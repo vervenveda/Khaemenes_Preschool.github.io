@@ -243,6 +243,85 @@
     opacity:0.92;
   }
 
+
+  /* Talking Garden Friends */
+  .voice-friends{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    margin-top:9px;
+  }
+  .voice-friend{
+    border:2px solid #e5d9ef;
+    border-radius:18px;
+    padding:10px 8px;
+    background:linear-gradient(145deg,#fff,#faf5ff);
+    color:#5b3e82;
+    cursor:pointer;
+    text-align:center;
+    font:inherit;
+    font-size:.82rem;
+    font-weight:750;
+    line-height:1.25;
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  .voice-friend:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(75,48,99,.12);
+  }
+  .voice-friend.active{
+    border-color:#8664d2;
+    background:linear-gradient(145deg,#efe7ff,#fff7d9);
+    box-shadow:0 0 0 3px rgba(134,100,210,.12);
+  }
+  .voice-friend .friend-emoji{
+    display:block;
+    font-size:1.55rem;
+    margin-bottom:3px;
+  }
+  .voice-friend .friend-name{display:block;}
+  .voice-friend .friend-style{
+    display:block;
+    margin-top:2px;
+    color:#83758f;
+    font-size:.7rem;
+    font-weight:600;
+  }
+  .voice-speed-row{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    margin-top:9px;
+  }
+  .voice-speed{
+    flex:1 1 72px;
+    border:1px solid #e1d7e9;
+    border-radius:999px;
+    padding:7px 8px;
+    background:#fff;
+    color:#684d80;
+    cursor:pointer;
+    font:inherit;
+    font-size:.77rem;
+    font-weight:700;
+  }
+  .voice-speed.active{
+    background:#effcf7;
+    border-color:#70d1af;
+    color:#286a55;
+  }
+  .voice-preview{
+    width:100%;
+    margin-top:9px;
+  }
+  .voice-status{
+    min-height:1.2em;
+    margin-top:7px;
+    color:#756c83;
+    font-size:.76rem;
+    text-align:center;
+  }
+
   footer{
     margin-top:10px;
     text-align:center;
@@ -591,13 +670,48 @@
       </div>
 
       <div class="side-section">
-        <h3>Voice</h3>
-        <div class="smallmuted">Choose a voice (if your browser has any):</div>
-        <select id="voicePicker" style="margin-top:4px;width:100%;padding:6px 8px;border-radius:10px;border:1px solid rgba(148,163,184,0.7);font-size:0.86rem;">
-          <option value="">(Use browser default)</option>
-        </select>
-        <p class="smallmuted" style="margin-top:6px;">
-          Tap “Hear it” and read along with the child.
+        <h3>Talking Garden Friends</h3>
+        <div class="smallmuted">Choose a friendly reading companion:</div>
+
+        <div class="voice-friends" id="voiceFriends" role="radiogroup" aria-label="Choose a reading friend">
+          <button class="voice-friend" type="button" data-character="fairy" role="radio" aria-checked="false">
+            <span class="friend-emoji">🧚</span>
+            <span class="friend-name">Fairy Lily</span>
+            <span class="friend-style">bright & cheerful</span>
+          </button>
+          <button class="voice-friend" type="button" data-character="bear" role="radio" aria-checked="false">
+            <span class="friend-emoji">🐻</span>
+            <span class="friend-name">Benny Bear</span>
+            <span class="friend-style">warm & gentle</span>
+          </button>
+          <button class="voice-friend" type="button" data-character="owl" role="radio" aria-checked="false">
+            <span class="friend-emoji">🦉</span>
+            <span class="friend-name">Professor Owl</span>
+            <span class="friend-style">calm & clear</span>
+          </button>
+          <button class="voice-friend" type="button" data-character="robot" role="radio" aria-checked="false">
+            <span class="friend-emoji">🤖</span>
+            <span class="friend-name">Robo Reader</span>
+            <span class="friend-style">fun & bouncy</span>
+          </button>
+          <button class="voice-friend" type="button" data-character="rainbow" role="radio" aria-checked="false" style="grid-column:1 / -1;">
+            <span class="friend-emoji">🌈</span>
+            <span class="friend-name">Rainbow Friend</span>
+            <span class="friend-style">a happy surprise voice</span>
+          </button>
+        </div>
+
+        <div class="smallmuted" style="margin-top:10px;">Reading speed:</div>
+        <div class="voice-speed-row" id="voiceSpeedRow" role="radiogroup" aria-label="Choose reading speed">
+          <button class="voice-speed" type="button" data-speed="slow" role="radio" aria-checked="false">🐢 Slow</button>
+          <button class="voice-speed" type="button" data-speed="normal" role="radio" aria-checked="false">🙂 Normal</button>
+          <button class="voice-speed" type="button" data-speed="lively" role="radio" aria-checked="false">🐇 Lively</button>
+        </div>
+
+        <button class="btn small voice-preview" id="previewVoiceBtn" type="button">🎧 Meet my reading friend</button>
+        <div class="voice-status" id="voiceStatus" aria-live="polite"></div>
+        <p class="smallmuted" style="margin-top:7px;">
+          Tap “Hear it” and say the word together.
         </p>
       </div>
 
@@ -1229,6 +1343,606 @@ const KIDS_MAGIC_WORDS = [
     synonyms:["joy","play"],
     origin:"Late English.",
     tags:["feelings","kids"]
+  },
+  {
+    id:"kids-051-all",
+    word:"all",
+    pronunciation:"AWL",
+    partOfSpeech:"determiner",
+    definition:"Every one or everything.",
+    simpleDefinition:"Every one.",
+    example:"All the ducks swam.",
+    synonyms:["every"],
+    origin:"Old English.",
+    tags:["sight-word","kids"]
+  },
+  {
+    id:"kids-052-and",
+    word:"and",
+    pronunciation:"AND",
+    partOfSpeech:"conjunction",
+    definition:"Joins words or ideas together.",
+    simpleDefinition:"Together.",
+    example:"Mom and Dad waved.",
+    synonyms:["plus"],
+    origin:"Old English.",
+    tags:["sight-word","kids"]
+  },
+  {
+    id:"kids-053-any",
+    word:"any",
+    pronunciation:"EN-ee",
+    partOfSpeech:"determiner",
+    definition:"One or more, no matter which.",
+    simpleDefinition:"Whichever.",
+    example:"Do you have any crayons?",
+    synonyms:["some"],
+    origin:"Old English.",
+    tags:["sight-word","kids"]
+  },
+  {
+    id:"kids-054-are",
+    word:"are",
+    pronunciation:"AR",
+    partOfSpeech:"verb",
+    definition:"A form of the verb 'to be.'",
+    simpleDefinition:"Being.",
+    example:"We are ready.",
+    synonyms:["be"],
+    origin:"Old English.",
+    tags:["sight-word","kids"]
+  },
+  {
+    id:"kids-055-ask",
+    word:"ask",
+    pronunciation:"ASK",
+    partOfSpeech:"verb",
+    definition:"To say a question.",
+    simpleDefinition:"Question.",
+    example:"Ask your teacher.",
+    synonyms:["question"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-056-away",
+    word:"away",
+    pronunciation:"uh-WAY",
+    partOfSpeech:"adverb",
+    definition:"To another place.",
+    simpleDefinition:"Far off.",
+    example:"The bird flew away.",
+    synonyms:["off"],
+    origin:"Old English.",
+    tags:["direction","kids"]
+  },
+  {
+    id:"kids-057-bee",
+    word:"bee",
+    pronunciation:"BEE",
+    partOfSpeech:"noun",
+    definition:"An insect that makes honey.",
+    simpleDefinition:"A honey bug.",
+    example:"The bee buzzed.",
+    synonyms:["insect"],
+    origin:"Old English.",
+    tags:["animal","kids"]
+  },
+  {
+    id:"kids-058-bell",
+    word:"bell",
+    pronunciation:"BEL",
+    partOfSpeech:"noun",
+    definition:"Something that rings.",
+    simpleDefinition:"Makes a ringing sound.",
+    example:"The bell rang.",
+    synonyms:["chime"],
+    origin:"Old English.",
+    tags:["school","kids"]
+  },
+  {
+    id:"kids-059-best",
+    word:"best",
+    pronunciation:"BEST",
+    partOfSpeech:"adjective",
+    definition:"Better than all the rest.",
+    simpleDefinition:"Number one.",
+    example:"You did your best!",
+    synonyms:["greatest"],
+    origin:"Old English.",
+    tags:["description","kids"]
+  },
+  {
+    id:"kids-060-bird",
+    word:"bird",
+    pronunciation:"BERD",
+    partOfSpeech:"noun",
+    definition:"An animal with feathers and wings.",
+    simpleDefinition:"A flying animal.",
+    example:"The bird sang.",
+    synonyms:["songbird"],
+    origin:"Old English.",
+    tags:["animal","kids"]
+  },
+  {
+    id:"kids-061-blue",
+    word:"blue",
+    pronunciation:"BLOO",
+    partOfSpeech:"adjective",
+    definition:"The color of the sky.",
+    simpleDefinition:"A color.",
+    example:"The ball is blue.",
+    synonyms:["azure"],
+    origin:"Old French.",
+    tags:["colors","kids"]
+  },
+  {
+    id:"kids-062-book",
+    word:"book",
+    pronunciation:"BOOK",
+    partOfSpeech:"noun",
+    definition:"Pages with stories or facts.",
+    simpleDefinition:"Something to read.",
+    example:"Let's read a book.",
+    synonyms:["story"],
+    origin:"Old English.",
+    tags:["school","kids"]
+  },
+  {
+    id:"kids-063-come",
+    word:"come",
+    pronunciation:"KUM",
+    partOfSpeech:"verb",
+    definition:"To move closer.",
+    simpleDefinition:"Move here.",
+    example:"Come with me.",
+    synonyms:["arrive"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-064-cool",
+    word:"cool",
+    pronunciation:"KOOL",
+    partOfSpeech:"adjective",
+    definition:"A little cold.",
+    simpleDefinition:"Not warm.",
+    example:"The water feels cool.",
+    synonyms:["chilly"],
+    origin:"Old English.",
+    tags:["description","kids"]
+  },
+  {
+    id:"kids-065-deer",
+    word:"deer",
+    pronunciation:"DEER",
+    partOfSpeech:"noun",
+    definition:"A gentle animal with long legs.",
+    simpleDefinition:"A forest animal.",
+    example:"The deer ran away.",
+    synonyms:["doe"],
+    origin:"Old English.",
+    tags:["animal","kids"]
+  },
+  {
+    id:"kids-066-did",
+    word:"did",
+    pronunciation:"DID",
+    partOfSpeech:"verb",
+    definition:"Shows something happened.",
+    simpleDefinition:"Done.",
+    example:"I did my work.",
+    synonyms:["finished"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-067-dot",
+    word:"dot",
+    pronunciation:"DOT",
+    partOfSpeech:"noun",
+    definition:"A very small round mark.",
+    simpleDefinition:"A tiny spot.",
+    example:"Draw a dot.",
+    synonyms:["spot"],
+    origin:"Old English.",
+    tags:["school","kids"]
+  },
+  {
+    id:"kids-068-dry",
+    word:"dry",
+    pronunciation:"DRY",
+    partOfSpeech:"adjective",
+    definition:"Not wet.",
+    simpleDefinition:"No water.",
+    example:"My shirt is dry.",
+    synonyms:["not wet"],
+    origin:"Old English.",
+    tags:["description","kids"]
+  },
+  {
+    id:"kids-069-eat",
+    word:"eat",
+    pronunciation:"EET",
+    partOfSpeech:"verb",
+    definition:"To have food.",
+    simpleDefinition:"Have food.",
+    example:"We eat lunch.",
+    synonyms:["chew"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-070-fall",
+    word:"fall",
+    pronunciation:"FAWL",
+    partOfSpeech:"verb",
+    definition:"To drop down.",
+    simpleDefinition:"Go down.",
+    example:"Leaves fall.",
+    synonyms:["drop"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-071-fast",
+    word:"fast",
+    pronunciation:"FAST",
+    partOfSpeech:"adjective",
+    definition:"Moving quickly.",
+    simpleDefinition:"Quick.",
+    example:"The rabbit is fast.",
+    synonyms:["quick"],
+    origin:"Old English.",
+    tags:["description","kids"]
+  },
+  {
+    id:"kids-072-feed",
+    word:"feed",
+    pronunciation:"FEED",
+    partOfSpeech:"verb",
+    definition:"To give food.",
+    simpleDefinition:"Give food.",
+    example:"Feed the fish.",
+    synonyms:["give food"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-073-feet",
+    word:"feet",
+    pronunciation:"FEET",
+    partOfSpeech:"noun",
+    definition:"The parts you stand on.",
+    simpleDefinition:"Your foot parts.",
+    example:"Wash your feet.",
+    synonyms:["foot"],
+    origin:"Old English.",
+    tags:["body","kids"]
+  },
+  {
+    id:"kids-074-find",
+    word:"find",
+    pronunciation:"FYND",
+    partOfSpeech:"verb",
+    definition:"To discover something.",
+    simpleDefinition:"Look and get.",
+    example:"Can you find the ball?",
+    synonyms:["discover"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-075-fish",
+    word:"fish",
+    pronunciation:"FISH",
+    partOfSpeech:"noun",
+    definition:"An animal that lives in water.",
+    simpleDefinition:"A water animal.",
+    example:"The fish swims.",
+    synonyms:["sea animal"],
+    origin:"Old English.",
+    tags:["animal","kids"]
+  },
+  {
+    id:"kids-076-five",
+    word:"five",
+    pronunciation:"FYVE",
+    partOfSpeech:"number",
+    definition:"The number after four.",
+    simpleDefinition:"Number 5.",
+    example:"I have five blocks.",
+    synonyms:["5"],
+    origin:"Old English.",
+    tags:["numbers","kids"]
+  },
+  {
+    id:"kids-077-food",
+    word:"food",
+    pronunciation:"FOOD",
+    partOfSpeech:"noun",
+    definition:"Things we eat.",
+    simpleDefinition:"Something to eat.",
+    example:"The food smells good.",
+    synonyms:["meal"],
+    origin:"Old English.",
+    tags:["food","kids"]
+  },
+  {
+    id:"kids-078-foot",
+    word:"foot",
+    pronunciation:"FOOT",
+    partOfSpeech:"noun",
+    definition:"The body part used for walking.",
+    simpleDefinition:"Helps you walk.",
+    example:"My foot is clean.",
+    synonyms:["feet"],
+    origin:"Old English.",
+    tags:["body","kids"]
+  },
+  {
+    id:"kids-079-frog",
+    word:"frog",
+    pronunciation:"FROG",
+    partOfSpeech:"noun",
+    definition:"A small jumping animal.",
+    simpleDefinition:"A jumping animal.",
+    example:"The frog jumped.",
+    synonyms:["amphibian"],
+    origin:"Old English.",
+    tags:["animal","kids"]
+  },
+  {
+    id:"kids-080-game",
+    word:"game",
+    pronunciation:"GAYM",
+    partOfSpeech:"noun",
+    definition:"Something fun to play.",
+    simpleDefinition:"A fun activity.",
+    example:"Let's play a game.",
+    synonyms:["play"],
+    origin:"Old English.",
+    tags:["play","kids"]
+  },
+  {
+    id:"kids-081-girl",
+    word:"girl",
+    pronunciation:"GERL",
+    partOfSpeech:"noun",
+    definition:"A young female child.",
+    simpleDefinition:"A young girl.",
+    example:"The girl laughed.",
+    synonyms:["child"],
+    origin:"Middle English.",
+    tags:["people","kids"]
+  },
+  {
+    id:"kids-082-give",
+    word:"give",
+    pronunciation:"GIV",
+    partOfSpeech:"verb",
+    definition:"To hand something to someone.",
+    simpleDefinition:"Share with someone.",
+    example:"Give me the ball.",
+    synonyms:["hand"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-083-good",
+    word:"good",
+    pronunciation:"GOOD",
+    partOfSpeech:"adjective",
+    definition:"Nice or helpful.",
+    simpleDefinition:"Nice.",
+    example:"You are good.",
+    synonyms:["kind"],
+    origin:"Old English.",
+    tags:["description","kids"]
+  },
+  {
+    id:"kids-084-hand",
+    word:"hand",
+    pronunciation:"HAND",
+    partOfSpeech:"noun",
+    definition:"The body part used to hold things.",
+    simpleDefinition:"Helps you hold.",
+    example:"Raise your hand.",
+    synonyms:["palm"],
+    origin:"Old English.",
+    tags:["body","kids"]
+  },
+  {
+    id:"kids-085-help",
+    word:"help",
+    pronunciation:"HELP",
+    partOfSpeech:"verb",
+    definition:"To make something easier for someone.",
+    simpleDefinition:"Be kind.",
+    example:"Help your friend.",
+    synonyms:["assist"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-086-here",
+    word:"here",
+    pronunciation:"HEER",
+    partOfSpeech:"adverb",
+    definition:"In this place.",
+    simpleDefinition:"This place.",
+    example:"Come here.",
+    synonyms:["near"],
+    origin:"Old English.",
+    tags:["direction","kids"]
+  },
+  {
+    id:"kids-087-home",
+    word:"home",
+    pronunciation:"HOHM",
+    partOfSpeech:"noun",
+    definition:"The place where you live.",
+    simpleDefinition:"Where you live.",
+    example:"We went home.",
+    synonyms:["house"],
+    origin:"Old English.",
+    tags:["home","kids"]
+  },
+  {
+    id:"kids-088-jump",
+    word:"jump",
+    pronunciation:"JUMP",
+    partOfSpeech:"verb",
+    definition:"To push yourself into the air.",
+    simpleDefinition:"Hop up.",
+    example:"Jump high!",
+    synonyms:["hop"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-089-keep",
+    word:"keep",
+    pronunciation:"KEEP",
+    partOfSpeech:"verb",
+    definition:"To hold onto something.",
+    simpleDefinition:"Hold.",
+    example:"Keep your toy safe.",
+    synonyms:["hold"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-090-kind",
+    word:"kind",
+    pronunciation:"KYND",
+    partOfSpeech:"adjective",
+    definition:"Nice and caring.",
+    simpleDefinition:"Nice.",
+    example:"Be kind to everyone.",
+    synonyms:["nice","caring"],
+    origin:"Old English.",
+    tags:["character","kids"]
+  },
+  {
+    id:"kids-091-like",
+    word:"like",
+    pronunciation:"LYKE",
+    partOfSpeech:"verb",
+    definition:"To enjoy something.",
+    simpleDefinition:"Enjoy.",
+    example:"I like apples.",
+    synonyms:["love"],
+    origin:"Old English.",
+    tags:["feelings","kids"]
+  },
+  {
+    id:"kids-092-look",
+    word:"look",
+    pronunciation:"LOOK",
+    partOfSpeech:"verb",
+    definition:"To use your eyes.",
+    simpleDefinition:"See.",
+    example:"Look at the moon.",
+    synonyms:["see"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-093-milk",
+    word:"milk",
+    pronunciation:"MILK",
+    partOfSpeech:"noun",
+    definition:"A drink that comes from cows.",
+    simpleDefinition:"A white drink.",
+    example:"Drink your milk.",
+    synonyms:["dairy"],
+    origin:"Old English.",
+    tags:["food","kids"]
+  },
+  {
+    id:"kids-094-more",
+    word:"more",
+    pronunciation:"MOR",
+    partOfSpeech:"determiner",
+    definition:"A greater amount.",
+    simpleDefinition:"Extra.",
+    example:"Can I have more?",
+    synonyms:["extra"],
+    origin:"Old English.",
+    tags:["sight-word","kids"]
+  },
+  {
+    id:"kids-095-moon",
+    word:"moon",
+    pronunciation:"MOON",
+    partOfSpeech:"noun",
+    definition:"The bright object in the night sky.",
+    simpleDefinition:"Night light.",
+    example:"The moon is bright.",
+    synonyms:["satellite"],
+    origin:"Old English.",
+    tags:["space","kids"]
+  },
+  {
+    id:"kids-096-name",
+    word:"name",
+    pronunciation:"NAYM",
+    partOfSpeech:"noun",
+    definition:"The word people call you.",
+    simpleDefinition:"What you're called.",
+    example:"My name is Sam.",
+    synonyms:["title"],
+    origin:"Old English.",
+    tags:["people","kids"]
+  },
+  {
+    id:"kids-097-next",
+    word:"next",
+    pronunciation:"NEKST",
+    partOfSpeech:"adjective",
+    definition:"Coming after something.",
+    simpleDefinition:"After.",
+    example:"Who's next?",
+    synonyms:["following"],
+    origin:"Old English.",
+    tags:["time","kids"]
+  },
+  {
+    id:"kids-098-open",
+    word:"open",
+    pronunciation:"OH-pən",
+    partOfSpeech:"verb",
+    definition:"To make something not closed.",
+    simpleDefinition:"Unlock.",
+    example:"Open the door.",
+    synonyms:["unlock"],
+    origin:"Old English.",
+    tags:["action","kids"]
+  },
+  {
+    id:"kids-099-play",
+    word:"play",
+    pronunciation:"PLAY",
+    partOfSpeech:"verb",
+    definition:"To have fun with games or toys.",
+    simpleDefinition:"Have fun.",
+    example:"Let's play outside.",
+    synonyms:["have fun"],
+    origin:"Old English.",
+    tags:["play","kids"]
+  },
+  {
+    id:"kids-100-read",
+    word:"read",
+    pronunciation:"REED",
+    partOfSpeech:"verb",
+    definition:"To look at words and understand them.",
+    simpleDefinition:"Say words from a book.",
+    example:"We read together.",
+    synonyms:["learn"],
+    origin:"Old English.",
+    tags:["school","kids"]
   }
 ];
 
@@ -1277,7 +1991,7 @@ let state = {
   bank: KIDS_MAGIC_WORDS.slice(),
   learned: [],
   favorites: [],
-  settings: { voiceName: "" }
+  settings: { voiceCharacter: "fairy", voiceSpeed: "normal", voiceName: "" }
 };
 let currentIndex = 0;
 let voicesList = [];
@@ -1304,7 +2018,10 @@ const bankCount = document.getElementById('bankCount');
 const learnedCount = document.getElementById('learnedCount');
 const favCount = document.getElementById('favCount');
 
-const voicePicker = document.getElementById('voicePicker');
+const voiceFriends = document.getElementById('voiceFriends');
+const voiceSpeedRow = document.getElementById('voiceSpeedRow');
+const previewVoiceBtn = document.getElementById('previewVoiceBtn');
+const voiceStatus = document.getElementById('voiceStatus');
 
 const startQuizBtn = document.getElementById('startQuizBtn');
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
@@ -1363,41 +2080,110 @@ function indexForToday(){
   return day % state.bank.length;
 }
 
-/* ============== Voices ============== */
+/* ============== Talking Garden Friends ============== */
+const VOICE_CHARACTERS = {
+  fairy:{name:"Fairy Lily",emoji:"🧚",pitch:1.28,rate:0.88,preference:"bright"},
+  bear:{name:"Benny Bear",emoji:"🐻",pitch:0.82,rate:0.90,preference:"warm"},
+  owl:{name:"Professor Owl",emoji:"🦉",pitch:0.98,rate:0.80,preference:"clear"},
+  robot:{name:"Robo Reader",emoji:"🤖",pitch:0.72,rate:0.93,preference:"robot"},
+  rainbow:{name:"Rainbow Friend",emoji:"🌈",pitch:1.08,rate:0.92,preference:"random"}
+};
+const VOICE_SPEEDS = {
+  slow:0.82,
+  normal:1,
+  lively:1.12
+};
+
+function englishVoices(){
+  return voicesList.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+}
+function chooseVoice(characterKey){
+  const available = englishVoices().length ? englishVoices() : voicesList;
+  if(!available.length) return null;
+  const c = VOICE_CHARACTERS[characterKey] || VOICE_CHARACTERS.fairy;
+
+  if(c.preference === "random"){
+    return available[Math.floor(Math.random()*available.length)] || null;
+  }
+
+  const namePatterns = {
+    bright:/female|zira|samantha|victoria|karen|moira|tessa|ava|serena|aria|jenny|susan|hazel/i,
+    warm:/male|david|daniel|alex|fred|tom|mark|george|guy|aaron/i,
+    clear:/google|microsoft|natural|enhanced|premium|english/i,
+    robot:/compact|espeak|novelty|fred|ralph|albert/i
+  };
+  const pattern = namePatterns[c.preference];
+  return (pattern && available.find(v=>pattern.test(v.name||""))) || available[0] || null;
+}
+
 function setupVoices(){
   if(!('speechSynthesis' in window)) {
-    voicePicker.innerHTML = '<option value="">(Speech not supported)</option>';
     hearBtn.disabled = true;
+    previewVoiceBtn.disabled = true;
+    voiceStatus.textContent = "Speech is not supported in this browser.";
     return;
   }
   voicesList = speechSynthesis.getVoices() || [];
-  voicePicker.innerHTML = '<option value="">(Use browser default)</option>';
-  voicesList.forEach((v,i)=>{
-    const opt = document.createElement('option');
-    opt.value = String(i);
-    opt.textContent = v.name + (v.lang ? " ("+v.lang+")" : "");
-    voicePicker.appendChild(opt);
-  });
-  if(state.settings.voiceName){
-    const idx = voicesList.findIndex(v=>v.name===state.settings.voiceName);
-    if(idx>=0) voicePicker.value = String(idx);
-  }
+  voiceStatus.textContent = voicesList.length
+    ? "Your garden friend is ready to read."
+    : "Loading friendly voices…";
+  refreshVoiceControls();
 }
 if('speechSynthesis' in window){
   speechSynthesis.onvoiceschanged = setupVoices;
 }
-function speakText(text){
+
+function refreshVoiceControls(){
+  const character = state.settings.voiceCharacter || "fairy";
+  const speed = state.settings.voiceSpeed || "normal";
+  voiceFriends.querySelectorAll('[data-character]').forEach(btn=>{
+    const active = btn.dataset.character === character;
+    btn.classList.toggle('active',active);
+    btn.setAttribute('aria-checked',String(active));
+  });
+  voiceSpeedRow.querySelectorAll('[data-speed]').forEach(btn=>{
+    const active = btn.dataset.speed === speed;
+    btn.classList.toggle('active',active);
+    btn.setAttribute('aria-checked',String(active));
+  });
+}
+
+function speakText(text, options={}){
   if(!text || !('speechSynthesis' in window)) return;
+  const characterKey = options.character || state.settings.voiceCharacter || "fairy";
+  const speedKey = options.speed || state.settings.voiceSpeed || "normal";
+  const character = VOICE_CHARACTERS[characterKey] || VOICE_CHARACTERS.fairy;
   const u = new SpeechSynthesisUtterance(text);
-  const idx = voicePicker.value;
-  if(idx !== "" && voicesList[Number(idx)]){
-    u.voice = voicesList[Number(idx)];
-  }
-  u.lang = 'en-US';
-  u.rate = 0.95;
-  u.pitch = 1.02;
+  const chosen = chooseVoice(characterKey);
+  if(chosen) u.voice = chosen;
+  u.lang = chosen?.lang || 'en-US';
+  u.rate = Math.max(0.55,Math.min(1.35,character.rate*(VOICE_SPEEDS[speedKey]||1)));
+  u.pitch = character.pitch;
+  u.volume = 1;
+  u.onstart = ()=>{ voiceStatus.textContent = `${character.emoji} ${character.name} is reading…`; };
+  u.onend = ()=>{ voiceStatus.textContent = "Wonderful listening! 🌟"; };
+  u.onerror = ()=>{ voiceStatus.textContent = "This voice needs another try. Please tap again."; };
   speechSynthesis.cancel();
   speechSynthesis.speak(u);
+}
+
+function buildFriendlyReading(item){
+  const character = VOICE_CHARACTERS[state.settings.voiceCharacter] || VOICE_CHARACTERS.fairy;
+  const introductions = {
+    fairy:"Hello, little word explorer!",
+    bear:"Hello, friend! Benny Bear is ready.",
+    owl:"Welcome, young scholar. Let us learn together.",
+    robot:"Beep boop! Word mission ready!",
+    rainbow:"Hello, sunshine! A colorful word is waiting."
+  };
+  const encouragements = {
+    fairy:"Can you say it with me? Wonderful!",
+    bear:"Your turn to say it. Great job!",
+    owl:"Listen carefully, then try it yourself. Excellent.",
+    robot:"Repeat after me. Word power activated!",
+    rainbow:"Say it out loud and make the garden sparkle!"
+  };
+  return `${introductions[state.settings.voiceCharacter] || introductions.fairy} Today's word is ${item.word}. ${item.pronunciation ? "It is pronounced " + item.pronunciation + "." : ""} ${encouragements[state.settings.voiceCharacter] || encouragements.fairy} ${item.definition || ""} ${item.example ? "Here is an example. " + item.example : ""} Let's say the word one more time. ${item.word}.`;
 }
 
 /* ============== UI render ============== */
@@ -1585,8 +2371,7 @@ nextBtn.addEventListener('click', ()=>{
 hearBtn.addEventListener('click', ()=>{
   if(!state.bank.length) return;
   const w = state.bank[currentIndex];
-  const text = `${w.word}. ${w.pronunciation ? "Pronounced " + w.pronunciation + ". " : ""} ${w.definition || ""}`;
-  speakText(text);
+  speakText(buildFriendlyReading(w));
 });
 markLearnedBtn.addEventListener('click', ()=>{
   if(!state.bank.length) return;
@@ -1613,14 +2398,32 @@ favBtn.addEventListener('click', ()=>{
   renderWord();
 });
 
-voicePicker.addEventListener('change', ()=>{
-  const idx = voicePicker.value;
-  if(idx !== "" && voicesList[Number(idx)]){
-    state.settings.voiceName = voicesList[Number(idx)].name;
-  }else{
-    state.settings.voiceName = "";
-  }
+voiceFriends.addEventListener('click', (e)=>{
+  const btn = e.target.closest('[data-character]');
+  if(!btn) return;
+  state.settings.voiceCharacter = btn.dataset.character;
   saveProgress();
+  refreshVoiceControls();
+  const friend = VOICE_CHARACTERS[state.settings.voiceCharacter];
+  speakText(`${friend.name} is ready to explore the word garden with you!`, {character:state.settings.voiceCharacter});
+});
+
+voiceSpeedRow.addEventListener('click', (e)=>{
+  const btn = e.target.closest('[data-speed]');
+  if(!btn) return;
+  state.settings.voiceSpeed = btn.dataset.speed;
+  saveProgress();
+  refreshVoiceControls();
+  voiceStatus.textContent = btn.dataset.speed === 'slow'
+    ? 'Slow and steady reading selected. 🐢'
+    : btn.dataset.speed === 'lively'
+      ? 'Lively reading selected. 🐇'
+      : 'Comfortable reading speed selected. 🙂';
+});
+
+previewVoiceBtn.addEventListener('click', ()=>{
+  const friend = VOICE_CHARACTERS[state.settings.voiceCharacter] || VOICE_CHARACTERS.fairy;
+  speakText(`Hello! I am ${friend.name}. I am happy to read and learn new words with you.`);
 });
 
 searchBox.addEventListener('input', ()=>renderSearchResults(searchBox.value));
@@ -1640,6 +2443,7 @@ function init(){
   loadProgress();
   refreshCounts();
   setupVoices();
+  refreshVoiceControls();
   const now = new Date();
   dateLabel.textContent = now.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
   if(state.bank.length){
