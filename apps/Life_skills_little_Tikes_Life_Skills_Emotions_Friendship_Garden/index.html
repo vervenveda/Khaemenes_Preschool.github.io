@@ -7,21 +7,21 @@
 <title>Little Tikes Life Skills — Emotions & Friendship Garden</title>
 <style>
 :root{
-  --ink:#352d3f;--muted:#756a7f;--paper:#fffdf9;--panel:rgba(255,255,255,.84);
-  --rose:#f39ab9;--rose-deep:#b64f7b;--sky:#8ed8ff;--sky-deep:#2d91bd;
-  --mint:#91dfbf;--mint-deep:#338c6a;--gold:#ffd978;--lilac:#d7c8ff;
+  --ink:#40364a;--muted:#7b7086;--paper:#fffefa;--panel:rgba(255,255,255,.93);
+  --rose:#f7b4ce;--rose-deep:#b75f86;--sky:#b8e9ff;--sky-deep:#3a9bc3;
+  --mint:#b9ecd7;--mint-deep:#438f74;--gold:#ffe79a;--lilac:#e1d8ff;
   --accent:var(--rose);--accent-deep:var(--rose-deep);--soft:#ffe8f0;
-  --shadow:0 22px 60px rgba(73,47,88,.15);--radius:30px;
+  --shadow:0 18px 48px rgba(73,47,88,.12);--radius:32px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;min-height:100vh;color:var(--ink);
-  font-family:"Trebuchet MS","Avenir Next Rounded","Arial Rounded MT Bold","Comic Sans MS",system-ui,sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:
     radial-gradient(circle at 10% 12%,rgba(255,255,255,.95) 0 5%,transparent 6%),
     radial-gradient(circle at 88% 18%,rgba(255,255,255,.72) 0 4%,transparent 5%),
-    linear-gradient(145deg,#fff4d8,#ffe3ef 44%,#e5f8f1);
+    linear-gradient(145deg,#fff9df,#ffedf5 44%,#ecfff7);
   padding:28px 14px 44px;overflow-x:hidden;
 }
 body.friendship{--accent:var(--sky);--accent-deep:var(--sky-deep);--soft:#e4f7ff}
@@ -33,10 +33,10 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:4px solid 
 .o1{width:150px;height:150px;background:#fff;left:2%;top:13%}.o2{width:90px;height:90px;background:var(--gold);right:8%;top:24%;animation-delay:-2s}.o3{width:190px;height:190px;background:#fff;right:-35px;bottom:5%;animation-delay:-5s}.o4{width:76px;height:76px;background:var(--mint);left:12%;bottom:15%;animation-delay:-3s}
 @keyframes float{50%{transform:translateY(-18px) scale(1.05)}}
 .shell{max-width:1120px;margin:auto}
-.hero{text-align:center;margin-bottom:16px}
+.hero{text-align:center;margin-bottom:24px;padding:8px 10px 0}
 .brand{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:#ffffffbd;box-shadow:0 8px 22px rgba(67,45,79,.11);font-size:13px;font-weight:900;color:var(--accent-deep)}
-h1{margin:11px 0 5px;font-size:clamp(2.3rem,6vw,4.8rem);line-height:.96;letter-spacing:-.045em;color:var(--accent-deep)}
-.hero p{max-width:760px;margin:8px auto 0;color:var(--muted);line-height:1.55;font-size:1rem}
+h1{margin:18px auto 10px;max-width:980px;font-size:clamp(2.45rem,6.3vw,4.9rem);line-height:1.08;letter-spacing:-.02em;color:var(--accent-deep);padding:0 .08em}
+.hero p{max-width:820px;margin:10px auto 0;color:var(--muted);line-height:1.7;font-size:1.03rem}
 .app{background:var(--panel);backdrop-filter:blur(15px);border:1px solid #ffffffc9;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
 .topbar{display:flex;justify-content:center;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:14px}
 .pill{border:1px solid color-mix(in srgb,var(--accent) 38%,white);background:#fff;color:var(--ink);border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer;box-shadow:0 6px 14px rgba(52,37,66,.08);transition:.18s}
@@ -68,6 +68,65 @@ h1{margin:11px 0 5px;font-size:clamp(2.3rem,6vw,4.8rem);line-height:.96;letter-s
 .reward-row{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:14px}.reward{background:#fff;border-radius:999px;padding:8px 12px;font-size:13px;box-shadow:0 5px 14px rgba(63,43,73,.08)}
 .footer{margin-top:16px;padding:14px;text-align:center;background:#ffffffa8;border-radius:18px;color:var(--muted);font-size:12px;line-height:1.5}.footer strong{color:var(--accent-deep)}
 .celebrate{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}.confetti{position:absolute;top:-40px;font-size:25px;animation:fall 1.8s ease-out forwards}@keyframes fall{to{transform:translate(var(--dx),100vh) rotate(540deg);opacity:0}}
+
+.mascot-banner{
+  display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;
+  margin:0 0 14px;padding:13px 15px;border-radius:22px;
+  background:linear-gradient(145deg,#fff,#fff5fa,#f1fbff);
+  border:1px solid #eadfea;
+}
+.mascot-face{font-size:3rem;animation:bob 3s ease-in-out infinite}
+.mascot-banner h3{margin:0;color:var(--accent-deep);font-size:1.05rem}
+.mascot-banner p{margin:3px 0 0;color:var(--muted);line-height:1.45}
+
+.voice-studio{
+  margin-bottom:14px;padding:13px;border-radius:22px;
+  background:linear-gradient(145deg,#fff,#fff8fc,#f7f4ff);
+  border:1px solid #eadfea;
+}
+.voice-studio h3{margin:0 0 8px;text-align:center;color:var(--accent-deep);font-size:1rem}
+.voice-friends{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-friend{
+  border:2px solid #e8dfea;background:#fff;color:var(--accent-deep);
+  border-radius:16px;padding:8px 5px;min-height:62px;cursor:pointer;font-weight:900;
+  display:grid;place-items:center;align-content:center;gap:2px;box-shadow:0 5px 12px rgba(63,43,80,.06)
+}
+.voice-friend .emoji{font-size:1.45rem;line-height:1}
+.voice-friend .name{font-size:.68rem}
+.voice-friend.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent-deep));transform:translateY(-1px)}
+.voice-options{margin-top:8px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.voice-status{min-height:1.2em;margin:8px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.story-text.speaking,.page-title.speaking{box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 22%,transparent);border-radius:16px;background:#fffdf5;padding:7px 10px}
+
+.passport{
+  margin-top:14px;padding:14px;border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff7fb,#eefbff);border:1px solid #eadfea
+}
+.passport h3{margin:0 0 8px;color:var(--accent-deep);text-align:center}
+.stamp-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.passport-stamp{padding:9px 6px;border-radius:15px;background:#fff;border:1px solid #eadfea;text-align:center;opacity:.42;filter:grayscale(.35)}
+.passport-stamp.earned{opacity:1;filter:none;box-shadow:0 6px 15px rgba(65,43,80,.08)}
+.passport-stamp span{display:block;font-size:1.45rem}.passport-stamp small{font-size:.68rem;color:var(--muted);font-weight:900}
+
+.parent-corner{margin-top:14px;border-radius:20px;background:#fff;border:1px solid #eadfea;padding:12px 14px}
+.parent-corner summary{cursor:pointer;color:var(--accent-deep);font-weight:900}
+.parent-corner p{color:var(--muted);line-height:1.5}
+
+.dot-row button{
+  width:34px;height:34px;display:grid;place-items:center;font-size:1rem;
+  border:1px solid #e6dce8;background:#fff;border-radius:50%
+}
+.dot-row button.active{width:42px;background:linear-gradient(135deg,var(--gold),var(--accent));color:var(--ink);transform:scale(1.06)}
+.sparkle{position:fixed;pointer-events:none;z-index:50;font-size:1.6rem;animation:sparkleFly 1s ease forwards}
+@keyframes sparkleFly{to{transform:translateY(-80px) scale(1.35) rotate(18deg);opacity:0}}
+
+@media(max-width:700px){
+  .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-friend:last-child{grid-column:1/-1}
+  .stamp-row{grid-template-columns:repeat(2,1fr)}
+  .mascot-banner{grid-template-columns:1fr;text-align:center}
+}
+
 @media(max-width:840px){.book{grid-template-columns:1fr}.page{min-height:0}.practice-grid{grid-template-columns:1fr}.scene{height:210px}}
 @media(max-width:560px){body{padding:18px 8px 30px}.app{padding:11px}.book{padding:9px}.page{padding:15px}.feeling-choices{grid-template-columns:repeat(2,1fr)}.nav{padding:9px 11px}.scene-emoji{font-size:82px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
@@ -90,6 +149,36 @@ h1{margin:11px 0 5px;font-size:clamp(2.3rem,6vw,4.8rem);line-height:.96;letter-s
     <button class="pill" id="quietBtn">🔔 Page Sound <span id="quietState">On</span></button>
     <button class="pill" id="saveBtn">🔖 Save Page</button>
   </div>
+
+  <div class="mascot-banner">
+    <div class="mascot-face" aria-hidden="true">💗</div>
+    <div>
+      <h3>Sunny Heart is your kindness guide</h3>
+      <p>“Hello, little friend! We will notice feelings, practice calm choices, and grow kindness one small step at a time.”</p>
+    </div>
+  </div>
+
+  <section class="voice-studio" aria-labelledby="voiceTitle">
+    <h3 id="voiceTitle">Choose Your Reading Friend</h3>
+    <div class="voice-friends" id="voiceFriends">
+      <button type="button" class="voice-friend" data-voice="fairy"><span class="emoji">🧚</span><span class="name">Fairy Lily</span></button>
+      <button type="button" class="voice-friend" data-voice="bear"><span class="emoji">🐻</span><span class="name">Benny Bear</span></button>
+      <button type="button" class="voice-friend" data-voice="owl"><span class="emoji">🦉</span><span class="name">Professor Owl</span></button>
+      <button type="button" class="voice-friend" data-voice="robot"><span class="emoji">🤖</span><span class="name">Robo Reader</span></button>
+      <button type="button" class="voice-friend" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Friend</span></button>
+    </div>
+    <div class="voice-options">
+      <select id="voiceSpeed" aria-label="Reading speed">
+        <option value="slow">🐢 Slow and gentle</option>
+        <option value="normal">🙂 Just right</option>
+        <option value="lively">🐇 A little lively</option>
+      </select>
+      <button type="button" id="previewVoice" class="action">👋 Meet My Voice</button>
+      <button type="button" id="stopVoiceBtn" class="action">⏹ Stop Voice</button>
+    </div>
+    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+  </section>
+
   <div class="progress-wrap"><div class="track"><div id="bar" class="bar"></div></div><div id="progressText" class="progress-text"></div></div>
 
   <article class="book" id="book">
@@ -129,6 +218,23 @@ h1{margin:11px 0 5px;font-size:clamp(2.3rem,6vw,4.8rem);line-height:.96;letter-s
     </article>
   </section>
 
+
+  <section class="passport">
+    <h3>🌎 My Little Hearts Passport</h3>
+    <div class="stamp-row" id="passportStamps">
+      <div class="passport-stamp" data-stamp="notice"><span>💗</span><small>Feeling Finder</small></div>
+      <div class="passport-stamp" data-stamp="breathe"><span>🎈</span><small>Calm Breather</small></div>
+      <div class="passport-stamp" data-stamp="kind"><span>🤝</span><small>Kind Friend</small></div>
+      <div class="passport-stamp" data-stamp="saved"><span>🔖</span><small>Story Keeper</small></div>
+      <div class="passport-stamp" data-stamp="finish"><span>🌈</span><small>Heart Explorer</small></div>
+    </div>
+  </section>
+
+  <details class="parent-corner">
+    <summary>👨‍👩‍👧 Parent & Grown-Up Corner</summary>
+    <p id="parentCornerText">Use these stories for gentle practice. Feelings do not need to disappear immediately; the goal is safety, support, kind communication, and repair.</p>
+  </details>
+
   <div class="reward-row">
     <div class="reward">📖 Pages explored: <strong id="visitedCount">0</strong></div>
     <div class="reward">⭐ Kindness stars: <strong id="stars">0</strong></div>
@@ -166,29 +272,69 @@ const state={
  pageSound:localStorage.getItem('little-hearts-page-sound')!=='false',
  stars:Number(localStorage.getItem('little-hearts-stars')||0),
  visited:new Set(JSON.parse(localStorage.getItem('little-hearts-visited')||'[]')),
- saved:new Set(JSON.parse(localStorage.getItem('little-hearts-saved')||'[]'))
+ saved:new Set(JSON.parse(localStorage.getItem('little-hearts-saved')||'[]')),
+ voiceFriend:localStorage.getItem('little-hearts-voice-friend')||'fairy',
+ voiceSpeed:localStorage.getItem('little-hearts-voice-speed')||'slow',
+ breaths:Number(localStorage.getItem('little-hearts-breaths')||0),
+ finished:localStorage.getItem('little-hearts-finished')==='true'
 };
-const $=id=>document.getElementById(id);let voice=null,audioCtx=null;
+const $=id=>document.getElementById(id);let voices=[],speechToken=0,audioCtx=null;
 function currentStory(){return stories[state.story]}function currentPage(){return currentStory().pages[state.index]}function key(){return `${state.story}:${state.index}`}
-function save(){localStorage.setItem('little-hearts-story',state.story);localStorage.setItem('little-hearts-index',state.index);localStorage.setItem('little-hearts-sound',state.sound);localStorage.setItem('little-hearts-page-sound',state.pageSound);localStorage.setItem('little-hearts-stars',state.stars);localStorage.setItem('little-hearts-visited',JSON.stringify([...state.visited]));localStorage.setItem('little-hearts-saved',JSON.stringify([...state.saved]))}
-function chooseVoice(){if(!('speechSynthesis'in window))return;const v=speechSynthesis.getVoices();voice=v.find(x=>/^en/i.test(x.lang)&&/samantha|jenny|aria|female|child/i.test(x.name))||v.find(x=>/^en/i.test(x.lang))||v[0]||null}if('speechSynthesis'in window){chooseVoice();speechSynthesis.onvoiceschanged=chooseVoice}
-function speak(text){if(!state.sound||!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g,''));if(voice)u.voice=voice;u.rate=.88;u.pitch=1.08;speechSynthesis.speak(u)}
+function save(){localStorage.setItem('little-hearts-story',state.story);localStorage.setItem('little-hearts-index',state.index);localStorage.setItem('little-hearts-sound',state.sound);localStorage.setItem('little-hearts-page-sound',state.pageSound);localStorage.setItem('little-hearts-stars',state.stars);localStorage.setItem('little-hearts-visited',JSON.stringify([...state.visited]));localStorage.setItem('little-hearts-saved',JSON.stringify([...state.saved]));localStorage.setItem('little-hearts-voice-friend',state.voiceFriend);localStorage.setItem('little-hearts-voice-speed',state.voiceSpeed);localStorage.setItem('little-hearts-breaths',String(state.breaths));localStorage.setItem('little-hearts-finished',String(state.finished))}
+const VOICE_FRIENDS={
+fairy:{name:'Fairy Lily',emoji:'🧚',rate:.82,pitch:1.2,preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,greeting:'Hello, little heart. Fairy Lily is ready to learn with you.'},
+bear:{name:'Benny Bear',emoji:'🐻',rate:.76,pitch:.9,preferred:/daniel|david|alex|fred|george|male|tom/i,greeting:'Hello, friend. Benny Bear will read nice and gently.'},
+owl:{name:'Professor Owl',emoji:'🦉',rate:.72,pitch:1,preferred:/daniel|samantha|alex|serena|moira/i,greeting:'Welcome, young learner. Professor Owl is ready for a thoughtful story.'},
+robot:{name:'Robo Reader',emoji:'🤖',rate:.84,pitch:.72,preferred:/fred|ralph|alex|david|google us english/i,greeting:'Beep boop. Robo Reader is ready for a kindness mission.'},
+rainbow:{name:'Rainbow Friend',emoji:'🌈',rate:.85,pitch:1.08,preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i,greeting:'Hello, sunshine. Rainbow Friend is happy to learn with you.'}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+function refreshVoices(){if(!('speechSynthesis'in window))return;voices=speechSynthesis.getVoices()||[];const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;$('voiceStatus').textContent=voices.length?`${f.emoji} ${f.name} is ready.`:'Loading a friendly voice…'}
+function chooseVoice(){if(!voices.length)refreshVoices();const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||''));const pool=english.length?english:voices;if(state.voiceFriend==='rainbow'&&pool.length){const friendly=pool.filter(v=>/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));const choices=friendly.length?friendly:pool;return choices[Math.floor(Math.random()*choices.length)]||null}return pool.find(v=>f.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null}
+function stopSpeaking(message='Voice stopped.'){speechToken++;if('speechSynthesis'in window)speechSynthesis.cancel();$('leftTitle').classList.remove('speaking');$('rightTitle').classList.remove('speaking');$('storyText').classList.remove('speaking');$('voiceStatus').textContent=message}
+function speak(text,{preview=false}={}){if(!state.sound||!('speechSynthesis'in window))return;if(!preview&&!String(text||'').trim())return;stopSpeaking('');const token=++speechToken;const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;const phrase=preview?`${f.greeting} Let us practice feelings and friendship together.`:String(text).replace(/<[^>]*>/g,'');const u=new SpeechSynthesisUtterance(phrase);const voice=chooseVoice();if(voice)u.voice=voice;u.lang=(voice&&voice.lang)||'en-US';u.rate=Math.max(.55,Math.min(1.16,f.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));u.pitch=f.pitch;u.volume=1;u.onstart=()=>{$('leftTitle').classList.add('speaking');$('rightTitle').classList.add('speaking');$('storyText').classList.add('speaking');$('voiceStatus').textContent=`${f.emoji} ${f.name} is reading.`};u.onend=()=>{if(token!==speechToken)return;$('leftTitle').classList.remove('speaking');$('rightTitle').classList.remove('speaking');$('storyText').classList.remove('speaking');$('voiceStatus').textContent='Wonderful listening! 🌟'};u.onerror=e=>{if(token!==speechToken)return;$('leftTitle').classList.remove('speaking');$('rightTitle').classList.remove('speaking');$('storyText').classList.remove('speaking');$('voiceStatus').textContent=e&&['interrupted','canceled'].includes(e.error)?'Voice stopped.':'The voice had a little hiccup. Try again.'};speechSynthesis.speak(u)}
+
+function updateVoiceButtons(){document.querySelectorAll('[data-voice]').forEach(b=>{const active=b.dataset.voice===state.voiceFriend;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});$('voiceSpeed').value=state.voiceSpeed}
+function updatePassport(){
+  const earned={
+    notice:state.visited.size>=3,
+    breathe:state.breaths>=1,
+    kind:state.stars>=5,
+    saved:state.saved.size>=1,
+    finish:state.finished||state.visited.size>=14
+  };
+  document.querySelectorAll('.passport-stamp').forEach(el=>el.classList.toggle('earned',!!earned[el.dataset.stamp]));
+}
+function sparkleBurst(count=12){
+  for(let i=0;i<count;i++){
+    const s=document.createElement('span');s.className='sparkle';s.textContent=['✨','⭐','💗','🌈'][i%4];
+    s.style.left=(20+Math.random()*60)+'vw';s.style.top=(45+Math.random()*25)+'vh';
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1100);
+  }
+}
+$('voiceFriends').addEventListener('click',e=>{const b=e.target.closest('[data-voice]');if(!b)return;state.voiceFriend=b.dataset.voice;save();updateVoiceButtons();const f=VOICE_FRIENDS[state.voiceFriend];$('voiceStatus').textContent=`${f.emoji} ${f.name} selected. Tap Meet My Voice to listen.`});
+$('voiceSpeed').addEventListener('change',e=>{state.voiceSpeed=e.target.value;save();$('voiceStatus').textContent='Reading speed saved.'});
+$('previewVoice').onclick=()=>speak('',{preview:true});
+$('stopVoiceBtn').onclick=()=>stopSpeaking('Voice stopped.');
+
 function pageChime(){if(!state.pageSound)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.value=640;g.gain.setValueAtTime(.025,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.13);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+.14)}catch(e){}}
 function celebrate(){const h=$('celebrate'),bits=['⭐','🌈','💗','🌱','✨'];for(let i=0;i<18;i++){const s=document.createElement('span');s.className='confetti';s.textContent=bits[i%bits.length];s.style.left=Math.random()*100+'vw';s.style.setProperty('--dx',(Math.random()*180-90)+'px');s.style.animationDelay=Math.random()*.3+'s';h.appendChild(s);setTimeout(()=>s.remove(),2100)}}
 function markVisited(){if(!state.visited.has(key())){state.visited.add(key());state.stars++;if(state.stars%5===0)celebrate()}}
-function renderDots(){const d=$('dots');d.innerHTML='';currentStory().pages.forEach((_,i)=>{const b=document.createElement('button');b.className=i===state.index?'active':'';b.setAttribute('aria-label',`Go to page ${i+1}`);b.onclick=()=>{state.index=i;render(true)};d.appendChild(b)})}
-function renderChoices(){const p=currentPage(),grid=$('choiceGrid');$('practicePrompt').textContent=p.quiz;$('choiceFeedback').textContent='';grid.innerHTML='';p.choices.forEach((text,i)=>{const b=document.createElement('button');b.className='choice-btn';b.textContent=text;b.onclick=()=>{[...grid.children].forEach(x=>x.disabled=true);if(i===p.correct){b.classList.add('correct');$('choiceFeedback').textContent='✓ '+p.explain;state.stars++;celebrate();speak('Correct. '+p.explain)}else{b.classList.add('wrong');grid.children[p.correct].classList.add('correct');$('choiceFeedback').textContent='Good try. '+p.explain;speak('Good try. '+p.explain)}$('stars').textContent=state.stars;save()};grid.appendChild(b)})}
-function render(flip=false){const s=currentStory();state.index=Math.max(0,Math.min(state.index,s.pages.length-1));const p=currentPage();document.body.classList.toggle('friendship',state.story==='friendship');if(flip){$('book').classList.remove('turn');void $('book').offsetWidth;$('book').classList.add('turn')}markVisited();$('bookLabel').textContent=s.label;$('leftTitle').textContent=p.left;$('rightTitle').textContent=p.right;$('stepTag').textContent=p.step;$('sceneEmoji').textContent=p.emoji;$('sceneWord').textContent=p.word;$('storyText').innerHTML=p.text;$('storyTip').textContent=p.tip;$('pageCount').textContent=`Page ${state.index+1} of ${s.pages.length}`;$('prevBtn').disabled=state.index===0;$('nextBtn').disabled=state.index===s.pages.length-1;$('bar').style.width=((state.index+1)/s.pages.length*100)+'%';$('progressText').textContent=`${state.index+1} of ${s.pages.length}`;$('feelingsTab').classList.toggle('active',state.story==='feelings');$('friendshipTab').classList.toggle('active',state.story==='friendship');$('saveBtn').textContent=state.saved.has(key())?'🔖 Page Saved':'🔖 Save Page';$('visitedCount').textContent=state.visited.size;$('stars').textContent=state.stars;$('savedCount').textContent=state.saved.size;renderDots();renderChoices();save()}
-function go(dir){const n=state.index+dir;if(n<0||n>=currentStory().pages.length)return;state.index=n;pageChime();render(true)}
+function renderDots(){const d=$('dots');d.innerHTML='';currentStory().pages.forEach((_,i)=>{const b=document.createElement('button');b.className=i===state.index?'active':'';b.textContent=currentStory().pages[i].emoji;b.title=currentStory().pages[i].step;b.setAttribute('aria-label',`Go to page ${i+1}: ${currentStory().pages[i].right}`);b.onclick=()=>{state.index=i;render(true)};d.appendChild(b)})}
+function renderChoices(){const p=currentPage(),grid=$('choiceGrid');$('practicePrompt').textContent=p.quiz;$('choiceFeedback').textContent='';grid.innerHTML='';p.choices.forEach((text,i)=>{const b=document.createElement('button');b.className='choice-btn';b.textContent=text;b.onclick=()=>{[...grid.children].forEach(x=>x.disabled=true);if(i===p.correct){b.classList.add('correct');$('choiceFeedback').textContent='⭐ Wonderful thinking! '+p.explain;state.stars++;celebrate();sparkleBurst(8);speak('Wonderful thinking. '+p.explain)}else{b.classList.add('wrong');grid.children[p.correct].classList.add('correct');$('choiceFeedback').textContent='🌈 Great try! '+p.explain;speak('Great try. '+p.explain)}$('stars').textContent=state.stars;save();updatePassport()};grid.appendChild(b)})}
+function render(flip=false){const s=currentStory();state.index=Math.max(0,Math.min(state.index,s.pages.length-1));const p=currentPage();document.body.classList.toggle('friendship',state.story==='friendship');if(flip){$('book').classList.remove('turn');void $('book').offsetWidth;$('book').classList.add('turn')}markVisited();$('bookLabel').textContent=s.label;$('leftTitle').textContent=p.left;$('rightTitle').textContent=p.right;$('stepTag').textContent=p.step;$('sceneEmoji').textContent=p.emoji;$('sceneWord').textContent=p.word;$('storyText').innerHTML=p.text;$('storyTip').textContent=p.tip;$('parentCornerText').textContent=p.tip;$('pageCount').textContent=`Page ${state.index+1} of ${s.pages.length}`;$('prevBtn').disabled=state.index===0;$('nextBtn').disabled=false;$('nextBtn').textContent=state.index===s.pages.length-1?'Finish 🌈':'Next ▶';$('bar').style.width=((state.index+1)/s.pages.length*100)+'%';$('progressText').textContent=`${state.index+1} of ${s.pages.length}`;$('feelingsTab').classList.toggle('active',state.story==='feelings');$('friendshipTab').classList.toggle('active',state.story==='friendship');$('saveBtn').textContent=state.saved.has(key())?'🔖 Page Saved':'🔖 Save Page';$('visitedCount').textContent=state.visited.size;$('stars').textContent=state.stars;$('savedCount').textContent=state.saved.size;renderDots();renderChoices();updatePassport();save()}
+function go(dir){const n=state.index+dir;if(n<0)return;if(n>=currentStory().pages.length){state.finished=true;save();updatePassport();sparkleBurst(20);speak('You finished this story. You earned the Heart Explorer passport stamp.');return}state.index=n;pageChime();render(true)}
 $('prevBtn').onclick=()=>go(-1);$('nextBtn').onclick=()=>go(1);$('feelingsTab').onclick=()=>{state.story='feelings';state.index=0;render(true)};$('friendshipTab').onclick=()=>{state.story='friendship';state.index=0;render(true)};
 $('sayTitle').onclick=()=>{const p=currentPage();speak(`${p.left}. ${p.right}. ${p.text}`)};$('doAction').onclick=()=>speak(currentPage().action);
 $('soundBtn').onclick=()=>{state.sound=!state.sound;$('soundState').textContent=state.sound?'On':'Off';$('soundBtn').classList.toggle('active',state.sound);if(!state.sound&&'speechSynthesis'in window)speechSynthesis.cancel();save()};
 $('quietBtn').onclick=()=>{state.pageSound=!state.pageSound;$('quietState').textContent=state.pageSound?'On':'Off';$('quietBtn').classList.toggle('active',state.pageSound);save()};
 $('saveBtn').onclick=()=>{if(state.saved.has(key()))state.saved.delete(key());else state.saved.add(key());render(false)};
 const fc=$('feelingChoices');feelings.forEach(item=>{const [emoji,...rest]=item.split(' '),b=document.createElement('button');b.className='feeling-choice';b.innerHTML=`${emoji}<span>${rest.join(' ')}</span>`;b.onclick=()=>{[...fc.children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('feelingFeedback').textContent=`Thank you for noticing. ${rest.join(' ')} is allowed.`;speak(`${rest.join(' ')} is allowed. Thank you for noticing your feeling.`)};fc.appendChild(b)});
-$('breathBall').onclick=()=>{const b=$('breathBall');b.classList.remove('breathing');void b.offsetWidth;b.classList.add('breathing');b.textContent='Breathe';$('breathFeedback').textContent='In gently… and out slowly…';speak('Breathe in gently. Breathe out slowly. Let us do three balloon breaths.');setTimeout(()=>{b.textContent='Again';$('breathFeedback').textContent='You gave your body a calm moment.';state.stars++;$('stars').textContent=state.stars;save()},18000)};
+$('breathBall').onclick=()=>{const b=$('breathBall');b.classList.remove('breathing');void b.offsetWidth;b.classList.add('breathing');b.textContent='Breathe';$('breathFeedback').textContent='In gently… and out slowly…';speak('Breathe in gently. Breathe out slowly. Let us do three balloon breaths.');setTimeout(()=>{b.textContent='Again';$('breathFeedback').textContent='You gave your body a calm moment.';state.stars++;state.breaths++;$('stars').textContent=state.stars;save();updatePassport();sparkleBurst(7)},18000)};
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});let swipe=0;$('book').addEventListener('pointerdown',e=>swipe=e.clientX);$('book').addEventListener('pointerup',e=>{const d=e.clientX-swipe;if(Math.abs(d)>55)go(d<0?1:-1)});
-$('soundState').textContent=state.sound?'On':'Off';$('quietState').textContent=state.pageSound?'On':'Off';$('soundBtn').classList.toggle('active',state.sound);$('quietBtn').classList.toggle('active',state.pageSound);render(false);
+if('speechSynthesis'in window){refreshVoices();speechSynthesis.addEventListener?.('voiceschanged',refreshVoices);speechSynthesis.onvoiceschanged=refreshVoices;setTimeout(refreshVoices,250);setTimeout(refreshVoices,900)}else{$('previewVoice').disabled=true;$('stopVoiceBtn').disabled=true;$('sayTitle').disabled=true;$('voiceStatus').textContent='Read-aloud voices are not available in this browser.'}
+updateVoiceButtons();
+$('soundState').textContent=state.sound?'On':'Off';$('quietState').textContent=state.pageSound?'On':'Off';$('soundBtn').classList.toggle('active',state.sound);$('quietBtn').classList.toggle('active',state.pageSound);render(false);updatePassport();window.addEventListener('beforeunload',()=>stopSpeaking(''));
 </script>
 </body>
 </html>
