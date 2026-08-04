@@ -7,10 +7,10 @@
 <title>Sunny ABCs &amp; 123s — Storytime</title>
 <style>
 :root{
-  --sun:#ffd45c;--coral:#ff8f7c;--berry:#ec6fa7;--mint:#82dfbd;--sky:#7fd8ff;
-  --ink:#332d43;--muted:#6e6680;--paper:#fffdf9;--panel:rgba(255,255,255,.88);
-  --accent:#ff9f43;--accent2:#ffcf5a;--deep:#d95f14;--soft:#fff1c9;
-  --good:#32a96b;--bad:#c65363;--ring:#47315f;--shadow:0 20px 55px rgba(56,39,73,.15);
+  --sun:#ffe596;--coral:#ffb4a7;--berry:#f4a4c8;--mint:#b5ecd7;--sky:#b8eaff;
+  --ink:#40374d;--muted:#7b7188;--paper:#fffefa;--panel:rgba(255,255,255,.94);
+  --accent:#f2a25f;--accent2:#ffe28a;--deep:#c96f2f;--soft:#fff5d9;
+  --good:#4fb67f;--bad:#c96878;--ring:#5b4773;--shadow:0 18px 46px rgba(66,47,81,.12);
   --radius:28px;--font:"Comic Sans MS","Chalkboard SE","Segoe Print","Trebuchet MS",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
@@ -20,7 +20,7 @@ body{
   background:
     radial-gradient(circle at 12% 10%,rgba(255,255,255,.92) 0 4%,transparent 5%),
     radial-gradient(circle at 87% 16%,rgba(255,255,255,.7) 0 3%,transparent 4%),
-    linear-gradient(145deg,#fff4c8 0%,#ffe6cb 42%,#ffd6e8 100%);
+    linear-gradient(145deg,#fff9df 0%,#fff0da 42%,#ffe8f3 100%);
   transition:background .35s ease,color .25s ease;
 }
 body.theme-sunny{--accent:#ff9f43;--accent2:#ffd15c;--deep:#d95f14;--soft:#fff1c9}
@@ -40,9 +40,9 @@ button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}
 .cloud{position:absolute;font-size:clamp(2rem,6vw,4rem);opacity:.3;animation:drift 18s linear infinite}.c1{top:5%;left:-10%}.c2{top:48%;left:-18%;animation-delay:-9s}
 @keyframes float{50%{transform:translateY(-18px) scale(1.05)}}
 @keyframes drift{to{transform:translateX(125vw)}}
-.page-wrap{max-width:1180px;margin:auto;padding:24px 14px 56px}
-.hero{text-align:center;margin-bottom:16px}.hero-badge{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:#ffffffc7;box-shadow:0 8px 24px #634d6b18;font-size:.83rem;font-weight:800}
-.hero h1{margin:11px 0 3px;font-size:clamp(2.35rem,7vw,4.8rem);line-height:.95;color:var(--deep);letter-spacing:-.045em}.hero p{margin:9px auto 0;max-width:760px;color:var(--muted);font-size:.98rem;line-height:1.55}
+.page-wrap{max-width:1180px;margin:auto;padding:32px 14px 60px}
+.hero{text-align:center;margin-bottom:24px;padding:8px 10px 0}.hero-badge{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:#ffffffc7;box-shadow:0 8px 24px #634d6b18;font-size:.83rem;font-weight:800}
+.hero h1{margin:18px auto 10px;max-width:980px;font-size:clamp(2.5rem,6.5vw,5rem);line-height:1.08;color:var(--deep);letter-spacing:-.02em;padding:0 .08em}.hero p{margin:10px auto 0;max-width:840px;color:var(--muted);font-size:1.02rem;line-height:1.7}
 .app-shell{background:var(--panel);backdrop-filter:blur(14px);border:1px solid #ffffffd6;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
 .app-header{text-align:center}.app-header h2{margin:0;font-size:clamp(1.4rem,4vw,1.8rem)}#modeLabel{color:var(--muted);font-size:.85rem;font-weight:800}
 .top-controls,.narration-controls{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:13px}
@@ -73,6 +73,64 @@ button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}
 #ariaLive{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .practice-studio .practice-tabs button:nth-child(n+3),body.simple-mode .advanced-control{display:none!important}
 #printArea{display:none}
+
+.mascot-banner{
+  display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;
+  margin:0 0 14px;padding:13px 15px;border-radius:22px;
+  background:linear-gradient(145deg,#fff,#fff8e9,#f3fbff);
+  border:1px solid #eadfe8;
+}
+.mascot-face{font-size:3.1rem;animation:bob 3s ease-in-out infinite}
+.mascot-banner h3{margin:0;color:var(--deep);font-size:1.08rem}
+.mascot-banner p{margin:3px 0 0;color:var(--muted);line-height:1.45}
+
+.voice-studio{
+  max-width:850px;margin:14px auto 0;padding:13px;border-radius:22px;
+  background:linear-gradient(145deg,#fff,#fffaf1,#f7f4ff);
+  border:1px solid #eadfe8;
+}
+.voice-studio h3{margin:0 0 8px;text-align:center;color:var(--deep);font-size:1rem}
+.voice-friends{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-friend{
+  border:2px solid #e6dce9;background:#fff;color:var(--deep);
+  border-radius:16px;padding:8px 5px;min-height:62px;cursor:pointer;font-weight:900;
+  display:grid;place-items:center;align-content:center;gap:2px;box-shadow:0 5px 12px rgba(63,43,80,.06)
+}
+.voice-friend .emoji{font-size:1.45rem;line-height:1}
+.voice-friend .name{font-size:.68rem}
+.voice-friend.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--deep));transform:translateY(-1px)}
+.voice-options{margin-top:8px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.voice-status{min-height:1.2em;margin:8px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.rhyme-line.speaking,.story-title.speaking{
+  box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 22%,transparent);
+  background:#fffdf4
+}
+
+.passport{
+  max-width:850px;margin:14px auto 0;padding:14px;border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8e8,#eefbff);border:1px solid #eadfe8
+}
+.passport h3{margin:0 0 8px;color:var(--deep);text-align:center}
+.stamp-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.passport-stamp{padding:9px 6px;border-radius:15px;background:#fff;border:1px solid #eadfe8;text-align:center;opacity:.42;filter:grayscale(.35)}
+.passport-stamp.earned{opacity:1;filter:none;box-shadow:0 6px 15px rgba(65,43,80,.08)}
+.passport-stamp span{display:block;font-size:1.45rem}.passport-stamp small{font-size:.68rem;color:var(--muted);font-weight:900}
+
+.dot-row button{
+  width:34px;height:34px;min-height:34px;display:grid;place-items:center;font-size:.92rem;
+  border:1px solid #e6dce9;background:#fff;border-radius:50%
+}
+.dot-row button.active{width:42px;background:linear-gradient(135deg,var(--accent2),var(--accent));color:var(--ink);transform:scale(1.06)}
+.sparkle{position:fixed;pointer-events:none;z-index:50;font-size:1.6rem;animation:sparkleFly 1s ease forwards}
+@keyframes sparkleFly{to{transform:translateY(-80px) scale(1.35) rotate(18deg);opacity:0}}
+
+@media(max-width:700px){
+  .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-friend:last-child{grid-column:1/-1}
+  .stamp-row{grid-template-columns:repeat(2,1fr)}
+  .mascot-banner{grid-template-columns:1fr;text-align:center}
+}
+
 @media(max-width:780px){.page-wrap{padding-top:18px}.app-shell{padding:12px}.book-card{grid-template-columns:1fr;max-width:620px}.book-card::after{display:none}.book-page{min-height:0}.dot-row{max-height:74px}.choice-grid{grid-template-columns:1fr}.settings-grid,.adult-actions{grid-template-columns:1fr}.hero p{font-size:.9rem}}
 @media(max-width:480px){.page-wrap{padding-left:7px;padding-right:7px}.hero h1{font-size:2.45rem}.app-shell{border-radius:20px}.book-card{padding:8px;border-radius:20px}.book-page{padding:15px;border-radius:17px}.top-controls{gap:6px}.pill-btn{padding:8px 10px;font-size:.78rem}.nav-row{grid-template-columns:1fr 1fr}.page-indicator{grid-column:1/-1;grid-row:1}.nav-btn{grid-row:2}.spell-box{width:36px;height:43px}.practice-studio{padding:10px}.trace-stage{aspect-ratio:1.55/1}.reward-row{gap:6px}.reward{font-size:.75rem}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
@@ -91,6 +149,31 @@ body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .pr
   </header>
 
   <section class="app-shell" aria-label="Sunny ABCs and 123s interactive storybook">
+
+    <div class="mascot-banner">
+      <div class="mascot-face" aria-hidden="true">☀️</div>
+      <div>
+        <h3>Sunny is your alphabet-and-number guide</h3>
+        <p>“Hello, little learner! We will read, count, trace, move, spell, and celebrate every brave try.”</p>
+      </div>
+    </div>
+
+    <section class="voice-studio" aria-labelledby="voiceTitle">
+      <h3 id="voiceTitle">Choose Your Reading Friend</h3>
+      <div class="voice-friends" id="voiceFriends">
+        <button type="button" class="voice-friend" data-voice="fairy"><span class="emoji">🧚</span><span class="name">Fairy Lily</span></button>
+        <button type="button" class="voice-friend" data-voice="bear"><span class="emoji">🐻</span><span class="name">Benny Bear</span></button>
+        <button type="button" class="voice-friend" data-voice="owl"><span class="emoji">🦉</span><span class="name">Professor Owl</span></button>
+        <button type="button" class="voice-friend" data-voice="robot"><span class="emoji">🤖</span><span class="name">Robo Reader</span></button>
+        <button type="button" class="voice-friend" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Friend</span></button>
+      </div>
+      <div class="voice-options">
+        <button type="button" id="previewVoice" class="action-btn">👋 Meet My Voice</button>
+        <button type="button" id="stopVoiceFriend" class="action-btn">⏹ Stop Voice</button>
+      </div>
+      <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+    </section>
+
     <div class="app-header">
       <h2>Sunny ABCs &amp; 123s</h2>
       <span id="modeLabel">Alphabet Book</span>
@@ -170,6 +253,18 @@ body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .pr
       <div class="practice-panel" id="matchPanel" role="tabpanel" hidden>
         <div id="matchArea"></div>
         <div class="practice-actions"><button class="practice-btn" id="newMatchBtn" type="button">🔄 New Match</button></div>
+      </div>
+    </section>
+
+
+    <section class="passport">
+      <h3>🌎 My Sunny Discovery Passport</h3>
+      <div class="stamp-row" id="passportStamps">
+        <div class="passport-stamp" data-stamp="alphabet"><span>🔤</span><small>Alphabet Explorer</small></div>
+        <div class="passport-stamp" data-stamp="numbers"><span>🔢</span><small>Number Navigator</small></div>
+        <div class="passport-stamp" data-stamp="trace"><span>✏️</span><small>Tracing Star</small></div>
+        <div class="passport-stamp" data-stamp="rhyme"><span>🎵</span><small>Rhyme Reader</small></div>
+        <div class="passport-stamp" data-stamp="graduate"><span>🌈</span><small>Sunny Graduate</small></div>
       </div>
     </section>
 
@@ -729,7 +824,7 @@ const $=id=>document.getElementById(id);
 function safeJSON(value,fallback){try{const v=JSON.parse(value);return v??fallback}catch{return fallback}}
 function oldVisited(){return safeJSON(localStorage.getItem('sunny-visited')||'[]',[])}
 const defaults={
-  book:localStorage.getItem('sunny-book')||'alphabet',index:Number(localStorage.getItem('sunny-index')||0),theme:Number(localStorage.getItem('sunny-theme')||0),sound:localStorage.getItem('sunny-sound')!=='false',song:false,caseMode:'both',speed:.86,autoAdvance:false,stars:Number(localStorage.getItem('sunny-stars')||0),visited:oldVisited(),favorites:[],awards:[],progress:{rhymes:0,words:0,movements:0,traces:0,spells:0,matches:0,counting:0},settings:{rewards:true,motion:true,simple:false,largeText:false,contrast:false,rememberName:false},learnerName:'',favoritesOnly:false};
+  book:localStorage.getItem('sunny-book')||'alphabet',index:Number(localStorage.getItem('sunny-index')||0),theme:Number(localStorage.getItem('sunny-theme')||0),sound:localStorage.getItem('sunny-sound')!=='false',song:false,caseMode:'both',speed:.86,autoAdvance:false,stars:Number(localStorage.getItem('sunny-stars')||0),visited:oldVisited(),favorites:[],awards:[],progress:{rhymes:0,words:0,movements:0,traces:0,spells:0,matches:0,counting:0},settings:{rewards:true,motion:true,simple:false,largeText:false,contrast:false,rememberName:false},learnerName:'',favoritesOnly:false,voiceFriend:localStorage.getItem('sunny-voice-friend')||'fairy'};
 const loaded=safeJSON(localStorage.getItem(STORE)||'null',null);
 const state={...defaults,...(loaded||{}),progress:{...defaults.progress,...(loaded?.progress||{})},settings:{...defaults.settings,...(loaded?.settings||{})}};
 state.visited=new Set(Array.isArray(state.visited)?state.visited:[]);state.favorites=new Set(Array.isArray(state.favorites)?state.favorites:[]);state.awards=new Set(Array.isArray(state.awards)?state.awards:[]);
@@ -743,24 +838,84 @@ function pageKey(){return `${state.book}:${originalIndex()}`}
 function countVisited(book){let n=0;state.visited.forEach(k=>{if(k.startsWith(book+':'))n++});return n}
 function totalActivities(){return Object.values(state.progress).reduce((a,b)=>a+Number(b||0),0)}
 function saveState(){
-  const payload={...state,visited:[...state.visited],favorites:[...state.favorites],awards:[...state.awards]};
+  const payload={...state,visited:[...state.visited],favorites:[...state.favorites],awards:[...state.awards],voiceFriend:state.voiceFriend};
   try{localStorage.setItem(STORE,JSON.stringify(payload))}catch{toast('Progress could not be saved because browser storage is full.')}
 }
 function toast(message){const t=$('toast');t.textContent=message;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400)}
 function announce(message){$('ariaLive').textContent='';setTimeout(()=>$('ariaLive').textContent=message,20)}
-function chooseVoice(){if(!('speechSynthesis'in window))return;const voices=speechSynthesis.getVoices();selectedVoice=voices.find(v=>/child|kid|jenny|samantha|aria|female/i.test(v.name)&&/^en/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null}
-if('speechSynthesis'in window){chooseVoice();speechSynthesis.onvoiceschanged=chooseVoice}
-function speak(text,onEnd,{countRhyme=false,status='Speaking…'}={}){
+const VOICE_FRIENDS={
+fairy:{name:'Fairy Lily',emoji:'🧚',pitch:1.2,rateFactor:.95,preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,greeting:'Hello, little learner. Fairy Lily is ready for sunny storytime.'},
+bear:{name:'Benny Bear',emoji:'🐻',pitch:.9,rateFactor:.9,preferred:/daniel|david|alex|fred|george|male|tom/i,greeting:'Hello, friend. Benny Bear will read nice and gently.'},
+owl:{name:'Professor Owl',emoji:'🦉',pitch:1,rateFactor:.86,preferred:/daniel|samantha|alex|serena|moira/i,greeting:'Welcome, young learner. Professor Owl is ready to read and count.'},
+robot:{name:'Robo Reader',emoji:'🤖',pitch:.72,rateFactor:1,preferred:/fred|ralph|alex|david|google us english/i,greeting:'Beep boop. Robo Reader is ready for the alphabet mission.'},
+rainbow:{name:'Rainbow Friend',emoji:'🌈',pitch:1.08,rateFactor:.98,preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i,greeting:'Hello, sunshine. Rainbow Friend is happy to learn with you.'}
+};
+let voices=[],speechToken=0,selectedVoice=null;
+function refreshVoices(){if(!('speechSynthesis'in window))return;voices=speechSynthesis.getVoices()||[];const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;$('voiceStatus').textContent=voices.length?`${f.emoji} ${f.name} is ready.`:'Loading a friendly voice…'}
+function chooseVoice(){if(!voices.length)refreshVoices();const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||''));const pool=english.length?english:voices;if(state.voiceFriend==='rainbow'&&pool.length){const friendly=pool.filter(v=>/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));const choices=friendly.length?friendly:pool;return choices[Math.floor(Math.random()*choices.length)]||null}return pool.find(v=>f.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null}
+function speak(text,onEnd,{countRhyme=false,status='Speaking…',preview=false}={}){
   if(!state.sound||!('speechSynthesis'in window)){if(onEnd)setTimeout(onEnd,500);return}
-  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);if(selectedVoice)u.voice=selectedVoice;u.rate=Number(state.speed)||.86;u.pitch=1.08;u.volume=1;$('narrationStatus').textContent=status;
-  u.onend=()=>{$('narrationStatus').textContent='Ready to read.';if(countRhyme){state.progress.rhymes++;saveState();updateRewards()}onEnd&&onEnd()};u.onerror=()=>{$('narrationStatus').textContent='Narration stopped.';onEnd&&onEnd()};speechSynthesis.speak(u)
+  speechToken++;
+  speechSynthesis.cancel();
+  const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
+  const phrase=preview?`${f.greeting} Let us read, move, trace, and count together.`:text;
+  const u=new SpeechSynthesisUtterance(phrase);
+  selectedVoice=chooseVoice();
+  if(selectedVoice)u.voice=selectedVoice;
+  u.lang=(selectedVoice&&selectedVoice.lang)||'en-US';
+  u.rate=Math.max(.55,Math.min(1.15,(Number(state.speed)||.86)*f.rateFactor));
+  u.pitch=f.pitch;
+  u.volume=1;
+  $('narrationStatus').textContent=status;
+  $('voiceStatus').textContent=`${f.emoji} ${f.name} is reading.`;
+  u.onend=()=>{$('narrationStatus').textContent='Ready to read.';$('voiceStatus').textContent='Wonderful listening! 🌟';if(countRhyme){state.progress.rhymes++;saveState();updateRewards()}onEnd&&onEnd()};
+  u.onerror=e=>{$('narrationStatus').textContent='Narration stopped.';$('voiceStatus').textContent=e&&['interrupted','canceled'].includes(e.error)?'Voice stopped.':'The voice had a little hiccup. Try again.';onEnd&&onEnd()};
+  speechSynthesis.speak(u)
 }
-function stopNarration(){songToken++;document.querySelectorAll('.rhyme-line').forEach(x=>x.classList.remove('active'));if('speechSynthesis'in window)speechSynthesis.cancel();$('pauseBtn').textContent='⏸ Pause';$('narrationStatus').textContent='Narration stopped.'}
+function stopNarration(){songToken++;document.querySelectorAll('.rhyme-line').forEach(x=>x.classList.remove('active'));if('speechSynthesis'in window)speechSynthesis.cancel();$('pauseBtn').textContent='⏸ Pause';$('narrationStatus').textContent='Narration stopped.';$('voiceStatus').textContent='Voice stopped.'}
 function pauseNarration(){if(!('speechSynthesis'in window))return;if(speechSynthesis.paused){speechSynthesis.resume();$('pauseBtn').textContent='⏸ Pause';$('narrationStatus').textContent='Reading…'}else if(speechSynthesis.speaking){speechSynthesis.pause();$('pauseBtn').textContent='▶ Resume';$('narrationStatus').textContent='Paused.'}}
 function startRhyme(){stopNarration();const token=songToken;const lines=[...document.querySelectorAll('.rhyme-line')];let i=0;state.song=true;updateToggleButtons();const next=()=>{if(token!==songToken||!state.song)return;lines.forEach(x=>x.classList.remove('active'));if(i>=lines.length){state.song=false;updateToggleButtons();state.progress.rhymes++;award(`rhyme:${pageKey()}`);saveState();updateRewards();$('narrationStatus').textContent='Rhyme complete!';if(state.autoAdvance)setTimeout(()=>go(1),700);return}const line=lines[i++];line.classList.add('active');speak(line.textContent,()=>setTimeout(next,220),{status:`Reading line ${i} of ${lines.length}…`})};next()}
+
+function updateVoiceButtons(){
+  document.querySelectorAll('[data-voice]').forEach(b=>{
+    const active=b.dataset.voice===state.voiceFriend;
+    b.classList.toggle('active',active);
+    b.setAttribute('aria-pressed',String(active));
+  });
+}
+function updatePassport(){
+  const earned={
+    alphabet:countVisited('alphabet')>=8,
+    numbers:countVisited('numbers')>=5,
+    trace:state.progress.traces>=3,
+    rhyme:state.progress.rhymes>=5,
+    graduate:countVisited('alphabet')>=26&&countVisited('numbers')>=12
+  };
+  document.querySelectorAll('.passport-stamp').forEach(el=>el.classList.toggle('earned',!!earned[el.dataset.stamp]));
+}
+function sparkleBurst(count=12){
+  for(let i=0;i<count;i++){
+    const s=document.createElement('span');s.className='sparkle';s.textContent=['✨','⭐','☀️','🌈'][i%4];
+    s.style.left=(20+Math.random()*60)+'vw';s.style.top=(45+Math.random()*25)+'vh';
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1100);
+  }
+}
+$('voiceFriends').addEventListener('click',e=>{
+  const b=e.target.closest('[data-voice]');
+  if(!b)return;
+  state.voiceFriend=b.dataset.voice;
+  try{localStorage.setItem('sunny-voice-friend',state.voiceFriend)}catch{}
+  saveState();
+  updateVoiceButtons();
+  const f=VOICE_FRIENDS[state.voiceFriend];
+  $('voiceStatus').textContent=`${f.emoji} ${f.name} selected. Tap Meet My Voice to listen.`;
+});
+$('previewVoice').onclick=()=>speak('',null,{preview:true,status:'Meeting your reading friend…'});
+$('stopVoiceFriend').onclick=()=>{stopNarration();$('voiceStatus').textContent='Voice stopped.'};
+
 function celebrate(){if(!state.settings.rewards||!state.settings.motion)return;const holder=$('celebration'),bits=['⭐','🌈','✨','🎈','💛'];for(let i=0;i<18;i++){const el=document.createElement('span');el.className='confetti';el.textContent=bits[i%bits.length];el.style.left=Math.random()*100+'vw';el.style.top='-40px';el.style.setProperty('--dx',(Math.random()*180-90)+'px');el.style.animationDelay=Math.random()*.35+'s';holder.appendChild(el);setTimeout(()=>el.remove(),2200)}}
 function award(id,amount=1,message='Wonderful work!'){
-  if(state.awards.has(id))return false;state.awards.add(id);if(state.settings.rewards){state.stars+=amount;celebrate();toast(message)}saveState();return true
+  if(state.awards.has(id))return false;state.awards.add(id);if(state.settings.rewards){state.stars+=amount;celebrate();toast(message);sparkleBurst(8)}saveState();return true
 }
 function markVisited(){const key=pageKey();if(!state.visited.has(key)){state.visited.add(key);award(`visit:${key}`,1,'A new page explored! ⭐');saveState()}}
 function displaySymbol(p){if(state.book==='numbers')return String(p.number);const upper=p.letter.toUpperCase(),lower=p.letter.toLowerCase();return state.caseMode==='upper'?upper:state.caseMode==='lower'?lower:`${upper} ${lower}`}
@@ -768,7 +923,7 @@ function quantityHTML(n,word){const icon=quantityEmoji[n]||emojiMap[word]||'●'
 function updateToggleButtons(){
   $('songModeState').textContent=state.song?'On':'Off';$('soundModeState').textContent=state.sound?'On':'Off';$('songModeBtn').classList.toggle('active',state.song);$('songModeBtn').setAttribute('aria-pressed',String(state.song));$('soundModeBtn').classList.toggle('active',state.sound);$('soundModeBtn').setAttribute('aria-pressed',String(state.sound));
 }
-function renderDots(){const row=$('dotRow'),list=pages();row.innerHTML='';list.forEach((p,i)=>{const all=state.book==='alphabet'?alphabetPages:numberPages,oi=all.indexOf(p),key=`${state.book}:${oi}`,b=document.createElement('button');b.className=(i===state.index?'active ':'')+(state.visited.has(key)?'visited ':'')+(state.favorites.has(key)?'favorite-dot':'');b.setAttribute('aria-label',`${state.book==='alphabet'?'Letter '+p.letter:'Number '+p.number}${state.favorites.has(key)?', favorite':''}`);b.onclick=()=>{state.index=i;render(true)};row.appendChild(b)})}
+function renderDots(){const row=$('dotRow'),list=pages();row.innerHTML='';list.forEach((p,i)=>{const all=state.book==='alphabet'?alphabetPages:numberPages,oi=all.indexOf(p),key=`${state.book}:${oi}`,b=document.createElement('button');b.className=(i===state.index?'active ':'')+(state.visited.has(key)?'visited ':'')+(state.favorites.has(key)?'favorite-dot':'');b.textContent=state.book==='alphabet'?(emojiMap[p.word]||p.letter):String(p.number);b.title=state.book==='alphabet'?`${p.letter} is for ${p.word}`:`Number ${p.number} — ${p.word}`;b.setAttribute('aria-label',`${state.book==='alphabet'?'Letter '+p.letter:'Number '+p.number}${state.favorites.has(key)?', favorite':''}`);b.onclick=()=>{state.index=i;render(true)};row.appendChild(b)})}
 function render(flip=false){
   const list=pages();if(!list.length){state.favoritesOnly=false;toast('No favorites are saved in this book yet.');return render(false)}state.index=Math.max(0,Math.min(state.index,list.length-1));const p=current();stopNarration();if(flip&&state.settings.motion){$('bookCard').classList.remove('flip');void $('bookCard').offsetWidth;$('bookCard').classList.add('flip')}markVisited();
   const emoji=emojiMap[p.word]||'✨',symbol=displaySymbol(p),isNumber=state.book==='numbers';
@@ -791,7 +946,7 @@ function toggleFavorite(){const key=pageKey();if(state.favorites.has(key)){state
 function countObjects(){const p=current();if(state.book!=='numbers')return;const items=[...document.querySelectorAll('#quantityGrid .quantity-item')];let i=0;state.progress.counting++;award(`count:${pageKey()}`);saveState();updateRewards();const next=()=>{items.forEach(x=>x.classList.remove('counting'));if(i>=items.length){speak(`${p.number}. ${p.word}!`,null,{status:'Counting complete!'});return}const item=items[i++];item.classList.add('counting');speak(String(i),()=>setTimeout(next,120),{status:`Counting ${i} of ${p.number}…`})};next()}
 function updateRewards(){
   $('visitedCount').textContent=state.visited.size;$('starCount').textContent=state.stars;$('favoriteCount').textContent=state.favorites.size;$('activityCount').textContent=totalActivities();
-  const shelf=$('badgeShelf');shelf.innerHTML='';badgeDefs.forEach(b=>{const earned=b.test(state);if(earned&&!state.awards.has(`badge:${b.id}`)){state.awards.add(`badge:${b.id}`);if(state.settings.rewards){state.stars+=2;celebrate();toast(`${b.icon} ${b.name} earned!`)}}const el=document.createElement('span');el.className='badge'+(earned?' earned':'');el.textContent=`${b.icon} ${b.name}`;shelf.appendChild(el)});saveState()
+  updatePassport();const shelf=$('badgeShelf');shelf.innerHTML='';badgeDefs.forEach(b=>{const earned=b.test(state);if(earned&&!state.awards.has(`badge:${b.id}`)){state.awards.add(`badge:${b.id}`);if(state.settings.rewards){state.stars+=2;celebrate();toast(`${b.icon} ${b.name} earned!`)}}const el=document.createElement('span');el.className='badge'+(earned?' earned':'');el.textContent=`${b.icon} ${b.name}`;shelf.appendChild(el)});saveState()
 }
 function showPractice(name){currentPractice=name;[['trace',$('tracePanel'),$('traceTab')],['spell',$('spellPanel'),$('spellTab')],['match',$('matchPanel'),$('matchTab')]].forEach(([n,p,b])=>{p.hidden=n!==name;b.classList.toggle('active',n===name);b.setAttribute('aria-selected',String(n===name))});if(name==='trace')setTimeout(resizeTrace,30);if(name==='spell')renderSpell();if(name==='match')buildMatch()}
 function resetPractice(){spellIndex=0;renderSpell();buildMatch();setTimeout(()=>{resizeTrace();clearTrace()},40)}
@@ -832,8 +987,21 @@ $('favoritesOnlyBtn').onclick=()=>{state.favoritesOnly=true;state.index=0;closeA
 document.addEventListener('keydown',e=>{if(!$('adultModal').hidden||!$('confirmModal').hidden)return;if(currentPractice==='spell'&&e.key==='Enter'){e.preventDefault();revealLetter();return}if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
 $('bookCard').addEventListener('pointerdown',e=>{if(e.target.closest('button,.rhyme-line'))return;swipeStart={x:e.clientX,y:e.clientY}});$('bookCard').addEventListener('pointerup',e=>{if(!swipeStart)return;const dx=e.clientX-swipeStart.x,dy=e.clientY-swipeStart.y;swipeStart=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx<0?1:-1)});$('bookCard').addEventListener('pointercancel',()=>swipeStart=null);
 
-function init(){state.index=Number.isFinite(state.index)?state.index:0;state.theme=Math.max(0,Math.min(themes.length-1,Number(state.theme)||0));applySettings();$('speedSelect').value=String(state.speed);$('autoAdvance').checked=state.autoAdvance;$('caseModeBtn').textContent={both:'Aa Both',upper:'A Upper',lower:'a Lower'}[state.caseMode]||'Aa Both';$('caseModeBtn').style.display=state.book==='alphabet'?'':'none';$('alphabetModeBtn').classList.toggle('active',state.book==='alphabet');$('numberModeBtn').classList.toggle('active',state.book==='numbers');$('alphabetModeBtn').setAttribute('aria-pressed',String(state.book==='alphabet'));$('numberModeBtn').setAttribute('aria-pressed',String(state.book==='numbers'));updateToggleButtons();render(false);showPractice('trace')}
+function init(){state.index=Number.isFinite(state.index)?state.index:0;state.voiceFriend=state.voiceFriend||'fairy';state.theme=Math.max(0,Math.min(themes.length-1,Number(state.theme)||0));applySettings();$('speedSelect').value=String(state.speed);$('autoAdvance').checked=state.autoAdvance;$('caseModeBtn').textContent={both:'Aa Both',upper:'A Upper',lower:'a Lower'}[state.caseMode]||'Aa Both';$('caseModeBtn').style.display=state.book==='alphabet'?'':'none';$('alphabetModeBtn').classList.toggle('active',state.book==='alphabet');$('numberModeBtn').classList.toggle('active',state.book==='numbers');$('alphabetModeBtn').setAttribute('aria-pressed',String(state.book==='alphabet'));$('numberModeBtn').setAttribute('aria-pressed',String(state.book==='numbers'));if('speechSynthesis'in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.('voiceschanged',refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $('previewVoice').disabled=true;
+  $('stopVoiceFriend').disabled=true;
+  $('playRhymeBtn').disabled=true;
+  $('voiceStatus').textContent='Read-aloud voices are not available in this browser.';
+}
+updateVoiceButtons();updateToggleButtons();render(false);showPractice('trace');updatePassport()}
 init();
+window.addEventListener('beforeunload',()=>{if('speechSynthesis'in window)speechSynthesis.cancel()});
 </script>
 </body>
 </html>
