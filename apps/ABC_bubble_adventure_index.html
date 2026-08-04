@@ -21,7 +21,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
 body{
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   color:var(--ink);
   background:
     radial-gradient(circle at 14% 15%,rgba(255,255,255,.8) 0 5%,transparent 6%),
@@ -33,14 +33,14 @@ button{font:inherit;touch-action:manipulation}
 .app{
   width:min(1180px,calc(100% - 20px));
   margin:0 auto;
-  padding:18px 0 38px;
+  padding:24px 0 42px;
 }
 .hero{
   text-align:center;
   background:linear-gradient(135deg,#4361c8,#7b5bd6,#d65c9e);
   color:white;
   border-radius:30px;
-  padding:24px 18px 20px;
+  padding:30px 20px 26px;
   box-shadow:var(--shadow);
   position:relative;
   overflow:hidden;
@@ -55,16 +55,19 @@ button{font:inherit;touch-action:manipulation}
 }
 .hero > *{position:relative;z-index:1}
 .hero h1{
-  margin:0;
-  font-size:clamp(2.2rem,6vw,4.8rem);
-  line-height:1;
-  letter-spacing:-.04em;
+  margin:0 auto;
+  max-width:980px;
+  padding:.06em .08em;
+  font-size:clamp(2.3rem,6vw,4.8rem);
+  line-height:1.1;
+  letter-spacing:-.018em;
 }
 .hero p{
-  margin:8px auto 0;
-  max-width:720px;
-  color:#f4efff;
-  line-height:1.55;
+  margin:10px auto 0;
+  max-width:760px;
+  color:#f8f5ff;
+  line-height:1.7;
+  font-size:1.02rem;
 }
 .toolbar{
   display:flex;
@@ -205,6 +208,87 @@ button:hover{transform:translateY(-2px)}
   font-size:.84rem;
   margin-top:12px;
 }
+
+.voice-panel{
+  max-width:900px;
+  margin:0 auto 14px;
+  padding:13px;
+  border-radius:22px;
+  background:rgba(255,255,255,.9);
+  border:1px solid #ddd8ef;
+  box-shadow:0 8px 20px rgba(54,40,87,.07);
+}
+.voice-panel h2{
+  margin:0 0 8px;
+  text-align:center;
+  color:var(--purple);
+  font-size:1.02rem;
+}
+.voice-friends{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:7px;
+}
+.voice-friend{
+  min-width:0;
+  min-height:60px;
+  padding:7px 5px;
+  border:2px solid #ddd8ef;
+  border-radius:16px;
+  background:#fff;
+  color:var(--ink);
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:2px;
+  box-shadow:none;
+}
+.voice-friend .emoji{font-size:1.4rem;line-height:1}
+.voice-friend .name{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:.68rem;
+}
+.voice-friend.active{
+  color:#fff;
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+}
+.voice-options{
+  margin-top:8px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.voice-options select{
+  border:1px solid #ddd8ef;
+  border-radius:999px;
+  padding:9px 12px;
+  background:#fff;
+  color:var(--ink);
+  font-weight:850;
+}
+.voice-status{
+  min-height:1.2em;
+  margin:8px 0 0;
+  text-align:center;
+  color:#665b72;
+  font-size:.8rem;
+}
+.message.speaking{
+  border-radius:18px;
+  background:rgba(255,255,255,.76);
+  box-shadow:0 0 0 5px rgba(138,111,232,.12);
+}
+@media(max-width:700px){
+  .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-friend:last-child{grid-column:1/-1}
+}
+
 @media(max-width:700px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .game-shell{min-height:520px}
@@ -215,22 +299,20 @@ button:hover{transform:translateY(-2px)}
     animation-iteration-count:1!important;
     scroll-behavior:auto!important;
   }
-  .site-footer {
-  margin-top: 16px;
-  padding: 15px 12px;
-  text-align: center;
-  border-radius: 18px;
-  background: rgba(255,255,255,.78);
-  border: 1px solid rgba(90,60,120,.12);
-  color: #665b72;
-  font-size: .84rem;
-  line-height: 1.5;
 }
 
-.site-footer strong {
-  color: #503a76;
+.site-footer{
+  margin-top:16px;
+  padding:15px 12px;
+  text-align:center;
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(90,60,120,.12);
+  color:#665b72;
+  font-size:.84rem;
+  line-height:1.5;
 }
-}
+.site-footer strong{color:#503a76;}
 </style>
 </head>
 <body>
@@ -247,6 +329,42 @@ button:hover{transform:translateY(-2px)}
     <button id="levelBtn" class="secondary">⭐ Level: Easy</button>
     <button id="resetBtn" class="secondary">↺ Reset Score</button>
   </div>
+
+
+  <section class="voice-panel" aria-labelledby="voiceTitle">
+    <h2 id="voiceTitle">Choose a Friendly Reading Voice</h2>
+
+    <div class="voice-friends" id="voiceFriends">
+      <button type="button" class="voice-friend" data-voice="fairy">
+        <span class="emoji">🧚</span><span class="name">Fairy Lily</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="bear">
+        <span class="emoji">🐻</span><span class="name">Benny Bear</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="owl">
+        <span class="emoji">🦉</span><span class="name">Professor Owl</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="robot">
+        <span class="emoji">🤖</span><span class="name">Robo Reader</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="rainbow">
+        <span class="emoji">🌈</span><span class="name">Rainbow Friend</span>
+      </button>
+    </div>
+
+    <div class="voice-options">
+      <select id="voiceSpeed" aria-label="Reading speed">
+        <option value="slow">🐢 Slow and gentle</option>
+        <option value="normal">🙂 Just right</option>
+        <option value="lively">🐇 A little lively</option>
+      </select>
+      <button type="button" id="previewVoiceBtn" class="secondary">👋 Meet My Voice</button>
+      <button type="button" id="repeatTargetBtn" class="secondary">🔤 Repeat Letter</button>
+      <button type="button" id="stopVoiceBtn" class="secondary">⏹ Stop Voice</button>
+    </div>
+
+    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+  </section>
 
   <section class="stats">
     <div class="stat"><strong id="score">0</strong>Score</div>
@@ -300,6 +418,8 @@ button:hover{transform:translateY(-2px)}
     streak:Number(localStorage.getItem("abcBubbleStreak") || 0),
     best:Number(localStorage.getItem("abcBubbleBest") || 0),
     rounds:Number(localStorage.getItem("abcBubbleRounds") || 0),
+    voiceFriend:localStorage.getItem("abcBubbleVoiceFriend") || "fairy",
+    voiceSpeed:localStorage.getItem("abcBubbleVoiceSpeed") || "slow",
     target:null,
     spawnTimer:null,
     bubbles:new Set()
@@ -318,6 +438,8 @@ button:hover{transform:translateY(-2px)}
     localStorage.setItem("abcBubbleStreak",String(state.streak));
     localStorage.setItem("abcBubbleBest",String(state.best));
     localStorage.setItem("abcBubbleRounds",String(state.rounds));
+    localStorage.setItem("abcBubbleVoiceFriend",state.voiceFriend);
+    localStorage.setItem("abcBubbleVoiceSpeed",state.voiceSpeed);
   }
 
   function updateStats(){
@@ -345,12 +467,117 @@ button:hover{transform:translateY(-2px)}
     osc.stop(ctx.currentTime+.23);
   }
 
-  function speak(text){
-    if(!state.sound || !("speechSynthesis" in window)) return;
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    u.rate=.86;
-    u.pitch=1.15;
+  const VOICE_FRIENDS={
+    fairy:{
+      name:"Fairy Lily",emoji:"🧚",rate:.82,pitch:1.2,
+      preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,
+      greeting:"Hello, little explorer. Fairy Lily is ready to pop some letter bubbles."
+    },
+    bear:{
+      name:"Benny Bear",emoji:"🐻",rate:.76,pitch:.9,
+      preferred:/daniel|david|alex|fred|george|male|tom/i,
+      greeting:"Hello, friend. Benny Bear will help you find the letters."
+    },
+    owl:{
+      name:"Professor Owl",emoji:"🦉",rate:.72,pitch:1,
+      preferred:/daniel|samantha|alex|serena|moira/i,
+      greeting:"Welcome, young learner. Professor Owl is ready for careful letter finding."
+    },
+    robot:{
+      name:"Robo Reader",emoji:"🤖",rate:.84,pitch:.72,
+      preferred:/fred|ralph|alex|david|google us english/i,
+      greeting:"Beep boop. Robo Reader is ready for the bubble mission."
+    },
+    rainbow:{
+      name:"Rainbow Friend",emoji:"🌈",rate:.85,pitch:1.08,
+      preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i,
+      greeting:"Hello, sunshine. Rainbow Friend is ready for a colorful alphabet adventure."
+    }
+  };
+
+  const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+  let voices=[];
+  let speechToken=0;
+
+  function refreshVoices(){
+    if(!("speechSynthesis" in window)) return;
+    voices=speechSynthesis.getVoices()||[];
+    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
+    const status=document.getElementById("voiceStatus");
+    if(status){
+      status.textContent=voices.length
+        ? `${friend.emoji} ${friend.name} is ready.`
+        : "Loading a friendly voice…";
+    }
+  }
+
+  function chooseVoice(){
+    if(!voices.length) refreshVoices();
+    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
+    const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+    const pool=english.length?english:voices;
+
+    if(state.voiceFriend==="rainbow"&&pool.length){
+      const friendly=pool.filter(v=>/natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));
+      const choices=friendly.length?friendly:pool;
+      return choices[Math.floor(Math.random()*choices.length)]||null;
+    }
+
+    return pool.find(v=>friend.preferred.test(v.name))
+      ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+      ||pool[0]
+      ||null;
+  }
+
+  function stopSpeaking(statusText="Voice stopped."){
+    speechToken++;
+    if("speechSynthesis" in window) speechSynthesis.cancel();
+    message.classList.remove("speaking");
+    const status=document.getElementById("voiceStatus");
+    if(status) status.textContent=statusText;
+  }
+
+  function speak(text,{preview=false}={}){
+    if(!state.sound||!("speechSynthesis" in window)) return;
+    if(!preview&&!String(text||"").trim()) return;
+
+    stopSpeaking("");
+    const token=++speechToken;
+    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
+    const phrase=preview?friend.greeting:text;
+    const u=new SpeechSynthesisUtterance(phrase);
+    const voice=chooseVoice();
+
+    if(voice) u.voice=voice;
+    u.lang=(voice&&voice.lang)||"en-US";
+    u.rate=Math.max(.55,Math.min(1.15,friend.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+    u.pitch=friend.pitch;
+    u.volume=1;
+
+    u.onstart=()=>{
+      message.classList.add("speaking");
+      const status=document.getElementById("voiceStatus");
+      if(status) status.textContent=`${friend.emoji} ${friend.name} is speaking.`;
+    };
+
+    u.onend=()=>{
+      if(token!==speechToken) return;
+      message.classList.remove("speaking");
+      const status=document.getElementById("voiceStatus");
+      if(status) status.textContent="Ready for the next letter! 🌟";
+    };
+
+    u.onerror=event=>{
+      if(token!==speechToken) return;
+      message.classList.remove("speaking");
+      const status=document.getElementById("voiceStatus");
+      if(status){
+        status.textContent=event&&["interrupted","canceled"].includes(event.error)
+          ?"Voice stopped."
+          :"The voice had a little hiccup. Tap Repeat Letter.";
+      }
+    };
+
     speechSynthesis.speak(u);
   }
 
@@ -511,6 +738,47 @@ button:hover{transform:translateY(-2px)}
     setMessage(state.paused?"Game paused.":"Keep looking for",state.paused?null:state.target);
   }
 
+
+  function updateVoiceButtons(){
+    document.querySelectorAll("[data-voice]").forEach(button=>{
+      const active=button.dataset.voice===state.voiceFriend;
+      button.classList.toggle("active",active);
+      button.setAttribute("aria-pressed",String(active));
+    });
+    document.getElementById("voiceSpeed").value=state.voiceSpeed;
+  }
+
+  document.getElementById("voiceFriends").onclick=event=>{
+    const button=event.target.closest("[data-voice]");
+    if(!button) return;
+
+    state.voiceFriend=button.dataset.voice;
+    updateVoiceButtons();
+    save();
+
+    const friend=VOICE_FRIENDS[state.voiceFriend];
+    document.getElementById("voiceStatus").textContent=
+      `${friend.emoji} ${friend.name} selected. Tap Meet My Voice to listen.`;
+  };
+
+  document.getElementById("voiceSpeed").onchange=event=>{
+    state.voiceSpeed=event.target.value;
+    save();
+    document.getElementById("voiceStatus").textContent="Reading speed saved.";
+  };
+
+  document.getElementById("previewVoiceBtn").onclick=()=>speak("",{preview:true});
+
+  document.getElementById("repeatTargetBtn").onclick=()=>{
+    if(state.target){
+      speak("Find the letter "+state.target);
+    }else{
+      speak("Press Start Game when you are ready.");
+    }
+  };
+
+  document.getElementById("stopVoiceBtn").onclick=()=>stopSpeaking("Voice stopped.");
+
   startBtn.onclick=startGame;
   pauseBtn.onclick=togglePause;
 
@@ -537,7 +805,27 @@ button:hover{transform:translateY(-2px)}
     save();
   };
 
+  if("speechSynthesis" in window){
+    refreshVoices();
+    speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+    speechSynthesis.onvoiceschanged=refreshVoices;
+    setTimeout(refreshVoices,250);
+    setTimeout(refreshVoices,900);
+  }else{
+    document.getElementById("previewVoiceBtn").disabled=true;
+    document.getElementById("repeatTargetBtn").disabled=true;
+    document.getElementById("stopVoiceBtn").disabled=true;
+    document.getElementById("voiceStatus").textContent=
+      "Read-aloud voices are not available in this browser.";
+  }
+
+  updateVoiceButtons();
   updateStats();
+
+  window.addEventListener("beforeunload",()=>{
+    clearInterval(state.spawnTimer);
+    stopSpeaking("");
+  });
 })();
 </script>
 </body>
