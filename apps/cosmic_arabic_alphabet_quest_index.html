@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Cosmic Arabic Alphabet Quest — a colorful bilingual preschool tracing, matching, and phonics app.">
+<title>Cosmic Arabic Alphabet Quest™</title>
+<style>
+:root{
+  --night:#17133a;
+  --indigo:#2c2368;
+  --violet:#6d4bc3;
+  --gold:#f4c95d;
+  --amber:#ee9b35;
+  --rose:#d85f8f;
+  --turquoise:#42c7b9;
+  --sky:#83d4ff;
+  --cream:#fff8e9;
+  --paper:#fffdf8;
+  --ink:#2e2744;
+  --muted:#746c88;
+  --success:#45b978;
+  --danger:#d45b67;
+  --shadow:0 18px 50px rgba(31,23,65,.18);
+  --radius:26px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
+  background:
+    radial-gradient(circle at 12% 12%,rgba(255,255,255,.8) 0 2px,transparent 3px),
+    radial-gradient(circle at 80% 18%,rgba(255,255,255,.7) 0 2px,transparent 3px),
+    linear-gradient(145deg,#fff2cc 0%,#ffe4d6 38%,#eadffd 100%);
+  background-size:auto,auto,auto;
+}
+button,select,input{font:inherit}
+button{touch-action:manipulation}
+.app{
+  width:min(1180px,calc(100% - 24px));
+  margin:0 auto;
+  padding:32px 0 56px;
+}
+.hero{
+  text-align:center;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,255,255,.18),transparent 25%),
+    linear-gradient(135deg,var(--night),var(--violet));
+  color:white;
+  border-radius:34px;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:auto -12% -70px;
+  height:150px;
+  background:radial-gradient(ellipse at center,rgba(244,201,93,.28),transparent 67%);
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.28);
+  font-size:.85rem;
+  font-weight:800;
+}
+.hero h1{
+  margin:18px auto 10px;
+  max-width:980px;
+  font-size:clamp(2.2rem,5.8vw,4.7rem);
+  letter-spacing:-.02em;
+  line-height:1.08;
+}
+.hero p{
+  max-width:720px;
+  margin:0 auto;
+  color:#eee9ff;
+  line-height:1.6;
+}
+.arabic-title{
+  display:block;
+  direction:rtl;
+  font-size:.82em;
+  margin-top:8px;
+  color:var(--gold);
+  letter-spacing:0;
+}
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  margin:18px 0 12px;
+}
+.pill,button{
+  border:0;
+  border-radius:999px;
+  padding:10px 14px;
+  font-weight:800;
+}
+.pill{
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(79,61,115,.12);
+}
+button{
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),var(--amber));
+  color:#362814;
+  box-shadow:0 6px 16px rgba(91,55,32,.15);
+  transition:.18s ease;
+}
+button:hover{transform:translateY(-2px)}
+button.secondary{
+  background:white;
+  color:var(--indigo);
+  border:1px solid #ddd5ef;
+}
+button.success{
+  background:linear-gradient(135deg,#6ddaa0,var(--success));
+  color:#113321;
+}
+button.danger{
+  background:#fff;
+  color:var(--danger);
+  border:1px solid #efc8ce;
+}
+button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.week-strip{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding:10px 4px 14px;
+  scrollbar-width:thin;
+}
+.week-btn{
+  flex:0 0 auto;
+  min-width:54px;
+  padding:8px 10px;
+  background:white;
+  color:var(--indigo);
+  border:1px solid #e5ddf2;
+  box-shadow:none;
+}
+.week-btn.active{
+  background:linear-gradient(135deg,var(--violet),var(--rose));
+  color:white;
+  border-color:transparent;
+}
+.week-btn.done::after{content:" ✓";color:var(--success)}
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:0 0 16px;
+}
+.stat{
+  background:rgba(255,255,255,.88);
+  border-radius:18px;
+  padding:12px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(63,44,84,.09);
+}
+.stat strong{display:block;font-size:1.25rem;color:var(--violet)}
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(300px,.75fr);
+  gap:16px;
+}
+.panel{
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(255,255,255,.95);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+.panel h2{
+  margin:0 0 5px;
+  color:var(--violet);
+  font-size:1.32rem;
+}
+.panel-note{
+  margin:0 0 13px;
+  color:var(--muted);
+  font-size:.9rem;
+}
+.lesson-card{
+  background:linear-gradient(135deg,#fff8da,#ffe8ef,#e8f8ff);
+  border-radius:24px;
+  padding:18px;
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:16px;
+  align-items:center;
+  margin-bottom:15px;
+}
+.lesson-letter{
+  min-height:150px;
+  display:grid;
+  place-items:center;
+  border-radius:24px;
+  background:linear-gradient(145deg,var(--night),var(--violet));
+  color:var(--gold);
+  font-size:clamp(4rem,10vw,7.6rem);
+  line-height:1;
+  direction:rtl;
+  box-shadow:0 12px 26px rgba(38,27,79,.2);
+}
+.lesson-info h3{
+  margin:0;
+  font-size:1.55rem;
+  color:var(--night);
+}
+.arabic-name{
+  direction:rtl;
+  font-size:1.45rem;
+  color:var(--rose);
+  font-weight:900;
+}
+.sound-line{color:var(--muted);margin:6px 0}
+.example{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:16px;
+  background:white;
+}
+.example .emoji{font-size:2rem}
+.example-arabic{direction:rtl;font-size:1.35rem;font-weight:900}
+.forms{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+.form-box{
+  background:white;
+  border-radius:14px;
+  padding:9px 6px;
+  text-align:center;
+  border:1px solid #eee6f3;
+}
+.form-box span{display:block;color:var(--muted);font-size:.7rem}
+.form-box strong{font-size:1.5rem;direction:rtl}
+.canvas-shell{
+  border-radius:24px;
+  padding:12px;
+  background:linear-gradient(145deg,#251d59,#5d45ae);
+  box-shadow:0 14px 28px rgba(44,35,104,.18);
+}
+#tracingCanvas{
+  display:block;
+  width:100%;
+  height:460px;
+  background:
+    linear-gradient(#ffffffee,#fffaf4ee),
+    repeating-linear-gradient(0deg,transparent 0 54px,rgba(107,75,177,.08) 55px 56px);
+  border-radius:18px;
+  touch-action:none;
+  cursor:crosshair;
+}
+.trace-tools{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  margin-top:10px;
+}
+.trace-tools label{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 11px;
+  border-radius:999px;
+  background:#fff;
+}
+.activity-grid{
+  display:grid;
+  gap:14px;
+}
+.activity{
+  background:linear-gradient(145deg,#fff,#fff8ee);
+  border-radius:22px;
+  padding:15px;
+  border:1px solid #efe6f2;
+}
+.activity h3{margin:0 0 8px;color:var(--rose)}
+.tiles,.cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.tile,.match-card{
+  border-radius:16px;
+  background:white;
+  border:2px solid #eee5f4;
+  padding:11px;
+  min-width:74px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 5px 12px rgba(64,43,82,.08);
+}
+.tile{
+  font-size:1.45rem;
+  direction:rtl;
+}
+.match-card .big{font-size:2rem;direction:rtl}
+.selected{outline:3px solid var(--turquoise);background:#e6fff9}
+.correct{outline:3px solid var(--success);background:#eafff1}
+.message{
+  min-height:28px;
+  margin-top:9px;
+  font-weight:800;
+  color:var(--violet);
+}
+.bottom-nav{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:16px;
+}
+.reward{
+  position:fixed;
+  z-index:20;
+  font-size:30px;
+  pointer-events:none;
+  animation:floatUp 1.2s ease-out forwards;
+}
+@keyframes floatUp{
+  to{opacity:0;transform:translateY(-110px) rotate(20deg) scale(1.3)}
+}
+.progress-track{
+  height:12px;
+  background:#ece5f3;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:9px;
+}
+.progress-bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--rose),var(--gold),var(--turquoise));
+  transition:width .35s ease;
+}
+.footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:.84rem;
+  margin-top:18px;
+}
+.error-box{
+  background:#fff1f1;
+  color:#8c2731;
+  border:1px solid #efbdc3;
+  border-radius:18px;
+  padding:18px;
+}
+
+.language-panel{
+  margin:14px auto 4px;
+  padding:14px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#fff,#fff8ee,#f7f4ff);
+  border:1px solid #eadff0;
+  box-shadow:0 10px 24px rgba(58,40,84,.08);
+}
+.language-panel h2{
+  margin:0 0 8px;
+  text-align:center;
+  color:var(--violet);
+  font-size:1.05rem;
+}
+.language-row{
+  display:grid;
+  grid-template-columns:minmax(220px,1fr) minmax(220px,1fr);
+  gap:10px;
+  align-items:end;
+}
+.language-row label{
+  display:grid;
+  gap:5px;
+  color:var(--muted);
+  font-size:.8rem;
+  font-weight:900;
+}
+.language-row select{
+  width:100%;
+  border:1px solid #e5ddf2;
+  border-radius:14px;
+  padding:9px 11px;
+  background:white;
+  color:var(--ink);
+  font-weight:900;
+}
+.voice-friends{
+  margin-top:10px;
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:7px;
+}
+.voice-friend{
+  min-width:0;
+  min-height:62px;
+  padding:8px 5px;
+  border-radius:16px;
+  border:2px solid #e8dff0;
+  background:#fff;
+  color:var(--violet);
+  box-shadow:0 5px 12px rgba(63,43,80,.06);
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:2px;
+}
+.voice-friend .emoji{font-size:1.45rem;line-height:1}
+.voice-friend .name{font-size:.68rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.voice-friend.active{
+  color:white;
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--violet),var(--rose));
+  transform:translateY(-1px);
+}
+.language-actions{
+  margin-top:10px;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.voice-status{
+  min-height:1.25em;
+  margin:8px 0 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:.8rem;
+}
+.lesson-card.speaking{
+  box-shadow:0 0 0 5px rgba(109,75,195,.15),0 14px 28px rgba(44,35,104,.18);
+}
+.localized-note{
+  margin:8px 0 0;
+  padding:9px 11px;
+  border-radius:14px;
+  background:rgba(255,255,255,.75);
+  color:var(--muted);
+  font-size:.84rem;
+}
+.rtl-ui{direction:rtl;text-align:right}
+@media(max-width:760px){
+  .language-row{grid-template-columns:1fr}
+  .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-friend:last-child{grid-column:1/-1}
+}
+
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .dashboard{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .app{width:min(100% - 14px,1180px);padding-top:10px}
+  .hero{border-radius:24px;padding:24px 13px}
+  .lesson-card{grid-template-columns:1fr;text-align:center}
+  .lesson-letter{min-height:120px}
+  .forms{grid-template-columns:repeat(2,1fr)}
+  #tracingCanvas{height:380px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+  .site-footer {
+  margin-top: 16px;
+  padding: 15px 12px;
+  text-align: center;
+  border-radius: 18px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(90,60,120,.12);
+  color: #665b72;
+  font-size: .84rem;
+  line-height: 1.5;
+}
+
+.site-footer strong {
+  color: #503a76;
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="hero">
+    <div class="hero-badge">🌙 Khaemenes Academy • Preschool Languages</div>
+    <h1>
+      Cosmic Arabic Alphabet Quest™
+      <span class="arabic-title">مغامرة الحروف العربية</span>
+    </h1>
+    <p>Trace, listen, match, and explore the 28 Arabic letters through child-friendly transliteration, English meanings, movement prompts, and colorful review weeks.</p>
+  </header>
+
+
+  <section class="language-panel" aria-labelledby="languagePanelTitle">
+    <h2 id="languagePanelTitle">🌍 Choose Your Home Language</h2>
+
+    <div class="language-row">
+      <label for="homeLanguage">
+        <span id="homeLanguageLabel">Home language for instructions and meanings</span>
+        <select id="homeLanguage">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="pt">Português</option>
+          <option value="ur">اردو</option>
+          <option value="fa">فارسی</option>
+        </select>
+      </label>
+
+      <label for="readingSpeed">
+        <span id="readingSpeedLabel">Reading speed</span>
+        <select id="readingSpeed">
+          <option value="slow">🐢 Slow and gentle</option>
+          <option value="normal">🙂 Just right</option>
+          <option value="lively">🐇 A little lively</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="voice-friends" id="voiceFriends">
+      <button type="button" class="voice-friend" data-voice="fairy">
+        <span class="emoji">🧚</span><span class="name">Fairy Lily</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="bear">
+        <span class="emoji">🐻</span><span class="name">Benny Bear</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="owl">
+        <span class="emoji">🦉</span><span class="name">Professor Owl</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="robot">
+        <span class="emoji">🤖</span><span class="name">Robo Reader</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="rainbow">
+        <span class="emoji">🌈</span><span class="name">Rainbow Friend</span>
+      </button>
+    </div>
+
+    <div class="language-actions">
+      <button id="previewVoiceBtn" type="button">👋 Meet My Voice</button>
+      <button id="hearMeaningBtn" type="button" class="secondary">🏠 Hear Meaning</button>
+      <button id="repeatBtn" type="button" class="secondary">🗣 Repeat After Me</button>
+      <button id="stopVoiceBtn" type="button" class="secondary">⏹ Stop Voice</button>
+    </div>
+
+    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+  </section>
+
+  <div class="toolbar">
+    <label class="pill">Week
+      <select id="weekSelect" aria-label="Choose week"></select>
+    </label>
+    <button id="speakLessonBtn">🔊 Hear Lesson</button>
+    <button id="themeBtn" class="secondary">🎨 Change Colors</button>
+    <button id="resetProgressBtn" class="danger">↺ Reset Progress</button>
+  </div>
+
+  <nav class="week-strip" id="weekNav" aria-label="Week navigation"></nav>
+
+  <section class="dashboard">
+    <div class="stat"><strong id="weekStat">1</strong>Current Week</div>
+    <div class="stat"><strong id="completedStat">0</strong>Weeks Complete</div>
+    <div class="stat"><strong id="starStat">0</strong>Stars Earned</div>
+    <div class="stat"><strong id="letterStat">ا</strong>Letter</div>
+  </section>
+
+  <div id="appContent"></div>
+
+  <p class="footer">Runs entirely in the browser • Progress stays on this device • No outside libraries or game services</p>
+</main>
+  <footer class="site-footer">
+  <strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>
+  All Rights Reserved.
+</footer>
+
+<script src="arabic_alphabet.js"></script>
+<script>
+(() => {
+  "use strict";
+
+  const root = document.documentElement;
+  const appContent = document.getElementById("appContent");
+  const weekNav = document.getElementById("weekNav");
+  const weekSelect = document.getElementById("weekSelect");
+
+  if (!Array.isArray(window.ARABIC_ALPHABET) || window.ARABIC_ALPHABET.length !== 28) {
+    appContent.innerHTML = `
+      <div class="error-box">
+        <strong>Arabic alphabet data was not found.</strong><br>
+        Place <code>arabic_alphabet.js</code> in the same GitHub folder as this HTML file.
+      </div>`;
+    return;
+  }
+
+  const alphabet = window.ARABIC_ALPHABET;
+  const englishLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+  function makeReviewWeek(weekNumber, startIndex, count, title) {
+    const letters = [];
+    for (let i = 0; i < count; i++) {
+      letters.push(alphabet[(startIndex + i) % alphabet.length]);
+    }
+    return {
+      week: weekNumber,
+      type: "review",
+      title,
+      letters
+    };
+  }
+
+  const CURRICULUM = alphabet.map((letter, index) => ({
+    week: index + 1,
+    type: "letter",
+    title: `Letter ${letter.transliteration}`,
+    letter,
+    englishPair: englishLetters[index % englishLetters.length]
+  }));
+
+  CURRICULUM.push(
+    makeReviewWeek(29, 0, 4, "Review: Alif to Thaa"),
+    makeReviewWeek(30, 4, 4, "Review: Jeem to Daal"),
+    makeReviewWeek(31, 8, 4, "Review: Dhaal to Seen"),
+    makeReviewWeek(32, 12, 4, "Review: Sheen to Taa"),
+    makeReviewWeek(33, 16, 4, "Review: Dhaa to Faa"),
+    makeReviewWeek(34, 20, 4, "Review: Qaaf to Meem"),
+    makeReviewWeek(35, 24, 4, "Review: Noon to Yaa"),
+    makeReviewWeek(36, 0, 7, "Review: First Seven Letters"),
+    makeReviewWeek(37, 7, 7, "Review: Letters Eight to Fourteen"),
+    makeReviewWeek(38, 14, 7, "Review: Letters Fifteen to Twenty-One"),
+    makeReviewWeek(39, 21, 7, "Review: Final Seven Letters"),
+    makeReviewWeek(40, 0, 14, "Grand Review: First Half"),
+    makeReviewWeek(41, 14, 14, "Grand Review: Second Half"),
+    makeReviewWeek(42, 0, 28, "Arabic Alphabet Celebration")
+  );
+
+  const state = {
+    currentWeek: Math.min(42, Math.max(1, Number(localStorage.getItem("cosmicArabicWeek") || 1))),
+    completed: new Set(JSON.parse(localStorage.getItem("cosmicArabicCompleted") || "[]")),
+    stars: Number(localStorage.getItem("cosmicArabicStars") || 0),
+    theme: Number(localStorage.getItem("cosmicArabicTheme") || 0),
+    traceDone: false,
+    tileDone: false,
+    matchDone: false,
+    homeLanguage: localStorage.getItem("cosmicArabicHomeLanguage") || "en",
+    readingSpeed: localStorage.getItem("cosmicArabicReadingSpeed") || "slow",
+    voiceFriend: localStorage.getItem("cosmicArabicVoiceFriend") || "fairy"
+  };
+
+  const themes = [
+    {night:"#17133a",violet:"#6d4bc3",gold:"#f4c95d",rose:"#d85f8f",turquoise:"#42c7b9"},
+    {night:"#153b4d",violet:"#227ca0",gold:"#f2c14e",rose:"#e57a77",turquoise:"#54d2c2"},
+    {night:"#4a1838",violet:"#9b3f76",gold:"#efc35b",rose:"#dd6f9c",turquoise:"#56c9b8"},
+    {night:"#223b2b",violet:"#4e8e63",gold:"#f0cb62",rose:"#d67678",turquoise:"#65c9a2"}
+  ];
+
+  let activeCanvas = null;
+  let isDrawing = false;
+  let lastPoint = null;
+  let selectedMatch = null;
+
+  function save() {
+    localStorage.setItem("cosmicArabicWeek", String(state.currentWeek));
+    localStorage.setItem("cosmicArabicCompleted", JSON.stringify([...state.completed]));
+    localStorage.setItem("cosmicArabicStars", String(state.stars));
+    localStorage.setItem("cosmicArabicTheme", String(state.theme));
+    localStorage.setItem("cosmicArabicHomeLanguage", state.homeLanguage);
+    localStorage.setItem("cosmicArabicReadingSpeed", state.readingSpeed);
+    localStorage.setItem("cosmicArabicVoiceFriend", state.voiceFriend);
+  }
+
+  function applyTheme() {
+    const t = themes[state.theme % themes.length];
+    root.style.setProperty("--night", t.night);
+    root.style.setProperty("--violet", t.violet);
+    root.style.setProperty("--gold", t.gold);
+    root.style.setProperty("--rose", t.rose);
+    root.style.setProperty("--turquoise", t.turquoise);
+  }
+
+  const UI = {
+    en:{
+      panelTitle:"🌍 Choose Your Home Language",
+      homeLabel:"Home language for instructions and meanings",
+      speedLabel:"Reading speed",
+      slow:"🐢 Slow and gentle",normal:"🙂 Just right",lively:"🐇 A little lively",
+      hearLesson:"🔊 Hear Lesson",theme:"🎨 Choose My Adventure",reset:"↺ Reset Progress",
+      hearArabic:"Hear Arabic",hearEnglish:"Hear English",hearMeaning:"🏠 Hear Meaning",
+      repeat:"🗣 Repeat After Me",stop:"⏹ Stop Voice",meet:"👋 Meet My Voice",
+      traceTitle:"✏️ Large Tracing Studio",traceNote:"Trace over the pale guide letters. Use Clear to practice again.",
+      listenMove:"🔊 Listen & Move",tiles:"🔤 Letter Tiles",match:"🧩 Matching Game",
+      progress:"Week Progress",complete:"🏆 Complete Week",previous:"◀ Previous Week",next:"Next Week ▶",
+      noTranslation:"This meaning is currently shown in English."
+    },
+    es:{
+      panelTitle:"🌍 Elige tu idioma de casa",
+      homeLabel:"Idioma para instrucciones y significados",
+      speedLabel:"Velocidad de lectura",
+      slow:"🐢 Lento y suave",normal:"🙂 Ritmo normal",lively:"🐇 Un poco animado",
+      hearLesson:"🔊 Escuchar lección",theme:"🎨 Elegir aventura",reset:"↺ Reiniciar progreso",
+      hearArabic:"Escuchar árabe",hearEnglish:"Escuchar inglés",hearMeaning:"🏠 Escuchar significado",
+      repeat:"🗣 Repite conmigo",stop:"⏹ Detener voz",meet:"👋 Conocer mi voz",
+      traceTitle:"✏️ Estudio grande de trazado",traceNote:"Repasa las letras guía. Usa Borrar para practicar otra vez.",
+      listenMove:"🔊 Escucha y muévete",tiles:"🔤 Fichas de letras",match:"🧩 Juego de parejas",
+      progress:"Progreso semanal",complete:"🏆 Completar semana",previous:"◀ Semana anterior",next:"Semana siguiente ▶",
+      noTranslation:"Este significado se muestra actualmente en inglés."
+    },
+    fr:{
+      panelTitle:"🌍 Choisis ta langue à la maison",
+      homeLabel:"Langue des consignes et des significations",
+      speedLabel:"Vitesse de lecture",
+      slow:"🐢 Lent et doux",normal:"🙂 Juste comme il faut",lively:"🐇 Un peu dynamique",
+      hearLesson:"🔊 Écouter la leçon",theme:"🎨 Choisir mon aventure",reset:"↺ Réinitialiser",
+      hearArabic:"Écouter l’arabe",hearEnglish:"Écouter l’anglais",hearMeaning:"🏠 Écouter le sens",
+      repeat:"🗣 Répète après moi",stop:"⏹ Arrêter la voix",meet:"👋 Découvrir ma voix",
+      traceTitle:"✏️ Grand atelier de tracé",traceNote:"Repasse sur les lettres-guides. Efface pour recommencer.",
+      listenMove:"🔊 Écoute et bouge",tiles:"🔤 Tuiles de lettres",match:"🧩 Jeu d’association",
+      progress:"Progrès de la semaine",complete:"🏆 Terminer la semaine",previous:"◀ Semaine précédente",next:"Semaine suivante ▶",
+      noTranslation:"Ce sens est actuellement affiché en anglais."
+    },
+    pt:{
+      panelTitle:"🌍 Escolha seu idioma de casa",
+      homeLabel:"Idioma das instruções e significados",
+      speedLabel:"Velocidade de leitura",
+      slow:"🐢 Devagar e suave",normal:"🙂 No ritmo certo",lively:"🐇 Um pouco animado",
+      hearLesson:"🔊 Ouvir lição",theme:"🎨 Escolher aventura",reset:"↺ Reiniciar progresso",
+      hearArabic:"Ouvir árabe",hearEnglish:"Ouvir inglês",hearMeaning:"🏠 Ouvir significado",
+      repeat:"🗣 Repita comigo",stop:"⏹ Parar voz",meet:"👋 Conhecer minha voz",
+      traceTitle:"✏️ Estúdio de traçado",traceNote:"Trace sobre as letras-guia. Use Limpar para praticar novamente.",
+      listenMove:"🔊 Ouça e mova-se",tiles:"🔤 Blocos de letras",match:"🧩 Jogo de combinação",
+      progress:"Progresso da semana",complete:"🏆 Concluir semana",previous:"◀ Semana anterior",next:"Próxima semana ▶",
+      noTranslation:"Este significado está sendo mostrado em inglês."
+    },
+    ur:{
+      panelTitle:"🌍 گھر کی زبان منتخب کریں",
+      homeLabel:"ہدایات اور معنی کی زبان",
+      speedLabel:"پڑھنے کی رفتار",
+      slow:"🐢 آہستہ اور نرم",normal:"🙂 مناسب رفتار",lively:"🐇 قدرے تیز",
+      hearLesson:"🔊 سبق سنیں",theme:"🎨 مہم منتخب کریں",reset:"↺ پیش رفت دوبارہ شروع کریں",
+      hearArabic:"عربی سنیں",hearEnglish:"انگریزی سنیں",hearMeaning:"🏠 معنی سنیں",
+      repeat:"🗣 میرے بعد دہرائیں",stop:"⏹ آواز روکیں",meet:"👋 میری آواز سنیں",
+      traceTitle:"✏️ بڑا حروف لکھنے کا اسٹوڈیو",traceNote:"ہلکے حروف پر لکیر کھینچیں۔ دوبارہ مشق کے لیے صاف کریں۔",
+      listenMove:"🔊 سنیں اور حرکت کریں",tiles:"🔤 حروف کی ٹائلیں",match:"🧩 ملاپ کا کھیل",
+      progress:"ہفتے کی پیش رفت",complete:"🏆 ہفتہ مکمل کریں",previous:"◀ پچھلا ہفتہ",next:"اگلا ہفتہ ▶",
+      noTranslation:"یہ معنی فی الحال انگریزی میں دکھایا جا رہا ہے۔"
+    },
+    fa:{
+      panelTitle:"🌍 زبان خانه را انتخاب کنید",
+      homeLabel:"زبان دستورها و معنی‌ها",
+      speedLabel:"سرعت خواندن",
+      slow:"🐢 آرام و آهسته",normal:"🙂 سرعت مناسب",lively:"🐇 کمی پرانرژی",
+      hearLesson:"🔊 شنیدن درس",theme:"🎨 انتخاب ماجراجویی",reset:"↺ بازنشانی پیشرفت",
+      hearArabic:"شنیدن عربی",hearEnglish:"شنیدن انگلیسی",hearMeaning:"🏠 شنیدن معنی",
+      repeat:"🗣 بعد از من تکرار کن",stop:"⏹ توقف صدا",meet:"👋 شنیدن صدای من",
+      traceTitle:"✏️ کارگاه بزرگ تمرین نوشتن",traceNote:"روی حروف کم‌رنگ تمرین کنید. برای تمرین دوباره پاک کنید.",
+      listenMove:"🔊 گوش کن و حرکت کن",tiles:"🔤 کارت‌های حروف",match:"🧩 بازی تطبیق",
+      progress:"پیشرفت هفته",complete:"🏆 تکمیل هفته",previous:"◀ هفته قبل",next:"هفته بعد ▶",
+      noTranslation:"این معنی فعلاً به انگلیسی نمایش داده می‌شود."
+    }
+  };
+
+  const LANGUAGE_META = {
+    en:{speech:"en-US",rtl:false},
+    es:{speech:"es-ES",rtl:false},
+    fr:{speech:"fr-FR",rtl:false},
+    pt:{speech:"pt-BR",rtl:false},
+    ur:{speech:"ur-PK",rtl:true},
+    fa:{speech:"fa-IR",rtl:true}
+  };
+
+  const VOICE_FRIENDS = {
+    fairy:{name:"Fairy Lily",emoji:"🧚",rate:.84,pitch:1.2,preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i},
+    bear:{name:"Benny Bear",emoji:"🐻",rate:.78,pitch:.9,preferred:/daniel|david|alex|fred|george|male|tom/i},
+    owl:{name:"Professor Owl",emoji:"🦉",rate:.74,pitch:1,preferred:/daniel|samantha|alex|serena|moira/i},
+    robot:{name:"Robo Reader",emoji:"🤖",rate:.86,pitch:.72,preferred:/fred|ralph|alex|david|google us english/i},
+    rainbow:{name:"Rainbow Friend",emoji:"🌈",rate:.86,pitch:1.08,preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i}
+  };
+
+  const SPEEDS = {slow:.88,normal:1,lively:1.1};
+  let voices = [];
+  let speechToken = 0;
+
+  function refreshVoices(){
+    if(!("speechSynthesis" in window)) return;
+    voices = speechSynthesis.getVoices() || [];
+    const friend = VOICE_FRIENDS[state.voiceFriend] || VOICE_FRIENDS.fairy;
+    const status = document.getElementById("voiceStatus");
+    if(status) status.textContent = voices.length
+      ? `${friend.emoji} ${friend.name} is ready.`
+      : "Loading a friendly voice…";
+  }
+
+  function chooseVoice(langCode, friendKey = state.voiceFriend){
+    if(!voices.length) refreshVoices();
+    const friend = VOICE_FRIENDS[friendKey] || VOICE_FRIENDS.fairy;
+    const exact = voices.filter(v => (v.lang || "").toLowerCase().startsWith(langCode.toLowerCase()));
+    const family = voices.filter(v => (v.lang || "").toLowerCase().startsWith(langCode.slice(0,2).toLowerCase()));
+    const pool = exact.length ? exact : family.length ? family : voices;
+
+    if(friendKey === "rainbow" && pool.length){
+      const friendly = pool.filter(v => /natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));
+      const choices = friendly.length ? friendly : pool;
+      return choices[Math.floor(Math.random()*choices.length)] || null;
+    }
+
+    return pool.find(v => friend.preferred.test(v.name))
+      || pool.find(v => /natural|enhanced|premium/i.test(v.name))
+      || pool[0]
+      || null;
+  }
+
+  function stopSpeaking(message = "Voice stopped."){
+    speechToken++;
+    if("speechSynthesis" in window) speechSynthesis.cancel();
+    document.querySelector(".lesson-card")?.classList.remove("speaking");
+    const status = document.getElementById("voiceStatus");
+    if(status) status.textContent = message;
+  }
+
+  function speak(text, lang = "ar-SA", options = {}) {
+    if (!("speechSynthesis" in window)) return;
+    if (!String(text || "").trim()) return;
+
+    stopSpeaking("");
+    const token = ++speechToken;
+    const friend = VOICE_FRIENDS[state.voiceFriend] || VOICE_FRIENDS.fairy;
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = chooseVoice(lang, state.voiceFriend);
+
+    utterance.lang = lang;
+    utterance.rate = Math.max(.55, Math.min(1.15, friend.rate * (SPEEDS[state.readingSpeed] || 1)));
+    utterance.pitch = lang.startsWith("ar") ? 1.02 : friend.pitch;
+    utterance.volume = 1;
+    if (voice) utterance.voice = voice;
+
+    utterance.onstart = () => {
+      document.querySelector(".lesson-card")?.classList.add("speaking");
+      const status = document.getElementById("voiceStatus");
+      if(status) status.textContent = `${friend.emoji} ${friend.name} is reading.`;
+    };
+
+    utterance.onend = () => {
+      if(token !== speechToken) return;
+      document.querySelector(".lesson-card")?.classList.remove("speaking");
+      const status = document.getElementById("voiceStatus");
+      if(status) status.textContent = "Wonderful listening! 🌟";
+      if(typeof options.onEnd === "function") options.onEnd();
+    };
+
+    utterance.onerror = event => {
+      if(token !== speechToken) return;
+      document.querySelector(".lesson-card")?.classList.remove("speaking");
+      const status = document.getElementById("voiceStatus");
+      if(status) status.textContent = event && ["interrupted","canceled"].includes(event.error)
+        ? "Voice stopped."
+        : "The voice had a little hiccup. Try again.";
+    };
+
+    speechSynthesis.speak(utterance);
+  }
+
+  if ("speechSynthesis" in window) {
+    refreshVoices();
+    speechSynthesis.addEventListener?.("voiceschanged", refreshVoices);
+    speechSynthesis.onvoiceschanged = refreshVoices;
+    setTimeout(refreshVoices,250);
+    setTimeout(refreshVoices,900);
+  }
+
+
+  function t(key){
+    return (UI[state.homeLanguage] && UI[state.homeLanguage][key]) || UI.en[key] || key;
+  }
+
+  function localizeStaticUI(){
+    const lang = LANGUAGE_META[state.homeLanguage] || LANGUAGE_META.en;
+    const panel = document.querySelector(".language-panel");
+    if(panel) panel.classList.toggle("rtl-ui", !!lang.rtl);
+
+    document.getElementById("languagePanelTitle").textContent = t("panelTitle");
+    document.getElementById("homeLanguageLabel").textContent = t("homeLabel");
+    document.getElementById("readingSpeedLabel").textContent = t("speedLabel");
+
+    const speed = document.getElementById("readingSpeed");
+    speed.options[0].textContent = t("slow");
+    speed.options[1].textContent = t("normal");
+    speed.options[2].textContent = t("lively");
+
+    document.getElementById("speakLessonBtn").textContent = t("hearLesson");
+    document.getElementById("themeBtn").textContent = t("theme");
+    document.getElementById("resetProgressBtn").textContent = t("reset");
+    document.getElementById("previewVoiceBtn").textContent = t("meet");
+    document.getElementById("hearMeaningBtn").textContent = t("hearMeaning");
+    document.getElementById("repeatBtn").textContent = t("repeat");
+    document.getElementById("stopVoiceBtn").textContent = t("stop");
+  }
+
+  function updateVoiceFriendButtons(){
+    document.querySelectorAll("[data-voice]").forEach(button => {
+      const active = button.dataset.voice === state.voiceFriend;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  function currentMeaningText(){
+    const data = CURRICULUM[state.currentWeek - 1];
+    const letters = getLessonLetters(data);
+    if(data.type === "letter"){
+      return `${data.letter.exampleTransliteration}. ${data.letter.exampleEnglish}.`;
+    }
+    return letters.map(l => `${l.transliteration}. ${l.exampleEnglish}.`).join(" ");
+  }
+
+  function currentArabicRepeatText(){
+    const data = CURRICULUM[state.currentWeek - 1];
+    const letters = getLessonLetters(data);
+    return letters.map(l => `${l.nameArabic}. ${l.exampleArabic}`).join(". ");
+  }
+
+  function showReward(target, symbol = "⭐") {
+    const rect = target.getBoundingClientRect();
+    const reward = document.createElement("div");
+    reward.className = "reward";
+    reward.textContent = symbol;
+    reward.style.left = `${rect.left + rect.width / 2}px`;
+    reward.style.top = `${rect.top + rect.height / 2}px`;
+    document.body.appendChild(reward);
+    setTimeout(() => reward.remove(), 1250);
+  }
+
+  function addStar(target) {
+    state.stars++;
+    save();
+    updateStats();
+    if (target) showReward(target);
+  }
+
+  function updateStats() {
+    const data = CURRICULUM[state.currentWeek - 1];
+    const symbol = data.type === "letter" ? data.letter.letter : data.letters[0].letter;
+    document.getElementById("weekStat").textContent = state.currentWeek;
+    document.getElementById("completedStat").textContent = state.completed.size;
+    document.getElementById("starStat").textContent = state.stars;
+    document.getElementById("letterStat").textContent = symbol;
+  }
+
+  function buildWeekNavigation() {
+    weekNav.innerHTML = "";
+    weekSelect.innerHTML = "";
+    CURRICULUM.forEach(item => {
+      const button = document.createElement("button");
+      button.className = "week-btn";
+      if (item.week === state.currentWeek) button.classList.add("active");
+      if (state.completed.has(item.week)) button.classList.add("done");
+      button.textContent = item.week;
+      button.title = item.title;
+      button.onclick = () => {
+        state.currentWeek = item.week;
+        render();
+      };
+      weekNav.appendChild(button);
+
+      const option = document.createElement("option");
+      option.value = item.week;
+      option.textContent = `Week ${item.week} — ${item.title}`;
+      weekSelect.appendChild(option);
+    });
+    weekSelect.value = String(state.currentWeek);
+  }
+
+  function getLessonLetters(data) {
+    return data.type === "letter" ? [data.letter] : data.letters;
+  }
+
+  function renderLessonHeader(data) {
+    if (data.type === "review") {
+      return `
+        <div class="lesson-card">
+          <div class="lesson-letter">${data.letters.map(l => l.letter).slice(0,4).join(" ")}</div>
+          <div class="lesson-info">
+            <h3>Week ${data.week}: ${data.title}</h3>
+            <div class="arabic-name">مراجعة الحروف</div>
+            <p class="sound-line">Review ${data.letters.length} Arabic letters through tracing, matching, and sound practice.</p>
+            <div class="example">
+              <span class="emoji">🌟</span>
+              <div><strong>Celebration Review</strong><br><span>Listen, trace, and recognize each letter.</span></div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    const l = data.letter;
+    return `
+      <div class="lesson-card">
+        <div class="lesson-letter">${l.letter}</div>
+        <div class="lesson-info">
+          <h3>Week ${data.week}: ${l.transliteration}</h3>
+          <div class="arabic-name">${l.nameArabic}</div>
+          <p class="sound-line"><strong>English sound guide:</strong> ${l.englishSound}</p>
+          <p class="sound-line"><strong>Transliteration:</strong> ${l.transliteration} • <strong>Sound:</strong> ${l.soundHint}</p>
+          <div class="example">
+            <span class="emoji">${l.emoji}</span>
+            <div>
+              <div class="example-arabic">${l.exampleArabic}</div>
+              <strong>${l.exampleTransliteration}</strong> — ${l.exampleEnglish}
+            </div>
+          </div>
+          <div class="forms">
+            <div class="form-box"><span>Isolated</span><strong>${l.isolated}</strong></div>
+            <div class="form-box"><span>Beginning</span><strong>${l.beginning}</strong></div>
+            <div class="form-box"><span>Middle</span><strong>${l.middle}</strong></div>
+            <div class="form-box"><span>Ending</span><strong>${l.ending}</strong></div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function render() {
+    state.traceDone = false;
+    state.tileDone = false;
+    state.matchDone = false;
+    selectedMatch = null;
+    const data = CURRICULUM[state.currentWeek - 1];
+    const letters = getLessonLetters(data);
+
+    appContent.innerHTML = `
+      <div class="layout">
+        <section class="panel">
+          ${renderLessonHeader(data)}
+          <h2>✏️ Large Tracing Studio</h2>
+          <p class="panel-note">Trace over the pale guide letters. Use Clear to practice again.</p>
+          <div class="canvas-shell">
+            <canvas id="tracingCanvas" width="900" height="460" aria-label="Large tracing canvas"></canvas>
+            <div class="trace-tools">
+              <label>Brush <input id="brushSize" type="range" min="4" max="28" value="12"></label>
+              <label>Color <input id="brushColor" type="color" value="#d85f8f"></label>
+              <button id="clearCanvasBtn" class="secondary">🧽 Clear</button>
+              <button id="traceCompleteBtn" class="success">✓ I Practiced</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="activity-grid">
+          <section class="activity">
+            <h3>${t("listenMove")}</h3>
+            <p>${data.type === "letter" ? data.letter.prompt : "Point to each letter as you hear its name."}</p>
+            <button id="hearArabicBtn">${t("hearArabic")}</button>
+            <button id="hearEnglishBtn" class="secondary">${t("hearEnglish")}</button>
+          </section>
+
+          <section class="activity">
+            <h3>${t("tiles")}</h3>
+            <p class="panel-note">Tap every letter tile.</p>
+            <div class="tiles" id="tiles"></div>
+            <div class="message" id="tileMessage"></div>
+          </section>
+
+          <section class="activity">
+            <h3>${t("match")}</h3>
+            <p class="panel-note">Match an Arabic letter to its transliteration.</p>
+            <div class="cards" id="matchCards"></div>
+            <div class="message" id="matchMessage"></div>
+          </section>
+
+          <section class="activity">
+            <h3>${t("progress")}</h3>
+            <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="message" id="weekMessage">Complete the three activities.</div>
+            <button id="completeWeekBtn" class="success" disabled>${t("complete")}</button>
+          </section>
+        </aside>
+      </div>
+
+      <div class="bottom-nav">
+        <button id="prevWeekBtn" class="secondary" ${state.currentWeek === 1 ? "disabled" : ""}>${t("previous")}</button>
+        <button id="nextWeekBtn" ${state.currentWeek === 42 ? "disabled" : ""}>${t("next")}</button>
+      </div>`;
+
+    initTracing(letters);
+    initTiles(letters);
+    initMatching(letters);
+    wireLessonButtons(data, letters);
+    buildWeekNavigation();
+    updateStats();
+    save();
+  }
+
+  function initTracing(letters) {
+    const canvas = document.getElementById("tracingCanvas");
+    activeCanvas = canvas;
+    const ctx = canvas.getContext("2d");
+
+    function drawGuide() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#fffdf8";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.save();
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      const count = letters.length;
+      const cols = count > 8 ? 7 : Math.min(count, 4);
+      const rows = Math.ceil(count / cols);
+      const cellW = canvas.width / cols;
+      const cellH = canvas.height / rows;
+      const fontSize = Math.min(150, Math.max(70, cellH * 0.62));
+
+      ctx.font = `900 ${fontSize}px serif`;
+      ctx.strokeStyle = "rgba(109,75,195,.22)";
+      ctx.lineWidth = 5;
+      ctx.setLineDash([10, 8]);
+
+      letters.forEach((l, index) => {
+        const col = index % cols;
+        const row = Math.floor(index / cols);
+        const x = cellW * col + cellW / 2;
+        const y = cellH * row + cellH / 2;
+        ctx.strokeText(l.letter, x, y);
+      });
+
+      ctx.setLineDash([]);
+      ctx.restore();
+    }
+
+    drawGuide();
+
+    function point(e) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (e.clientX - rect.left) * (canvas.width / rect.width),
+        y: (e.clientY - rect.top) * (canvas.height / rect.height)
+      };
+    }
+
+    canvas.onpointerdown = e => {
+      e.preventDefault();
+      canvas.setPointerCapture?.(e.pointerId);
+      isDrawing = true;
+      lastPoint = point(e);
+    };
+
+    canvas.onpointermove = e => {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const p = point(e);
+      ctx.save();
+      ctx.strokeStyle = document.getElementById("brushColor").value;
+      ctx.lineWidth = Number(document.getElementById("brushSize").value);
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      ctx.moveTo(lastPoint.x, lastPoint.y);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      ctx.restore();
+      lastPoint = p;
+    };
+
+    canvas.onpointerup = canvas.onpointercancel = () => {
+      isDrawing = false;
+      lastPoint = null;
+    };
+
+    document.getElementById("clearCanvasBtn").onclick = drawGuide;
+    document.getElementById("traceCompleteBtn").onclick = e => {
+      if (!state.traceDone) addStar(e.currentTarget);
+      state.traceDone = true;
+      e.currentTarget.textContent = "✓ Tracing Practiced";
+      updateActivityProgress();
+    };
+  }
+
+  function initTiles(letters) {
+    const box = document.getElementById("tiles");
+    const tapped = new Set();
+
+    letters.forEach((l, index) => {
+      const tile = document.createElement("button");
+      tile.className = "tile";
+      tile.innerHTML = `<strong>${l.letter}</strong><br><small>${l.transliteration}</small>`;
+      tile.onclick = () => {
+        speak(`${l.nameArabic}. ${l.exampleArabic}`, "ar-SA");
+        if (!tapped.has(index)) {
+          tapped.add(index);
+          tile.classList.add("correct");
+          addStar(tile);
+        }
+        if (tapped.size === letters.length) {
+          state.tileDone = true;
+          document.getElementById("tileMessage").textContent = "Wonderful! Every tile was explored.";
+          updateActivityProgress();
+        }
+      };
+      box.appendChild(tile);
+    });
+  }
+
+  function initMatching(letters) {
+    const gameLetters = [...letters].slice(0, Math.min(6, letters.length));
+    const items = [];
+
+    gameLetters.forEach(l => {
+      items.push({key:l.id, type:"arabic", label:l.letter});
+      items.push({key:l.id, type:"latin", label:l.transliteration});
+    });
+
+    items.sort(() => Math.random() - 0.5);
+    const box = document.getElementById("matchCards");
+    const matched = new Set();
+
+    items.forEach(item => {
+      const card = document.createElement("button");
+      card.className = "match-card";
+      card.dataset.key = item.key;
+      card.dataset.type = item.type;
+      card.innerHTML = item.type === "arabic"
+        ? `<div class="big">${item.label}</div><small>Arabic</small>`
+        : `<strong>${item.label}</strong><br><small>Transliteration</small>`;
+
+      card.onclick = () => {
+        if (card.classList.contains("correct")) return;
+
+        if (!selectedMatch) {
+          selectedMatch = card;
+          card.classList.add("selected");
+          return;
+        }
+
+        if (selectedMatch === card) {
+          card.classList.remove("selected");
+          selectedMatch = null;
+          return;
+        }
+
+        const good =
+          selectedMatch.dataset.key === card.dataset.key &&
+          selectedMatch.dataset.type !== card.dataset.type;
+
+        if (good) {
+          selectedMatch.classList.remove("selected");
+          selectedMatch.classList.add("correct");
+          card.classList.add("correct");
+          matched.add(card.dataset.key);
+          addStar(card);
+          document.getElementById("matchMessage").textContent = "Correct match! ⭐";
+          selectedMatch = null;
+
+          if (matched.size === gameLetters.length) {
+            state.matchDone = true;
+            document.getElementById("matchMessage").textContent = "All matches complete!";
+            updateActivityProgress();
+          }
+        } else {
+          selectedMatch.classList.remove("selected");
+          document.getElementById("matchMessage").textContent = "Try another pair.";
+          selectedMatch = null;
+        }
+      };
+
+      box.appendChild(card);
+    });
+  }
+
+  function updateActivityProgress() {
+    const completed = [state.traceDone, state.tileDone, state.matchDone].filter(Boolean).length;
+    document.getElementById("progressBar").style.width = `${completed / 3 * 100}%`;
+    const button = document.getElementById("completeWeekBtn");
+    button.disabled = completed < 3;
+
+    if (completed === 3) {
+      document.getElementById("weekMessage").textContent = "All activities complete. Claim the week!";
+    }
+  }
+
+  function wireLessonButtons(data, letters) {
+    document.getElementById("hearArabicBtn").onclick = () => {
+      const text = letters.map(l => `${l.nameArabic}. ${l.exampleArabic}`).join(". ");
+      speak(text, "ar-SA");
+    };
+
+    document.getElementById("hearEnglishBtn").onclick = () => {
+      const text = letters.map(l => `${l.transliteration}. ${l.exampleEnglish}`).join(". ");
+      speak(text, "en-US");
+    };
+
+    document.getElementById("completeWeekBtn").onclick = e => {
+      if (!state.completed.has(state.currentWeek)) {
+        state.completed.add(state.currentWeek);
+        state.stars += 3;
+        showReward(e.currentTarget, "🏆");
+      }
+      save();
+      buildWeekNavigation();
+      updateStats();
+      e.currentTarget.textContent = "✓ Week Completed";
+      document.getElementById("weekMessage").textContent = "Excellent work!";
+    };
+
+    document.getElementById("prevWeekBtn").onclick = () => {
+      if (state.currentWeek > 1) {
+        state.currentWeek--;
+        render();
+        window.scrollTo({top:0, behavior:"smooth"});
+      }
+    };
+
+    document.getElementById("nextWeekBtn").onclick = () => {
+      if (state.currentWeek < 42) {
+        state.currentWeek++;
+        render();
+        window.scrollTo({top:0, behavior:"smooth"});
+      }
+    };
+  }
+
+
+  document.getElementById("homeLanguage").value = state.homeLanguage;
+  document.getElementById("readingSpeed").value = state.readingSpeed;
+  updateVoiceFriendButtons();
+  localizeStaticUI();
+
+  document.getElementById("homeLanguage").onchange = event => {
+    state.homeLanguage = event.target.value;
+    localizeStaticUI();
+    save();
+    render();
+  };
+
+  document.getElementById("readingSpeed").onchange = event => {
+    state.readingSpeed = event.target.value;
+    save();
+    const status = document.getElementById("voiceStatus");
+    if(status) status.textContent = "Reading speed saved.";
+  };
+
+  document.getElementById("voiceFriends").onclick = event => {
+    const button = event.target.closest("[data-voice]");
+    if(!button) return;
+    state.voiceFriend = button.dataset.voice;
+    updateVoiceFriendButtons();
+    save();
+    const friend = VOICE_FRIENDS[state.voiceFriend];
+    document.getElementById("voiceStatus").textContent =
+      `${friend.emoji} ${friend.name} selected. Tap Meet My Voice to listen.`;
+  };
+
+  document.getElementById("previewVoiceBtn").onclick = () => {
+    const meta = LANGUAGE_META[state.homeLanguage] || LANGUAGE_META.en;
+    const friend = VOICE_FRIENDS[state.voiceFriend] || VOICE_FRIENDS.fairy;
+    const greetings = {
+      en:`Hello, little learner. ${friend.name} is ready to explore Arabic letters with you.`,
+      es:`Hola, pequeño aprendiz. ${friend.name} está listo para explorar las letras árabes contigo.`,
+      fr:`Bonjour, petit apprenant. ${friend.name} est prêt à explorer les lettres arabes avec toi.`,
+      pt:`Olá, pequeno aprendiz. ${friend.name} está pronto para explorar as letras árabes com você.`,
+      ur:`سلام ننھے طالب علم۔ ${friend.name} آپ کے ساتھ عربی حروف سیکھنے کے لیے تیار ہے۔`,
+      fa:`سلام زبان‌آموز کوچک. ${friend.name} آماده است حروف عربی را با تو یاد بگیرد.`
+    };
+    speak(greetings[state.homeLanguage] || greetings.en, meta.speech);
+  };
+
+  document.getElementById("hearMeaningBtn").onclick = () => {
+    const meta = LANGUAGE_META[state.homeLanguage] || LANGUAGE_META.en;
+    speak(currentMeaningText(), meta.speech);
+  };
+
+  document.getElementById("repeatBtn").onclick = () => {
+    speak(currentArabicRepeatText(), "ar-SA");
+  };
+
+  document.getElementById("stopVoiceBtn").onclick = () => stopSpeaking(t("stop"));
+
+  weekSelect.onchange = () => {
+    state.currentWeek = Number(weekSelect.value);
+    render();
+  };
+
+  document.getElementById("speakLessonBtn").onclick = () => {
+    const data = CURRICULUM[state.currentWeek - 1];
+    const letters = getLessonLetters(data);
+    speak(letters.map(l => `${l.nameArabic}. ${l.exampleArabic}`).join(". "), "ar-SA");
+  };
+
+  document.getElementById("themeBtn").onclick = () => {
+    state.theme = (state.theme + 1) % themes.length;
+    applyTheme();
+    save();
+  };
+
+  document.getElementById("resetProgressBtn").onclick = () => {
+    if (!confirm("Reset all saved weeks and stars?")) return;
+    state.completed.clear();
+    state.stars = 0;
+    state.currentWeek = 1;
+    save();
+    render();
+  };
+
+  applyTheme();
+  render();
+})();
+</script>
+</body>
+</html>
