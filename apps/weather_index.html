@@ -15,7 +15,7 @@
 html{scroll-behavior:smooth}
 body{
 margin:0;min-height:100vh;padding:24px 14px 46px;color:var(--ink);
-font-family:"Avenir Next Rounded","Trebuchet MS","Arial Rounded MT Bold","Comic Sans MS",system-ui,sans-serif;
+font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
 background:linear-gradient(145deg,var(--bg1),var(--bg2));transition:.35s
 }
 button,select{font:inherit}button{touch-action:manipulation}
@@ -23,8 +23,8 @@ button,select{font:inherit}button{touch-action:manipulation}
 .hero{text-align:center;margin-bottom:16px}
 .mascot{width:82px;height:82px;margin:auto;border-radius:50%;display:grid;place-items:center;font-size:3rem;background:radial-gradient(circle,#fffbd1,#ffc84e);box-shadow:0 0 28px #ffd95d99;animation:bob 3s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(-7px) rotate(2deg)}}
-h1{margin:10px 0 4px;font-size:clamp(2.35rem,7vw,4.8rem);line-height:.95;letter-spacing:-.04em;color:var(--primary)}
-.subtitle{max-width:820px;margin:auto;color:var(--muted);line-height:1.6}
+h1{margin:16px auto 8px;max-width:920px;padding:0 .08em;font-size:clamp(2.4rem,6.3vw,4.8rem);line-height:1.08;letter-spacing:-.02em;color:var(--primary)}
+.subtitle{max-width:840px;margin:auto;color:var(--muted);line-height:1.72;font-size:1.02rem}
 .app{background:var(--panel);border:1px solid var(--border);border-radius:30px;padding:18px;box-shadow:var(--shadow)}
 .toolbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
 .control{background:var(--panel);border:1px solid var(--border);border-radius:17px;padding:10px}
@@ -70,12 +70,116 @@ footer{margin-top:15px;text-align:center;color:var(--muted);font-size:.82rem;lin
 @media(max-width:860px){.toolbar{grid-template-columns:repeat(2,1fr)}.lab{grid-template-columns:1fr}.scene-card,.story-card{min-height:0}}
 @media(max-width:560px){.toolbar{grid-template-columns:1fr}.weather-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.btn.primary{margin-left:0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+
+/* =========================================================
+   CRÈCHE PRESCHOOL PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1120px,100%);
+  margin:0 auto 16px;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(43,92,138,.16);
+}
+.creche-mark{
+  width:52px;height:52px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#ffd43b,#ff8a4c);
+  border:3px solid #fff;
+  font-size:1.8rem;
+}
+.creche-eyebrow{margin:0;color:#df4c68;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:#245ca8;font-size:clamp(1.02rem,2.3vw,1.32rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #acd0ec;border-radius:999px;background:#fff;color:#245ca8;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;background:linear-gradient(135deg,#f05b78,#ff9948);border-color:#fff}
+
+/* Friendly weather voice studio */
+.voice-studio{
+  margin-top:11px;padding:13px;border:2px solid var(--border);border-radius:19px;
+  background:linear-gradient(145deg,#fff,#fff9e8,#eef9ff)
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--primary);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:60px;padding:7px 5px;border:2px solid var(--border);
+  border-radius:15px;background:#fff;color:var(--primary);display:grid;place-items:center;
+  align-content:center;gap:2px;font-weight:900;cursor:pointer
+}
+.voice-guide .emoji{font-size:1.4rem;line-height:1}
+.voice-guide .name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.68rem}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--secondary),var(--primary))}
+.voice-controls{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{border:2px solid var(--border);border-radius:999px;padding:9px 12px;background:#fff;color:var(--ink);font-weight:900}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.story-card.speaking{box-shadow:0 0 0 5px rgba(255,214,77,.3),0 12px 24px rgba(40,83,126,.1)}
+
+.scene-card,.story-card,.app,.control,.notice,.stat{
+  border-width:2px;
+}
+.weather-btn,.option,.btn{
+  border:2px solid var(--border);
+}
+.weather-btn:hover,.option:hover,.btn:hover{
+  transform:translateY(-2px);
+}
+.weather-btn,.option,.btn{
+  transition:transform .16s ease,box-shadow .16s ease,background .16s ease;
+}
+.scene{
+  border:4px solid #fff;
+  box-shadow:inset 0 -25px 60px #ffffff55,0 10px 20px rgba(48,74,132,.12);
+}
+.mission-banner{
+  margin-top:10px;padding:11px 12px;border-radius:16px;border:2px dashed var(--border);
+  background:linear-gradient(135deg,#fff,#eef9ff);color:var(--muted);line-height:1.45
+}
+.mission-banner strong{color:var(--primary)}
+.choice-hint{box-shadow:0 0 0 3px rgba(255,215,106,.38)}
+.sparkle{position:fixed;pointer-events:none;z-index:50;font-size:1.6rem;animation:sparkleFly 1s ease forwards}
+@keyframes sparkleFly{to{transform:translateY(-80px) scale(1.35) rotate(18deg);opacity:0}}
+
+@media(max-width:720px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+}
+@media(max-width:650px){
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}
+  .creche-links{grid-column:auto}
+}
+
 </style>
 </head>
 <body>
+
+<header class="creche-header" aria-label="Crèche Preschool Portal">
+  <div class="creche-mark" aria-hidden="true">🌈</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Portal</p>
+    <div class="creche-title">The Crèche™ · Bright Preschool Weather Play</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link current" href="#" aria-current="page">☀️ Weather Adventure</a>
+  </nav>
+</header>
+
 <main class="wrap">
 <header class="hero">
-<div class="mascot" aria-hidden="true">😊</div>
+<div class="mascot" aria-hidden="true">☀️</div>
 <h1>Sunny's Weather Adventure</h1>
 <p class="subtitle">Explore animated skies, learn weather words, complete observation missions, and practice weather safety with Sunny.</p>
 </header>
@@ -86,6 +190,28 @@ footer{margin-top:15px;text-align:center;color:var(--muted);font-size:.82rem;lin
 <div class="control"><label for="soundMode">Sunny's voice</label><select id="soundMode"><option value="on">On</option><option value="off">Off</option></select></div>
 <div class="control"><label for="motionMode">Scene motion</label><select id="motionMode"><option value="on">On</option><option value="off">Off</option></select></div>
 <div class="control"><label for="autoMode">Adventure cycle</label><select id="autoMode"><option value="off">Manual</option><option value="on">Auto explore</option></select></div>
+</div>
+
+
+<div class="voice-studio" aria-labelledby="voiceTitle">
+  <h2 id="voiceTitle">Choose a Weather Friend</h2>
+  <div class="voice-guides" id="voiceGuides">
+    <button type="button" class="voice-guide" data-voice="sunny"><span class="emoji">☀️</span><span class="name">Sunny Sky</span></button>
+    <button type="button" class="voice-guide" data-voice="cloud"><span class="emoji">☁️</span><span class="name">Cloudy Casey</span></button>
+    <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Weather Owl</span></button>
+    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Ray</span></button>
+  </div>
+  <div class="voice-controls">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and clear</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">🌤️ A little lively</option>
+    </select>
+    <button class="btn" type="button" id="previewVoiceBtn">👋 Meet My Friend</button>
+    <button class="btn" type="button" id="repeatVoiceBtn">🔁 Repeat Last</button>
+    <button class="btn" type="button" id="stopVoiceBtn">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
 </div>
 
 <div class="notice"><strong>Important:</strong> This is an animated learning adventure, not a live forecast. A rainbow is an optical event, and night is a time of day. Use a trusted weather source and adult judgment for clothing, travel, and outdoor safety.</div>
@@ -105,7 +231,7 @@ footer{margin-top:15px;text-align:center;color:var(--muted);font-size:.82rem;lin
 <div class="box observe"><strong>🔎 Sunny's mission:</strong> <span id="observe"></span></div>
 <div class="box fact"><strong>💡 Weather fact:</strong> <span id="fact"></span></div>
 <div class="box safety"><strong>🛟 Safety:</strong> <span id="safety"></span></div>
-<div class="check"><strong>🌟 Quick Check</strong><div id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div></div>
+<div class="mission-banner"><strong>Weather Watcher Tip:</strong> This is pretend weather play. Look outside with a trusted grown-up before deciding what the real sky is doing.</div><div class="check"><strong>🌟 Quick Check</strong><div id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback" aria-live="polite"></div></div>
 <div class="actions">
 <button class="btn" id="hearBtn">🔊 Hear Sunny</button>
 <button class="btn sunny" id="surpriseBtn">🎲 Surprise Scene</button>
@@ -130,12 +256,103 @@ const WEATHER=[{"id": "sunny", "name": "Sunny", "emoji": "☀️", "scene": "sun
 const THEMES={"sunny": {"name": "Sunny Adventure", "emoji": "☀️", "bg1": "#fff5d5", "bg2": "#e6f7ff", "panel": "#fffdf8", "ink": "#493a28", "muted": "#74695c", "primary": "#e58a2c", "secondary": "#f6b867", "accent": "#ffd96d", "card": "#fff4df", "border": "#efcda0"}, "rainbow": {"name": "Rainbow Trail", "emoji": "🌈", "bg1": "#f5eaff", "bg2": "#e8f7ff", "panel": "#fffafd", "ink": "#43344f", "muted": "#706679", "primary": "#8266c7", "secondary": "#df82b1", "accent": "#ffd76d", "card": "#f8efff", "border": "#cdbce4"}, "ocean": {"name": "Ocean Sky", "emoji": "🌊", "bg1": "#e7f8ff", "bg2": "#e6f6ef", "panel": "#fbffff", "ink": "#24434f", "muted": "#61747c", "primary": "#2f8fad", "secondary": "#63bfc1", "accent": "#ffd88b", "card": "#ecfaff", "border": "#acdce4"}, "meadow": {"name": "Meadow Weather", "emoji": "🌿", "bg1": "#eaf7e9", "bg2": "#f0f3df", "panel": "#fcfff9", "ink": "#304536", "muted": "#667168", "primary": "#5b9468", "secondary": "#8fbd7d", "accent": "#e8cf73", "card": "#f1f8ed", "border": "#b7d2b2"}, "night": {"name": "Moonlit Weather", "emoji": "🌙", "bg1": "#1f2445", "bg2": "#34325d", "panel": "#2d3053", "ink": "#f6f3ff", "muted": "#cbc8e4", "primary": "#9faeff", "secondary": "#c98be1", "accent": "#ffd76d", "card": "#383c66", "border": "#606698"}};
 const $=id=>document.getElementById(id);
 const KEY='sunnys-weather-adventure-v3';
-function fresh(){return{theme:'sunny',current:'sunny',explored:[],checks:[],missions:[],dates:[]}}
+function fresh(){return{theme:'sunny',current:'sunny',voiceFriend:'sunny',voiceSpeed:'slow',explored:[],checks:[],missions:[],dates:[]}}
 function load(){try{return Object.assign(fresh(),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch{return fresh()}}
-let state=load(),current=WEATHER.find(w=>w.id===state.current)||WEATHER[0],autoTimer=null;
+let state=load(),current=WEATHER.find(w=>w.id===state.current)||WEATHER[0],autoTimer=null,voices=[],speechToken=0,lastSpoken='';
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
-function speak(t){if($('soundMode').value==='off'||!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=.88;u.pitch=1.08;speechSynthesis.speak(u)}
+const VOICE_GUIDES={
+  sunny:{name:'Sunny Sky',emoji:'☀️',rate:.82,pitch:1.12,preferred:/samantha|aria|jenny|ava|karen|victoria|female/i,greeting:'Hello, weather watcher. Sunny Sky is ready to explore a pretend weather scene.'},
+  cloud:{name:'Cloudy Casey',emoji:'☁️',rate:.78,pitch:.98,preferred:/daniel|david|alex|fred|george|male/i,greeting:'Hello, cloud detective. Cloudy Casey is ready to look at the sky with you.'},
+  owl:{name:'Weather Owl',emoji:'🦉',rate:.74,pitch:1,preferred:/daniel|samantha|alex|serena|moira/i,greeting:'Welcome, young meteorologist. Weather Owl is ready for careful weather learning.'},
+  rainbow:{name:'Rainbow Ray',emoji:'🌈',rate:.84,pitch:1.1,preferred:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:'Hello, bright explorer. Rainbow Ray is ready for a colorful weather adventure.'}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+
+function refreshVoices(){
+  if(!('speechSynthesis'in window))return;
+  voices=speechSynthesis.getVoices()||[];
+  const g=VOICE_GUIDES[state.voiceFriend]||VOICE_GUIDES.sunny;
+  $('voiceStatus').textContent=voices.length?`${g.emoji} ${g.name} is ready.`:'Loading a friendly voice…';
+}
+function chooseVoice(){
+  if(!voices.length)refreshVoices();
+  const g=VOICE_GUIDES[state.voiceFriend]||VOICE_GUIDES.sunny;
+  const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||''));
+  const pool=english.length?english:voices;
+  if(state.voiceFriend==='rainbow'&&pool.length){
+    const natural=pool.filter(v=>/natural|enhanced|premium/i.test(v.name));
+    const choices=natural.length?natural:pool;
+    return choices[Math.floor(Math.random()*choices.length)]||null;
+  }
+  return pool.find(v=>g.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null;
+}
+function stopSpeaking(message='Voice stopped.'){
+  speechToken++;
+  if('speechSynthesis'in window)speechSynthesis.cancel();
+  document.querySelector('.story-card')?.classList.remove('speaking');
+  $('voiceStatus').textContent=message;
+}
+function speak(t,{preview=false,target=null}={}){
+  if($('soundMode').value==='off'||!('speechSynthesis'in window))return;
+  const g=VOICE_GUIDES[state.voiceFriend]||VOICE_GUIDES.sunny;
+  const phrase=preview?g.greeting:String(t||'').trim();
+  if(!phrase)return;
+  stopSpeaking('');
+  const token=++speechToken;
+  lastSpoken=phrase;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const voice=chooseVoice();
+  if(voice)u.voice=voice;
+  u.lang=(voice&&voice.lang)||'en-US';
+  u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=g.pitch;
+  u.volume=1;
+  u.onstart=()=>{if(target)target.classList.add('speaking');$('voiceStatus').textContent=`${g.emoji} ${g.name} is reading.`};
+  u.onend=()=>{if(token!==speechToken)return;if(target)target.classList.remove('speaking');$('voiceStatus').textContent='Ready for another weather scene! 🌤️'};
+  u.onerror=e=>{if(token!==speechToken)return;if(target)target.classList.remove('speaking');$('voiceStatus').textContent=e&&['interrupted','canceled'].includes(e.error)?'Voice stopped.':'The voice had a little hiccup. Try again.'};
+  speechSynthesis.speak(u);
+}
+
+function updateVoiceButtons(){
+  document.querySelectorAll('[data-voice]').forEach(button=>{
+    const active=button.dataset.voice===state.voiceFriend;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-pressed',String(active));
+  });
+  $('voiceSpeed').value=state.voiceSpeed;
+}
+function sparkleBurst(count=10){
+  for(let i=0;i<count;i++){
+    const s=document.createElement('span');
+    s.className='sparkle';
+    s.textContent=['✨','⭐','☀️','🌈'][i%4];
+    s.style.left=(20+Math.random()*60)+'vw';
+    s.style.top=(45+Math.random()*25)+'vh';
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),1100);
+  }
+}
+
 function applyTheme(k){const t=THEMES[k]||THEMES.sunny;Object.entries(t).forEach(([n,v])=>{if(!['name','emoji'].includes(n))document.documentElement.style.setProperty('--'+n,v)});state.theme=k;save()}
+
+$('voiceGuides').onclick=e=>{
+  const button=e.target.closest('[data-voice]');
+  if(!button)return;
+  state.voiceFriend=button.dataset.voice;
+  save();
+  updateVoiceButtons();
+  const g=VOICE_GUIDES[state.voiceFriend];
+  $('voiceStatus').textContent=`${g.emoji} ${g.name} selected. Tap Meet My Friend to listen.`;
+};
+$('voiceSpeed').onchange=e=>{
+  state.voiceSpeed=e.target.value;
+  save();
+  $('voiceStatus').textContent='Reading speed saved.';
+};
+$('previewVoiceBtn').onclick=()=>speak('',{preview:true});
+$('repeatVoiceBtn').onclick=()=>lastSpoken?speak(lastSpoken,{target:document.querySelector('.story-card')}):speak('Choose a weather picture to begin.',{target:document.querySelector('.story-card')});
+$('stopVoiceBtn').onclick=()=>stopSpeaking('Voice stopped.');
+
 function clearScene(){$('scene').querySelectorAll('.particle,.gust,.bolt,.rainbow,.fog,.moon,.star').forEach(x=>x.remove())}
 function particle(symbol,count,color){for(let i=0;i<count;i++){const x=document.createElement('span');x.className='particle';x.textContent=symbol;x.style.left=(4+Math.random()*92)+'%';x.style.animationDelay=(Math.random()*1.7)+'s';x.style.fontSize=(14+Math.random()*12)+'px';if(color)x.style.color=color;$('scene').appendChild(x)}}
 function drawScene(type){
@@ -156,21 +373,76 @@ function renderGrid(){$('weatherGrid').innerHTML='';WEATHER.forEach(w=>{const b=
 function selectWeather(id){
 current=WEATHER.find(w=>w.id===id)||WEATHER[0];state.current=current.id;if(!state.explored.includes(id))state.explored.push(id);save();
 $('sceneLabel').textContent=`${current.emoji} ${current.name}`;$('weatherTitle').textContent=current.name;$('message').textContent=current.message;$('observe').textContent=current.observe;$('fact').textContent=current.fact;$('safety').textContent=current.safety;
-drawScene(current.scene);renderGrid();renderCheck();updateStats();$('weatherTitle').focus();if($('soundMode').value==='on')speak(`${current.name}. ${current.message}`)
+drawScene(current.scene);renderGrid();renderCheck();updateStats();$('weatherTitle').focus();if($('soundMode').value==='on')speak(`${current.name}. ${current.message}`,{target:document.querySelector('.story-card')})
 }
 function renderCheck(){
-const q=current.check;$('question').textContent=q.q;$('options').innerHTML='';$('feedback').textContent='';
-const pairs=q.answers.map((text,i)=>({text,correct:i===q.correct})).sort(()=>Math.random()-.5);
-pairs.forEach(x=>{const b=document.createElement('button');b.className='option';b.textContent=x.text;b.onclick=()=>{[...$('options').children].forEach(n=>n.disabled=true);b.classList.add(x.correct?'correct':'wrong');if(x.correct){$('feedback').textContent='That fits!';if(!state.checks.includes(current.id))state.checks.push(current.id)}else{$('feedback').textContent='Good try. The green answer shows the best choice.';const i=pairs.findIndex(v=>v.correct);$('options').children[i].classList.add('correct')}save();updateStats()};$('options').appendChild(b)})
+  const q=current.check;
+  $('question').textContent=q.q;
+  $('options').innerHTML='';
+  $('feedback').textContent='';
+  const pairs=q.answers.map((text,i)=>({text,correct:i===q.correct})).sort(()=>Math.random()-.5);
+  let wrong=0;
+  pairs.forEach(x=>{
+    const b=document.createElement('button');
+    b.className='option';
+    b.textContent=x.text;
+    b.onclick=()=>{
+      if(x.correct){
+        [...$('options').children].forEach(n=>n.disabled=true);
+        b.classList.add('correct');
+        $('feedback').textContent='⭐ Wonderful! That is the best choice.';
+        if(!state.checks.includes(current.id))state.checks.push(current.id);
+        speak(`Wonderful. ${x.text} is the best choice.`);
+      }else{
+        wrong++;
+        b.classList.add('wrong');
+        b.disabled=true;
+        if(wrong<2){
+          $('feedback').textContent='🌈 Good try. Look at the choices and try once more.';
+          speak('Good try. Look at the choices and try once more.');
+        }else{
+          [...$('options').children].forEach(n=>n.disabled=true);
+          const correctButton=[...$('options').children].find((el,i)=>pairs[i].correct);
+          if(correctButton)correctButton.classList.add('correct');
+          const answer=pairs.find(v=>v.correct)?.text||'the green answer';
+          $('feedback').textContent=`The green answer shows the best choice: ${answer}.`;
+          speak(`The best choice is ${answer}.`);
+        }
+      }
+      save();
+      updateStats();
+    };
+    $('options').appendChild(b);
+  });
 }
 function updateStats(){$('sceneStat').textContent=state.explored.length;$('checkStat').textContent=state.checks.length;$('missionStat').textContent=state.missions.length;$('dayStat').textContent=new Set(state.dates).size}
 function cycleAuto(){if(autoTimer)clearInterval(autoTimer);autoTimer=null;if($('autoMode').value==='on')autoTimer=setInterval(()=>{const i=(WEATHER.indexOf(current)+1)%WEATHER.length;selectWeather(WEATHER[i].id)},6500)}
 $('theme').innerHTML=Object.entries(THEMES).map(([k,t])=>`<option value="${k}">${t.emoji} ${t.name}</option>`).join('');$('theme').value=state.theme;$('theme').onchange=e=>applyTheme(e.target.value);
 $('motionMode').onchange=()=>drawScene(current.scene);$('autoMode').onchange=cycleAuto;
-$('hearBtn').onclick=()=>speak(`${current.name}. ${current.message}. Sunny's mission. ${current.observe}. Weather fact. ${current.fact}. Safety. ${current.safety}`);
+$('hearBtn').onclick=()=>speak(`${current.name}. ${current.message}. Sunny's mission. ${current.observe}. Weather fact. ${current.fact}. Safety. ${current.safety}`,{target:document.querySelector('.story-card')});
 $('surpriseBtn').onclick=()=>{let n=current;while(n.id===current.id)n=WEATHER[Math.floor(Math.random()*WEATHER.length)];selectWeather(n.id)};
-$('completeBtn').onclick=()=>{state.missions.push({weather:current.id,date:new Date().toISOString()});state.dates.push(new Date().toLocaleDateString('en-CA'));save();updateStats();$('feedback').textContent=`Mission complete: ${current.name}.`;speak('Mission complete. Great weather exploring.')};
-applyTheme(state.theme);selectWeather(current.id);cycleAuto();
+$('completeBtn').onclick=()=>{state.missions.push({weather:current.id,date:new Date().toISOString()});state.dates.push(new Date().toLocaleDateString('en-CA'));save();updateStats();$('feedback').textContent=`Mission complete: ${current.name}.`;sparkleBurst(14);speak('Mission complete. Great weather exploring.');};
+if('speechSynthesis'in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.('voiceschanged',refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $('previewVoiceBtn').disabled=true;
+  $('repeatVoiceBtn').disabled=true;
+  $('stopVoiceBtn').disabled=true;
+  $('hearBtn').disabled=true;
+  $('voiceStatus').textContent='Read-aloud voices are not available in this browser.';
+}
+updateVoiceButtons();
+applyTheme(state.theme);
+selectWeather(current.id);
+cycleAuto();
+window.addEventListener('beforeunload',()=>{
+  if(autoTimer)clearInterval(autoTimer);
+  stopSpeaking('');
+});
 </script>
 </body>
 </html>
