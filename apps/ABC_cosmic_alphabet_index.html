@@ -30,7 +30,7 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--ink);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:
     radial-gradient(circle at 15% 12%,rgba(255,255,255,.85) 0 2px,transparent 3px),
     radial-gradient(circle at 80% 20%,rgba(255,255,255,.7) 0 2px,transparent 3px),
@@ -42,7 +42,7 @@ button{cursor:pointer;touch-action:manipulation}
 .app{
   width:min(1180px,calc(100% - 22px));
   margin:0 auto;
-  padding:22px 0 52px;
+  padding:30px 0 56px;
 }
 .hero{
   position:relative;
@@ -50,7 +50,7 @@ button{cursor:pointer;touch-action:manipulation}
   text-align:center;
   color:white;
   border-radius:34px;
-  padding:30px 20px 28px;
+  padding:36px 22px 32px;
   background:
     radial-gradient(circle at 20% 20%,rgba(255,255,255,.16),transparent 24%),
     radial-gradient(circle at 75% 30%,rgba(244,201,93,.18),transparent 25%),
@@ -82,16 +82,19 @@ button{cursor:pointer;touch-action:manipulation}
   font-size:.85rem;
 }
 .hero h1{
-  margin:12px 0 8px;
-  font-size:clamp(2.4rem,7vw,5.4rem);
-  line-height:.96;
-  letter-spacing:-.05em;
+  margin:18px auto 10px;
+  max-width:980px;
+  padding:.05em .08em;
+  font-size:clamp(2.5rem,6.5vw,5.2rem);
+  line-height:1.08;
+  letter-spacing:-.02em;
 }
 .hero p{
   max-width:760px;
   margin:0 auto;
-  line-height:1.6;
-  color:#eeeaff;
+  line-height:1.72;
+  color:#f4f1ff;
+  font-size:1.02rem;
 }
 .hero-icons{
   display:flex;
@@ -361,6 +364,85 @@ button.danger{
   font-size:.85rem;
   margin-top:18px;
 }
+
+.voice-panel{
+  max-width:980px;
+  margin:0 auto 16px;
+  padding:14px;
+  border-radius:22px;
+  background:rgba(255,255,255,.92);
+  border:1px solid #ded8ee;
+  box-shadow:0 8px 22px rgba(56,40,76,.08);
+}
+.voice-panel h2{
+  margin:0 0 8px;
+  text-align:center;
+  color:var(--space2);
+  font-size:1.05rem;
+}
+.voice-friends{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:7px;
+}
+.voice-friend{
+  min-width:0;
+  min-height:64px;
+  padding:8px 5px;
+  border-radius:16px;
+  border:2px solid #e5def0;
+  background:white;
+  color:var(--space2);
+  box-shadow:none;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:2px;
+}
+.voice-friend .emoji{font-size:1.45rem;line-height:1}
+.voice-friend .name{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:.68rem;
+}
+.voice-friend.active{
+  color:white;
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--violet),var(--rose));
+}
+.voice-options{
+  margin-top:9px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.voice-options select{
+  border:1px solid #ded8ee;
+  border-radius:999px;
+  padding:9px 12px;
+  background:white;
+  color:var(--space2);
+  font-weight:850;
+}
+.voice-status{
+  min-height:1.2em;
+  margin:8px 0 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:.8rem;
+}
+.panel.speaking{
+  box-shadow:0 0 0 5px rgba(123,91,214,.13),var(--shadow);
+}
+@media(max-width:700px){
+  .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-friend:last-child{grid-column:1/-1}
+}
+
 @media(max-width:900px){
   .main-grid{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -378,22 +460,20 @@ button.danger{
     animation-iteration-count:1!important;
     scroll-behavior:auto!important;
   }
-  .site-footer {
-  margin-top: 16px;
-  padding: 15px 12px;
-  text-align: center;
-  border-radius: 18px;
-  background: rgba(255,255,255,.78);
-  border: 1px solid rgba(90,60,120,.12);
-  color: #665b72;
-  font-size: .84rem;
-  line-height: 1.5;
 }
 
-.site-footer strong {
-  color: #503a76;
+.site-footer{
+  margin-top:16px;
+  padding:15px 12px;
+  text-align:center;
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(90,60,120,.12);
+  color:#665b72;
+  font-size:.84rem;
+  line-height:1.5;
 }
-}
+.site-footer strong{color:#503a76;}
 </style>
 </head>
 <body>
@@ -414,6 +494,42 @@ button.danger{
     <button id="themeBtn" class="secondary">🎨 Change Theme</button>
     <button id="resetBtn" class="danger">↺ Reset Progress</button>
   </div>
+
+
+  <section class="voice-panel" aria-labelledby="voiceTitle">
+    <h2 id="voiceTitle">Choose a Cosmic Reading Guide</h2>
+
+    <div class="voice-friends" id="voiceFriends">
+      <button type="button" class="voice-friend" data-voice="mira">
+        <span class="emoji">🌙</span><span class="name">Moonbeam Mira</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="comet">
+        <span class="emoji">☄️</span><span class="name">Captain Comet</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="nova">
+        <span class="emoji">🦊</span><span class="name">Nova Fox</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="owl">
+        <span class="emoji">🦉</span><span class="name">Professor Owl</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="starlight">
+        <span class="emoji">✨</span><span class="name">Starlight Friend</span>
+      </button>
+    </div>
+
+    <div class="voice-options">
+      <select id="voiceSpeed" aria-label="Reading speed">
+        <option value="slow">🐢 Slow and gentle</option>
+        <option value="normal">🙂 Just right</option>
+        <option value="lively">🚀 A little lively</option>
+      </select>
+      <button id="previewVoiceBtn" type="button" class="secondary">👋 Meet My Guide</button>
+      <button id="hearMeaningBtn" type="button" class="secondary">🌍 Hear Meaning</button>
+      <button id="stopVoiceBtn" type="button" class="secondary">⏹ Stop Voice</button>
+    </div>
+
+    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+  </section>
 
   <section class="stats">
     <div class="stat"><strong id="letterStat">ا</strong>Current Letter</div>
@@ -546,7 +662,9 @@ const state = {
   explored:new Set(JSON.parse(localStorage.getItem("cosmicAlphabetExplored")||"[]")),
   theme:Number(localStorage.getItem("cosmicAlphabetTheme")||0),
   currentRound:null,
-  storyIndex:0
+  storyIndex:0,
+  voiceFriend:localStorage.getItem("cosmicAlphabetVoiceFriend")||"mira",
+  voiceSpeed:localStorage.getItem("cosmicAlphabetVoiceSpeed")||"slow"
 };
 
 const $=id=>document.getElementById(id);
@@ -557,6 +675,8 @@ function save(){
   localStorage.setItem("cosmicAlphabetCorrect",String(state.correct));
   localStorage.setItem("cosmicAlphabetExplored",JSON.stringify([...state.explored]));
   localStorage.setItem("cosmicAlphabetTheme",String(state.theme));
+  localStorage.setItem("cosmicAlphabetVoiceFriend",state.voiceFriend);
+  localStorage.setItem("cosmicAlphabetVoiceSpeed",state.voiceSpeed);
 }
 
 function applyTheme(){
@@ -566,24 +686,128 @@ function applyTheme(){
   }
 }
 
-function chooseVoice(prefix){
-  if(!("speechSynthesis" in window)) return null;
-  const voices=speechSynthesis.getVoices();
-  return voices.find(v=>v.lang?.toLowerCase().startsWith(prefix))
-    || voices.find(v=>/^en/i.test(v.lang))
-    || voices[0]
-    || null;
+const VOICE_GUIDES={
+  mira:{
+    name:"Moonbeam Mira",emoji:"🌙",rate:.8,pitch:1.14,
+    preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,
+    greeting:"Hello, little explorer. Moonbeam Mira is ready to discover Arabic letters beneath the stars."
+  },
+  comet:{
+    name:"Captain Comet",emoji:"☄️",rate:.84,pitch:.92,
+    preferred:/daniel|david|alex|fred|george|male|tom/i,
+    greeting:"Welcome aboard. Captain Comet is ready for an Arabic alphabet mission."
+  },
+  nova:{
+    name:"Nova Fox",emoji:"🦊",rate:.86,pitch:1.06,
+    preferred:/samantha|aria|jenny|ava|karen|moira|serena/i,
+    greeting:"Hello, clever explorer. Nova Fox is ready to find a new cosmic letter."
+  },
+  owl:{
+    name:"Professor Owl",emoji:"🦉",rate:.74,pitch:1,
+    preferred:/daniel|samantha|alex|serena|moira/i,
+    greeting:"Welcome, young learner. Professor Owl is ready for careful Arabic letter practice."
+  },
+  starlight:{
+    name:"Starlight Friend",emoji:"✨",rate:.84,pitch:1.08,
+    preferred:/natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria/i,
+    greeting:"Hello, shining star. Your Starlight Friend is ready to learn Arabic with you."
+  }
+};
+
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+let browserVoices=[];
+let speechToken=0;
+
+function refreshVoices(){
+  if(!("speechSynthesis" in window))return;
+  browserVoices=speechSynthesis.getVoices()||[];
+  const guide=VOICE_GUIDES[state.voiceFriend]||VOICE_GUIDES.mira;
+  const status=$("voiceStatus");
+  if(status){
+    status.textContent=browserVoices.length
+      ?`${guide.emoji} ${guide.name} is ready.`
+      :"Loading a friendly browser voice…";
+  }
 }
 
-function speak(text,lang="ar-SA"){
-  if(!("speechSynthesis" in window)) return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang=lang;
-  u.rate=lang.startsWith("ar")?.72:.84;
-  u.pitch=1.04;
-  const voice=chooseVoice(lang.startsWith("ar")?"ar":"en");
-  if(voice) u.voice=voice;
+function chooseVoice(lang,guideKey=state.voiceFriend){
+  if(!browserVoices.length)refreshVoices();
+  const guide=VOICE_GUIDES[guideKey]||VOICE_GUIDES.mira;
+  const family=lang.slice(0,2).toLowerCase();
+  const languagePool=browserVoices.filter(v=>(v.lang||"").toLowerCase().startsWith(family));
+
+  if(family==="ar"){
+    return languagePool.find(v=>/natural|enhanced|premium/i.test(v.name))
+      ||languagePool[0]
+      ||null;
+  }
+
+  const pool=languagePool.length
+    ?languagePool
+    :browserVoices.filter(v=>/^en/i.test(v.lang||""));
+
+  if(guideKey==="starlight"&&pool.length){
+    const friendly=pool.filter(v=>/natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria/i.test(v.name));
+    const choices=friendly.length?friendly:pool;
+    return choices[Math.floor(Math.random()*choices.length)]||null;
+  }
+
+  return pool.find(v=>guide.preferred.test(v.name))
+    ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+    ||pool[0]
+    ||browserVoices[0]
+    ||null;
+}
+
+function stopSpeaking(statusText="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("speaking"));
+  const status=$("voiceStatus");
+  if(status)status.textContent=statusText;
+}
+
+function speak(text,lang="ar-SA",{preview=false}={}){
+  if(!("speechSynthesis" in window))return;
+  if(!preview&&!String(text||"").trim())return;
+
+  stopSpeaking("");
+  const token=++speechToken;
+  const guide=VOICE_GUIDES[state.voiceFriend]||VOICE_GUIDES.mira;
+  const phrase=preview?guide.greeting:text;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const voice=chooseVoice(lang);
+
+  if(voice)u.voice=voice;
+  u.lang=(voice&&voice.lang)||lang;
+  u.rate=Math.max(.55,Math.min(1.15,guide.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=lang.startsWith("ar")?1.02:guide.pitch;
+  u.volume=1;
+
+  u.onstart=()=>{
+    document.querySelector(".panel")?.classList.add("speaking");
+    const status=$("voiceStatus");
+    if(status)status.textContent=`${guide.emoji} ${guide.name} is reading.`;
+  };
+
+  u.onend=()=>{
+    if(token!==speechToken)return;
+    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("speaking"));
+    const status=$("voiceStatus");
+    if(status)status.textContent="Wonderful listening! 🌟";
+  };
+
+  u.onerror=event=>{
+    if(token!==speechToken)return;
+    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("speaking"));
+    const status=$("voiceStatus");
+    if(status){
+      status.textContent=event&&["interrupted","canceled"].includes(event.error)
+        ?"Voice stopped."
+        :"The voice had a little hiccup. Try again.";
+    }
+  };
+
   speechSynthesis.speak(u);
 }
 
@@ -687,7 +911,7 @@ function renderRound(){
     b.onclick=()=>{
       if(choice.id===round.answer.id){
         b.classList.add("correct");
-        $("message").textContent="Correct! "+round.answer.exampleArabic+" means "+round.answer.exampleEnglish+".";
+        $("message").textContent="Wonderful! "+round.answer.exampleArabic+" means "+round.answer.exampleEnglish+".";
         state.stars++;
         state.correct++;
         save();
@@ -696,7 +920,7 @@ function renderRound(){
         setTimeout(newRound,900);
       }else{
         b.classList.add("wrong");
-        $("message").textContent="Try another cosmic image.";
+        $("message").textContent="Great try! Choose another cosmic image.";
         setTimeout(()=>b.classList.remove("wrong"),700);
       }
     };
@@ -740,6 +964,44 @@ function renderAll(){
   save();
 }
 
+
+function updateVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(button=>{
+    const active=button.dataset.voice===state.voiceFriend;
+    button.classList.toggle("active",active);
+    button.setAttribute("aria-pressed",String(active));
+  });
+  $("voiceSpeed").value=state.voiceSpeed;
+}
+
+$("voiceFriends").onclick=event=>{
+  const button=event.target.closest("[data-voice]");
+  if(!button)return;
+
+  state.voiceFriend=button.dataset.voice;
+  updateVoiceButtons();
+  save();
+
+  const guide=VOICE_GUIDES[state.voiceFriend];
+  $("voiceStatus").textContent=
+    `${guide.emoji} ${guide.name} selected. Tap Meet My Guide to listen.`;
+};
+
+$("voiceSpeed").onchange=event=>{
+  state.voiceSpeed=event.target.value;
+  save();
+  $("voiceStatus").textContent="Reading speed saved.";
+};
+
+$("previewVoiceBtn").onclick=()=>speak("","en-US",{preview:true});
+
+$("hearMeaningBtn").onclick=()=>{
+  const l=current();
+  speak(`${l.transliteration}. ${l.exampleEnglish}. ${l.englishSound}.`,"en-US");
+};
+
+$("stopVoiceBtn").onclick=()=>stopSpeaking("Voice stopped.");
+
 $("hearBtn").onclick=()=>{
   const l=current();
   speak(`${l.nameArabic}. ${l.exampleArabic}`,"ar-SA");
@@ -765,10 +1027,26 @@ $("resetBtn").onclick=()=>{
   renderAll();
 };
 
+if("speechSynthesis" in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $("previewVoiceBtn").disabled=true;
+  $("hearMeaningBtn").disabled=true;
+  $("stopVoiceBtn").disabled=true;
+  $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+}
+
+updateVoiceButtons();
 applyTheme();
 newStory();
 newRound();
 renderAll();
+
+window.addEventListener("beforeunload",()=>stopSpeaking(""));
 </script>
 </body>
 </html>
