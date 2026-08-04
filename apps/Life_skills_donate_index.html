@@ -1,55 +1,881 @@
-<!-- Kids Game Page Donation Banner — Colorful & Fun! -->
-<div style="
-  background: linear-gradient(90deg, #ffecd2 0%, #fcb69f 25%, #a1c4fd 65%, #c2e9fb 100%);
-  border-radius: 22px;
-  padding: 16px 18px 18px 18px;
-  margin: 32px auto 24px;
-  font-family: 'Poppins', 'Comic Sans MS', 'Baloo 2', cursive, sans-serif;
-  max-width: 460px;
-  text-align: center;
-  box-shadow: 0 4px 18px rgba(50,80,170,0.08);
-  border: 3px solid #ffe082;
-  position: relative;
-  overflow: hidden;
-">
-  <span style="font-size: 1.26em; font-weight: 700; color: #ff6f00; letter-spacing: 0.01em;">
-    🎁 Help Us Share the Fun!
-  </span>
-  <div style="margin: 7px 0 5px 0; color: #00497a; font-size: 1em; font-weight: 500;">
-    Every game, art tool & smile is FREE for kids.<br>
-    Love what you see? Please help us keep<br>
-    <span style="color:#ff6f00;">Pearls Palette</span> and our kids’ games free for all!
+<!-- =========================================================
+     LITTLE TIKES™ SUPPORT QUEST
+     Parent-gated donation banner
+     Single-file vanilla HTML / CSS / JS
+     ========================================================= -->
+
+<section class="support-quest" id="supportQuest" aria-labelledby="supportQuestTitle">
+  <div class="support-sparkles" aria-hidden="true">
+    <span>⭐</span>
+    <span>🎨</span>
+    <span>🎮</span>
+    <span>🌈</span>
   </div>
-  <a href="https://buy.stripe.com/00w5kEf7P9Sc0bb3En4AU0c" target="_blank"
-    style="
-      display:inline-block;
-      margin-top: 10px;
-      background: linear-gradient(90deg, #ffb347 30%, #59d9a3 100%);
-      color: #fff;
-      padding: 11px 35px;
-      border-radius: 12px;
-      font-size: 1.08em;
-      font-weight: 700;
-      text-decoration: none;
-      letter-spacing:0.02em;
-      box-shadow: 0 2px 10px #b2f5ea80;
-      transition: transform 0.13s;
-    "
-    onmouseover="this.style.transform='scale(1.07)'"
-    onmouseout="this.style.transform='scale(1)'"
-  >💛 Donate Now</a>
-  <div style="font-size:0.96em; margin-top: 11px; color:#00516f; opacity: 0.65;">
-    Thank you for supporting creativity & joy!
+
+  <button
+    class="support-close"
+    id="supportClose"
+    type="button"
+    aria-label="Hide support message"
+  >
+    ×
+  </button>
+
+  <div class="support-mascot" id="supportMascot" aria-hidden="true">
+    🦊
   </div>
-  <!-- Decorative confetti (SVG, optional) -->
-  <svg viewBox="0 0 260 30" width="160" height="16" style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%); pointer-events:none;">
-    <circle cx="10" cy="12" r="4" fill="#ffd700"/>
-    <circle cx="60" cy="6" r="3" fill="#ff8c42"/>
-    <circle cx="130" cy="15" r="5" fill="#4fd1c5"/>
-    <circle cx="200" cy="9" r="3.2" fill="#f06292"/>
-    <circle cx="245" cy="13" r="4" fill="#a1c4fd"/>
-    <circle cx="95" cy="23" r="2.7" fill="#fcb900"/>
-    <circle cx="160" cy="18" r="3.5" fill="#90ee90"/>
-    <circle cx="210" cy="23" r="2.8" fill="#ffa500"/>
-  </svg>
-</div>
+
+  <div class="support-copy">
+    <p class="support-eyebrow">A Little Kindness Quest</p>
+
+    <h2 id="supportQuestTitle">Help Keep the Learning Adventures Growing!</h2>
+
+    <p class="support-message">
+      Artists, teachers, writers, and programmers put lots of care into making
+      these games free for children.
+    </p>
+
+    <p class="support-child-note">
+      You never need to donate by yourself. You can tell a parent or trusted
+      grown-up that you enjoyed the game and ask whether they would like to help.
+    </p>
+
+    <div class="support-work" id="supportWork" hidden>
+      <h3>What does support help create?</h3>
+
+      <div class="support-work-grid">
+        <div>
+          <span>🎨</span>
+          <strong>New Art</strong>
+          <small>Characters, worlds, and animations</small>
+        </div>
+
+        <div>
+          <span>🎮</span>
+          <strong>New Games</strong>
+          <small>Learning adventures and activities</small>
+        </div>
+
+        <div>
+          <span>🔊</span>
+          <strong>Friendly Voices</strong>
+          <small>Read-aloud and accessibility tools</small>
+        </div>
+
+        <div>
+          <span>🛠️</span>
+          <strong>Upgrades</strong>
+          <small>Repairs, testing, and improvements</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="support-actions">
+      <button class="support-btn support-learn" id="supportLearn" type="button">
+        🛠️ See How Games Are Made
+      </button>
+
+      <button class="support-btn support-hear" id="supportHear" type="button">
+        🔊 Hear the Message
+      </button>
+
+      <button class="support-btn support-stop" id="supportStop" type="button">
+        ⏹ Stop Voice
+      </button>
+    </div>
+
+    <div class="support-voice-picker" aria-label="Choose support-message voice">
+      <button type="button" class="support-voice active" data-support-voice="fox">
+        🦊 Focus Fox
+      </button>
+
+      <button type="button" class="support-voice" data-support-voice="owl">
+        🦉 Professor Owl
+      </button>
+
+      <button type="button" class="support-voice" data-support-voice="star">
+        ⭐ Steady Star
+      </button>
+    </div>
+
+    <div class="support-grownup-box">
+      <span class="support-lock" aria-hidden="true">🔒</span>
+
+      <div>
+        <strong>Parent or Grown-Up Area</strong>
+
+        <p>
+          Even a voluntary one- or two-dollar gift can help support future
+          repairs, lessons, art, voices, and new games.
+        </p>
+      </div>
+    </div>
+
+    <a
+      class="support-donate"
+      id="supportDonate"
+      href="https://buy.stripe.com/00w5kEf7P9Sc0bb3En4AU0c"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      💛 Grown-Ups: Support the Free Games
+    </a>
+
+    <button class="support-thankyou" id="supportThankYou" type="button">
+      🌟 We Already Asked a Grown-Up
+    </button>
+
+    <p class="support-fine-print">
+      Donations are optional. Children can continue playing whether or not a
+      grown-up donates.
+    </p>
+
+    <p class="support-status" id="supportStatus" aria-live="polite"></p>
+  </div>
+</section>
+
+<style>
+  .support-quest {
+    --support-orange: #ef7f3f;
+    --support-blue: #347eaa;
+    --support-green: #54b98c;
+    --support-purple: #8a69ca;
+    --support-yellow: #ffe48b;
+    --support-ink: #3e3a52;
+    --support-muted: #6e687d;
+    --support-line: rgba(93, 71, 122, 0.15);
+
+    position: relative;
+    width: min(720px, calc(100% - 24px));
+    margin: 32px auto 24px;
+    padding: 24px;
+    overflow: hidden;
+
+    border: 3px solid var(--support-yellow);
+    border-radius: 24px;
+
+    background:
+      radial-gradient(
+        circle at 12% 12%,
+        rgba(255, 255, 255, 0.9),
+        transparent 18%
+      ),
+      linear-gradient(
+        135deg,
+        #fff4cf 0%,
+        #ffe6e8 34%,
+        #e4f1ff 68%,
+        #e4fff1 100%
+      );
+
+    box-shadow: 0 16px 38px rgba(55, 63, 112, 0.13);
+
+    color: var(--support-ink);
+    text-align: center;
+
+    font-family:
+      "Comic Sans MS",
+      "Trebuchet MS",
+      "Arial Rounded MT Bold",
+      system-ui,
+      sans-serif;
+  }
+
+  .support-quest[hidden] {
+    display: none;
+  }
+
+  .support-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    z-index: 5;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid var(--support-line);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.88);
+    color: var(--support-muted);
+
+    font-size: 1.35rem;
+    font-weight: 900;
+    cursor: pointer;
+  }
+
+  .support-mascot {
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 8px;
+
+    display: grid;
+    place-items: center;
+
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+
+    background: linear-gradient(145deg, #ffffff, #fff3ca);
+    box-shadow: 0 10px 22px rgba(65, 46, 92, 0.12);
+
+    font-size: 3.1rem;
+
+    animation: supportBob 3s ease-in-out infinite;
+  }
+
+  .support-eyebrow {
+    margin: 0 0 5px;
+
+    color: var(--support-purple);
+
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .support-quest h2 {
+    margin: 0 auto 10px;
+    max-width: 580px;
+
+    color: var(--support-orange);
+
+    font-size: clamp(1.55rem, 4vw, 2.35rem);
+    line-height: 1.15;
+  }
+
+  .support-message,
+  .support-child-note {
+    max-width: 590px;
+    margin: 8px auto;
+
+    line-height: 1.58;
+  }
+
+  .support-child-note {
+    padding: 11px 13px;
+
+    border: 1px solid var(--support-line);
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--support-blue);
+  }
+
+  .support-actions,
+  .support-voice-picker {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    margin-top: 12px;
+  }
+
+  .support-btn,
+  .support-voice,
+  .support-thankyou {
+    border: 1px solid var(--support-line);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--support-ink);
+
+    padding: 9px 12px;
+
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition:
+      transform 0.16s ease,
+      box-shadow 0.16s ease;
+  }
+
+  .support-btn:hover,
+  .support-voice:hover,
+  .support-thankyou:hover,
+  .support-donate:hover {
+    transform: translateY(-2px);
+  }
+
+  .support-hear {
+    color: var(--support-blue);
+  }
+
+  .support-learn {
+    color: var(--support-purple);
+  }
+
+  .support-stop {
+    color: #a75465;
+  }
+
+  .support-voice.active {
+    border-color: transparent;
+    background: linear-gradient(
+      135deg,
+      var(--support-purple),
+      var(--support-blue)
+    );
+    color: white;
+  }
+
+  .support-work {
+    margin-top: 14px;
+    padding: 14px;
+
+    border: 1px solid var(--support-line);
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.76);
+  }
+
+  .support-work h3 {
+    margin: 0 0 10px;
+    color: var(--support-purple);
+  }
+
+  .support-work-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .support-work-grid > div {
+    padding: 10px 7px;
+
+    border: 1px solid var(--support-line);
+    border-radius: 15px;
+
+    background: white;
+  }
+
+  .support-work-grid span {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 1.55rem;
+  }
+
+  .support-work-grid strong,
+  .support-work-grid small {
+    display: block;
+  }
+
+  .support-work-grid strong {
+    color: var(--support-blue);
+    font-size: 0.82rem;
+  }
+
+  .support-work-grid small {
+    margin-top: 3px;
+    color: var(--support-muted);
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+
+  .support-grownup-box {
+    max-width: 590px;
+    margin: 15px auto 10px;
+    padding: 13px;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: center;
+
+    border: 2px dashed rgba(52, 126, 170, 0.3);
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.78);
+    text-align: left;
+  }
+
+  .support-grownup-box strong {
+    color: var(--support-blue);
+  }
+
+  .support-grownup-box p {
+    margin: 3px 0 0;
+
+    color: var(--support-muted);
+
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  .support-lock {
+    font-size: 1.9rem;
+  }
+
+  .support-donate {
+    display: inline-block;
+
+    margin-top: 5px;
+    padding: 12px 24px;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+      90deg,
+      var(--support-orange),
+      var(--support-green)
+    );
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 1rem;
+    font-weight: 900;
+
+    box-shadow: 0 8px 18px rgba(67, 170, 134, 0.22);
+
+    transition:
+      transform 0.16s ease,
+      box-shadow 0.16s ease;
+  }
+
+  .support-thankyou {
+    display: block;
+    margin: 10px auto 0;
+
+    color: var(--support-purple);
+  }
+
+  .support-fine-print {
+    max-width: 560px;
+    margin: 12px auto 0;
+
+    color: var(--support-muted);
+
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .support-status {
+    min-height: 1.2em;
+    margin: 8px 0 0;
+
+    color: var(--support-blue);
+
+    font-size: 0.8rem;
+    font-weight: 900;
+  }
+
+  .support-sparkles span {
+    position: absolute;
+    opacity: 0.22;
+    font-size: 1.45rem;
+  }
+
+  .support-sparkles span:nth-child(1) {
+    left: 5%;
+    top: 11%;
+  }
+
+  .support-sparkles span:nth-child(2) {
+    right: 7%;
+    top: 18%;
+  }
+
+  .support-sparkles span:nth-child(3) {
+    left: 8%;
+    bottom: 12%;
+  }
+
+  .support-sparkles span:nth-child(4) {
+    right: 7%;
+    bottom: 10%;
+  }
+
+  .support-confetti {
+    position: fixed;
+    z-index: 9999;
+
+    pointer-events: none;
+
+    font-size: 1.7rem;
+
+    animation: supportConfetti 1.15s ease-out forwards;
+  }
+
+  @keyframes supportBob {
+    50% {
+      transform: translateY(-7px) rotate(2deg);
+    }
+  }
+
+  @keyframes supportConfetti {
+    to {
+      opacity: 0;
+      transform: translateY(-95px) rotate(60deg) scale(1.3);
+    }
+  }
+
+  @media (max-width: 650px) {
+    .support-quest {
+      padding: 22px 14px;
+    }
+
+    .support-work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .support-grownup-box {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .support-quest *,
+    .support-quest *::before,
+    .support-quest *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    "use strict";
+
+    const supportQuest = document.getElementById("supportQuest");
+
+    if (!supportQuest) {
+      return;
+    }
+
+    const supportWork = document.getElementById("supportWork");
+    const supportLearn = document.getElementById("supportLearn");
+    const supportHear = document.getElementById("supportHear");
+    const supportStop = document.getElementById("supportStop");
+    const supportClose = document.getElementById("supportClose");
+    const supportThankYou = document.getElementById("supportThankYou");
+    const supportStatus = document.getElementById("supportStatus");
+    const supportMascot = document.getElementById("supportMascot");
+
+    const STORAGE_KEY = "little-tikes-support-quest-v1";
+
+    const supportVoices = {
+      fox: {
+        name: "Focus Fox",
+        emoji: "🦊",
+        pitch: 1.05,
+        rate: 0.82,
+        preferred:
+          /samantha|aria|jenny|ava|karen|victoria|female/i
+      },
+
+      owl: {
+        name: "Professor Owl",
+        emoji: "🦉",
+        pitch: 1,
+        rate: 0.75,
+        preferred:
+          /daniel|samantha|alex|serena|moira/i
+      },
+
+      star: {
+        name: "Steady Star",
+        emoji: "⭐",
+        pitch: 1.1,
+        rate: 0.8,
+        preferred:
+          /natural|enhanced|premium|samantha|aria|jenny|ava/i
+      }
+    };
+
+    const state = loadState();
+
+    let browserVoices = [];
+    let speechToken = 0;
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(
+          localStorage.getItem(STORAGE_KEY) || "{}"
+        );
+
+        return {
+          voice: saved.voice || "fox",
+          hidden: Boolean(saved.hidden),
+          thanked: Boolean(saved.thanked)
+        };
+      } catch {
+        return {
+          voice: "fox",
+          hidden: false,
+          thanked: false
+        };
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(state)
+        );
+      } catch {
+        // The banner still works if storage is unavailable.
+      }
+    }
+
+    function refreshVoices() {
+      if (!("speechSynthesis" in window)) {
+        return;
+      }
+
+      browserVoices = speechSynthesis.getVoices() || [];
+    }
+
+    function chooseVoice() {
+      refreshVoices();
+
+      const character =
+        supportVoices[state.voice] || supportVoices.fox;
+
+      const englishVoices = browserVoices.filter((voice) =>
+        /^en([-_]|$)/i.test(voice.lang || "")
+      );
+
+      const pool = englishVoices.length
+        ? englishVoices
+        : browserVoices;
+
+      return (
+        pool.find((voice) =>
+          character.preferred.test(voice.name)
+        ) ||
+        pool.find((voice) =>
+          /natural|enhanced|premium/i.test(voice.name)
+        ) ||
+        pool[0] ||
+        null
+      );
+    }
+
+    function stopVoice(message = "Voice stopped.") {
+      speechToken += 1;
+
+      if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+      }
+
+      supportStatus.textContent = message;
+    }
+
+    function speakSupportMessage() {
+      if (!("speechSynthesis" in window)) {
+        supportStatus.textContent =
+          "A read-aloud voice is not available in this browser.";
+        return;
+      }
+
+      stopVoice("");
+
+      const token = ++speechToken;
+      const character =
+        supportVoices[state.voice] || supportVoices.fox;
+
+      const text =
+        "Artists, teachers, writers, and programmers worked hard " +
+        "to make these learning games free for children. " +
+        "You never need to donate by yourself. " +
+        "You can tell a parent or trusted grown-up that you enjoyed the game, " +
+        "and ask whether they would like to help make more free adventures.";
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = chooseVoice();
+
+      if (voice) {
+        utterance.voice = voice;
+      }
+
+      utterance.lang = voice?.lang || "en-US";
+      utterance.rate = character.rate;
+      utterance.pitch = character.pitch;
+      utterance.volume = 1;
+
+      utterance.onstart = () => {
+        supportStatus.textContent =
+          `${character.emoji} ${character.name} is reading.`;
+      };
+
+      utterance.onend = () => {
+        if (token !== speechToken) {
+          return;
+        }
+
+        supportStatus.textContent =
+          "Thank you for listening! 🌟";
+      };
+
+      utterance.onerror = (event) => {
+        if (token !== speechToken) {
+          return;
+        }
+
+        supportStatus.textContent =
+          event &&
+          ["canceled", "interrupted"].includes(event.error)
+            ? "Voice stopped."
+            : "The voice had a little hiccup.";
+      };
+
+      speechSynthesis.speak(utterance);
+    }
+
+    function updateVoiceButtons() {
+      document
+        .querySelectorAll("[data-support-voice]")
+        .forEach((button) => {
+          const active =
+            button.dataset.supportVoice === state.voice;
+
+          button.classList.toggle("active", active);
+          button.setAttribute(
+            "aria-pressed",
+            String(active)
+          );
+        });
+
+      const character =
+        supportVoices[state.voice] || supportVoices.fox;
+
+      supportMascot.textContent = character.emoji;
+    }
+
+    function celebrate() {
+      const symbols = [
+        "✨",
+        "⭐",
+        "🌈",
+        "💛",
+        "🎨",
+        "🎮"
+      ];
+
+      for (let index = 0; index < 18; index += 1) {
+        const confetti = document.createElement("span");
+
+        confetti.className = "support-confetti";
+        confetti.textContent =
+          symbols[index % symbols.length];
+
+        confetti.style.left =
+          `${18 + Math.random() * 64}vw`;
+
+        confetti.style.top =
+          `${45 + Math.random() * 25}vh`;
+
+        confetti.style.animationDelay =
+          `${Math.random() * 0.18}s`;
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 1400);
+      }
+    }
+
+    supportLearn.addEventListener("click", () => {
+      supportWork.hidden = !supportWork.hidden;
+
+      supportLearn.textContent = supportWork.hidden
+        ? "🛠️ See How Games Are Made"
+        : "✨ Hide the Creation Tools";
+
+      if (!supportWork.hidden) {
+        supportStatus.textContent =
+          "Every game takes planning, art, writing, testing, and repairs.";
+      }
+    });
+
+    supportHear.addEventListener(
+      "click",
+      speakSupportMessage
+    );
+
+    supportStop.addEventListener("click", () => {
+      stopVoice("Voice stopped.");
+    });
+
+    document
+      .querySelectorAll("[data-support-voice]")
+      .forEach((button) => {
+        button.addEventListener("click", () => {
+          state.voice = button.dataset.supportVoice;
+          saveState();
+          updateVoiceButtons();
+
+          const character =
+            supportVoices[state.voice];
+
+          supportStatus.textContent =
+            `${character.emoji} ${character.name} selected.`;
+        });
+      });
+
+    supportThankYou.addEventListener("click", () => {
+      state.thanked = true;
+      saveState();
+
+      celebrate();
+
+      supportStatus.textContent =
+        "Thank you for sharing the message with a grown-up! 🌟";
+
+      supportThankYou.textContent =
+        "💛 Thank You, Kindness Helper!";
+    });
+
+    supportClose.addEventListener("click", () => {
+      state.hidden = true;
+      saveState();
+      supportQuest.hidden = true;
+      stopVoice("");
+    });
+
+    if (state.hidden) {
+      supportQuest.hidden = true;
+    }
+
+    if (state.thanked) {
+      supportThankYou.textContent =
+        "💛 Thank You, Kindness Helper!";
+    }
+
+    if ("speechSynthesis" in window) {
+      refreshVoices();
+
+      speechSynthesis.addEventListener?.(
+        "voiceschanged",
+        refreshVoices
+      );
+
+      speechSynthesis.onvoiceschanged =
+        refreshVoices;
+
+      setTimeout(refreshVoices, 250);
+      setTimeout(refreshVoices, 900);
+    } else {
+      supportHear.disabled = true;
+      supportStop.disabled = true;
+
+      supportStatus.textContent =
+        "A read-aloud voice is not available in this browser.";
+    }
+
+    updateVoiceButtons();
+
+    window.addEventListener("beforeunload", () => {
+      stopVoice("");
+    });
+  })();
+</script>
