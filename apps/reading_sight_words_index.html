@@ -28,7 +28,7 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--ink);
-  font-family:"Comic Sans MS","Trebuchet MS",system-ui,sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:
     radial-gradient(circle at 12% 14%,rgba(255,255,255,.86) 0 5%,transparent 6%),
     radial-gradient(circle at 87% 14%,rgba(255,255,255,.7) 0 4%,transparent 5%),
@@ -54,16 +54,19 @@ button{touch-action:manipulation}
   box-shadow:var(--shadow);
 }
 .hero h1{
-  margin:0;
-  font-size:clamp(2.3rem,7vw,5rem);
-  line-height:.96;
-  letter-spacing:-.05em;
+  margin:0 auto 8px;
+  max-width:940px;
+  padding:0 .08em;
+  font-size:clamp(2.35rem,6.2vw,4.85rem);
+  line-height:1.08;
+  letter-spacing:-.02em;
 }
 .hero p{
-  max-width:760px;
+  max-width:840px;
   margin:8px auto 0;
   color:#fff7f2;
-  line-height:1.6;
+  line-height:1.72;
+  font-size:1.02rem;
 }
 .hero-icons{
   display:flex;
@@ -375,9 +378,146 @@ button.danger{
     scroll-behavior:auto!important;
   }
 }
+
+/* =========================================================
+   CRÈCHE PRESCHOOL PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1120px,calc(100% - 22px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(75,49,69,.13);
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#ffd65b,#76d0af);
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{margin:0;color:#d64f77;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:#634a88;font-size:clamp(1.02rem,2.3vw,1.32rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #ded4e8;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;background:linear-gradient(135deg,#7c65c7,#e977a9);border-color:#fff}
+
+/* =========================================================
+   FRIENDLY VOICE STUDIO
+   ========================================================= */
+.voice-studio{
+  margin:14px 0;
+  padding:13px;
+  border:2px solid #e1d7e8;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff);
+  box-shadow:0 10px 24px rgba(75,49,69,.07)
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;border:2px solid #ded4e8;
+  border-radius:16px;background:#fff;color:var(--plum);display:grid;place-items:center;
+  align-content:center;gap:2px;font-weight:900;box-shadow:none
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.68rem}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--plum),var(--tomato))}
+.voice-controls{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{border:2px solid #ded4e8}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.kitchen-card.speaking{box-shadow:0 0 0 5px rgba(244,207,98,.38),var(--shadow)}
+
+/* =========================================================
+   WORD PANTRY + PROGRESS GARDEN
+   ========================================================= */
+.pantry{
+  margin-top:14px;padding:13px;border:2px solid #e1d7e8;border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8e8)
+}
+.pantry h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.pantry-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+.pantry-card{
+  min-height:72px;padding:7px;border:2px solid #e3d9eb;border-radius:14px;background:#fff;
+  display:grid;place-items:center;align-content:center;gap:2px;opacity:.35;filter:grayscale(.4)
+}
+.pantry-card.learned{opacity:1;filter:none}
+.pantry-card span{font-size:1.35rem}
+.pantry-card small{font-size:.62rem;color:var(--muted);font-weight:900}
+.soup-growth{
+  margin-top:10px;padding:10px;border:2px dashed #d7cce3;border-radius:17px;background:#ffffffb8
+}
+.growth-row{display:flex;justify-content:center;align-items:end;gap:12px;min-height:66px}
+.growth-row span{font-size:2rem;opacity:.28;transform:scale(.86);transition:.2s}
+.growth-row span.on{opacity:1;transform:scale(1)}
+.growth-label{text-align:center;color:var(--muted);font-size:.73rem;margin-top:4px}
+
+/* =========================================================
+   IMPROVED LETTER INTERACTION
+   ========================================================= */
+.letter-tile{
+  border:3px solid transparent;
+}
+.letter-tile:focus-visible{
+  border-color:#fff;
+  outline:4px solid rgba(110,182,223,.5);
+}
+.letter-tile.hint{
+  animation:letterHint .7s ease 2;
+  box-shadow:0 0 0 5px rgba(244,207,98,.45),0 10px 20px rgba(59,40,74,.14)
+}
+@keyframes letterHint{50%{transform:translateY(-8px) scale(1.08)}}
+.drop-tile.locked-correct{pointer-events:none}
+.quiz-options button.correct{background:linear-gradient(135deg,#80dfa3,#43b978)}
+.quiz-options button.wrong{background:linear-gradient(135deg,#ffd9df,#e77d89)}
+.quiz-feedback{min-height:24px;margin-top:8px;color:var(--plum);font-weight:900}
+.quiz-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.accessibility-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.accessibility-row button.active{color:#fff;background:linear-gradient(135deg,var(--mint),var(--blue))}
+body.large-type{font-size:18px}
+body.simple-mode .stats,
+body.simple-mode .level-map,
+body.simple-mode .badge-row,
+body.simple-mode .pantry{display:none!important}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-guide:last-child{grid-column:1/-1}
+  .pantry-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}
+  .creche-links{grid-column:auto}
+  .pantry-grid{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 <body>
+
+<header class="creche-header" aria-label="Crèche Preschool Portal">
+  <div class="creche-mark" aria-hidden="true">🍲</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Portal</p>
+    <div class="creche-title">The Crèche™ · Sight Words Spelling Soup</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link current" href="#" aria-current="page">🍲 Spelling Soup</a>
+  </nav>
+</header>
+
 <main class="app">
   <header class="hero">
     <h1>Pre-K Sight Words — Spelling Soup</h1>
@@ -387,7 +527,30 @@ button.danger{
     </div>
   </header>
 
-  <div class="toolbar">
+  
+<section class="voice-studio" aria-labelledby="voiceTitle">
+  <h2 id="voiceTitle">Choose a Kitchen Reading Friend</h2>
+  <div class="voice-guides" id="voiceGuides">
+    <button type="button" class="voice-guide" data-voice="chef"><span class="emoji">👩‍🍳</span><span class="name">Chef Cherry</span></button>
+    <button type="button" class="voice-guide" data-voice="carrot"><span class="emoji">🥕</span><span class="name">Cora Carrot</span></button>
+    <button type="button" class="voice-guide" data-voice="mouse"><span class="emoji">🐭</span><span class="name">Milo Mouse</span></button>
+    <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Reader Owl</span></button>
+    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+  </div>
+  <div class="voice-controls">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and clear</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">🥄 A little lively</option>
+    </select>
+    <button type="button" id="meetGuideBtn" class="secondary">👋 Meet My Friend</button>
+    <button type="button" id="repeatVoiceBtn" class="secondary">🔁 Repeat Last</button>
+    <button type="button" id="stopVoiceBtn" class="secondary">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+</section>
+
+<div class="toolbar">
     <label class="pill">Level
       <select id="levelSelect"></select>
     </label>
@@ -398,6 +561,12 @@ button.danger{
     <button id="soundBtn" class="secondary">🔊 Sound On</button>
     <button id="resetBtn" class="danger">↺ Reset Progress</button>
   </div>
+
+<div class="accessibility-row">
+  <button id="largeTypeBtn" class="secondary">🔎 Larger Type</button>
+  <button id="simpleModeBtn" class="secondary">🧘 Simple Mode</button>
+  <button id="autoSpeakBtn" class="secondary">🗣️ Auto Read On</button>
+</div>
 
   <section class="stats">
     <div class="stat"><strong id="scoreStat">0</strong>Score</div>
@@ -432,6 +601,18 @@ button.danger{
       <section class="activity">
         <h2>🏆 Level Progress</h2>
         <div class="progress"><div id="progressBar"></div></div>
+
+<div class="soup-growth">
+  <div class="growth-row" id="growthRow">
+    <span data-grow="0">🥄</span>
+    <span data-grow="1">🥕</span>
+    <span data-grow="2">🌽</span>
+    <span data-grow="3">🍲</span>
+    <span data-grow="4">👩‍🍳</span>
+  </div>
+  <div class="growth-label" id="growthLabel">Complete words to fill the soup kitchen.</div>
+</div>
+
         <div class="message" id="progressMessage"></div>
       </section>
 
@@ -442,6 +623,11 @@ button.danger{
     </aside>
   </div>
 
+<section class="pantry">
+  <h2>📚 My Sight-Word Pantry</h2>
+  <div class="pantry-grid" id="pantryGrid"></div>
+</section>
+
   <footer class="site-footer">
     <strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>
     All Rights Reserved.
@@ -451,7 +637,7 @@ button.danger{
 <div class="quiz-overlay" id="quizOverlay">
   <div class="quiz-box">
     <h2 id="quizQuestion">Quick Sight-Word Quiz</h2>
-    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-options" id="quizOptions"></div><div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div><div class="quiz-actions"><button class="secondary" id="quizHearBtn">🔊 Hear Clue</button><button class="secondary" id="quizCloseBtn">Close</button></div>
   </div>
 </div>
 
@@ -559,9 +745,15 @@ button.danger{
     streak:Number(localStorage.getItem("soupStreak")||0),
     stars:Number(localStorage.getItem("soupStars")||0),
     sound:localStorage.getItem("soupSound")!=="false",
+    voice:localStorage.getItem("soupVoice")||"chef",
+    voiceSpeed:localStorage.getItem("soupVoiceSpeed")||"slow",
+    autoSpeak:localStorage.getItem("soupAutoSpeak")!=="false",
+    largeType:localStorage.getItem("soupLargeType")==="true",
+    simpleMode:localStorage.getItem("soupSimpleMode")==="true",
     completed:new Set(JSON.parse(localStorage.getItem("soupCompleted")||"[]")),
     placed:[],
-    finished:false
+    finished:false,
+    quizWrong:0
   };
 
   const $=id=>document.getElementById(id);
@@ -574,23 +766,129 @@ button.danger{
     localStorage.setItem("soupStars",String(state.stars));
     localStorage.setItem("soupSound",String(state.sound));
     localStorage.setItem("soupCompleted",JSON.stringify([...state.completed]));
+    localStorage.setItem("soupVoice",state.voice);
+    localStorage.setItem("soupVoiceSpeed",state.voiceSpeed);
+    localStorage.setItem("soupAutoSpeak",String(state.autoSpeak));
+    localStorage.setItem("soupLargeType",String(state.largeType));
+    localStorage.setItem("soupSimpleMode",String(state.simpleMode));
   }
 
   function currentLevel(){return LEVELS[state.level]}
   function currentWord(){return currentLevel().words[state.index]}
 
-  function speak(text){
-    if(!state.sound || !("speechSynthesis" in window)) return;
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    const voices=speechSynthesis.getVoices();
-    u.voice=voices.find(v=>/child|kid|jenny|samantha|aria|female/i.test(v.name)&&/^en/i.test(v.lang))
-      ||voices.find(v=>/^en/i.test(v.lang))
-      ||voices[0]
+  const GUIDE_VOICES={
+    chef:{name:"Chef Cherry",rate:.82,pitch:1.08,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, little reader. Chef Cherry is ready to stir letters into a bowl of sight words."},
+    carrot:{name:"Cora Carrot",rate:.86,pitch:1.15,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello, word cook. Cora Carrot is ready to find the letters in order."},
+    mouse:{name:"Milo Mouse",rate:.79,pitch:1.04,match:/daniel|alex|david|fred|george/i,greeting:"Hello, reading friend. Milo Mouse is ready for a tiny bowl of spelling practice."},
+    owl:{name:"Reader Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful reader. Reader Owl is ready to listen to every sound and letter."},
+    rainbow:{name:"Rainbow Rae",rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright reader. Rainbow Rae is ready for a colorful spelling soup adventure."}
+  };
+  const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+  let availableVoices=[],speechToken=0,lastSpoken="";
+
+  function refreshVoices(){
+    if(!("speechSynthesis" in window)) return;
+    availableVoices=speechSynthesis.getVoices()||[];
+    const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.chef;
+    $("voiceStatus").textContent=availableVoices.length?`${g.name} is ready.`:"Loading a friendly voice…";
+  }
+
+  function chooseVoice(){
+    refreshVoices();
+    const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.chef;
+    const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+    const pool=english.length?english:availableVoices;
+    return pool.find(v=>g.match.test(v.name))
+      ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+      ||pool[0]
       ||null;
-    u.rate=.84;
-    u.pitch=1.12;
+  }
+
+  function stopSpeaking(message="Voice stopped."){
+    speechToken++;
+    if("speechSynthesis" in window) speechSynthesis.cancel();
+    document.querySelector(".kitchen-card")?.classList.remove("speaking");
+    $("voiceStatus").textContent=message;
+  }
+
+  function speak(text,{preview=false,target=null,spell=false}={}){
+    if(!state.sound || !("speechSynthesis" in window)) return;
+    const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.chef;
+    let phrase=preview?g.greeting:String(text||"").trim();
+    if(spell) phrase=String(text||"").split("").join(", ");
+    if(!phrase) return;
+
+    stopSpeaking("");
+    const token=++speechToken;
+    lastSpoken=phrase;
+    const u=new SpeechSynthesisUtterance(phrase);
+    const voice=chooseVoice();
+    if(voice)u.voice=voice;
+    u.lang=voice?.lang||"en-US";
+    u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+    u.pitch=g.pitch;
+    u.volume=1;
+    u.onstart=()=>{if(target)target.classList.add("speaking");$("voiceStatus").textContent=`${g.name} is reading.`};
+    u.onend=()=>{if(token!==speechToken)return;if(target)target.classList.remove("speaking");$("voiceStatus").textContent="Ready for another word!"};
+    u.onerror=()=>{if(token!==speechToken)return;if(target)target.classList.remove("speaking");$("voiceStatus").textContent="The voice had a little hiccup."};
     speechSynthesis.speak(u);
+  }
+
+
+  function updateVoiceButtons(){
+    document.querySelectorAll("[data-voice]").forEach(b=>{
+      const active=b.dataset.voice===state.voice;
+      b.classList.toggle("active",active);
+      b.setAttribute("aria-pressed",String(active));
+    });
+    $("voiceSpeed").value=state.voiceSpeed;
+  }
+
+  function renderPantry(){
+    const allWords=LEVELS.flatMap(level=>level.words);
+    $("pantryGrid").innerHTML=allWords.map(item=>`
+      <button class="pantry-card ${state.completed.has(item.id)?"learned":""}" data-pantry="${item.id}" ${state.completed.has(item.id)?"":"disabled"}>
+        <span>${state.completed.has(item.id)?item.img:"❔"}</span>
+        <small>${state.completed.has(item.id)?item.word.toUpperCase():"Keep cooking"}</small>
+      </button>`).join("");
+  }
+
+  function updateGrowth(){
+    const ids=currentLevel().words.map(w=>w.id);
+    const done=ids.filter(id=>state.completed.has(id)).length;
+    const ratio=done/ids.length;
+    const stage=Math.min(4,Math.floor(ratio*5));
+    document.querySelectorAll("[data-grow]").forEach(el=>el.classList.toggle("on",Number(el.dataset.grow)<=stage));
+    $("growthLabel").textContent=done===ids.length
+      ?"This soup kitchen is full and ready to celebrate!"
+      :`${done} of ${ids.length} words completed in this level.`;
+  }
+
+  function updateAccessibility(){
+    document.body.classList.toggle("large-type",state.largeType);
+    document.body.classList.toggle("simple-mode",state.simpleMode);
+    $("largeTypeBtn").classList.toggle("active",state.largeType);
+    $("simpleModeBtn").classList.toggle("active",state.simpleMode);
+    $("autoSpeakBtn").classList.toggle("active",state.autoSpeak);
+    $("autoSpeakBtn").textContent=state.autoSpeak?"🗣️ Auto Read On":"🤫 Auto Read Off";
+  }
+
+  function currentPrompt(){
+    const item=currentWord();
+    return `${item.word}. ${item.prompt}`;
+  }
+
+  function hintCorrectLetter(){
+    const item=currentWord();
+    const pos=state.placed.length;
+    const expected=item.word.toLowerCase()[pos];
+    const buttons=[...document.querySelectorAll(".letter-tile:not(.used)")];
+    buttons.forEach(b=>b.classList.remove("hint"));
+    const matching=buttons.find(b=>b.dataset.letter===expected);
+    if(matching){
+      matching.classList.add("hint");
+      setTimeout(()=>matching.classList.remove("hint"),1700);
+    }
   }
 
   function shuffle(array){
@@ -640,6 +938,8 @@ button.danger{
       done===ids.length
         ?"This soup level is complete! 🏆"
         :`${ids.length-done} sight words remain in this level.`;
+    updateGrowth();
+    renderPantry();
   }
 
   function renderLevelControls(){
@@ -687,9 +987,9 @@ button.danger{
 
     const item=currentWord();
     $("wordImg").textContent=item.img;
-    $("wordTitle").textContent="Spell the sight word";
+    $("wordTitle").textContent=`Build the word: ${item.word.toUpperCase()}`;
     $("clue").textContent=item.prompt;
-    $("message").textContent="Tap the letters in order.";
+    $("message").textContent="Tap or use Tab and Enter to choose the letters in order.";
 
     const dz=$("dropzone");
     dz.innerHTML="";
@@ -720,6 +1020,7 @@ button.danger{
     renderBadges();
     updateStats();
     save();
+    if(state.autoSpeak)setTimeout(()=>speak(currentPrompt(),{target:document.querySelector(".kitchen-card")}),220);
   }
 
   function highlightNext(){
@@ -742,14 +1043,15 @@ button.danger{
 
     if(letter===item.word.toLowerCase()[pos]){
       tile.classList.add("right");
-      speak(letter);
+      speak(letter,{target:document.querySelector(".kitchen-card")});
       state.score+=2;
       $("message").textContent="Correct letter!";
     }else{
       tile.classList.add("wrong");
       state.streak=0;
-      $("message").textContent="That letter does not fit there. Try again.";
-      speak("Try again");
+      $("message").textContent="Nice try. That letter does not fit here. Look for the next sound.";
+      speak("Nice try. Look for the next letter.",{target:document.querySelector(".kitchen-card")});
+      hintCorrectLetter();
       updateStats();
       save();
       setTimeout(()=>removeFrom(pos),650);
@@ -785,8 +1087,8 @@ button.danger{
     state.streak++;
     state.stars+=3;
     state.completed.add(item.id);
-    $("message").textContent=`Wonderful! You spelled ${item.word.toUpperCase()}!`;
-    speak(`Wonderful. You spelled ${item.word}.`);
+    $("message").textContent=`Wonderful! You spelled ${item.word.toUpperCase()}! ${item.prompt}`;
+    speak(`Wonderful. You spelled ${item.word}. ${item.prompt}`,{target:document.querySelector(".kitchen-card")});
     reward($("wordImg"),"🌟");
     updateStats();
     renderBadges();
@@ -799,24 +1101,50 @@ button.danger{
     const correct=item.word.toLowerCase();
     const pool=currentLevel().words.map(w=>w.word.toLowerCase()).filter(w=>w!==correct);
     const options=shuffle([correct,...shuffle(pool).slice(0,3)]);
+    state.quizWrong=0;
     $("quizQuestion").textContent=`Which word matches this clue: “${item.prompt}”`;
+    $("quizFeedback").textContent="";
     $("quizOptions").innerHTML="";
+
     options.forEach(opt=>{
       const b=document.createElement("button");
-      b.textContent=opt;
+      b.textContent=opt.toUpperCase();
+      b.dataset.word=opt;
       b.onclick=()=>{
         if(opt===correct){
+          [...$("quizOptions").children].forEach(x=>x.disabled=true);
+          b.classList.add("correct");
           state.score+=5;
           state.stars++;
+          $("quizFeedback").textContent=`Correct! ${item.word.toUpperCase()} matches the clue.`;
           reward(b,"⭐");
-          speak("Correct");
+          speak(`Correct. ${item.word}. ${item.prompt}`,{target:$("quizOverlay").querySelector(".quiz-box")});
+          save();
+          setTimeout(()=>{
+            $("quizOverlay").classList.remove("open");
+            nextWord();
+          },1300);
         }else{
+          state.quizWrong++;
+          b.classList.add("wrong");
+          b.disabled=true;
           state.streak=0;
-          speak("Good try");
+          if(state.quizWrong<2){
+            $("quizFeedback").textContent="Good try. Listen to the clue and try once more.";
+            speak("Good try. Listen to the clue and try once more.");
+          }else{
+            [...$("quizOptions").children].forEach(x=>x.disabled=true);
+            const right=[...$("quizOptions").children].find(x=>x.dataset.word===correct);
+            right?.classList.add("correct");
+            $("quizFeedback").textContent=`The matching word is ${item.word.toUpperCase()}.`;
+            speak(`The matching word is ${item.word}. ${item.prompt}`);
+            save();
+            setTimeout(()=>{
+              $("quizOverlay").classList.remove("open");
+              nextWord();
+            },1900);
+          }
         }
-        save();
-        $("quizOverlay").classList.remove("open");
-        nextWord();
       };
       $("quizOptions").appendChild(b);
     });
@@ -832,14 +1160,72 @@ button.danger{
     render();
   }
 
+
+  $("voiceGuides").onclick=e=>{
+    const b=e.target.closest("[data-voice]");
+    if(!b)return;
+    state.voice=b.dataset.voice;
+    save();
+    updateVoiceButtons();
+    $("voiceStatus").textContent=`${GUIDE_VOICES[state.voice].name} selected.`;
+  };
+
+  $("voiceSpeed").onchange=e=>{
+    state.voiceSpeed=e.target.value;
+    save();
+    $("voiceStatus").textContent="Reading speed saved.";
+  };
+
+  $("meetGuideBtn").onclick=()=>speak("",{preview:true});
+  $("repeatVoiceBtn").onclick=()=>lastSpoken
+    ?speak(lastSpoken,{target:document.querySelector(".kitchen-card")})
+    :speak(currentPrompt(),{target:document.querySelector(".kitchen-card")});
+  $("stopVoiceBtn").onclick=()=>stopSpeaking();
+
+  $("largeTypeBtn").onclick=()=>{
+    state.largeType=!state.largeType;
+    save();
+    updateAccessibility();
+  };
+
+  $("simpleModeBtn").onclick=()=>{
+    state.simpleMode=!state.simpleMode;
+    save();
+    updateAccessibility();
+  };
+
+  $("autoSpeakBtn").onclick=()=>{
+    state.autoSpeak=!state.autoSpeak;
+    save();
+    updateAccessibility();
+  };
+
+  $("pantryGrid").onclick=e=>{
+    const b=e.target.closest("[data-pantry]");
+    if(!b||b.disabled)return;
+    const item=LEVELS.flatMap(level=>level.words).find(w=>w.id===b.dataset.pantry);
+    speak(`${item.word}. ${item.prompt}`,{target:document.querySelector(".pantry")});
+  };
+
+  $("quizHearBtn").onclick=()=>{
+    const item=currentWord();
+    speak(item.prompt,{target:$("quizOverlay").querySelector(".quiz-box")});
+  };
+
+  $("quizCloseBtn").onclick=()=>{
+    $("quizOverlay").classList.remove("open");
+  };
+
   $("hearBtn").onclick=()=>{
     const item=currentWord();
-    speak(`${item.word}. ${item.prompt}`);
+    speak(`${item.word}. ${item.prompt}`,{target:document.querySelector(".kitchen-card")});
   };
   $("hintBtn").onclick=()=>{
     const item=currentWord();
-    $("clue").textContent=`Hint: ${item.prompt} It begins with ${item.word[0].toUpperCase()}.`;
-    speak(item.prompt);
+    const nextLetter=item.word.toLowerCase()[state.placed.length]||item.word[0].toLowerCase();
+    $("clue").textContent=`Hint: ${item.prompt} The next letter is ${nextLetter.toUpperCase()}.`;
+    speak(`${item.prompt} The next letter is ${nextLetter}.`,{target:document.querySelector(".kitchen-card")});
+    hintCorrectLetter();
   };
   $("clearBtn").onclick=()=>{
     state.placed.forEach(item=>item.button.classList.remove("used"));
@@ -855,6 +1241,7 @@ button.danger{
   $("nextBtn").onclick=nextWord;
   $("soundBtn").onclick=()=>{
     state.sound=!state.sound;
+    if(!state.sound)stopSpeaking("");
     updateStats();
     save();
   };
@@ -871,11 +1258,32 @@ button.danger{
     state.streak=0;
     state.stars=0;
     state.completed.clear();
+    state.quizWrong=0;
     save();
     render();
   };
 
+  if("speechSynthesis" in window){
+    refreshVoices();
+    speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+    speechSynthesis.onvoiceschanged=refreshVoices;
+    setTimeout(refreshVoices,250);
+    setTimeout(refreshVoices,900);
+  }else{
+    $("meetGuideBtn").disabled=true;
+    $("repeatVoiceBtn").disabled=true;
+    $("stopVoiceBtn").disabled=true;
+    $("hearBtn").disabled=true;
+    $("quizHearBtn").disabled=true;
+    $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+  }
+
+  updateVoiceButtons();
+  updateAccessibility();
+  renderPantry();
   render();
+
+  window.addEventListener("beforeunload",()=>stopSpeaking(""));
 })();
 </script>
 </body>
