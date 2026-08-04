@@ -28,7 +28,7 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--ink);
-  font-family:"Comic Sans MS","Trebuchet MS",system-ui,sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:
     radial-gradient(circle at 12% 12%,rgba(255,255,255,.92) 0 5%,transparent 6%),
     radial-gradient(circle at 88% 14%,rgba(255,255,255,.74) 0 4%,transparent 5%),
@@ -70,16 +70,19 @@ button{touch-action:manipulation}
   box-shadow:var(--shadow);
 }
 .hero h1{
-  margin:0;
-  font-size:clamp(2.3rem,7vw,5rem);
-  line-height:.96;
-  letter-spacing:-.05em;
+  margin:0 auto 8px;
+  max-width:920px;
+  padding:0 .08em;
+  font-size:clamp(2.35rem,6.3vw,4.85rem);
+  line-height:1.08;
+  letter-spacing:-.02em;
 }
 .hero p{
   margin:8px auto 0;
-  max-width:800px;
+  max-width:840px;
   color:#fff4fb;
-  line-height:1.6;
+  line-height:1.72;
+  font-size:1.02rem;
 }
 .hero-icons{
   display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px;
@@ -284,10 +287,171 @@ button.danger{background:white;color:var(--bad);border:1px solid #efc7cd}
 @media(max-width:900px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.level-grid{grid-template-columns:1fr}.shape-grid{grid-template-columns:repeat(2,1fr)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important}}
+
+/* =========================================================
+   CRÈCHE PRESCHOOL PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1160px,calc(100% - 22px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(66,46,92,.14);
+  position:relative;
+  z-index:2;
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#ffd75d,#78d6ae);
+  border:3px solid #fff;font-size:1.9rem;
+}
+.creche-eyebrow{margin:0;color:#d84f7a;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:#5a4692;font-size:clamp(1.02rem,2.3vw,1.32rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #ded4e9;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;background:linear-gradient(135deg,#7c65c7,#e977a9);border-color:#fff}
+
+/* =========================================================
+   VOICE STUDIO
+   ========================================================= */
+.voice-studio{
+  margin:14px 0;
+  padding:13px;
+  border:2px solid #e2d8eb;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff);
+  box-shadow:0 10px 24px rgba(66,46,92,.08);
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;border:2px solid #ded4e8;
+  border-radius:16px;background:#fff;color:var(--plum);display:grid;place-items:center;
+  align-content:center;gap:2px;font-weight:900;box-shadow:none
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.68rem}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose))}
+.voice-controls{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{border:2px solid #ded4e8}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.challenge-card.speaking,.activity.speaking{box-shadow:0 0 0 5px rgba(255,209,102,.33)}
+
+/* =========================================================
+   GROWING SHAPE GARDEN
+   ========================================================= */
+.garden-progress{
+  margin:0 0 14px;
+  padding:13px;
+  border:2px solid #e2d8eb;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#f3ffe9,#eef9ff);
+  box-shadow:0 10px 24px rgba(66,46,92,.07);
+}
+.garden-progress h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.garden-bed{
+  min-height:105px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:10px;
+  border-radius:17px;
+  background:linear-gradient(180deg,#dff5ff 0 60%,#d9b775 61% 100%);
+  border:2px solid #cfe0e9;
+}
+.garden-item{
+  width:58px;min-height:74px;display:grid;place-items:end center;text-align:center;
+  opacity:.28;filter:grayscale(.4);transform:scale(.9);transition:.2s ease
+}
+.garden-item.grown{opacity:1;filter:none;transform:scale(1)}
+.garden-item span{font-size:2.1rem}
+.garden-item small{font-size:.58rem;font-weight:900;color:#5b4a63;background:#ffffffcc;padding:2px 5px;border-radius:999px}
+.garden-label{text-align:center;color:var(--muted);font-size:.76rem;margin-top:7px}
+
+/* =========================================================
+   SHAPE PASSPORT / COLLECTION
+   ========================================================= */
+.shape-passport{
+  margin-top:14px;
+  padding:13px;
+  border:2px solid #e2d8eb;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff7dc);
+}
+.shape-passport h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.shape-passport-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+.passport-shape{
+  min-height:78px;padding:7px;border:2px solid #e3d9eb;border-radius:14px;background:#fff;
+  display:grid;place-items:center;align-content:center;gap:3px;opacity:.36;filter:grayscale(.4)
+}
+.passport-shape.mastered{opacity:1;filter:none}
+.passport-shape span{font-size:1.4rem}
+.passport-shape small{font-size:.62rem;color:var(--muted);font-weight:900}
+
+/* =========================================================
+   PRE-K ACCURACY & TRACING
+   ========================================================= */
+.shape-property{
+  display:block;
+  margin-top:4px;
+  color:var(--muted);
+  font-size:.72rem;
+  line-height:1.35;
+}
+.trace-meter{
+  margin-top:8px;height:10px;border-radius:999px;overflow:hidden;background:#e9e3ed
+}
+.trace-meter>div{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--sun),var(--mint));transition:.25s}
+.trace-score{font-size:.72rem;color:var(--muted);text-align:center;margin-top:5px}
+
+.shape-card.hint{outline:5px solid #ffd166;outline-offset:2px}
+.shape-card.pulse .shape-visual,.shape-card.pulse .object-emoji{animation:answerPulse .7s ease 2}
+@keyframes answerPulse{50%{transform:scale(1.16)}}
+.shape-card:disabled{cursor:default}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-guide:last-child{grid-column:1/-1}
+  .shape-passport-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}
+  .creche-links{grid-column:auto}
+  .shape-passport-grid{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 <body>
 <div class="sky" aria-hidden="true"><span>⭐</span><span>🌈</span><span>🔺</span><span>✨</span><span>🔵</span></div>
+
+
+<header class="creche-header" aria-label="Crèche Preschool Portal">
+  <div class="creche-mark" aria-hidden="true">🌻</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Portal</p>
+    <div class="creche-title">The Crèche™ · Shape Garden Academy</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link current" href="#" aria-current="page">🌻 Shape Garden</a>
+  </nav>
+</header>
 
 <main class="app">
   <header class="hero">
@@ -296,7 +460,36 @@ button.danger{background:white;color:var(--bad);border:1px solid #efc7cd}
     <div class="hero-icons"><span>🔵</span><span>🔺</span><span>⭐</span><span>💜</span></div>
   </header>
 
-  <div class="toolbar">
+  
+<section class="voice-studio" aria-labelledby="voiceTitle">
+  <h2 id="voiceTitle">Choose a Garden Guide</h2>
+  <div class="voice-guides" id="voiceGuides">
+    <button type="button" class="voice-guide" data-voice="sunflower"><span class="emoji">🌻</span><span class="name">Sunny Sunflower</span></button>
+    <button type="button" class="voice-guide" data-voice="bee"><span class="emoji">🐝</span><span class="name">Buzzy Bee</span></button>
+    <button type="button" class="voice-guide" data-voice="clover"><span class="emoji">🐛</span><span class="name">Clover Caterpillar</span></button>
+    <button type="button" class="voice-guide" data-voice="ollie"><span class="emoji">🦉</span><span class="name">Ollie Owl</span></button>
+    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+  </div>
+  <div class="voice-controls">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and clear</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">🌼 A little lively</option>
+    </select>
+    <button type="button" id="meetGuideBtn" class="secondary">👋 Meet My Guide</button>
+    <button type="button" id="repeatVoiceBtn" class="secondary">🔁 Repeat Last</button>
+    <button type="button" id="stopVoiceBtn" class="secondary">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+</section>
+
+<section class="garden-progress">
+  <h2>🌱 My Growing Shape Garden</h2>
+  <div class="garden-bed" id="gardenBed"></div>
+  <div class="garden-label" id="gardenLabel">Master shapes to help the garden grow.</div>
+</section>
+
+<div class="toolbar">
     <label class="pill">Activity
       <select id="modeSelect">
         <option value="find">Find the Shape</option>
@@ -345,7 +538,7 @@ button.danger{background:white;color:var(--bad);border:1px solid #efc7cd}
           <button id="checkTrace">✓ Check Trace</button>
           <button id="guideBtn" class="secondary">👁 Guide On</button>
         </div>
-        <div class="feedback" id="traceMessage">Trace the current shape.</div>
+        <div class="feedback" id="traceMessage">Trace the current shape.</div><div class="trace-meter"><div id="traceMeterBar"></div></div><div class="trace-score" id="traceScore">Guide coverage: 0%</div>
       </section>
 
       <section class="activity">
@@ -377,18 +570,18 @@ button.danger{background:white;color:var(--bad);border:1px solid #efc7cd}
 "use strict";
 
 const SHAPES = [
-  {id:"circle",name:"Circle",sides:0,object:"⚽",example:"ball"},
-  {id:"square",name:"Square",sides:4,object:"🪟",example:"window"},
-  {id:"triangle",name:"Triangle",sides:3,object:"🍕",example:"pizza slice"},
-  {id:"rectangle",name:"Rectangle",sides:4,object:"🚪",example:"door"},
-  {id:"oval",name:"Oval",sides:0,object:"🥚",example:"egg"},
-  {id:"diamond",name:"Diamond",sides:4,object:"🔶",example:"kite shape"},
-  {id:"star",name:"Star",sides:10,object:"⭐",example:"star"},
-  {id:"heart",name:"Heart",sides:0,object:"💗",example:"heart symbol"},
-  {id:"pentagon",name:"Pentagon",sides:5,object:"🏠",example:"house outline"},
-  {id:"hexagon",name:"Hexagon",sides:6,object:"🍯",example:"honeycomb"},
-  {id:"semicircle",name:"Semicircle",sides:1,object:"🌅",example:"half sun"},
-  {id:"crescent",name:"Crescent",sides:0,object:"🌙",example:"moon"}
+  {id:"circle",name:"Circle",sides:0,object:"⚽",example:"ball",property:"no straight sides and no corners",countLabel:"0 straight sides"},
+  {id:"square",name:"Square",sides:4,object:"🪟",example:"window",property:"4 equal straight sides and 4 corners",countLabel:"4 straight sides"},
+  {id:"triangle",name:"Triangle",sides:3,object:"🍕",example:"pizza slice",property:"3 straight sides and 3 corners",countLabel:"3 straight sides"},
+  {id:"rectangle",name:"Rectangle",sides:4,object:"🚪",example:"door",property:"4 straight sides and 4 corners",countLabel:"4 straight sides"},
+  {id:"oval",name:"Oval",sides:0,object:"🥚",example:"egg",property:"one smooth curved edge and no corners",countLabel:"0 straight sides"},
+  {id:"diamond",name:"Diamond",sides:4,object:"🔶",example:"kite shape",property:"4 straight sides and 4 corners",countLabel:"4 straight sides"},
+  {id:"star",name:"Star",sides:10,object:"⭐",example:"star",property:"5 points and 10 straight edges",countLabel:"5 points"},
+  {id:"heart",name:"Heart",sides:0,object:"💗",example:"heart symbol",property:"curved edges and one point",countLabel:"1 point"},
+  {id:"pentagon",name:"Pentagon",sides:5,object:"🏠",example:"house outline",property:"5 straight sides and 5 corners",countLabel:"5 straight sides"},
+  {id:"hexagon",name:"Hexagon",sides:6,object:"🍯",example:"honeycomb",property:"6 straight sides and 6 corners",countLabel:"6 straight sides"},
+  {id:"semicircle",name:"Semicircle",sides:1,object:"🌅",example:"half sun",property:"1 straight side and 1 curved edge",countLabel:"1 straight side"},
+  {id:"crescent",name:"Crescent",sides:0,object:"🌙",example:"moon",property:"2 curved edges and no corners",countLabel:"0 straight sides"}
 ];
 
 const LEVELS = [
@@ -408,7 +601,11 @@ const state = {
   mastered:new Set(JSON.parse(localStorage.getItem("shapeGardenMastered")||"[]")),
   current:null,
   locked:false,
-  guide:true
+  guide:true,
+  voice:localStorage.getItem("shapeGardenVoice")||"sunflower",
+  voiceSpeed:localStorage.getItem("shapeGardenVoiceSpeed")||"slow",
+  autoSpeak:localStorage.getItem("shapeGardenAutoSpeak")!=="false",
+  attempts:0
 };
 
 const $=id=>document.getElementById(id);
@@ -416,6 +613,8 @@ const canvas=$("traceCanvas");
 const ctx=canvas.getContext("2d");
 let drawing=false;
 let tracePoints=0;
+let traceSamples=[];
+let guideSamples=[];
 
 function save(){
   localStorage.setItem("shapeGardenLevel",String(state.level));
@@ -425,17 +624,177 @@ function save(){
   localStorage.setItem("shapeGardenStars",String(state.stars));
   localStorage.setItem("shapeGardenRound",String(state.round));
   localStorage.setItem("shapeGardenMastered",JSON.stringify([...state.mastered]));
+  localStorage.setItem("shapeGardenVoice",state.voice);
+  localStorage.setItem("shapeGardenVoiceSpeed",state.voiceSpeed);
+  localStorage.setItem("shapeGardenAutoSpeak",String(state.autoSpeak));
 }
 
-function speak(text){
+const GUIDE_VOICES={
+  sunflower:{name:"Sunny Sunflower",rate:.82,pitch:1.1,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, little gardener. Sunny Sunflower is ready to grow a garden full of shapes."},
+  bee:{name:"Buzzy Bee",rate:.86,pitch:1.17,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Buzz buzz. Buzzy Bee is ready to find shapes and visit the garden."},
+  clover:{name:"Clover Caterpillar",rate:.78,pitch:1.05,match:/samantha|aria|jenny|ava|karen|moira/i,greeting:"Hello, shape friend. Clover Caterpillar is ready to learn one little shape at a time."},
+  ollie:{name:"Ollie Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful observer. Ollie Owl is ready to look at sides, corners, curves, and points."},
+  rainbow:{name:"Rainbow Rae",rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright learner. Rainbow Rae is ready for a colorful shape garden adventure."}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+let availableVoices=[],speechToken=0,lastSpoken="";
+
+function refreshVoices(){
   if(!("speechSynthesis" in window)) return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  const voices=speechSynthesis.getVoices();
-  u.voice=voices.find(v=>/child|kid|jenny|samantha|aria|female/i.test(v.name)&&/^en/i.test(v.lang))
-    ||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;
-  u.rate=.86;u.pitch=1.1;
+  availableVoices=speechSynthesis.getVoices()||[];
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.sunflower;
+  $("voiceStatus").textContent=availableVoices.length?`${g.name} is ready.`:"Loading a friendly voice…";
+}
+function chooseVoice(){
+  refreshVoices();
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.sunflower;
+  const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+  const pool=english.length?english:availableVoices;
+  return pool.find(v=>g.match.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null;
+}
+function stopSpeaking(message="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis" in window) speechSynthesis.cancel();
+  document.querySelectorAll(".challenge-card,.activity").forEach(el=>el.classList.remove("speaking"));
+  $("voiceStatus").textContent=message;
+}
+function speak(text,{preview=false,target=null}={}){
+  if(!("speechSynthesis" in window)) return;
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.sunflower;
+  const phrase=preview?g.greeting:String(text||"").trim();
+  if(!phrase) return;
+  stopSpeaking("");
+  const token=++speechToken;
+  lastSpoken=phrase;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const voice=chooseVoice();
+  if(voice)u.voice=voice;
+  u.lang=voice?.lang||"en-US";
+  u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=g.pitch;
+  u.volume=1;
+  u.onstart=()=>{if(target)target.classList.add("speaking");$("voiceStatus").textContent=`${g.name} is reading.`};
+  u.onend=()=>{if(token!==speechToken)return;if(target)target.classList.remove("speaking");$("voiceStatus").textContent="Ready for another shape!"};
+  u.onerror=()=>{if(token!==speechToken)return;if(target)target.classList.remove("speaking");$("voiceStatus").textContent="The voice had a little hiccup."};
   speechSynthesis.speak(u);
+}
+
+
+const GARDEN_REWARDS={
+  circle:["🌻","Sunflower"],square:["🪨","Stepping Stone"],triangle:["🌲","Little Pine"],
+  rectangle:["🚪","Garden Gate"],oval:["🌱","Oval Seed"],diamond:["🪁","Garden Kite"],
+  star:["⭐","Star Flower"],heart:["💗","Kindness Flower"],pentagon:["🏡","Garden House"],
+  hexagon:["🍯","Honeycomb"],semicircle:["🌅","Half-Sun Bed"],crescent:["🌙","Moon Garden"]
+};
+
+function updateVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(b=>{
+    const active=b.dataset.voice===state.voice;
+    b.classList.toggle("active",active);
+    b.setAttribute("aria-pressed",String(active));
+  });
+  $("voiceSpeed").value=state.voiceSpeed;
+}
+function renderGarden(){
+  $("gardenBed").innerHTML=SHAPES.map(s=>{
+    const reward=GARDEN_REWARDS[s.id]||["🌼",s.name];
+    return `<div class="garden-item ${state.mastered.has(s.id)?"grown":""}">
+      <span>${state.mastered.has(s.id)?reward[0]:"🌱"}</span>
+      <small>${state.mastered.has(s.id)?reward[1]:s.name}</small>
+    </div>`;
+  }).join("");
+  $("gardenLabel").textContent=state.mastered.size===SHAPES.length
+    ?"Your whole shape garden is blooming!"
+    :`${state.mastered.size} of ${SHAPES.length} garden discoveries are growing.`;
+}
+function renderPassport(){
+  $("shapePassportGrid").innerHTML=SHAPES.map(s=>`
+    <button class="passport-shape ${state.mastered.has(s.id)?"mastered":""}" data-passport="${s.id}" ${state.mastered.has(s.id)?"":"disabled"}>
+      <span>${state.mastered.has(s.id)?s.object:"❔"}</span>
+      <small>${state.mastered.has(s.id)?s.name:"Keep exploring"}</small>
+    </button>`).join("");
+}
+function shapeFact(s){
+  return `${s.name}. ${s.property}. A ${s.example} can match this shape.`;
+}
+function distance(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+function sampleCurrentGuide(){
+  const rect=canvas.getBoundingClientRect();
+  const off=document.createElement("canvas");
+  off.width=Math.max(1,Math.round(rect.width));
+  off.height=Math.max(1,Math.round(rect.height));
+  const octx=off.getContext("2d");
+  const oldCtx=ctx;
+  guideSamples=[];
+  const steps=240;
+  const cx=rect.width/2,cy=rect.height/2,r=Math.min(rect.width,rect.height)*.3;
+  function push(x,y){guideSamples.push({x,y})}
+  const shape=state.current?.id;
+  if(!shape)return;
+  if(shape==="circle"||shape==="oval"){
+    const rx=shape==="oval"?r*1.25:r,ry=shape==="oval"?r*.8:r;
+    for(let i=0;i<steps;i++){const a=i*2*Math.PI/steps;push(cx+Math.cos(a)*rx,cy+Math.sin(a)*ry)}
+  }else if(["square","rectangle","triangle","diamond","pentagon","hexagon","star","semicircle","crescent","heart"].includes(shape)){
+    // Use canvas path sampling by drawing the same geometry to an offscreen mask.
+    octx.save();
+    octx.strokeStyle="#000";octx.lineWidth=12;octx.lineCap="round";octx.lineJoin="round";
+    octx.beginPath();
+    const rr=r;
+    if(shape==="square"||shape==="rectangle"){
+      const ww=shape==="rectangle"?rr*2.5:rr*2,hh=shape==="rectangle"?rr*1.35:rr*2;
+      octx.rect(cx-ww/2,cy-hh/2,ww,hh);
+    }else if(shape==="triangle"){
+      octx.moveTo(cx,cy-rr);octx.lineTo(cx+rr,cy+rr);octx.lineTo(cx-rr,cy+rr);octx.closePath();
+    }else if(shape==="diamond"){
+      octx.moveTo(cx,cy-rr);octx.lineTo(cx+rr,cy);octx.lineTo(cx,cy+rr);octx.lineTo(cx-rr,cy);octx.closePath();
+    }else if(shape==="pentagon"||shape==="hexagon"){
+      const sides=shape==="pentagon"?5:6;
+      for(let i=0;i<sides;i++){const a=-Math.PI/2+i*2*Math.PI/sides,x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;i?octx.lineTo(x,y):octx.moveTo(x,y)}
+      octx.closePath();
+    }else if(shape==="star"){
+      for(let i=0;i<10;i++){const rad=i%2===0?rr:rr*.45,a=-Math.PI/2+i*Math.PI/5,x=cx+Math.cos(a)*rad,y=cy+Math.sin(a)*rad;i?octx.lineTo(x,y):octx.moveTo(x,y)}
+      octx.closePath();
+    }else if(shape==="heart"){
+      octx.moveTo(cx,cy+rr*.85);
+      octx.bezierCurveTo(cx-rr*1.2,cy,cx-rr*.95,cy-rr*.9,cx,cy-rr*.25);
+      octx.bezierCurveTo(cx+rr*.95,cy-rr*.9,cx+rr*1.2,cy,cx,cy+rr*.85);
+    }else if(shape==="semicircle"){
+      octx.arc(cx,cy,rr,Math.PI,0);octx.lineTo(cx-rr,cy);octx.closePath();
+    }else if(shape==="crescent"){
+      octx.arc(cx,cy,rr,-Math.PI/2,Math.PI/2);
+      octx.arc(cx+rr*.4,cy,rr*.82,Math.PI/2,-Math.PI/2,true);octx.closePath();
+    }
+    octx.stroke();octx.restore();
+    const data=octx.getImageData(0,0,off.width,off.height).data;
+    for(let y=0;y<off.height;y+=4)for(let x=0;x<off.width;x+=4){
+      if(data[(y*off.width+x)*4+3]>40)guideSamples.push({x,y});
+    }
+  }
+}
+function traceQuality(){
+  if(!traceSamples.length||!guideSamples.length)return{coverage:0,closeness:0,score:0};
+  const tolerance=22;
+  let near=0;
+  for(const p of traceSamples){
+    let best=Infinity;
+    for(let i=0;i<guideSamples.length;i+=3){const d=distance(p,guideSamples[i]);if(d<best)best=d;if(best<6)break}
+    if(best<=tolerance)near++;
+  }
+  let covered=0;
+  for(let i=0;i<guideSamples.length;i+=6){
+    let hit=false;
+    for(let j=0;j<traceSamples.length;j+=2){if(distance(guideSamples[i],traceSamples[j])<=tolerance){hit=true;break}}
+    if(hit)covered++;
+  }
+  const closeness=near/traceSamples.length;
+  const coverage=covered/Math.max(1,Math.ceil(guideSamples.length/6));
+  return{coverage,closeness,score:coverage*.68+closeness*.32};
+}
+function updateTraceMeter(){
+  const q=traceQuality();
+  const pct=Math.round(q.score*100);
+  $("traceMeterBar").style.width=`${pct}%`;
+  $("traceScore").textContent=`Guide coverage: ${pct}%`;
 }
 
 function shuffle(a){
@@ -452,7 +811,7 @@ function questionText(){
   const s=state.current;
   if(state.mode==="find") return `Can you find the ${s.name.toLowerCase()}?`;
   if(state.mode==="object") return `Which shape matches a ${s.example}?`;
-  if(state.mode==="sides") return `Which shape has ${s.sides} ${s.sides===1?"side":"sides"}?`;
+  if(state.mode==="sides") return `Which shape matches this clue: ${s.property}?`;
   return `Which shape is called ${s.name}?`;
 }
 
@@ -460,6 +819,7 @@ function renderRound(){
   const available=pool();
   state.current=available[Math.floor(Math.random()*available.length)];
   state.locked=false;
+  state.attempts=0;
   $("question").textContent=questionText();
   $("feedback").textContent="";
   $("modeSelect").value=state.mode;
@@ -477,7 +837,7 @@ function renderRound(){
     if(state.mode==="object"){
       card.innerHTML=`<div class="object-emoji">${shape.object}</div><div class="shape-name">${shape.example}</div>`;
     }else if(state.mode==="sides"){
-      card.innerHTML=`<div class="shape-visual ${shape.id}"></div><div class="shape-name">${shape.sides} ${shape.sides===1?"side":"sides"}</div>`;
+      card.innerHTML=`<div class="shape-visual ${shape.id}"></div><div class="shape-name">${shape.countLabel}</div><span class="shape-property">${shape.property}</span>`;
     }else{
       card.innerHTML=`<div class="shape-visual ${shape.id}"></div><div class="shape-name">${state.mode==="name"?shape.name:""}</div>`;
     }
@@ -490,30 +850,45 @@ function renderRound(){
   renderLevels();
   updateStats();
   save();
-  speak(questionText());
+  if(state.autoSpeak)setTimeout(()=>speak(questionText(),{target:document.querySelector(".challenge-card")}),240);
 }
 
 function checkAnswer(shape,card){
-  if(state.locked) return;
+  if(state.locked||card.disabled) return;
   const correct=shape.id===state.current.id;
   if(correct){
     state.locked=true;
+    [...$("shapeGrid").children].forEach(n=>n.disabled=true);
     card.classList.add("correct");
     state.score+=10;
     state.streak++;
     state.stars+=2;
     state.mastered.add(shape.id);
-    $("feedback").textContent=`Wonderful! That is the ${shape.name}.`;
-    speak(`Wonderful. That is the ${shape.name}.`);
+    $("feedback").textContent=`Wonderful! ${shapeFact(shape)}`;
+    speak(`Wonderful. ${shapeFact(shape)}`,{target:document.querySelector(".challenge-card")});
     sparkle(card);
     updateStats();
+    renderGarden();
+    renderPassport();
     save();
-    setTimeout(()=>{state.round++;renderRound()},1100);
+    setTimeout(()=>{state.round++;renderRound()},1500);
   }else{
+    state.attempts++;
     card.classList.add("wrong");
+    card.disabled=true;
     state.streak=0;
-    $("feedback").textContent="Good try. Look again.";
-    speak("Good try. Look again.");
+    if(state.attempts<2){
+      $("feedback").textContent="Nice thinking. Look at the clue and try once more.";
+      speak("Nice thinking. Look at the clue and try once more.",{target:document.querySelector(".challenge-card")});
+    }else{
+      state.locked=true;
+      [...$("shapeGrid").children].forEach(n=>n.disabled=true);
+      const correctCard=[...$("shapeGrid").children].find(n=>n.dataset.id===state.current.id);
+      correctCard?.classList.add("hint","pulse");
+      $("feedback").textContent=`The answer is ${state.current.name}. ${state.current.property}.`;
+      speak(`The answer is ${state.current.name}. ${state.current.property}.`,{target:document.querySelector(".challenge-card")});
+      setTimeout(()=>{state.round++;renderRound()},2200);
+    }
     setTimeout(()=>card.classList.remove("wrong"),600);
     updateStats();
     save();
@@ -546,6 +921,8 @@ function updateStats(){
   if(state.mastered.size>=8)badges.push("🧭 Shape Explorer");
   if(state.mastered.size===SHAPES.length)badges.push("🏆 Shape Scholar");
   $("badges").innerHTML=badges.length?badges.map(x=>`<span class="badge">${x}</span>`).join(""):'<span class="badge">Play to earn shape badges.</span>';
+  renderGarden();
+  renderPassport();
 }
 
 function sparkle(target){
@@ -566,7 +943,8 @@ function buildLibrary(){
     <div class="library-item">
       <div class="shape-visual ${s.id}" style="margin:0 auto 8px"></div>
       <strong>${s.name}</strong><br>
-      <span>${s.sides} ${s.sides===1?"side":"sides"} · ${s.object} ${s.example}</span>
+      <span>${s.property} · ${s.object} ${s.example}</span><br>
+      <button class="secondary" data-library-speak="${s.id}" style="margin-top:8px">🔊 Hear Shape</button>
     </div>
   `).join("");
 }
@@ -638,8 +1016,12 @@ function drawGuide(){
 }
 function clearTrace(){
   tracePoints=0;
+  traceSamples=[];
   drawGuide();
+  sampleCurrentGuide();
   $("traceMessage").textContent="Trace the current shape.";
+  $("traceMeterBar").style.width="0%";
+  $("traceScore").textContent="Guide coverage: 0%";
 }
 function pos(e){
   const r=canvas.getBoundingClientRect();
@@ -651,21 +1033,36 @@ canvas.addEventListener("pointermove",e=>{
   const p=pos(e);
   ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="#e566a0";ctx.lineWidth=12;
   ctx.lineTo(p.x,p.y);ctx.stroke();tracePoints++;
+  traceSamples.push(p);
+  if(tracePoints%6===0)updateTraceMeter();
 });
 canvas.addEventListener("pointerup",()=>drawing=false);
 canvas.addEventListener("pointerleave",()=>drawing=false);
 
 $("clearTrace").addEventListener("click",clearTrace);
 $("checkTrace").addEventListener("click",()=>{
-  if(tracePoints<20){
-    $("traceMessage").textContent="Keep tracing a little more.";
-    speak("Keep tracing a little more.");
+  const q=traceQuality();
+  const pct=Math.round(q.score*100);
+  updateTraceMeter();
+  if(tracePoints<18){
+    $("traceMessage").textContent="Make a longer tracing line around the shape.";
+    speak("Make a longer tracing line around the shape.",{target:$("traceCanvas").closest(".activity")});
     return;
   }
-  $("traceMessage").textContent=`Beautiful ${state.current.name} tracing!`;
+  if(q.score<.38){
+    $("traceMessage").textContent="Try staying a little closer to the dotted guide.";
+    speak("Try staying a little closer to the dotted guide.",{target:$("traceCanvas").closest(".activity")});
+    return;
+  }
+  if(q.coverage<.48){
+    $("traceMessage").textContent="You followed part of it. Try going around a little more.";
+    speak("You followed part of it. Try going around a little more.",{target:$("traceCanvas").closest(".activity")});
+    return;
+  }
+  $("traceMessage").textContent=`Wonderful ${state.current.name} tracing! You followed ${pct}% of the guide.`;
   state.stars+=2;
   state.mastered.add(state.current.id);
-  speak(`Beautiful ${state.current.name} tracing.`);
+  speak(`Wonderful ${state.current.name} tracing.`,{target:$("traceCanvas").closest(".activity")});
   updateStats();save();
 });
 $("guideBtn").addEventListener("click",()=>{
@@ -674,14 +1071,46 @@ $("guideBtn").addEventListener("click",()=>{
   clearTrace();
 });
 
+
+$("voiceGuides").onclick=event=>{
+  const b=event.target.closest("[data-voice]");
+  if(!b)return;
+  state.voice=b.dataset.voice;
+  save();
+  updateVoiceButtons();
+  $("voiceStatus").textContent=`${GUIDE_VOICES[state.voice].name} selected.`;
+};
+$("voiceSpeed").onchange=event=>{
+  state.voiceSpeed=event.target.value;
+  save();
+  $("voiceStatus").textContent="Reading speed saved.";
+};
+$("meetGuideBtn").onclick=()=>speak("",{preview:true});
+$("repeatVoiceBtn").onclick=()=>lastSpoken?speak(lastSpoken,{target:document.querySelector(".challenge-card")}):speak(questionText(),{target:document.querySelector(".challenge-card")});
+$("stopVoiceBtn").onclick=()=>stopSpeaking();
+
+$("shapePassportGrid").onclick=event=>{
+  const b=event.target.closest("[data-passport]");
+  if(!b||b.disabled)return;
+  const shape=SHAPES.find(s=>s.id===b.dataset.passport);
+  speak(shapeFact(shape),{target:document.querySelector(".shape-passport")});
+};
+
+$("libraryGrid").addEventListener("click",event=>{
+  const b=event.target.closest("[data-library-speak]");
+  if(!b)return;
+  const shape=SHAPES.find(s=>s.id===b.dataset.librarySpeak);
+  speak(shapeFact(shape),{target:document.querySelector(".sheet")});
+});
+
 $("modeSelect").addEventListener("change",e=>{state.mode=e.target.value;renderRound()});
-$("hearBtn").addEventListener("click",()=>speak(questionText()));
+$("hearBtn").addEventListener("click",()=>speak(questionText(),{target:document.querySelector(".challenge-card")}));
 $("hintBtn").addEventListener("click",()=>{
   document.querySelectorAll(".shape-card").forEach(card=>{
     if(card.dataset.id===state.current.id)card.style.outline="5px solid #ffd166";
     else card.style.outline="";
   });
-  speak(`Look for the ${state.current.name}.`);
+  speak(`Look for the ${state.current.name}. ${state.current.property}.`,{target:document.querySelector(".challenge-card")});
 });
 $("nextBtn").addEventListener("click",()=>{state.round++;renderRound()});
 $("libraryBtn").addEventListener("click",()=>{$("libraryModal").classList.add("open");buildLibrary()});
@@ -689,11 +1118,28 @@ $("closeLibrary").addEventListener("click",()=>$("libraryModal").classList.remov
 $("libraryModal").addEventListener("click",e=>{if(e.target===$("libraryModal"))$("libraryModal").classList.remove("open")});
 $("resetBtn").addEventListener("click",()=>{
   if(!confirm("Reset all Shape Garden progress?"))return;
-  state.level=0;state.mode="find";state.score=0;state.streak=0;state.stars=0;state.round=1;state.mastered.clear();
+  state.level=0;state.mode="find";state.score=0;state.streak=0;state.stars=0;state.round=1;state.mastered.clear();state.attempts=0;
   save();renderRound();
 });
 
+if("speechSynthesis" in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $("meetGuideBtn").disabled=true;
+  $("repeatVoiceBtn").disabled=true;
+  $("stopVoiceBtn").disabled=true;
+  $("hearBtn").disabled=true;
+  $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+}
+updateVoiceButtons();
+renderGarden();
+renderPassport();
 requestAnimationFrame(()=>{resizeCanvas();renderRound()});
+window.addEventListener("beforeunload",()=>stopSpeaking(""));
 })();
 </script>
 </body>
