@@ -25,7 +25,7 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--ink);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:
     radial-gradient(circle at 12% 14%,rgba(255,255,255,.9) 0 5%,transparent 6%),
     radial-gradient(circle at 88% 14%,rgba(255,255,255,.74) 0 4%,transparent 5%),
@@ -36,11 +36,11 @@ button{font:inherit;touch-action:manipulation}
 .app{
   width:min(1080px,calc(100% - 22px));
   margin:0 auto;
-  padding:22px 0 48px;
+  padding:30px 0 54px;
 }
 .hero{
   text-align:center;
-  padding:28px 20px 24px;
+  padding:34px 22px 30px;
   border-radius:32px;
   color:white;
   background:
@@ -51,16 +51,19 @@ button{font:inherit;touch-action:manipulation}
   overflow:hidden;
 }
 .hero h1{
-  margin:0;
-  font-size:clamp(2.3rem,7vw,5rem);
-  line-height:.96;
-  letter-spacing:-.05em;
+  margin:0 auto;
+  max-width:920px;
+  padding:.05em .08em;
+  font-size:clamp(2.4rem,6.4vw,4.9rem);
+  line-height:1.08;
+  letter-spacing:-.02em;
 }
 .hero p{
   max-width:720px;
   margin:8px auto 0;
-  line-height:1.6;
-  color:#fff9ef;
+  line-height:1.72;
+  color:#fffaf2;
+  font-size:1.02rem;
 }
 .confetti-dots{
   display:flex;
@@ -313,6 +316,127 @@ button:hover{transform:translateY(-2px)}
   font-size:.84rem;
   margin-top:16px;
 }
+
+.voice-panel{
+  max-width:940px;
+  margin:0 auto 15px;
+  padding:14px;
+  border-radius:22px;
+  background:rgba(255,255,255,.92);
+  border:1px solid #ded8eb;
+  box-shadow:0 8px 20px rgba(66,45,89,.08);
+}
+.voice-panel h2{
+  margin:0 0 8px;
+  text-align:center;
+  color:var(--violet);
+  font-size:1.04rem;
+}
+.voice-friends{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:7px;
+}
+.voice-friend{
+  min-width:0;
+  min-height:62px;
+  padding:8px 5px;
+  border:2px solid #ded8eb;
+  border-radius:16px;
+  background:white;
+  color:var(--violet);
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:2px;
+  box-shadow:none;
+}
+.voice-friend .emoji{font-size:1.45rem;line-height:1}
+.voice-friend .name{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:.68rem;
+}
+.voice-friend.active{
+  color:white;
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--berry),var(--violet));
+}
+.voice-options{
+  margin-top:9px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.voice-options select{
+  border:1px solid #ded8eb;
+  border-radius:999px;
+  padding:9px 12px;
+  background:white;
+  color:var(--ink);
+  font-weight:850;
+}
+.voice-status{
+  min-height:1.2em;
+  margin:8px 0 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:.8rem;
+}
+.letter-card.speaking{
+  box-shadow:0 0 0 5px rgba(139,109,232,.13);
+}
+.quick-tools{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.completion-badge{
+  display:none;
+  margin:12px auto 0;
+  max-width:620px;
+  padding:12px 14px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#fff8d8,#fff,#eefcff);
+  border:1px solid #ded8eb;
+  text-align:center;
+  color:var(--violet);
+  font-weight:900;
+}
+.completion-badge.show{display:block}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:rgba(48,34,66,.34);
+  z-index:100;
+}
+.modal.show{display:flex}
+.modal-card{
+  width:min(500px,95vw);
+  border-radius:26px;
+  padding:22px;
+  background:white;
+  box-shadow:0 24px 60px rgba(48,34,66,.24);
+  text-align:center;
+}
+.modal-card h2{margin:0 0 8px;color:var(--violet)}
+.modal-card p{color:var(--muted);line-height:1.55}
+.modal-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+@media(max-width:700px){
+  .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-friend:last-child{grid-column:1/-1}
+}
+
 @media(max-width:860px){
   .game-grid{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -323,22 +447,20 @@ button:hover{transform:translateY(-2px)}
     animation-iteration-count:1!important;
     scroll-behavior:auto!important;
   }
-  .site-footer {
-  margin-top: 16px;
-  padding: 15px 12px;
-  text-align: center;
-  border-radius: 18px;
-  background: rgba(255,255,255,.78);
-  border: 1px solid rgba(90,60,120,.12);
-  color: #665b72;
-  font-size: .84rem;
-  line-height: 1.5;
 }
 
-.site-footer strong {
-  color: #503a76;
+.site-footer{
+  margin-top:16px;
+  padding:15px 12px;
+  text-align:center;
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(90,60,120,.12);
+  color:#665b72;
+  font-size:.84rem;
+  line-height:1.5;
 }
-}
+.site-footer strong{color:#503a76;}
 </style>
 </head>
 <body>
@@ -357,6 +479,42 @@ button:hover{transform:translateY(-2px)}
     <button id="resetBtn" class="secondary">↺ Reset Progress</button>
   </div>
 
+
+  <section class="voice-panel" aria-labelledby="voiceTitle">
+    <h2 id="voiceTitle">Choose an Alphabet Buddy</h2>
+
+    <div class="voice-friends" id="voiceFriends">
+      <button type="button" class="voice-friend" data-voice="rosie">
+        <span class="emoji">🐰</span><span class="name">Rosie Rabbit</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="leo">
+        <span class="emoji">🦁</span><span class="name">Leo Lion</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="penny">
+        <span class="emoji">🐧</span><span class="name">Penny Penguin</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="freddie">
+        <span class="emoji">🐸</span><span class="name">Freddie Frog</span>
+      </button>
+      <button type="button" class="voice-friend" data-voice="panda">
+        <span class="emoji">🐼</span><span class="name">Panda Pal</span>
+      </button>
+    </div>
+
+    <div class="voice-options">
+      <select id="voiceSpeed" aria-label="Reading speed">
+        <option value="slow">🐢 Slow and gentle</option>
+        <option value="normal">🙂 Just right</option>
+        <option value="lively">🐇 A little lively</option>
+      </select>
+      <button id="previewVoiceBtn" class="secondary" type="button">👋 Meet My Buddy</button>
+      <button id="hearWordBtn" class="secondary" type="button">🔤 Hear Word</button>
+      <button id="stopVoiceBtn" class="secondary" type="button">⏹ Stop Voice</button>
+    </div>
+
+    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+  </section>
+
   <section class="stats">
     <div class="stat"><strong id="scoreStat">0</strong>Score</div>
     <div class="stat"><strong id="streakStat">0</strong>Streak</div>
@@ -374,6 +532,10 @@ button:hover{transform:translateY(-2px)}
         <div class="nav-row">
           <button id="prevBtn" class="secondary">⬅ Previous</button>
           <button id="nextBtn" class="primary">Next ➡</button>
+        </div>
+        <div class="quick-tools">
+          <button id="nextUnfinishedBtn" class="secondary" type="button">🎯 Next Unfinished Letter</button>
+          <button id="repeatInstructionsBtn" class="secondary" type="button">🔊 Repeat Instructions</button>
         </div>
       </div>
 
@@ -398,7 +560,7 @@ button:hover{transform:translateY(-2px)}
       <div class="activity">
         <h2>🏆 Alphabet Progress</h2>
         <div class="progress"><div id="progressBar"></div></div>
-        <div class="message" id="progressMessage">Complete every letter from A to Z.</div>
+        <div class="message" id="progressMessage">Complete every letter from A to Z.</div><div class="completion-badge" id="completionBadge">🌈 Alphabet complete! You finished all 26 letters.</div>
       </div>
     </aside>
   </div>
@@ -410,6 +572,18 @@ button:hover{transform:translateY(-2px)}
   <strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>
   All Rights Reserved.
 </footer>
+
+
+<div class="modal" id="resetModal" aria-hidden="true">
+  <div class="modal-card">
+    <h2>Start the Alphabet Again?</h2>
+    <p>This will clear the score, streak, and completed letters. Your chosen alphabet buddy and reading speed will stay saved.</p>
+    <div class="modal-actions">
+      <button id="cancelResetBtn" class="secondary" type="button">Keep Learning</button>
+      <button id="confirmResetBtn" class="primary" type="button">Reset Progress</button>
+    </div>
+  </div>
+</div>
 
 <script>
 (() => {
@@ -457,6 +631,8 @@ button:hover{transform:translateY(-2px)}
     streak:Number(localStorage.getItem("alphabetFunStreak")||0),
     completed:new Set(JSON.parse(localStorage.getItem("alphabetFunCompleted")||"[]")),
     theme:Number(localStorage.getItem("alphabetFunTheme")||0),
+    voiceFriend:localStorage.getItem("alphabetFunVoiceFriend")||"rosie",
+    voiceSpeed:localStorage.getItem("alphabetFunVoiceSpeed")||"slow",
     selected:null,
     matchDone:false,
     quizDone:false
@@ -470,6 +646,8 @@ button:hover{transform:translateY(-2px)}
     localStorage.setItem("alphabetFunStreak",String(state.streak));
     localStorage.setItem("alphabetFunCompleted",JSON.stringify([...state.completed]));
     localStorage.setItem("alphabetFunTheme",String(state.theme));
+    localStorage.setItem("alphabetFunVoiceFriend",state.voiceFriend);
+    localStorage.setItem("alphabetFunVoiceSpeed",state.voiceSpeed);
   }
 
   function applyTheme(){
@@ -488,14 +666,112 @@ button:hover{transform:translateY(-2px)}
     return copy;
   }
 
-  function speak(){
-    if(!("speechSynthesis" in window)) return;
-    const item=DATA[state.index];
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(`${item.letter}. ${item.letter} is for ${item.word}. The sound is ${item.sound}.`);
-    u.rate=.84;
-    u.pitch=1.12;
+  const VOICE_BUDDIES={
+    rosie:{
+      name:"Rosie Rabbit",emoji:"🐰",rate:.86,pitch:1.16,
+      preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,
+      greeting:"Hop hop hooray. Rosie Rabbit is ready to learn the alphabet with you."
+    },
+    leo:{
+      name:"Leo Lion",emoji:"🦁",rate:.78,pitch:.9,
+      preferred:/daniel|david|alex|fred|george|male|tom/i,
+      greeting:"Roar. Leo Lion is ready for a brave alphabet adventure."
+    },
+    penny:{
+      name:"Penny Penguin",emoji:"🐧",rate:.8,pitch:1.02,
+      preferred:/moira|serena|samantha|aria|karen|victoria/i,
+      greeting:"Waddle waddle. Penny Penguin is ready to practice letters."
+    },
+    freddie:{
+      name:"Freddie Frog",emoji:"🐸",rate:.88,pitch:1.08,
+      preferred:/alex|david|daniel|fred|ralph/i,
+      greeting:"Ribbit. Freddie Frog is ready to jump into alphabet fun."
+    },
+    panda:{
+      name:"Panda Pal",emoji:"🐼",rate:.76,pitch:.98,
+      preferred:/natural|enhanced|premium|samantha|daniel|alex|aria/i,
+      greeting:"Hello, friend. Panda Pal is ready to learn one letter at a time."
+    }
+  };
+
+  const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+  let voices=[];
+  let speechToken=0;
+
+  function refreshVoices(){
+    if(!("speechSynthesis" in window))return;
+    voices=speechSynthesis.getVoices()||[];
+    const buddy=VOICE_BUDDIES[state.voiceFriend]||VOICE_BUDDIES.rosie;
+    $("voiceStatus").textContent=voices.length
+      ?`${buddy.emoji} ${buddy.name} is ready.`
+      :"Loading a friendly voice…";
+  }
+
+  function chooseVoice(){
+    if(!voices.length)refreshVoices();
+    const buddy=VOICE_BUDDIES[state.voiceFriend]||VOICE_BUDDIES.rosie;
+    const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+    const pool=english.length?english:voices;
+
+    if(state.voiceFriend==="panda"&&pool.length){
+      const natural=pool.filter(v=>/natural|enhanced|premium/i.test(v.name));
+      const choices=natural.length?natural:pool;
+      return choices[Math.floor(Math.random()*choices.length)]||null;
+    }
+
+    return pool.find(v=>buddy.preferred.test(v.name))
+      ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+      ||pool[0]
+      ||null;
+  }
+
+  function stopSpeaking(statusText="Voice stopped."){
+    speechToken++;
+    if("speechSynthesis" in window)speechSynthesis.cancel();
+    document.querySelector(".letter-card")?.classList.remove("speaking");
+    $("voiceStatus").textContent=statusText;
+  }
+
+  function speakText(text,{preview=false}={}){
+    if(!("speechSynthesis" in window))return;
+    if(!preview&&!String(text||"").trim())return;
+
+    stopSpeaking("");
+    const token=++speechToken;
+    const buddy=VOICE_BUDDIES[state.voiceFriend]||VOICE_BUDDIES.rosie;
+    const phrase=preview?buddy.greeting:text;
+    const u=new SpeechSynthesisUtterance(phrase);
+    const voice=chooseVoice();
+
+    if(voice)u.voice=voice;
+    u.lang=(voice&&voice.lang)||"en-US";
+    u.rate=Math.max(.55,Math.min(1.15,buddy.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+    u.pitch=buddy.pitch;
+    u.volume=1;
+
+    u.onstart=()=>{
+      document.querySelector(".letter-card")?.classList.add("speaking");
+      $("voiceStatus").textContent=`${buddy.emoji} ${buddy.name} is reading.`;
+    };
+    u.onend=()=>{
+      if(token!==speechToken)return;
+      document.querySelector(".letter-card")?.classList.remove("speaking");
+      $("voiceStatus").textContent="Ready for another letter! 🌟";
+    };
+    u.onerror=event=>{
+      if(token!==speechToken)return;
+      document.querySelector(".letter-card")?.classList.remove("speaking");
+      $("voiceStatus").textContent=event&&["interrupted","canceled"].includes(event.error)
+        ?"Voice stopped."
+        :"The voice had a little hiccup. Try again.";
+    };
+
     speechSynthesis.speak(u);
+  }
+
+  function speak(){
+    const item=DATA[state.index];
+    speakText(`${item.letter}. ${item.letter} is for ${item.word}. The sound is ${item.sound}.`);
   }
 
   function reward(target){
@@ -521,6 +797,7 @@ button:hover{transform:translateY(-2px)}
       state.completed.size===26
         ?"The whole alphabet is complete! 🌈"
         :`${26-state.completed.size} letters remain.`;
+    $("completionBadge").classList.toggle("show",state.completed.size===26);
   }
 
   function completeIfReady(){
@@ -563,6 +840,7 @@ button:hover{transform:translateY(-2px)}
   }
 
   function checkMatch(letter,source){
+    if(state.matchDone)return;
     const target=DATA[state.index].letter;
     if(letter===target){
       source?.classList.add("correct");
@@ -574,7 +852,7 @@ button:hover{transform:translateY(-2px)}
       reward(source||$("dropzone"));
     }else{
       source?.classList.add("wrong");
-      $("dropzone").textContent="Try another letter.";
+      $("dropzone").textContent="Great try! Choose another letter.";
       state.streak=0;
       setTimeout(()=>source?.classList.remove("wrong"),650);
     }
@@ -602,14 +880,14 @@ button:hover{transform:translateY(-2px)}
         if(state.quizDone) return;
         if(letter===item.letter){
           b.classList.add("correct");
-          $("message").textContent="Correct quiz answer!";
+          $("message").textContent="Wonderful! That is the correct quiz answer!";
           state.quizDone=true;
           state.score+=5;
           state.streak++;
           reward(b);
         }else{
           b.classList.add("wrong");
-          $("message").textContent="Almost. Try another answer.";
+          $("message").textContent="Great try! Choose another answer.";
           state.streak=0;
         }
         save();
@@ -657,6 +935,83 @@ button:hover{transform:translateY(-2px)}
     save();
   }
 
+
+  function updateVoiceButtons(){
+    document.querySelectorAll("[data-voice]").forEach(button=>{
+      const active=button.dataset.voice===state.voiceFriend;
+      button.classList.toggle("active",active);
+      button.setAttribute("aria-pressed",String(active));
+    });
+    $("voiceSpeed").value=state.voiceSpeed;
+  }
+
+  function openReset(){
+    $("resetModal").classList.add("show");
+    $("resetModal").setAttribute("aria-hidden","false");
+  }
+
+  function closeReset(){
+    $("resetModal").classList.remove("show");
+    $("resetModal").setAttribute("aria-hidden","true");
+  }
+
+  $("voiceFriends").onclick=event=>{
+    const button=event.target.closest("[data-voice]");
+    if(!button)return;
+    state.voiceFriend=button.dataset.voice;
+    updateVoiceButtons();
+    save();
+    const buddy=VOICE_BUDDIES[state.voiceFriend];
+    $("voiceStatus").textContent=
+      `${buddy.emoji} ${buddy.name} selected. Tap Meet My Buddy to listen.`;
+  };
+
+  $("voiceSpeed").onchange=event=>{
+    state.voiceSpeed=event.target.value;
+    save();
+    $("voiceStatus").textContent="Reading speed saved.";
+  };
+
+  $("previewVoiceBtn").onclick=()=>speakText("",{preview:true});
+  $("hearWordBtn").onclick=()=>{
+    const item=DATA[state.index];
+    speakText(`${item.word}. ${item.letter} is for ${item.word}.`);
+  };
+  $("stopVoiceBtn").onclick=()=>stopSpeaking("Voice stopped.");
+
+  $("nextUnfinishedBtn").onclick=()=>{
+    const start=state.index;
+    for(let offset=1;offset<=DATA.length;offset++){
+      const i=(start+offset)%DATA.length;
+      if(!state.completed.has(DATA[i].letter)){
+        state.index=i;
+        render();
+        return;
+      }
+    }
+    $("message").textContent="All 26 letters are complete! 🌈";
+    speakText("Wonderful. You completed every letter from A to Z.");
+  };
+
+  $("repeatInstructionsBtn").onclick=()=>{
+    const item=DATA[state.index];
+    speakText(`Match the letter ${item.letter}. Then answer which letter begins the word ${item.word}.`);
+  };
+
+  $("cancelResetBtn").onclick=closeReset;
+  $("confirmResetBtn").onclick=()=>{
+    state.score=0;
+    state.streak=0;
+    state.completed.clear();
+    state.index=0;
+    save();
+    closeReset();
+    render();
+  };
+  $("resetModal").onclick=event=>{
+    if(event.target.id==="resetModal")closeReset();
+  };
+
   $("dropzone").ondragover=e=>{
     e.preventDefault();
     $("dropzone").classList.add("ready");
@@ -680,23 +1035,40 @@ button:hover{transform:translateY(-2px)}
     applyTheme();
     save();
   };
-  $("resetBtn").onclick=()=>{
-    if(!confirm("Reset all saved Alphabet Fun progress?")) return;
-    state.score=0;
-    state.streak=0;
-    state.completed.clear();
-    state.index=0;
-    save();
-    render();
-  };
+  $("resetBtn").onclick=openReset;
 
   document.addEventListener("keydown",e=>{
-    if(e.key==="ArrowRight") $("nextBtn").click();
-    if(e.key==="ArrowLeft") $("prevBtn").click();
+    if($("resetModal").classList.contains("show")){
+      if(e.key==="Escape")closeReset();
+      return;
+    }
+    if(["INPUT","SELECT","TEXTAREA","BUTTON"].includes(document.activeElement?.tagName))return;
+    if(e.key==="ArrowRight")$("nextBtn").click();
+    if(e.key==="ArrowLeft")$("prevBtn").click();
+    if(e.key===" "){
+      e.preventDefault();
+      speak();
+    }
   });
 
+  if("speechSynthesis" in window){
+    refreshVoices();
+    speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+    speechSynthesis.onvoiceschanged=refreshVoices;
+    setTimeout(refreshVoices,250);
+    setTimeout(refreshVoices,900);
+  }else{
+    $("previewVoiceBtn").disabled=true;
+    $("hearWordBtn").disabled=true;
+    $("stopVoiceBtn").disabled=true;
+    $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+  }
+
+  updateVoiceButtons();
   applyTheme();
   render();
+
+  window.addEventListener("beforeunload",()=>stopSpeaking(""));
 })();
 </script>
 </body>
