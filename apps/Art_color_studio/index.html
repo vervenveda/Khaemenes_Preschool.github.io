@@ -134,13 +134,14 @@ button.danger{background:white;color:var(--bad);border:1px solid #efc7cd}
 }
 .stat strong{display:block;font-size:1.24rem;color:var(--violet)}
 
-.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,.34fr);gap:16px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,.34fr);gap:16px;align-items:start}
 .panel{
   background:var(--panel);
   border:1px solid rgba(255,255,255,.96);
   border-radius:28px;
   padding:18px;
   box-shadow:var(--shadow);
+  align-self:start;
 }
 .canvas-shell{
   border-radius:26px;
@@ -391,6 +392,107 @@ input[type="range"]{width:100%;accent-color:var(--violet);min-height:38px}
 .modal p{margin:0;color:var(--muted);line-height:1.5}
 .modal-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:16px}
 
+
+.prompt-dock{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(310px,.42fr);
+  gap:12px;
+  align-items:stretch;
+  margin:0 0 14px;
+}
+.prompt-dock .prompt-card{
+  min-height:112px;
+  height:100%;
+  padding:16px 18px;
+  font-size:clamp(1rem,2vw,1.15rem);
+}
+.prompt-actions{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  margin-top:10px;
+}
+.voice-card{
+  border-radius:22px;
+  padding:13px;
+  background:linear-gradient(145deg,#fff,#f8f4ff);
+  border:1px solid #e7dfee;
+  display:grid;
+  align-content:center;
+  gap:9px;
+}
+.voice-card h2{
+  margin:0;
+  color:var(--plum);
+  font-size:1.05rem;
+  text-align:center;
+}
+.voice-friends{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:6px;
+}
+.voice-friend{
+  min-width:0;
+  min-height:55px;
+  padding:6px 3px;
+  border-radius:15px;
+  background:white;
+  color:var(--plum);
+  border:2px solid #e4dce9;
+  box-shadow:none;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:1px;
+}
+.voice-friend .voice-emoji{font-size:1.3rem;line-height:1}
+.voice-friend .voice-name{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:.68rem;
+}
+.voice-friend.active{
+  color:white;
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--violet),var(--rose));
+}
+.voice-options{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:7px;
+  align-items:center;
+}
+.voice-options select{
+  width:100%;
+  min-width:0;
+  padding:8px 10px;
+  font-weight:800;
+}
+.voice-status{
+  min-height:1.2em;
+  margin:0;
+  color:var(--muted);
+  text-align:center;
+  font-size:.78rem;
+  line-height:1.3;
+}
+.prompt-card.speaking{
+  box-shadow:0 0 0 5px rgba(141,107,212,.16);
+  filter:saturate(1.05);
+}
+@media(max-width:930px){
+  .prompt-dock{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .prompt-dock{gap:9px;margin-bottom:10px}
+  .voice-friends{grid-template-columns:repeat(3,1fr)}
+  .voice-friend:nth-child(4),.voice-friend:nth-child(5){grid-column:auto}
+  .prompt-actions{grid-template-columns:1fr 1fr}
+}
+
 @media(max-width:930px){
   .layout{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -445,6 +547,49 @@ input[type="range"]{width:100%;accent-color:var(--violet);min-height:38px}
     <div class="stat"><strong id="strokeStat">0</strong>Art Moves</div>
     <div class="stat"><strong id="saveStat">0</strong>Pictures Saved</div>
     <div class="stat"><strong id="promptStat">0</strong>Prompts Explored</div>
+  </section>
+
+  <section class="prompt-dock" aria-label="Creative prompt and friendly reader">
+    <div class="activity">
+      <h2>🌟 Your Creative Prompt</h2>
+      <div class="prompt-card" id="promptCard">Draw a happy garden using circles, dots, and wiggly lines.</div>
+      <div class="prompt-actions">
+        <button type="button" id="newPromptDockBtn">✨ New Prompt</button>
+        <button type="button" id="speakPrompt" class="secondary">🔊 Read My Prompt</button>
+        <button type="button" id="stopPromptVoice" class="secondary">⏹ Stop Voice</button>
+        <button type="button" id="guideBtn" class="secondary" aria-pressed="false">👁️ Picture Guide</button>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <h2>Choose a Reading Friend</h2>
+      <div class="voice-friends" id="voiceFriends">
+        <button type="button" class="voice-friend" data-voice="fairy" title="Fairy Lily">
+          <span class="voice-emoji">🧚</span><span class="voice-name">Fairy</span>
+        </button>
+        <button type="button" class="voice-friend" data-voice="bear" title="Benny Bear">
+          <span class="voice-emoji">🐻</span><span class="voice-name">Bear</span>
+        </button>
+        <button type="button" class="voice-friend" data-voice="owl" title="Professor Owl">
+          <span class="voice-emoji">🦉</span><span class="voice-name">Owl</span>
+        </button>
+        <button type="button" class="voice-friend" data-voice="robot" title="Robo Reader">
+          <span class="voice-emoji">🤖</span><span class="voice-name">Robot</span>
+        </button>
+        <button type="button" class="voice-friend" data-voice="rainbow" title="Rainbow Friend">
+          <span class="voice-emoji">🌈</span><span class="voice-name">Rainbow</span>
+        </button>
+      </div>
+      <div class="voice-options">
+        <select id="voiceSpeed" aria-label="Reading speed">
+          <option value="slow">🐢 Slow & gentle</option>
+          <option value="normal">🙂 Just right</option>
+          <option value="lively">🐇 A little lively</option>
+        </select>
+        <button type="button" id="previewVoice" class="secondary">👋 Hello</button>
+      </div>
+      <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+    </div>
   </section>
 
   <div class="layout">
@@ -506,15 +651,6 @@ input[type="range"]{width:100%;accent-color:var(--violet);min-height:38px}
       <section class="activity">
         <h2>✨ Sticker Garden</h2>
         <div class="stamp-grid" id="stampGrid"></div>
-      </section>
-
-      <section class="activity">
-        <h2>🌟 Creative Prompt</h2>
-        <div class="prompt-card" id="promptCard">Draw a happy garden using circles, dots, and wiggly lines.</div>
-        <div class="tool-grid" style="margin-top:8px">
-          <button type="button" id="speakPrompt" class="tool-btn">🔊 Read It</button>
-          <button type="button" id="guideBtn" class="tool-btn" aria-pressed="false">👁️ Picture Guide</button>
-        </div>
       </section>
 
       <details class="activity more-tools" id="moreTools">
@@ -674,7 +810,9 @@ const state={
   backgroundColor:BACKGROUNDS[0],
   guide:false,
   guideEmoji:"🌼",
-  littleMode:true
+  littleMode:true,
+  voiceFriend:localStorage.getItem("colorStudioVoiceFriend")||"fairy",
+  voiceSpeed:localStorage.getItem("colorStudioVoiceSpeed")||"slow"
 };
 
 let drawing=false;
@@ -686,6 +824,8 @@ let resizeTimer=null;
 let toastTimer=null;
 let draftTimer=null;
 let modalResolve=null;
+let voices=[];
+let speechToken=0;
 
 function showToast(message){
   const toast=$("toast");
@@ -1082,6 +1222,7 @@ function setTool(tool){
 }
 
 function newPrompt(){
+  stopVoice("");
   const prompt=PROMPTS[Math.floor(Math.random()*PROMPTS.length)];
   $("promptCard").textContent=prompt.text;
   state.guideEmoji=prompt.guide;
@@ -1092,18 +1233,114 @@ function newPrompt(){
   showToast("A new art idea is ready!");
 }
 
-function speak(text){
+const VOICE_FRIENDS={
+  fairy:{
+    name:"Fairy Lily",emoji:"🧚",rate:.82,pitch:1.2,
+    preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,
+    greeting:"Hello, little artist. Fairy Lily is ready to share your art idea."
+  },
+  bear:{
+    name:"Benny Bear",emoji:"🐻",rate:.76,pitch:.9,
+    preferred:/daniel|david|alex|fred|george|male|tom/i,
+    greeting:"Hello, art friend. Benny Bear will read nice and gently."
+  },
+  owl:{
+    name:"Professor Owl",emoji:"🦉",rate:.72,pitch:1,
+    preferred:/daniel|samantha|alex|serena|moira/i,
+    greeting:"Welcome, young artist. Professor Owl is ready to read your creative challenge."
+  },
+  robot:{
+    name:"Robo Reader",emoji:"🤖",rate:.84,pitch:.72,
+    preferred:/fred|ralph|alex|david|google us english/i,
+    greeting:"Beep boop. Robo Reader is ready for an art mission."
+  },
+  rainbow:{
+    name:"Rainbow Friend",emoji:"🌈",rate:.84,pitch:1.08,
+    preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i,
+    greeting:"Hello, sunshine. Rainbow Friend is excited to create with you."
+  }
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+
+function refreshVoices(){
+  if(!("speechSynthesis" in window))return;
+  voices=speechSynthesis.getVoices()||[];
+  const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
+  $("voiceStatus").textContent=voices.length
+    ?`${friend.emoji} ${friend.name} is ready.`
+    :"Loading a friendly voice…";
+}
+
+function chooseFriendlyVoice(friendKey=state.voiceFriend){
+  if(!voices.length)refreshVoices();
+  const friend=VOICE_FRIENDS[friendKey]||VOICE_FRIENDS.fairy;
+  const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+  const pool=english.length?english:voices;
+
+  if(friendKey==="rainbow"&&pool.length){
+    const friendly=pool.filter(v=>/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));
+    const choices=friendly.length?friendly:pool;
+    return choices[Math.floor(Math.random()*choices.length)]||null;
+  }
+  return pool.find(v=>friend.preferred.test(v.name))
+    ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+    ||pool[0]
+    ||null;
+}
+
+function setVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(button=>{
+    const active=button.dataset.voice===state.voiceFriend;
+    button.classList.toggle("active",active);
+    button.setAttribute("aria-pressed",String(active));
+  });
+  $("voiceSpeed").value=state.voiceSpeed;
+}
+
+function stopVoice(message="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  $("promptCard").classList.remove("speaking");
+  $("voiceStatus").textContent=message;
+}
+
+function speak(text,{preview=false}={}){
   if(!("speechSynthesis" in window)){
     showToast("Read-aloud is not available in this browser.");
     return;
   }
-  speechSynthesis.cancel();
-  const utterance=new SpeechSynthesisUtterance(text);
-  const voices=speechSynthesis.getVoices();
-  utterance.voice=voices.find(v=>/child|kid|jenny|samantha|aria|female/i.test(v.name)&&/^en/i.test(v.lang))
-    ||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;
-  utterance.rate=.86;
-  utterance.pitch=1.06;
+  if(!preview&&!String(text||"").trim())return;
+
+  stopVoice("");
+  const token=++speechToken;
+  const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
+  const message=preview
+    ?friend.greeting+" Let us make something wonderful together."
+    :friend.greeting+" Here is your prompt. "+text+" Take your time, use your imagination, and have fun.";
+
+  const utterance=new SpeechSynthesisUtterance(message);
+  const voice=chooseFriendlyVoice();
+  if(voice)utterance.voice=voice;
+  utterance.lang=(voice&&voice.lang)||"en-US";
+  utterance.rate=Math.max(.55,Math.min(1.16,friend.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  utterance.pitch=friend.pitch;
+  utterance.volume=1;
+
+  utterance.onstart=()=>{
+    $("promptCard").classList.add("speaking");
+    $("voiceStatus").textContent=`${friend.emoji} ${friend.name} is reading your prompt.`;
+  };
+  utterance.onend=()=>{
+    if(token!==speechToken)return;
+    $("promptCard").classList.remove("speaking");
+    $("voiceStatus").textContent="Your art adventure is ready! 🌟";
+  };
+  utterance.onerror=event=>{
+    if(token!==speechToken)return;
+    $("promptCard").classList.remove("speaking");
+    const harmless=event&&["interrupted","canceled"].includes(event.error);
+    $("voiceStatus").textContent=harmless?"Voice stopped.":"The voice had a little hiccup. Tap Read My Prompt again.";
+  };
   speechSynthesis.speak(utterance);
 }
 
@@ -1301,7 +1538,26 @@ $("mirrorY").addEventListener("click",e=>{
   e.currentTarget.setAttribute("aria-pressed",String(state.mirrorY));
 });
 $("newPromptBtn").addEventListener("click",newPrompt);
+$("newPromptDockBtn").addEventListener("click",newPrompt);
 $("speakPrompt").addEventListener("click",()=>speak($("promptCard").textContent));
+$("stopPromptVoice").addEventListener("click",()=>stopVoice("Voice stopped."));
+$("previewVoice").addEventListener("click",()=>speak("",{preview:true}));
+
+$("voiceFriends").addEventListener("click",event=>{
+  const button=event.target.closest("[data-voice]");
+  if(!button)return;
+  state.voiceFriend=button.dataset.voice;
+  try{localStorage.setItem("colorStudioVoiceFriend",state.voiceFriend)}catch{}
+  setVoiceButtons();
+  const friend=VOICE_FRIENDS[state.voiceFriend];
+  $("voiceStatus").textContent=`${friend.emoji} ${friend.name} selected. Tap Hello to listen.`;
+});
+
+$("voiceSpeed").addEventListener("change",event=>{
+  state.voiceSpeed=event.target.value;
+  try{localStorage.setItem("colorStudioVoiceSpeed",state.voiceSpeed)}catch{}
+  $("voiceStatus").textContent="Reading speed saved.";
+});
 $("guideBtn").addEventListener("click",e=>{
   state.guide=!state.guide;
   $("guideOverlay").classList.toggle("show",state.guide);
@@ -1421,7 +1677,22 @@ requestAnimationFrame(()=>{
   updateUndoButtons();
   setLittleMode(true);
   restoreDraft();
+  setVoiceButtons();
+
+  if("speechSynthesis" in window){
+    refreshVoices();
+    speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+    speechSynthesis.onvoiceschanged=refreshVoices;
+    setTimeout(refreshVoices,250);
+    setTimeout(refreshVoices,900);
+  }else{
+    $("speakPrompt").disabled=true;
+    $("stopPromptVoice").disabled=true;
+    $("previewVoice").disabled=true;
+    $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+  }
 });
+window.addEventListener("beforeunload",()=>stopVoice(""));
 })();
 </script>
 </body>
