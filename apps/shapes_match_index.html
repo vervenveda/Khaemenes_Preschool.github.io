@@ -28,7 +28,7 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--ink);
-  font-family:"Comic Sans MS","Trebuchet MS",system-ui,sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:
     radial-gradient(circle at 12% 12%,rgba(255,255,255,.92) 0 5%,transparent 6%),
     radial-gradient(circle at 88% 14%,rgba(255,255,255,.74) 0 4%,transparent 5%),
@@ -70,16 +70,19 @@ button{touch-action:manipulation}
   box-shadow:var(--shadow);
 }
 .hero h1{
-  margin:0;
-  font-size:clamp(2.3rem,7vw,5rem);
-  line-height:.96;
-  letter-spacing:-.05em;
+  margin:0 auto 8px;
+  max-width:920px;
+  padding:0 .08em;
+  font-size:clamp(2.35rem,6.3vw,4.85rem);
+  line-height:1.08;
+  letter-spacing:-.02em;
 }
 .hero p{
   margin:8px auto 0;
-  max-width:800px;
+  max-width:840px;
   color:#fff4fb;
-  line-height:1.6;
+  line-height:1.72;
+  font-size:1.02rem;
 }
 .hero-icons{
   display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px;
@@ -338,10 +341,172 @@ button.danger{background:white;color:var(--bad);border:1px solid #efc7cd}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important}
 }
+
+/* =========================================================
+   CRÈCHE PRESCHOOL PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1180px,calc(100% - 22px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff7cf);
+  box-shadow:0 12px 24px rgba(66,46,92,.14);
+  position:relative;
+  z-index:2;
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#ffd75d,#ff8f77);
+  border:3px solid #fff;font-size:1.9rem;
+}
+.creche-eyebrow{margin:0;color:#d84f7a;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:#5a4692;font-size:clamp(1.02rem,2.3vw,1.32rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #ded4e9;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;background:linear-gradient(135deg,#7c65c7,#e977a9);border-color:#fff}
+
+/* =========================================================
+   VOICE STUDIO
+   ========================================================= */
+.voice-studio{
+  margin:14px 0;
+  padding:13px;
+  border:2px solid #e2d8eb;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff);
+  box-shadow:0 10px 24px rgba(66,46,92,.08);
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;border:2px solid #ded4e8;
+  border-radius:16px;background:#fff;color:var(--plum);display:grid;place-items:center;
+  align-content:center;gap:2px;font-weight:900;box-shadow:none
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.7rem}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose))}
+.voice-controls{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{border:2px solid #ded4e8}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.challenge-card.speaking{box-shadow:0 0 0 5px rgba(255,209,102,.33)}
+
+/* =========================================================
+   ADVENTURE MAP + SHAPE BOOK
+   ========================================================= */
+.adventure-strip{
+  margin:14px 0;
+  padding:13px;
+  border:2px solid #e3d9eb;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#f6f2ff);
+}
+.adventure-strip h2{margin:0 0 9px;text-align:center;color:var(--plum);font-size:1rem}
+.worlds{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+.world-btn{
+  min-width:0;min-height:68px;padding:8px 5px;border:2px solid #e3d9eb;border-radius:15px;
+  background:#fff;color:var(--plum);font-weight:900;box-shadow:none
+}
+.world-btn span{display:block;font-size:1.35rem;margin-bottom:2px}
+.world-btn small{display:block;font-size:.65rem}
+.world-btn.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--sky),var(--violet))}
+.world-btn.locked{opacity:.45}
+
+.shape-book{
+  margin-top:14px;padding:13px;border:2px solid #e3d9eb;border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff7dc)
+}
+.shape-book h2{margin:0 0 9px;text-align:center;color:var(--plum);font-size:1rem}
+.shape-book-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+.shape-book-card{
+  min-height:74px;padding:7px;border:2px solid #e3d9eb;border-radius:14px;background:#fff;
+  display:grid;place-items:center;align-content:center;gap:3px;opacity:.36;filter:grayscale(.4)
+}
+.shape-book-card.found{opacity:1;filter:none}
+.shape-book-card span{font-size:1.35rem}
+.shape-book-card small{font-size:.62rem;color:var(--muted);font-weight:900}
+
+/* =========================================================
+   ACCESSIBILITY + GROWING PROGRESS
+   ========================================================= */
+.accessibility-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0 0}
+.accessibility-row button.active{color:#fff;background:linear-gradient(135deg,var(--aqua),var(--sky))}
+.growth-track{
+  margin-top:11px;padding:10px;border-radius:17px;background:rgba(255,255,255,.72);border:2px dashed #d7cce3
+}
+.growth-stage{display:flex;justify-content:center;align-items:end;gap:12px;min-height:68px}
+.growth-stage span{font-size:2.15rem;opacity:.3;transform:scale(.86);transition:.2s}
+.growth-stage span.on{opacity:1;transform:scale(1)}
+.growth-label{text-align:center;color:var(--muted);font-size:.74rem;margin-top:4px}
+
+body.high-contrast{
+  --panel:#fff;
+  --ink:#111;
+  --muted:#333;
+  background:#fff7a8;
+}
+body.high-contrast .shape-tile,
+body.high-contrast .shadow-tile,
+body.high-contrast .level-card,
+body.high-contrast .stat,
+body.high-contrast .panel{
+  border-color:#111!important;
+}
+body.large-shapes .shape-art{width:108px;height:108px}
+body.large-shapes .shape-tile,
+body.large-shapes .shadow-tile{min-height:170px}
+body.simple-mode .stats,
+body.simple-mode .levels,
+body.simple-mode .badges,
+body.simple-mode .adventure-strip,
+body.simple-mode .shape-book{display:none!important}
+
+.shape-tile.bounce .shape-art{animation:shapeBounce .55s ease}
+.shadow-tile.correct .shape-art{animation:shapePop .5s ease}
+@keyframes shapeBounce{50%{transform:rotate(var(--shape-rotation,0deg)) scale(calc(var(--shape-scale,1) * 1.2))}}
+@keyframes shapePop{50%{transform:rotate(var(--shape-rotation,0deg)) scale(calc(var(--shape-scale,1) * 1.18))}}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .worlds{grid-template-columns:repeat(3,1fr)}
+  .shape-book-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}
+  .creche-links{grid-column:auto}
+  .worlds,.shape-book-grid{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 <body>
 <div class="sky" aria-hidden="true"><span>⭐</span><span>🌈</span><span>🔺</span><span>✨</span><span>🔵</span></div>
+
+
+<header class="creche-header" aria-label="Crèche Preschool Portal">
+  <div class="creche-mark" aria-hidden="true">🧩</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Portal</p>
+    <div class="creche-title">The Crèche™ · Bright Shape & Shadow Play</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link current" href="#" aria-current="page">🧩 Shape Studio</a>
+  </nav>
+</header>
 
 <main class="app">
   <header class="hero">
@@ -350,7 +515,34 @@ button.danger{background:white;color:var(--bad);border:1px solid #efc7cd}
     <div class="hero-icons"><span>🔵</span><span>⬛</span><span>⭐</span><span>🧩</span></div>
   </header>
 
-  <div class="toolbar">
+  
+<section class="voice-studio" aria-labelledby="voiceTitle">
+  <h2 id="voiceTitle">Choose a Shape Guide</h2>
+  <div class="voice-guides" id="voiceGuides">
+    <button type="button" class="voice-guide" data-voice="pip"><span class="emoji">🐦</span><span class="name">Pip the Shape Bird</span></button>
+    <button type="button" class="voice-guide" data-voice="ollie"><span class="emoji">🦉</span><span class="name">Ollie Owl</span></button>
+    <button type="button" class="voice-guide" data-voice="twinkle"><span class="emoji">⭐</span><span class="name">Twinkle Star</span></button>
+    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+  </div>
+  <div class="voice-controls">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and clear</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">✨ A little lively</option>
+    </select>
+    <button type="button" id="meetGuideBtn" class="secondary">👋 Meet My Guide</button>
+    <button type="button" id="repeatVoiceBtn" class="secondary">🔁 Repeat Last</button>
+    <button type="button" id="stopVoiceBtn" class="secondary">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+</section>
+
+<section class="adventure-strip">
+  <h2>🌍 Shape Adventure Map</h2>
+  <div class="worlds" id="worlds"></div>
+</section>
+
+<div class="toolbar">
     <label class="pill">Challenge
       <select id="modeSelect">
         <option value="silhouette">Shadow Match</option>
@@ -365,6 +557,12 @@ button.danger{background:white;color:var(--bad);border:1px solid #efc7cd}
     <button id="freePlayBtn" class="secondary">♾ Free Play</button>
     <button id="resetBtn" class="danger">↺ Reset</button>
   </div>
+
+<div class="accessibility-row">
+  <button id="contrastBtn" class="secondary">◐ High Contrast</button>
+  <button id="largeShapesBtn" class="secondary">🔎 Larger Shapes</button>
+  <button id="simpleModeBtn" class="secondary">🧘 Simple Mode</button>
+</div>
 
   <section class="stats">
     <div class="stat"><strong id="scoreStat">0</strong>Score</div>
@@ -392,10 +590,27 @@ button.danger{background:white;color:var(--bad);border:1px solid #efc7cd}
 
       <div class="feedback" id="feedback" aria-live="polite"></div>
       <div class="progress"><div id="progressBar"></div></div>
+
+<div class="growth-track">
+  <div class="growth-stage" id="growthStage">
+    <span data-growth="0">🌱</span>
+    <span data-growth="1">🌿</span>
+    <span data-growth="2">🌼</span>
+    <span data-growth="3">🌳</span>
+    <span data-growth="4">🏆</span>
+  </div>
+  <div class="growth-label" id="growthLabel">Match shapes to grow your progress garden.</div>
+</div>
+
       <div class="levels" id="levelGrid"></div>
       <div class="badges" id="badges"></div>
     </div>
   </section>
+
+<section class="shape-book">
+  <h2>📖 My Shape Collection Book</h2>
+  <div class="shape-book-grid" id="shapeBookGrid"></div>
+</section>
 
   <footer class="site-footer">
     <strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>
@@ -446,6 +661,13 @@ const state = {
   totalMatched:Number(localStorage.getItem("shadowStudioMatched")||0),
   round:Number(localStorage.getItem("shadowStudioRound")||1),
   freePlay:localStorage.getItem("shadowStudioFreePlay")==="true",
+  voice:localStorage.getItem("shadowStudioVoice")||"pip",
+  voiceSpeed:localStorage.getItem("shadowStudioVoiceSpeed")||"slow",
+  world:localStorage.getItem("shadowStudioWorld")||"garden",
+  discovered:JSON.parse(localStorage.getItem("shadowStudioDiscovered")||"[]"),
+  highContrast:localStorage.getItem("shadowStudioContrast")==="true",
+  largeShapes:localStorage.getItem("shadowStudioLargeShapes")==="true",
+  simpleMode:localStorage.getItem("shadowStudioSimpleMode")==="true",
   selected:null,
   matches:0,
   chosen:[]
@@ -462,17 +684,147 @@ function save(){
   localStorage.setItem("shadowStudioMatched",String(state.totalMatched));
   localStorage.setItem("shadowStudioRound",String(state.round));
   localStorage.setItem("shadowStudioFreePlay",String(state.freePlay));
+  localStorage.setItem("shadowStudioVoice",state.voice);
+  localStorage.setItem("shadowStudioVoiceSpeed",state.voiceSpeed);
+  localStorage.setItem("shadowStudioWorld",state.world);
+  localStorage.setItem("shadowStudioDiscovered",JSON.stringify(state.discovered));
+  localStorage.setItem("shadowStudioContrast",String(state.highContrast));
+  localStorage.setItem("shadowStudioLargeShapes",String(state.largeShapes));
+  localStorage.setItem("shadowStudioSimpleMode",String(state.simpleMode));
 }
 
-function speak(text){
+const GUIDE_VOICES={
+  pip:{name:"Pip the Shape Bird",rate:.84,pitch:1.15,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, shape explorer. Pip is ready to find colorful shapes and their shadows."},
+  ollie:{name:"Ollie Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful observer. Ollie Owl is ready to look closely at every shape."},
+  twinkle:{name:"Twinkle Star",rate:.82,pitch:1.12,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, shining learner. Twinkle Star is ready for a sparkling shape adventure."},
+  rainbow:{name:"Rainbow Rae",rate:.86,pitch:1.08,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello, bright friend. Rainbow Rae is ready to match shapes in every color."}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+let availableVoices=[],speechToken=0,lastSpoken="";
+
+function refreshVoices(){
   if(!("speechSynthesis" in window)) return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  const voices=speechSynthesis.getVoices();
-  u.voice=voices.find(v=>/child|kid|jenny|samantha|aria|female/i.test(v.name)&&/^en/i.test(v.lang))
-    ||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;
-  u.rate=.86;u.pitch=1.1;
+  availableVoices=speechSynthesis.getVoices()||[];
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.pip;
+  $("voiceStatus").textContent=availableVoices.length?`${g.name} is ready.`:"Loading a friendly voice…";
+}
+function chooseVoice(){
+  refreshVoices();
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.pip;
+  const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+  const pool=english.length?english:availableVoices;
+  return pool.find(v=>g.match.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null;
+}
+function stopSpeaking(message="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis" in window) speechSynthesis.cancel();
+  document.querySelector(".challenge-card")?.classList.remove("speaking");
+  $("voiceStatus").textContent=message;
+}
+function speak(text,{preview=false,target=null}={}){
+  if(!("speechSynthesis" in window)) return;
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.pip;
+  const phrase=preview?g.greeting:String(text||"").trim();
+  if(!phrase) return;
+  stopSpeaking("");
+  const token=++speechToken;
+  lastSpoken=phrase;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const voice=chooseVoice();
+  if(voice)u.voice=voice;
+  u.lang=voice?.lang||"en-US";
+  u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=g.pitch;
+  u.volume=1;
+  u.onstart=()=>{if(target)target.classList.add("speaking");$("voiceStatus").textContent=`${g.name} is reading.`};
+  u.onend=()=>{if(token!==speechToken)return;if(target)target.classList.remove("speaking");$("voiceStatus").textContent="Ready for another shape!"};
+  u.onerror=()=>{if(token!==speechToken)return;if(target)target.classList.remove("speaking");$("voiceStatus").textContent="The voice had a little hiccup."};
   speechSynthesis.speak(u);
+}
+
+
+const WORLDS=[
+  {id:"garden",name:"Garden",icon:"🌼",bg:"linear-gradient(145deg,#fff7d5,#e8ffe7,#e6faff)"},
+  {id:"beach",name:"Beach",icon:"🏖️",bg:"linear-gradient(145deg,#fff4bd,#dff6ff,#d6f1ff)"},
+  {id:"space",name:"Space",icon:"🚀",bg:"linear-gradient(145deg,#eef0ff,#ddd8ff,#d7e8ff)"},
+  {id:"castle",name:"Castle",icon:"🏰",bg:"linear-gradient(145deg,#fff0ea,#f5e7ff,#eef5ff)"},
+  {id:"dino",name:"Dino Valley",icon:"🦕",bg:"linear-gradient(145deg,#efffdc,#e7fff4,#fff5cc)"},
+  {id:"rainbow",name:"Rainbow Forest",icon:"🌈",bg:"linear-gradient(145deg,#fff4d8,#ffe9f7,#e5f7ff)"}
+];
+
+const SHAPE_FACTS={
+  circle:"A wheel, a plate, and many clocks are circles.",
+  square:"A square has four equal sides.",
+  triangle:"A triangle has three sides.",
+  rectangle:"Books, doors, and many windows are rectangles.",
+  hexagon:"A hexagon has six sides. Honeycomb cells often look hexagonal.",
+  octagon:"An octagon has eight sides. Stop signs are octagons.",
+  heart:"A heart shape is often used to show love and care.",
+  oval:"An egg can look like an oval.",
+  diamond:"A diamond shape can look like a square standing on one corner.",
+  star:"A star shape has points. Real stars are giant glowing balls of gas.",
+  pentagon:"A pentagon has five sides.",
+  crescent:"A crescent shape looks like a curved slice of the Moon."
+};
+
+function updateVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(b=>{
+    const active=b.dataset.voice===state.voice;
+    b.classList.toggle("active",active);
+    b.setAttribute("aria-pressed",String(active));
+  });
+  $("voiceSpeed").value=state.voiceSpeed;
+}
+function renderWorlds(){
+  $("worlds").innerHTML="";
+  WORLDS.forEach((w,i)=>{
+    const unlocked=i===0||state.totalMatched>=i*8;
+    const b=document.createElement("button");
+    b.className="world-btn"+(state.world===w.id?" active":"")+(unlocked?"":" locked");
+    b.disabled=!unlocked;
+    b.innerHTML=`<span>${w.icon}</span><small>${w.name}</small>`;
+    b.onclick=()=>{state.world=w.id;save();applyWorld();renderWorlds();speak(`${w.name} world selected.`)};
+    $("worlds").appendChild(b);
+  });
+}
+function applyWorld(){
+  const w=WORLDS.find(x=>x.id===state.world)||WORLDS[0];
+  document.querySelector(".challenge-card").style.background=w.bg;
+}
+function renderShapeBook(){
+  $("shapeBookGrid").innerHTML=SHAPES.map(s=>{
+    const found=state.discovered.includes(s.id);
+    return `<button class="shape-book-card ${found?"found":""}" data-book-shape="${s.id}" ${found?"":"disabled"}>
+      <span>${found?"⭐":"❔"}</span><small>${found?s.name:"Not found yet"}</small>
+    </button>`;
+  }).join("");
+}
+function updateAccessibility(){
+  document.body.classList.toggle("high-contrast",state.highContrast);
+  document.body.classList.toggle("large-shapes",state.largeShapes);
+  document.body.classList.toggle("simple-mode",state.simpleMode);
+  $("contrastBtn").classList.toggle("active",state.highContrast);
+  $("largeShapesBtn").classList.toggle("active",state.largeShapes);
+  $("simpleModeBtn").classList.toggle("active",state.simpleMode);
+}
+function updateGrowth(){
+  const ratio=state.matches/Math.max(1,state.chosen.length);
+  const stage=Math.min(4,Math.floor(ratio*5));
+  document.querySelectorAll("[data-growth]").forEach(el=>el.classList.toggle("on",Number(el.dataset.growth)<=stage));
+  $("growthLabel").textContent=state.matches===state.chosen.length?"Your progress garden is complete!":`${state.matches} of ${state.chosen.length} shapes matched.`;
+}
+function celebrateShape(shape,target){
+  target.classList.add("bounce");
+  setTimeout(()=>target.classList.remove("bounce"),600);
+  const symbols=shape.id==="heart"?["💛","💗","✨"]:shape.id==="star"?["⭐","✨","🌟"]:["✨","⭐","🌈"];
+  const r=target.getBoundingClientRect();
+  symbols.concat(symbols).forEach((symbol,index)=>{
+    const s=document.createElement("span");
+    s.className="spark";s.textContent=symbol;
+    s.style.left=(r.left+r.width/2+(index-2.5)*20)+"px";
+    s.style.top=(r.top+r.height/2)+"px";
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1150);
+  });
 }
 
 function shuffle(a){
@@ -512,7 +864,7 @@ function renderRound(){
   $("question").textContent=state.freePlay
     ? "Free Play: match every shape at your own pace."
     : `Round ${state.round}: match every shape to its shadow.`;
-  $("instruction").textContent="Drag a shape to its shadow, or tap a shape and then tap its match.";
+  $("instruction").textContent="Drag a shape to its shadow, or tap a shape and then tap its match. Keyboard players can use Tab and Enter.";
   $("feedback").textContent="";
   $("modeSelect").value=state.mode;
 
@@ -590,10 +942,14 @@ function attemptMatch(shapeId,shadowTile){
     state.streak++;
     state.stars+=2;
     state.selected=null;
-    $("feedback").textContent=`Perfect match! ${shape.name}.`;
-    speak(`Perfect match. ${shape.name}.`);
-    sparkle(shadowTile);
+    $("feedback").textContent=`Wonderful match! ${shape.name}. ${SHAPE_FACTS[shape.id]}`;
+    speak(`Wonderful match. ${shape.name}. ${SHAPE_FACTS[shape.id]}`,{target:document.querySelector(".challenge-card")});
+    if(!state.discovered.includes(shape.id))state.discovered.push(shape.id);
+    celebrateShape(shape,shadowTile);
+    renderShapeBook();
     updateStats();
+    updateGrowth();
+    renderWorlds();
     save();
 
     if(state.matches===state.chosen.length){
@@ -602,8 +958,8 @@ function attemptMatch(shapeId,shadowTile){
   }else{
     shadowTile.classList.add("wrong");
     state.streak=0;
-    $("feedback").textContent="Good try. That shadow belongs to another shape.";
-    speak("Good try. Look again.");
+    $("feedback").textContent="Nice thinking. That shadow belongs to another shape. Look one more time.";
+    speak("Nice thinking. Look one more time.",{target:document.querySelector(".challenge-card")});
     setTimeout(()=>shadowTile.classList.remove("wrong"),650);
     updateStats();
     save();
@@ -649,6 +1005,7 @@ function updateStats(){
   $("matchedStat").textContent=state.totalMatched;
   $("roundStat").textContent=state.round;
   $("progressBar").style.width=(state.matches/Math.max(1,state.chosen.length)*100)+"%";
+  updateGrowth();
 
   const badges=[];
   if(state.totalMatched>=5) badges.push("🧩 First Five");
@@ -673,11 +1030,40 @@ function sparkle(target){
   });
 }
 
+
+$("voiceGuides").onclick=event=>{
+  const b=event.target.closest("[data-voice]");
+  if(!b)return;
+  state.voice=b.dataset.voice;
+  save();
+  updateVoiceButtons();
+  $("voiceStatus").textContent=`${GUIDE_VOICES[state.voice].name} selected.`;
+};
+$("voiceSpeed").onchange=event=>{
+  state.voiceSpeed=event.target.value;
+  save();
+  $("voiceStatus").textContent="Reading speed saved.";
+};
+$("meetGuideBtn").onclick=()=>speak("",{preview:true});
+$("repeatVoiceBtn").onclick=()=>lastSpoken?speak(lastSpoken,{target:document.querySelector(".challenge-card")}):speak("Match each colorful shape to its shadow.",{target:document.querySelector(".challenge-card")});
+$("stopVoiceBtn").onclick=()=>stopSpeaking();
+
+$("contrastBtn").onclick=()=>{state.highContrast=!state.highContrast;save();updateAccessibility()};
+$("largeShapesBtn").onclick=()=>{state.largeShapes=!state.largeShapes;save();updateAccessibility()};
+$("simpleModeBtn").onclick=()=>{state.simpleMode=!state.simpleMode;save();updateAccessibility()};
+
+$("shapeBookGrid").onclick=event=>{
+  const b=event.target.closest("[data-book-shape]");
+  if(!b||b.disabled)return;
+  const shape=SHAPES.find(s=>s.id===b.dataset.bookShape);
+  speak(`${shape.name}. ${SHAPE_FACTS[shape.id]}`,{target:document.querySelector(".shape-book")});
+};
+
 $("modeSelect").addEventListener("change",event=>{
   state.mode=event.target.value;
   renderRound();
 });
-$("hearBtn").addEventListener("click",()=>speak("Match each colorful shape to its shadow."));
+$("hearBtn").addEventListener("click",()=>speak("Match each colorful shape to its shadow. You may drag a shape, or tap a shape and then tap its matching shadow.",{target:document.querySelector(".challenge-card")}));
 $("hintBtn").addEventListener("click",()=>{
   if(!state.selected){
     const first=document.querySelector(".shape-tile:not(.matched)");
@@ -709,6 +1095,11 @@ $("resetBtn").addEventListener("click",()=>{
   state.totalMatched=0;
   state.round=1;
   state.freePlay=false;
+  state.world="garden";
+  state.discovered=[];
+  state.highContrast=false;
+  state.largeShapes=false;
+  state.simpleMode=false;
   save();
   renderRound();
 });
@@ -723,8 +1114,27 @@ $("celebrationModal").addEventListener("click",event=>{
   }
 });
 
+if("speechSynthesis" in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $("meetGuideBtn").disabled=true;
+  $("repeatVoiceBtn").disabled=true;
+  $("stopVoiceBtn").disabled=true;
+  $("hearBtn").disabled=true;
+  $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+}
+updateVoiceButtons();
+updateAccessibility();
+renderWorlds();
+renderShapeBook();
+applyWorld();
 $("freePlayBtn").textContent=state.freePlay?"✓ Free Play On":"♾ Free Play";
 renderRound();
+window.addEventListener("beforeunload",()=>stopSpeaking(""));
 })();
 </script>
 </body>
