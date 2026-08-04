@@ -13,14 +13,14 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;padding:26px 14px 48px;color:var(--ink);font-family:"Avenir Next Rounded","Trebuchet MS","Arial Rounded MT Bold","Comic Sans MS",system-ui,sans-serif;background:linear-gradient(145deg,var(--bg1),var(--bg2));transition:.35s}
+body{margin:0;min-height:100vh;padding:32px 14px 54px;color:var(--ink);font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;background:linear-gradient(145deg,var(--bg1),var(--bg2));transition:.35s}
 button,select,input{font:inherit}button{touch-action:manipulation}
 .wrap{width:min(1120px,100%);margin:auto}
-.hero{text-align:center;margin-bottom:18px}
+.hero{text-align:center;margin-bottom:24px;padding:8px 10px 0}
 .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--panel);border:1px solid var(--border);font-weight:900;color:var(--primary);font-size:.86rem}
-h1{margin:12px 0 5px;font-size:clamp(2.35rem,7vw,4.8rem);line-height:.96;letter-spacing:-.04em;color:var(--primary)}
-.subtitle{max-width:800px;margin:0 auto;color:var(--muted);line-height:1.6}
-.app{background:var(--panel);border:1px solid var(--border);border-radius:32px;padding:18px;box-shadow:var(--shadow)}
+h1{margin:18px auto 10px;max-width:980px;padding:0 .08em;font-size:clamp(2.45rem,6.3vw,4.9rem);line-height:1.08;letter-spacing:-.02em;color:var(--primary)}
+.subtitle{max-width:840px;margin:0 auto;color:var(--muted);line-height:1.72;font-size:1.02rem}
+.app{background:var(--panel);border:1px solid var(--border);border-radius:34px;padding:20px;box-shadow:var(--shadow)}
 .toolbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .control{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:11px}
 .control label{display:block;font-size:.73rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:900;margin-bottom:5px}
@@ -56,6 +56,97 @@ h1{margin:12px 0 5px;font-size:clamp(2.35rem,7vw,4.8rem);line-height:.96;letter-
 .list-item{border:0;border-radius:13px;padding:10px;background:var(--card);color:var(--ink);text-align:left;cursor:pointer}
 footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;line-height:1.55}footer strong{color:var(--primary)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.mascot-banner{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:12px;
+  align-items:center;
+  margin:0 0 14px;
+  padding:13px 15px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#fff,#fff8e9,#f1fff7);
+  border:1px solid var(--border);
+}
+.mascot-face{font-size:3rem;animation:bob 3s ease-in-out infinite}
+.mascot-banner h3{margin:0;color:var(--primary);font-size:1.06rem}
+.mascot-banner p{margin:3px 0 0;color:var(--muted);line-height:1.45}
+
+.voice-studio{
+  margin:0 0 14px;
+  padding:13px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#fff,#fffaf1,#f7f4ff);
+  border:1px solid var(--border);
+}
+.voice-studio h3{margin:0 0 8px;text-align:center;color:var(--primary);font-size:1rem}
+.voice-friends{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-friend{
+  min-width:0;min-height:62px;padding:8px 5px;border:2px solid var(--border);
+  border-radius:16px;background:white;color:var(--primary);display:grid;place-items:center;
+  align-content:center;gap:2px;box-shadow:none
+}
+.voice-friend .emoji{font-size:1.45rem;line-height:1}
+.voice-friend .name{font-size:.68rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.voice-friend.active{color:white;border-color:transparent;background:linear-gradient(135deg,var(--secondary),var(--primary))}
+.voice-options{margin-top:9px;display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
+.voice-options select{border:1px solid var(--border);border-radius:999px;padding:9px 12px;background:var(--panel);color:var(--ink);font-weight:900}
+.voice-status{min-height:1.2em;margin:8px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.details.speaking{box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 35%,transparent)}
+
+.kitchen-mode{
+  margin-top:14px;
+  border-radius:22px;
+  padding:14px;
+  border:1px solid var(--border);
+  background:linear-gradient(145deg,var(--panel),var(--card));
+}
+.kitchen-mode h3{margin:0 0 8px;color:var(--primary)}
+.step-card{
+  min-height:116px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:16px;
+  border-radius:18px;
+  background:var(--panel);
+  border:2px dashed var(--border);
+  color:var(--ink);
+  font-size:1.08rem;
+  line-height:1.55;
+}
+.step-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.checklist{display:grid;gap:7px;margin-top:10px}
+.check-item{
+  display:flex;align-items:flex-start;gap:8px;padding:9px 10px;border-radius:14px;
+  background:var(--panel);border:1px solid var(--border)
+}
+.check-item input{width:20px;height:20px;flex:0 0 auto}
+.life-passport{
+  margin-top:14px;padding:14px;border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff7e8,#eefbff);border:1px solid var(--border)
+}
+.life-passport h3{margin:0 0 8px;color:var(--primary);text-align:center}
+.stamp-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.passport-stamp{
+  padding:9px 6px;border-radius:15px;background:var(--panel);border:1px solid var(--border);
+  text-align:center;opacity:.42;filter:grayscale(.35)
+}
+.passport-stamp.earned{opacity:1;filter:none;box-shadow:0 6px 15px rgba(65,43,80,.08)}
+.passport-stamp span{display:block;font-size:1.45rem}
+.passport-stamp small{font-size:.68rem;color:var(--muted);font-weight:900}
+.parent-corner{margin-top:14px;border-radius:20px;background:var(--panel);border:1px solid var(--border);padding:12px 14px}
+.parent-corner summary{cursor:pointer;color:var(--primary);font-weight:900}
+.parent-corner p{color:var(--muted);line-height:1.5}
+.sparkle{position:fixed;pointer-events:none;z-index:50;font-size:1.6rem;animation:sparkleFly 1s ease forwards}
+@keyframes sparkleFly{to{transform:translateY(-80px) scale(1.35) rotate(18deg);opacity:0}}
+@media(max-width:700px){
+  .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-friend:last-child{grid-column:1/-1}
+  .stamp-row{grid-template-columns:repeat(2,1fr)}
+  .mascot-banner{grid-template-columns:1fr;text-align:center}
+}
+
 @media(max-width:860px){.toolbar{grid-template-columns:repeat(2,1fr)}.recipe{grid-template-columns:1fr}.visual,.details{min-height:0}}
 @media(max-width:560px){.toolbar,.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.btn.primary{margin-left:0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
@@ -69,6 +160,36 @@ footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;lin
 <p class="subtitle">Simple food activities with clear adult-help labels, allergen reminders, and age-appropriate texture and choking notes.</p>
 </header>
 <section class="app">
+
+<div class="mascot-banner">
+  <div class="mascot-face" aria-hidden="true">🥄</div>
+  <div>
+    <h3>Sunny Spoon is your little-kitchen guide</h3>
+    <p>“Hello, kitchen helper! We will wash hands, ask a grown-up, gather ingredients, follow one step at a time, and clean up together.”</p>
+  </div>
+</div>
+
+<section class="voice-studio" aria-labelledby="voiceTitle">
+  <h3 id="voiceTitle">Choose a Kitchen Reading Friend</h3>
+  <div class="voice-friends" id="voiceFriends">
+    <button type="button" class="voice-friend" data-voice="chef"><span class="emoji">🧑‍🍳</span><span class="name">Chef Coco</span></button>
+    <button type="button" class="voice-friend" data-voice="mouse"><span class="emoji">🐭</span><span class="name">Milo Mouse</span></button>
+    <button type="button" class="voice-friend" data-voice="bee"><span class="emoji">🐝</span><span class="name">Busy Bee</span></button>
+    <button type="button" class="voice-friend" data-voice="frog"><span class="emoji">🐸</span><span class="name">Freddie Frog</span></button>
+    <button type="button" class="voice-friend" data-voice="strawberry"><span class="emoji">🍓</span><span class="name">Berry Friend</span></button>
+  </div>
+  <div class="voice-options">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and gentle</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">🥄 A little lively</option>
+    </select>
+    <button type="button" id="previewVoiceBtn" class="btn">👋 Meet My Friend</button>
+    <button type="button" id="stopVoiceBtn" class="btn">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+</section>
+
 <div class="toolbar">
 <div class="control"><label for="theme">Color theme</label><select id="theme"></select></div>
 <div class="control"><label for="category">Recipe type</label><select id="category"></select></div>
@@ -93,6 +214,18 @@ footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;lin
 <div class="box"><h3>Steps</h3><ol id="steps"></ol></div>
 </div>
 <div class="warning"><strong>Safety notes:</strong> <span id="safetyNotes"></span></div>
+
+<div class="kitchen-mode">
+  <h3>🥣 Make It Together Mode</h3>
+  <div class="checklist" id="ingredientChecklist"></div>
+  <div class="step-card" id="guidedStep">Choose a recipe to begin.</div>
+  <div class="step-nav">
+    <button class="btn" id="previousStepBtn">⬅ Previous Step</button>
+    <button class="btn sunny" id="hearStepBtn">🔊 Hear This Step</button>
+    <button class="btn primary" id="nextStepBtn">Next Step ➡</button>
+  </div>
+</div>
+
 <div class="actions">
 <button class="btn" id="hearBtn">🔊 Read Recipe</button>
 <button class="btn sunny" id="favoriteBtn">☆ Save Recipe</button>
@@ -101,6 +234,23 @@ footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;lin
 </div>
 </section>
 </div>
+
+
+<section class="life-passport">
+  <h3>🌎 My Little Kitchen Passport</h3>
+  <div class="stamp-row" id="passportStamps">
+    <div class="passport-stamp" data-stamp="explore"><span>🥣</span><small>Recipe Explorer</small></div>
+    <div class="passport-stamp" data-stamp="safe"><span>🧼</span><small>Safety Helper</small></div>
+    <div class="passport-stamp" data-stamp="steps"><span>🥄</span><small>Step Follower</small></div>
+    <div class="passport-stamp" data-stamp="save"><span>⭐</span><small>Recipe Keeper</small></div>
+    <div class="passport-stamp" data-stamp="variety"><span>🌈</span><small>Food Adventurer</small></div>
+  </div>
+</section>
+
+<details class="parent-corner">
+  <summary>👨‍👩‍👧 Parent & Grown-Up Corner</summary>
+  <p>Use the adult-help and safety labels as prompts for supervision. The app does not determine whether a recipe or texture is safe for a specific child. A trusted adult remains responsible for allergies, choking risks, heat, appliances, freshness, hygiene, and serving size.</p>
+</details>
 
 <div class="stats">
 <div class="stat"><strong id="viewedStat">0</strong>Recipes viewed</div>
@@ -117,14 +267,111 @@ footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;lin
 <footer><strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>All Rights Reserved. · Educational use only; adult supervision required.</footer>
 </main>
 <script>
-const RECIPES=[{"name": "Peanut Butter Banana Bites", "ingredients": ["Banana", "Peanut butter", "Honey"], "steps": ["Ask a grown-up to slice the banana.", "Spread peanut butter on each slice.", "Add a tiny drizzle of honey if allowed."], "category": "No-Cook", "adult_help": true, "allergens": ["Peanuts"], "choking": ["Banana pieces should be age-appropriate.", "Honey is not for children under 12 months."], "emoji": "🍌"}, {"name": "Apple Nachos", "ingredients": ["Apple", "Peanut butter", "Chocolate chips"], "steps": ["Ask a grown-up to slice the apple thinly.", "Arrange slices on a plate.", "Drizzle softened peanut butter and add a few chocolate chips."], "category": "No-Cook", "adult_help": true, "allergens": ["Peanuts"], "choking": ["Apple slices can be a choking risk for young children; prepare to an age-appropriate texture."], "emoji": "🍎"}, {"name": "Yogurt Parfait", "ingredients": ["Yogurt", "Granola", "Berries"], "steps": ["Spoon yogurt into a cup.", "Add soft berries.", "Top with a small amount of granola if age-appropriate."], "category": "No-Cook", "adult_help": false, "allergens": ["Milk", "Possible nuts in granola"], "choking": ["Choose soft fruit and age-appropriate granola."], "emoji": "🥣"}, {"name": "Ants on a Log", "ingredients": ["Celery", "Peanut butter", "Raisins"], "steps": ["Ask a grown-up to prepare the celery.", "Spread peanut butter in the center.", "Add raisins only if age-appropriate."], "category": "No-Cook", "adult_help": true, "allergens": ["Peanuts"], "choking": ["Raw celery and raisins can be choking hazards for young children."], "emoji": "🐜"}, {"name": "Mini Cheese Sandwiches", "ingredients": ["Bread", "Cheese"], "steps": ["Place cheese between two pieces of bread.", "Press gently.", "Ask a grown-up to cut into age-appropriate pieces."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Cut to an age-appropriate size."], "emoji": "🥪"}, {"name": "Rainbow Fruit Cup", "ingredients": ["Strawberries", "Blueberries", "Banana", "Grapes"], "steps": ["Ask a grown-up to wash and prepare the fruit.", "Layer the fruit by color.", "Serve in a small cup or bowl."], "category": "No-Cook", "adult_help": true, "allergens": [], "choking": ["Whole grapes are a major choking hazard; cut lengthwise into quarters for young children.", "Blueberries may need to be squashed or cut."], "emoji": "🌈"}, {"name": "No-Bake Oat Bites", "ingredients": ["Oats", "Seed butter or peanut butter", "Honey or mashed banana"], "steps": ["Mix ingredients in a bowl.", "Ask a grown-up to check the texture.", "Roll into very small soft bites and chill."], "category": "No-Cook", "adult_help": true, "allergens": ["Possible peanuts", "Oats may contain gluten"], "choking": ["Make bites small and soft.", "Honey is not for children under 12 months."], "emoji": "⚪"}, {"name": "Cracker Sandwiches", "ingredients": ["Crackers", "Cheese", "Turkey slices"], "steps": ["Place a small piece of cheese and turkey on one cracker.", "Top with another cracker.", "Press gently."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Choose crackers and fillings appropriate for the child’s age."], "emoji": "🧀"}, {"name": "Tortilla Roll-Ups", "ingredients": ["Tortilla", "Cream cheese", "Turkey"], "steps": ["Spread cream cheese on the tortilla.", "Add a thin layer of Turkey.", "Roll tightly and ask a grown-up to slice."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Slice into small, manageable pieces."], "emoji": "🌯"}, {"name": "Frozen Yogurt Bites", "ingredients": ["Yogurt", "Soft berries"], "steps": ["Spoon small yogurt dots onto a lined tray.", "Add a tiny soft berry piece.", "A grown-up places the tray in the freezer."], "category": "Freezer", "adult_help": true, "allergens": ["Milk"], "choking": ["Frozen foods can be very hard; allow to soften before serving to young children."], "emoji": "❄️"}, {"name": "Trail Mix Cup", "ingredients": ["Cereal", "Pretzels", "Raisins", "Chocolate chips"], "steps": ["Ask a grown-up to choose age-appropriate pieces.", "Add a little of each ingredient to a bowl.", "Mix with a spoon."], "category": "No-Cook", "adult_help": true, "allergens": ["Wheat", "Possible milk", "Possible nuts"], "choking": ["Traditional trail mix is often unsuitable for preschoolers because of hard and chewy pieces."], "emoji": "🥨"}, {"name": "Bagel Faces", "ingredients": ["Bagel", "Cream cheese", "Soft fruit"], "steps": ["Ask a grown-up to prepare the bagel.", "Spread cream cheese.", "Use soft fruit to make a face."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Bagels can be chewy; use soft, small pieces for young children."], "emoji": "🙂"}, {"name": "Chocolate Milk", "ingredients": ["Milk", "Chocolate syrup"], "steps": ["A grown-up pours the milk.", "Add a small amount of chocolate syrup.", "Stir slowly."], "category": "Drinks", "adult_help": true, "allergens": ["Milk"], "choking": [], "emoji": "🥛"}, {"name": "Banana Sandwich", "ingredients": ["Bread", "Banana", "Peanut or seed butter"], "steps": ["Spread the butter on bread.", "Add banana slices prepared by a grown-up.", "Close the sandwich and cut if needed."], "category": "No-Cook", "adult_help": true, "allergens": ["Wheat", "Possible peanuts"], "choking": ["Cut to an age-appropriate size."], "emoji": "🍌"}, {"name": "Fruit Yogurt Dip", "ingredients": ["Yogurt", "Soft fruit"], "steps": ["Spoon yogurt into a small bowl.", "Ask a grown-up to prepare soft fruit pieces.", "Dip and enjoy."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk"], "choking": ["Avoid hard raw fruit pieces for very young children."], "emoji": "🍓"}, {"name": "Ham and Cheese Roll-Ups", "ingredients": ["Ham", "Cheese"], "steps": ["Place cheese on a thin slice of Turkey.", "Roll gently.", "Ask a grown-up to cut into small pieces."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk"], "choking": ["Rolled meat and cheese should be cut into small, manageable pieces."], "emoji": "🌀"}, {"name": "Cereal Sundae", "ingredients": ["Cereal", "Yogurt", "Soft fruit"], "steps": ["Add yogurt to a bowl.", "Top with soft fruit.", "Add a small amount of age-appropriate cereal."], "category": "No-Cook", "adult_help": false, "allergens": ["Milk", "Wheat", "Possible nuts"], "choking": ["Choose cereal and fruit appropriate for the child’s age."], "emoji": "🍨"}, {"name": "Peach Yogurt Cup", "ingredients": ["Yogurt", "Soft peaches"], "steps": ["Spoon yogurt into a cup.", "Add finely chopped soft peaches.", "Stir or layer."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk"], "choking": ["Peach pieces should be soft and small."], "emoji": "🍑"}, {"name": "Rice Cake Faces", "ingredients": ["Rice cake", "Cream cheese", "Soft fruit"], "steps": ["Spread cream cheese on the rice cake.", "Use soft fruit pieces to make a face.", "Ask a grown-up to check the size and texture."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Possible rice sensitivity"], "choking": ["Rice cakes can be dry and hard; supervise closely and consider a softer base."], "emoji": "😄"}, {"name": "Veggie Wrap", "ingredients": ["Tortilla", "Cheese", "Soft lettuce or avocado"], "steps": ["Place ingredients on the tortilla.", "Roll gently.", "Ask a grown-up to cut into small pieces."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Use soft fillings and manageable pieces."], "emoji": "🥬"}, {"name": "Butterfly Snack", "ingredients": ["Soft bread or crackers", "Cheese", "Pretzels"], "steps": ["Arrange two pieces as wings.", "Add cheese in the center.", "Use pretzels only if age-appropriate."], "category": "Creative", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Hard pretzels may be a choking risk for young children."], "emoji": "🦋"}, {"name": "Cookie Decorating", "ingredients": ["Cookie", "Frosting", "Sprinkles"], "steps": ["Place one cookie on a plate.", "Spread a small amount of frosting.", "Add a few sprinkles."], "category": "Creative", "adult_help": false, "allergens": ["Wheat", "Milk", "Egg"], "choking": ["Small hard decorations may not be suitable for very young children."], "emoji": "🍪"}, {"name": "Peanut Butter Oat Cups", "ingredients": ["Oats", "Peanut butter", "Honey"], "steps": ["Mix ingredients with a grown-up.", "Press into small silicone cups.", "Chill until set."], "category": "No-Cook", "adult_help": true, "allergens": ["Peanuts", "Oats may contain gluten"], "choking": ["Honey is not for children under 12 months.", "Texture should be soft and easy to chew."], "emoji": "🥜"}, {"name": "Fruit Ice Pops", "ingredients": ["Fruit juice", "Soft fruit pieces"], "steps": ["Add soft fruit to molds.", "Pour in juice with a grown-up.", "Freeze and let soften slightly before serving."], "category": "Freezer", "adult_help": true, "allergens": [], "choking": ["Frozen fruit can be very hard; supervise and allow to soften."], "emoji": "🧊"}, {"name": "Breakfast Banana Bowl", "ingredients": ["Banana", "Yogurt", "Cereal"], "steps": ["Ask a grown-up to prepare the banana.", "Add yogurt.", "Top with a small amount of age-appropriate cereal."], "category": "Breakfast", "adult_help": true, "allergens": ["Milk", "Wheat", "Possible nuts"], "choking": ["Choose soft pieces and age-appropriate cereal."], "emoji": "🌞"}, {"name": "Cucumber Cream Cheese Bites", "ingredients": ["Soft bread", "Cream cheese", "Cucumber"], "steps": ["A grown-up prepares thin cucumber pieces.", "Spread cream cheese on soft bread.", "Add cucumber and cut into small bites."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Raw cucumber can be firm; prepare very thin or use peeled soft pieces."], "emoji": "🥒"}, {"name": "Mini Pizza Crackers", "ingredients": ["Crackers", "Tomato sauce", "Cheese"], "steps": ["Spread sauce on crackers.", "Add cheese.", "A grown-up heats them and lets them cool fully."], "category": "Adult Heat", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Check temperature before serving."], "emoji": "🍕"}, {"name": "Cheese Quesadilla", "ingredients": ["Tortilla", "Cheese"], "steps": ["Place cheese inside a tortilla.", "A grown-up heats it safely.", "Cool and cut into small pieces."], "category": "Adult Heat", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Check temperature and cut into manageable pieces."], "emoji": "🫓"}, {"name": "Simple Smoothie", "ingredients": ["Banana", "Milk or yogurt", "Berries"], "steps": ["Place prepared ingredients in the blender.", "A grown-up closes and operates the blender.", "Pour into a cup after the blades stop completely."], "category": "Adult Appliance", "adult_help": true, "allergens": ["Milk"], "choking": ["Whole berries should be prepared appropriately before blending."], "emoji": "🥤"}, {"name": "Mini Bagel Pizza", "ingredients": ["Bagel", "Tomato sauce", "Cheese"], "steps": ["A grown-up prepares the bagel.", "Spread sauce and add cheese.", "A grown-up heats and cools it before serving."], "category": "Adult Heat", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Bagels are chewy; cut into small pieces."], "emoji": "🍕"}];
+const RECIPES=[{"name": "Peanut Butter Banana Bites", "ingredients": ["Banana", "Peanut butter", "Honey"], "steps": ["Ask a grown-up to slice the banana.", "Spread peanut butter on each slice.", "Add a tiny drizzle of honey if allowed."], "category": "No-Cook", "adult_help": true, "allergens": ["Peanuts"], "choking": ["Banana pieces should be age-appropriate.", "Honey is not for children under 12 months."], "emoji": "🍌"}, {"name": "Apple Nachos", "ingredients": ["Apple", "Peanut butter", "Chocolate chips"], "steps": ["Ask a grown-up to slice the apple thinly.", "Arrange slices on a plate.", "Drizzle softened peanut butter and add a few chocolate chips."], "category": "No-Cook", "adult_help": true, "allergens": ["Peanuts"], "choking": ["Apple slices can be a choking risk for young children; prepare to an age-appropriate texture."], "emoji": "🍎"}, {"name": "Yogurt Parfait", "ingredients": ["Yogurt", "Granola", "Berries"], "steps": ["Spoon yogurt into a cup.", "Add soft berries.", "Top with a small amount of granola if age-appropriate."], "category": "No-Cook", "adult_help": false, "allergens": ["Milk", "Possible nuts in granola"], "choking": ["Choose soft fruit and age-appropriate granola."], "emoji": "🥣"}, {"name": "Ants on a Log", "ingredients": ["Celery", "Peanut butter", "Raisins"], "steps": ["Ask a grown-up to prepare the celery.", "Spread peanut butter in the center.", "Add raisins only if age-appropriate."], "category": "No-Cook", "adult_help": true, "allergens": ["Peanuts"], "choking": ["Raw celery and raisins can be choking hazards for young children."], "emoji": "🐜"}, {"name": "Mini Cheese Sandwiches", "ingredients": ["Bread", "Cheese"], "steps": ["Place cheese between two pieces of bread.", "Press gently.", "Ask a grown-up to cut into age-appropriate pieces."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Cut to an age-appropriate size."], "emoji": "🥪"}, {"name": "Rainbow Fruit Cup", "ingredients": ["Strawberries", "Blueberries", "Banana", "Grapes"], "steps": ["Ask a grown-up to wash and prepare the fruit.", "Layer the fruit by color.", "Serve in a small cup or bowl."], "category": "No-Cook", "adult_help": true, "allergens": [], "choking": ["Whole grapes are a major choking hazard; cut lengthwise into quarters for young children.", "Blueberries may need to be squashed or cut."], "emoji": "🌈"}, {"name": "No-Bake Oat Bites", "ingredients": ["Oats", "Seed butter or peanut butter", "Honey or mashed banana"], "steps": ["Mix ingredients in a bowl.", "Ask a grown-up to check the texture.", "Roll into very small soft bites and chill."], "category": "No-Cook", "adult_help": true, "allergens": ["Possible peanuts", "Oats may contain gluten"], "choking": ["Make bites small and soft.", "Honey is not for children under 12 months."], "emoji": "⚪"}, {"name": "Cracker Sandwiches", "ingredients": ["Crackers", "Cheese", "Turkey slices"], "steps": ["Place a small piece of cheese and turkey on one cracker.", "Top with another cracker.", "Press gently."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Choose crackers and fillings appropriate for the child’s age."], "emoji": "🧀"}, {"name": "Tortilla Roll-Ups", "ingredients": ["Tortilla", "Cream cheese", "Turkey"], "steps": ["Spread cream cheese on the tortilla.", "Add a thin layer of Turkey.", "Roll tightly and ask a grown-up to slice."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Slice into small, manageable pieces."], "emoji": "🌯"}, {"name": "Frozen Yogurt Bites", "ingredients": ["Yogurt", "Soft berries"], "steps": ["Spoon small yogurt dots onto a lined tray.", "Add a tiny soft berry piece.", "A grown-up places the tray in the freezer."], "category": "Freezer", "adult_help": true, "allergens": ["Milk"], "choking": ["Frozen foods can be very hard; allow to soften before serving to young children."], "emoji": "❄️"}, {"name": "Trail Mix Cup", "ingredients": ["Cereal", "Pretzels", "Raisins", "Chocolate chips"], "steps": ["Ask a grown-up to choose age-appropriate pieces.", "Add a little of each ingredient to a bowl.", "Mix with a spoon."], "category": "No-Cook", "adult_help": true, "allergens": ["Wheat", "Possible milk", "Possible nuts"], "choking": ["Traditional trail mix is often unsuitable for preschoolers because of hard and chewy pieces."], "emoji": "🥨"}, {"name": "Bagel Faces", "ingredients": ["Bagel", "Cream cheese", "Soft fruit"], "steps": ["Ask a grown-up to prepare the bagel.", "Spread cream cheese.", "Use soft fruit to make a face."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Bagels can be chewy; use soft, small pieces for young children."], "emoji": "🙂"}, {"name": "Chocolate Milk", "ingredients": ["Milk", "Chocolate syrup"], "steps": ["A grown-up pours the milk.", "Add a small amount of chocolate syrup.", "Stir slowly."], "category": "Drinks", "adult_help": true, "allergens": ["Milk"], "choking": [], "emoji": "🥛"}, {"name": "Banana Sandwich", "ingredients": ["Bread", "Banana", "Peanut or seed butter"], "steps": ["Spread the butter on bread.", "Add banana slices prepared by a grown-up.", "Close the sandwich and cut if needed."], "category": "No-Cook", "adult_help": true, "allergens": ["Wheat", "Possible peanuts"], "choking": ["Cut to an age-appropriate size."], "emoji": "🍌"}, {"name": "Fruit Yogurt Dip", "ingredients": ["Yogurt", "Soft fruit"], "steps": ["Spoon yogurt into a small bowl.", "Ask a grown-up to prepare soft fruit pieces.", "Dip and enjoy."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk"], "choking": ["Avoid hard raw fruit pieces for very young children."], "emoji": "🍓"}, {"name": "Ham and Cheese Roll-Ups", "ingredients": ["Ham", "Cheese"], "steps": ["Place cheese on a thin slice of ham.", "Roll gently.", "Ask a grown-up to cut into small pieces."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk"], "choking": ["Rolled meat and cheese should be cut into small, manageable pieces."], "emoji": "🌀"}, {"name": "Cereal Sundae", "ingredients": ["Cereal", "Yogurt", "Soft fruit"], "steps": ["Add yogurt to a bowl.", "Top with soft fruit.", "Add a small amount of age-appropriate cereal."], "category": "No-Cook", "adult_help": false, "allergens": ["Milk", "Wheat", "Possible nuts"], "choking": ["Choose cereal and fruit appropriate for the child’s age."], "emoji": "🍨"}, {"name": "Peach Yogurt Cup", "ingredients": ["Yogurt", "Soft peaches"], "steps": ["Spoon yogurt into a cup.", "Add finely chopped soft peaches.", "Stir or layer."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk"], "choking": ["Peach pieces should be soft and small."], "emoji": "🍑"}, {"name": "Rice Cake Faces", "ingredients": ["Rice cake", "Cream cheese", "Soft fruit"], "steps": ["Spread cream cheese on the rice cake.", "Use soft fruit pieces to make a face.", "Ask a grown-up to check the size and texture."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Possible rice sensitivity"], "choking": ["Rice cakes can be dry and hard; supervise closely and consider a softer base."], "emoji": "😄"}, {"name": "Veggie Wrap", "ingredients": ["Tortilla", "Cheese", "Soft lettuce or avocado"], "steps": ["Place ingredients on the tortilla.", "Roll gently.", "Ask a grown-up to cut into small pieces."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Use soft fillings and manageable pieces."], "emoji": "🥬"}, {"name": "Butterfly Snack", "ingredients": ["Soft bread or crackers", "Cheese", "Pretzels"], "steps": ["Arrange two pieces as wings.", "Add cheese in the center.", "Use pretzels only if age-appropriate."], "category": "Creative", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Hard pretzels may be a choking risk for young children."], "emoji": "🦋"}, {"name": "Cookie Decorating", "ingredients": ["Cookie", "Frosting", "Sprinkles"], "steps": ["Place one cookie on a plate.", "Spread a small amount of frosting.", "Add a few sprinkles."], "category": "Creative", "adult_help": false, "allergens": ["Wheat", "Milk", "Egg"], "choking": ["Small hard decorations may not be suitable for very young children."], "emoji": "🍪"}, {"name": "Peanut Butter Oat Cups", "ingredients": ["Oats", "Peanut butter", "Honey"], "steps": ["Mix ingredients with a grown-up.", "Press into small silicone cups.", "Chill until set."], "category": "No-Cook", "adult_help": true, "allergens": ["Peanuts", "Oats may contain gluten"], "choking": ["Honey is not for children under 12 months.", "Texture should be soft and easy to chew."], "emoji": "🥜"}, {"name": "Fruit Ice Pops", "ingredients": ["Fruit juice", "Soft fruit pieces"], "steps": ["Add soft fruit to molds.", "Pour in juice with a grown-up.", "Freeze and let soften slightly before serving."], "category": "Freezer", "adult_help": true, "allergens": [], "choking": ["Frozen fruit can be very hard; supervise and allow to soften."], "emoji": "🧊"}, {"name": "Breakfast Banana Bowl", "ingredients": ["Banana", "Yogurt", "Cereal"], "steps": ["Ask a grown-up to prepare the banana.", "Add yogurt.", "Top with a small amount of age-appropriate cereal."], "category": "Breakfast", "adult_help": true, "allergens": ["Milk", "Wheat", "Possible nuts"], "choking": ["Choose soft pieces and age-appropriate cereal."], "emoji": "🌞"}, {"name": "Cucumber Cream Cheese Bites", "ingredients": ["Soft bread", "Cream cheese", "Cucumber"], "steps": ["A grown-up prepares thin cucumber pieces.", "Spread cream cheese on soft bread.", "Add cucumber and cut into small bites."], "category": "No-Cook", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Raw cucumber can be firm; prepare very thin or use peeled soft pieces."], "emoji": "🥒"}, {"name": "Mini Pizza Crackers", "ingredients": ["Crackers", "Tomato sauce", "Cheese"], "steps": ["Spread sauce on crackers.", "Add cheese.", "A grown-up heats them and lets them cool fully."], "category": "Adult Heat", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Check temperature before serving."], "emoji": "🍕"}, {"name": "Cheese Quesadilla", "ingredients": ["Tortilla", "Cheese"], "steps": ["Place cheese inside a tortilla.", "A grown-up heats it safely.", "Cool and cut into small pieces."], "category": "Adult Heat", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Check temperature and cut into manageable pieces."], "emoji": "🫓"}, {"name": "Simple Smoothie", "ingredients": ["Banana", "Milk or yogurt", "Berries"], "steps": ["Place prepared ingredients in the blender.", "A grown-up closes and operates the blender.", "Pour into a cup after the blades stop completely."], "category": "Adult Appliance", "adult_help": true, "allergens": ["Milk"], "choking": ["Whole berries should be prepared appropriately before blending."], "emoji": "🥤"}, {"name": "Mini Bagel Pizza", "ingredients": ["Bagel", "Tomato sauce", "Cheese"], "steps": ["A grown-up prepares the bagel.", "Spread sauce and add cheese.", "A grown-up heats and cools it before serving."], "category": "Adult Heat", "adult_help": true, "allergens": ["Milk", "Wheat"], "choking": ["Bagels are chewy; cut into small pieces."], "emoji": "🍕"}];
 const THEMES={"citrus": {"name": "Citrus Kitchen", "emoji": "🍊", "bg1": "#fff1d7", "bg2": "#ffe8d3", "panel": "#fffdf8", "ink": "#503923", "muted": "#776858", "primary": "#dc7b3f", "secondary": "#efa16d", "accent": "#ffd66b", "card": "#fff4e6", "success": "#e2f6df", "border": "#efc7a0"}, "mint": {"name": "Mint Pantry", "emoji": "🌿", "bg1": "#e8f8ee", "bg2": "#e7f4ff", "panel": "#fbfffc", "ink": "#2f493b", "muted": "#64756b", "primary": "#4f9872", "secondary": "#7ac7a4", "accent": "#f1d377", "card": "#eef9f2", "success": "#dff5e8", "border": "#b6ddc7"}, "berry": {"name": "Berry Bakehouse", "emoji": "🫐", "bg1": "#f6eaf6", "bg2": "#eee8ff", "panel": "#fffafd", "ink": "#50314d", "muted": "#766275", "primary": "#8f4f87", "secondary": "#c073a8", "accent": "#f0cf78", "card": "#fbeef7", "success": "#e2f5e6", "border": "#d8afd0"}, "ocean": {"name": "Blue Apron", "emoji": "🌊", "bg1": "#e7f8ff", "bg2": "#e6f6ef", "panel": "#fbffff", "ink": "#24434f", "muted": "#61747c", "primary": "#2f8fad", "secondary": "#63bfc1", "accent": "#ffd88b", "card": "#ecfaff", "success": "#def5e8", "border": "#acdce4"}, "night": {"name": "Midnight Kitchen", "emoji": "🌙", "bg1": "#1f2445", "bg2": "#34325d", "panel": "#2d3053", "ink": "#f6f3ff", "muted": "#cbc8e4", "primary": "#9faeff", "secondary": "#c98be1", "accent": "#ffd76d", "card": "#383c66", "success": "#315846", "border": "#606698"}};
 const $=id=>document.getElementById(id);
 const KEY='little-kitchen-recipe-garden-v2';
-function loadState(){try{const x=JSON.parse(localStorage.getItem(KEY)||'{}');return{theme:x.theme||'citrus',viewed:Array.isArray(x.viewed)?x.viewed:[],saved:Array.isArray(x.saved)?x.saved:[],categories:Array.isArray(x.categories)?x.categories:[]}}catch{return{theme:'citrus',viewed:[],saved:[],categories:[]}}}
-let state=loadState(),current=null,lastName='';
+function loadState(){try{const x=JSON.parse(localStorage.getItem(KEY)||'{}');return{theme:x.theme||'citrus',viewed:Array.isArray(x.viewed)?x.viewed:[],saved:Array.isArray(x.saved)?x.saved:[],categories:Array.isArray(x.categories)?x.categories:[],voiceFriend:x.voiceFriend||'chef',voiceSpeed:x.voiceSpeed||'slow',guidedDone:Number(x.guidedDone)||0,safetySeen:!!x.safetySeen}}catch{return{theme:'citrus',viewed:[],saved:[],categories:[],voiceFriend:'chef',voiceSpeed:'slow',guidedDone:0,safetySeen:false}}}
+let state=loadState(),current=null,lastName='',guidedIndex=0,voices=[],speechToken=0;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
-function speak(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=.88;u.pitch=1.04;speechSynthesis.speak(u)}
+const VOICE_FRIENDS={
+chef:{name:'Chef Coco',emoji:'🧑‍🍳',rate:.8,pitch:1.04,preferred:/samantha|aria|jenny|ava|karen|victoria|female/i,greeting:'Hello, kitchen helper. Chef Coco is ready to make a recipe with a grown-up.'},
+mouse:{name:'Milo Mouse',emoji:'🐭',rate:.84,pitch:1.18,preferred:/samantha|aria|jenny|zira|ava|karen/i,greeting:'Hello, little cook. Milo Mouse is ready to gather the ingredients.'},
+bee:{name:'Busy Bee',emoji:'🐝',rate:.88,pitch:1.1,preferred:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:'Buzz buzz. Busy Bee is ready to follow each kitchen step.'},
+frog:{name:'Freddie Frog',emoji:'🐸',rate:.82,pitch:.98,preferred:/alex|daniel|david|fred|ralph|male/i,greeting:'Ribbit. Freddie Frog is ready for a supervised kitchen adventure.'},
+strawberry:{name:'Berry Friend',emoji:'🍓',rate:.8,pitch:1.08,preferred:/moira|serena|samantha|aria|karen|victoria/i,greeting:'Hello, sweet friend. Berry Friend is ready to explore a colorful recipe.'}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+
+function refreshVoices(){
+  if(!('speechSynthesis'in window))return;
+  voices=speechSynthesis.getVoices()||[];
+  const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.chef;
+  $('voiceStatus').textContent=voices.length?`${f.emoji} ${f.name} is ready.`:'Loading a friendly voice…';
+}
+function chooseVoice(){
+  if(!voices.length)refreshVoices();
+  const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.chef;
+  const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||''));
+  const pool=english.length?english:voices;
+  if(state.voiceFriend==='bee'&&pool.length){
+    const natural=pool.filter(v=>/natural|enhanced|premium/i.test(v.name));
+    const choices=natural.length?natural:pool;
+    return choices[Math.floor(Math.random()*choices.length)]||null;
+  }
+  return pool.find(v=>f.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null;
+}
+function stopSpeaking(message='Voice stopped.'){
+  speechToken++;
+  if('speechSynthesis'in window)speechSynthesis.cancel();
+  document.querySelector('.details')?.classList.remove('speaking');
+  $('voiceStatus').textContent=message;
+}
+function speak(t,{preview=false}={}){
+  if(!('speechSynthesis'in window))return;
+  if(!preview&&!String(t||'').trim())return;
+  stopSpeaking('');
+  const token=++speechToken;
+  const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.chef;
+  const phrase=preview?f.greeting:t;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const voice=chooseVoice();
+  if(voice)u.voice=voice;
+  u.lang=(voice&&voice.lang)||'en-US';
+  u.rate=Math.max(.55,Math.min(1.15,f.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=f.pitch;
+  u.volume=1;
+  u.onstart=()=>{document.querySelector('.details')?.classList.add('speaking');$('voiceStatus').textContent=`${f.emoji} ${f.name} is reading.`};
+  u.onend=()=>{if(token!==speechToken)return;document.querySelector('.details')?.classList.remove('speaking');$('voiceStatus').textContent='Ready for the next kitchen step! 🌟'};
+  u.onerror=e=>{if(token!==speechToken)return;document.querySelector('.details')?.classList.remove('speaking');$('voiceStatus').textContent=e&&['interrupted','canceled'].includes(e.error)?'Voice stopped.':'The voice had a little hiccup. Try again.'};
+  speechSynthesis.speak(u);
+}
+
+function updateVoiceButtons(){
+  document.querySelectorAll('[data-voice]').forEach(b=>{
+    const active=b.dataset.voice===state.voiceFriend;
+    b.classList.toggle('active',active);
+    b.setAttribute('aria-pressed',String(active));
+  });
+  $('voiceSpeed').value=state.voiceSpeed;
+}
+function sparkleBurst(count=10){
+  for(let i=0;i<count;i++){
+    const s=document.createElement('span');
+    s.className='sparkle';
+    s.textContent=['✨','⭐','🥄','🌈'][i%4];
+    s.style.left=(20+Math.random()*60)+'vw';
+    s.style.top=(45+Math.random()*25)+'vh';
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),1100);
+  }
+}
+function updatePassport(){
+  const earned={
+    explore:state.viewed.length>=3,
+    safe:state.safetySeen,
+    steps:state.guidedDone>=1,
+    save:state.saved.length>=1,
+    variety:state.categories.length>=4
+  };
+  document.querySelectorAll('.passport-stamp').forEach(el=>el.classList.toggle('earned',!!earned[el.dataset.stamp]));
+}
+function renderIngredientChecklist(){
+  if(!current)return;
+  $('ingredientChecklist').innerHTML=current.ingredients.map((item,i)=>`
+    <label class="check-item">
+      <input type="checkbox" data-ingredient="${i}">
+      <span>${item}</span>
+    </label>`).join('');
+}
+function renderGuidedStep(){
+  if(!current)return;
+  guidedIndex=Math.max(0,Math.min(guidedIndex,current.steps.length-1));
+  $('guidedStep').textContent=`Step ${guidedIndex+1} of ${current.steps.length}: ${current.steps[guidedIndex]}`;
+  $('previousStepBtn').disabled=guidedIndex===0;
+  $('nextStepBtn').textContent=guidedIndex===current.steps.length-1?'Finish Recipe Steps 🌈':'Next Step ➡';
+}
+
 function applyTheme(id){const t=THEMES[id]||THEMES.citrus;Object.entries(t).forEach(([k,v])=>{if(!['name','emoji'].includes(k))document.documentElement.style.setProperty('--'+k,v)});state.theme=id;save();$('themeBadge').textContent=`${t.emoji} ${t.name} · Recipe Garden`}
 function filtered(){
 const cat=$('category').value,help=$('helpFilter').value,term=$('search').value.toLowerCase().trim();
@@ -134,24 +381,84 @@ function pick(preferred=null){
 const pool=filtered();$('availableStat').textContent=pool.length;
 if(!pool.length){$('recipeName').textContent='No matching recipes';$('ingredients').innerHTML='';$('steps').innerHTML='';$('safetyNotes').textContent='Try another filter or search word.';return}
 let r=preferred;do{r=r||pool[Math.floor(Math.random()*pool.length)]}while(pool.length>1&&r.name===lastName);current=r;lastName=r.name;
-$('recipeName').textContent=r.name;$('recipeEmoji').textContent=r.emoji;$('categoryPill').textContent=r.category;
+guidedIndex=0;$('recipeName').textContent=r.name;$('recipeEmoji').textContent=r.emoji;$('categoryPill').textContent=r.category;
 $('helpPill').textContent=r.adult_help?'👩‍🍳 Adult help required':'👐 Simple child job with supervision';
 $('allergenPill').textContent=r.allergens.length?`⚠ Allergens: ${r.allergens.join(', ')}`:'✓ No listed major allergen';
 $('ingredients').innerHTML=r.ingredients.map(x=>`<li>${x}</li>`).join('');
 $('steps').innerHTML=r.steps.map(x=>`<li>${x}</li>`).join('');
 $('safetyNotes').textContent=r.choking.length?r.choking.join(' '):'A grown-up should still check age, allergies, texture, temperature, and serving size.';
-if(!state.viewed.includes(r.name))state.viewed.push(r.name);if(!state.categories.includes(r.category))state.categories.push(r.category);save();updateStats();renderSaved();updateFavorite();$('recipeName').focus()
+if(!state.viewed.includes(r.name))state.viewed.push(r.name);state.safetySeen=true;if(!state.categories.includes(r.category))state.categories.push(r.category);save();updateStats();renderSaved();updateFavorite();renderIngredientChecklist();renderGuidedStep();updatePassport();$('recipeName').focus()
 }
 function updateFavorite(){$('favoriteBtn').textContent=current&&state.saved.includes(current.name)?'★ Saved':'☆ Save Recipe';$('favoriteBtn').classList.toggle('saved',current&&state.saved.includes(current.name))}
 function updateStats(){$('viewedStat').textContent=state.viewed.length;$('savedStat').textContent=state.saved.length;$('categoryStat').textContent=state.categories.length;$('availableStat').textContent=filtered().length}
 function renderSaved(){const rows=state.saved.map(n=>RECIPES.find(r=>r.name===n)).filter(Boolean);$('savedList').innerHTML=rows.length?'': '<div class="list-item">Saved recipes will appear here.</div>';rows.forEach(r=>{const b=document.createElement('button');b.className='list-item';b.textContent=`${r.emoji} ${r.name}`;b.onclick=()=>pick(r);$('savedList').appendChild(b)})}
 function recipeText(r){return `${r.name}. Ingredients: ${r.ingredients.join(', ')}. Steps: ${r.steps.join(' ')} Safety notes: ${r.choking.join(' ')}`}
+
+$('voiceFriends').onclick=e=>{
+  const b=e.target.closest('[data-voice]');
+  if(!b)return;
+  state.voiceFriend=b.dataset.voice;
+  save();
+  updateVoiceButtons();
+  const f=VOICE_FRIENDS[state.voiceFriend];
+  $('voiceStatus').textContent=`${f.emoji} ${f.name} selected. Tap Meet My Friend to listen.`;
+};
+$('voiceSpeed').onchange=e=>{
+  state.voiceSpeed=e.target.value;
+  save();
+  $('voiceStatus').textContent='Reading speed saved.';
+};
+$('previewVoiceBtn').onclick=()=>speak('',{preview:true});
+$('stopVoiceBtn').onclick=()=>stopSpeaking('Voice stopped.');
+
+$('previousStepBtn').onclick=()=>{
+  if(!current)return;
+  guidedIndex=Math.max(0,guidedIndex-1);
+  renderGuidedStep();
+};
+$('hearStepBtn').onclick=()=>{
+  if(!current)return;
+  speak($('guidedStep').textContent);
+};
+$('nextStepBtn').onclick=()=>{
+  if(!current)return;
+  if(guidedIndex<current.steps.length-1){
+    guidedIndex++;
+    renderGuidedStep();
+    speak($('guidedStep').textContent);
+  }else{
+    state.guidedDone++;
+    save();
+    updatePassport();
+    sparkleBurst(14);
+    speak('Wonderful step following. You finished the recipe directions with a grown-up.');
+  }
+};
+
 $('nextBtn').onclick=()=>pick();$('hearBtn').onclick=()=>current&&speak(recipeText(current));$('favoriteBtn').onclick=()=>{if(!current)return;const i=state.saved.indexOf(current.name);if(i>=0)state.saved.splice(i,1);else state.saved.push(current.name);save();updateFavorite();updateStats();renderSaved()};
 $('copyBtn').onclick=async()=>{if(!current)return;try{await navigator.clipboard.writeText(recipeText(current))}catch{}};
 ['category','helpFilter'].forEach(id=>$(id).onchange=()=>pick());$('search').oninput=()=>pick();$('theme').onchange=e=>applyTheme(e.target.value);
 $('theme').innerHTML=Object.entries(THEMES).map(([id,t])=>`<option value="${id}">${t.emoji} ${t.name}</option>`).join('');$('theme').value=state.theme;
 $('category').innerHTML=['All',...new Set(RECIPES.map(r=>r.category))].map(c=>`<option value="${c}">${c}</option>`).join('');
-applyTheme(state.theme);renderSaved();pick();
+if('speechSynthesis'in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.('voiceschanged',refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $('previewVoiceBtn').disabled=true;
+  $('stopVoiceBtn').disabled=true;
+  $('hearBtn').disabled=true;
+  $('hearStepBtn').disabled=true;
+  $('voiceStatus').textContent='Read-aloud voices are not available in this browser.';
+}
+updateVoiceButtons();
+applyTheme(state.theme);
+renderSaved();
+pick();
+updatePassport();
+window.addEventListener('beforeunload',()=>stopSpeaking(''));
 </script>
 </body>
 </html>
