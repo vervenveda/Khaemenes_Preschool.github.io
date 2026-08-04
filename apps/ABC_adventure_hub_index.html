@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ABC Adventure Hub — an offline preschool alphabet game with eight colorful worlds, friendly readers, rewards, and local progress.">
+<title>ABC Adventure Hub™</title>
+<style>
+:root{
+  --sky1:#c8f3ff;
+  --sky2:#dfe9ff;
+  --sun:#ffe79a;
+  --pink:#f6a8c9;
+  --coral:#ffb2a4;
+  --mint:#b9ead7;
+  --purple:#9a88e8;
+  --ink:#40384f;
+  --muted:#7a7185;
+  --panel:rgba(255,255,255,.94);
+  --line:#eadff0;
+  --shadow:0 18px 44px rgba(61,49,90,.13);
+  --radius:30px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 14% 15%,rgba(255,255,255,.8) 0 5%,transparent 6%),
+    radial-gradient(circle at 86% 14%,rgba(255,255,255,.65) 0 4%,transparent 5%),
+    linear-gradient(145deg,#e8fbff 0%,#deedff 42%,#f1e7ff 100%);
+  overflow-x:hidden;
+}
+button,select,input{font:inherit}
+button{touch-action:manipulation}
+button:focus-visible,select:focus-visible,input:focus-visible{
+  outline:4px solid rgba(154,136,232,.28);
+  outline-offset:3px;
+}
+.app{
+  width:min(1220px,calc(100% - 20px));
+  margin:0 auto;
+  padding:26px 0 44px;
+}
+.hero{
+  text-align:center;
+  background:linear-gradient(135deg,#6287d8,#8c78dd,#d88bb8);
+  color:white;
+  border-radius:34px;
+  padding:32px 20px 26px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 15% 30%,rgba(255,255,255,.24),transparent 18%),
+    radial-gradient(circle at 80% 20%,rgba(255,255,255,.18),transparent 20%),
+    linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);
+}
+.hero>*{position:relative;z-index:1}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.3);
+  font-weight:900;
+  font-size:.84rem;
+}
+.hero h1{
+  margin:18px auto 10px;
+  max-width:980px;
+  font-size:clamp(2.5rem,6.4vw,5rem);
+  line-height:1.08;
+  letter-spacing:-.02em;
+}
+.hero p{
+  margin:10px auto 0;
+  max-width:780px;
+  color:#f7f4ff;
+  line-height:1.7;
+  font-size:1.02rem;
+}
+.topbar{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+  margin:15px 0;
+}
+.btn,button{
+  border:0;
+  border-radius:999px;
+  padding:10px 15px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.18s ease;
+}
+button:hover{transform:translateY(-2px)}
+.primary{
+  color:white;
+  background:linear-gradient(135deg,var(--pink),var(--coral));
+  box-shadow:0 8px 18px rgba(215,79,132,.16);
+}
+.secondary{
+  background:white;
+  color:var(--ink);
+  border:1px solid var(--line);
+}
+.good{
+  color:#153626;
+  background:linear-gradient(135deg,#b9f0d2,#75d8a4);
+}
+.danger{
+  background:#fff;
+  color:#b75567;
+  border:1px solid #efcbd2;
+}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+.hub{
+  display:grid;
+  gap:14px;
+}
+.world-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.world-card{
+  min-height:145px;
+  border-radius:24px;
+  padding:15px;
+  color:var(--ink);
+  background:linear-gradient(145deg,#fff,#fff8ef);
+  border:2px solid transparent;
+  box-shadow:0 10px 22px rgba(56,43,80,.09);
+  text-align:left;
+  display:grid;
+  align-content:space-between;
+  gap:10px;
+}
+.world-card:hover{transform:translateY(-3px)}
+.world-card.active{
+  border-color:var(--purple);
+  box-shadow:0 0 0 4px rgba(154,136,232,.14),0 12px 25px rgba(56,43,80,.1);
+}
+.world-icon{font-size:2.5rem}
+.world-card strong{font-size:1.03rem;color:#594281}
+.world-card small{color:var(--muted);line-height:1.35}
+.hub-note{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:14px 16px;
+  color:var(--muted);
+  text-align:center;
+  line-height:1.55;
+}
+
+.voice-panel,.reward-panel,.parent-panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:14px;
+  box-shadow:0 10px 24px rgba(56,43,80,.08);
+}
+.voice-panel h2,.reward-panel h2{margin:0 0 10px;text-align:center;color:#6650a0;font-size:1.05rem}
+.voice-friends{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:7px;
+}
+.voice-friend{
+  border:2px solid var(--line);
+  background:#fff;
+  color:#6650a0;
+  border-radius:17px;
+  padding:8px 5px;
+  min-height:64px;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:2px;
+  box-shadow:0 5px 12px rgba(63,43,80,.06);
+}
+.voice-friend .emoji{font-size:1.45rem}
+.voice-friend .name{font-size:.68rem}
+.voice-friend.active{
+  color:white;
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+}
+.voice-options{
+  margin-top:9px;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.voice-options select{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  border-radius:999px;
+  padding:9px 12px;
+  font-weight:900;
+}
+.voice-status{
+  min-height:1.2em;
+  margin:8px 0 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:.8rem;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:9px;
+  margin:12px 0;
+}
+.stat{
+  text-align:center;
+  background:var(--panel);
+  border-radius:18px;
+  padding:11px;
+  box-shadow:0 8px 20px rgba(54,40,87,.07);
+}
+.stat strong{display:block;color:var(--purple);font-size:1.25rem}
+.message{
+  text-align:center;
+  min-height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-size:clamp(1.15rem,3vw,1.7rem);
+  font-weight:900;
+  margin-bottom:10px;
+}
+.target-letter{
+  display:inline-grid;
+  place-items:center;
+  width:52px;height:52px;
+  border-radius:50%;
+  color:white;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  box-shadow:0 8px 16px rgba(91,65,155,.18);
+}
+.game-shell{
+  position:relative;
+  min-height:570px;
+  border-radius:32px;
+  overflow:hidden;
+  border:6px solid rgba(255,255,255,.94);
+  box-shadow:var(--shadow);
+  background:linear-gradient(to top,#b9eeff 0%,#ddf7ff 48%,#f8fdff 100%);
+}
+.game-shell.paused::before{
+  content:"Paused";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.68);
+  color:#6650a0;
+  font-size:clamp(2rem,6vw,4rem);
+  font-weight:950;
+  z-index:20;
+}
+.scenery{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+.scenery .floaty{
+  position:absolute;
+  animation:drift 16s linear infinite;
+  opacity:.72;
+}
+@keyframes drift{
+  from{transform:translateX(-140px)}
+  to{transform:translateX(calc(100vw + 160px))}
+}
+.ground{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:96px;
+  pointer-events:none;
+  z-index:1;
+}
+.game-object{
+  position:absolute;
+  display:grid;
+  place-items:center;
+  font-weight:950;
+  color:white;
+  cursor:pointer;
+  user-select:none;
+  box-shadow:
+    inset -12px -14px 22px rgba(0,0,0,.12),
+    inset 10px 12px 20px rgba(255,255,255,.35),
+    0 14px 24px rgba(45,43,83,.2);
+  border:4px solid rgba(255,255,255,.72);
+  transition:transform .15s ease,filter .15s ease;
+  z-index:3;
+}
+.game-object:hover{transform:scale(1.07)}
+.game-object.pop{animation:pop .28s ease forwards}
+@keyframes pop{to{transform:scale(1.6);opacity:0}}
+.game-object .object-emoji{
+  position:absolute;
+  font-size:.45em;
+  bottom:7%;
+  right:9%;
+  filter:drop-shadow(0 3px 3px rgba(0,0,0,.14));
+}
+.game-object.bubble{border-radius:50%}
+.game-object.bubble::before{
+  content:"";
+  position:absolute;width:22%;height:22%;border-radius:50%;
+  background:rgba(255,255,255,.7);top:15%;left:20%;filter:blur(1px);
+}
+.game-object.train{border-radius:18px 18px 10px 10px}
+.game-object.butterfly{border-radius:48% 48% 42% 42%;clip-path:polygon(50% 18%,65% 0,100% 18%,80% 50%,100% 82%,65% 100%,50% 78%,35% 100%,0 82%,20% 50%,0 18%,35% 0)}
+.game-object.fish{border-radius:50% 60% 60% 50%;clip-path:polygon(0 50%,18% 22%,18% 0,100% 18%,100% 82%,18% 100%,18% 78%)}
+.game-object.planet{border-radius:50%;box-shadow:inset -18px -18px 24px rgba(0,0,0,.16),0 0 0 8px rgba(255,255,255,.22),0 14px 24px rgba(45,43,83,.2)}
+.game-object.safari{border-radius:22px}
+.game-object.cloud{border-radius:50px}
+.game-object.forest{border-radius:44% 44% 38% 38%}
+
+.spark{
+  position:fixed;
+  z-index:50;
+  pointer-events:none;
+  font-size:26px;
+  animation:spark 1s ease-out forwards;
+}
+@keyframes spark{to{opacity:0;transform:translateY(-90px) rotate(45deg) scale(1.3)}}
+
+.sticker-grid,.passport-grid{
+  display:grid;
+  grid-template-columns:repeat(8,minmax(0,1fr));
+  gap:8px;
+}
+.sticker,.passport-stamp{
+  min-height:76px;
+  padding:8px 5px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:#fff;
+  text-align:center;
+  opacity:.38;
+  filter:grayscale(.4);
+}
+.sticker.earned,.passport-stamp.earned{
+  opacity:1;
+  filter:none;
+  box-shadow:0 7px 16px rgba(55,43,82,.08);
+}
+.sticker span,.passport-stamp span{display:block;font-size:1.65rem}
+.sticker small,.passport-stamp small{font-size:.66rem;color:var(--muted);font-weight:900}
+
+.treasure{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:12px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#fff9dc,#fff,#f4efff);
+  border:1px solid var(--line);
+}
+.treasure strong{color:#6a52a3}
+.progress-track{
+  height:13px;
+  min-width:220px;
+  flex:1;
+  max-width:520px;
+  background:#ece5f3;
+  border-radius:999px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--pink),var(--sun),var(--mint));
+  transition:width .35s ease;
+}
+.parent-panel summary{
+  cursor:pointer;
+  color:#6650a0;
+  font-weight:900;
+}
+.parent-grid{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.parent-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:12px;
+}
+.parent-card strong{display:block;color:#6650a0;margin-bottom:5px}
+.parent-card p{margin:0;color:var(--muted);line-height:1.45;font-size:.88rem}
+
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:rgba(39,29,58,.36);
+  z-index:100;
+}
+.modal.show{display:flex}
+.modal-card{
+  width:min(520px,96vw);
+  background:#fff;
+  border-radius:28px;
+  padding:22px;
+  box-shadow:0 24px 60px rgba(42,30,66,.24);
+  text-align:center;
+}
+.modal-card h2{margin:0 0 8px;color:#6650a0}
+.modal-card p{color:var(--muted);line-height:1.55}
+.modal-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:14px}
+
+.footer{
+  text-align:center;
+  color:#645a75;
+  font-size:.84rem;
+  margin-top:14px;
+}
+.site-footer{
+  margin-top:16px;
+  padding:15px 12px;
+  text-align:center;
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(90,60,120,.12);
+  color:#665b72;
+  font-size:.84rem;
+  line-height:1.5;
+}
+.site-footer strong{color:#503a76}
+
+body.large-text{font-size:118%}
+body.high-contrast{filter:contrast(1.18) saturate(1.12)}
+body.dyslexia-font{font-family:Verdana,Arial,sans-serif}
+body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+
+@media(max-width:980px){
+  .world-grid{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .sticker-grid,.passport-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:700px){
+  .app{padding-top:12px}
+  .hero{border-radius:24px;padding:26px 14px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .game-shell{min-height:520px}
+  .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-friend:last-child{grid-column:1/-1}
+  .world-grid{grid-template-columns:1fr 1fr}
+  .parent-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .world-grid{grid-template-columns:1fr}
+  .sticker-grid,.passport-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="hero">
+    <div class="hero-badge">🌈 Khaemenes Academy · Little Tikes Learning Engine</div>
+    <h1>ABC Adventure Hub™</h1>
+    <p>Choose a world, listen for the target letter, and tap the correct moving character. Bubble Adventure remains the protected original world.</p>
+  </header>
+
+  <div class="topbar">
+    <button id="hubBtn" class="secondary">🗺️ Adventure Map</button>
+    <button id="startBtn" class="primary">▶ Start Adventure</button>
+    <button id="pauseBtn" class="secondary">⏸ Pause</button>
+    <button id="soundBtn" class="secondary">🔊 Sound On</button>
+    <button id="levelBtn" class="secondary">⭐ Level: Easy</button>
+    <button id="resetBtn" class="danger">↺ Reset Progress</button>
+  </div>
+
+  <section id="hubView" class="hub">
+    <div class="hub-note">
+      Bubble Adventure uses the original floating-letter gameplay, scoring, difficulty, pause, sound, and local-save behavior. The other worlds reuse the same protected engine with different scenery and movement.
+    </div>
+
+    <div class="world-grid" id="worldGrid"></div>
+
+    <section class="voice-panel">
+      <h2>🔊 Choose Your Reading Friend</h2>
+      <div class="voice-friends" id="voiceFriends">
+        <button type="button" class="voice-friend" data-voice="fairy"><span class="emoji">🧚</span><span class="name">Fairy Lily</span></button>
+        <button type="button" class="voice-friend" data-voice="bear"><span class="emoji">🐻</span><span class="name">Benny Bear</span></button>
+        <button type="button" class="voice-friend" data-voice="owl"><span class="emoji">🦉</span><span class="name">Professor Owl</span></button>
+        <button type="button" class="voice-friend" data-voice="robot"><span class="emoji">🤖</span><span class="name">Robo Reader</span></button>
+        <button type="button" class="voice-friend" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Friend</span></button>
+      </div>
+      <div class="voice-options">
+        <select id="voiceSpeed" aria-label="Reading speed">
+          <option value="slow">🐢 Slow and gentle</option>
+          <option value="normal">🙂 Just right</option>
+          <option value="lively">🐇 A little lively</option>
+        </select>
+        <button id="previewVoiceBtn" class="secondary">👋 Meet My Voice</button>
+        <button id="stopVoiceBtn" class="secondary">⏹ Stop Voice</button>
+      </div>
+      <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+    </section>
+
+    <section class="reward-panel">
+      <h2>🎁 My Adventure Rewards</h2>
+      <div class="sticker-grid" id="stickerGrid"></div>
+      <div class="treasure">
+        <span style="font-size:2rem" id="chestIcon">🔒</span>
+        <strong id="chestText">Earn 20 stars to open the next treasure chest.</strong>
+        <div class="progress-track"><div class="progress-bar" id="chestBar"></div></div>
+      </div>
+    </section>
+
+    <section class="reward-panel">
+      <h2>🌎 My ABC Discovery Passport</h2>
+      <div class="passport-grid" id="passportGrid"></div>
+    </section>
+
+    <details class="parent-panel">
+      <summary>👨‍👩‍👧 Parent & Teacher Corner</summary>
+      <div class="parent-grid">
+        <div class="parent-card"><strong>Letters Practiced</strong><p id="lettersPracticed">None yet</p></div>
+        <div class="parent-card"><strong>Letters Needing Practice</strong><p id="difficultLetters">None yet</p></div>
+        <div class="parent-card"><strong>Accessibility</strong><p>
+          <label><input type="checkbox" id="largeTextToggle"> Large text</label><br>
+          <label><input type="checkbox" id="contrastToggle"> High contrast</label><br>
+          <label><input type="checkbox" id="fontToggle"> Dyslexia-friendly font</label><br>
+          <label><input type="checkbox" id="motionToggle"> Reduce animation</label>
+        </p></div>
+      </div>
+    </details>
+  </section>
+
+  <section id="gameView" hidden>
+    <section class="stats">
+      <div class="stat"><strong id="score">0</strong>Score</div>
+      <div class="stat"><strong id="streak">0</strong>Streak</div>
+      <div class="stat"><strong id="best">0</strong>Best Streak</div>
+      <div class="stat"><strong id="round">0</strong>Rounds</div>
+      <div class="stat"><strong id="stars">0</strong>Stars</div>
+    </section>
+
+    <div class="message" id="message">Press Start to begin.</div>
+    <section class="game-shell" id="gameArea" aria-label="Alphabet adventure game">
+      <div class="scenery" id="scenery"></div>
+      <div class="ground" id="ground"></div>
+    </section>
+  </section>
+
+  <p class="footer">Offline-first · Local progress only · No tracking · No outside game services</p>
+
+  <footer class="site-footer">
+    <strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>
+    All Rights Reserved.
+  </footer>
+</main>
+
+<div class="modal" id="resetModal" aria-hidden="true">
+  <div class="modal-card">
+    <h2>Start Over?</h2>
+    <p>This will reset the saved score, streaks, stars, stickers, passport stamps, and letter practice history. Your chosen reading friend and accessibility settings will remain.</p>
+    <div class="modal-actions">
+      <button id="cancelResetBtn" class="secondary">Keep Exploring</button>
+      <button id="confirmResetBtn" class="danger">Reset Progress</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  /* ==========================================================
+     LEGACY BUBBLE ENGINE COMPATIBILITY
+     Existing localStorage keys are preserved:
+     abcBubbleSound, abcBubbleLevel, abcBubbleScore,
+     abcBubbleStreak, abcBubbleBest, abcBubbleRounds.
+     ========================================================== */
+
+  const $ = id => document.getElementById(id);
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+  const colors = [
+    ["#ff9fba","#ff7088"],["#75dec1","#43c79d"],["#ffe177","#f6b752"],
+    ["#82c5ff","#6799ec"],["#b5a0ff","#8a72ea"],["#f5a0c5","#db75ae"],
+    ["#7de0ec","#4eb5cd"],["#ffb092","#f17a61"]
+  ];
+
+  const WORLDS = {
+    bubble:{
+      name:"Bubble Adventure",icon:"🎈",objectClass:"bubble",emoji:"✨",
+      blurb:"Pop the correct floating bubble.",
+      background:"linear-gradient(to top,#b9eeff 0%,#ddf7ff 48%,#f8fdff 100%)",
+      ground:"radial-gradient(ellipse at 20% 100%,#8be0a8 0 42%,transparent 43%),radial-gradient(ellipse at 50% 100%,#70cf92 0 45%,transparent 46%),radial-gradient(ellipse at 82% 100%,#8be0a8 0 43%,transparent 44%)",
+      scenery:["☁️","☁️","🦋"],axis:"vertical",wobble:18
+    },
+    train:{
+      name:"Alphabet Train",icon:"🚂",objectClass:"train",emoji:"🚃",
+      blurb:"Catch the correct letter car.",
+      background:"linear-gradient(to top,#d8f4ff,#f5fcff)",
+      ground:"linear-gradient(#8b6b50 0 8px,#555 8px 16px,#7dcf88 16px 100%)",
+      scenery:["🌤️","🏡","🌳"],axis:"horizontal",wobble:8
+    },
+    butterfly:{
+      name:"Butterfly Garden",icon:"🦋",objectClass:"butterfly",emoji:"🌸",
+      blurb:"Find the butterfly carrying the letter.",
+      background:"linear-gradient(to top,#eaffef,#e6f8ff,#fff8df)",
+      ground:"radial-gradient(circle at 12% 100%,#f7a7c4 0 20px,transparent 21px),radial-gradient(circle at 35% 100%,#ffd77a 0 22px,transparent 23px),radial-gradient(circle at 68% 100%,#bc9df2 0 22px,transparent 23px),linear-gradient(#8dd79c,#79c889)",
+      scenery:["🌼","🐝","☀️"],axis:"vertical",wobble:36
+    },
+    ocean:{
+      name:"Ocean Explorer",icon:"🐠",objectClass:"fish",emoji:"🐚",
+      blurb:"Catch the correct letter fish.",
+      background:"linear-gradient(to top,#219ac7,#68c9e7,#c7f4ff)",
+      ground:"radial-gradient(ellipse at 20% 100%,#f29c66 0 22%,transparent 23%),radial-gradient(ellipse at 55% 100%,#efca6a 0 24%,transparent 25%),linear-gradient(#e9d29a,#d7bd7f)",
+      scenery:["🫧","🪸","🐙"],axis:"horizontal",wobble:24
+    },
+    space:{
+      name:"Space Mission",icon:"🚀",objectClass:"planet",emoji:"⭐",
+      blurb:"Collect the correct orbiting letter.",
+      background:"radial-gradient(circle at 30% 20%,#fff 0 2px,transparent 3px),radial-gradient(circle at 70% 30%,#fff 0 2px,transparent 3px),linear-gradient(#15163f,#3a2f79)",
+      ground:"radial-gradient(ellipse at 50% 130%,#9187d8 0 62%,transparent 63%)",
+      scenery:["🌙","🛰️","✨"],axis:"diagonal",wobble:20
+    },
+    safari:{
+      name:"Safari Search",icon:"🦁",objectClass:"safari",emoji:"🐾",
+      blurb:"Spot the letter on a safari friend.",
+      background:"linear-gradient(to top,#f9d98e,#fff0bd,#bfe8ff)",
+      ground:"radial-gradient(ellipse at 20% 100%,#6fb56e 0 42%,transparent 43%),radial-gradient(ellipse at 70% 100%,#79bd73 0 45%,transparent 46%)",
+      scenery:["🌴","🦒","☀️"],axis:"horizontal",wobble:14
+    },
+    clouds:{
+      name:"Rainbow Clouds",icon:"☁️",objectClass:"cloud",emoji:"🌈",
+      blurb:"Tap the cloud with the correct letter.",
+      background:"linear-gradient(to top,#ccefff,#e9f8ff,#fff7df)",
+      ground:"linear-gradient(90deg,#f69dbf,#ffd67a,#8edab2,#8ccdf6,#b59af0)",
+      scenery:["🌈","☀️","🎈"],axis:"vertical",wobble:28
+    },
+    forest:{
+      name:"Forest Friends",icon:"🌳",objectClass:"forest",emoji:"🦉",
+      blurb:"Find the woodland friend hiding the letter.",
+      background:"linear-gradient(to top,#b9e7bf,#e2f8df,#effcff)",
+      ground:"radial-gradient(ellipse at 15% 100%,#5ca76a 0 42%,transparent 43%),radial-gradient(ellipse at 50% 100%,#4d965e 0 46%,transparent 47%),radial-gradient(ellipse at 82% 100%,#67ae70 0 44%,transparent 45%)",
+      scenery:["🌲","🦊","🍄"],axis:"vertical",wobble:22
+    }
+  };
+
+  const LEVELS = [
+    {name:"Easy", speed:6500, spawn:1450, size:[100,130]},
+    {name:"Medium", speed:5200, spawn:1200, size:[88,118]},
+    {name:"Challenge", speed:4200, spawn:950, size:[78,105]}
+  ];
+
+  const VOICE_FRIENDS = {
+    fairy:{name:"Fairy Lily",emoji:"🧚",rate:.82,pitch:1.2,preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,
+      hello:"Hello, little explorer. Fairy Lily is ready for an alphabet adventure."},
+    bear:{name:"Benny Bear",emoji:"🐻",rate:.76,pitch:.9,preferred:/daniel|david|alex|fred|george|male|tom/i,
+      hello:"Hello, friend. Benny Bear will help you find every letter."},
+    owl:{name:"Professor Owl",emoji:"🦉",rate:.72,pitch:1,preferred:/daniel|samantha|alex|serena|moira/i,
+      hello:"Welcome, young learner. Professor Owl is ready for careful letter finding."},
+    robot:{name:"Robo Reader",emoji:"🤖",rate:.84,pitch:.72,preferred:/fred|ralph|alex|david|google us english/i,
+      hello:"Beep boop. Alphabet systems online. Robo Reader is ready."},
+    rainbow:{name:"Rainbow Friend",emoji:"🌈",rate:.85,pitch:1.08,preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i,
+      hello:"Hello, sunshine. Rainbow Friend is ready to make letters colorful."}
+  };
+  const SPEEDS={slow:.88,normal:1,lively:1.1};
+
+  const state = {
+    running:false,
+    paused:false,
+    sound:localStorage.getItem("abcBubbleSound") !== "false",
+    level:Number(localStorage.getItem("abcBubbleLevel") || 0),
+    score:Number(localStorage.getItem("abcBubbleScore") || 0),
+    streak:Number(localStorage.getItem("abcBubbleStreak") || 0),
+    best:Number(localStorage.getItem("abcBubbleBest") || 0),
+    rounds:Number(localStorage.getItem("abcBubbleRounds") || 0),
+    stars:Number(localStorage.getItem("abcHubStars") || 0),
+    world:localStorage.getItem("abcHubWorld") || "bubble",
+    voiceFriend:localStorage.getItem("abcHubVoiceFriend") || "fairy",
+    voiceSpeed:localStorage.getItem("abcHubVoiceSpeed") || "slow",
+    stickers:new Set(JSON.parse(localStorage.getItem("abcHubStickers") || "[]")),
+    visitedWorlds:new Set(JSON.parse(localStorage.getItem("abcHubVisitedWorlds") || '["bubble"]')),
+    correctByLetter:JSON.parse(localStorage.getItem("abcHubCorrectByLetter") || "{}"),
+    wrongByLetter:JSON.parse(localStorage.getItem("abcHubWrongByLetter") || "{}"),
+    chests:Number(localStorage.getItem("abcHubChests") || 0),
+    access:JSON.parse(localStorage.getItem("abcHubAccess") || "{}"),
+    target:null,
+    spawnTimer:null,
+    bubbles:new Set()
+  };
+
+  let voices=[];
+  let speechToken=0;
+  let audioCtx=null;
+
+  function save(){
+    localStorage.setItem("abcBubbleSound",String(state.sound));
+    localStorage.setItem("abcBubbleLevel",String(state.level));
+    localStorage.setItem("abcBubbleScore",String(state.score));
+    localStorage.setItem("abcBubbleStreak",String(state.streak));
+    localStorage.setItem("abcBubbleBest",String(state.best));
+    localStorage.setItem("abcBubbleRounds",String(state.rounds));
+    localStorage.setItem("abcHubStars",String(state.stars));
+    localStorage.setItem("abcHubWorld",state.world);
+    localStorage.setItem("abcHubVoiceFriend",state.voiceFriend);
+    localStorage.setItem("abcHubVoiceSpeed",state.voiceSpeed);
+    localStorage.setItem("abcHubStickers",JSON.stringify([...state.stickers]));
+    localStorage.setItem("abcHubVisitedWorlds",JSON.stringify([...state.visitedWorlds]));
+    localStorage.setItem("abcHubCorrectByLetter",JSON.stringify(state.correctByLetter));
+    localStorage.setItem("abcHubWrongByLetter",JSON.stringify(state.wrongByLetter));
+    localStorage.setItem("abcHubChests",String(state.chests));
+    localStorage.setItem("abcHubAccess",JSON.stringify(state.access));
+  }
+
+  function randomLetter(){return letters[Math.floor(Math.random()*letters.length)]}
+
+  function refreshVoices(){
+    if(!("speechSynthesis" in window))return;
+    voices=speechSynthesis.getVoices()||[];
+    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
+    $("voiceStatus").textContent=voices.length?`${friend.emoji} ${friend.name} is ready.`:"Loading a friendly voice…";
+  }
+
+  function chooseVoice(){
+    if(!voices.length)refreshVoices();
+    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
+    const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+    const pool=english.length?english:voices;
+    if(state.voiceFriend==="rainbow"&&pool.length){
+      const friendly=pool.filter(v=>/natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));
+      const choices=friendly.length?friendly:pool;
+      return choices[Math.floor(Math.random()*choices.length)]||null;
+    }
+    return pool.find(v=>friend.preferred.test(v.name))
+      ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+      ||pool[0]||null;
+  }
+
+  function stopSpeaking(message="Voice stopped."){
+    speechToken++;
+    if("speechSynthesis" in window)speechSynthesis.cancel();
+    $("voiceStatus").textContent=message;
+  }
+
+  function speak(text,{preview=false}={}){
+    if(!state.sound||!("speechSynthesis" in window))return;
+    if(!preview&&!String(text||"").trim())return;
+    stopSpeaking("");
+    const token=++speechToken;
+    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
+    const phrase=preview?friend.hello:text;
+    const u=new SpeechSynthesisUtterance(phrase);
+    const voice=chooseVoice();
+    if(voice)u.voice=voice;
+    u.lang=(voice&&voice.lang)||"en-US";
+    u.rate=Math.max(.55,Math.min(1.15,friend.rate*(SPEEDS[state.voiceSpeed]||1)));
+    u.pitch=friend.pitch;
+    u.volume=1;
+    u.onstart=()=>$("voiceStatus").textContent=`${friend.emoji} ${friend.name} is speaking.`;
+    u.onend=()=>{if(token===speechToken)$("voiceStatus").textContent="Ready for another adventure! 🌟"};
+    u.onerror=e=>{if(token===speechToken)$("voiceStatus").textContent=e&&["interrupted","canceled"].includes(e.error)?"Voice stopped.":"The voice had a little hiccup. Try again."};
+    speechSynthesis.speak(u);
+  }
+
+  function ensureAudio(){
+    if(audioCtx)return audioCtx;
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtx)return null;
+    audioCtx=new AudioCtx();
+    return audioCtx;
+  }
+
+  function beep(kind="good"){
+    if(!state.sound)return;
+    const ctx=ensureAudio();
+    if(!ctx)return;
+    const now=ctx.currentTime;
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+    osc.type=kind==="good"?"sine":"triangle";
+    osc.frequency.setValueAtTime(kind==="good"?660:220,now);
+    if(kind==="good")osc.frequency.exponentialRampToValueAtTime(880,now+.18);
+    gain.gain.setValueAtTime(.13,now);
+    gain.gain.exponentialRampToValueAtTime(.001,now+.24);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(now);osc.stop(now+.25);
+  }
+
+  function spark(target,symbol="⭐",count=7){
+    const r=target.getBoundingClientRect();
+    for(let i=0;i<count;i++){
+      const el=document.createElement("span");
+      el.className="spark";
+      el.textContent=symbol;
+      el.style.left=(r.left+r.width/2+(Math.random()*70-35))+"px";
+      el.style.top=(r.top+r.height/2)+"px";
+      el.style.animationDelay=(Math.random()*.15)+"s";
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),1100);
+    }
+  }
+
+  function setMessage(text,letter=null){
+    $("message").innerHTML=letter?`${text} <span class="target-letter">${letter}</span>`:text;
+  }
+
+  function updateStats(){
+    $("score").textContent=state.score;
+    $("streak").textContent=state.streak;
+    $("best").textContent=state.best;
+    $("round").textContent=state.rounds;
+    $("stars").textContent=state.stars;
+    $("soundBtn").textContent=state.sound?"🔊 Sound On":"🔇 Sound Off";
+    $("levelBtn").textContent="⭐ Level: "+LEVELS[state.level].name;
+  }
+
+  function buildWorldCards(){
+    $("worldGrid").innerHTML="";
+    Object.entries(WORLDS).forEach(([id,w])=>{
+      const b=document.createElement("button");
+      b.className="world-card"+(state.world===id?" active":"");
+      b.innerHTML=`<span class="world-icon">${w.icon}</span><span><strong>${w.name}</strong><br><small>${w.blurb}</small></span>`;
+      b.onclick=()=>{
+        state.world=id;
+        state.visitedWorlds.add(id);
+        save();
+        buildWorldCards();
+        applyWorld();
+        showGame();
+        startGame();
+      };
+      $("worldGrid").appendChild(b);
+    });
+  }
+
+  function updateVoiceButtons(){
+    document.querySelectorAll("[data-voice]").forEach(b=>{
+      const active=b.dataset.voice===state.voiceFriend;
+      b.classList.toggle("active",active);
+      b.setAttribute("aria-pressed",String(active));
+    });
+    $("voiceSpeed").value=state.voiceSpeed;
+  }
+
+  const STICKERS=[
+    ["bubble","🎈","Bubble Popper"],["train","🚂","Train Conductor"],["butterfly","🦋","Garden Friend"],["ocean","🐠","Ocean Explorer"],
+    ["space","🚀","Space Pilot"],["safari","🦁","Safari Scout"],["clouds","🌈","Rainbow Rider"],["forest","🦉","Forest Finder"]
+  ];
+  function updateRewards(){
+    $("stickerGrid").innerHTML=STICKERS.map(([id,icon,label])=>
+      `<div class="sticker ${state.stickers.has(id)?"earned":""}"><span>${icon}</span><small>${label}</small></div>`
+    ).join("");
+
+    const passport=[
+      ["first","⭐","First Letter",state.score>=10],
+      ["streak","🔥","Five Streak",state.best>=5],
+      ["worlds","🗺️","World Traveler",state.visitedWorlds.size>=4],
+      ["master","🔤","Alphabet Explorer",Object.keys(state.correctByLetter).length>=13],
+      ["graduate","🌈","ABC Graduate",Object.keys(state.correctByLetter).length>=26]
+    ];
+    $("passportGrid").innerHTML=passport.map(([,icon,label,earned])=>
+      `<div class="passport-stamp ${earned?"earned":""}"><span>${icon}</span><small>${label}</small></div>`
+    ).join("");
+
+    const progress=state.stars%20;
+    $("chestBar").style.width=(progress/20*100)+"%";
+    $("chestIcon").textContent=progress===0&&state.stars>0?"🎁":"🔒";
+    $("chestText").textContent=`${progress}/20 stars toward the next treasure chest. Chests opened: ${state.chests}`;
+
+    const practiced=Object.keys(state.correctByLetter).sort();
+    $("lettersPracticed").textContent=practiced.length?practiced.join(", "):"None yet";
+    const difficult=Object.entries(state.wrongByLetter).filter(([,n])=>n>0).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([l])=>l);
+    $("difficultLetters").textContent=difficult.length?difficult.join(", "):"None yet";
+  }
+
+  function maybeOpenChest(){
+    const expected=Math.floor(state.stars/20);
+    if(expected>state.chests){
+      state.chests=expected;
+      state.stickers.add(state.world);
+      save();
+      updateRewards();
+      spark($("chestIcon"),"🎁",12);
+      speak("Treasure chest opened. You earned a new adventure sticker.");
+    }
+  }
+
+  function applyAccessibility(){
+    document.body.classList.toggle("large-text",!!state.access.largeText);
+    document.body.classList.toggle("high-contrast",!!state.access.contrast);
+    document.body.classList.toggle("dyslexia-font",!!state.access.font);
+    document.body.classList.toggle("reduced-motion",!!state.access.motion);
+    $("largeTextToggle").checked=!!state.access.largeText;
+    $("contrastToggle").checked=!!state.access.contrast;
+    $("fontToggle").checked=!!state.access.font;
+    $("motionToggle").checked=!!state.access.motion;
+  }
+
+  function showHub(){
+    stopGame(false);
+    $("hubView").hidden=false;
+    $("gameView").hidden=true;
+    $("hubBtn").disabled=true;
+    buildWorldCards();
+    updateRewards();
+  }
+
+  function showGame(){
+    $("hubView").hidden=true;
+    $("gameView").hidden=false;
+    $("hubBtn").disabled=false;
+    updateStats();
+  }
+
+  function clearObjects(){
+    state.bubbles.forEach(item=>{
+      cancelAnimationFrame(item.raf);
+      item.el.remove();
+    });
+    state.bubbles.clear();
+  }
+
+  function applyWorld(){
+    const w=WORLDS[state.world]||WORLDS.bubble;
+    const area=$("gameArea");
+    area.style.background=w.background;
+    $("ground").style.background=w.ground;
+    $("scenery").innerHTML="";
+    w.scenery.forEach((emoji,i)=>{
+      const s=document.createElement("span");
+      s.className="floaty";
+      s.textContent=emoji;
+      s.style.top=(8+i*20)+"%";
+      s.style.left=(-120-i*80)+"px";
+      s.style.fontSize=(2.2+i*.6)+"rem";
+      s.style.animationDuration=(14+i*4)+"s";
+      s.style.animationDelay=(-i*4)+"s";
+      $("scenery").appendChild(s);
+    });
+  }
+
+  function pickNewLetter(){
+    state.target=randomLetter();
+    state.rounds++;
+    const world=WORLDS[state.world];
+    setMessage(`${world.icon} Find the letter`,state.target);
+    speak(`Find the letter ${state.target}`);
+    createObject(state.target,true);
+    updateStats();
+    save();
+  }
+
+  function createObject(letter=null,isTarget=false){
+    if(!state.running||state.paused)return;
+
+    const config=LEVELS[state.level];
+    const world=WORLDS[state.world]||WORLDS.bubble;
+    const obj=document.createElement("button");
+    obj.className=`game-object ${world.objectClass}`;
+    obj.type="button";
+
+    const objectLetter=letter||randomLetter();
+    obj.innerHTML=`<span>${objectLetter}</span><span class="object-emoji">${world.emoji}</span>`;
+    obj.setAttribute("aria-label","Letter "+objectLetter);
+
+    const size=Math.round(config.size[0]+Math.random()*(config.size[1]-config.size[0]));
+    obj.style.width=size+"px";
+    obj.style.height=Math.round(size*(world.objectClass==="train"?.72:1))+"px";
+    obj.style.fontSize=Math.max(34,size*.4)+"px";
+
+    const palette=colors[Math.floor(Math.random()*colors.length)];
+    obj.style.background=`linear-gradient(145deg,${palette[0]},${palette[1]})`;
+
+    const maxLeft=Math.max(0,$("gameArea").clientWidth-size-8);
+    const left=Math.random()*maxLeft;
+    const maxTop=Math.max(0,$("gameArea").clientHeight-size-100);
+
+    if(world.axis==="horizontal"){
+      obj.style.left=(-size-10)+"px";
+      obj.style.top=(50+Math.random()*Math.max(80,maxTop-60))+"px";
+    }else if(world.axis==="diagonal"){
+      obj.style.left=(-size-10)+"px";
+      obj.style.bottom=(-size-10)+"px";
+    }else{
+      obj.style.left=left+"px";
+      obj.style.bottom=(-size-10)+"px";
+    }
+
+    $("gameArea").appendChild(obj);
+    const item={el:obj,raf:null,start:null};
+    state.bubbles.add(item);
+
+    function animate(time){
+      if(!state.running||!document.body.contains(obj)){
+        state.bubbles.delete(item);return;
+      }
+      if(state.paused){
+        item.raf=requestAnimationFrame(animate);return;
+      }
+      if(!item.start)item.start=time;
+      const elapsed=time-item.start;
+      const progress=elapsed/config.speed;
+      const wobble=Math.sin(progress*Math.PI*4)*world.wobble;
+
+      if(world.axis==="horizontal"){
+        const distance=$("gameArea").clientWidth+size+30;
+        obj.style.left=(-size+progress*distance)+"px";
+        obj.style.transform=`translateY(${wobble}px) rotate(${wobble*.08}deg)`;
+      }else if(world.axis==="diagonal"){
+        const dx=$("gameArea").clientWidth+size+20;
+        const dy=$("gameArea").clientHeight+size;
+        obj.style.left=(-size+progress*dx)+"px";
+        obj.style.bottom=(-size+progress*dy)+"px";
+        obj.style.transform=`translateY(${wobble}px) rotate(${progress*60}deg)`;
+      }else{
+        const distance=$("gameArea").clientHeight-size-80;
+        obj.style.bottom=(-size+progress*(distance+size))+"px";
+        obj.style.transform=`translateX(${wobble}px) rotate(${wobble*.08}deg)`;
+      }
+
+      if(progress<1){
+        item.raf=requestAnimationFrame(animate);
+      }else{
+        obj.remove();
+        state.bubbles.delete(item);
+        if(objectLetter===state.target){
+          state.streak=0;
+          state.wrongByLetter[state.target]=(state.wrongByLetter[state.target]||0)+1;
+          setMessage("That letter moved away. Try again with",state.target);
+          beep("bad");
+          updateStats();updateRewards();save();
+          setTimeout(()=>createObject(state.target,true),350);
+        }
+      }
+    }
+
+    item.raf=requestAnimationFrame(animate);
+
+    obj.onclick=()=>{
+      if(!state.running||state.paused)return;
+      cancelAnimationFrame(item.raf);
+
+      if(objectLetter===state.target){
+        obj.classList.add("pop");
+        spark(obj,["⭐","✨","🌈"][Math.floor(Math.random()*3)],8);
+        beep("good");
+        state.score+=10;
+        state.streak++;
+        state.best=Math.max(state.best,state.streak);
+        state.stars++;
+        state.correctByLetter[objectLetter]=(state.correctByLetter[objectLetter]||0)+1;
+        const praise=["Wonderful!","Amazing!","You found it!","Fantastic!","Super letter finding!","Brilliant!"];
+        const line=praise[Math.floor(Math.random()*praise.length)];
+        setMessage(`${line} You found`,objectLetter);
+        speak(`${line} You found the letter ${objectLetter}`);
+        if(state.streak>0&&state.streak%5===0)state.stickers.add(state.world);
+        maybeOpenChest();
+        setTimeout(()=>{
+          obj.remove();
+          state.bubbles.delete(item);
+          pickNewLetter();
+        },280);
+      }else{
+        obj.classList.add("pop");
+        beep("bad");
+        state.score=Math.max(0,state.score-2);
+        state.streak=0;
+        state.wrongByLetter[state.target]=(state.wrongByLetter[state.target]||0)+1;
+        setMessage("Great try! Look again for",state.target);
+        speak(`Great try. Look again for the letter ${state.target}`);
+        setTimeout(()=>{
+          obj.remove();
+          state.bubbles.delete(item);
+        },260);
+      }
+      updateStats();updateRewards();save();
+    };
+  }
+
+  function startGame(){
+    clearInterval(state.spawnTimer);
+    clearObjects();
+    state.running=true;
+    state.paused=false;
+    $("gameArea").classList.remove("paused");
+    $("pauseBtn").textContent="⏸ Pause";
+    $("startBtn").textContent="↻ Restart Adventure";
+    showGame();
+    applyWorld();
+    pickNewLetter();
+    state.spawnTimer=setInterval(()=>createObject(),LEVELS[state.level].spawn);
+  }
+
+  function stopGame(showStopped=true){
+    clearInterval(state.spawnTimer);
+    state.spawnTimer=null;
+    state.running=false;
+    state.paused=false;
+    clearObjects();
+    $("gameArea").classList.remove("paused");
+    if(showStopped)setMessage("Adventure stopped.");
+  }
+
+  function togglePause(){
+    if(!state.running)return;
+    state.paused=!state.paused;
+    $("gameArea").classList.toggle("paused",state.paused);
+    $("pauseBtn").textContent=state.paused?"▶ Resume":"⏸ Pause";
+    setMessage(state.paused?"Game paused.":"Keep looking for",state.paused?null:state.target);
+  }
+
+  function openReset(){
+    $("resetModal").classList.add("show");
+    $("resetModal").setAttribute("aria-hidden","false");
+  }
+  function closeReset(){
+    $("resetModal").classList.remove("show");
+    $("resetModal").setAttribute("aria-hidden","true");
+  }
+  function resetProgress(){
+    stopGame(false);
+    state.score=0;state.streak=0;state.best=0;state.rounds=0;state.stars=0;state.chests=0;
+    state.stickers.clear();state.visitedWorlds=new Set(["bubble"]);
+    state.correctByLetter={};state.wrongByLetter={};
+    save();updateStats();updateRewards();buildWorldCards();closeReset();showHub();
+  }
+
+  $("startBtn").onclick=()=>{showGame();startGame()};
+  $("pauseBtn").onclick=togglePause;
+  $("hubBtn").onclick=showHub;
+  $("soundBtn").onclick=()=>{state.sound=!state.sound;updateStats();save()};
+  $("levelBtn").onclick=()=>{
+    state.level=(state.level+1)%LEVELS.length;
+    updateStats();save();
+    if(state.running)startGame();
+  };
+  $("resetBtn").onclick=openReset;
+  $("cancelResetBtn").onclick=closeReset;
+  $("confirmResetBtn").onclick=resetProgress;
+  $("resetModal").onclick=e=>{if(e.target.id==="resetModal")closeReset()};
+
+  $("voiceFriends").onclick=e=>{
+    const b=e.target.closest("[data-voice]");
+    if(!b)return;
+    state.voiceFriend=b.dataset.voice;
+    updateVoiceButtons();save();
+    const f=VOICE_FRIENDS[state.voiceFriend];
+    $("voiceStatus").textContent=`${f.emoji} ${f.name} selected. Tap Meet My Voice to listen.`;
+  };
+  $("voiceSpeed").onchange=e=>{state.voiceSpeed=e.target.value;save();$("voiceStatus").textContent="Reading speed saved."};
+  $("previewVoiceBtn").onclick=()=>speak("",{preview:true});
+  $("stopVoiceBtn").onclick=()=>stopSpeaking("Voice stopped.");
+
+  [["largeTextToggle","largeText"],["contrastToggle","contrast"],["fontToggle","font"],["motionToggle","motion"]]
+    .forEach(([id,key])=>$(id).onchange=e=>{state.access[key]=e.target.checked;applyAccessibility();save()});
+
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"&&$("resetModal").classList.contains("show"))closeReset();
+    if(e.code==="Space"&&$("gameView").hidden===false&&document.activeElement===document.body){
+      e.preventDefault();togglePause();
+    }
+  });
+
+  window.addEventListener("beforeunload",()=>{
+    clearInterval(state.spawnTimer);
+    stopSpeaking("");
+  });
+
+  if("speechSynthesis" in window){
+    refreshVoices();
+    speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+    speechSynthesis.onvoiceschanged=refreshVoices;
+    setTimeout(refreshVoices,250);
+    setTimeout(refreshVoices,900);
+  }else{
+    $("previewVoiceBtn").disabled=true;
+    $("stopVoiceBtn").disabled=true;
+    $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+  }
+
+  applyAccessibility();
+  updateVoiceButtons();
+  updateStats();
+  updateRewards();
+  buildWorldCards();
+  applyWorld();
+  showHub();
+})();
+</script>
+</body>
+</html>
