@@ -20,7 +20,7 @@
   html,body{
     margin:0;
     height:100%;
-    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
     background:radial-gradient(circle at top,#fef3c7,#fee2e2 40%,#e0f2fe 90%);
     color:var(--ink);
     -webkit-font-smoothing:antialiased;
@@ -454,14 +454,13 @@
 
   .word-title{
     color:#5c3d8e;
-    font-family:"Comic Sans MS","Trebuchet MS","Segoe Print",system-ui,sans-serif;
-    font-size:clamp(1.55rem,5.2vw,3.35rem);
+    font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
+    font-size:clamp(1.55rem,5vw,3.2rem);
     font-weight:900;
-    line-height:1.05;
-    letter-spacing:-.025em;
-    white-space:nowrap;
-    overflow:visible;
-    overflow-wrap:normal;
+    line-height:1.12;
+    letter-spacing:-.015em;
+    white-space:normal;
+    overflow-wrap:anywhere;
     word-break:normal;
     max-width:100%;
   }
@@ -584,9 +583,131 @@
     }
   }
 
+
+/* =========================================================
+   CRÈCHE PRESCHOOL PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1050px,calc(100% - 22px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(75,49,69,.13);
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#ffd65b,#8fd8be);
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{margin:0;color:#d64f77;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:#634a88;font-size:clamp(1.02rem,2.3vw,1.32rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #ded4e8;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;background:linear-gradient(135deg,#7c65c7,#e977a9);border-color:#fff}
+
+/* =========================================================
+   MODERN CRÈCHE CONTROLS
+   ========================================================= */
+.voice-extra-row,.accessibility-row{
+  display:flex;gap:7px;flex-wrap:wrap;margin-top:9px
+}
+.voice-extra-row .btn,.accessibility-row .btn{flex:1 1 110px}
+.accessibility-row .btn.active{
+  color:#fff;
+  background:linear-gradient(135deg,#70d1af,#6dbfe5);
+  border-color:transparent
+}
+body.large-type{font-size:18px}
+body.simple-mode .side,
+body.simple-mode .chips-row,
+body.simple-mode .meta,
+body.simple-mode .word-id,
+body.simple-mode footer{
+  display:none!important
+}
+body.simple-mode .grid{grid-template-columns:1fr}
+body.simple-mode .app{max-width:820px}
+body.simple-mode .definition,
+body.simple-mode .simple,
+body.simple-mode .example{font-size:1.08rem}
+
+.word-garden-progress{
+  margin-top:14px;
+  padding:12px;
+  border:2px solid #e5d9ef;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#f2fff0,#eef9ff)
+}
+.word-garden-progress h3{margin:0 0 7px;text-align:center;color:#5b3e82}
+.garden-row{
+  min-height:72px;
+  display:flex;justify-content:center;align-items:flex-end;gap:10px;flex-wrap:wrap
+}
+.garden-step{
+  font-size:2rem;opacity:.28;transform:scale(.86);transition:.2s
+}
+.garden-step.on{opacity:1;transform:scale(1)}
+.garden-label{text-align:center;color:#756c83;font-size:.75rem;margin-top:5px}
+
+.word-passport{
+  margin-top:14px;padding:13px;border:2px solid #e5d9ef;border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff7df)
+}
+.word-passport h3{margin:0 0 8px;text-align:center;color:#5b3e82}
+.passport-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+.passport-card{
+  min-height:72px;padding:7px;border:2px solid #e4dbea;border-radius:14px;background:#fff;
+  display:grid;place-items:center;align-content:center;gap:2px;opacity:.34;filter:grayscale(.4)
+}
+.passport-card.learned{opacity:1;filter:none}
+.passport-card span{font-size:1.35rem}
+.passport-card small{font-size:.62rem;color:#756c83;font-weight:900;text-align:center}
+.main-card-speaking{box-shadow:0 0 0 5px rgba(242,202,99,.34),0 18px 44px rgba(59,39,79,.13)!important}
+
+.quiz-hint{
+  animation:quizPulse .7s ease 2;
+  box-shadow:0 0 0 4px rgba(242,202,99,.35)
+}
+@keyframes quizPulse{50%{transform:translateY(-2px) scale(1.02)}}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .passport-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}
+  .creche-links{grid-column:auto}
+  .passport-grid{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 <body>
+
+<header class="creche-header" aria-label="Crèche Preschool Portal">
+  <div class="creche-mark" aria-hidden="true">🌿</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Portal</p>
+    <div class="creche-title">The Crèche™ · Enchanted Word Garden</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link current" href="#" aria-current="page">🌿 Word Garden</a>
+  </nav>
+</header>
+
 <div class="app" role="application" aria-label="Learn a New Word Enchanted Word Garden">
   <header>
     <div class="logo">
@@ -630,6 +751,19 @@
         <button class="btn" id="markLearnedBtn">✅ I learned it</button>
         <button class="btn" id="favBtn">⭐ Save to favorites</button>
         <button class="btn" id="nextBtn">🎲 Surprise me</button>
+      </div>
+
+
+      <div class="word-garden-progress">
+        <h3>🌱 My Growing Word Garden</h3>
+        <div class="garden-row" id="gardenRow">
+          <span class="garden-step" data-step="0">🌱</span>
+          <span class="garden-step" data-step="1">🌿</span>
+          <span class="garden-step" data-step="2">🌼</span>
+          <span class="garden-step" data-step="3">🌳</span>
+          <span class="garden-step" data-step="4">🏆</span>
+        </div>
+        <div class="garden-label" id="gardenLabel">Learn words to help the garden grow.</div>
       </div>
 
       <hr style="margin:12px 0;border:none;border-top:1px solid rgba(148,163,184,0.4);" />
@@ -709,6 +843,15 @@
         </div>
 
         <button class="btn small voice-preview" id="previewVoiceBtn" type="button">🎧 Meet my reading friend</button>
+        <div class="voice-extra-row">
+          <button class="btn small" id="repeatVoiceBtn" type="button">🔁 Repeat Last</button>
+          <button class="btn small" id="stopVoiceBtn" type="button">⏹ Stop Voice</button>
+        </div>
+        <div class="accessibility-row">
+          <button class="btn small" id="largeTypeBtn" type="button">🔎 Larger Type</button>
+          <button class="btn small" id="simpleModeBtn" type="button">🧘 Simple Mode</button>
+          <button class="btn small" id="autoReadBtn" type="button">🗣️ Auto Read</button>
+        </div>
         <div class="voice-status" id="voiceStatus" aria-live="polite"></div>
         <p class="smallmuted" style="margin-top:7px;">
           Tap “Hear it” and say the word together.
@@ -724,6 +867,12 @@
       </div>
     </aside>
   </main>
+
+
+  <section class="word-passport">
+    <h3>📖 My Learned Word Passport</h3>
+    <div class="passport-grid" id="passportGrid"></div>
+  </section>
 
   <footer>
     <strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>
@@ -1991,10 +2140,20 @@ let state = {
   bank: KIDS_MAGIC_WORDS.slice(),
   learned: [],
   favorites: [],
-  settings: { voiceCharacter: "fairy", voiceSpeed: "normal", voiceName: "" }
+  settings: {
+    voiceCharacter: "fairy",
+    voiceSpeed: "normal",
+    voiceName: "",
+    autoRead: false,
+    largeType: false,
+    simpleMode: false
+  }
 };
 let currentIndex = 0;
 let voicesList = [];
+let lastSpokenText = "";
+let speechToken = 0;
+let quizWrongCount = 0;
 
 /* ============== UI refs ============== */
 const wordEmoji = document.getElementById('wordEmoji');
@@ -2022,6 +2181,15 @@ const voiceFriends = document.getElementById('voiceFriends');
 const voiceSpeedRow = document.getElementById('voiceSpeedRow');
 const previewVoiceBtn = document.getElementById('previewVoiceBtn');
 const voiceStatus = document.getElementById('voiceStatus');
+const repeatVoiceBtn = document.getElementById('repeatVoiceBtn');
+const stopVoiceBtn = document.getElementById('stopVoiceBtn');
+const largeTypeBtn = document.getElementById('largeTypeBtn');
+const simpleModeBtn = document.getElementById('simpleModeBtn');
+const autoReadBtn = document.getElementById('autoReadBtn');
+const gardenRow = document.getElementById('gardenRow');
+const gardenLabel = document.getElementById('gardenLabel');
+const passportGrid = document.getElementById('passportGrid');
+const mainCard = document.getElementById('mainCard');
 
 const startQuizBtn = document.getElementById('startQuizBtn');
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
@@ -2072,6 +2240,60 @@ function shuffle(arr){
     [arr[i],arr[j]]=[arr[j],arr[i]];
   }
 }
+
+function renderGarden(){
+  const ratio = state.bank.length ? state.learned.length / state.bank.length : 0;
+  const stage = Math.min(4, Math.floor(ratio * 5));
+  gardenRow.querySelectorAll('[data-step]').forEach(el=>{
+    el.classList.toggle('on', Number(el.dataset.step) <= stage);
+  });
+  gardenLabel.textContent = state.learned.length === state.bank.length
+    ? "Every word in the garden has been learned!"
+    : `${state.learned.length} of ${state.bank.length} words learned.`;
+}
+
+function renderPassport(){
+  const words = state.learned
+    .map(word => state.bank.find(item => item.word === word))
+    .filter(Boolean)
+    .slice(-30)
+    .reverse();
+
+  passportGrid.innerHTML = "";
+  if(!words.length){
+    passportGrid.innerHTML = '<div class="passport-card learned" style="grid-column:1/-1"><span>🌱</span><small>Learn a word to begin your passport.</small></div>';
+    return;
+  }
+
+  words.forEach(item=>{
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'passport-card learned';
+    btn.innerHTML = `<span>${emojiForWord(item)}</span><small>${escapeHtml(item.word)}</small>`;
+    btn.addEventListener('click', ()=>{
+      const idx = state.bank.findIndex(w=>w.word===item.word);
+      if(idx>=0) renderWord(idx);
+      speakText(`${item.word}. ${item.simpleDefinition || item.definition}.`);
+    });
+    passportGrid.appendChild(btn);
+  });
+}
+
+function applyAccessibility(){
+  document.body.classList.toggle('large-type', !!state.settings.largeType);
+  document.body.classList.toggle('simple-mode', !!state.settings.simpleMode);
+  largeTypeBtn.classList.toggle('active', !!state.settings.largeType);
+  simpleModeBtn.classList.toggle('active', !!state.settings.simpleMode);
+  autoReadBtn.classList.toggle('active', !!state.settings.autoRead);
+  autoReadBtn.textContent = state.settings.autoRead ? '🗣️ Auto Read On' : '🤫 Auto Read Off';
+}
+
+function refreshLearningDisplays(){
+  renderGarden();
+  renderPassport();
+  applyAccessibility();
+}
+
 function indexForToday(){
   if(!state.bank.length) return 0;
   const now = new Date();
@@ -2148,22 +2370,42 @@ function refreshVoiceControls(){
   });
 }
 
+function stopSpeaking(message="Voice stopped."){
+  speechToken++;
+  if('speechSynthesis' in window) speechSynthesis.cancel();
+  mainCard?.classList.remove('main-card-speaking');
+  voiceStatus.textContent = message;
+}
+
 function speakText(text, options={}){
   if(!text || !('speechSynthesis' in window)) return;
+  stopSpeaking("");
+  lastSpokenText = String(text);
+  const token = ++speechToken;
   const characterKey = options.character || state.settings.voiceCharacter || "fairy";
   const speedKey = options.speed || state.settings.voiceSpeed || "normal";
   const character = VOICE_CHARACTERS[characterKey] || VOICE_CHARACTERS.fairy;
-  const u = new SpeechSynthesisUtterance(text);
+  const u = new SpeechSynthesisUtterance(lastSpokenText);
   const chosen = chooseVoice(characterKey);
   if(chosen) u.voice = chosen;
   u.lang = chosen?.lang || 'en-US';
   u.rate = Math.max(0.55,Math.min(1.35,character.rate*(VOICE_SPEEDS[speedKey]||1)));
   u.pitch = character.pitch;
   u.volume = 1;
-  u.onstart = ()=>{ voiceStatus.textContent = `${character.emoji} ${character.name} is reading…`; };
-  u.onend = ()=>{ voiceStatus.textContent = "Wonderful listening! 🌟"; };
-  u.onerror = ()=>{ voiceStatus.textContent = "This voice needs another try. Please tap again."; };
-  speechSynthesis.cancel();
+  u.onstart = ()=>{
+    if(options.highlight !== false) mainCard?.classList.add('main-card-speaking');
+    voiceStatus.textContent = `${character.emoji} ${character.name} is reading…`;
+  };
+  u.onend = ()=>{
+    if(token!==speechToken) return;
+    mainCard?.classList.remove('main-card-speaking');
+    voiceStatus.textContent = "Wonderful listening! 🌟";
+  };
+  u.onerror = ()=>{
+    if(token!==speechToken) return;
+    mainCard?.classList.remove('main-card-speaking');
+    voiceStatus.textContent = "This voice needs another try. Please tap again.";
+  };
   speechSynthesis.speak(u);
 }
 
@@ -2191,6 +2433,7 @@ function refreshCounts(){
   bankCount.textContent = state.bank.length;
   learnedCount.textContent = state.learned.length;
   favCount.textContent = state.favorites.length;
+  refreshLearningDisplays();
 }
 function renderWord(idx){
   if(!state.bank.length) return;
@@ -2247,6 +2490,9 @@ function renderWord(idx){
   // date
   const today = new Date();
   dateLabel.textContent = today.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
+  if(state.settings.autoRead){
+    setTimeout(()=>speakText(`${w.word}. ${w.simpleDefinition || w.definition}. ${w.example || ""}`),220);
+  }
 }
 
 /* ============== Search ============== */
@@ -2315,12 +2561,14 @@ function renderSearchResults(q){
 
 /* ============== Quiz ============== */
 function startQuiz(){
+  quizWrongCount = 0;
   quizResult.textContent = "";
   quizOptions.innerHTML = "";
   if(!state.bank.length){
     quizQuestion.textContent = "No words in the bank.";
     return;
   }
+
   const correctIdx = Math.floor(Math.random()*state.bank.length);
   const correct = state.bank[correctIdx];
   const correctDef = correct.definition || "";
@@ -2329,9 +2577,7 @@ function startQuiz(){
   const choices = [correctDef];
   const pool = state.bank.filter((_,i)=>i!==correctIdx && state.bank[i].definition);
   shuffle(pool);
-  for(let i=0;i<3 && i<pool.length;i++){
-    choices.push(pool[i].definition);
-  }
+  for(let i=0;i<3 && i<pool.length;i++) choices.push(pool[i].definition);
   shuffle(choices);
 
   choices.forEach(ch=>{
@@ -2340,21 +2586,33 @@ function startQuiz(){
     btn.className = "quiz-option";
     btn.textContent = ch;
     btn.addEventListener('click', ()=>{
-      Array.from(quizOptions.children).forEach(c=>c.disabled = true);
       if(ch === correctDef){
+        Array.from(quizOptions.children).forEach(c=>c.disabled = true);
         btn.classList.add('correct');
-        quizResult.textContent = "Nice! That’s correct. 🌟";
+        quizResult.textContent = "Wonderful! That meaning matches the word. 🌟";
+        speakText(`Wonderful. ${correct.word} means ${correct.simpleDefinition || correct.definition}.`);
         if(!state.learned.includes(correct.word)){
           state.learned.push(correct.word);
           saveProgress();
           refreshCounts();
         }
-      } else {
+      }else{
+        quizWrongCount++;
         btn.classList.add('wrong');
-        Array.from(quizOptions.children).forEach(c=>{
-          if(c.textContent === correctDef) c.classList.add('correct');
-        });
-        quizResult.textContent = "Good try! The correct meaning is highlighted in green.";
+        btn.disabled = true;
+        if(quizWrongCount < 2){
+          quizResult.textContent = "Good try. Read the meanings and try once more.";
+          speakText("Good try. Read the meanings and try once more.");
+        }else{
+          Array.from(quizOptions.children).forEach(c=>{
+            c.disabled = true;
+            if(c.textContent === correctDef){
+              c.classList.add('correct','quiz-hint');
+            }
+          });
+          quizResult.textContent = `The correct meaning is highlighted. ${correct.word} means ${correct.simpleDefinition || correct.definition}.`;
+          speakText(`The correct meaning is highlighted. ${correct.word} means ${correct.simpleDefinition || correct.definition}.`);
+        }
       }
     });
     quizOptions.appendChild(btn);
@@ -2426,6 +2684,35 @@ previewVoiceBtn.addEventListener('click', ()=>{
   speakText(`Hello! I am ${friend.name}. I am happy to read and learn new words with you.`);
 });
 
+repeatVoiceBtn.addEventListener('click', ()=>{
+  if(lastSpokenText) speakText(lastSpokenText);
+  else if(state.bank.length) speakText(buildFriendlyReading(state.bank[currentIndex]));
+});
+
+stopVoiceBtn.addEventListener('click', ()=>stopSpeaking());
+
+largeTypeBtn.addEventListener('click', ()=>{
+  state.settings.largeType = !state.settings.largeType;
+  saveProgress();
+  applyAccessibility();
+});
+
+simpleModeBtn.addEventListener('click', ()=>{
+  state.settings.simpleMode = !state.settings.simpleMode;
+  saveProgress();
+  applyAccessibility();
+});
+
+autoReadBtn.addEventListener('click', ()=>{
+  state.settings.autoRead = !state.settings.autoRead;
+  saveProgress();
+  applyAccessibility();
+  voiceStatus.textContent = state.settings.autoRead
+    ? "Words will read automatically when opened."
+    : "Automatic reading is off.";
+});
+
+
 searchBox.addEventListener('input', ()=>renderSearchResults(searchBox.value));
 searchBox.addEventListener('keydown', (e)=>{
   if(e.key === "Enter"){
@@ -2444,6 +2731,9 @@ function init(){
   refreshCounts();
   setupVoices();
   refreshVoiceControls();
+  applyAccessibility();
+  renderGarden();
+  renderPassport();
   const now = new Date();
   dateLabel.textContent = now.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
   if(state.bank.length){
@@ -2456,6 +2746,7 @@ function init(){
 init();
 setTimeout(setupVoices, 600);
 window.addEventListener("resize", ()=>requestAnimationFrame(fitWordOnOneLine));
+window.addEventListener("beforeunload", ()=>stopSpeaking(""));
 </script>
 </body>
 </html>
