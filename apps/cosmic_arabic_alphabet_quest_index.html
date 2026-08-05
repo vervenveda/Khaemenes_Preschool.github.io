@@ -75,17 +75,18 @@ button{touch-action:manipulation}
   font-weight:800;
 }
 .hero h1{
-  margin:18px auto 10px;
+  margin:18px auto 12px;
   max-width:980px;
   font-size:clamp(2.2rem,5.8vw,4.7rem);
   letter-spacing:-.02em;
   line-height:1.08;
 }
 .hero p{
-  max-width:720px;
+  max-width:850px;
   margin:0 auto;
   color:#eee9ff;
-  line-height:1.6;
+  line-height:1.72;
+  font-size:1.02rem;
 }
 .arabic-title{
   display:block;
@@ -494,9 +495,159 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .site-footer strong {
   color: #503a76;
 }
+
+/* =========================================================
+   CRÈCHE LANGUAGE PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1180px,calc(100% - 24px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(63,44,84,.14);
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#f4c95d,#42c7b9);
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{
+  margin:0;color:#d85f8f;font-size:.68rem;font-weight:900;
+  letter-spacing:.12em;text-transform:uppercase
+}
+.creche-title{
+  margin:2px 0 0;color:#503a76;
+  font-size:clamp(1.02rem,2.3vw,1.34rem);line-height:1.2
+}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #ded4e8;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{
+  color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose));border-color:#fff
+}
+
+/* =========================================================
+   ACCESSIBILITY + PRESCHOOL FOCUS TOOLS
+   ========================================================= */
+.creche-tools{
+  margin:12px 0 14px;
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap
+}
+.creche-tools button.active{
+  color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--turquoise),var(--violet))
+}
+body.large-type{font-size:18px}
+body.focus-mode .dashboard,
+body.focus-mode .week-strip,
+body.focus-mode .footer,
+body.focus-mode .site-footer,
+body.focus-mode .constellation-panel{display:none!important}
+body.focus-mode .layout{grid-template-columns:1fr}
+body.focus-mode .app{max-width:920px}
+body.hide-transliteration .sound-line,
+body.hide-transliteration .tile small,
+body.hide-transliteration .match-card[data-type="latin"],
+body.hide-transliteration .example strong{display:none!important}
+
+/* =========================================================
+   CONSTELLATION PROGRESS + CERTIFICATE
+   ========================================================= */
+.constellation-panel{
+  margin:0 0 16px;
+  padding:13px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#17133a,#2c2368);
+  color:#fff;
+  box-shadow:var(--shadow);
+}
+.constellation-panel h2{
+  margin:0 0 8px;text-align:center;color:var(--gold);font-size:1.05rem
+}
+.constellation-row{
+  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px
+}
+.constellation-star{
+  min-height:58px;display:grid;place-items:center;align-content:center;gap:2px;
+  border:1px solid rgba(255,255,255,.16);border-radius:14px;
+  background:rgba(255,255,255,.08);opacity:.42;text-align:center
+}
+.constellation-star.on{opacity:1;background:rgba(244,201,93,.18)}
+.constellation-star span{font-size:1.35rem}
+.constellation-star small{font-size:.58rem;color:#eee9ff}
+.constellation-note{text-align:center;margin-top:7px;color:#ddd6f3;font-size:.75rem}
+
+.certificate-modal{
+  position:fixed;inset:0;display:none;place-items:center;padding:16px;
+  background:rgba(23,19,58,.72);z-index:60
+}
+.certificate-modal.open{display:grid}
+.certificate-sheet{
+  width:min(860px,100%);max-height:92vh;overflow:auto;
+  padding:34px;border:8px double var(--gold);border-radius:24px;
+  background:linear-gradient(145deg,#fffdf8,#fff4d5,#f3edff);
+  color:var(--night);text-align:center;box-shadow:0 28px 70px rgba(0,0,0,.35)
+}
+.certificate-sheet h2{font-size:clamp(2rem,5vw,3.5rem);margin:8px 0;color:var(--violet)}
+.certificate-arabic{direction:rtl;font-size:2.2rem;color:var(--rose);font-weight:900}
+.certificate-name{
+  width:min(560px,100%);margin:16px auto;padding:10px;border:0;border-bottom:3px solid var(--violet);
+  background:transparent;text-align:center;font-size:1.35rem;font-weight:900;color:var(--night)
+}
+.certificate-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:18px}
+.trace-meter{
+  flex:1 1 190px;min-width:170px;padding:7px 10px;border-radius:999px;background:#fff
+}
+.trace-meter-track{height:9px;border-radius:999px;overflow:hidden;background:#e9e2ef}
+.trace-meter-bar{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--gold),var(--turquoise));transition:.2s}
+.trace-meter small{display:block;margin-top:3px;color:var(--muted);font-size:.65rem;text-align:center}
+
+.match-card.wrong{outline:3px solid var(--danger);background:#fff0f2;animation:arabicShake .34s ease}
+@keyframes arabicShake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .constellation-row{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}.creche-links{grid-column:auto}
+  .constellation-row{grid-template-columns:repeat(3,1fr)}
+}
+@media print{
+  body *{visibility:hidden!important}
+  #certificateModal,#certificateModal *{visibility:visible!important}
+  #certificateModal{position:absolute;inset:0;display:grid!important;background:#fff}
+  .certificate-actions{display:none!important}
+  .certificate-sheet{box-shadow:none;width:100%;max-height:none}
+}
+
 </style>
 </head>
 <body>
+
+<header class="creche-header" aria-label="Crèche Preschool Languages Portal">
+  <div class="creche-mark" aria-hidden="true">🌙</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Languages</p>
+    <div class="creche-title">The Crèche™ · Cosmic Arabic Alphabet Quest</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool language navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link" href="../languages/index.html">🌍 Languages</a>
+    <a class="creche-link current" href="#" aria-current="page">🌙 Arabic Quest</a>
+  </nav>
+</header>
+
 <main class="app">
   <header class="hero">
     <div class="hero-badge">🌙 Khaemenes Academy • Preschool Languages</div>
@@ -562,6 +713,15 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
   </section>
 
+
+  <div class="creche-tools" aria-label="Accessibility and learning controls">
+    <button id="largeTypeBtn" type="button" class="secondary">🔎 Larger Type</button>
+    <button id="focusModeBtn" type="button" class="secondary">🧘 Focus Mode</button>
+    <button id="autoReadBtn" type="button" class="secondary">🗣️ Auto Read On</button>
+    <button id="transliterationBtn" type="button" class="secondary">Aa Transliteration On</button>
+    <button id="certificateBtn" type="button" class="secondary">🏆 Certificate</button>
+  </div>
+
   <div class="toolbar">
     <label class="pill">Week
       <select id="weekSelect" aria-label="Choose week"></select>
@@ -580,6 +740,13 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     <div class="stat"><strong id="letterStat">ا</strong>Letter</div>
   </section>
 
+
+  <section class="constellation-panel" aria-labelledby="constellationTitle">
+    <h2 id="constellationTitle">✨ My Arabic Letter Constellation</h2>
+    <div class="constellation-row" id="constellationRow"></div>
+    <div class="constellation-note" id="constellationNote">Complete weeks to light the stars.</div>
+  </section>
+
   <div id="appContent"></div>
 
   <p class="footer">Runs entirely in the browser • Progress stays on this device • No outside libraries or game services</p>
@@ -589,7 +756,562 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
   All Rights Reserved.
 </footer>
 
-<script src="arabic_alphabet.js"></script>
+<script>
+/**
+ * Sunny Arabic Alphabet Data
+ * Sovereign, dependency-free JavaScript data file.
+ *
+ * Usage:
+ *   1. Include this file before your main app script:
+ *      <script src="arabic_alphabet.js"><\/script>
+ *
+ *   2. Access the lessons with:
+ *      window.ARABIC_ALPHABET
+ *
+ * Notes:
+ * - Arabic is written right-to-left.
+ * - Transliteration is simplified for young learners.
+ * - Pronunciation clues are approximate; native audio is recommended.
+ */
+
+window.ARABIC_ALPHABET = [
+  {
+    id: 1,
+    letter: "ا",
+    nameArabic: "أَلِف",
+    transliteration: "Alif",
+    academicTransliteration: "ʾalif",
+    englishSound: "Long a, as in father",
+    soundHint: "aa",
+    exampleArabic: "أَسَد",
+    exampleTransliteration: "Asad",
+    exampleEnglish: "Lion",
+    emoji: "🦁",
+    isolated: "ا",
+    beginning: "ا",
+    middle: "ـا",
+    ending: "ـا",
+    prompt: "Stretch your arms tall like Alif.",
+    note: "Alif does not connect to the letter after it."
+  },
+  {
+    id: 2,
+    letter: "ب",
+    nameArabic: "بَاء",
+    transliteration: "Baa",
+    academicTransliteration: "bāʾ",
+    englishSound: "b, as in ball",
+    soundHint: "b",
+    exampleArabic: "بَطَّة",
+    exampleTransliteration: "Baṭṭah",
+    exampleEnglish: "Duck",
+    emoji: "🦆",
+    isolated: "ب",
+    beginning: "بـ",
+    middle: "ـبـ",
+    ending: "ـب",
+    prompt: "Bounce like a ball and say b-b-b."
+  },
+  {
+    id: 3,
+    letter: "ت",
+    nameArabic: "تَاء",
+    transliteration: "Taa",
+    academicTransliteration: "tāʾ",
+    englishSound: "t, as in top",
+    soundHint: "t",
+    exampleArabic: "تُفَّاح",
+    exampleTransliteration: "Tuffāḥ",
+    exampleEnglish: "Apples",
+    emoji: "🍎",
+    isolated: "ت",
+    beginning: "تـ",
+    middle: "ـتـ",
+    ending: "ـت",
+    prompt: "Tap your toes and say t-t-t."
+  },
+  {
+    id: 4,
+    letter: "ث",
+    nameArabic: "ثَاء",
+    transliteration: "Thaa",
+    academicTransliteration: "thāʾ",
+    englishSound: "th, as in three",
+    soundHint: "th",
+    exampleArabic: "ثَعْلَب",
+    exampleTransliteration: "Thaʿlab",
+    exampleEnglish: "Fox",
+    emoji: "🦊",
+    isolated: "ث",
+    beginning: "ثـ",
+    middle: "ـثـ",
+    ending: "ـث",
+    prompt: "Hold up three fingers and say th-th-th."
+  },
+  {
+    id: 5,
+    letter: "ج",
+    nameArabic: "جِيم",
+    transliteration: "Jeem",
+    academicTransliteration: "jīm",
+    englishSound: "j, as in jam",
+    soundHint: "j",
+    exampleArabic: "جَمَل",
+    exampleTransliteration: "Jamal",
+    exampleEnglish: "Camel",
+    emoji: "🐪",
+    isolated: "ج",
+    beginning: "جـ",
+    middle: "ـجـ",
+    ending: "ـج",
+    prompt: "Walk slowly like a camel and say j-j-j."
+  },
+  {
+    id: 6,
+    letter: "ح",
+    nameArabic: "حَاء",
+    transliteration: "Haa",
+    academicTransliteration: "ḥāʾ",
+    englishSound: "Deep, breathy h; no exact English match",
+    soundHint: "ḥ",
+    exampleArabic: "حِصَان",
+    exampleTransliteration: "Ḥiṣān",
+    exampleEnglish: "Horse",
+    emoji: "🐴",
+    isolated: "ح",
+    beginning: "حـ",
+    middle: "ـحـ",
+    ending: "ـح",
+    prompt: "Breathe gently and say a deep h sound."
+  },
+  {
+    id: 7,
+    letter: "خ",
+    nameArabic: "خَاء",
+    transliteration: "Khaa",
+    academicTransliteration: "khāʾ",
+    englishSound: "kh, like the sound in loch",
+    soundHint: "kh",
+    exampleArabic: "خُبْز",
+    exampleTransliteration: "Khubz",
+    exampleEnglish: "Bread",
+    emoji: "🍞",
+    isolated: "خ",
+    beginning: "خـ",
+    middle: "ـخـ",
+    ending: "ـخ",
+    prompt: "Pretend to smell fresh bread and say kh."
+  },
+  {
+    id: 8,
+    letter: "د",
+    nameArabic: "دَال",
+    transliteration: "Daal",
+    academicTransliteration: "dāl",
+    englishSound: "d, as in door",
+    soundHint: "d",
+    exampleArabic: "دُبّ",
+    exampleTransliteration: "Dubb",
+    exampleEnglish: "Bear",
+    emoji: "🐻",
+    isolated: "د",
+    beginning: "د",
+    middle: "ـد",
+    ending: "ـد",
+    prompt: "Stomp like a bear and say d-d-d.",
+    note: "Daal does not connect to the letter after it."
+  },
+  {
+    id: 9,
+    letter: "ذ",
+    nameArabic: "ذَال",
+    transliteration: "Dhaal",
+    academicTransliteration: "dhāl",
+    englishSound: "th, as in this",
+    soundHint: "dh",
+    exampleArabic: "ذِئْب",
+    exampleTransliteration: "Dhiʾb",
+    exampleEnglish: "Wolf",
+    emoji: "🐺",
+    isolated: "ذ",
+    beginning: "ذ",
+    middle: "ـذ",
+    ending: "ـذ",
+    prompt: "Howl softly like a wolf and say dh.",
+    note: "Dhaal does not connect to the letter after it."
+  },
+  {
+    id: 10,
+    letter: "ر",
+    nameArabic: "رَاء",
+    transliteration: "Raa",
+    academicTransliteration: "rāʾ",
+    englishSound: "A lightly rolled or tapped r",
+    soundHint: "r",
+    exampleArabic: "رُمَّان",
+    exampleTransliteration: "Rummān",
+    exampleEnglish: "Pomegranate",
+    emoji: "🍎",
+    isolated: "ر",
+    beginning: "ر",
+    middle: "ـر",
+    ending: "ـر",
+    prompt: "Roll your hands and try a gentle r sound.",
+    note: "Raa does not connect to the letter after it."
+  },
+  {
+    id: 11,
+    letter: "ز",
+    nameArabic: "زَاي",
+    transliteration: "Zaay",
+    academicTransliteration: "zāy",
+    englishSound: "z, as in zoo",
+    soundHint: "z",
+    exampleArabic: "زَهْرَة",
+    exampleTransliteration: "Zahrah",
+    exampleEnglish: "Flower",
+    emoji: "🌸",
+    isolated: "ز",
+    beginning: "ز",
+    middle: "ـز",
+    ending: "ـز",
+    prompt: "Buzz like a bee and say z-z-z.",
+    note: "Zaay does not connect to the letter after it."
+  },
+  {
+    id: 12,
+    letter: "س",
+    nameArabic: "سِين",
+    transliteration: "Seen",
+    academicTransliteration: "sīn",
+    englishSound: "s, as in sun",
+    soundHint: "s",
+    exampleArabic: "سَمَك",
+    exampleTransliteration: "Samak",
+    exampleEnglish: "Fish",
+    emoji: "🐟",
+    isolated: "س",
+    beginning: "سـ",
+    middle: "ـسـ",
+    ending: "ـس",
+    prompt: "Swim like a fish and say s-s-s."
+  },
+  {
+    id: 13,
+    letter: "ش",
+    nameArabic: "شِين",
+    transliteration: "Sheen",
+    academicTransliteration: "shīn",
+    englishSound: "sh, as in ship",
+    soundHint: "sh",
+    exampleArabic: "شَمْس",
+    exampleTransliteration: "Shams",
+    exampleEnglish: "Sun",
+    emoji: "☀️",
+    isolated: "ش",
+    beginning: "شـ",
+    middle: "ـشـ",
+    ending: "ـش",
+    prompt: "Make a big sun shape and say sh-sh-sh."
+  },
+  {
+    id: 14,
+    letter: "ص",
+    nameArabic: "صَاد",
+    transliteration: "Saad",
+    academicTransliteration: "ṣād",
+    englishSound: "A deep, emphatic s",
+    soundHint: "ṣ",
+    exampleArabic: "صَقْر",
+    exampleTransliteration: "Ṣaqr",
+    exampleEnglish: "Falcon",
+    emoji: "🦅",
+    isolated: "ص",
+    beginning: "صـ",
+    middle: "ـصـ",
+    ending: "ـص",
+    prompt: "Spread your wings like a falcon and say a strong s."
+  },
+  {
+    id: 15,
+    letter: "ض",
+    nameArabic: "ضَاد",
+    transliteration: "Daad",
+    academicTransliteration: "ḍād",
+    englishSound: "A deep, emphatic d",
+    soundHint: "ḍ",
+    exampleArabic: "ضِفْدَع",
+    exampleTransliteration: "Ḍifdaʿ",
+    exampleEnglish: "Frog",
+    emoji: "🐸",
+    isolated: "ض",
+    beginning: "ضـ",
+    middle: "ـضـ",
+    ending: "ـض",
+    prompt: "Hop like a frog and say a strong d."
+  },
+  {
+    id: 16,
+    letter: "ط",
+    nameArabic: "طَاء",
+    transliteration: "Taa",
+    academicTransliteration: "ṭāʾ",
+    englishSound: "A deep, emphatic t",
+    soundHint: "ṭ",
+    exampleArabic: "طَائِر",
+    exampleTransliteration: "Ṭāʾir",
+    exampleEnglish: "Bird",
+    emoji: "🐦",
+    isolated: "ط",
+    beginning: "طـ",
+    middle: "ـطـ",
+    ending: "ـط",
+    prompt: "Flap your arms like a bird and say a strong t."
+  },
+  {
+    id: 17,
+    letter: "ظ",
+    nameArabic: "ظَاء",
+    transliteration: "Dhaa",
+    academicTransliteration: "ẓāʾ",
+    englishSound: "A deep, emphatic th or z sound",
+    soundHint: "ẓ",
+    exampleArabic: "ظِلّ",
+    exampleTransliteration: "Ẓill",
+    exampleEnglish: "Shadow",
+    emoji: "🌳",
+    isolated: "ظ",
+    beginning: "ظـ",
+    middle: "ـظـ",
+    ending: "ـظ",
+    prompt: "Make a shadow shape and say a deep dh sound."
+  },
+  {
+    id: 18,
+    letter: "ع",
+    nameArabic: "عَيْن",
+    transliteration: "Ayn",
+    academicTransliteration: "ʿayn",
+    englishSound: "A throat sound with no exact English match",
+    soundHint: "ʿ",
+    exampleArabic: "عَيْن",
+    exampleTransliteration: "ʿAyn",
+    exampleEnglish: "Eye",
+    emoji: "👁️",
+    isolated: "ع",
+    beginning: "عـ",
+    middle: "ـعـ",
+    ending: "ـع",
+    prompt: "Point to your eye and practice the gentle throat sound."
+  },
+  {
+    id: 19,
+    letter: "غ",
+    nameArabic: "غَيْن",
+    transliteration: "Ghayn",
+    academicTransliteration: "ghayn",
+    englishSound: "A gargled gh sound",
+    soundHint: "gh",
+    exampleArabic: "غَزَال",
+    exampleTransliteration: "Ghazāl",
+    exampleEnglish: "Gazelle",
+    emoji: "🦌",
+    isolated: "غ",
+    beginning: "غـ",
+    middle: "ـغـ",
+    ending: "ـغ",
+    prompt: "Leap gently like a gazelle and say gh."
+  },
+  {
+    id: 20,
+    letter: "ف",
+    nameArabic: "فَاء",
+    transliteration: "Faa",
+    academicTransliteration: "fāʾ",
+    englishSound: "f, as in fish",
+    soundHint: "f",
+    exampleArabic: "فِيل",
+    exampleTransliteration: "Fīl",
+    exampleEnglish: "Elephant",
+    emoji: "🐘",
+    isolated: "ف",
+    beginning: "فـ",
+    middle: "ـفـ",
+    ending: "ـف",
+    prompt: "Stomp like an elephant and say f-f-f."
+  },
+  {
+    id: 21,
+    letter: "ق",
+    nameArabic: "قَاف",
+    transliteration: "Qaaf",
+    academicTransliteration: "qāf",
+    englishSound: "A deep k sound made farther back",
+    soundHint: "q",
+    exampleArabic: "قَمَر",
+    exampleTransliteration: "Qamar",
+    exampleEnglish: "Moon",
+    emoji: "🌙",
+    isolated: "ق",
+    beginning: "قـ",
+    middle: "ـقـ",
+    ending: "ـق",
+    prompt: "Make a moon shape and say a deep q sound."
+  },
+  {
+    id: 22,
+    letter: "ك",
+    nameArabic: "كَاف",
+    transliteration: "Kaaf",
+    academicTransliteration: "kāf",
+    englishSound: "k, as in kite",
+    soundHint: "k",
+    exampleArabic: "كِتَاب",
+    exampleTransliteration: "Kitāb",
+    exampleEnglish: "Book",
+    emoji: "📖",
+    isolated: "ك",
+    beginning: "كـ",
+    middle: "ـكـ",
+    ending: "ـك",
+    prompt: "Open an imaginary book and say k-k-k."
+  },
+  {
+    id: 23,
+    letter: "ل",
+    nameArabic: "لَام",
+    transliteration: "Laam",
+    academicTransliteration: "lām",
+    englishSound: "l, as in lamp",
+    soundHint: "l",
+    exampleArabic: "لَيْمُون",
+    exampleTransliteration: "Laymūn",
+    exampleEnglish: "Lemon",
+    emoji: "🍋",
+    isolated: "ل",
+    beginning: "لـ",
+    middle: "ـلـ",
+    ending: "ـل",
+    prompt: "Pretend to taste a lemon and say l-l-l."
+  },
+  {
+    id: 24,
+    letter: "م",
+    nameArabic: "مِيم",
+    transliteration: "Meem",
+    academicTransliteration: "mīm",
+    englishSound: "m, as in moon",
+    soundHint: "m",
+    exampleArabic: "مَوْز",
+    exampleTransliteration: "Mawz",
+    exampleEnglish: "Banana",
+    emoji: "🍌",
+    isolated: "م",
+    beginning: "مـ",
+    middle: "ـمـ",
+    ending: "ـم",
+    prompt: "Rub your tummy and say m-m-m."
+  },
+  {
+    id: 25,
+    letter: "ن",
+    nameArabic: "نُون",
+    transliteration: "Noon",
+    academicTransliteration: "nūn",
+    englishSound: "n, as in nest",
+    soundHint: "n",
+    exampleArabic: "نَجْم",
+    exampleTransliteration: "Najm",
+    exampleEnglish: "Star",
+    emoji: "⭐",
+    isolated: "ن",
+    beginning: "نـ",
+    middle: "ـنـ",
+    ending: "ـن",
+    prompt: "Twinkle your fingers and say n-n-n."
+  },
+  {
+    id: 26,
+    letter: "ه",
+    nameArabic: "هَاء",
+    transliteration: "Haa",
+    academicTransliteration: "hāʾ",
+    englishSound: "Soft h, as in hat",
+    soundHint: "h",
+    exampleArabic: "هِلَال",
+    exampleTransliteration: "Hilāl",
+    exampleEnglish: "Crescent moon",
+    emoji: "🌙",
+    isolated: "ه",
+    beginning: "هـ",
+    middle: "ـهـ",
+    ending: "ـه",
+    prompt: "Breathe softly and say h-h-h."
+  },
+  {
+    id: 27,
+    letter: "و",
+    nameArabic: "وَاو",
+    transliteration: "Waaw",
+    academicTransliteration: "wāw",
+    englishSound: "w, as in water, or long oo",
+    soundHint: "w / oo",
+    exampleArabic: "وَرْدَة",
+    exampleTransliteration: "Wardah",
+    exampleEnglish: "Rose",
+    emoji: "🌹",
+    isolated: "و",
+    beginning: "و",
+    middle: "ـو",
+    ending: "ـو",
+    prompt: "Pretend to smell a rose and say w-w-w.",
+    note: "Waaw does not connect to the letter after it."
+  },
+  {
+    id: 28,
+    letter: "ي",
+    nameArabic: "يَاء",
+    transliteration: "Yaa",
+    academicTransliteration: "yāʾ",
+    englishSound: "y, as in yellow, or long ee",
+    soundHint: "y / ee",
+    exampleArabic: "يَد",
+    exampleTransliteration: "Yad",
+    exampleEnglish: "Hand",
+    emoji: "✋",
+    isolated: "ي",
+    beginning: "يـ",
+    middle: "ـيـ",
+    ending: "ـي",
+    prompt: "Wave your hand and say y-y-y."
+  }
+];
+
+window.ARABIC_EXTRA_SYMBOLS = [
+  {
+    letter: "ء",
+    nameArabic: "هَمْزَة",
+    transliteration: "Hamza",
+    academicTransliteration: "ʾ",
+    englishSound: "A brief voice stop, like the break in uh-oh",
+    exampleArabic: "سُؤَال",
+    exampleTransliteration: "Suʾāl",
+    exampleEnglish: "Question",
+    emoji: "❓"
+  }
+];
+
+window.ARABIC_ALPHABET_META = {
+  title: "Sunny Arabic Alphabet",
+  direction: "rtl",
+  languageCode: "ar",
+  totalLetters: 28,
+  transliterationStyle: "child-friendly",
+  educationalNote:
+    "Transliteration gives only an approximate guide. Native-speaker audio is recommended for accurate pronunciation."
+};
+
+</script>
 <script>
 (() => {
   "use strict";
@@ -659,7 +1381,11 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     matchDone: false,
     homeLanguage: localStorage.getItem("cosmicArabicHomeLanguage") || "en",
     readingSpeed: localStorage.getItem("cosmicArabicReadingSpeed") || "slow",
-    voiceFriend: localStorage.getItem("cosmicArabicVoiceFriend") || "fairy"
+    voiceFriend: localStorage.getItem("cosmicArabicVoiceFriend") || "fairy",
+    autoRead: localStorage.getItem("cosmicArabicAutoRead") !== "false",
+    largeType: localStorage.getItem("cosmicArabicLargeType") === "true",
+    focusMode: localStorage.getItem("cosmicArabicFocusMode") === "true",
+    showTransliteration: localStorage.getItem("cosmicArabicShowTransliteration") !== "false"
   };
 
   const themes = [
@@ -682,6 +1408,10 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     localStorage.setItem("cosmicArabicHomeLanguage", state.homeLanguage);
     localStorage.setItem("cosmicArabicReadingSpeed", state.readingSpeed);
     localStorage.setItem("cosmicArabicVoiceFriend", state.voiceFriend);
+    localStorage.setItem("cosmicArabicAutoRead", String(state.autoRead));
+    localStorage.setItem("cosmicArabicLargeType", String(state.largeType));
+    localStorage.setItem("cosmicArabicFocusMode", String(state.focusMode));
+    localStorage.setItem("cosmicArabicShowTransliteration", String(state.showTransliteration));
   }
 
   function applyTheme() {
@@ -794,6 +1524,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
   const SPEEDS = {slow:.88,normal:1,lively:1.1};
   let voices = [];
   let speechToken = 0;
+  let lastSpoken = "";
 
   function refreshVoices(){
     if(!("speechSynthesis" in window)) return;
@@ -839,6 +1570,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     stopSpeaking("");
     const token = ++speechToken;
     const friend = VOICE_FRIENDS[state.voiceFriend] || VOICE_FRIENDS.fairy;
+    lastSpoken = String(text);
     const utterance = new SpeechSynthesisUtterance(text);
     const voice = chooseVoice(lang, state.voiceFriend);
 
@@ -933,6 +1665,82 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     return letters.map(l => `${l.nameArabic}. ${l.exampleArabic}`).join(". ");
   }
 
+
+  function applyCrecheSettings(){
+    document.body.classList.toggle("large-type", state.largeType);
+    document.body.classList.toggle("focus-mode", state.focusMode);
+    document.body.classList.toggle("hide-transliteration", !state.showTransliteration);
+
+    const large = document.getElementById("largeTypeBtn");
+    const focus = document.getElementById("focusModeBtn");
+    const auto = document.getElementById("autoReadBtn");
+    const trans = document.getElementById("transliterationBtn");
+
+    large?.classList.toggle("active", state.largeType);
+    focus?.classList.toggle("active", state.focusMode);
+    auto?.classList.toggle("active", state.autoRead);
+    trans?.classList.toggle("active", state.showTransliteration);
+
+    if(auto) auto.textContent = state.autoRead ? "🗣️ Auto Read On" : "🤫 Auto Read Off";
+    if(trans) trans.textContent = state.showTransliteration ? "Aa Transliteration On" : "Aa Transliteration Off";
+  }
+
+  function renderConstellation(){
+    const row = document.getElementById("constellationRow");
+    if(!row) return;
+    const milestones = [
+      {week:4,icon:"⭐",label:"First 4"},
+      {week:8,icon:"🌟",label:"8 letters"},
+      {week:12,icon:"✨",label:"12 letters"},
+      {week:16,icon:"🌙",label:"16 letters"},
+      {week:20,icon:"🪐",label:"20 letters"},
+      {week:24,icon:"☄️",label:"24 letters"},
+      {week:28,icon:"🌌",label:"Alphabet"},
+      {week:32,icon:"💫",label:"Reviews"},
+      {week:36,icon:"🚀",label:"Big Review"},
+      {week:40,icon:"🔭",label:"Grand Review"},
+      {week:41,icon:"🏅",label:"Second Half"},
+      {week:42,icon:"🏆",label:"Celebration"}
+    ];
+    row.innerHTML = milestones.map(m => {
+      const on = state.completed.size >= m.week || state.completed.has(m.week);
+      return `<div class="constellation-star ${on ? "on" : ""}"><span>${on ? m.icon : "☆"}</span><small>${m.label}</small></div>`;
+    }).join("");
+    document.getElementById("constellationNote").textContent =
+      state.completed.size >= 42
+        ? "Every constellation is shining. The certificate is ready!"
+        : `${state.completed.size} of 42 weeks complete.`;
+  }
+
+  function openCertificate(){
+    if(state.completed.size < 42){
+      const remaining = 42 - state.completed.size;
+      alert(`Complete ${remaining} more week${remaining === 1 ? "" : "s"} to unlock the final certificate.`);
+      return;
+    }
+    document.getElementById("certificateDate").textContent =
+      `Completed ${new Date().toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"})}`;
+    const modal = document.getElementById("certificateModal");
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden","false");
+  }
+
+  function closeCertificate(){
+    const modal = document.getElementById("certificateModal");
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden","true");
+  }
+
+  function currentLessonNarration(){
+    const data = CURRICULUM[state.currentWeek - 1];
+    const letters = getLessonLetters(data);
+    if(data.type === "letter"){
+      const l = data.letter;
+      return `${l.nameArabic}. ${l.transliteration}. ${l.englishSound}. ${l.exampleArabic}. ${l.exampleTransliteration}. ${l.exampleEnglish}.`;
+    }
+    return letters.map(l => `${l.nameArabic}. ${l.transliteration}. ${l.exampleArabic}.`).join(" ");
+  }
+
   function showReward(target, symbol = "⭐") {
     const rect = target.getBoundingClientRect();
     const reward = document.createElement("div");
@@ -958,6 +1766,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     document.getElementById("completedStat").textContent = state.completed.size;
     document.getElementById("starStat").textContent = state.stars;
     document.getElementById("letterStat").textContent = symbol;
+    renderConstellation();
   }
 
   function buildWeekNavigation() {
@@ -1052,6 +1861,10 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
               <label>Color <input id="brushColor" type="color" value="#d85f8f"></label>
               <button id="clearCanvasBtn" class="secondary">🧽 Clear</button>
               <button id="traceCompleteBtn" class="success">✓ I Practiced</button>
+              <div class="trace-meter">
+                <div class="trace-meter-track"><div class="trace-meter-bar" id="traceMeterBar"></div></div>
+                <small id="traceMeterText">Tracing practice: 0%</small>
+              </div>
             </div>
           </div>
         </section>
@@ -1099,12 +1912,17 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     buildWeekNavigation();
     updateStats();
     save();
+    applyCrecheSettings();
+    if(state.autoRead){
+      setTimeout(() => speak(currentLessonNarration(), "ar-SA"), 260);
+    }
   }
 
   function initTracing(letters) {
     const canvas = document.getElementById("tracingCanvas");
     activeCanvas = canvas;
     const ctx = canvas.getContext("2d");
+    let tracePoints = 0;
 
     function drawGuide() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1171,6 +1989,12 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       ctx.stroke();
       ctx.restore();
       lastPoint = p;
+      tracePoints++;
+      const pct = Math.min(100, Math.round(tracePoints / Math.max(45, letters.length * 18) * 100));
+      const meter = document.getElementById("traceMeterBar");
+      const text = document.getElementById("traceMeterText");
+      if(meter) meter.style.width = pct + "%";
+      if(text) text.textContent = `Tracing practice: ${pct}%`;
     };
 
     canvas.onpointerup = canvas.onpointercancel = () => {
@@ -1178,8 +2002,19 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       lastPoint = null;
     };
 
-    document.getElementById("clearCanvasBtn").onclick = drawGuide;
+    document.getElementById("clearCanvasBtn").onclick = () => {
+      tracePoints = 0;
+      drawGuide();
+      document.getElementById("traceMeterBar").style.width = "0%";
+      document.getElementById("traceMeterText").textContent = "Tracing practice: 0%";
+    };
     document.getElementById("traceCompleteBtn").onclick = e => {
+      const needed = Math.max(22, letters.length * 8);
+      if(tracePoints < needed){
+        document.getElementById("traceMeterText").textContent = "Trace a little more before completing.";
+        speak("Trace a little more before completing.", (LANGUAGE_META[state.homeLanguage] || LANGUAGE_META.en).speech);
+        return;
+      }
       if (!state.traceDone) addStar(e.currentTarget);
       state.traceDone = true;
       e.currentTarget.textContent = "✓ Tracing Practiced";
@@ -1268,8 +2103,16 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
             updateActivityProgress();
           }
         } else {
-          selectedMatch.classList.remove("selected");
-          document.getElementById("matchMessage").textContent = "Try another pair.";
+          const first = selectedMatch;
+          first.classList.remove("selected");
+          first.classList.add("wrong");
+          card.classList.add("wrong");
+          document.getElementById("matchMessage").textContent = "Good try. Listen and choose another pair.";
+          speak("Good try. Listen and choose another pair.", (LANGUAGE_META[state.homeLanguage] || LANGUAGE_META.en).speech);
+          setTimeout(() => {
+            first.classList.remove("wrong");
+            card.classList.remove("wrong");
+          }, 650);
           selectedMatch = null;
         }
       };
@@ -1311,6 +2154,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       updateStats();
       e.currentTarget.textContent = "✓ Week Completed";
       document.getElementById("weekMessage").textContent = "Excellent work!";
+      speak("Excellent work. This week is complete.", (LANGUAGE_META[state.homeLanguage] || LANGUAGE_META.en).speech);
     };
 
     document.getElementById("prevWeekBtn").onclick = () => {
@@ -1412,9 +2256,68 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     render();
   };
 
+
+  document.getElementById("largeTypeBtn").onclick = () => {
+    state.largeType = !state.largeType;
+    save();
+    applyCrecheSettings();
+  };
+
+  document.getElementById("focusModeBtn").onclick = () => {
+    state.focusMode = !state.focusMode;
+    save();
+    applyCrecheSettings();
+  };
+
+  document.getElementById("autoReadBtn").onclick = () => {
+    state.autoRead = !state.autoRead;
+    save();
+    applyCrecheSettings();
+    document.getElementById("voiceStatus").textContent =
+      state.autoRead ? "Lessons will read automatically." : "Automatic lesson reading is off.";
+  };
+
+  document.getElementById("transliterationBtn").onclick = () => {
+    state.showTransliteration = !state.showTransliteration;
+    save();
+    applyCrecheSettings();
+  };
+
+  document.getElementById("certificateBtn").onclick = openCertificate;
+  document.getElementById("closeCertificateBtn").onclick = closeCertificate;
+  document.getElementById("printCertificateBtn").onclick = () => window.print();
+  document.getElementById("certificateModal").onclick = event => {
+    if(event.target.id === "certificateModal") closeCertificate();
+  };
+
+  document.addEventListener("keydown", event => {
+    if(event.key === "Escape") closeCertificate();
+  });
+
   applyTheme();
+  applyCrecheSettings();
+  renderConstellation();
   render();
 })();
 </script>
+
+<div class="certificate-modal" id="certificateModal" aria-hidden="true">
+  <section class="certificate-sheet">
+    <div style="font-size:2.6rem">🌙 ✨ 📚 ✨ 🌙</div>
+    <p style="letter-spacing:.14em;text-transform:uppercase;color:#746c88;font-weight:900">Khaemenes Academy · The Crèche</p>
+    <h2>Certificate of Completion</h2>
+    <div class="certificate-arabic">شهادة إتمام</div>
+    <p>This certifies that</p>
+    <input class="certificate-name" id="certificateName" placeholder="Learner's name" aria-label="Learner's name">
+    <p>has completed the <strong>Cosmic Arabic Alphabet Quest™</strong>, including the 28 Arabic letters, tracing, listening, matching, and review activities.</p>
+    <p id="certificateDate"></p>
+    <p><strong>Jennifer Kay Pearl · Khaemenes Academy</strong></p>
+    <div class="certificate-actions">
+      <button id="printCertificateBtn" type="button">🖨️ Print Certificate</button>
+      <button id="closeCertificateBtn" type="button" class="secondary">Close</button>
+    </div>
+  </section>
+</div>
+
 </body>
 </html>
