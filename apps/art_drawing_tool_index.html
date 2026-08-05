@@ -1,444 +1,805 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Pel™ Personal Editing Lab — Pre-K</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Pel Personal Editing Lab — a Crèche preschool art studio with brushes, markers, crayons, pencils, stickers, friendly narration, undo, redo, saved gallery, and offline local progress.">
+<title>Pel™ Personal Editing Lab — The Crèche</title>
 <style>
-  body{
-    font-family:"Comic Sans MS", system-ui, sans-serif;
-    background:#CCE3FF;
-    margin:0;
-    text-align:center;
-  }
-  h1{color:#ff4081;margin:10px 0;text-shadow:1px 1px #3333;}
-  #toolbar{
-    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;
-    background:#fff;padding:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
-    border-bottom:2px solid #ccc;
-    position:sticky; top:0; z-index:5;
-  }
-  button{
-    font-size:15px;padding:7px 11px;border:none;border-radius:8px;cursor:pointer;
-    background:#eee;transition:background .2s, transform .06s;
-  }
-  button:hover{background:#ddd;}
-  button:active{transform:translateY(1px);}
-  button.active{
-    background:#ffd1e3;
-    outline:2px solid rgba(255,64,129,.45);
-  }
-  .color-btn{
-    width:30px;height:30px;border-radius:50%;
-    border:2px solid #333;margin:2px;cursor:pointer;display:inline-block;
-  }
-  #brushSize{width:110px; vertical-align:middle;}
-  #canvas{
-    border:3px solid #333;border-radius:12px;margin:15px auto;display:block;background:#fff;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    touch-action:none;
-    max-width:96vw;
-    height:auto;
-  }
-  #stickersPanel{
-    display:none;margin:10px auto;padding:8px;background:#fff;width:fit-content;
-    border-radius:8px;border:1px solid #ccc;
-  }
-  .sticker{
-    font-size:28px;cursor:grab;margin:4px;display:inline-block;
-    user-select:none;
-  }
-  #gallery{
-    margin:10px auto;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
-    padding:0 10px 16px;
-  }
-  .thumb{
-    width:100px;height:70px;border:2px solid #999;border-radius:8px;object-fit:cover;cursor:pointer;
-    background:#fff;
-  }
-  .mini{
-    font-size:12px;color:#444;margin:-4px 0 10px 0;
-    opacity:.85;
-  }
+:root{
+  --sky:#dff5ff;
+  --sun:#ffd75f;
+  --coral:#ff8f78;
+  --rose:#e977a9;
+  --violet:#7562c8;
+  --plum:#60477f;
+  --mint:#9be0bd;
+  --blue:#4d8fc9;
+  --paper:#fffdf8;
+  --panel:#ffffff;
+  --ink:#2f3446;
+  --muted:#6d7181;
+  --line:rgba(96,71,127,.16);
+  --good:#44aa73;
+  --bad:#cf5f6e;
+  --shadow:0 18px 42px rgba(64,49,86,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:14px 10px 42px;
+  overflow-x:hidden;
+  color:var(--ink);
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,255,255,.95),transparent 18%),
+    linear-gradient(135deg,#fde9a8,#c9f0dd,#cfe7ff);
+}
+button,input,select{font:inherit}
+button{cursor:pointer;touch-action:manipulation}
+:focus-visible{outline:4px solid rgba(117,98,200,.25);outline-offset:3px}
+
+.creche-header{
+  width:min(1180px,100%);
+  margin:0 auto 14px;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(64,49,86,.13);
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,var(--sun),var(--mint));
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{margin:0;color:#d65480;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:var(--plum);font-size:clamp(1.02rem,2.3vw,1.34rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  min-height:38px;padding:8px 12px;display:inline-flex;align-items:center;justify-content:center;
+  border:2px solid #ded4e8;border-radius:999px;background:#fff;color:var(--plum);
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose))}
+
+.wrap{width:min(1180px,100%);margin:auto}
+.hero{
+  padding:28px 18px;
+  border-radius:30px;
+  text-align:center;
+  color:#fff;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(255,255,255,.18),transparent 18%),
+    linear-gradient(135deg,#6c58b6,#4d8fc9 60%,#58b79a);
+  box-shadow:var(--shadow)
+}
+.hero .eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 12px;border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.24);
+  font-size:.74rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase
+}
+.hero h1{
+  margin:14px auto 8px;
+  max-width:980px;
+  padding:0 .08em;
+  font-size:clamp(2.4rem,6vw,4.9rem);
+  line-height:1.08;
+  letter-spacing:-.02em
+}
+.hero p{max-width:900px;margin:auto;color:#f7fbff;line-height:1.72;font-size:1.02rem}
+
+.studio{
+  margin-top:14px;
+  padding:16px;
+  border:2px solid rgba(255,255,255,.85);
+  border-radius:26px;
+  background:rgba(255,255,255,.94);
+  box-shadow:var(--shadow)
+}
+.voice-studio{
+  margin-bottom:14px;padding:13px;
+  border:2px solid var(--line);border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff)
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;border:2px solid var(--line);
+  border-radius:16px;background:#fff;color:var(--plum);
+  display:grid;place-items:center;align-content:center;gap:2px;font-weight:900
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{font-size:.67rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose))}
+.voice-controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{
+  border:2px solid var(--line);border-radius:999px;padding:9px 12px;background:#fff;color:var(--ink);font-weight:900
+}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+
+.simple-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.btn{
+  border:1px solid var(--line);border-radius:13px;padding:9px 12px;background:#fff;color:var(--plum);
+  font-weight:900;box-shadow:0 5px 12px rgba(64,49,86,.07);transition:.16s
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--violet),var(--blue))}
+.btn.good{color:#fff;border-color:transparent;background:linear-gradient(135deg,#4db67a,#3f9e78)}
+.btn.sunny{color:#574313;border-color:transparent;background:linear-gradient(135deg,#ffe36d,#ffad5f)}
+.btn.danger{color:#fff;border-color:transparent;background:linear-gradient(135deg,#da6d7d,#ba4b5e)}
+.btn.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--violet),var(--rose))}
+body.large-type{font-size:18px}
+body.focus-mode .gallery-section,
+body.focus-mode .art-garden,
+body.focus-mode .studio-note,
+body.focus-mode .voice-studio{display:none!important}
+
+.toolbar{
+  position:sticky;top:8px;z-index:10;
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:9px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 10px 24px rgba(64,49,86,.1)
+}
+.tool-group{
+  min-width:0;padding:10px;border:1px solid var(--line);border-radius:16px;background:#fff
+}
+.tool-group h3{margin:0 0 7px;color:var(--plum);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.tool-buttons{display:flex;gap:6px;flex-wrap:wrap}
+.tool-btn{
+  flex:1 1 92px;min-height:42px;
+  border:2px solid transparent;border-radius:12px;background:#f3f5fa;color:var(--ink);font-weight:900
+}
+.tool-btn.active{border-color:var(--sun);background:#fff7cb;box-shadow:0 0 0 4px rgba(255,215,95,.18)}
+.size-row{display:flex;align-items:center;gap:8px}
+.size-row input{width:100%}
+.size-value{
+  min-width:34px;padding:4px 7px;border-radius:999px;background:#eef3f8;text-align:center;font-weight:900
+}
+.palette{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.color-btn{
+  width:32px;height:32px;border-radius:50%;border:3px solid #fff;
+  box-shadow:0 0 0 2px rgba(47,52,70,.25);padding:0
+}
+.color-btn.active{box-shadow:0 0 0 4px rgba(117,98,200,.34)}
+.color-picker{width:38px;height:34px;padding:0;border:0;background:none}
+.action-buttons{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+
+.canvas-shell{
+  margin-top:14px;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:linear-gradient(145deg,#fff,#f8fbff)
+}
+.canvas-top{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px
+}
+.canvas-title{color:var(--plum);font-weight:900}
+.canvas-status{color:var(--muted);font-size:.78rem}
+.canvas-wrap{
+  position:relative;
+  width:min(100%,920px);
+  margin:auto;
+  border:4px solid var(--ink);
+  border-radius:18px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 10px 28px rgba(64,49,86,.13)
+}
+canvas{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#fff;
+  touch-action:none
+}
+.canvas-wrap.speaking{box-shadow:0 0 0 6px rgba(255,215,95,.38),0 10px 28px rgba(64,49,86,.13)}
+
+.stickers-panel{
+  display:none;
+  margin-top:12px;padding:12px;
+  border:1px solid var(--line);border-radius:18px;
+  background:linear-gradient(145deg,#fff,#fff7da)
+}
+.stickers-panel.open{display:block}
+.sticker-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:7px}
+.sticker{
+  min-height:48px;
+  display:grid;place-items:center;
+  border:1px solid var(--line);border-radius:12px;background:#fff;
+  font-size:1.65rem;cursor:grab;user-select:none
+}
+.sticker.selected{background:#fff3a7;box-shadow:0 0 0 4px rgba(255,215,95,.28)}
+.sticker-help{text-align:center;color:var(--muted);font-size:.76rem;margin-top:8px}
+
+.gallery-section{
+  margin-top:14px;padding:13px;border:1px solid var(--line);border-radius:20px;background:#fff
+}
+.gallery-section h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.gallery{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:9px
+}
+.gallery-item{
+  min-width:0;padding:7px;border:1px solid var(--line);border-radius:14px;background:#fff
+}
+.thumb{
+  width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--line);cursor:pointer;background:#fff
+}
+.thumb-title{margin-top:5px;font-size:.66rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gallery-actions{display:flex;gap:5px;margin-top:5px}
+.gallery-actions button{flex:1;padding:6px;border-radius:9px;font-size:.67rem}
+
+.art-garden{
+  margin-top:14px;padding:12px;border:2px dashed var(--line);border-radius:18px;
+  background:linear-gradient(145deg,#fff,#f2fff0,#eef9ff)
+}
+.art-garden h3{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.garden-row{display:flex;justify-content:center;align-items:flex-end;gap:12px;min-height:70px;flex-wrap:wrap}
+.garden-step{font-size:2rem;opacity:.28;transform:scale(.86);transition:.2s}
+.garden-step.on{opacity:1;transform:scale(1)}
+.garden-label{text-align:center;color:var(--muted);font-size:.74rem;margin-top:5px}
+.studio-note{
+  margin-top:12px;padding:10px 12px;border-radius:16px;
+  background:#fff9d9;border:1px solid #edd78b;color:#6d5824;text-align:center;font-size:.82rem;font-weight:900
+}
+.toast{
+  position:fixed;left:50%;bottom:20px;transform:translate(-50%,28px);
+  padding:10px 15px;border-radius:999px;background:#2a2637;color:#fff;font-weight:900;
+  opacity:0;pointer-events:none;transition:.25s;z-index:50
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:1000px){
+  .toolbar{grid-template-columns:repeat(2,1fr)}
+  .sticker-grid{grid-template-columns:repeat(8,1fr)}
+}
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-guide:last-child{grid-column:1/-1}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .sticker-grid{grid-template-columns:repeat(6,1fr)}
+}
+@media(max-width:520px){
+  body{padding:9px 6px 32px}
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}
+  .creche-links{grid-column:auto}
+  .toolbar{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr}
+  .sticker-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
 </style>
 </head>
 <body>
 
-<h1>Pel™<br>Personal Editing Lab<br>Pre-K Version</h1>
-<div class="mini">Offline • No ads • Saves last 5 drawings on this device</div>
+<header class="creche-header" aria-label="Crèche Preschool Art Portal">
+  <div class="creche-mark" aria-hidden="true">🎨</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Art Portal</p>
+    <div class="creche-title">The Crèche™ · Pel Personal Editing Lab</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool art navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link" href="../art/index.html">🖼️ Art Studio</a>
+    <a class="creche-link current" href="#" aria-current="page">🎨 Pel Lab</a>
+  </nav>
+</header>
 
-<div id="toolbar">
-  <button id="tool_brush"  onclick="setTool('brush')">🖌 Brush</button>
-  <button id="tool_marker" onclick="setTool('marker')">🖍 Marker</button>
-  <button id="tool_crayon" onclick="setTool('crayon')">🧁 Crayon</button>
-  <button id="tool_pencil" onclick="setTool('pencil')">✏️ Pencil</button>
-  <button id="tool_eraser" onclick="setTool('eraser')">🩹 Eraser</button>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">🖌 Draw · Color · Create · Save</div>
+    <h1>Pel™ Personal Editing Lab</h1>
+    <p>A bright, private preschool art studio with brushes, markers, crayons, pencils, stickers, undo, redo, and a five-picture gallery saved only on this device.</p>
+  </section>
 
-  <label style="display:flex;align-items:center;gap:6px">
-    Size:
-    <input type="range" id="brushSize" min="2" max="30" value="8" />
-    <span id="sizeLbl">8</span>
-  </label>
+  <section class="studio">
+    <section class="voice-studio" aria-labelledby="voiceTitle">
+      <h2 id="voiceTitle">Choose an Art Guide</h2>
+      <div class="voice-guides" id="voiceGuides">
+        <button type="button" class="voice-guide" data-voice="pearl"><span class="emoji">🎨</span><span class="name">Pearl Painter</span></button>
+        <button type="button" class="voice-guide" data-voice="bunny"><span class="emoji">🐰</span><span class="name">Benny Bunny</span></button>
+        <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Art Owl</span></button>
+        <button type="button" class="voice-guide" data-voice="robot"><span class="emoji">🤖</span><span class="name">Doodle-Bot</span></button>
+        <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+      </div>
+      <div class="voice-controls">
+        <select id="voiceSpeed" aria-label="Reading speed">
+          <option value="slow">🐢 Slow and clear</option>
+          <option value="normal">🙂 Just right</option>
+          <option value="lively">🌈 A little lively</option>
+        </select>
+        <button type="button" id="meetGuideBtn" class="btn">👋 Meet My Guide</button>
+        <button type="button" id="repeatVoiceBtn" class="btn">🔁 Repeat Last</button>
+        <button type="button" id="stopVoiceBtn" class="btn">⏹ Stop Voice</button>
+      </div>
+      <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+    </section>
 
-  <input type="color" id="colorPicker" title="Custom Color" value="#000000" />
+    <div class="simple-row">
+      <button type="button" id="hearToolsBtn" class="btn">🔊 Hear Tools</button>
+      <button type="button" id="largeTypeBtn" class="btn">🔎 Larger Type</button>
+      <button type="button" id="focusModeBtn" class="btn">🧘 Focus Mode</button>
+      <button type="button" id="autoGuideBtn" class="btn">🗣️ Auto Guide On</button>
+    </div>
 
-  <button onclick="undo()">↩️ Undo</button>
-  <button onclick="redo()">↪️ Redo</button>
-  <button onclick="clearCanvas()">🧹 Clear</button>
-  <button onclick="toggleStickers()">🌟 Stickers</button>
-  <button onclick="saveArtwork()">💾 Save</button>
-</div>
+    <section class="toolbar" aria-label="Drawing tools">
+      <div class="tool-group">
+        <h3>Drawing Tool</h3>
+        <div class="tool-buttons">
+          <button id="tool_brush" class="tool-btn" data-tool="brush">🖌 Brush</button>
+          <button id="tool_marker" class="tool-btn" data-tool="marker">🖍 Marker</button>
+          <button id="tool_crayon" class="tool-btn" data-tool="crayon">🌈 Crayon</button>
+          <button id="tool_pencil" class="tool-btn" data-tool="pencil">✏️ Pencil</button>
+          <button id="tool_eraser" class="tool-btn" data-tool="eraser">🩹 Eraser</button>
+        </div>
+      </div>
 
-<div id="colors" style="margin:6px 0 0 0;">
-  <div class="color-btn" style="background:#e53935" onclick="setColor('#e53935')"></div>
-  <div class="color-btn" style="background:#fb8c00" onclick="setColor('#fb8c00')"></div>
-  <div class="color-btn" style="background:#fdd835" onclick="setColor('#fdd835')"></div>
-  <div class="color-btn" style="background:#43a047" onclick="setColor('#43a047')"></div>
-  <div class="color-btn" style="background:#1e88e5" onclick="setColor('#1e88e5')"></div>
-  <div class="color-btn" style="background:#8e24aa" onclick="setColor('#8e24aa')"></div>
-  <div class="color-btn" style="background:#f06292" onclick="setColor('#f06292')"></div>
-  <div class="color-btn" style="background:#795548" onclick="setColor('#795548')"></div>
-  <div class="color-btn" style="background:#000000" onclick="setColor('#000000')"></div>
-  <div class="color-btn" style="background:#ffffff" onclick="setColor('#ffffff')"></div>
-</div>
+      <div class="tool-group">
+        <h3>Brush Size</h3>
+        <div class="size-row">
+          <span aria-hidden="true">•</span>
+          <input type="range" id="brushSize" min="2" max="34" value="8" aria-label="Brush size">
+          <span class="size-value" id="sizeLbl">8</span>
+        </div>
+      </div>
 
-<div id="stickersPanel" aria-label="Stickers">
-  <span class="sticker" draggable="true">⭐</span>
-  <span class="sticker" draggable="true">🌸</span>
-  <span class="sticker" draggable="true">🌈</span>
-  <span class="sticker" draggable="true">☀️</span>
-  <span class="sticker" draggable="true">🎈</span>
-  <span class="sticker" draggable="true">❤️</span>
-  <span class="sticker" draggable="true">🌻</span>
-  <span class="sticker" draggable="true">🌙</span>
-  <span class="sticker" draggable="true">🍀</span>
-  <span class="sticker" draggable="true">🦋</span>
-  <span class="sticker" draggable="true">🎨</span>
-  <span class="sticker" draggable="true">💎</span>
-  <span class="sticker" draggable="true">✨</span>
-  <span class="sticker" draggable="true">💫</span>
-  <span class="sticker" draggable="true">🌿</span>
-  <span class="sticker" draggable="true">🍎</span>
-  <span class="sticker" draggable="true">🌼</span>
-  <span class="sticker" draggable="true">🪶</span>
-  <span class="sticker" draggable="true">🎵</span>
-  <span class="sticker" draggable="true">🌊</span>
-  <span class="sticker" draggable="true">☁️</span>
-  <span class="sticker" draggable="true">🌺</span>
-  <span class="sticker" draggable="true">🪄</span>
-  <span class="sticker" draggable="true">🌞</span>
-  <span class="sticker" draggable="true">🖌️</span>
-  <span class="sticker" draggable="true">🖍️</span>
-  <span class="sticker" draggable="true">🪷</span>
-  <span class="sticker" draggable="true">🎆</span>
-  <span class="sticker" draggable="true">🧡</span>
-  <span class="sticker" draggable="true">💜</span>
-  <span class="sticker" draggable="true">💖</span>
-  <span class="sticker" draggable="true">💚</span>
-  <span class="sticker" draggable="true">🌾</span>
-  <span class="sticker" draggable="true">🍂</span>
-  <span class="sticker" draggable="true">🌵</span>
-  <span class="sticker" draggable="true">🦜</span>
-  <span class="sticker" draggable="true">🎁</span>
-  <span class="sticker" draggable="true">🧩</span>
-  <span class="sticker" draggable="true">🎶</span>
-  <span class="sticker" draggable="true">🎀</span>
-  <span class="sticker" draggable="true">🕊️</span>
-</div>
+      <div class="tool-group">
+        <h3>Colors</h3>
+        <div class="palette" id="colors">
+          <button class="color-btn" style="background:#e53935" data-color="#e53935" aria-label="Red"></button>
+          <button class="color-btn" style="background:#fb8c00" data-color="#fb8c00" aria-label="Orange"></button>
+          <button class="color-btn" style="background:#fdd835" data-color="#fdd835" aria-label="Yellow"></button>
+          <button class="color-btn" style="background:#43a047" data-color="#43a047" aria-label="Green"></button>
+          <button class="color-btn" style="background:#1e88e5" data-color="#1e88e5" aria-label="Blue"></button>
+          <button class="color-btn" style="background:#8e24aa" data-color="#8e24aa" aria-label="Purple"></button>
+          <button class="color-btn" style="background:#f06292" data-color="#f06292" aria-label="Pink"></button>
+          <button class="color-btn" style="background:#795548" data-color="#795548" aria-label="Brown"></button>
+          <button class="color-btn" style="background:#000000" data-color="#000000" aria-label="Black"></button>
+          <button class="color-btn" style="background:#ffffff" data-color="#ffffff" aria-label="White"></button>
+          <input class="color-picker" type="color" id="colorPicker" title="Custom color" value="#000000">
+        </div>
+      </div>
 
-<canvas id="canvas" width="800" height="500"></canvas>
-<div id="gallery" aria-label="Saved gallery"></div>
+      <div class="tool-group">
+        <h3>Art Actions</h3>
+        <div class="action-buttons">
+          <button id="undoBtn" class="btn">↩️ Undo</button>
+          <button id="redoBtn" class="btn">↪️ Redo</button>
+          <button id="clearBtn" class="btn danger">🧹 Clear</button>
+          <button id="stickersBtn" class="btn sunny">🌟 Stickers</button>
+        </div>
+      </div>
+
+      <div class="tool-group">
+        <h3>Save & Create</h3>
+        <div class="action-buttons">
+          <button id="newArtBtn" class="btn">📄 New</button>
+          <button id="saveBtn" class="btn good">💾 Save Art</button>
+          <button id="downloadBtn" class="btn primary">⬇ Download</button>
+          <button id="whiteCanvasBtn" class="btn">⬜ White Canvas</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stickers-panel" id="stickersPanel" aria-label="Stickers">
+      <div class="sticker-grid" id="stickerGrid"></div>
+      <div class="sticker-help">Drag a sticker onto the canvas, or tap a sticker and then tap the canvas.</div>
+    </section>
+
+    <section class="canvas-shell">
+      <div class="canvas-top">
+        <div class="canvas-title">🖼️ My Art Canvas</div>
+        <div class="canvas-status" id="canvasStatus">Brush selected · Black · Size 8</div>
+      </div>
+      <div class="canvas-wrap" id="canvasWrap">
+        <canvas id="canvas" width="900" height="560" aria-label="Drawing canvas"></canvas>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <h2>🖼️ My Five-Picture Gallery</h2>
+      <div class="gallery" id="gallery"></div>
+    </section>
+
+    <section class="art-garden">
+      <h3>🌱 My Creativity Garden</h3>
+      <div class="garden-row" id="gardenRow">
+        <span class="garden-step" data-step="0">🌱</span>
+        <span class="garden-step" data-step="1">🌿</span>
+        <span class="garden-step" data-step="2">🌼</span>
+        <span class="garden-step" data-step="3">🌳</span>
+        <span class="garden-step" data-step="4">🌈</span>
+      </div>
+      <div class="garden-label" id="gardenLabel">Draw and save artwork to grow the garden.</div>
+    </section>
+
+    <div class="studio-note">🎨 There is no wrong way to make art. Ask before changing someone else’s picture, and save only artwork you want to keep on this device.</div>
+  </section>
+</main>
+
+<div id="toast" class="toast"></div>
 
 <script>
-/* ======================
-   Pel™ Pre-K — Clean Build
-   Offline, safe, no deps.
-   ====================== */
+(() => {
+"use strict";
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d", { alpha: true });
+const $=id=>document.getElementById(id);
+const canvas=$("canvas");
+const ctx=canvas.getContext("2d",{alpha:true});
+const KEY="pel-creche-v2";
+const GALLERY_KEY="pel-creche-gallery-v2";
+const MAX_HISTORY=24;
+const MAX_GALLERY=5;
 
-let painting = false;
-let currentColor = "#000000";
-let tool = "brush";
-let brushSize = 8;
+const STICKERS=["⭐","🌸","🌈","☀️","🎈","❤️","🌻","🌙","🍀","🦋","🎨","💎","✨","💫","🌿","🍎","🌼","🪶","🎵","🌊","☁️","🌺","🪄","🌞","🖌️","🖍️","🪷","🎆","🧡","💜","💖","💚","🌾","🍂","🌵","🦜","🎁","🧩","🎶","🎀","🕊️"];
 
-let draggingSticker = null;
-
-let undoStack = [];
-let redoStack = [];
-const MAX_HISTORY = 20;
-
-const $ = (id)=>document.getElementById(id);
-
-function sanitizeFilename(name){
-  name = String(name || "").trim();
-  // Remove characters that break filenames on most systems
-  name = name.replace(/[\\\/:*?"<>|]+/g, "");
-  // Reduce whitespace
-  name = name.replace(/\s+/g, "_");
-  // Limit length
-  if(!name) name = "artwork";
-  return name.slice(0, 40);
+function fresh(){
+  return {
+    tool:"brush",color:"#000000",brushSize:8,voice:"pearl",voiceSpeed:"slow",
+    autoGuide:true,largeType:false,focusMode:false,savedCount:0
+  };
 }
+function load(){
+  try{return Object.assign(fresh(),JSON.parse(localStorage.getItem(KEY)||"{}"))}
+  catch{return fresh()}
+}
+let state=load();
+let painting=false;
+let lastPoint=null;
+let undoStack=[];
+let redoStack=[];
+let selectedSticker="";
+let draggingSticker="";
+let voices=[];
+let speechToken=0;
+let lastSpoken="";
 
+function savePrefs(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
+function toast(msg){
+  const t=$("toast");t.textContent=msg;t.classList.add("show");
+  clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove("show"),1700)
+}
+function sanitizeFilename(name){
+  name=String(name||"").trim().replace(/[\\\/:*?"<>|]+/g,"").replace(/\s+/g,"_");
+  return (name||"artwork").slice(0,40)
+}
+function currentStatus(){
+  const names={brush:"Brush",marker:"Marker",crayon:"Crayon",pencil:"Pencil",eraser:"Eraser"};
+  $("canvasStatus").textContent=`${names[state.tool]} selected · ${state.color.toUpperCase()} · Size ${state.brushSize}`;
+}
+function applySettings(){
+  document.body.classList.toggle("large-type",state.largeType);
+  document.body.classList.toggle("focus-mode",state.focusMode);
+  $("largeTypeBtn").classList.toggle("active",state.largeType);
+  $("focusModeBtn").classList.toggle("active",state.focusMode);
+  $("autoGuideBtn").classList.toggle("active",state.autoGuide);
+  $("autoGuideBtn").textContent=state.autoGuide?"🗣️ Auto Guide On":"🤫 Auto Guide Off";
+  $("brushSize").value=state.brushSize;
+  $("sizeLbl").textContent=state.brushSize;
+  $("colorPicker").value=state.color;
+  document.querySelectorAll("[data-tool]").forEach(b=>b.classList.toggle("active",b.dataset.tool===state.tool));
+  document.querySelectorAll("[data-color]").forEach(b=>b.classList.toggle("active",b.dataset.color.toLowerCase()===state.color.toLowerCase()));
+  currentStatus();
+}
+function setTool(tool,announce=true){
+  state.tool=tool;
+  selectedSticker="";
+  document.querySelectorAll(".sticker").forEach(s=>s.classList.remove("selected"));
+  savePrefs();applySettings();
+  const names={brush:"Brush",marker:"Marker",crayon:"Crayon",pencil:"Pencil",eraser:"Eraser"};
+  if(announce&&state.autoGuide)speak(`${names[tool]} selected.`)
+}
+function setColor(color,announce=true){
+  state.color=color;
+  savePrefs();applySettings();
+  if(announce&&state.autoGuide)speak("New color selected.")
+}
 function saveState(){
   try{
-    if(undoStack.length >= MAX_HISTORY) undoStack.shift();
+    if(undoStack.length>=MAX_HISTORY)undoStack.shift();
     undoStack.push(canvas.toDataURL("image/png"));
-    redoStack = [];
-  }catch(e){
-    // If device storage is tight or dataURL too big
-    console.warn("saveState failed:", e);
-  }
+    redoStack=[];
+  }catch(e){console.warn("Could not save undo state.",e)}
 }
-
 function restoreFromDataURL(dataURL){
-  const img = new Image();
-  img.onload = () => {
+  const img=new Image();
+  img.onload=()=>{
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.globalAlpha = 1;
-    ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    ctx.globalAlpha=1;
+    ctx.drawImage(img,0,0,canvas.width,canvas.height)
   };
-  img.src = dataURL;
+  img.src=dataURL
 }
-
 function undo(){
-  if(undoStack.length === 0) return;
+  if(!undoStack.length){toast("Nothing to undo yet");return}
   try{
     redoStack.push(canvas.toDataURL("image/png"));
-    const prev = undoStack.pop();
-    if(prev) restoreFromDataURL(prev);
-  }catch(e){}
+    restoreFromDataURL(undoStack.pop());
+    toast("Last change undone")
+  }catch{}
 }
-
 function redo(){
-  if(redoStack.length === 0) return;
+  if(!redoStack.length){toast("Nothing to redo yet");return}
   try{
     undoStack.push(canvas.toDataURL("image/png"));
-    const next = redoStack.pop();
-    if(next) restoreFromDataURL(next);
-  }catch(e){}
+    restoreFromDataURL(redoStack.pop());
+    toast("Change restored")
+  }catch{}
 }
-
-function setTool(t){
-  tool = t;
-  ["brush","marker","crayon","pencil","eraser"].forEach(k=>{
-    const b = $("tool_"+k);
-    if(b) b.classList.toggle("active", k===t);
-  });
-}
-
-function setColor(c){
-  currentColor = c;
-  const cp = $("colorPicker");
-  if(cp && cp.value.toLowerCase() !== String(c).toLowerCase()){
-    // keep picker synced when a palette dot is clicked
-    try{ cp.value = c; }catch{}
-  }
-}
-
-$("brushSize").addEventListener("input", e=>{
-  brushSize = Number(e.target.value || 8);
-  $("sizeLbl").textContent = String(brushSize);
-});
-$("colorPicker").addEventListener("input", e=>setColor(e.target.value));
-
-/* Coordinate scaling: works even if canvas is displayed at a different CSS size */
-function getPosFromEvent(e){
-  const rect = canvas.getBoundingClientRect();
-  const scaleX = canvas.width / rect.width;
-  const scaleY = canvas.height / rect.height;
-  const x = (e.clientX - rect.left) * scaleX;
-  const y = (e.clientY - rect.top) * scaleY;
-  return { x, y };
-}
-
-function startPosition(e){
-  painting = true;
+function clearCanvas(confirmFirst=true){
+  if(confirmFirst&&!confirm("Clear your canvas?"))return;
   saveState();
-  // Start path at current position (prevents a line jump from 0,0)
-  const {x,y} = getPosFromEvent(e);
-  ctx.beginPath();
-  ctx.moveTo(x,y);
-  draw(e);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#fff";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  toast("Canvas cleared")
 }
-
-function endPosition(){
-  painting = false;
-  ctx.beginPath();
-  ctx.globalAlpha = 1;
+function newArtwork(){
+  if(!confirm("Start a new artwork? Your saved gallery pictures will stay here."))return;
+  clearCanvas(false);
+  undoStack=[];redoStack=[];
+  toast("A fresh canvas is ready")
 }
-
+function whiteCanvas(){
+  saveState();
+  ctx.globalAlpha=1;
+  ctx.fillStyle="#fff";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  toast("White background added")
+}
+function getPoint(e){
+  const rect=canvas.getBoundingClientRect();
+  return {
+    x:(e.clientX-rect.left)*(canvas.width/rect.width),
+    y:(e.clientY-rect.top)*(canvas.height/rect.height)
+  }
+}
 function applyToolStyle(){
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
-  ctx.globalAlpha = 1;
-
-  if(tool === "eraser"){
-    ctx.strokeStyle = "#ffffff";
-    ctx.lineWidth = brushSize + 10;
-    return;
+  ctx.lineCap="round";ctx.lineJoin="round";ctx.globalAlpha=1;
+  if(state.tool==="eraser"){
+    ctx.strokeStyle="#fff";ctx.lineWidth=state.brushSize+12;return
   }
-
-  ctx.strokeStyle = currentColor;
-
-  switch(tool){
-    case "brush":
-      ctx.lineWidth = brushSize;
-      ctx.globalAlpha = 1;
-      break;
-    case "marker":
-      ctx.lineWidth = brushSize + 4;
-      ctx.globalAlpha = 0.6;
-      break;
-    case "crayon":
-      ctx.lineWidth = brushSize + 6;
-      ctx.globalAlpha = 0.45;
-      break;
-    case "pencil":
-      ctx.lineWidth = Math.max(1, brushSize / 2);
-      ctx.globalAlpha = 1;
-      break;
-    default:
-      ctx.lineWidth = brushSize;
-      ctx.globalAlpha = 1;
-  }
+  ctx.strokeStyle=state.color;
+  if(state.tool==="marker"){ctx.lineWidth=state.brushSize+5;ctx.globalAlpha=.58}
+  else if(state.tool==="crayon"){ctx.lineWidth=state.brushSize+7;ctx.globalAlpha=.48}
+  else if(state.tool==="pencil"){ctx.lineWidth=Math.max(1,state.brushSize/2)}
+  else{ctx.lineWidth=state.brushSize}
 }
-
+function beginDraw(e){
+  if(selectedSticker){placeSticker(selectedSticker,e);return}
+  painting=true;saveState();lastPoint=getPoint(e);
+  ctx.beginPath();ctx.moveTo(lastPoint.x,lastPoint.y)
+}
 function draw(e){
-  if(!painting) return;
-  const {x,y} = getPosFromEvent(e);
-
-  applyToolStyle();
-  ctx.lineTo(x,y);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(x,y);
+  if(!painting)return;
+  const p=getPoint(e);applyToolStyle();
+  ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y);lastPoint=p
 }
-
-/* Mouse */
-canvas.addEventListener("mousedown", startPosition);
-canvas.addEventListener("mouseup", endPosition);
-canvas.addEventListener("mouseleave", endPosition);
-canvas.addEventListener("mousemove", draw);
-
-/* Touch */
-canvas.addEventListener("touchstart", (ev)=>{
-  ev.preventDefault();
-  startPosition(ev.touches[0]);
-},{passive:false});
-canvas.addEventListener("touchend", (ev)=>{
-  ev.preventDefault();
-  endPosition();
-},{passive:false});
-canvas.addEventListener("touchmove", (ev)=>{
-  ev.preventDefault();
-  draw(ev.touches[0]);
-},{passive:false});
-
-function clearCanvas(){
-  if(confirm("Clear your canvas?")){
-    saveState();
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-  }
+function endDraw(){
+  painting=false;lastPoint=null;ctx.beginPath();ctx.globalAlpha=1
 }
-
-/* Stickers */
+function placeSticker(sticker,e){
+  if(!sticker)return;
+  saveState();
+  const p=getPoint(e);
+  ctx.globalAlpha=1;
+  ctx.font='48px "Comic Sans MS",system-ui,sans-serif';
+  ctx.textAlign="center";ctx.textBaseline="middle";
+  ctx.fillText(sticker,p.x,p.y);
+  selectedSticker="";
+  document.querySelectorAll(".sticker").forEach(s=>s.classList.remove("selected"));
+  toast("Sticker placed")
+}
 function toggleStickers(){
-  const p = $("stickersPanel");
-  p.style.display = (p.style.display==="none" || !p.style.display) ? "block" : "none";
+  const panel=$("stickersPanel");
+  panel.classList.toggle("open");
+  $("stickersBtn").classList.toggle("active",panel.classList.contains("open"));
+  if(state.autoGuide)speak(panel.classList.contains("open")?"Choose a sticker, then tap the canvas.":"Sticker tray closed.")
 }
-
-document.querySelectorAll(".sticker").forEach(s=>{
-  s.addEventListener("dragstart", (ev)=>{
-    draggingSticker = s.textContent;
-    try{ ev.dataTransfer.setData("text/plain", draggingSticker); }catch{}
-  });
-});
-
-/* Drop onto canvas */
-canvas.addEventListener("dragover", e=>e.preventDefault());
-canvas.addEventListener("drop", e=>{
-  e.preventDefault();
-  const sticker = (()=>{
-    try{
-      const dt = e.dataTransfer.getData("text/plain");
-      if(dt) return dt;
-    }catch{}
-    return draggingSticker;
-  })();
-
-  if(sticker){
-    saveState();
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const x = (e.clientX - rect.left) * scaleX;
-    const y = (e.clientY - rect.top) * scaleY;
-
-    ctx.globalAlpha = 1;
-    ctx.font = "40px Comic Sans MS, system-ui, sans-serif";
-    ctx.fillText(sticker, x-20, y+20);
-
-    draggingSticker = null;
-  }
-});
-
-/* Save artwork + mini gallery (last 5) */
-function saveArtwork(){
-  const title = prompt("Title your artwork:");
-  if(!title) return;
-
-  const imgData = canvas.toDataURL("image/png");
-  const safe = sanitizeFilename(title);
-  const date = new Date().toISOString().slice(0,10);
-
-  const link = document.createElement("a");
-  link.download = `${safe}_${date}.png`;
-  link.href = imgData;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-
-  addToGallery(imgData, title);
-}
-
-function addToGallery(imgData, title){
-  // Guard: dataURLs can be large; keep last 5 only
-  let gallery = [];
-  try{ gallery = JSON.parse(localStorage.getItem("artGallery") || "[]"); }catch{}
-  gallery.unshift({ img: imgData, title: String(title||"").slice(0,60), ts: Date.now() });
-  if(gallery.length > 5) gallery = gallery.slice(0,5);
-  try{ localStorage.setItem("artGallery", JSON.stringify(gallery)); }catch{}
-  renderGallery();
-}
-
-function renderGallery(){
-  const galleryDiv = $("gallery");
-  galleryDiv.innerHTML = "";
-  let gallery = [];
-  try{ gallery = JSON.parse(localStorage.getItem("artGallery") || "[]"); }catch{}
-  gallery.forEach(g=>{
-    const img = document.createElement("img");
-    img.src = g.img;
-    img.className = "thumb";
-    img.title = g.title || "Saved";
-    img.alt = g.title || "Saved";
-    img.addEventListener("click", ()=>{
-      // Load onto canvas
-      saveState();
-      restoreFromDataURL(g.img);
+function renderStickers(){
+  $("stickerGrid").innerHTML="";
+  STICKERS.forEach(symbol=>{
+    const b=document.createElement("button");
+    b.type="button";b.className="sticker";b.textContent=symbol;b.draggable=true;
+    b.addEventListener("click",()=>{
+      selectedSticker=selectedSticker===symbol?"":symbol;
+      document.querySelectorAll(".sticker").forEach(s=>s.classList.toggle("selected",s===b&&!!selectedSticker));
+      if(selectedSticker&&state.autoGuide)speak("Sticker selected. Tap the canvas to place it.")
     });
-    galleryDiv.appendChild(img);
-  });
+    b.addEventListener("dragstart",e=>{
+      draggingSticker=symbol;
+      try{e.dataTransfer.setData("text/plain",symbol)}catch{}
+    });
+    $("stickerGrid").appendChild(b)
+  })
+}
+function getGallery(){
+  try{return JSON.parse(localStorage.getItem(GALLERY_KEY)||"[]")}
+  catch{return[]}
+}
+function setGallery(items){
+  try{localStorage.setItem(GALLERY_KEY,JSON.stringify(items.slice(0,MAX_GALLERY)))}catch{
+    toast("This device does not have enough storage for another picture.")
+  }
+}
+function saveToGallery(){
+  const title=prompt("Title your artwork:");
+  if(!title)return;
+  const img=canvas.toDataURL("image/png");
+  const gallery=getGallery();
+  gallery.unshift({img,title:String(title).slice(0,60),ts:Date.now()});
+  setGallery(gallery);
+  state.savedCount++;
+  savePrefs();
+  renderGallery();updateGarden();
+  toast("Artwork saved in your five-picture gallery");
+  speak("Artwork saved. Wonderful creating.")
+}
+function downloadArtwork(){
+  const title=prompt("Name the picture for download:","My_Artwork");
+  if(!title)return;
+  const a=document.createElement("a");
+  const date=new Date().toISOString().slice(0,10);
+  a.download=`${sanitizeFilename(title)}_${date}.png`;
+  a.href=canvas.toDataURL("image/png");
+  document.body.appendChild(a);a.click();a.remove();
+  toast("Artwork download prepared")
+}
+function renderGallery(){
+  const gallery=getGallery();
+  $("gallery").innerHTML="";
+  if(!gallery.length){
+    $("gallery").innerHTML='<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:18px">Saved artwork will appear here.</div>';
+    return
+  }
+  gallery.forEach((g,index)=>{
+    const item=document.createElement("article");item.className="gallery-item";
+    const img=document.createElement("img");img.src=g.img;img.className="thumb";img.alt=g.title||"Saved artwork";img.title="Tap to load";
+    img.onclick=()=>{saveState();restoreFromDataURL(g.img);toast("Artwork loaded onto the canvas")};
+    const title=document.createElement("div");title.className="thumb-title";title.textContent=g.title||"Saved artwork";
+    const actions=document.createElement("div");actions.className="gallery-actions";
+    const load=document.createElement("button");load.className="btn";load.textContent="Load";load.onclick=img.onclick;
+    const del=document.createElement("button");del.className="btn danger";del.textContent="Delete";
+    del.onclick=()=>{
+      if(!confirm(`Delete “${g.title||"this picture"}” from this device?`))return;
+      const updated=getGallery();updated.splice(index,1);setGallery(updated);renderGallery();updateGarden();toast("Picture removed")
+    };
+    actions.append(load,del);item.append(img,title,actions);$("gallery").appendChild(item)
+  })
+}
+function updateGarden(){
+  const count=Math.max(state.savedCount,getGallery().length);
+  const stage=Math.min(4,Math.floor(count/2));
+  document.querySelectorAll("[data-step]").forEach(el=>el.classList.toggle("on",Number(el.dataset.step)<=stage));
+  $("gardenLabel").textContent=count>=8
+    ?"Your creativity garden is blooming with art!"
+    :`${count} saved art moment${count===1?"":"s"} helped the garden grow.`
 }
 
-/* Init */
-setTool("brush");
-$("sizeLbl").textContent = String(brushSize);
+const GUIDES={
+  pearl:{name:"Pearl Painter",rate:.82,pitch:1.08,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, little artist. Pearl Painter is ready to draw, color, and create with you."},
+  bunny:{name:"Benny Bunny",rate:.85,pitch:1.15,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello, art friend. Benny Bunny is ready to make a bright picture."},
+  owl:{name:"Art Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful creator. Art Owl is ready to explore lines, colors, shapes, and textures."},
+  robot:{name:"Doodle-Bot",rate:.8,pitch:.96,match:/daniel|david|alex|fred|george/i,greeting:"Beep boop. Doodle-Bot is ready for an art mission."},
+  rainbow:{name:"Rainbow Rae",rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright artist. Rainbow Rae is ready for a colorful art adventure."}
+};
+const SPEEDS={slow:.88,normal:1,lively:1.1};
+function refreshVoices(){if("speechSynthesis"in window)voices=speechSynthesis.getVoices()||[]}
+function chooseVoice(){
+  refreshVoices();const g=GUIDES[state.voice]||GUIDES.pearl;
+  const en=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||"")),pool=en.length?en:voices;
+  return pool.find(v=>g.match.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null
+}
+function stopVoice(msg="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis"in window)speechSynthesis.cancel();
+  $("canvasWrap").classList.remove("speaking");
+  $("voiceStatus").textContent=msg
+}
+function speak(text,preview=false){
+  const phrase=preview?(GUIDES[state.voice]||GUIDES.pearl).greeting:String(text||"").trim();
+  if(!phrase||!("speechSynthesis"in window))return;
+  stopVoice("");lastSpoken=phrase;
+  const token=++speechToken,g=GUIDES[state.voice]||GUIDES.pearl,u=new SpeechSynthesisUtterance(phrase),v=chooseVoice();
+  if(v)u.voice=v;
+  u.lang=v?.lang||"en-US";
+  u.rate=Math.max(.55,Math.min(1.15,g.rate*(SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=g.pitch;
+  u.onstart=()=>{$("canvasWrap").classList.add("speaking");$("voiceStatus").textContent=`${g.name} is speaking.`};
+  u.onend=()=>{if(token!==speechToken)return;$("canvasWrap").classList.remove("speaking");$("voiceStatus").textContent="Ready to create!"};
+  u.onerror=()=>{if(token!==speechToken)return;$("canvasWrap").classList.remove("speaking");$("voiceStatus").textContent="The voice had a little hiccup."};
+  speechSynthesis.speak(u)
+}
+function updateVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(b=>b.classList.toggle("active",b.dataset.voice===state.voice));
+  $("voiceSpeed").value=state.voiceSpeed
+}
+function hearTools(){
+  speak("Choose a brush, marker, crayon, pencil, or eraser. Pick a size and color. Draw on the canvas. Open the sticker tray for decorations. Undo and redo help fix changes. Save artwork to the gallery or download a picture.")
+}
+
+document.querySelectorAll("[data-tool]").forEach(b=>b.onclick=()=>setTool(b.dataset.tool));
+document.querySelectorAll("[data-color]").forEach(b=>b.onclick=()=>setColor(b.dataset.color));
+$("brushSize").oninput=e=>{
+  state.brushSize=Number(e.target.value||8);savePrefs();applySettings()
+};
+$("colorPicker").oninput=e=>setColor(e.target.value,false);
+$("undoBtn").onclick=undo;
+$("redoBtn").onclick=redo;
+$("clearBtn").onclick=()=>clearCanvas(true);
+$("stickersBtn").onclick=toggleStickers;
+$("newArtBtn").onclick=newArtwork;
+$("saveBtn").onclick=saveToGallery;
+$("downloadBtn").onclick=downloadArtwork;
+$("whiteCanvasBtn").onclick=whiteCanvas;
+$("hearToolsBtn").onclick=hearTools;
+$("largeTypeBtn").onclick=()=>{state.largeType=!state.largeType;savePrefs();applySettings()};
+$("focusModeBtn").onclick=()=>{state.focusMode=!state.focusMode;savePrefs();applySettings()};
+$("autoGuideBtn").onclick=()=>{state.autoGuide=!state.autoGuide;savePrefs();applySettings()};
+$("voiceGuides").onclick=e=>{
+  const b=e.target.closest("[data-voice]");if(!b)return;
+  state.voice=b.dataset.voice;savePrefs();updateVoiceButtons();
+  $("voiceStatus").textContent=`${GUIDES[state.voice].name} selected.`
+};
+$("voiceSpeed").onchange=e=>{state.voiceSpeed=e.target.value;savePrefs()};
+$("meetGuideBtn").onclick=()=>speak("",true);
+$("repeatVoiceBtn").onclick=()=>lastSpoken?speak(lastSpoken):hearTools();
+$("stopVoiceBtn").onclick=()=>stopVoice();
+
+canvas.addEventListener("pointerdown",e=>{e.preventDefault();canvas.setPointerCapture?.(e.pointerId);beginDraw(e)});
+canvas.addEventListener("pointermove",e=>{e.preventDefault();draw(e)});
+canvas.addEventListener("pointerup",e=>{e.preventDefault();endDraw()});
+canvas.addEventListener("pointercancel",endDraw);
+canvas.addEventListener("pointerleave",e=>{if(e.buttons===0)endDraw()});
+canvas.addEventListener("dragover",e=>e.preventDefault());
+canvas.addEventListener("drop",e=>{
+  e.preventDefault();
+  let sticker="";
+  try{sticker=e.dataTransfer.getData("text/plain")}catch{}
+  sticker=sticker||draggingSticker;
+  if(sticker)placeSticker(sticker,e);
+  draggingSticker=""
+});
+
+if("speechSynthesis"in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices
+}else{
+  $("meetGuideBtn").disabled=true;$("repeatVoiceBtn").disabled=true;$("stopVoiceBtn").disabled=true;$("hearToolsBtn").disabled=true;
+  $("voiceStatus").textContent="Read-aloud voices are not available in this browser."
+}
+
+ctx.fillStyle="#fff";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+renderStickers();
 renderGallery();
+updateVoiceButtons();
+applySettings();
+updateGarden();
+setTool(state.tool,false);
+if(state.autoGuide)setTimeout(()=>speak("Welcome to Pel Personal Editing Lab. Choose a tool, a color, and begin your artwork."),260);
+window.addEventListener("beforeunload",()=>stopVoice(""));
+})();
 </script>
 </body>
 </html>
