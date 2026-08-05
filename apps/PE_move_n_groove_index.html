@@ -15,7 +15,7 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;min-height:100vh;padding:26px 14px 48px;color:var(--ink);
-  font-family:"Avenir Next Rounded","Trebuchet MS","Arial Rounded MT Bold","Comic Sans MS",system-ui,sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:linear-gradient(145deg,#f9ecff,#eaf9ff 46%,#fff3d7);
 }
 button,select,input{font:inherit}
@@ -30,8 +30,8 @@ button{touch-action:manipulation}
 .wrap{width:min(1120px,100%);margin:auto}
 .hero{text-align:center;margin-bottom:18px}
 .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:#ffffffcc;border:1px solid #fff;box-shadow:0 8px 20px rgba(70,48,88,.08);color:var(--plum);font-weight:900;font-size:.86rem}
-h1{margin:12px 0 5px;font-size:clamp(2.5rem,7vw,5rem);line-height:.95;letter-spacing:-.045em;color:var(--plum)}
-.subtitle{max-width:780px;margin:0 auto;color:var(--muted);line-height:1.6}
+h1{margin:12px auto 8px;max-width:980px;padding:0 .08em;font-size:clamp(2.45rem,6.2vw,4.95rem);line-height:1.08;letter-spacing:-.02em;color:var(--plum)}
+.subtitle{max-width:920px;margin:0 auto;color:var(--muted);line-height:1.72;font-size:1.02rem}
 .app{background:var(--panel);border:1px solid #ffffffdc;border-radius:32px;padding:18px;box-shadow:var(--shadow);backdrop-filter:blur(14px)}
 .toolbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .control{background:#fff;border:1px solid rgba(91,61,135,.1);border-radius:18px;padding:11px}
@@ -78,9 +78,127 @@ footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;lin
 @media(max-width:860px){.toolbar{grid-template-columns:repeat(2,1fr)}.session{grid-template-columns:1fr}.mascot-panel,.activity-panel{min-height:0}}
 @media(max-width:540px){.toolbar{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* =========================================================
+   CRÈCHE MOVEMENT PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1120px,calc(100% - 22px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(66,44,84,.14)
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,var(--gold),var(--mint));
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{margin:0;color:#d65480;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:var(--plum);font-size:clamp(1.02rem,2.3vw,1.32rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  min-height:38px;padding:8px 12px;display:inline-flex;align-items:center;justify-content:center;
+  border:2px solid #ded4e8;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose))}
+
+/* =========================================================
+   FRIENDLY MOVEMENT GUIDES
+   ========================================================= */
+.voice-studio{
+  margin:14px 0;
+  padding:13px;
+  border:2px solid rgba(91,61,135,.12);
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff);
+  box-shadow:0 10px 24px rgba(66,44,84,.07)
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;border:2px solid #ded4e8;
+  border-radius:16px;background:#fff;color:var(--plum);
+  display:grid;place-items:center;align-content:center;gap:2px;font-weight:900
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.67rem}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose))}
+.voice-controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{
+  border:2px solid #ded4e8;border-radius:999px;padding:9px 12px;background:#fff;color:var(--ink);font-weight:900
+}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.activity-panel.speaking,.mascot-panel.speaking{box-shadow:0 0 0 5px rgba(255,214,107,.4),var(--shadow)}
+
+.simple-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+.simple-row .btn.active{color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose))}
+body.large-type{font-size:18px}
+body.simple-mode .stats,
+body.simple-mode .parent,
+body.simple-mode .safety{display:none!important}
+body.simple-mode .session{grid-template-columns:1fr}
+body.simple-mode .mascot-panel{min-height:220px}
+
+/* =========================================================
+   MOVEMENT GARDEN
+   ========================================================= */
+.movement-garden{
+  margin-top:14px;padding:12px;border:2px dashed rgba(91,61,135,.16);border-radius:18px;
+  background:linear-gradient(145deg,#fff,#f2fff0,#eef9ff)
+}
+.movement-garden h3{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.garden-row{display:flex;justify-content:center;align-items:flex-end;gap:12px;min-height:68px;flex-wrap:wrap}
+.garden-step{font-size:2rem;opacity:.28;transform:scale(.86);transition:.2s}
+.garden-step.on{opacity:1;transform:scale(1)}
+.garden-label{text-align:center;color:var(--muted);font-size:.74rem;margin-top:5px}
+
+.option.hint{animation:hintPulse .7s ease 2;box-shadow:0 0 0 5px rgba(255,214,107,.42)}
+@keyframes hintPulse{50%{transform:translateY(-3px) scale(1.03)}}
+
+.completion-card{
+  display:none;margin-top:14px;padding:18px;border:2px solid rgba(91,61,135,.12);border-radius:20px;
+  background:linear-gradient(145deg,#fff,#eafff2);text-align:center
+}
+.completion-card.show{display:block}
+.completion-card h3{margin:0 0 6px;color:var(--plum)}
+.completion-card p{margin:0;color:var(--muted);line-height:1.5}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-guide:last-child{grid-column:1/-1}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}.creche-links{grid-column:auto}
+}
+
 </style>
 </head>
 <body>
+
+<header class="creche-header" aria-label="Crèche Preschool Movement Portal">
+  <div class="creche-mark" aria-hidden="true">🦘</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Movement</p>
+    <div class="creche-title">The Crèche™ · Boppi's Move & Groove Garden</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool movement navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link" href="../movement/index.html">🏃 Movement</a>
+    <a class="creche-link current" href="#" aria-current="page">🦘 Move & Groove</a>
+  </nav>
+</header>
+
 <div class="decor" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span></div>
 <main class="wrap">
 <header class="hero">
@@ -90,6 +208,35 @@ footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;lin
 </header>
 
 <section class="app">
+  
+<section class="voice-studio" aria-labelledby="voiceTitle">
+  <h2 id="voiceTitle">Choose a Movement Guide</h2>
+  <div class="voice-guides" id="voiceGuides">
+    <button type="button" class="voice-guide" data-voice="boppi"><span class="emoji">🦘</span><span class="name">Boppi</span></button>
+    <button type="button" class="voice-guide" data-voice="bunny"><span class="emoji">🐰</span><span class="name">Benny Bunny</span></button>
+    <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Movement Owl</span></button>
+    <button type="button" class="voice-guide" data-voice="robot"><span class="emoji">🤖</span><span class="name">Motion-Bot</span></button>
+    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+  </div>
+  <div class="voice-controls">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and clear</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">🎵 A little lively</option>
+    </select>
+    <button type="button" id="meetGuideBtn" class="btn">👋 Meet My Guide</button>
+    <button type="button" id="repeatVoiceBtn" class="btn">🔁 Repeat Last</button>
+    <button type="button" id="stopVoiceBtn" class="btn">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+</section>
+
+<div class="simple-row">
+  <button type="button" id="largeTypeBtn" class="btn">🔎 Larger Type</button>
+  <button type="button" id="simpleModeBtn" class="btn">🧘 Simple Mode</button>
+  <button type="button" id="autoReadBtn" class="btn">🗣️ Auto Read On</button>
+</div>
+
   <div class="toolbar">
     <div class="control"><label for="unitFilter">Learning unit</label><select id="unitFilter"></select></div>
     <div class="control"><label for="duration">Movement timer</label><select id="duration"><option value="15">15 seconds</option><option value="30" selected>30 seconds</option><option value="45">45 seconds</option><option value="60">60 seconds</option></select></div>
@@ -132,6 +279,24 @@ footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;lin
     </div>
   </section>
 
+
+  <section class="movement-garden">
+    <h3>🌱 My Movement Garden</h3>
+    <div class="garden-row" id="gardenRow">
+      <span class="garden-step" data-step="0">🌱</span>
+      <span class="garden-step" data-step="1">🌿</span>
+      <span class="garden-step" data-step="2">🌼</span>
+      <span class="garden-step" data-step="3">🌳</span>
+      <span class="garden-step" data-step="4">🌈</span>
+    </div>
+    <div class="garden-label" id="gardenLabel">Complete safe movement lessons to help the garden grow.</div>
+  </section>
+  <div class="completion-card" id="completionCard">
+    <h3>🏆 Move & Groove Garden Complete</h3>
+    <p>You explored all 42 lessons with warm-ups, movement, cool-downs, and safe learning checks.</p>
+  </div>
+
+
   <div class="stats">
     <div class="stat"><strong id="completeStat">0</strong>Lessons completed</div>
     <div class="stat"><strong id="minutesStat">0</strong>Movement minutes</div>
@@ -153,12 +318,107 @@ footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;lin
 const LESSONS=[{"id": 1, "unit": "Moving Our Bodies", "title": "Walking Feet", "icon": "🚶", "warm": "Walk in place with soft feet. Swing your arms gently.", "move": "Follow a winding path around your space.", "cool": "Slow your steps and take two calm breaths.", "check": {"q": "Which choice keeps indoor walking safe?", "options": ["Use walking feet", "Race past everyone", "Close your eyes"], "correct": 0}}, {"id": 2, "unit": "Moving Our Bodies", "title": "Running Fun", "icon": "🏃", "warm": "March first, then make your steps a little quicker.", "move": "Run in place or along a clear path. Freeze when Boppi says stop.", "cool": "Walk slowly until your breathing feels comfortable.", "check": {"q": "What should you do when you hear stop?", "options": ["Stop your body", "Keep running", "Bump a friend"], "correct": 0}}, {"id": 3, "unit": "Moving Our Bodies", "title": "Hopping Like a Bunny", "icon": "🐇", "warm": "Bend your knees and practice one small jump.", "move": "Hop on two feet, then try one foot while holding support if needed.", "cool": "Shake out your legs and stand tall.", "check": {"q": "How can you land safely?", "options": ["Soft knees", "Locked knees", "On another person"], "correct": 0}}, {"id": 4, "unit": "Moving Our Bodies", "title": "Skipping Steps", "icon": "🎵", "warm": "Step, hop, step, hop very slowly.", "move": "Skip or practice the step-hop pattern around your space.", "cool": "Walk and clap a slow beat.", "check": {"q": "What pattern helps us skip?", "options": ["Step-hop", "Sit-sleep", "Push-pull"], "correct": 0}}, {"id": 5, "unit": "Moving Our Bodies", "title": "Marching Parade", "icon": "🥁", "warm": "Tap a steady beat on your knees.", "move": "March with high or low knees and swing your arms.", "cool": "Make the marching beat slower and slower.", "check": {"q": "What helps a parade move together?", "options": ["A steady beat", "Pushing", "Closing ears"], "correct": 0}}, {"id": 6, "unit": "Moving Our Bodies", "title": "Crawling Critters", "icon": "🐛", "warm": "Reach hands forward and stretch your back gently.", "move": "Bear crawl, crab walk, or move on hands and knees on a safe surface.", "cool": "Sit back, stretch your hands, and breathe.", "check": {"q": "What should you check before crawling?", "options": ["The floor is clear", "The lights are off", "Everyone runs"], "correct": 0}}, {"id": 7, "unit": "Moving Our Bodies", "title": "Balance Trail", "icon": "⚖️", "warm": "Stand tall with feet apart.", "move": "Walk heel-to-toe on an imaginary line. Hold a wall or chair if needed.", "cool": "Stand still and notice your breathing.", "check": {"q": "What can help balance?", "options": ["Arms out and eyes forward", "Spinning fast", "Holding your breath"], "correct": 0}}, {"id": 8, "unit": "Stretch & Grow", "title": "Reach for the Sky", "icon": "☁️", "warm": "Roll your shoulders gently.", "move": "Reach up, then lean a little to each side without forcing.", "cool": "Lower your arms and wiggle your fingers.", "check": {"q": "How should a stretch feel?", "options": ["Gentle, not painful", "Sharp and painful", "As hard as possible"], "correct": 0}}, {"id": 9, "unit": "Stretch & Grow", "title": "Wiggle Legs", "icon": "🦵", "warm": "Tap each foot and bend each knee.", "move": "Wiggle, shake, and make slow circles with your legs.", "cool": "Stand still and feel your feet on the floor.", "check": {"q": "What should you do if a move hurts?", "options": ["Stop and tell an adult", "Keep forcing it", "Hide it"], "correct": 0}}, {"id": 10, "unit": "Stretch & Grow", "title": "Neck & Shoulders", "icon": "🐻", "warm": "Shrug your shoulders up and down.", "move": "Look left and right slowly; make tiny shoulder circles.", "cool": "Let your shoulders rest away from your ears.", "check": {"q": "How should neck movements be done?", "options": ["Slowly and gently", "Fast and hard", "With eyes closed while running"], "correct": 0}}, {"id": 11, "unit": "Stretch & Grow", "title": "Breathe & Move", "icon": "🌬️", "warm": "Place one hand on your belly.", "move": "Breathe in as your arms rise; breathe out as they lower.", "cool": "Take one quiet breath and smile.", "check": {"q": "What helps your body settle?", "options": ["Slow breathing", "Holding your breath", "Yelling"], "correct": 0}}, {"id": 12, "unit": "Stretch & Grow", "title": "Yoga Animals", "icon": "🧘", "warm": "Stand tall like a mountain.", "move": "Try cat stretch, dog stretch, and tree balance with support.", "cool": "Rest in a comfortable seated or lying position.", "check": {"q": "What matters most in yoga?", "options": ["Moving safely for your body", "Looking perfect", "Stretching the farthest"], "correct": 0}}, {"id": 13, "unit": "Stretch & Grow", "title": "Dance Warm-Up", "icon": "💃", "warm": "Tap toes and clap to a beat.", "move": "Dance with arms, shoulders, and feet. Freeze when the music pauses.", "cool": "Sway slowly side to side.", "check": {"q": "What should you do when the music stops?", "options": ["Freeze safely", "Keep crashing around", "Run away"], "correct": 0}}, {"id": 14, "unit": "Stretch & Grow", "title": "Rainbow Stretch", "icon": "🌈", "warm": "Trace a rainbow overhead with one hand.", "move": "Reach across your body in colorful rainbow arcs.", "cool": "Bring your hands to your heart and breathe.", "check": {"q": "Should everyone stretch the same distance?", "options": ["No, bodies are different", "Yes, exactly the same", "Only the tallest can stretch"], "correct": 0}}, {"id": 15, "unit": "Sports Basics", "title": "Throw & Catch", "icon": "🤲", "warm": "Pretend to toss and catch a soft cloud.", "move": "Toss a scarf, sock ball, or beanbag gently to yourself or a partner.", "cool": "Hold the object still and relax your hands.", "check": {"q": "What object is safest for beginners?", "options": ["A soft lightweight object", "A rock", "A sharp object"], "correct": 0}}, {"id": 16, "unit": "Sports Basics", "title": "Roll It", "icon": "⚽", "warm": "Make circles with your hands.", "move": "Roll a soft ball toward a target or partner.", "cool": "Stop the ball gently with two hands.", "check": {"q": "Where should you aim?", "options": ["At a clear target", "At someone’s face", "At breakable objects"], "correct": 0}}, {"id": 17, "unit": "Sports Basics", "title": "Kick It", "icon": "🥅", "warm": "Tap the ball softly with each foot.", "move": "Kick a soft ball toward a wide target using gentle force.", "cool": "Place one foot on the floor and balance.", "check": {"q": "Where should you practice kicking?", "options": ["In a clear safe space", "Near glass", "In a crowded hallway"], "correct": 0}}, {"id": 18, "unit": "Sports Basics", "title": "Bounce Time", "icon": "🏀", "warm": "Pretend to bounce with your hands.", "move": "Bounce a ball, or tap a balloon down and catch it.", "cool": "Hold the ball and shake out your hands.", "check": {"q": "What should your eyes watch?", "options": ["The ball and clear space", "The ceiling only", "A screen"], "correct": 0}}, {"id": 19, "unit": "Sports Basics", "title": "Jumping Fun", "icon": "🦘", "warm": "Bend and straighten your knees.", "move": "Jump over an imaginary line, forward and back, or side to side.", "cool": "Land, stand tall, and breathe.", "check": {"q": "How should you land?", "options": ["Softly with bent knees", "With stiff knees", "On one another"], "correct": 0}}, {"id": 20, "unit": "Sports Basics", "title": "Tap & Strike", "icon": "🏓", "warm": "Tap your palms together gently.", "move": "Use your hand or a soft paddle to tap a balloon upward.", "cool": "Catch or stop the balloon safely.", "check": {"q": "What should you strike in this lesson?", "options": ["A balloon or soft ball", "A person", "Furniture"], "correct": 0}}, {"id": 21, "unit": "Sports Basics", "title": "Mini Sports Day", "icon": "🏅", "warm": "Choose your favorite warm-up move.", "move": "Try one minute each of rolling, tossing, kicking, and jumping.", "cool": "Celebrate effort with a stretch.", "check": {"q": "What is the goal of sports day?", "options": ["Safe movement and fun", "Winning every time", "Making others lose"], "correct": 0}}, {"id": 22, "unit": "Teamwork Time", "title": "Taking Turns", "icon": "🔁", "warm": "Pass an imaginary ball from hand to hand.", "move": "Practice my turn, your turn with a partner or stuffed animal.", "cool": "Say, “Thank you for playing.”", "check": {"q": "What do you do while waiting?", "options": ["Stay nearby and wait safely", "Grab the equipment", "Shout"], "correct": 0}}, {"id": 23, "unit": "Teamwork Time", "title": "Helping Hands", "icon": "👐", "warm": "Open and close your hands.", "move": "Carry light items, gather equipment, or help tidy a safe area.", "cool": "Give yourself a helping-hands clap.", "check": {"q": "What should you carry?", "options": ["Something light and safe", "Something too heavy", "Anything sharp"], "correct": 0}}, {"id": 24, "unit": "Teamwork Time", "title": "Following Signals", "icon": "🚦", "warm": "Practice stop, go, slow.", "move": "Move when you hear go; freeze on stop; move gently on slow.", "cool": "Finish with one slow lap.", "check": {"q": "Why do signals help?", "options": ["They keep activities organized and safe", "They make people confused", "They help us bump"], "correct": 0}}, {"id": 25, "unit": "Teamwork Time", "title": "Cheering Others", "icon": "📣", "warm": "Practice a quiet clap and a big smile.", "move": "Take turns doing a move while others offer kind encouragement.", "cool": "Say one kind phrase together.", "check": {"q": "What is a kind cheer?", "options": ["You kept trying!", "You are bad at this", "Move faster!"], "correct": 0}}, {"id": 26, "unit": "Teamwork Time", "title": "Sharing Equipment", "icon": "🎈", "warm": "Pretend to pass a ball carefully.", "move": "Share one item using turns, timers, or partner games.", "cool": "Return the item to its place.", "check": {"q": "What helps sharing feel fair?", "options": ["Taking turns", "Hiding everything", "Grabbing first"], "correct": 0}}, {"id": 27, "unit": "Teamwork Time", "title": "Listening Bodies", "icon": "👂", "warm": "Make your body still enough to notice a sound.", "move": "Follow two simple movement directions in order.", "cool": "Sit or stand quietly for one breath.", "check": {"q": "Does listening always require eye contact?", "options": ["No, people listen in different ways", "Yes, always", "Only adults listen"], "correct": 0}}, {"id": 28, "unit": "Teamwork Time", "title": "Celebration Circle", "icon": "🎉", "warm": "Choose one move everyone can copy.", "move": "Each person leads one safe movement.", "cool": "End with applause or a quiet wave.", "check": {"q": "Should everyone be included?", "options": ["Yes, with choices that fit them", "Only the fastest", "Only the loudest"], "correct": 0}}, {"id": 29, "unit": "Healthy Habits", "title": "Food Gives Us Energy", "icon": "🍎", "warm": "Pretend to pick colorful foods from a garden.", "move": "March to different food colors named by an adult.", "cool": "Slow down and take a pretend water sip.", "check": {"q": "What is a balanced message about food?", "options": ["Different foods help our bodies in different ways", "One food makes you perfect", "Desserts are bad"], "correct": 0}}, {"id": 30, "unit": "Healthy Habits", "title": "Water Break", "icon": "💧", "warm": "Reach up, then relax your shoulders.", "move": "Do a short movement burst, then pause for water if available.", "cool": "Notice how your body feels after resting.", "check": {"q": "When is water helpful?", "options": ["Before, during, and after active play as needed", "Never", "Only at bedtime"], "correct": 0}}, {"id": 31, "unit": "Healthy Habits", "title": "Rest & Recharge", "icon": "🌙", "warm": "Move slowly like waking from a nap.", "move": "Alternate 10 seconds of movement with 10 seconds of rest.", "cool": "Finish in a comfortable resting pose.", "check": {"q": "Why do bodies need rest?", "options": ["To recover and feel ready", "Because movement is bad", "To avoid all activity"], "correct": 0}}, {"id": 32, "unit": "Healthy Habits", "title": "Joyful Movement", "icon": "😊", "warm": "Choose a movement that feels fun.", "move": "Dance, march, sway, or wheel in a way that works for your body.", "cool": "Name one movement you enjoyed.", "check": {"q": "Does movement have to look the same for everyone?", "options": ["No, many kinds of movement count", "Yes, exactly the same", "Only running counts"], "correct": 0}}, {"id": 33, "unit": "Healthy Habits", "title": "Clean & Ready", "icon": "🧼", "warm": "Pretend to wash hands with rubbing motions.", "move": "Act out getting ready: shoes tied, water nearby, clear floor.", "cool": "Finish by checking your space.", "check": {"q": "When should equipment be cleaned?", "options": ["When needed and with adult guidance", "Never", "Only after it breaks"], "correct": 0}}, {"id": 34, "unit": "Healthy Habits", "title": "Kindness in Motion", "icon": "💖", "warm": "Make a heart shape with your hands.", "move": "Move with a partner while respecting space and boundaries.", "cool": "Offer a wave, smile, or kind word.", "check": {"q": "What if someone does not want a high five?", "options": ["Respect their choice", "Do it anyway", "Tease them"], "correct": 0}}, {"id": 35, "unit": "Healthy Habits", "title": "Healthy Heroes", "icon": "🦸", "warm": "Stand in a comfortable hero pose.", "move": "Choose three safe moves and complete them at your own pace.", "cool": "Take a victory breath.", "check": {"q": "What makes a movement hero?", "options": ["Trying safely and caring for others", "Being the strongest", "Never resting"], "correct": 0}}, {"id": 36, "unit": "Fun Fitness", "title": "Freeze Dance", "icon": "⏸️", "warm": "Start with gentle toe taps.", "move": "Dance while music plays or an adult claps; freeze on the signal.", "cool": "Sway slowly and stop.", "check": {"q": "What does freeze mean?", "options": ["Stop your body safely", "Fall down", "Run faster"], "correct": 0}}, {"id": 37, "unit": "Fun Fitness", "title": "Animal Moves", "icon": "🐾", "warm": "Choose an animal and copy one gentle motion.", "move": "Hop like a bunny, stomp like an elephant, or stretch like a cat.", "cool": "Return to your regular walk.", "check": {"q": "Can you change a move to fit your body?", "options": ["Yes", "No", "Only a teacher can"], "correct": 0}}, {"id": 38, "unit": "Fun Fitness", "title": "Obstacle Adventure", "icon": "🚧", "warm": "Walk around your clear space.", "move": "Step over tape lines, around pillows, and under a safe ribbon with adult setup.", "cool": "Walk one easy lap to finish.", "check": {"q": "What belongs in a safe obstacle course?", "options": ["Soft, stable items", "Sharp tools", "Tall unstable furniture"], "correct": 0}}, {"id": 39, "unit": "Fun Fitness", "title": "Balloon Games", "icon": "🎈", "warm": "Tap the air with open hands.", "move": "Keep a balloon or scarf off the floor using gentle taps.", "cool": "Catch it and take a breath.", "check": {"q": "What should you do if a balloon pops?", "options": ["Stop and let an adult clean it up", "Put pieces in your mouth", "Keep running"], "correct": 0}}, {"id": 40, "unit": "Fun Fitness", "title": "Shadow Play", "icon": "🌤️", "warm": "Wave and watch your shadow.", "move": "Copy your shadow, make shapes, or step beside it outdoors with supervision.", "cool": "Stand still and notice the light.", "check": {"q": "What creates a shadow?", "options": ["Light blocked by an object", "Music", "Water"], "correct": 0}}, {"id": 41, "unit": "Fun Fitness", "title": "Parachute Play", "icon": "🪂", "warm": "Practice lifting your arms together.", "move": "Use a sheet or play parachute with adults: lift, lower, and make gentle waves.", "cool": "Lower it slowly to the floor.", "check": {"q": "What makes parachute play work?", "options": ["Cooperation", "Pulling as hard as possible", "Letting go suddenly"], "correct": 0}}, {"id": 42, "unit": "Fun Fitness", "title": "Move & Groove Celebration", "icon": "🎊", "warm": "Choose a favorite warm-up.", "move": "Create a mini routine with three favorite moves.", "cool": "Cool down, celebrate effort, and rest.", "check": {"q": "What should we celebrate?", "options": ["Effort, learning, and safe movement", "Only perfect moves", "Only first place"], "correct": 0}}];
 const $=id=>document.getElementById(id);
 const KEY='boppi-prek-pe-garden-v2';
-function loadState(){try{const x=JSON.parse(localStorage.getItem(KEY)||'{}');return{completed:x.completed||{},seconds:Number(x.seconds)||0,favorites:Array.isArray(x.favorites)?x.favorites:[]}}catch{return{completed:{},seconds:0,favorites:[]}}}
+function loadState(){try{
+      const x=JSON.parse(localStorage.getItem(KEY)||'{}');
+      return{
+        completed:x.completed||{},
+        seconds:Number(x.seconds)||0,
+        favorites:Array.isArray(x.favorites)?x.favorites:[],
+        voice:x.voice||'boppi',
+        voiceSpeed:x.voiceSpeed||'slow',
+        autoRead:x.autoRead!==false,
+        largeType:!!x.largeType,
+        simpleMode:!!x.simpleMode
+      }
+    }catch{
+      return{completed:{},seconds:0,favorites:[],voice:'boppi',voiceSpeed:'slow',autoRead:true,largeType:false,simpleMode:false}
+    }}
 let state=loadState(),current=null,phase=0,remaining=30,timerId=null,running=false;
 const phases=['warm','move','cool','check'];
 const phaseNames=['Warm-Up','Move & Play','Cool-Down','Learning Check'];
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
-function speak(t){if($('soundMode').value==='off'||!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=.88;u.pitch=1.08;speechSynthesis.speak(u)}
+const GUIDE_VOICES={
+boppi:{name:"Boppi",rate:.84,pitch:1.1,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, movement friend. Boppi is ready to warm up, move safely, cool down, and celebrate your effort."},
+bunny:{name:"Benny Bunny",rate:.86,pitch:1.15,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello, active friend. Benny Bunny is ready to hop into a safe movement lesson."},
+owl:{name:"Movement Owl",rate:.75,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful mover. Movement Owl is ready to think about body awareness, balance, safety, and rest."},
+robot:{name:"Motion-Bot",rate:.8,pitch:.96,match:/daniel|david|alex|fred|george/i,greeting:"Beep boop. Motion-Bot is ready for a movement mission."},
+rainbow:{name:"Rainbow Rae",rate:.85,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright mover. Rainbow Rae is ready for a colorful movement adventure."}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+let availableVoices=[],speechToken=0,lastSpoken="";
+
+function refreshVoices(){
+  if(!("speechSynthesis"in window))return;
+  availableVoices=speechSynthesis.getVoices()||[];
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.boppi;
+  $("voiceStatus").textContent=availableVoices.length?`${g.name} is ready.`:"Loading a friendly voice…"
+}
+function chooseVoice(){
+  refreshVoices();
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.boppi;
+  const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+  const pool=english.length?english:availableVoices;
+  return pool.find(v=>g.match.test(v.name))
+    ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+    ||pool[0]||null
+}
+function stopSpeaking(message="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis"in window)speechSynthesis.cancel();
+  document.querySelectorAll(".activity-panel,.mascot-panel").forEach(el=>el.classList.remove("speaking"));
+  $("voiceStatus").textContent=message
+}
+function speak(t,{preview=false,target=null}={}){
+  if($("soundMode").value==="off"||!("speechSynthesis"in window))return;
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.boppi;
+  const phrase=preview?g.greeting:String(t||"").trim();
+  if(!phrase)return;
+  stopSpeaking("");
+  const token=++speechToken;
+  lastSpoken=phrase;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const v=chooseVoice();
+  if(v)u.voice=v;
+  u.lang=v?.lang||"en-US";
+  u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=g.pitch;
+  u.onstart=()=>{target?.classList.add("speaking");$("voiceStatus").textContent=`${g.name} is reading.`};
+  u.onend=()=>{if(token!==speechToken)return;target?.classList.remove("speaking");$("voiceStatus").textContent="Ready to move safely!"};
+  u.onerror=()=>{if(token!==speechToken)return;target?.classList.remove("speaking");$("voiceStatus").textContent="The voice had a little hiccup."};
+  speechSynthesis.speak(u)
+}
+
+function updateVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(b=>{
+    const active=b.dataset.voice===state.voice;
+    b.classList.toggle("active",active);
+    b.setAttribute("aria-pressed",String(active))
+  });
+  $("voiceSpeed").value=state.voiceSpeed
+}
+function applyAccessibility(){
+  document.body.classList.toggle("large-type",state.largeType);
+  document.body.classList.toggle("simple-mode",state.simpleMode);
+  $("largeTypeBtn").classList.toggle("active",state.largeType);
+  $("simpleModeBtn").classList.toggle("active",state.simpleMode);
+  $("autoReadBtn").classList.toggle("active",state.autoRead);
+  $("autoReadBtn").textContent=state.autoRead?"🗣️ Auto Read On":"🤫 Auto Read Off"
+}
+function currentNarration(){
+  if(!current)return "Choose a lesson to begin.";
+  const phaseText=phase<3?current[phases[phase]]:current.check.q;
+  return `${current.title}. ${phaseNames[phase]}. ${phaseText}`
+}
+function updateGarden(){
+  const complete=Object.keys(state.completed).length;
+  const stage=Math.min(4,Math.floor(complete/9));
+  document.querySelectorAll("[data-step]").forEach(el=>el.classList.toggle("on",Number(el.dataset.step)<=stage));
+  $("gardenLabel").textContent=complete===LESSONS.length
+    ?"Every Move and Groove lesson is complete!"
+    :`${complete} of ${LESSONS.length} movement lessons complete.`;
+  $("completionCard").classList.toggle("show",complete===LESSONS.length)
+}
+
 function filtered(){const unit=$('unitFilter').value,term=$('search').value.toLowerCase().trim();return LESSONS.filter(l=>(unit==='All'||l.unit===unit)&&(!term||(`${l.title} ${l.unit} ${l.warm} ${l.move}`.toLowerCase().includes(term))))}
 function renderLessons(){
   const g=$('lessonGrid');g.innerHTML='';
@@ -172,25 +432,94 @@ function renderPhase(){
   $('checkPanel').classList.add('hidden');$('timer').style.display='block';$('timerLabel').style.display='block';$('startTimerBtn').style.display='inline-block';$('pauseBtn').style.display='inline-block';
   if(phase<3){$('instruction').textContent=current[phases[phase]];$('nextPhaseBtn').textContent=phase===2?'Learning Check →':'Next Step →';$('mascotNote').textContent=phase===0?'Boppi says: Start gently and notice your space.':phase===1?'Boppi says: Choose a seated, standing, or supported version.':'Boppi says: Slow down and let your body recover.'}
   else{renderCheck();$('instruction').textContent='One quick question about safe movement.';$('timer').style.display='none';$('timerLabel').style.display='none';$('startTimerBtn').style.display='none';$('pauseBtn').style.display='none';$('nextPhaseBtn').textContent='Finish Lesson ✓'}
-  speak($('instruction').textContent)
+  if(state.autoRead)setTimeout(()=>speak(currentNarration(),{target:document.querySelector('.activity-panel')}),220)
 }
-function startTimer(){if(running)return;running=true;$('startTimerBtn').disabled=true;$('pauseBtn').disabled=false;$('timerLabel').textContent='Keep moving safely.';timerId=setInterval(()=>{remaining--;$('timer').textContent=remaining;state.seconds++;if(remaining<=0){stopTimer();$('timerLabel').textContent='Movement complete! Take a breath.';speak('Movement complete. Take a breath.')}if(state.seconds%10===0){save();updateStats()}},1000)}
+function startTimer(){if(running)return;running=true;$('startTimerBtn').disabled=true;$('pauseBtn').disabled=false;$('timerLabel').textContent='Keep moving safely.';timerId=setInterval(()=>{remaining--;$('timer').textContent=remaining;state.seconds++;if(remaining<=0){stopTimer();$('timerLabel').textContent='Movement complete! Take a breath.';speak('Movement complete. Take a breath.',{target:document.querySelector('.activity-panel')})}if(state.seconds%10===0){save();updateStats()}},1000)}
 function stopTimer(){if(timerId)clearInterval(timerId);timerId=null;running=false;if($('startTimerBtn'))$('startTimerBtn').disabled=false;if($('pauseBtn'))$('pauseBtn').disabled=true;save();updateStats()}
 function renderCheck(){
-  $('checkPanel').classList.remove('hidden');$('checkQuestion').textContent=current.check.q;$('checkOptions').innerHTML='';$('checkFeedback').textContent='';
+  $("checkPanel").classList.remove("hidden");
+  $("checkQuestion").textContent=current.check.q;
+  $("checkOptions").innerHTML="";
+  $("checkFeedback").textContent="";
   const pairs=current.check.options.map((text,i)=>({text,correct:i===current.check.correct})).sort(()=>Math.random()-.5);
-  pairs.forEach(p=>{const b=document.createElement('button');b.className='option';b.textContent=p.text;b.onclick=()=>{[...$('checkOptions').children].forEach(x=>x.disabled=true);b.classList.add(p.correct?'correct':'wrong');if(!p.correct){const right=pairs.findIndex(x=>x.correct);$('checkOptions').children[right].classList.add('correct')}$('checkFeedback').textContent=p.correct?'That fits! Safe movement is the goal.':'Good try. The green answer shows the safest choice.'};$('checkOptions').appendChild(b)})
+  let wrong=0;
+  pairs.forEach(p=>{
+    const b=document.createElement("button");
+    b.className="option";
+    b.textContent=p.text;
+    b.onclick=()=>{
+      if(b.disabled)return;
+      if(p.correct){
+        [...$("checkOptions").children].forEach(x=>x.disabled=true);
+        b.classList.add("correct");
+        $("checkFeedback").textContent="That fits! Safe movement is the goal.";
+        speak("That fits. Safe movement is the goal.",{target:document.querySelector(".activity-panel")})
+      }else{
+        wrong++;
+        b.classList.add("wrong");
+        b.disabled=true;
+        if(wrong<2){
+          $("checkFeedback").textContent="Good try. Read the choices and try once more.";
+          speak("Good try. Read the choices and try once more.",{target:document.querySelector(".activity-panel")});
+          setTimeout(()=>b.classList.remove("wrong"),650);
+          return
+        }
+        [...$("checkOptions").children].forEach(x=>x.disabled=true);
+        const right=[...$("checkOptions").children].find((_,i)=>pairs[i].correct);
+        right?.classList.add("correct","hint");
+        $("checkFeedback").textContent="The safest choice is highlighted.";
+        speak("The safest choice is highlighted.",{target:document.querySelector(".activity-panel")})
+      }
+    };
+    $("checkOptions").appendChild(b)
+  })
 }
 function nextPhase(){if(phase<3){phase++;renderPhase()}else finishLesson()}
-function finishLesson(){stopTimer();state.completed[current.id]={date:new Date().toISOString()};save();updateStats();renderLessons();speak(`Great moving! You finished ${current.title}.`);$('sessionScreen').classList.add('hidden');$('homeScreen').classList.remove('hidden')}
-function updateStats(){const ids=Object.keys(state.completed).map(Number);$('completeStat').textContent=ids.length;$('minutesStat').textContent=Math.floor(state.seconds/60);$('unitStat').textContent=new Set(ids.map(id=>LESSONS.find(l=>l.id===id)?.unit).filter(Boolean)).size;$('favoriteStat').textContent=state.favorites.length}
+function finishLesson(){stopTimer();state.completed[current.id]={date:new Date().toISOString()};save();updateStats();renderLessons();speak(`Great moving! You finished ${current.title}.`,{target:document.querySelector('.activity-panel')});$('sessionScreen').classList.add('hidden');$('homeScreen').classList.remove('hidden')}
+function updateStats(){const ids=Object.keys(state.completed).map(Number);$('completeStat').textContent=ids.length;$('minutesStat').textContent=Math.floor(state.seconds/60);$('unitStat').textContent=new Set(ids.map(id=>LESSONS.find(l=>l.id===id)?.unit).filter(Boolean)).size;$('favoriteStat').textContent=state.favorites.length;updateGarden()}
 function updateFavoriteButton(){if(!current)return;$('favoriteBtn').textContent=state.favorites.includes(current.id)?'★ Favorited':'☆ Favorite Current Lesson'}
 function fillUnits(){const u=['All',...new Set(LESSONS.map(l=>l.unit))];$('unitFilter').innerHTML=u.map(x=>`<option value="${x}">${x}</option>`).join('')}
-$('unitFilter').onchange=renderLessons;$('search').oninput=renderLessons;$('backBtn').onclick=()=>{stopTimer();$('sessionScreen').classList.add('hidden');$('homeScreen').classList.remove('hidden')};$('hearBtn').onclick=()=>speak($('instruction').textContent);$('startTimerBtn').onclick=startTimer;$('pauseBtn').onclick=()=>{stopTimer();$('timerLabel').textContent='Paused. Rest or restart when ready.'};$('nextPhaseBtn').onclick=nextPhase;$('duration').onchange=()=>{if(current&&!running){remaining=Number($('duration').value);$('timer').textContent=remaining}};
+
+$("voiceGuides").onclick=e=>{
+  const b=e.target.closest("[data-voice]");
+  if(!b)return;
+  state.voice=b.dataset.voice;
+  save();updateVoiceButtons();
+  $("voiceStatus").textContent=`${GUIDE_VOICES[state.voice].name} selected.`
+};
+$("voiceSpeed").onchange=e=>{state.voiceSpeed=e.target.value;save();$("voiceStatus").textContent="Reading speed saved."};
+$("meetGuideBtn").onclick=()=>speak("",{preview:true});
+$("repeatVoiceBtn").onclick=()=>lastSpoken
+  ?speak(lastSpoken,{target:document.querySelector(".activity-panel")})
+  :speak(currentNarration(),{target:document.querySelector(".activity-panel")});
+$("stopVoiceBtn").onclick=()=>stopSpeaking();
+$("largeTypeBtn").onclick=()=>{state.largeType=!state.largeType;save();applyAccessibility()};
+$("simpleModeBtn").onclick=()=>{state.simpleMode=!state.simpleMode;save();applyAccessibility()};
+$("autoReadBtn").onclick=()=>{state.autoRead=!state.autoRead;save();applyAccessibility()};
+
+$('unitFilter').onchange=renderLessons;$('search').oninput=renderLessons;$('backBtn').onclick=()=>{stopTimer();$('sessionScreen').classList.add('hidden');$('homeScreen').classList.remove('hidden')};$('hearBtn').onclick=()=>speak(currentNarration(),{target:document.querySelector('.activity-panel')});$('startTimerBtn').onclick=startTimer;$('pauseBtn').onclick=()=>{stopTimer();$('timerLabel').textContent='Paused. Rest or restart when ready.'};$('nextPhaseBtn').onclick=nextPhase;$('duration').onchange=()=>{if(current&&!running){remaining=Number($('duration').value);$('timer').textContent=remaining}};
 $('favoriteBtn').onclick=()=>{if(!current)return;const i=state.favorites.indexOf(current.id);if(i>=0)state.favorites.splice(i,1);else state.favorites.push(current.id);save();updateFavoriteButton();updateStats()};
-$('resetBtn').onclick=()=>{if(confirm('Reset completed lessons, movement time, and favorites on this device?')){state={completed:{},seconds:0,favorites:[]};save();renderLessons();updateStats()}};
+$('resetBtn').onclick=()=>{if(confirm('Reset completed lessons, movement time, and favorites on this device?')){state={completed:{},seconds:0,favorites:[],voice:state.voice,voiceSpeed:state.voiceSpeed,autoRead:state.autoRead,largeType:state.largeType,simpleMode:state.simpleMode};save();renderLessons();updateStats()}};
 document.addEventListener('keydown',e=>{if(e.key==='Escape')$('backBtn').click();if(e.key===' '&&current){e.preventDefault();running?$('pauseBtn').click():$('startTimerBtn').click()}});
-fillUnits();renderLessons();updateStats();
+if("speechSynthesis"in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900)
+}else{
+  $("meetGuideBtn").disabled=true;
+  $("repeatVoiceBtn").disabled=true;
+  $("stopVoiceBtn").disabled=true;
+  $("hearBtn").disabled=true;
+  $("voiceStatus").textContent="Read-aloud voices are not available in this browser."
+}
+updateVoiceButtons();
+applyAccessibility();
+fillUnits();
+renderLessons();
+updateStats();
+window.addEventListener("beforeunload",()=>{stopTimer();stopSpeaking("")});
 </script>
 </body>
 </html>
