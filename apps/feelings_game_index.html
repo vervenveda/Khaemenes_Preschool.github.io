@@ -15,7 +15,7 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;min-height:100vh;padding:28px 14px 48px;color:var(--ink);
-  font-family:"Avenir Next Rounded","Trebuchet MS","Arial Rounded MT Bold","Comic Sans MS",system-ui,sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:
     radial-gradient(circle at 10% 12%,rgba(255,255,255,.92) 0 5%,transparent 6%),
     radial-gradient(circle at 88% 16%,rgba(255,255,255,.72) 0 4%,transparent 5%),
@@ -33,8 +33,8 @@ button{touch-action:manipulation}
 .wrap{width:min(1120px,100%);margin:auto}
 .hero{text-align:center;margin-bottom:18px}
 .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:#ffffffc9;border:1px solid #ffffffde;box-shadow:0 8px 22px rgba(70,49,86,.09);font-size:.86rem;font-weight:900;color:var(--plum)}
-h1{margin:12px 0 6px;font-size:clamp(2.3rem,7vw,4.8rem);line-height:.96;letter-spacing:-.04em;color:var(--plum)}
-.subtitle{margin:0 auto;max-width:780px;color:var(--muted);line-height:1.6;font-size:1rem}
+h1{margin:12px auto 8px;max-width:920px;padding:0 .08em;font-size:clamp(2.35rem,6.1vw,4.75rem);line-height:1.08;letter-spacing:-.02em;color:var(--plum)}
+.subtitle{margin:0 auto;max-width:860px;color:var(--muted);line-height:1.72;font-size:1.02rem}
 .app{background:var(--panel);backdrop-filter:blur(14px);border:1px solid #ffffffd9;border-radius:30px;padding:18px;box-shadow:var(--shadow)}
 .topbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
 .control-card{background:#fff;border-radius:18px;padding:12px;border:1px solid rgba(93,63,145,.1);box-shadow:0 6px 18px rgba(61,41,78,.06)}
@@ -90,9 +90,120 @@ footer strong{color:var(--plum)}
 @media(max-width:860px){.topbar{grid-template-columns:repeat(2,1fr)}.game-card{grid-template-columns:1fr}.scene,.quiz{min-height:0}}
 @media(max-width:560px){.topbar{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.btn.primary{margin-left:0}.calm-grid{grid-template-columns:1fr;text-align:center}.breath-circle{margin:auto}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* =========================================================
+   CRÈCHE / ELEMENTARY PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1120px,calc(100% - 22px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(72,48,94,.14)
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#ffd66b,#9be2c1);
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{margin:0;color:#d65480;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:var(--plum);font-size:clamp(1.02rem,2.3vw,1.34rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #ded4e8;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;background:linear-gradient(135deg,var(--lav),var(--rose));border-color:#fff}
+
+/* =========================================================
+   FRIENDLY VOICE STUDIO
+   ========================================================= */
+.voice-studio{
+  margin:14px 0;
+  padding:13px;
+  border:2px solid #e2d7ea;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff);
+  box-shadow:0 10px 24px rgba(72,48,94,.07)
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;border:2px solid #ded4e8;
+  border-radius:16px;background:#fff;color:var(--plum);display:grid;place-items:center;
+  align-content:center;gap:2px;font-weight:900
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.67rem}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--lav),var(--rose))}
+.voice-controls{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{
+  border:2px solid #ded4e8;border-radius:999px;padding:9px 12px;background:#fff;color:var(--ink);font-weight:900
+}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.quiz.speaking,.scene.speaking,.calm-box.speaking{box-shadow:0 0 0 5px rgba(255,214,107,.35)}
+
+.simple-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+.simple-row .btn.active{color:#fff;background:linear-gradient(135deg,var(--mint),var(--sky))}
+body.large-type{font-size:18px}
+body.simple-mode .stats,
+body.simple-mode .calm-box,
+body.simple-mode .adult-note,
+body.simple-mode .scene-message,
+body.simple-mode .checkin{display:none!important}
+body.simple-mode .game-card{grid-template-columns:1fr}
+body.simple-mode .scene{min-height:170px}
+
+/* =========================================================
+   FEELINGS GARDEN PROGRESS
+   ========================================================= */
+.feelings-growth{
+  margin-top:14px;padding:12px;border:2px dashed #d9cce4;border-radius:18px;
+  background:linear-gradient(145deg,#fff,#f2fff0,#eef9ff)
+}
+.feelings-growth h3{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.garden-row{display:flex;justify-content:center;align-items:flex-end;gap:12px;min-height:68px;flex-wrap:wrap}
+.garden-step{font-size:2rem;opacity:.28;transform:scale(.86);transition:.2s}
+.garden-step.on{opacity:1;transform:scale(1)}
+.garden-label{text-align:center;color:var(--muted);font-size:.74rem;margin-top:5px}
+
+.answer-btn.hint{animation:hintPulse .7s ease 2;box-shadow:0 0 0 5px rgba(255,214,107,.42)}
+@keyframes hintPulse{50%{transform:translateY(-3px) scale(1.03)}}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-guide:last-child{grid-column:1/-1}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}.creche-links{grid-column:auto}
+}
+
 </style>
 </head>
 <body>
+
+<header class="creche-header" aria-label="Khaemenes Academy Feelings Portal">
+  <div class="creche-mark" aria-hidden="true">🌈</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Social-Emotional Learning</p>
+    <div class="creche-title">The Crèche™ · Noetic Kids Feelings Garden</div>
+  </div>
+  <nav class="creche-links" aria-label="Portal navigation">
+    <a class="creche-link" href="../index.html">🏡 Learning Home</a>
+    <a class="creche-link current" href="#" aria-current="page">🌈 Feelings Garden</a>
+  </nav>
+</header>
+
 <div class="decor" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span></div>
 <main class="wrap">
 <header class="hero">
@@ -102,7 +213,36 @@ footer strong{color:var(--plum)}
 </header>
 
 <section class="app" aria-label="Noetic Kids Feelings Garden game">
-  <div class="topbar">
+  
+<section class="voice-studio" aria-labelledby="voiceTitle">
+  <h2 id="voiceTitle">Choose a Feelings Guide</h2>
+  <div class="voice-guides" id="voiceGuides">
+    <button type="button" class="voice-guide" data-voice="hope"><span class="emoji">🌟</span><span class="name">Hope</span></button>
+    <button type="button" class="voice-guide" data-voice="bunny"><span class="emoji">🐰</span><span class="name">Benny Bunny</span></button>
+    <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Feelings Owl</span></button>
+    <button type="button" class="voice-guide" data-voice="heart"><span class="emoji">💗</span><span class="name">Kind Heart</span></button>
+    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+  </div>
+  <div class="voice-controls">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and clear</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">🌈 A little lively</option>
+    </select>
+    <button type="button" id="meetGuideBtn" class="btn">👋 Meet My Guide</button>
+    <button type="button" id="repeatVoiceBtn" class="btn">🔁 Repeat Last</button>
+    <button type="button" id="stopVoiceBtn" class="btn">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+</section>
+
+<div class="simple-row">
+  <button type="button" id="largeTypeBtn" class="btn">🔎 Larger Type</button>
+  <button type="button" id="simpleModeBtn" class="btn">🧘 Simple Mode</button>
+  <button type="button" id="autoReadBtn" class="btn">🗣️ Auto Read On</button>
+</div>
+
+<div class="topbar">
     <div class="control-card"><label for="level">Learning level</label><select id="level"><option value="prek">Preschool–K</option><option value="early">Grades 1–2</option><option value="elementary">Grades 3–5</option></select></div>
     <div class="control-card"><label for="category">Practice garden</label><select id="category"><option value="mixed">Mixed Feelings</option><option value="name">Name the Feeling</option><option value="body">Body Clues</option><option value="choices">Safe Choices</option><option value="friendship">Friendship & Boundaries</option></select></div>
     <div class="control-card"><label for="sessionSize">Questions this session</label><select id="sessionSize"></select></div>
@@ -139,6 +279,18 @@ footer strong{color:var(--plum)}
       <div class="stat"><strong id="learnedStat">0</strong>Skills explored</div>
       <div class="stat"><strong id="sessionsStat">0</strong>Sessions</div>
     </div>
+
+<div class="feelings-growth">
+  <h3>🌱 My Feelings Garden</h3>
+  <div class="garden-row" id="gardenRow">
+    <span class="garden-step" data-step="0">🌱</span>
+    <span class="garden-step" data-step="1">🌿</span>
+    <span class="garden-step" data-step="2">🌼</span>
+    <span class="garden-step" data-step="3">🌳</span>
+    <span class="garden-step" data-step="4">🌈</span>
+  </div>
+  <div class="garden-label" id="gardenLabel">Explore feelings skills to help the garden grow.</div>
+</div>
 
     <div class="calm-box">
       <div class="calm-grid">
@@ -255,10 +407,15 @@ function loadProgress(){
       sessions:Number(raw.sessions)||0,
       learnedIds:Array.isArray(raw.learnedIds)?raw.learnedIds:[],
       bestStreak:Number(raw.bestStreak)||0,
-      mood:raw.mood||''
+      mood:raw.mood||'',
+      voice:raw.voice||'hope',
+      voiceSpeed:raw.voiceSpeed||'slow',
+      autoRead:raw.autoRead!==false,
+      largeType:!!raw.largeType,
+      simpleMode:!!raw.simpleMode
     };
   }catch{
-    return{sessions:0,learnedIds:[],bestStreak:0,mood:''};
+    return{sessions:0,learnedIds:[],bestStreak:0,mood:'',voice:'hope',voiceSpeed:'slow',autoRead:true,largeType:false,simpleMode:false};
   }
 }
 let progress=loadProgress();
@@ -267,11 +424,88 @@ let calmTimers=[],calmRunning=false;
 
 function save(){try{localStorage.setItem(storageKey,JSON.stringify(progress))}catch{}}
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function speak(text){
-  if($('soundMode').value==='off'||!('speechSynthesis'in window))return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);u.rate=.88;u.pitch=1.05;speechSynthesis.speak(u);
+const GUIDE_VOICES={
+  hope:{name:"Hope",rate:.82,pitch:1.08,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, feelings friend. Hope is ready to notice emotions, body clues, and safe choices with you."},
+  bunny:{name:"Benny Bunny",rate:.85,pitch:1.15,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello. Benny Bunny is ready to hop through feelings and calming choices."},
+  owl:{name:"Feelings Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful listener. Feelings Owl is ready to think about emotions, boundaries, and safe actions."},
+  heart:{name:"Kind Heart",rate:.79,pitch:1.06,match:/samantha|aria|jenny|ava|karen/i,greeting:"Hello, kind friend. Kind Heart is ready to practice caring words and helpful choices."},
+  rainbow:{name:"Rainbow Rae",rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright learner. Rainbow Rae is ready for a colorful feelings-garden adventure."}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+let availableVoices=[],speechToken=0,lastSpoken="";
+
+function refreshVoices(){
+  if(!("speechSynthesis" in window))return;
+  availableVoices=speechSynthesis.getVoices()||[];
+  const g=GUIDE_VOICES[progress.voice]||GUIDE_VOICES.hope;
+  $("voiceStatus").textContent=availableVoices.length?`${g.name} is ready.`:"Loading a friendly voice…";
 }
+function chooseVoice(){
+  refreshVoices();
+  const g=GUIDE_VOICES[progress.voice]||GUIDE_VOICES.hope;
+  const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+  const pool=english.length?english:availableVoices;
+  return pool.find(v=>g.match.test(v.name))
+    ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+    ||pool[0]
+    ||null;
+}
+function stopSpeaking(message="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  document.querySelectorAll(".quiz,.scene,.calm-box").forEach(el=>el.classList.remove("speaking"));
+  $("voiceStatus").textContent=message;
+}
+function speak(text,{preview=false,target=null}={}){
+  if($("soundMode").value==="off"||!("speechSynthesis" in window))return;
+  const g=GUIDE_VOICES[progress.voice]||GUIDE_VOICES.hope;
+  const phrase=preview?g.greeting:String(text||"").trim();
+  if(!phrase)return;
+  stopSpeaking("");
+  const token=++speechToken;
+  lastSpoken=phrase;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const v=chooseVoice();
+  if(v)u.voice=v;
+  u.lang=v?.lang||"en-US";
+  u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[progress.voiceSpeed]||1)));
+  u.pitch=g.pitch;
+  u.onstart=()=>{target?.classList.add("speaking");$("voiceStatus").textContent=`${g.name} is reading.`};
+  u.onend=()=>{if(token!==speechToken)return;target?.classList.remove("speaking");$("voiceStatus").textContent="Ready for another feelings question!"};
+  u.onerror=()=>{if(token!==speechToken)return;target?.classList.remove("speaking");$("voiceStatus").textContent="The voice had a little hiccup."};
+  speechSynthesis.speak(u);
+}
+
+function updateVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(b=>{
+    const active=b.dataset.voice===progress.voice;
+    b.classList.toggle("active",active);
+    b.setAttribute("aria-pressed",String(active));
+  });
+  $("voiceSpeed").value=progress.voiceSpeed;
+}
+function applyAccessibility(){
+  document.body.classList.toggle("large-type",progress.largeType);
+  document.body.classList.toggle("simple-mode",progress.simpleMode);
+  $("largeTypeBtn").classList.toggle("active",progress.largeType);
+  $("simpleModeBtn").classList.toggle("active",progress.simpleMode);
+  $("autoReadBtn").classList.toggle("active",progress.autoRead);
+  $("autoReadBtn").textContent=progress.autoRead?"🗣️ Auto Read On":"🤫 Auto Read Off";
+}
+function currentNarration(){
+  const q=session[index];
+  if(!q)return "";
+  return `${q.q} The choices are ${q.answers.join(", ")}.`;
+}
+function updateGarden(){
+  const total=progress.learnedIds.length+progress.sessions;
+  const stage=Math.min(4,Math.floor(total/15));
+  document.querySelectorAll("[data-step]").forEach(el=>el.classList.toggle("on",Number(el.dataset.step)<=stage));
+  $("gardenLabel").textContent=total>=60
+    ?"The feelings garden is blooming beautifully!"
+    :`${progress.learnedIds.length} skills explored across ${progress.sessions} sessions.`;
+}
+
 function eligible(){
   const level=$('level').value,cat=$('category').value;
   return BANK.filter(x=>x.level===level&&(cat==='mixed'||x.cat===cat));
@@ -284,7 +518,7 @@ function refreshSessionSizes(){
 function prepareQuestion(raw){
   const pairs=raw.answers.map((text,i)=>({text,correct:i===raw.correct}));
   const mixed=shuffle(pairs);
-  return {...raw,answers:mixed.map(x=>x.text),correct:mixed.findIndex(x=>x.correct)};
+  return {...raw,answers:mixed.map(x=>x.text),correct:mixed.findIndex(x=>x.correct),_wrong:0};
 }
 function renderCheckin(){
   const moods=[['😊','happy'],['😢','sad'],['😠','mad'],['😟','worried'],['😌','calm'],['😴','tired']];
@@ -303,6 +537,7 @@ function updateStats(){
   $('streakStat').textContent=streak;
   $('learnedStat').textContent=progress.learnedIds.length;
   $('sessionsStat').textContent=progress.sessions;
+  updateGarden();
 }
 function startGame(custom=null){
   stopCalm();
@@ -327,25 +562,48 @@ function loadQuestion(){
   });
   $('progressBar').style.width=`${((index+1)/session.length)*100}%`;
   $('progressText').textContent=`${index+1} of ${session.length}`;
-  $('question').focus();
+  $('question').focus();if(progress.autoRead)setTimeout(()=>speak(currentNarration(),{target:document.querySelector('.quiz')}),220);
 }
 function selectAnswer(i,btn){
-  if(locked)return;locked=true;
-  const q=session[index],buttons=[...$('answers').children];
-  buttons.forEach(b=>b.disabled=true);
-  buttons[q.correct].classList.add('correct');
-  buttons[q.correct].textContent='✓ '+buttons[q.correct].textContent;
+  if(locked||btn.disabled)return;
+  const q=session[index],buttons=[...$("answers").children];
+  q._wrong=(q._wrong||0);
+
   if(i===q.correct){
+    locked=true;
+    buttons.forEach(b=>b.disabled=true);
+    buttons[q.correct].classList.add("correct");
+    buttons[q.correct].textContent="✓ "+buttons[q.correct].textContent;
     score++;streak++;
     if(!progress.learnedIds.includes(q.id))progress.learnedIds.push(q.id);
-    $('feedback').innerHTML=`<strong>That fits.</strong> ${q.why}`;
+    $("feedback").innerHTML=`<strong>That fits.</strong> ${q.why}`;
+    speak(`That fits. ${q.why}`,{target:document.querySelector(".quiz")});
   }else{
-    btn.classList.add('wrong');btn.textContent='✗ '+btn.textContent;
-    streak=0;missed.push(q);
-    $('feedback').innerHTML=`<strong>Good try.</strong> ${q.why}`;
+    q._wrong++;
+    btn.classList.add("wrong");
+    btn.disabled=true;
+    streak=0;
+    if(q._wrong<2){
+      $("feedback").innerHTML="<strong>Good try.</strong> Read the choices and try once more.";
+      speak("Good try. Read the choices and try once more.",{target:document.querySelector(".quiz")});
+      setTimeout(()=>btn.classList.remove("wrong"),650);
+      progress.bestStreak=Math.max(progress.bestStreak,streak);save();updateStats();
+      return;
+    }
+    locked=true;
+    buttons.forEach(b=>b.disabled=true);
+    const right=buttons[q.correct];
+    right.classList.add("correct","hint");
+    right.textContent="✓ "+right.textContent;
+    missed.push(q);
+    $("feedback").innerHTML=`<strong>The best fit is highlighted.</strong> ${q.why}`;
+    speak(`The best fit is highlighted. ${q.why}`,{target:document.querySelector(".quiz")});
   }
-  progress.bestStreak=Math.max(progress.bestStreak,streak);save();updateStats();
-  $('nextBtn').disabled=false;$('nextBtn').focus();
+
+  progress.bestStreak=Math.max(progress.bestStreak,streak);
+  save();updateStats();
+  $("nextBtn").disabled=false;
+  $("nextBtn").focus();
 }
 function next(){index++;if(index<session.length)loadQuestion();else endGame()}
 function endGame(){
@@ -358,7 +616,7 @@ function endGame(){
 function clearCalmTimers(){calmTimers.forEach(clearTimeout);calmTimers=[]}
 function stopCalm(){
   clearCalmTimers();calmRunning=false;
-  if('speechSynthesis'in window)speechSynthesis.cancel();
+  stopSpeaking('');
   $('breathCircle')?.classList.remove('inhale','exhale');
   if($('calmBtn'))$('calmBtn').disabled=false;
   if($('stopCalmBtn'))$('stopCalmBtn').disabled=true;
@@ -391,11 +649,32 @@ function startCalm(){
   },delay+200));
 }
 
+
+$("voiceGuides").onclick=e=>{
+  const b=e.target.closest("[data-voice]");
+  if(!b)return;
+  progress.voice=b.dataset.voice;
+  save();updateVoiceButtons();
+  $("voiceStatus").textContent=`${GUIDE_VOICES[progress.voice].name} selected.`;
+};
+$("voiceSpeed").onchange=e=>{
+  progress.voiceSpeed=e.target.value;
+  save();$("voiceStatus").textContent="Reading speed saved.";
+};
+$("meetGuideBtn").onclick=()=>speak("",{preview:true});
+$("repeatVoiceBtn").onclick=()=>lastSpoken
+  ?speak(lastSpoken,{target:document.querySelector(".quiz")})
+  :speak(currentNarration(),{target:document.querySelector(".quiz")});
+$("stopVoiceBtn").onclick=()=>stopSpeaking();
+$("largeTypeBtn").onclick=()=>{progress.largeType=!progress.largeType;save();applyAccessibility()};
+$("simpleModeBtn").onclick=()=>{progress.simpleMode=!progress.simpleMode;save();applyAccessibility()};
+$("autoReadBtn").onclick=()=>{progress.autoRead=!progress.autoRead;save();applyAccessibility()};
+
 $('nextBtn').onclick=next;
 $('playAgainBtn').onclick=()=>startGame();
 $('reviewBtn').onclick=()=>startGame(missed);
-$('hearQuestion').onclick=()=>speak(session[index].q);
-$('hearAnswers').onclick=()=>speak(session[index].answers.map((x,i)=>`${i+1}. ${x}`).join('. '));
+$('hearQuestion').onclick=()=>speak(session[index].q,{target:document.querySelector('.quiz')});
+$('hearAnswers').onclick=()=>speak(session[index].answers.map((x,i)=>`${i+1}. ${x}`).join('. '),{target:document.querySelector('.quiz')});
 $('calmBtn').onclick=startCalm;
 $('stopCalmBtn').onclick=stopCalm;
 ['level','category'].forEach(id=>$(id).onchange=()=>{refreshSessionSizes();startGame()});
@@ -405,7 +684,27 @@ document.addEventListener('keydown',e=>{
     const b=$('answers').children[Number(e.key)-1];if(b)b.click();
   }else if(e.key==='Enter'&&!$('nextBtn').disabled){$('nextBtn').click()}
 });
-renderCheckin();refreshSessionSizes();updateStats();startGame();
+if("speechSynthesis" in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $("meetGuideBtn").disabled=true;
+  $("repeatVoiceBtn").disabled=true;
+  $("stopVoiceBtn").disabled=true;
+  $("hearQuestion").disabled=true;
+  $("hearAnswers").disabled=true;
+  $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+}
+updateVoiceButtons();
+applyAccessibility();
+renderCheckin();
+refreshSessionSizes();
+updateStats();
+startGame();
+window.addEventListener("beforeunload",()=>stopSpeaking(""));
 </script>
 </body>
 </html>
