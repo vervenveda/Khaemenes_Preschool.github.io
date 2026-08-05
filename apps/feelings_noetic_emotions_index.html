@@ -1,207 +1,670 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Noetic Kids – Feelings & Emotions</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Comic Sans MS', system-ui, sans-serif;
-      background: linear-gradient(135deg, #fde68a, #a7f3d0, #bfdbfe);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .game {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      width: 100%;
-      max-width: 720px;
-      padding: 28px 32px 34px;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 6px;
-      color: #2563eb;
-    }
-    .subtitle {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #475569;
-      margin-bottom: 22px;
-    }
-    .question {
-      font-size: 1.5rem;
-      text-align: center;
-      margin-bottom: 20px;
-      color: #0f172a;
-    }
-    .answers {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 16px;
-    }
-    .answers button {
-      font-size: 1.2rem;
-      padding: 16px 14px;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      background: #e0f2fe;
-      transition: transform .15s, background .15s;
-    }
-    .answers button:hover { transform: scale(1.05); }
-    .answers button.correct { background: #bbf7d0; }
-    .answers button.wrong { background: #fecaca; }
-    .footer {
-      margin-top: 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.1rem;
-      color: #334155;
-    }
-    .btn {
-      background: #22c55e;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 18px;
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-    .btn:hover { background: #16a34a; }
-    .hidden { display: none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Noetic Kids — Feelings & Emotions, a gentle Crèche preschool social-emotional learning game with friendly voices, kind-choice practice, emotion words, and private local progress.">
+<title>Noetic Kids — Feelings & Emotions</title>
+<style>
+:root{
+  --gold:#fde68a;
+  --mint:#a7f3d0;
+  --sky:#bfdbfe;
+  --plum:#684f94;
+  --rose:#eb86aa;
+  --blue:#2563eb;
+  --green:#22c55e;
+  --ink:#263346;
+  --muted:#667085;
+  --panel:#ffffff;
+  --line:#ded8e8;
+  --shadow:0 20px 42px rgba(48,46,70,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:16px 10px 40px;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,255,255,.9),transparent 18%),
+    linear-gradient(135deg,var(--gold),var(--mint),var(--sky));
+}
+button,select{font:inherit}
+button{touch-action:manipulation}
+:focus-visible{outline:4px solid rgba(37,99,235,.25);outline-offset:3px}
+
+.creche-header{
+  width:min(940px,100%);
+  margin:0 auto 14px;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(48,46,70,.12);
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;
+  border-radius:18px;background:linear-gradient(145deg,#ffd75f,#8fdcb8);
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{
+  margin:0;color:#d95782;font-size:.68rem;font-weight:900;
+  letter-spacing:.12em;text-transform:uppercase
+}
+.creche-title{
+  margin:2px 0 0;color:var(--plum);
+  font-size:clamp(1.02rem,2.3vw,1.34rem);line-height:1.2
+}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  min-height:38px;padding:8px 12px;display:inline-flex;align-items:center;justify-content:center;
+  border:2px solid var(--line);border-radius:999px;background:#fff;color:var(--plum);
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--plum),var(--rose))}
+
+.wrap{width:min(940px,100%);margin:auto}
+.hero{
+  padding:26px 18px;
+  border-radius:28px;
+  text-align:center;
+  color:#fff;
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.14),transparent 18%),
+    linear-gradient(135deg,#5d56a8,#4d8bc9 62%,#5eb69f);
+  box-shadow:var(--shadow)
+}
+.hero .eyebrow{
+  display:inline-flex;gap:8px;align-items:center;
+  padding:7px 12px;border-radius:999px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+  font-size:.73rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase
+}
+.hero h1{
+  margin:14px auto 8px;
+  max-width:780px;
+  padding:0 .08em;
+  font-size:clamp(2.35rem,6vw,4.7rem);
+  line-height:1.08;
+  letter-spacing:-.02em
+}
+.hero p{
+  max-width:780px;margin:auto;color:#f5fbff;line-height:1.72;font-size:1.02rem
+}
+
+.game{
+  margin-top:14px;
+  background:rgba(255,255,255,.94);
+  border:2px solid rgba(255,255,255,.9);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+.voice-studio{
+  margin-bottom:14px;padding:13px;
+  border:2px solid var(--line);border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff)
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;
+  border:2px solid var(--line);border-radius:16px;background:#fff;color:var(--plum);
+  display:grid;place-items:center;align-content:center;gap:2px;font-weight:900
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{font-size:.67rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--plum),var(--rose))}
+.voice-controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{
+  border:2px solid var(--line);border-radius:999px;
+  padding:9px 12px;background:#fff;color:var(--ink);font-weight:900
+}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.question-card.speaking{box-shadow:0 0 0 5px rgba(253,230,138,.5)}
+
+.simple-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.btn{
+  border:0;border-radius:13px;padding:10px 14px;cursor:pointer;
+  font-weight:900;background:#fff;color:var(--plum);
+  box-shadow:0 5px 13px rgba(48,46,70,.09)
+}
+.btn.primary{color:#fff;background:linear-gradient(135deg,var(--blue),#5f72cf)}
+.btn.good{color:#fff;background:linear-gradient(135deg,#29b969,#169b52)}
+.btn.sunny{color:#594814;background:linear-gradient(135deg,#ffe46e,#ffbc6d)}
+.btn.active{color:#fff;background:linear-gradient(135deg,var(--plum),var(--rose))}
+body.large-type{font-size:18px}
+body.simple-mode .stats,
+body.simple-mode .feelings-garden,
+body.simple-mode .learning-note{display:none!important}
+
+.question-card{
+  min-height:400px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:linear-gradient(145deg,#fff,#fbfdff);
+  display:flex;
+  flex-direction:column;
+}
+.feeling-icon{
+  width:82px;height:82px;display:grid;place-items:center;
+  margin:0 auto 8px;border-radius:24px;
+  background:linear-gradient(145deg,#fff5bf,#d9f8e7);
+  border:2px solid #fff;box-shadow:0 8px 20px rgba(48,46,70,.08);
+  font-size:2.8rem
+}
+.question{
+  font-size:clamp(1.35rem,4vw,1.8rem);
+  text-align:center;
+  margin:8px auto 18px;
+  max-width:760px;
+  color:#17233a;
+  line-height:1.45;
+  font-weight:900
+}
+.answers{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
+}
+.answers button{
+  min-height:76px;
+  font-size:1.08rem;
+  padding:14px;
+  border-radius:16px;
+  border:2px solid #cfe5f4;
+  cursor:pointer;
+  background:#eaf7ff;
+  color:#21324b;
+  font-weight:900;
+  transition:.15s
+}
+.answers button:hover{transform:translateY(-2px)}
+.answers button.correct{background:#dff7e7;border-color:#66bf88}
+.answers button.wrong{background:#ffe4e8;border-color:#df8794}
+.answers button.hint{animation:hintPulse .7s ease 2;box-shadow:0 0 0 5px rgba(253,230,138,.52)}
+@keyframes hintPulse{50%{transform:translateY(-3px) scale(1.04)}}
+
+.feedback{
+  min-height:34px;
+  margin-top:12px;
+  text-align:center;
+  color:var(--muted);
+  font-weight:900;
+  line-height:1.45
+}
+.footer{
+  margin-top:auto;
+  padding-top:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  color:#334155
+}
+.progress-wrap{
+  flex:1 1 220px;
+  min-width:180px
+}
+.progress-text{font-size:.9rem;font-weight:900;color:var(--muted)}
+.progress{
+  height:11px;margin-top:5px;border-radius:999px;overflow:hidden;background:#e5e9ef
+}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--gold),var(--green));transition:.25s}
+
+.learning-note{
+  margin-top:14px;padding:12px 14px;border:1px solid #edd8a2;border-radius:17px;
+  background:#fff9dd;color:#6b5727;text-align:center;font-size:.84rem;line-height:1.5;font-weight:900
+}
+.stats{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px
+}
+.stat{
+  padding:10px;border:1px solid var(--line);border-radius:15px;background:#fff;text-align:center
+}
+.stat strong{display:block;color:var(--blue);font-size:1.22rem}
+.feelings-garden{
+  margin-top:14px;padding:13px;border:2px dashed var(--line);border-radius:20px;
+  background:linear-gradient(145deg,#fff,#f3fff1,#eef9ff)
+}
+.feelings-garden h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.garden-row{display:flex;justify-content:center;align-items:flex-end;gap:12px;min-height:72px;flex-wrap:wrap}
+.garden-step{font-size:2rem;opacity:.28;transform:scale(.86);transition:.2s}
+.garden-step.on{opacity:1;transform:scale(1)}
+.garden-label{text-align:center;color:var(--muted);font-size:.74rem;margin-top:5px}
+
+.end-area{text-align:center;padding:24px 10px}
+.end-area h2{color:var(--blue);font-size:2rem}
+.result{font-size:1.25rem;line-height:1.5}
+.result-note{max-width:650px;margin:10px auto;color:var(--muted);line-height:1.55}
+.hidden{display:none!important}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-guide:last-child{grid-column:1/-1}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}.creche-links{grid-column:auto}
+  .answers{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
 </head>
 <body>
 
-<div class="game">
-  <h1>How Do I Feel?</h1>
-  <div class="subtitle">Feelings · Emotions · Kind Choices</div>
-
-  <div id="playArea">
-    <div id="question" class="question"></div>
-    <div id="answers" class="answers"></div>
-    <div class="footer">
-      <span id="progress"></span>
-      <button id="nextBtn" class="btn hidden">Next</button>
-    </div>
+<header class="creche-header" aria-label="Crèche Preschool Portal">
+  <div class="creche-mark" aria-hidden="true">🌈</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Portal</p>
+    <div class="creche-title">The Crèche™ · Noetic Kids Feelings & Emotions</div>
   </div>
+  <nav class="creche-links" aria-label="Preschool navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link current" href="#" aria-current="page">🌈 Feelings</a>
+  </nav>
+</header>
 
-  <div id="endArea" class="hidden">
-    <h2 style="text-align:center; color:#2563eb;">Great Job! 🌈</h2>
-    <p id="result" style="text-align:center; font-size:1.3rem;"></p>
-    <div style="text-align:center; margin-top:20px;">
-      <button class="btn" onclick="startGame()">Play Again</button>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">💛 Feelings · Emotions · Kind Choices</div>
+    <h1>How Do I Feel?</h1>
+    <p>A gentle social-emotional learning game that helps young children name feelings, make kind choices, ask for help, and practice calming strategies.</p>
+  </section>
+
+  <section class="game">
+    <section class="voice-studio" aria-labelledby="voiceTitle">
+      <h2 id="voiceTitle">Choose a Feelings Friend</h2>
+      <div class="voice-guides" id="voiceGuides">
+        <button type="button" class="voice-guide" data-voice="hope"><span class="emoji">🌟</span><span class="name">Hope</span></button>
+        <button type="button" class="voice-guide" data-voice="bunny"><span class="emoji">🐰</span><span class="name">Benny Bunny</span></button>
+        <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Feelings Owl</span></button>
+        <button type="button" class="voice-guide" data-voice="heart"><span class="emoji">💗</span><span class="name">Kind Heart</span></button>
+        <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+      </div>
+      <div class="voice-controls">
+        <select id="voiceSpeed" aria-label="Reading speed">
+          <option value="slow">🐢 Slow and clear</option>
+          <option value="normal">🙂 Just right</option>
+          <option value="lively">🌈 A little lively</option>
+        </select>
+        <button type="button" id="meetGuideBtn" class="btn">👋 Meet My Friend</button>
+        <button type="button" id="repeatVoiceBtn" class="btn">🔁 Repeat Last</button>
+        <button type="button" id="stopVoiceBtn" class="btn">⏹ Stop Voice</button>
+      </div>
+      <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+    </section>
+
+    <div class="simple-row">
+      <button type="button" id="hearBtn" class="btn">🔊 Hear Question</button>
+      <button type="button" id="largeTypeBtn" class="btn">🔎 Larger Type</button>
+      <button type="button" id="simpleModeBtn" class="btn">🧘 Simple Mode</button>
+      <button type="button" id="autoReadBtn" class="btn">🗣️ Auto Read On</button>
     </div>
-  </div>
-</div>
+
+    <div id="playArea">
+      <section class="question-card">
+        <div class="feeling-icon" id="feelingIcon" aria-hidden="true">🙂</div>
+        <div id="question" class="question"></div>
+        <div id="answers" class="answers"></div>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+        <div class="footer">
+          <div class="progress-wrap">
+            <div id="progressText" class="progress-text"></div>
+            <div class="progress"><div id="progressBar"></div></div>
+          </div>
+          <button id="nextBtn" class="btn primary hidden">Next</button>
+        </div>
+      </section>
+    </div>
+
+    <div id="endArea" class="end-area hidden">
+      <h2>Great Job! 🌈</h2>
+      <p id="result" class="result"></p>
+      <p class="result-note">Every feeling is okay. Safe, kind choices help us understand what to do next.</p>
+      <button class="btn good" id="playAgainBtn">Play Again</button>
+    </div>
+
+    <div class="learning-note">💛 Feelings are not “good” or “bad.” They are messages. We can name the feeling, ask for help, and choose a safe response.</div>
+
+    <section class="stats">
+      <div class="stat"><strong id="gamesStat">0</strong>Games played</div>
+      <div class="stat"><strong id="answersStat">0</strong>Kind choices</div>
+      <div class="stat"><strong id="streakStat">0</strong>Best streak</div>
+      <div class="stat"><strong id="starsStat">0</strong>Stars</div>
+    </section>
+
+    <section class="feelings-garden">
+      <h2>🌱 My Feelings Garden</h2>
+      <div class="garden-row" id="gardenRow">
+        <span class="garden-step" data-step="0">🌱</span>
+        <span class="garden-step" data-step="1">🌿</span>
+        <span class="garden-step" data-step="2">🌼</span>
+        <span class="garden-step" data-step="3">🌳</span>
+        <span class="garden-step" data-step="4">🌈</span>
+      </div>
+      <div class="garden-label" id="gardenLabel">Practice naming feelings and kind choices to grow the garden.</div>
+    </section>
+  </section>
+</main>
 
 <script>
-/* ---------------- QUESTION DATA (25) ---------------- */
+(() => {
+"use strict";
+
 const QUESTIONS = [
-  {q:'When someone takes your toy, how might you feel?', a:['Happy','Sad','Sleepy'], c:1},
-  {q:'If a friend hugs you, how do you feel?', a:['Angry','Loved','Scared'], c:1},
-  {q:'What should you do if someone is crying?', a:['Laugh','Help them','Ignore'], c:1},
-  {q:'When you break something by accident, what is a good choice?', a:['Hide','Say sorry','Run away'], c:1},
-  {q:'If you feel angry, what can help?', a:['Hit','Take deep breaths','Yell'], c:1},
-  {q:'How do you feel when you share?', a:['Happy','Mad','Bored'], c:0},
-  {q:'If someone says something mean, what should you do?', a:['Be mean back','Tell a grown-up','Cry forever'], c:1},
-  {q:'What feeling makes you smile?', a:['Joy','Fear','Anger'], c:0},
-  {q:'If you feel scared, what helps?', a:['Ask for help','Hide forever','Scream'], c:0},
-  {q:'What is a kind action?', a:['Sharing','Pushing','Ignoring'], c:0},
-  {q:'If you lose a game, how might you feel?', a:['Sad','Happy','Sleepy'], c:0},
-  {q:'What should you do if someone is hurt?', a:['Help','Laugh','Walk away'], c:0},
-  {q:'If you are happy, what can you do?', a:['Smile','Cry','Hide'], c:0},
-  {q:'What feeling tells you something is wrong?', a:['Fear','Joy','Pride'], c:0},
-  {q:'If someone shares with you, what should you say?', a:['Thank you','Nothing','Go away'], c:0},
-  {q:'What can you do when you feel mad?', a:['Talk about it','Break things','Hit'], c:0},
-  {q:'How do you feel when you help someone?', a:['Proud','Angry','Scared'], c:0},
-  {q:'If someone says “no,” what should you do?', a:['Listen','Yell','Cry'], c:0},
-  {q:'What feeling makes your heart feel warm?', a:['Love','Fear','Anger'], c:0},
-  {q:'If you feel tired, what helps?', a:['Rest','Run','Yell'], c:0},
-  {q:'What is a good choice at school?', a:['Listening','Running away','Yelling'], c:0},
-  {q:'If someone is different from you, what should you do?', a:['Be kind','Laugh','Ignore'], c:0},
-  {q:'What feeling helps you make friends?', a:['Kindness','Anger','Fear'], c:0},
-  {q:'If you make a mistake, what is okay?', a:['Try again','Give up','Hide'], c:0},
-  {q:'What should you do if you feel confused?', a:['Ask for help','Run','Cry'], c:0}
+  {icon:"😢",q:"When someone takes your toy, how might you feel?",a:["Happy","Sad","Sleepy"],c:1,explain:"You might feel sad or upset. You can use words and ask a grown-up for help."},
+  {icon:"💗",q:"If a friend gives you a welcome hug and you want the hug, how might you feel?",a:["Angry","Loved","Scared"],c:1,explain:"A wanted hug can help someone feel loved and cared for."},
+  {icon:"😭",q:"What is a kind thing to do if someone is crying?",a:["Laugh at them","Ask if they need help","Ignore them"],c:1,explain:"You can ask if they need help and find a trusted grown-up."},
+  {icon:"🧸",q:"When you break something by accident, what is a helpful choice?",a:["Hide it","Tell the truth and say sorry","Run away"],c:1,explain:"Telling the truth and saying sorry helps repair the mistake."},
+  {icon:"😠",q:"If you feel angry, what can help your body calm down?",a:["Hit something","Take slow breaths","Yell at someone"],c:1,explain:"Slow breaths, space, and a trusted grown-up can help."},
+  {icon:"🤝",q:"How might you feel after sharing and playing kindly?",a:["Happy","Mad","Bored"],c:0,explain:"Sharing can help people feel happy and connected."},
+  {icon:"🗣️",q:"If someone says something mean, what is a safe choice?",a:["Be mean back","Tell a trusted grown-up","Keep it secret forever"],c:1,explain:"Tell a trusted grown-up and move to a safe place."},
+  {icon:"😊",q:"Which feeling often makes people smile?",a:["Joy","Fear","Anger"],c:0,explain:"Joy can make us smile, laugh, or feel light inside."},
+  {icon:"😨",q:"If you feel scared, what can help?",a:["Ask a trusted person for help","Hide forever","Scream at everyone"],c:0,explain:"Asking for help is a strong and safe choice."},
+  {icon:"💛",q:"Which is a kind action?",a:["Sharing","Pushing","Ignoring someone who needs help"],c:0,explain:"Sharing is one way to show care."},
+  {icon:"🎲",q:"If you lose a game, how might you feel?",a:["Disappointed","Proud of winning","Sleepy"],c:0,explain:"Disappointed is a normal feeling. You can take a breath and try again later."},
+  {icon:"🩹",q:"What should you do if someone is hurt?",a:["Get help","Laugh","Walk away without telling anyone"],c:0,explain:"Get a trusted grown-up and stay nearby if it is safe."},
+  {icon:"😄",q:"If you feel happy, what might your face do?",a:["Smile","Frown","Hide"],c:0,explain:"People often smile when they feel happy."},
+  {icon:"⚠️",q:"Which feeling can warn you that something may not be safe?",a:["Fear","Joy","Pride"],c:0,explain:"Fear can be a warning signal. Tell a trusted grown-up."},
+  {icon:"🙏",q:"If someone shares with you, what is a kind thing to say?",a:["Thank you","Nothing ever","Go away"],c:0,explain:"Saying thank you shows appreciation."},
+  {icon:"😡",q:"What can you do when you feel mad?",a:["Talk about it","Break things","Hit someone"],c:0,explain:"Use words, take space, breathe, or ask for help."},
+  {icon:"🌟",q:"How might you feel when you help someone?",a:["Proud","Angry","Scared"],c:0,explain:"Helping can make us feel proud and useful."},
+  {icon:"🛑",q:"If someone says “no” or “stop,” what should you do?",a:["Listen and stop","Yell","Keep doing it"],c:0,explain:"Respecting no and stop helps everyone feel safe."},
+  {icon:"❤️",q:"Which feeling can make your heart feel warm and connected?",a:["Love","Fear","Anger"],c:0,explain:"Love can feel warm, safe, and connected."},
+  {icon:"😴",q:"If you feel tired, what can help?",a:["Rest","Run faster","Yell"],c:0,explain:"Rest helps the body and brain recover."},
+  {icon:"🏫",q:"Which is a helpful choice at school?",a:["Listening","Running away","Yelling over others"],c:0,explain:"Listening helps everyone learn and stay safe."},
+  {icon:"🌍",q:"If someone is different from you, what is a kind choice?",a:["Be respectful and kind","Laugh at them","Leave them out"],c:0,explain:"Differences are part of what makes people special."},
+  {icon:"🤗",q:"Which quality can help you make friends?",a:["Kindness","Anger","Fear"],c:0,explain:"Kindness, listening, and sharing can help friendships grow."},
+  {icon:"🔁",q:"If you make a mistake, what can you do?",a:["Try again","Give up forever","Hide the mistake"],c:0,explain:"Mistakes help us learn. We can try again or ask for help."},
+  {icon:"❓",q:"What can you do if you feel confused?",a:["Ask for help","Run away","Pretend you understand"],c:0,explain:"Asking for help is a smart learning choice."}
 ];
 
-/* ---------------- GAME LOGIC ---------------- */
-let gameQuestions = [];
-let index = 0;
-let score = 0;
-let locked = false;
+const $ = id => document.getElementById(id);
+const KEY = "noetic-feelings-creche-v1";
 
-const qEl = document.getElementById('question');
-const aEl = document.getElementById('answers');
-const progressEl = document.getElementById('progress');
-const nextBtn = document.getElementById('nextBtn');
-const playArea = document.getElementById('playArea');
-const endArea = document.getElementById('endArea');
-const resultEl = document.getElementById('result');
+function fresh(){
+  return {
+    games:0,kindChoices:0,bestStreak:0,stars:0,
+    voice:"hope",voiceSpeed:"slow",autoRead:true,largeType:false,simpleMode:false
+  };
+}
+function load(){
+  try{return Object.assign(fresh(),JSON.parse(localStorage.getItem(KEY)||"{}"))}
+  catch{return fresh()}
+}
+let state=load();
+let gameQuestions=[];
+let index=0;
+let score=0;
+let streak=0;
+let locked=false;
+let wrongCount=0;
+let availableVoices=[];
+let speechToken=0;
+let lastSpoken="";
 
-function startGame() {
-  gameQuestions = shuffle([...QUESTIONS]).slice(0,5);
-  index = 0;
-  score = 0;
-  playArea.classList.remove('hidden');
-  endArea.classList.add('hidden');
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+const GUIDES={
+  hope:{name:"Hope",rate:.82,pitch:1.08,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, feelings friend. Hope is ready to help name feelings and practice kind choices."},
+  bunny:{name:"Benny Bunny",rate:.85,pitch:1.15,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello. Benny Bunny is ready to hop through feelings and calming choices."},
+  owl:{name:"Feelings Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful listener. Feelings Owl is ready to think about emotions and safe choices."},
+  heart:{name:"Kind Heart",rate:.79,pitch:1.06,match:/samantha|aria|jenny|ava|karen/i,greeting:"Hello, kind friend. Kind Heart is ready to practice caring words and helpful choices."},
+  rainbow:{name:"Rainbow Rae",rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright learner. Rainbow Rae is ready for a colorful feelings adventure."}
+};
+const SPEEDS={slow:.88,normal:1,lively:1.1};
+
+function refreshVoices(){
+  if(!("speechSynthesis" in window))return;
+  availableVoices=speechSynthesis.getVoices()||[];
+  const g=GUIDES[state.voice]||GUIDES.hope;
+  $("voiceStatus").textContent=availableVoices.length?`${g.name} is ready.`:"Loading a friendly voice…";
+}
+function chooseVoice(){
+  refreshVoices();
+  const g=GUIDES[state.voice]||GUIDES.hope;
+  const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+  const pool=english.length?english:availableVoices;
+  return pool.find(v=>g.match.test(v.name))
+    ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+    ||pool[0]
+    ||null;
+}
+function stopSpeaking(message="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  document.querySelector(".question-card")?.classList.remove("speaking");
+  $("voiceStatus").textContent=message;
+}
+function speak(text,{preview=false,target=null}={}){
+  if(!("speechSynthesis" in window))return;
+  const g=GUIDES[state.voice]||GUIDES.hope;
+  const phrase=preview?g.greeting:String(text||"").trim();
+  if(!phrase)return;
+  stopSpeaking("");
+  const token=++speechToken;
+  lastSpoken=phrase;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const v=chooseVoice();
+  if(v)u.voice=v;
+  u.lang=v?.lang||"en-US";
+  u.rate=Math.max(.55,Math.min(1.15,g.rate*(SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=g.pitch;
+  u.onstart=()=>{target?.classList.add("speaking");$("voiceStatus").textContent=`${g.name} is reading.`};
+  u.onend=()=>{if(token!==speechToken)return;target?.classList.remove("speaking");$("voiceStatus").textContent="Ready for another feelings question!"};
+  u.onerror=()=>{if(token!==speechToken)return;target?.classList.remove("speaking");$("voiceStatus").textContent="The voice had a little hiccup."};
+  speechSynthesis.speak(u);
+}
+
+function updateVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(b=>{
+    const active=b.dataset.voice===state.voice;
+    b.classList.toggle("active",active);
+    b.setAttribute("aria-pressed",String(active));
+  });
+  $("voiceSpeed").value=state.voiceSpeed;
+}
+function applyAccessibility(){
+  document.body.classList.toggle("large-type",state.largeType);
+  document.body.classList.toggle("simple-mode",state.simpleMode);
+  $("largeTypeBtn").classList.toggle("active",state.largeType);
+  $("simpleModeBtn").classList.toggle("active",state.simpleMode);
+  $("autoReadBtn").classList.toggle("active",state.autoRead);
+  $("autoReadBtn").textContent=state.autoRead?"🗣️ Auto Read On":"🤫 Auto Read Off";
+}
+function updateStats(){
+  $("gamesStat").textContent=state.games;
+  $("answersStat").textContent=state.kindChoices;
+  $("streakStat").textContent=state.bestStreak;
+  $("starsStat").textContent=state.stars;
+  const total=state.kindChoices+state.games;
+  const stage=Math.min(4,Math.floor(total/5));
+  document.querySelectorAll("[data-step]").forEach(el=>el.classList.toggle("on",Number(el.dataset.step)<=stage));
+  $("gardenLabel").textContent=total>=20
+    ?"Your feelings garden is blooming beautifully!"
+    :`${total} feelings and kindness moments have helped the garden grow.`;
+  save();
+}
+
+function currentQuestion(){return gameQuestions[index]}
+function currentNarration(){
+  const q=currentQuestion();
+  return q?`${q.q} The choices are ${q.a.join(", ")}.`:"";
+}
+
+function startGame(){
+  stopSpeaking("");
+  gameQuestions=shuffle(QUESTIONS).slice(0,5);
+  index=0;
+  score=0;
+  streak=0;
+  $("playArea").classList.remove("hidden");
+  $("endArea").classList.add("hidden");
   loadQuestion();
 }
 
-function loadQuestion() {
-  locked = false;
-  nextBtn.classList.add('hidden');
-  const q = gameQuestions[index];
-  qEl.textContent = q.q;
-  aEl.innerHTML = '';
+function loadQuestion(){
+  locked=false;
+  wrongCount=0;
+  $("nextBtn").classList.add("hidden");
+  $("feedback").textContent="";
+  const q=currentQuestion();
+  $("question").textContent=q.q;
+  $("feelingIcon").textContent=q.icon;
+  $("answers").innerHTML="";
   q.a.forEach((text,i)=>{
-    const b = document.createElement('button');
-    b.textContent = text;
-    b.onclick = ()=>selectAnswer(b,i);
-    aEl.appendChild(b);
+    const b=document.createElement("button");
+    b.type="button";
+    b.textContent=text;
+    b.onclick=()=>selectAnswer(b,i);
+    $("answers").appendChild(b);
   });
-  progressEl.textContent = `Question ${index+1} of 5`;
+  $("progressText").textContent=`Question ${index+1} of ${gameQuestions.length}`;
+  $("progressBar").style.width=`${index/gameQuestions.length*100}%`;
+  if(state.autoRead)setTimeout(()=>speak(currentNarration(),{target:document.querySelector(".question-card")}),220);
 }
 
-function selectAnswer(btn, i) {
-  if (locked) return;
-  locked = true;
-  const q = gameQuestions[index];
-  const buttons = aEl.querySelectorAll('button');
-  buttons[q.c].classList.add('correct');
-  if (i === q.c) score++; else btn.classList.add('wrong');
-  nextBtn.classList.remove('hidden');
+function selectAnswer(btn,i){
+  if(locked||btn.disabled)return;
+  const q=currentQuestion();
+  const buttons=[...$("answers").querySelectorAll("button")];
+
+  if(i===q.c){
+    locked=true;
+    buttons.forEach(b=>b.disabled=true);
+    btn.classList.add("correct");
+    score++;
+    streak++;
+    state.kindChoices++;
+    state.bestStreak=Math.max(state.bestStreak,streak);
+    state.stars+=2;
+    $("feedback").textContent=`That is a safe or kind choice. ${q.explain}`;
+    speak(`That is a safe or kind choice. ${q.explain}`,{target:document.querySelector(".question-card")});
+    $("nextBtn").classList.remove("hidden");
+    $("progressBar").style.width=`${(index+1)/gameQuestions.length*100}%`;
+    updateStats();
+    return;
+  }
+
+  wrongCount++;
+  streak=0;
+  btn.classList.add("wrong");
+  btn.disabled=true;
+
+  if(wrongCount<2){
+    $("feedback").textContent="Good thinking. Try once more and look for the safest or kindest choice.";
+    speak("Good thinking. Try once more and look for the safest or kindest choice.",{target:document.querySelector(".question-card")});
+    setTimeout(()=>btn.classList.remove("wrong"),650);
+  }else{
+    locked=true;
+    buttons.forEach(b=>b.disabled=true);
+    const right=buttons[q.c];
+    right.classList.add("correct","hint");
+    $("feedback").textContent=`The best answer here is “${q.a[q.c]}.” ${q.explain}`;
+    speak(`The best answer here is ${q.a[q.c]}. ${q.explain}`,{target:document.querySelector(".question-card")});
+    $("nextBtn").classList.remove("hidden");
+    $("progressBar").style.width=`${(index+1)/gameQuestions.length*100}%`;
+    updateStats();
+  }
 }
 
-nextBtn.onclick = ()=>{
+function endGame(){
+  $("playArea").classList.add("hidden");
+  $("endArea").classList.remove("hidden");
+  state.games++;
+  state.stars+=score;
+  $("result").textContent=`You practiced ${score} out of 5 kind or safe choices. 🌟`;
+  updateStats();
+  speak(`Great job. You practiced ${score} out of 5 kind or safe choices.`);
+}
+
+$("nextBtn").onclick=()=>{
   index++;
-  if (index < gameQuestions.length) loadQuestion();
+  if(index<gameQuestions.length)loadQuestion();
   else endGame();
 };
+$("playAgainBtn").onclick=startGame;
+$("hearBtn").onclick=()=>speak(currentNarration(),{target:document.querySelector(".question-card")});
+$("voiceGuides").onclick=e=>{
+  const b=e.target.closest("[data-voice]");
+  if(!b)return;
+  state.voice=b.dataset.voice;
+  save();
+  updateVoiceButtons();
+  $("voiceStatus").textContent=`${GUIDES[state.voice].name} selected.`;
+};
+$("voiceSpeed").onchange=e=>{
+  state.voiceSpeed=e.target.value;
+  save();
+  $("voiceStatus").textContent="Reading speed saved.";
+};
+$("meetGuideBtn").onclick=()=>speak("",{preview:true});
+$("repeatVoiceBtn").onclick=()=>lastSpoken
+  ?speak(lastSpoken,{target:document.querySelector(".question-card")})
+  :speak(currentNarration(),{target:document.querySelector(".question-card")});
+$("stopVoiceBtn").onclick=()=>stopSpeaking();
+$("largeTypeBtn").onclick=()=>{
+  state.largeType=!state.largeType;
+  save();
+  applyAccessibility();
+};
+$("simpleModeBtn").onclick=()=>{
+  state.simpleMode=!state.simpleMode;
+  save();
+  applyAccessibility();
+};
+$("autoReadBtn").onclick=()=>{
+  state.autoRead=!state.autoRead;
+  save();
+  applyAccessibility();
+};
 
-function endGame() {
-  playArea.classList.add('hidden');
-  endArea.classList.remove('hidden');
-  resultEl.textContent = `You got ${score} out of 5 right! 🌟`;
+if("speechSynthesis" in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $("meetGuideBtn").disabled=true;
+  $("repeatVoiceBtn").disabled=true;
+  $("stopVoiceBtn").disabled=true;
+  $("hearBtn").disabled=true;
+  $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
 }
 
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
+updateVoiceButtons();
+applyAccessibility();
+updateStats();
 startGame();
+window.addEventListener("beforeunload",()=>stopSpeaking(""));
+})();
 </script>
-
 </body>
 </html>
