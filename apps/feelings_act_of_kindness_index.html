@@ -16,7 +16,7 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;min-height:100vh;color:var(--ink);
-  font-family:"Trebuchet MS","Avenir Next Rounded","Arial Rounded MT Bold","Comic Sans MS",system-ui,sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:
     radial-gradient(circle at 8% 10%,#ffffffd9 0 5%,transparent 6%),
     radial-gradient(circle at 91% 17%,#ffffffb8 0 4%,transparent 5%),
@@ -32,8 +32,8 @@ button{touch-action:manipulation}
 .app{width:min(1080px,100%);margin:auto}
 .hero{text-align:center;margin-bottom:16px}
 .badge{display:inline-flex;align-items:center;gap:8px;background:#ffffffc7;padding:8px 14px;border-radius:999px;box-shadow:0 8px 22px #5a3d6c18;font-size:13px;font-weight:850}
-h1{margin:12px 0 5px;font-size:clamp(2.35rem,7vw,5.1rem);line-height:.95;letter-spacing:-.05em;background:linear-gradient(90deg,#ef7f3f,var(--rose),var(--violet),#30a9e8,#4eae86);-webkit-background-clip:text;background-clip:text;color:transparent}
-.subtitle{margin:0 auto;max-width:760px;color:var(--muted);font-size:clamp(.98rem,2vw,1.15rem);line-height:1.55}
+h1{margin:12px auto 8px;max-width:920px;padding:0 .08em;font-size:clamp(2.35rem,6.2vw,4.9rem);line-height:1.08;letter-spacing:-.02em;background:linear-gradient(90deg,#ef7f3f,var(--rose),var(--violet),#30a9e8,#4eae86);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:0 auto;max-width:840px;color:var(--muted);font-size:clamp(.98rem,2vw,1.15rem);line-height:1.72}
 .shell{background:var(--panel);border:1px solid #ffffffd9;border-radius:32px;padding:18px;box-shadow:var(--shadow);backdrop-filter:blur(14px)}
 .toolbar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
 .control{background:white;border:1px solid #eadfed;border-radius:18px;padding:10px 12px;text-align:left}
@@ -71,9 +71,118 @@ footer{text-align:center;color:var(--muted);font-size:12px;line-height:1.5;margi
 @media(max-width:820px){.toolbar{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}}
 @media(max-width:520px){body{padding:16px 8px 36px}.shell{padding:11px;border-radius:24px}.prompt-card{padding:22px 12px 18px}.check-grid{grid-template-columns:1fr}.btn{width:100%}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* =========================================================
+   CRÈCHE PRESCHOOL PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1080px,calc(100% - 22px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(76,51,88,.13)
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#ffd65c,#88dfbe);
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{margin:0;color:#d65480;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:var(--plum);font-size:clamp(1.02rem,2.3vw,1.32rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #ded4e8;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose));border-color:#fff}
+
+/* =========================================================
+   FRIENDLY KINDNESS GUIDES
+   ========================================================= */
+.voice-studio{
+  margin:14px 0;
+  padding:13px;
+  border:2px solid #e2d7ea;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff);
+  box-shadow:0 10px 24px rgba(76,51,88,.07)
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;border:2px solid #ded4e8;
+  border-radius:16px;background:#fff;color:var(--plum);display:grid;place-items:center;
+  align-content:center;gap:2px;font-weight:900
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.67rem}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose))}
+.voice-controls{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{
+  border:2px solid #ded4e8;border-radius:999px;padding:9px 12px;background:#fff;color:var(--ink);font-weight:900
+}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.prompt-card.speaking{box-shadow:0 0 0 5px rgba(255,214,92,.4),0 12px 28px #59415f12}
+
+.simple-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+.simple-row .btn.active{color:#fff;background:linear-gradient(135deg,var(--mint),var(--sky))}
+body.large-type{font-size:18px}
+body.simple-mode .stats,
+body.simple-mode .lower,
+body.simple-mode .safety{display:none!important}
+
+/* =========================================================
+   GROWING KINDNESS GARDEN
+   ========================================================= */
+.kindness-growth{
+  margin-top:14px;padding:12px;border:2px dashed #d9cce4;border-radius:18px;
+  background:linear-gradient(145deg,#fff,#f2fff0,#eef9ff)
+}
+.kindness-growth h3{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.garden-row{display:flex;justify-content:center;align-items:flex-end;gap:12px;min-height:68px;flex-wrap:wrap}
+.garden-step{font-size:2rem;opacity:.28;transform:scale(.86);transition:.2s}
+.garden-step.on{opacity:1;transform:scale(1)}
+.garden-label{text-align:center;color:var(--muted);font-size:.74rem;margin-top:5px}
+
+.kindness-tip{
+  margin-top:12px;padding:10px 12px;border-radius:16px;
+  background:#fff9d9;border:1px solid #edd78b;color:#6d5824;text-align:center;font-weight:900;font-size:.82rem
+}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-guide:last-child{grid-column:1/-1}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}.creche-links{grid-column:auto}
+}
+
 </style>
 </head>
 <body>
+
+<header class="creche-header" aria-label="Crèche Preschool Portal">
+  <div class="creche-mark" aria-hidden="true">💛</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Crèche Life Skills</p>
+    <div class="creche-title">The Crèche™ · Kindness Garden</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link current" href="#" aria-current="page">💛 Kindness Garden</a>
+  </nav>
+</header>
+
 <div class="bg" aria-hidden="true"><span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span></div>
 <main class="app">
 <header class="hero">
@@ -82,8 +191,37 @@ footer{text-align:center;color:var(--muted);font-size:12px;line-height:1.5;margi
   <p class="subtitle">Choose a safe, thoughtful act of kindness, reflect on how it felt, and grow a garden of caring choices—one small action at a time.</p>
 </header>
 <section class="shell" aria-label="Acts of Kindness Kids Garden">
-  <div class="toolbar">
-    <div class="control"><label for="ageBand">Age Group</label><select id="ageBand"><option value="little">Preschool–K</option><option value="elementary" selected>Grades 1–5</option><option value="family">Family & Classroom</option></select></div>
+  
+<section class="voice-studio" aria-labelledby="voiceTitle">
+  <h2 id="voiceTitle">Choose a Kindness Guide</h2>
+  <div class="voice-guides" id="voiceGuides">
+    <button type="button" class="voice-guide" data-voice="hope"><span class="emoji">🌟</span><span class="name">Hope</span></button>
+    <button type="button" class="voice-guide" data-voice="bunny"><span class="emoji">🐰</span><span class="name">Benny Bunny</span></button>
+    <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Kindness Owl</span></button>
+    <button type="button" class="voice-guide" data-voice="heart"><span class="emoji">💗</span><span class="name">Kind Heart</span></button>
+    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+  </div>
+  <div class="voice-controls">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and clear</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">🌈 A little lively</option>
+    </select>
+    <button type="button" id="meetGuideBtn" class="btn">👋 Meet My Guide</button>
+    <button type="button" id="repeatVoiceBtn" class="btn">🔁 Repeat Last</button>
+    <button type="button" id="stopVoiceBtn" class="btn">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+</section>
+
+<div class="simple-row">
+  <button type="button" id="largeTypeBtn" class="btn">🔎 Larger Type</button>
+  <button type="button" id="simpleModeBtn" class="btn">🧘 Simple Mode</button>
+  <button type="button" id="autoReadBtn" class="btn">🗣️ Auto Read On</button>
+</div>
+
+<div class="toolbar">
+    <div class="control"><label for="ageBand">Age Group</label><select id="ageBand"><option value="little" selected>Preschool–K</option><option value="elementary">Grades 1–5</option><option value="family">Family & Classroom</option></select></div>
     <div class="control"><label for="category">Kindness Area</label><select id="category"><option value="all">Surprise Me</option><option value="home">At Home</option><option value="school">At School</option><option value="friendship">Friendship</option><option value="community">Community</option><option value="earth">Earth & Animals</option><option value="self">Kindness to Myself</option></select></div>
     <div class="control"><label for="challengeSize">Daily Goal</label><select id="challengeSize"><option value="1">1 act</option><option value="3" selected>3 acts</option><option value="5">5 acts</option><option value="7">7 acts</option></select></div>
   </div>
@@ -109,6 +247,19 @@ footer{text-align:center;color:var(--muted);font-size:12px;line-height:1.5;margi
   </div>
   <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
   <div class="progress-wrap"><div class="track"><div id="goalBar" class="bar"></div></div><div id="goalText" class="progress-text">0 of 3 today</div></div>
+
+<div class="kindness-growth">
+  <h3>🌱 My Kindness Garden</h3>
+  <div class="garden-row" id="gardenRow">
+    <span class="garden-step" data-step="0">🌱</span>
+    <span class="garden-step" data-step="1">🌿</span>
+    <span class="garden-step" data-step="2">🌼</span>
+    <span class="garden-step" data-step="3">🌳</span>
+    <span class="garden-step" data-step="4">🌈</span>
+  </div>
+  <div class="garden-label" id="gardenLabel">Complete kind actions to help the garden grow.</div>
+</div>
+<div class="kindness-tip">💛 Kindness should always be safe, welcome, and respectful of boundaries.</div>
 
   <div class="lower">
     <section class="panel">
@@ -171,30 +322,154 @@ const PROMPTS=[
 {age:'family',cat:'self',icon:'🫶',text:'Create a family kindness break: stretch, breathe, and say one appreciation.',note:'Everyone may pass if they do not want to share.'}
 ];
 const STORE='kindness-garden-v2';
-let state={todayDate:'',today:0,allTime:0,streak:0,lastDoneDate:'',favorites:[],history:[],reflections:[],current:null,lastText:'',selectedFeeling:''};
+let state={
+todayDate:'',today:0,allTime:0,streak:0,lastDoneDate:'',favorites:[],history:[],reflections:[],
+current:null,lastText:'',selectedFeeling:'',
+voice:'hope',voiceSpeed:'slow',autoRead:true,largeType:false,simpleMode:false
+};
 const $=id=>document.getElementById(id);
 function localDate(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function yesterdayString(){const d=new Date();d.setDate(d.getDate()-1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function load(){try{const raw=localStorage.getItem(STORE);if(raw)state={...state,...JSON.parse(raw)}}catch(e){}if(state.todayDate!==localDate()){state.todayDate=localDate();state.today=0}save()}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(state))}catch(e){}}
+
+function updateVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(b=>{
+    const active=b.dataset.voice===state.voice;
+    b.classList.toggle("active",active);
+    b.setAttribute("aria-pressed",String(active));
+  });
+  $("voiceSpeed").value=state.voiceSpeed;
+}
+function applyAccessibility(){
+  document.body.classList.toggle("large-type",state.largeType);
+  document.body.classList.toggle("simple-mode",state.simpleMode);
+  $("largeTypeBtn").classList.toggle("active",state.largeType);
+  $("simpleModeBtn").classList.toggle("active",state.simpleMode);
+  $("autoReadBtn").classList.toggle("active",state.autoRead);
+  $("autoReadBtn").textContent=state.autoRead?"🗣️ Auto Read On":"🤫 Auto Read Off";
+}
+function updateGarden(){
+  const stage=Math.min(4,Math.floor(state.allTime/5));
+  document.querySelectorAll("[data-step]").forEach(el=>el.classList.toggle("on",Number(el.dataset.step)<=stage));
+  $("gardenLabel").textContent=state.allTime>=20
+    ?"The kindness garden is blooming beautifully!"
+    :`${state.allTime} caring actions have helped the garden grow.`;
+}
+function currentNarration(){
+  const p=state.current;
+  return p?`${p.text} ${p.note}`:"";
+}
+
 function eligible(){const age=$('ageBand').value,cat=$('category').value;return PROMPTS.filter(p=>(p.age===age||age==='family'&&p.age==='family')&&(cat==='all'||p.cat===cat))}
 function choosePrompt(){let list=eligible();if(!list.length)list=PROMPTS.filter(p=>$('category').value==='all'||p.cat===$('category').value);if(!list.length)list=PROMPTS;let pick=list[Math.floor(Math.random()*list.length)];let guard=0;while(pick.text===state.lastText&&list.length>1&&guard++<20)pick=list[Math.floor(Math.random()*list.length)];state.current=pick;state.lastText=pick.text;save();renderPrompt(true)}
 function titleCase(s){return s.charAt(0).toUpperCase()+s.slice(1)}
-function renderPrompt(pop=false){const p=state.current||PROMPTS[0];$('promptIcon').textContent=p.icon;$('promptCategory').textContent=titleCase(p.cat.replace('self','kindness to myself'));$('promptText').textContent=p.text;$('promptNote').textContent=p.note;const saved=state.favorites.some(x=>x.text===p.text);$('saveBtn').classList.toggle('saved',saved);$('saveBtn').textContent=saved?'🔖 Saved':'🔖 Save Idea';if(pop){$('promptCard').classList.remove('pop');void $('promptCard').offsetWidth;$('promptCard').classList.add('pop')}}
-function updateStats(){const goal=Number($('challengeSize').value);$('todayCount').textContent=state.today;$('allTimeCount').textContent=state.allTime;$('streakCount').textContent=state.streak;$('savedCount').textContent=state.favorites.length;$('goalBar').style.width=Math.min(100,state.today/goal*100)+'%';$('goalText').textContent=`${state.today} of ${goal} today`;renderBadges();renderHistory()}
-function markDone(){if(!state.current)return;const today=localDate();if(state.lastDoneDate!==today){state.streak=state.lastDoneDate===yesterdayString()?state.streak+1:1;state.lastDoneDate=today}state.today++;state.allTime++;state.history.unshift({text:state.current.text,icon:state.current.icon,date:new Date().toLocaleDateString(),feel:state.selectedFeeling||''});state.history=state.history.slice(0,20);save();$('feedback').textContent='Kindness planted! Your caring choice matters. 🌱';speak('Kindness planted. Your caring choice matters.');toast('🌟 Kindness counted');updateStats();if(state.today>=Number($('challengeSize').value))celebrate()}
-function speak(text){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=.9;u.pitch=1.08;speechSynthesis.speak(u)}
+function renderPrompt(pop=false){const p=state.current||PROMPTS[0];$('promptIcon').textContent=p.icon;$('promptCategory').textContent=titleCase(p.cat.replace('self','kindness to myself'));$('promptText').textContent=p.text;$('promptNote').textContent=p.note;const saved=state.favorites.some(x=>x.text===p.text);$('saveBtn').classList.toggle('saved',saved);$('saveBtn').textContent=saved?'🔖 Saved':'🔖 Save Idea';if(pop){$('promptCard').classList.remove('pop');void $('promptCard').offsetWidth;$('promptCard').classList.add('pop')}if(state.autoRead)setTimeout(()=>speak(currentNarration(),{target:$('promptCard')}),220)}
+function updateStats(){const goal=Number($('challengeSize').value);$('todayCount').textContent=state.today;$('allTimeCount').textContent=state.allTime;$('streakCount').textContent=state.streak;$('savedCount').textContent=state.favorites.length;$('goalBar').style.width=Math.min(100,state.today/goal*100)+'%';$('goalText').textContent=`${state.today} of ${goal} today`;renderBadges();renderHistory();updateGarden()}
+function markDone(){if(!state.current)return;const today=localDate();if(state.lastDoneDate!==today){state.streak=state.lastDoneDate===yesterdayString()?state.streak+1:1;state.lastDoneDate=today}state.today++;state.allTime++;state.history.unshift({text:state.current.text,icon:state.current.icon,date:new Date().toLocaleDateString(),feel:state.selectedFeeling||''});state.history=state.history.slice(0,20);save();$('feedback').textContent='Kindness planted! Your caring choice matters. 🌱';speak('Kindness planted. Your caring choice matters.',{target:$('promptCard')});toast('🌟 Kindness counted');updateStats();if(state.today>=Number($('challengeSize').value))celebrate()}
+const GUIDE_VOICES={
+hope:{name:"Hope",rate:.82,pitch:1.08,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, kindness gardener. Hope is ready to find one small and safe way to care for someone today."},
+bunny:{name:"Benny Bunny",rate:.85,pitch:1.15,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello, caring friend. Benny Bunny is ready to hop toward a kind choice."},
+owl:{name:"Kindness Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, thoughtful helper. Kindness Owl is ready to think about safe and respectful kindness."},
+heart:{name:"Kind Heart",rate:.79,pitch:1.06,match:/samantha|aria|jenny|ava|karen/i,greeting:"Hello, kind friend. Kind Heart is ready to practice caring words and gentle actions."},
+rainbow:{name:"Rainbow Rae",rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright helper. Rainbow Rae is ready to grow a colorful kindness garden."}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+let availableVoices=[],speechToken=0,lastSpoken="";
+
+function refreshVoices(){
+  if(!("speechSynthesis" in window))return;
+  availableVoices=speechSynthesis.getVoices()||[];
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.hope;
+  $("voiceStatus").textContent=availableVoices.length?`${g.name} is ready.`:"Loading a friendly voice…";
+}
+function chooseVoice(){
+  refreshVoices();
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.hope;
+  const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+  const pool=english.length?english:availableVoices;
+  return pool.find(v=>g.match.test(v.name))
+    ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+    ||pool[0]
+    ||null;
+}
+function stopSpeaking(message="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  $("promptCard")?.classList.remove("speaking");
+  $("voiceStatus").textContent=message;
+}
+function speak(text,{preview=false,target=null}={}){
+  if(!("speechSynthesis" in window))return;
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.hope;
+  const phrase=preview?g.greeting:String(text||"").trim();
+  if(!phrase)return;
+  stopSpeaking("");
+  const token=++speechToken;
+  lastSpoken=phrase;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const v=chooseVoice();
+  if(v)u.voice=v;
+  u.lang=v?.lang||"en-US";
+  u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=g.pitch;
+  u.onstart=()=>{target?.classList.add("speaking");$("voiceStatus").textContent=`${g.name} is reading.`};
+  u.onend=()=>{if(token!==speechToken)return;target?.classList.remove("speaking");$("voiceStatus").textContent="Ready for another kind idea!"};
+  u.onerror=()=>{if(token!==speechToken)return;target?.classList.remove("speaking");$("voiceStatus").textContent="The voice had a little hiccup."};
+  speechSynthesis.speak(u);
+}
 function toggleFavorite(){const p=state.current;const i=state.favorites.findIndex(x=>x.text===p.text);if(i>=0)state.favorites.splice(i,1);else state.favorites.push(p);save();renderPrompt();updateStats();toast(i>=0?'Removed from favorites':'Saved to favorites')}
 function saveReflection(){const text=$('journal').value.trim();if(!text&&!state.selectedFeeling){toast('Choose a feeling or write a note first');return}state.reflections.unshift({date:new Date().toLocaleString(),feel:state.selectedFeeling,text,prompt:state.current?.text||''});state.reflections=state.reflections.slice(0,30);save();$('journal').value='';state.selectedFeeling='';document.querySelectorAll('.check-btn').forEach(b=>b.classList.remove('active'));toast('Reflection saved on this device')}
 function renderHistory(){const h=$('history');h.innerHTML='';if(!state.history.length){h.innerHTML='<div class="empty">Completed kindness acts will appear here.</div>';return}state.history.slice(0,8).forEach(x=>{const d=document.createElement('div');d.className='history-item';d.innerHTML=`<div class="history-icon">${x.icon}</div><div class="history-text"><strong>${x.text}</strong><br>${x.date}${x.feel?` · ${titleCase(x.feel)}`:''}</div>`;h.appendChild(d)})}
 function renderBadges(){const defs=[['🌱 First Seed',1],['🌼 Kindness Sprout',5],['🌻 Caring Gardener',10],['🌈 Community Helper',25],['💛 Kindness Keeper',50],['🏆 Golden Heart',100]];const box=$('badges');box.innerHTML='';defs.forEach(([name,n])=>{const s=document.createElement('span');s.className='award'+(state.allTime>=n?' earned':'');s.textContent=`${name} · ${n}`;box.appendChild(s)})}
 function celebrate(){const bits=['⭐','🌈','💛','🌼','✨'];for(let i=0;i<20;i++){const e=document.createElement('span');e.textContent=bits[i%bits.length];e.style.cssText=`position:fixed;left:${Math.random()*100}vw;top:-30px;font-size:24px;z-index:12;pointer-events:none;transition:transform 1.7s ease-out,opacity 1.7s`;document.body.appendChild(e);requestAnimationFrame(()=>{e.style.transform=`translate(${Math.random()*160-80}px,105vh) rotate(540deg)`;e.style.opacity='0'});setTimeout(()=>e.remove(),1900)}toast('Daily kindness goal reached!')}
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
-$('newBtn').onclick=choosePrompt;$('speakBtn').onclick=()=>speak(`${state.current.text} ${state.current.note}`);$('saveBtn').onclick=toggleFavorite;$('doneBtn').onclick=markDone;$('saveReflection').onclick=saveReflection;$('clearJournal').onclick=()=>{$('journal').value='';};$('clearHistory').onclick=()=>{if(confirm('Clear the recent kindness history on this device?')){state.history=[];save();updateStats()}};
+
+$("voiceGuides").onclick=e=>{
+  const b=e.target.closest("[data-voice]");
+  if(!b)return;
+  state.voice=b.dataset.voice;
+  save();updateVoiceButtons();
+  $("voiceStatus").textContent=`${GUIDE_VOICES[state.voice].name} selected.`;
+};
+$("voiceSpeed").onchange=e=>{
+  state.voiceSpeed=e.target.value;
+  save();$("voiceStatus").textContent="Reading speed saved.";
+};
+$("meetGuideBtn").onclick=()=>speak("",{preview:true});
+$("repeatVoiceBtn").onclick=()=>lastSpoken
+  ?speak(lastSpoken,{target:$("promptCard")})
+  :speak(currentNarration(),{target:$("promptCard")});
+$("stopVoiceBtn").onclick=()=>stopSpeaking();
+$("largeTypeBtn").onclick=()=>{state.largeType=!state.largeType;save();applyAccessibility()};
+$("simpleModeBtn").onclick=()=>{state.simpleMode=!state.simpleMode;save();applyAccessibility()};
+$("autoReadBtn").onclick=()=>{state.autoRead=!state.autoRead;save();applyAccessibility()};
+
+$('newBtn').onclick=choosePrompt;$('speakBtn').onclick=()=>speak(currentNarration(),{target:$('promptCard')});$('saveBtn').onclick=toggleFavorite;$('doneBtn').onclick=markDone;$('saveReflection').onclick=saveReflection;$('clearJournal').onclick=()=>{$('journal').value='';};$('clearHistory').onclick=()=>{if(confirm('Clear the recent kindness history on this device?')){state.history=[];save();updateStats()}};
 $('ageBand').onchange=choosePrompt;$('category').onchange=choosePrompt;$('challengeSize').onchange=updateStats;
 document.querySelectorAll('.check-btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.check-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.selectedFeeling=b.dataset.feel;});
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!/textarea|select|button/i.test(document.activeElement?.tagName||'')){e.preventDefault();choosePrompt()}if(e.key.toLowerCase()==='s')speak(`${state.current.text} ${state.current.note}`)});
-load();state.current=state.current||PROMPTS[5];renderPrompt();updateStats();
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!/textarea|select|button/i.test(document.activeElement?.tagName||'')){e.preventDefault();choosePrompt()}if(e.key.toLowerCase()==='s')speak(currentNarration(),{target:$('promptCard')})});
+if("speechSynthesis" in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $("meetGuideBtn").disabled=true;
+  $("repeatVoiceBtn").disabled=true;
+  $("stopVoiceBtn").disabled=true;
+  $("speakBtn").disabled=true;
+  $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+}
+load();
+$("ageBand").value="little";
+state.current=state.current||PROMPTS[0];
+updateVoiceButtons();
+applyAccessibility();
+renderPrompt();
+updateStats();
+window.addEventListener("beforeunload",()=>stopSpeaking(""));
 </script>
 </body>
 </html>
