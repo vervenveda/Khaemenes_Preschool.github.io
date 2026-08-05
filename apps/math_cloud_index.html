@@ -15,14 +15,14 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;min-height:100vh;padding:24px 14px 48px;color:var(--ink);
-  font-family:"Avenir Next Rounded","Trebuchet MS","Arial Rounded MT Bold","Comic Sans MS",system-ui,sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:linear-gradient(145deg,var(--bg1),var(--bg2));transition:.35s
 }
 button,select,input{font:inherit}button{touch-action:manipulation}
 .wrap{width:min(1220px,100%);margin:auto}
 .hero{text-align:center;margin-bottom:16px;padding:28px 18px;border-radius:32px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;box-shadow:var(--shadow)}
-.hero h1{margin:0;font-size:clamp(2.4rem,7vw,5rem);line-height:.95;letter-spacing:-.05em}
-.hero p{max-width:850px;margin:8px auto 0;line-height:1.6;color:#fff9ff}
+.hero h1{margin:0 auto 8px;max-width:980px;padding:0 .08em;font-size:clamp(2.4rem,6.2vw,4.9rem);line-height:1.08;letter-spacing:-.02em}
+.hero p{max-width:880px;margin:8px auto 0;line-height:1.72;color:#fff9ff;font-size:1.02rem}
 .hero-icons{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:13px}.hero-icons span{width:48px;height:48px;display:grid;place-items:center;border-radius:16px;background:#ffffff24;font-size:1.7rem}
 .app{background:var(--panel);border:1px solid var(--border);border-radius:30px;padding:18px;box-shadow:var(--shadow)}
 .toolbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
@@ -76,9 +76,121 @@ footer{margin-top:15px;text-align:center;color:var(--muted);font-size:.82rem;lin
 @media(max-width:980px){.toolbar{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:580px){.toolbar{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.week-grid{grid-template-columns:repeat(4,1fr)}.quiz-options{grid-template-columns:1fr}.lesson-head{align-items:flex-start}.icon{width:74px;height:74px;font-size:2.4rem}.btn.primary{margin-left:0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* =========================================================
+   CRÈCHE PRESCHOOL PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1220px,calc(100% - 22px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(62,43,83,.14);
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#ffd36a,#71d3ae);
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{margin:0;color:#d65480;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:#5e4a91;font-size:clamp(1.02rem,2.3vw,1.32rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #ded4e8;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;background:linear-gradient(135deg,#7663c5,#e47aa9);border-color:#fff}
+
+/* =========================================================
+   FRIENDLY MATH GUIDE STUDIO
+   ========================================================= */
+.voice-studio{
+  margin:14px 0;
+  padding:13px;
+  border:2px solid var(--border);
+  border-radius:20px;
+  background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--accent) 17%,var(--panel)),color-mix(in srgb,var(--primary) 8%,var(--panel)));
+  box-shadow:0 10px 24px rgba(62,43,83,.07)
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--primary);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;border:2px solid var(--border);
+  border-radius:16px;background:var(--panel);color:var(--primary);display:grid;place-items:center;
+  align-content:center;gap:2px;font-weight:900;box-shadow:none
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.68rem}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--primary),var(--secondary))}
+.voice-controls{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{
+  border:2px solid var(--border);border-radius:999px;padding:9px 12px;background:var(--panel);color:var(--ink);font-weight:900
+}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.lesson.speaking,.sheet.speaking{box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 45%,transparent),var(--shadow)}
+
+.simple-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0}
+.simple-row .btn.active{color:#fff;background:linear-gradient(135deg,var(--primary),var(--secondary))}
+body.large-type{font-size:18px}
+body.simple-mode .stats,
+body.simple-mode .side,
+body.simple-mode .teacher-note,
+body.simple-mode .notice{display:none!important}
+body.simple-mode .layout{grid-template-columns:1fr}
+body.simple-mode .wrap{max-width:900px}
+
+.learning-garden{
+  margin-top:13px;padding:12px;border:2px dashed var(--border);border-radius:18px;
+  background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--accent) 14%,var(--panel)))
+}
+.learning-garden h3{margin:0 0 8px;text-align:center;color:var(--primary);font-size:1rem}
+.garden-row{display:flex;justify-content:center;align-items:flex-end;gap:12px;min-height:68px;flex-wrap:wrap}
+.garden-step{font-size:2rem;opacity:.28;transform:scale(.86);transition:.2s}
+.garden-step.on{opacity:1;transform:scale(1)}
+.garden-label{text-align:center;color:var(--muted);font-size:.74rem;margin-top:5px}
+
+.game-btn.hint{animation:hintPulse .7s ease 2;box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 48%,transparent)}
+@keyframes hintPulse{50%{transform:translateY(-3px) scale(1.04)}}
+
+.quiz-options button.correct{background:#e7f9ed;border:2px solid var(--good)}
+.quiz-options button.wrong{background:#ffe8ec;border:2px solid var(--bad)}
+.quiz-note{margin-top:8px;color:var(--muted);font-weight:900;text-align:center}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice-guide:last-child{grid-column:1/-1}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}
+  .creche-links{grid-column:auto}
+}
+
 </style>
 </head>
 <body>
+
+<header class="creche-header" aria-label="Crèche Preschool Portal">
+  <div class="creche-mark" aria-hidden="true">☁️</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Portal</p>
+    <div class="creche-title">The Crèche™ · Pre-K Math Cloud</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link current" href="#" aria-current="page">☁️ Math Cloud</a>
+  </nav>
+</header>
+
 <main class="wrap">
 <header class="hero">
 <h1>Pre-K Math Cloud</h1>
@@ -87,6 +199,35 @@ footer{margin-top:15px;text-align:center;color:var(--muted);font-size:.82rem;lin
 </header>
 
 <section class="app">
+
+<section class="voice-studio" aria-labelledby="voiceTitle">
+  <h2 id="voiceTitle">Choose a Math Guide</h2>
+  <div class="voice-guides" id="voiceGuides">
+    <button type="button" class="voice-guide" data-voice="cloud"><span class="emoji">☁️</span><span class="name">Cloudy Clara</span></button>
+    <button type="button" class="voice-guide" data-voice="bunny"><span class="emoji">🐰</span><span class="name">Benny Bunny</span></button>
+    <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Math Owl</span></button>
+    <button type="button" class="voice-guide" data-voice="robot"><span class="emoji">🤖</span><span class="name">Count-Bot</span></button>
+    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+  </div>
+  <div class="voice-controls">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and clear</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">⭐ A little lively</option>
+    </select>
+    <button type="button" id="meetGuideBtn" class="btn">👋 Meet My Guide</button>
+    <button type="button" id="repeatVoiceBtn" class="btn">🔁 Repeat Last</button>
+    <button type="button" id="stopVoiceBtn" class="btn">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+</section>
+
+<div class="simple-row">
+  <button type="button" id="largeTypeBtn" class="btn">🔎 Larger Type</button>
+  <button type="button" id="simpleModeBtn" class="btn">🧘 Simple Mode</button>
+  <button type="button" id="autoReadBtn" class="btn">🗣️ Auto Read On</button>
+</div>
+
 <div class="toolbar">
 <div class="control"><label for="theme">Color theme</label><select id="theme"></select></div>
 <div class="control"><label for="weekSelect">Week</label><select id="weekSelect"></select></div>
@@ -119,6 +260,19 @@ footer{margin-top:15px;text-align:center;color:var(--muted);font-size:.82rem;lin
 <div class="game-title" id="gameTitle">Interactive practice</div>
 <div class="game" id="game"></div>
 <div class="feedback" id="feedback" aria-live="polite"></div>
+
+<div class="learning-garden">
+  <h3>🌱 My 42-Week Math Garden</h3>
+  <div class="garden-row" id="gardenRow">
+    <span class="garden-step" data-step="0">🌱</span>
+    <span class="garden-step" data-step="1">🌿</span>
+    <span class="garden-step" data-step="2">🌼</span>
+    <span class="garden-step" data-step="3">🌳</span>
+    <span class="garden-step" data-step="4">🏆</span>
+  </div>
+  <div class="garden-label" id="gardenLabel">Complete lessons to grow the math garden.</div>
+</div>
+
 <div class="actions">
 <button class="btn" id="hearBtn">🔊 Read Directions</button>
 <button class="btn" id="newGameBtn">↻ New Practice</button>
@@ -150,7 +304,7 @@ footer{margin-top:15px;text-align:center;color:var(--muted);font-size:.82rem;lin
 <footer><strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>All Rights Reserved. · Local, private, offline-first, and child-friendly.</footer>
 </main>
 
-<div class="modal" id="quizModal"><div class="sheet"><h2 id="quizTitle"></h2><div id="quizArea"></div><div class="actions"><button class="btn primary" id="submitQuiz">Submit Quiz</button><button class="btn" id="closeQuiz">Close</button></div><div class="feedback" id="quizResult"></div></div></div>
+<div class="modal" id="quizModal"><div class="sheet"><h2 id="quizTitle"></h2><div id="quizArea"></div><div class="actions"><button class="btn primary" id="submitQuiz">Submit Quiz</button><button class="btn" id="closeQuiz">Close</button></div><div class="feedback" id="quizResult"></div><div class="quiz-note" id="quizNote">Children may retry after reviewing the lesson.</div></div></div>
 <div class="modal" id="teacherModal"><div class="sheet"><h2>Teacher Progress View</h2><div id="teacherContent"></div><div class="actions"><button class="btn" id="closeTeacher">Close</button></div></div></div>
 
 <script>
@@ -160,12 +314,90 @@ const DAY_TYPES=['Explore','Practice','Move & Count','Create','Review'];
 const $=id=>document.getElementById(id);
 const KEY='prek-math-cloud-complete-v4';
 
-function fresh(){return{theme:'cloud',week:1,day:1,stars:0,completed:[],quizResults:[],solvedAttempts:{},dates:[]}}
+function fresh(){return{
+theme:'cloud',week:1,day:1,stars:0,completed:[],quizResults:[],solvedAttempts:{},dates:[],
+voice:'cloud',voiceSpeed:'slow',autoRead:true,largeType:false,simpleMode:false
+}}
 function load(){try{return Object.assign(fresh(),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch{return fresh()}}
 let state=load(),game=null,solved=false,quizItems=[];
 
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
-function speak(t){if($('soundMode').value==='off'||!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=.88;u.pitch=1.06;speechSynthesis.speak(u)}
+const GUIDE_VOICES={
+cloud:{name:'Cloudy Clara',rate:.82,pitch:1.1,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:'Hello, little mathematician. Cloudy Clara is ready to explore numbers, shapes, patterns, and more.'},
+bunny:{name:'Benny Bunny',rate:.85,pitch:1.16,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:'Hello, counting friend. Benny Bunny is ready to hop through today’s math lesson.'},
+owl:{name:'Math Owl',rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:'Welcome, careful thinker. Math Owl is ready to look, count, compare, and explain.'},
+robot:{name:'Count-Bot',rate:.79,pitch:.96,match:/daniel|david|alex|fred|george/i,greeting:'Beep boop. Count-Bot is ready for a friendly math mission.'},
+rainbow:{name:'Rainbow Rae',rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:'Hello, bright learner. Rainbow Rae is ready for a colorful math-cloud adventure.'}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+let availableVoices=[],speechToken=0,lastSpoken='';
+
+function refreshVoices(){
+if(!('speechSynthesis'in window))return;
+availableVoices=speechSynthesis.getVoices()||[];
+const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.cloud;
+$('voiceStatus').textContent=availableVoices.length?`${g.name} is ready.`:'Loading a friendly voice…'
+}
+function chooseVoice(){
+refreshVoices();
+const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.cloud;
+const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||''));
+const pool=english.length?english:availableVoices;
+return pool.find(v=>g.match.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null
+}
+function stopSpeaking(message='Voice stopped.'){
+speechToken++;
+if('speechSynthesis'in window)speechSynthesis.cancel();
+document.querySelectorAll('.lesson,.sheet').forEach(el=>el.classList.remove('speaking'));
+$('voiceStatus').textContent=message
+}
+function speak(t,{preview=false,target=null}={}){
+if($('soundMode').value==='off'||!('speechSynthesis'in window))return;
+const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.cloud;
+const phrase=preview?g.greeting:String(t||'').trim();
+if(!phrase)return;
+stopSpeaking('');
+const token=++speechToken;
+lastSpoken=phrase;
+const u=new SpeechSynthesisUtterance(phrase);
+const v=chooseVoice();
+if(v)u.voice=v;
+u.lang=v?.lang||'en-US';
+u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+u.pitch=g.pitch;
+u.onstart=()=>{target?.classList.add('speaking');$('voiceStatus').textContent=`${g.name} is reading.`};
+u.onend=()=>{if(token!==speechToken)return;target?.classList.remove('speaking');$('voiceStatus').textContent='Ready for more math!'};
+u.onerror=()=>{if(token!==speechToken)return;target?.classList.remove('speaking');$('voiceStatus').textContent='The voice had a little hiccup.'};
+speechSynthesis.speak(u)
+}
+
+function updateVoiceButtons(){
+document.querySelectorAll('[data-voice]').forEach(b=>{
+const active=b.dataset.voice===state.voice;
+b.classList.toggle('active',active);
+b.setAttribute('aria-pressed',String(active))
+});
+$('voiceSpeed').value=state.voiceSpeed
+}
+function applyAccessibility(){
+document.body.classList.toggle('large-type',!!state.largeType);
+document.body.classList.toggle('simple-mode',!!state.simpleMode);
+$('largeTypeBtn').classList.toggle('active',!!state.largeType);
+$('simpleModeBtn').classList.toggle('active',!!state.simpleMode);
+$('autoReadBtn').classList.toggle('active',!!state.autoRead);
+$('autoReadBtn').textContent=state.autoRead?'🗣️ Auto Read On':'🤫 Auto Read Off'
+}
+function updateGarden(){
+const complete=state.completed.length;
+const ratio=complete/210;
+const stage=Math.min(4,Math.floor(ratio*5));
+document.querySelectorAll('[data-step]').forEach(el=>el.classList.toggle('on',Number(el.dataset.step)<=stage));
+$('gardenLabel').textContent=complete===210?'The entire math garden is blooming!':`${complete} of 210 lessons complete.`
+}
+function lessonNarration(){
+return `${$('lessonTitle').textContent}. ${$('objective').textContent}. Hands-on activity. ${$('handsOn').textContent}. Grown-up prompt. ${$('teacherPrompt').textContent}. ${game?.prompt||''}`
+}
+
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
 function id(){return `W${state.week}D${state.day}`}
@@ -246,11 +478,48 @@ if(['number','count','zero','tenframe','trace'].includes(kind)){
 game={name,icon,kind,prompt,options,answer};solved=false
 }
 function renderGame(){
-makeGame();$('gameTitle').textContent=DAY_TYPES[state.day-1]+' Interactive Practice';$('feedback').textContent=game.prompt;$('game').innerHTML='';$('completeBtn').disabled=!state.completed.includes(id());
-game.options.forEach(opt=>{const b=document.createElement('button');b.className='game-btn';b.textContent=opt;b.onclick=()=>{if(solved)return;if(String(opt)===String(game.answer)){b.classList.add('correct');solved=true;$('feedback').textContent='Correct! Show or tell how you knew.';state.solvedAttempts[id()]=(state.solvedAttempts[id()]||0)+1;if(!state.completed.includes(id()))$('completeBtn').disabled=false;save();speak('Correct. Wonderful thinking.')}else{b.classList.add('wrong');$('feedback').textContent='Good try. Look, count, or use real objects and try again.';setTimeout(()=>b.classList.remove('wrong'),650)}};$('game').appendChild(b)})
+makeGame();
+$('gameTitle').textContent=DAY_TYPES[state.day-1]+' Interactive Practice';
+$('feedback').textContent=game.prompt;
+$('game').innerHTML='';
+$('completeBtn').disabled=!state.completed.includes(id());
+let wrong=0;
+game.options.forEach(opt=>{
+const b=document.createElement('button');
+b.className='game-btn';
+b.textContent=opt;
+b.onclick=()=>{
+if(solved||b.disabled)return;
+if(String(opt)===String(game.answer)){
+[...$('game').children].forEach(x=>x.disabled=true);
+b.classList.add('correct');
+solved=true;
+$('feedback').textContent='Correct! Show or tell how you knew.';
+state.solvedAttempts[id()]=(state.solvedAttempts[id()]||0)+1;
+if(!state.completed.includes(id()))$('completeBtn').disabled=false;
+save();
+speak('Correct. Wonderful thinking.',{target:document.querySelector('.lesson')})
+}else{
+wrong++;
+b.classList.add('wrong');b.disabled=true;
+if(wrong<2){
+$('feedback').textContent='Good try. Look, count, or use real objects and try once more.';
+speak('Good try. Look, count, or use real objects and try once more.',{target:document.querySelector('.lesson')})
+}else{
+[...$('game').children].forEach(x=>x.disabled=true);
+const right=[...$('game').children].find(x=>String(x.textContent)===String(game.answer));
+right?.classList.add('correct','hint');
+$('feedback').textContent=`The correct answer is ${game.answer}. Try a new practice when ready.`;
+speak(`The correct answer is ${game.answer}.`,{target:document.querySelector('.lesson')})
+}
+setTimeout(()=>b.classList.remove('wrong'),650)
+}
+};
+$('game').appendChild(b)
+})
 }
 function renderLesson(){
-const [name,icon]=topic();$('lessonIcon').textContent=icon;$('lessonTitle').textContent=name;$('lessonMeta').textContent=`Week ${state.week} · Day ${state.day} · ${DAY_TYPES[state.day-1]}`;$('objective').textContent=objective();$('handsOn').textContent=handsOn();$('teacherPrompt').textContent=teacherPrompt();renderGame();renderMap();updateStats();syncControls();save()
+const [name,icon]=topic();$('lessonIcon').textContent=icon;$('lessonTitle').textContent=name;$('lessonMeta').textContent=`Week ${state.week} · Day ${state.day} · ${DAY_TYPES[state.day-1]}`;$('objective').textContent=objective();$('handsOn').textContent=handsOn();$('teacherPrompt').textContent=teacherPrompt();renderGame();renderMap();updateStats();syncControls();save();if(state.autoRead)setTimeout(()=>speak(lessonNarration(),{target:document.querySelector('.lesson')}),240)
 }
 function renderMap(){
 $('weekGrid').innerHTML='';TOPICS.forEach((t,i)=>{const b=document.createElement('button');b.className='week-btn'+(i+1===state.week?' active':'');if([1,2,3,4,5].every(d=>state.completed.includes(`W${i+1}D${d}`)))b.classList.add('done');b.textContent=`W${i+1}`;b.title=t[0];b.onclick=()=>{state.week=i+1;state.day=1;renderLesson()};$('weekGrid').appendChild(b)});
@@ -260,7 +529,7 @@ function syncControls(){$('weekSelect').value=state.week;$('daySelect').value=st
 function updateStats(){
 const complete=state.completed.length,weeks=TOPICS.filter((_,i)=>[1,2,3,4,5].every(d=>state.completed.includes(`W${i+1}D${d}`))).length,avg=state.quizResults.length?Math.round(state.quizResults.reduce((a,b)=>a+b.score,0)/state.quizResults.length):0;
 $('starsStat').textContent=state.stars;$('doneStat').textContent=complete;$('weekDoneStat').textContent=weeks;$('quizStat').textContent=state.quizResults.length;$('avgStat').textContent=avg+'%';$('streakStat').textContent=new Set(state.dates).size;$('progressBar').style.width=`${complete/210*100}%`;$('progressText').textContent=`${complete} of 210 lessons complete.`;
-const badges=[];if(complete>=5)badges.push('☁️ First Week');if(complete>=25)badges.push('🔢 Number Explorer');if(complete>=50)badges.push('🔺 Shape Spotter');if(complete>=100)badges.push('🌈 Math Adventurer');if(weeks>=21)badges.push('🧠 Halfway Hero');if(complete>=210)badges.push('🏆 Math Cloud Graduate');$('badges').innerHTML=badges.length?badges.map(x=>`<span class="badge-item">${x}</span>`).join(''):'<span class="badge-item">Complete lessons to earn badges.</span>'
+const badges=[];if(complete>=5)badges.push('☁️ First Week');if(complete>=25)badges.push('🔢 Number Explorer');if(complete>=50)badges.push('🔺 Shape Spotter');if(complete>=100)badges.push('🌈 Math Adventurer');if(weeks>=21)badges.push('🧠 Halfway Hero');if(complete>=210)badges.push('🏆 Math Cloud Graduate');$('badges').innerHTML=badges.length?badges.map(x=>`<span class="badge-item">${x}</span>`).join(''):'<span class="badge-item">Complete lessons to earn badges.</span>';updateGarden()
 }
 function completeLesson(){
 if(state.completed.includes(id())){$('feedback').textContent='This lesson is already complete.';return}
@@ -283,18 +552,59 @@ $('teacherContent').innerHTML=`<p><strong>Current location:</strong> Week ${stat
 }
 function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='prek_math_cloud_progress.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function importData(file){const r=new FileReader();r.onload=()=>{try{state=Object.assign(fresh(),JSON.parse(r.result));save();applyTheme(state.theme);renderLesson()}catch{alert('That file could not be imported.')}};r.readAsText(file)}
+
+$('voiceGuides').onclick=e=>{
+const b=e.target.closest('[data-voice]');
+if(!b)return;
+state.voice=b.dataset.voice;
+save();updateVoiceButtons();
+$('voiceStatus').textContent=`${GUIDE_VOICES[state.voice].name} selected.`
+};
+$('voiceSpeed').onchange=e=>{state.voiceSpeed=e.target.value;save();$('voiceStatus').textContent='Reading speed saved.'};
+$('meetGuideBtn').onclick=()=>speak('',{preview:true});
+$('repeatVoiceBtn').onclick=()=>lastSpoken?speak(lastSpoken,{target:document.querySelector('.lesson')}):speak(lessonNarration(),{target:document.querySelector('.lesson')});
+$('stopVoiceBtn').onclick=()=>stopSpeaking();
+$('largeTypeBtn').onclick=()=>{state.largeType=!state.largeType;save();applyAccessibility()};
+$('simpleModeBtn').onclick=()=>{state.simpleMode=!state.simpleMode;save();applyAccessibility()};
+$('autoReadBtn').onclick=()=>{state.autoRead=!state.autoRead;save();applyAccessibility()};
+
 $('theme').innerHTML=Object.entries(THEMES).map(([k,t])=>`<option value="${k}">${t.emoji} ${t.name}</option>`).join('');
 $('weekSelect').innerHTML=TOPICS.map((t,i)=>`<option value="${i+1}">Week ${i+1}: ${t[0]}</option>`).join('');
 $('daySelect').innerHTML=DAY_TYPES.map((d,i)=>`<option value="${i+1}">Day ${i+1}: ${d}</option>`).join('');
 $('theme').value=state.theme;$('theme').onchange=e=>applyTheme(e.target.value);$('weekSelect').onchange=e=>{state.week=Number(e.target.value);state.day=1;renderLesson()};$('daySelect').onchange=e=>{state.day=Number(e.target.value);renderLesson()};
 $('search').onchange=e=>{const q=e.target.value.toLowerCase().trim(),i=TOPICS.findIndex(t=>t[0].toLowerCase().includes(q)||t[2].toLowerCase().includes(q));if(i>=0){state.week=i+1;state.day=1;renderLesson()}};
-$('hearBtn').onclick=()=>speak(`${$('lessonTitle').textContent}. ${$('objective').textContent}. Hands-on activity. ${$('handsOn').textContent}. ${game.prompt}`);
-$('newGameBtn').onclick=renderGame;$('hintBtn').onclick=()=>speak(`The answer is ${game.answer}. Use objects, fingers, or counting to check.`);$('completeBtn').onclick=completeLesson;
+$('hearBtn').onclick=()=>speak(lessonNarration(),{target:document.querySelector('.lesson')});
+$('newGameBtn').onclick=renderGame;
+$('hintBtn').onclick=()=>{
+const right=[...$('game').children].find(x=>String(x.textContent)===String(game.answer));
+right?.classList.add('hint');
+setTimeout(()=>right?.classList.remove('hint'),1700);
+$('feedback').textContent=`Hint: the answer is ${game.answer}. Use objects, fingers, or counting to check.`;
+speak(`The answer is ${game.answer}. Use objects, fingers, or counting to check.`,{target:document.querySelector('.lesson')})
+};
+$('completeBtn').onclick=completeLesson;
 $('quizBtn').onclick=openQuiz;$('submitQuiz').onclick=submitQuiz;$('closeQuiz').onclick=()=>$('quizModal').classList.remove('open');$('teacherBtn').onclick=teacherView;$('closeTeacher').onclick=()=>$('teacherModal').classList.remove('open');
 $('exportBtn').onclick=exportData;$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=e=>e.target.files[0]&&importData(e.target.files[0]);
 $('resetBtn').onclick=()=>{if(confirm('Reset all Pre-K Math Cloud progress on this device?')){state=fresh();save();applyTheme(state.theme);renderLesson()}};
 document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});
-applyTheme(state.theme);renderLesson();
+if('speechSynthesis'in window){
+refreshVoices();
+speechSynthesis.addEventListener?.('voiceschanged',refreshVoices);
+speechSynthesis.onvoiceschanged=refreshVoices;
+setTimeout(refreshVoices,250);
+setTimeout(refreshVoices,900)
+}else{
+$('meetGuideBtn').disabled=true;
+$('repeatVoiceBtn').disabled=true;
+$('stopVoiceBtn').disabled=true;
+$('hearBtn').disabled=true;
+$('voiceStatus').textContent='Read-aloud voices are not available in this browser.'
+}
+updateVoiceButtons();
+applyAccessibility();
+applyTheme(state.theme);
+renderLesson();
+window.addEventListener('beforeunload',()=>stopSpeaking(''));
 </script>
 </body>
 </html>
