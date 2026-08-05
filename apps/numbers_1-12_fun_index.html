@@ -29,7 +29,7 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--ink);
-  font-family:"Comic Sans MS","Trebuchet MS",system-ui,sans-serif;
+  font-family:"Comic Sans MS","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   background:
     radial-gradient(circle at 12% 12%,rgba(255,255,255,.92) 0 5%,transparent 6%),
     radial-gradient(circle at 88% 14%,rgba(255,255,255,.74) 0 4%,transparent 5%),
@@ -70,16 +70,19 @@ button{font:inherit;touch-action:manipulation}
   box-shadow:var(--shadow);
 }
 .hero h1{
-  margin:0;
-  font-size:clamp(2.3rem,7vw,5rem);
-  line-height:.96;
-  letter-spacing:-.05em;
+  margin:0 auto 8px;
+  max-width:920px;
+  padding:0 .08em;
+  font-size:clamp(2.35rem,6.2vw,4.85rem);
+  line-height:1.08;
+  letter-spacing:-.02em;
 }
 .hero p{
   margin:8px auto 0;
-  max-width:760px;
+  max-width:840px;
   color:#fff4fb;
-  line-height:1.6;
+  line-height:1.72;
+  font-size:1.02rem;
 }
 .hero-icons{
   display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px;
@@ -262,10 +265,137 @@ button.good{background:linear-gradient(135deg,#79dc9f,var(--good));color:#123621
 @media(max-width:900px){.layout{grid-template-columns:1fr}.number-stage{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.number-grid{grid-template-columns:repeat(4,1fr)}.game-area{grid-template-columns:1fr}.dots{grid-template-columns:repeat(4,46px)}.dot{width:46px;height:46px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important}}
+
+/* =========================================================
+   CRÈCHE PRESCHOOL PORTAL HEADER
+   ========================================================= */
+.creche-header{
+  width:min(1120px,calc(100% - 22px));
+  margin:14px auto 0;
+  padding:11px 13px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  border:3px solid #fff;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff,#fff8cf);
+  box-shadow:0 12px 24px rgba(65,44,88,.14);
+  position:relative;
+  z-index:2;
+}
+.creche-mark{
+  width:54px;height:54px;display:grid;place-items:center;border-radius:18px;
+  background:linear-gradient(145deg,#ffd65b,#7ed6b6);
+  border:3px solid #fff;font-size:1.9rem
+}
+.creche-eyebrow{margin:0;color:#d64f77;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.creche-title{margin:2px 0 0;color:#634a88;font-size:clamp(1.02rem,2.3vw,1.32rem);line-height:1.2}
+.creche-links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.creche-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;
+  border:2px solid #ded4e8;border-radius:999px;background:#fff;color:#654fa1;
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.creche-link.current{color:#fff;background:linear-gradient(135deg,#7c65c7,#e977a9);border-color:#fff}
+
+/* =========================================================
+   FRIENDLY NUMBER VOICE STUDIO
+   ========================================================= */
+.voice-studio{
+  margin:14px 0;
+  padding:13px;
+  border:2px solid #e1d7e8;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff);
+  box-shadow:0 10px 24px rgba(65,44,88,.07)
+}
+.voice-studio h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.voice-guides{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.voice-guide{
+  min-width:0;min-height:62px;padding:8px 6px;border:2px solid #ded4e8;
+  border-radius:16px;background:#fff;color:var(--plum);display:grid;place-items:center;
+  align-content:center;gap:2px;font-weight:900;box-shadow:none
+}
+.voice-guide .emoji{font-size:1.45rem;line-height:1}
+.voice-guide .name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.68rem}
+.voice-guide.active{color:#fff;border-color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose))}
+.voice-controls{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.voice-controls select{
+  border:2px solid #ded4e8;border-radius:999px;padding:9px 12px;background:#fff;color:var(--ink);font-weight:900
+}
+.voice-status{min-height:1.2em;margin:7px 0 0;text-align:center;color:var(--muted);font-size:.8rem}
+.number-card.speaking,.activity.speaking{box-shadow:0 0 0 5px rgba(255,211,105,.34),var(--shadow)}
+
+.simple-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0 0}
+.simple-row button.active{color:#fff;background:linear-gradient(135deg,var(--mint),var(--sky))}
+body.large-type{font-size:18px}
+body.simple-mode .stats,
+body.simple-mode .number-path-card,
+body.simple-mode .progress-card{display:none!important}
+
+/* =========================================================
+   COLLECTION + GROWTH
+   ========================================================= */
+.collection{
+  margin-top:14px;padding:13px;border:2px solid #e1d7e8;border-radius:20px;
+  background:linear-gradient(145deg,#fff,#fff8df)
+}
+.collection h2{margin:0 0 8px;text-align:center;color:var(--plum);font-size:1rem}
+.collection-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+.collection-card{
+  min-height:76px;padding:7px;border:2px solid #e2d9e9;border-radius:14px;background:#fff;
+  display:grid;place-items:center;align-content:center;gap:2px;opacity:.35;filter:grayscale(.4)
+}
+.collection-card.learned{opacity:1;filter:none}
+.collection-card span{font-size:1.45rem}
+.collection-card small{font-size:.62rem;color:var(--muted);font-weight:900;text-align:center}
+
+.growth-track{
+  margin-top:10px;padding:10px;border:2px dashed #d7cce3;border-radius:17px;background:#ffffffb8
+}
+.growth-row{display:flex;justify-content:center;align-items:end;gap:12px;min-height:66px}
+.growth-row span{font-size:2rem;opacity:.28;transform:scale(.86);transition:.2s}
+.growth-row span.on{opacity:1;transform:scale(1)}
+.growth-label{text-align:center;color:var(--muted);font-size:.73rem;margin-top:4px}
+
+.trace-meter{margin-top:8px;height:10px;border-radius:999px;overflow:hidden;background:#e9e3ed}
+.trace-meter>div{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--sun),var(--mint));transition:.25s}
+.trace-score{text-align:center;color:var(--muted);font-size:.72rem;margin-top:5px}
+
+.choice.hint{animation:choiceHint .7s ease 2;box-shadow:0 0 0 5px rgba(255,211,105,.4)}
+@keyframes choiceHint{50%{transform:translateY(-3px) scale(1.03)}}
+
+@media(max-width:760px){
+  .creche-header{grid-template-columns:auto 1fr}
+  .creche-links{grid-column:1/-1;justify-content:center}
+  .voice-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .collection-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:460px){
+  .creche-header{grid-template-columns:1fr;text-align:center}
+  .creche-mark{margin:auto}
+  .creche-links{grid-column:auto}
+  .collection-grid{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 <body>
 <div class="sky" aria-hidden="true"><span>⭐</span><span>🌈</span><span>☁️</span><span>✨</span><span>🦋</span></div>
+
+
+<header class="creche-header" aria-label="Crèche Preschool Portal">
+  <div class="creche-mark" aria-hidden="true">🔢</div>
+  <div>
+    <p class="creche-eyebrow">Khaemenes Academy · Preschool Portal</p>
+    <div class="creche-title">The Crèche™ · Number Garden 1–12</div>
+  </div>
+  <nav class="creche-links" aria-label="Preschool navigation">
+    <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
+    <a class="creche-link current" href="#" aria-current="page">🔢 Number Garden</a>
+  </nav>
+</header>
 
 <main class="app">
   <header class="hero">
@@ -274,12 +404,40 @@ button.good{background:linear-gradient(135deg,#79dc9f,var(--good));color:#123621
     <div class="hero-icons"><span>1️⃣</span><span>🔢</span><span>✏️</span><span>🌼</span></div>
   </header>
 
-  <div class="toolbar">
+  
+<section class="voice-studio" aria-labelledby="voiceTitle">
+  <h2 id="voiceTitle">Choose a Number Friend</h2>
+  <div class="voice-guides" id="voiceGuides">
+    <button type="button" class="voice-guide" data-voice="sunny"><span class="emoji">☀️</span><span class="name">Sunny One</span></button>
+    <button type="button" class="voice-guide" data-voice="bunny"><span class="emoji">🐰</span><span class="name">Benny Bunny</span></button>
+    <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Number Owl</span></button>
+    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+  </div>
+  <div class="voice-controls">
+    <select id="voiceSpeed" aria-label="Reading speed">
+      <option value="slow">🐢 Slow and clear</option>
+      <option value="normal">🙂 Just right</option>
+      <option value="lively">⭐ A little lively</option>
+    </select>
+    <button type="button" id="meetGuideBtn" class="secondary">👋 Meet My Friend</button>
+    <button type="button" id="repeatVoiceBtn" class="secondary">🔁 Repeat Last</button>
+    <button type="button" id="stopVoiceBtn" class="secondary">⏹ Stop Voice</button>
+  </div>
+  <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+</section>
+
+<div class="toolbar">
     <button id="prevBtn" class="secondary">⬅ Previous</button>
     <button id="hearBtn">🔊 Hear Number</button>
     <button id="nextBtn" class="good">Next ➡</button>
     <button id="randomBtn" class="secondary">🎲 Surprise Me</button>
   </div>
+
+<div class="simple-row">
+  <button id="largeTypeBtn" class="secondary">🔎 Larger Type</button>
+  <button id="simpleModeBtn" class="secondary">🧘 Simple Mode</button>
+  <button id="autoReadBtn" class="secondary">🗣️ Auto Read On</button>
+</div>
 
   <section class="stats">
     <div class="stat"><strong id="currentStat">1</strong>Current Number</div>
@@ -311,7 +469,7 @@ button.good{background:linear-gradient(135deg,#79dc9f,var(--good));color:#123621
     </section>
 
     <aside class="side-stack">
-      <section class="activity">
+      <section class="activity number-path-card">
         <h2>🌈 Number Path</h2>
         <div class="number-grid" id="numberGrid"></div>
       </section>
@@ -326,16 +484,33 @@ button.good{background:linear-gradient(135deg,#79dc9f,var(--good));color:#123621
           <button id="checkTrace">✓ Check Trace</button>
           <button id="guideBtn" class="secondary">👁 Guide On</button>
         </div>
-        <div class="trace-message" id="traceMessage">Trace over the large number.</div>
+        <div class="trace-message" id="traceMessage">Trace over the large number.</div><div class="trace-meter"><div id="traceMeterBar"></div></div><div class="trace-score" id="traceScore">Guide coverage: 0%</div>
       </section>
 
-      <section class="activity">
+      <section class="activity progress-card">
         <h2>🏆 Garden Progress</h2>
         <div class="progress"><div id="progressBar"></div></div>
+
+<div class="growth-track">
+  <div class="growth-row" id="growthRow">
+    <span data-step="0">🌱</span>
+    <span data-step="1">🌿</span>
+    <span data-step="2">🌼</span>
+    <span data-step="3">🌳</span>
+    <span data-step="4">🏆</span>
+  </div>
+  <div class="growth-label" id="growthLabel">Trace and match numbers to grow the garden.</div>
+</div>
+
         <div class="trace-message" id="progressText"></div>
       </section>
     </aside>
   </div>
+
+<section class="collection">
+  <h2>📖 My Number Collection</h2>
+  <div class="collection-grid" id="collectionGrid"></div>
+</section>
 
   <footer class="site-footer">
     <strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>
@@ -376,7 +551,12 @@ const state={
   stars:Number(localStorage.getItem("numberGardenStars")||0),
   traced:new Set(JSON.parse(localStorage.getItem("numberGardenTraced")||"[]")),
   matched:new Set(JSON.parse(localStorage.getItem("numberGardenMatched")||"[]")),
-  guide:true
+  guide:true,
+  voice:localStorage.getItem("numberGardenVoice")||"sunny",
+  voiceSpeed:localStorage.getItem("numberGardenVoiceSpeed")||"slow",
+  autoRead:localStorage.getItem("numberGardenAutoRead")!=="false",
+  largeType:localStorage.getItem("numberGardenLargeType")==="true",
+  simpleMode:localStorage.getItem("numberGardenSimpleMode")==="true"
 };
 
 const $=id=>document.getElementById(id);
@@ -384,23 +564,150 @@ const canvas=$("traceCanvas");
 const ctx=canvas.getContext("2d");
 let drawing=false;
 let points=0;
+let traceSamples=[];
+let guideMaskCanvas=null;
+let guideMaskCtx=null;
 
 function save(){
   localStorage.setItem("numberGardenCurrent",String(state.current));
   localStorage.setItem("numberGardenStars",String(state.stars));
   localStorage.setItem("numberGardenTraced",JSON.stringify([...state.traced]));
   localStorage.setItem("numberGardenMatched",JSON.stringify([...state.matched]));
+  localStorage.setItem("numberGardenVoice",state.voice);
+  localStorage.setItem("numberGardenVoiceSpeed",state.voiceSpeed);
+  localStorage.setItem("numberGardenAutoRead",String(state.autoRead));
+  localStorage.setItem("numberGardenLargeType",String(state.largeType));
+  localStorage.setItem("numberGardenSimpleMode",String(state.simpleMode));
 }
 
-function speak(text){
-  if(!("speechSynthesis" in window)) return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  const voices=speechSynthesis.getVoices();
-  u.voice=voices.find(v=>/child|kid|jenny|samantha|aria|female/i.test(v.name)&&/^en/i.test(v.lang))
-    ||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;
-  u.rate=.84;u.pitch=1.1;
+const GUIDE_VOICES={
+  sunny:{name:"Sunny One",rate:.82,pitch:1.12,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, number gardener. Sunny One is ready to count, trace, and match with you."},
+  bunny:{name:"Benny Bunny",rate:.85,pitch:1.16,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello, counting friend. Benny Bunny is ready to hop through numbers one to twelve."},
+  owl:{name:"Number Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful counter. Number Owl is ready to count each object and trace each numeral."},
+  rainbow:{name:"Rainbow Rae",rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright learner. Rainbow Rae is ready for a colorful number garden adventure."}
+};
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
+let availableVoices=[],speechToken=0,lastSpoken="";
+
+function refreshVoices(){
+  if(!("speechSynthesis" in window))return;
+  availableVoices=speechSynthesis.getVoices()||[];
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.sunny;
+  $("voiceStatus").textContent=availableVoices.length?`${g.name} is ready.`:"Loading a friendly voice…";
+}
+function chooseVoice(){
+  refreshVoices();
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.sunny;
+  const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+  const pool=english.length?english:availableVoices;
+  return pool.find(v=>g.match.test(v.name))
+    ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+    ||pool[0]
+    ||null;
+}
+function stopSpeaking(message="Voice stopped."){
+  speechToken++;
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  document.querySelectorAll(".number-card,.activity").forEach(el=>el.classList.remove("speaking"));
+  $("voiceStatus").textContent=message;
+}
+function speak(text,{preview=false,target=null}={}){
+  if(!("speechSynthesis" in window))return;
+  const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.sunny;
+  const phrase=preview?g.greeting:String(text||"").trim();
+  if(!phrase)return;
+  stopSpeaking("");
+  const token=++speechToken;
+  lastSpoken=phrase;
+  const u=new SpeechSynthesisUtterance(phrase);
+  const voice=chooseVoice();
+  if(voice)u.voice=voice;
+  u.lang=voice?.lang||"en-US";
+  u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=g.pitch;
+  u.volume=1;
+  u.onstart=()=>{if(target)target.classList.add("speaking");$("voiceStatus").textContent=`${g.name} is reading.`};
+  u.onend=()=>{if(token!==speechToken)return;if(target)target.classList.remove("speaking");$("voiceStatus").textContent="Ready for another number!"};
+  u.onerror=()=>{if(token!==speechToken)return;if(target)target.classList.remove("speaking");$("voiceStatus").textContent="The voice had a little hiccup."};
   speechSynthesis.speak(u);
+}
+
+
+function updateVoiceButtons(){
+  document.querySelectorAll("[data-voice]").forEach(b=>{
+    const active=b.dataset.voice===state.voice;
+    b.classList.toggle("active",active);
+    b.setAttribute("aria-pressed",String(active));
+  });
+  $("voiceSpeed").value=state.voiceSpeed;
+}
+function applyAccessibility(){
+  document.body.classList.toggle("large-type",state.largeType);
+  document.body.classList.toggle("simple-mode",state.simpleMode);
+  $("largeTypeBtn").classList.toggle("active",state.largeType);
+  $("simpleModeBtn").classList.toggle("active",state.simpleMode);
+  $("autoReadBtn").classList.toggle("active",state.autoRead);
+  $("autoReadBtn").textContent=state.autoRead?"🗣️ Auto Read On":"🤫 Auto Read Off";
+}
+function renderCollection(){
+  $("collectionGrid").innerHTML=DATA.map(item=>{
+    const learned=state.traced.has(item.n)&&state.matched.has(item.n);
+    return `<button class="collection-card ${learned?"learned":""}" data-number="${item.n}" ${learned?"":"disabled"}>
+      <span>${learned?item.emoji:"❔"}</span>
+      <small>${learned?`${item.n} · ${item.word.toUpperCase()}`:"Keep learning"}</small>
+    </button>`;
+  }).join("");
+}
+function updateGrowth(){
+  const complete=DATA.filter(x=>state.traced.has(x.n)&&state.matched.has(x.n)).length;
+  const ratio=complete/DATA.length;
+  const stage=Math.min(4,Math.floor(ratio*5));
+  document.querySelectorAll("[data-step]").forEach(el=>el.classList.toggle("on",Number(el.dataset.step)<=stage));
+  $("growthLabel").textContent=complete===DATA.length
+    ?"All twelve numbers are blooming!"
+    :`${complete} of ${DATA.length} numbers fully explored.`;
+}
+function speakCurrent(){
+  const d=currentData();
+  speak(`${d.n}. ${d.word}. ${d.fact}`,{target:document.querySelector(".number-card")});
+}
+function makeGuideMask(){
+  const rect=canvas.getBoundingClientRect();
+  guideMaskCanvas=document.createElement("canvas");
+  guideMaskCanvas.width=Math.max(1,Math.round(rect.width));
+  guideMaskCanvas.height=Math.max(1,Math.round(rect.height));
+  guideMaskCtx=guideMaskCanvas.getContext("2d");
+  guideMaskCtx.clearRect(0,0,guideMaskCanvas.width,guideMaskCanvas.height);
+  guideMaskCtx.strokeStyle="#000";
+  guideMaskCtx.lineWidth=18;
+  guideMaskCtx.textAlign="center";
+  guideMaskCtx.textBaseline="middle";
+  guideMaskCtx.font=`900 ${Math.min(rect.width*.58,rect.height*.72)}px "Comic Sans MS",sans-serif`;
+  guideMaskCtx.strokeText(String(state.current),rect.width/2,rect.height/2+8);
+}
+function traceQuality(){
+  if(!traceSamples.length||!guideMaskCtx)return 0;
+  const data=guideMaskCtx.getImageData(0,0,guideMaskCanvas.width,guideMaskCanvas.height).data;
+  let near=0;
+  const radius=18;
+  for(const p of traceSamples){
+    let hit=false;
+    for(let y=Math.max(0,Math.floor(p.y-radius));y<Math.min(guideMaskCanvas.height,Math.ceil(p.y+radius));y+=3){
+      for(let x=Math.max(0,Math.floor(p.x-radius));x<Math.min(guideMaskCanvas.width,Math.ceil(p.x+radius));x+=3){
+        if(data[(y*guideMaskCanvas.width+x)*4+3]>20){hit=true;break}
+      }
+      if(hit)break;
+    }
+    if(hit)near++;
+  }
+  const closeness=near/traceSamples.length;
+  const coverage=Math.min(1,traceSamples.length/Math.max(45,state.current*5));
+  return closeness*.7+coverage*.3;
+}
+function updateTraceMeter(){
+  const pct=Math.round(traceQuality()*100);
+  $("traceMeterBar").style.width=`${pct}%`;
+  $("traceScore").textContent=`Guide coverage: ${pct}%`;
 }
 
 function currentData(){return DATA[state.current-1]}
@@ -417,6 +724,7 @@ function render(){
   clearCanvas();
   updateStats();
   save();
+  if(state.autoRead)setTimeout(speakCurrent,220);
 }
 
 function renderDots(){
@@ -458,21 +766,32 @@ function renderMatch(){
     counts.add(n);
   }
   const box=$("gameArea");box.innerHTML="";
+  let wrong=0;
   shuffle([...counts]).forEach(count=>{
     const b=document.createElement("button");
     b.className="choice";
     b.textContent=Array.from({length:count},()=>item.emoji).join("");
     b.onclick=()=>{
       if(count===item.n){
+        [...box.children].forEach(x=>x.disabled=true);
         b.classList.add("correct");
-        $("matchPrompt").textContent="Correct! You matched the number.";
+        $("matchPrompt").textContent=`Correct! You counted ${item.n}.`;
         if(!state.matched.has(item.n)){state.matched.add(item.n);state.stars+=2}
-        speak("Correct. You matched the number.");
+        speak(`Correct. You counted ${item.n}.`,{target:b.closest(".activity")});
         updateStats();renderNumbers();save();
       }else{
-        b.classList.add("wrong");
-        $("matchPrompt").textContent="Good try. Count each picture carefully.";
-        speak("Good try. Count carefully.");
+        wrong++;
+        b.classList.add("wrong");b.disabled=true;
+        if(wrong<2){
+          $("matchPrompt").textContent="Good try. Count each picture carefully and try once more.";
+          speak("Good try. Count carefully and try once more.",{target:b.closest(".activity")});
+        }else{
+          [...box.children].forEach(x=>x.disabled=true);
+          const right=[...box.children].find(x=>x.textContent.length===Array.from({length:item.n},()=>item.emoji).join("").length);
+          right?.classList.add("correct","hint");
+          $("matchPrompt").textContent=`The correct group has ${item.n} picture${item.n===1?"":"s"}.`;
+          speak(`The correct group has ${item.n} pictures.`,{target:b.closest(".activity")});
+        }
         setTimeout(()=>b.classList.remove("wrong"),600);
       }
     };
@@ -509,8 +828,12 @@ function drawGuide(){
 
 function clearCanvas(){
   points=0;
+  traceSamples=[];
   drawGuide();
+  makeGuideMask();
   $("traceMessage").textContent="Trace over the large number.";
+  $("traceMeterBar").style.width="0%";
+  $("traceScore").textContent="Guide coverage: 0%";
 }
 
 function pointerPos(e){
@@ -537,6 +860,8 @@ function moveDraw(e){
   ctx.lineTo(p.x,p.y);
   ctx.stroke();
   points++;
+  traceSamples.push(p);
+  if(points%6===0)updateTraceMeter();
 }
 function endDraw(){drawing=false}
 
@@ -546,14 +871,22 @@ canvas.addEventListener("pointerup",endDraw);
 canvas.addEventListener("pointerleave",endDraw);
 
 function checkTrace(){
+  const score=traceQuality();
+  const pct=Math.round(score*100);
+  updateTraceMeter();
   if(points<18){
     $("traceMessage").textContent="Keep tracing a little more.";
-    speak("Keep tracing a little more.");
+    speak("Keep tracing a little more.",{target:canvas.closest(".activity")});
     return;
   }
-  $("traceMessage").textContent="Beautiful tracing! You earned a star.";
+  if(score<.42){
+    $("traceMessage").textContent="Try staying a little closer to the dotted number.";
+    speak("Try staying a little closer to the dotted number.",{target:canvas.closest(".activity")});
+    return;
+  }
+  $("traceMessage").textContent=`Beautiful tracing! You followed ${pct}% of the guide.`;
   if(!state.traced.has(state.current)){state.traced.add(state.current);state.stars+=2}
-  speak("Beautiful tracing.");
+  speak("Beautiful tracing.",{target:canvas.closest(".activity")});
   updateStats();renderNumbers();save();
 }
 
@@ -565,6 +898,8 @@ function updateStats(){
   const complete=DATA.filter(x=>state.traced.has(x.n)&&state.matched.has(x.n)).length;
   $("progressBar").style.width=(complete/12*100)+"%";
   $("progressText").textContent=`${complete} of 12 numbers fully explored.`;
+  updateGrowth();
+  renderCollection();
 }
 
 function change(delta){
@@ -572,10 +907,49 @@ function change(delta){
   render();
 }
 
+
+$("voiceGuides").onclick=e=>{
+  const b=e.target.closest("[data-voice]");
+  if(!b)return;
+  state.voice=b.dataset.voice;
+  save();
+  updateVoiceButtons();
+  $("voiceStatus").textContent=`${GUIDE_VOICES[state.voice].name} selected.`;
+};
+$("voiceSpeed").onchange=e=>{
+  state.voiceSpeed=e.target.value;
+  save();
+  $("voiceStatus").textContent="Reading speed saved.";
+};
+$("meetGuideBtn").onclick=()=>speak("",{preview:true});
+$("repeatVoiceBtn").onclick=()=>lastSpoken?speak(lastSpoken,{target:document.querySelector(".number-card")}):speakCurrent();
+$("stopVoiceBtn").onclick=()=>stopSpeaking();
+
+$("largeTypeBtn").onclick=()=>{
+  state.largeType=!state.largeType;
+  save();applyAccessibility();
+};
+$("simpleModeBtn").onclick=()=>{
+  state.simpleMode=!state.simpleMode;
+  save();applyAccessibility();
+};
+$("autoReadBtn").onclick=()=>{
+  state.autoRead=!state.autoRead;
+  save();applyAccessibility();
+};
+
+$("collectionGrid").onclick=e=>{
+  const b=e.target.closest("[data-number]");
+  if(!b||b.disabled)return;
+  state.current=Number(b.dataset.number);
+  render();
+  speakCurrent();
+};
+
 $("prevBtn").onclick=()=>change(-1);
 $("nextBtn").onclick=()=>change(1);
 $("randomBtn").onclick=()=>{state.current=Math.floor(Math.random()*12)+1;render()};
-$("hearBtn").onclick=()=>{const d=currentData();speak(`${d.n}. ${d.word}. ${d.fact}`)};
+$("hearBtn").onclick=speakCurrent;
 $("clearTrace").onclick=clearCanvas;
 $("checkTrace").onclick=checkTrace;
 $("guideBtn").onclick=()=>{
@@ -584,7 +958,24 @@ $("guideBtn").onclick=()=>{
   clearCanvas();
 };
 
+if("speechSynthesis" in window){
+  refreshVoices();
+  speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
+  speechSynthesis.onvoiceschanged=refreshVoices;
+  setTimeout(refreshVoices,250);
+  setTimeout(refreshVoices,900);
+}else{
+  $("meetGuideBtn").disabled=true;
+  $("repeatVoiceBtn").disabled=true;
+  $("stopVoiceBtn").disabled=true;
+  $("hearBtn").disabled=true;
+  $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
+}
+updateVoiceButtons();
+applyAccessibility();
+renderCollection();
 requestAnimationFrame(()=>{resizeCanvas();render()});
+window.addEventListener("beforeunload",()=>stopSpeaking(""));
 })();
 </script>
 </body>
