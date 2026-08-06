@@ -1,48 +1,32 @@
-# Khaemenes Guided Preschool Portal v0.1
+# Crechè Profile Continuity Update v0.2
 
-## Upload location
-
-Upload the included folder to:
+## Upload these two production files
 
 ```text
-vervenveda/Khaemenes_Preschool.github.io/
-└── khaemenes-preschool/
-    └── index.html
+Khaemenes_Preschool.github.io/
+├── index.html                         # replace the current root page
+└── assets/
+    └── khaemenes-profile-bridge.js   # add this new shared bridge
 ```
 
-The live URL will be:
+Keep the existing `mentor/` folder and all files under `apps/` unchanged.
+
+## What changes on the Crechè home page
+
+- A prominent **Meet My Mentor · Enter Guided Preschool** button opens `mentor/index.html`.
+- Parent Profile and Child Profile controls appear in a new family pathway section.
+- Kinder Garden and Elementary School receive prominent custom-domain buttons.
+- Existing favorites migrate into the first child profile created on the device.
+- New hearts pin to the active child profile rather than one anonymous browser-wide list.
+- A reusable learner continuity record is stored for future school-level adapters.
+- All 52 child adventure links remain in the catalog.
+
+## Public page
 
 ```text
-https://vervenveda.com/Khaemenes_Preschool.github.io/khaemenes-preschool/
+https://vervenveda.com/Khaemenes_Preschool.github.io/
 ```
 
-## Connect it from the current Crechè home page
+## Next school-profile integration
 
-Open the repository root `index.html` and place the button from
-`CRECHE_HOME_BUTTON_PATCH.txt` first inside the existing hero `.actions`
-container.
-
-## What the portal includes
-
-- Grown-up-assisted child profile creation
-- First name or nickname only
-- Broad age band rather than exact birth date
-- Personality-based mentor matching
-- Interest selection
-- 20, 30, or 45 minute guided daily rhythms
-- Age-filtered and balanced Crechè activity selection
-- Connection to the central Sovereign Problem-Solving Agent
-- Automatic local fallback when the central module is unavailable
-- Local-only profile and progress storage
-- Guided mentor prompts rather than unrestricted private chat
-- Daily completion tracking
-- Whole-child domain map
-- Read-aloud support through browser speech synthesis
-- Calm colors and reduced-motion controls
-- Explicit export and erase controls
-- No account, advertising, analytics, microphone, photograph, or email
-
-## Existing Crechè page
-
-The current root landing page remains unchanged except for the new prominent
-button. It continues to serve as the open Activity Garden.
+Read `PROFILE_CONTINUITY_ADAPTER.md` before adding the profile display to Kinder Garden or Elementary.

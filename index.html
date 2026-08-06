@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Khaemenes Preschool — home of the Crechè, a colorful early-learning portal connecting alphabet, language, reading, spelling, numbers, shapes, art, feelings, life skills, music, movement, weather, and wonder apps.">
+<meta name="description" content="Khaemenes Preschool — the Crechè activity garden, guided preschool AI mentor hub, child and parent profile center, pinned educational games, and pathways to Kinder Garden and Elementary School.">
 <meta name="theme-color" content="#3eb8ed">
 <meta name="color-scheme" content="light">
+<link rel="canonical" href="https://vervenveda.com/Khaemenes_Preschool.github.io/">
 <title>Khaemenes Preschool · Crechè | Bright Beginnings</title>
 <style>
 :root{
@@ -317,6 +318,86 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
   font-weight:800;
 }
 
+
+/* Guided learning + family profile continuity */
+.family-pathway{
+  position:relative;
+  border-block:1px solid rgba(45,58,92,.14);
+  background:
+    radial-gradient(circle at 9% 8%,rgba(255,214,61,.28),transparent 19rem),
+    radial-gradient(circle at 91% 88%,rgba(34,203,230,.22),transparent 23rem),
+    linear-gradient(145deg,rgba(255,255,255,.94),rgba(242,250,255,.91) 54%,rgba(255,247,222,.93));
+}
+.family-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.family-card{
+  position:relative;min-height:285px;display:flex;flex-direction:column;padding:24px;overflow:hidden;
+  border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow)
+}
+.family-card.featured{color:#fff;background:linear-gradient(145deg,#183766,#2b5684 56%,#1a8588);border-color:rgba(255,255,255,.55)}
+.family-card::after{content:"";position:absolute;right:-50px;bottom:-58px;width:165px;height:165px;border-radius:50%;background:var(--family-glow,rgba(116,87,255,.09))}
+.family-card>*{position:relative;z-index:1}
+.family-icon{width:70px;height:70px;display:grid;place-items:center;border-radius:23px;background:var(--family-soft,#f0edff);font-size:2.15rem;box-shadow:var(--soft)}
+.family-card.featured .family-icon{border:3px solid rgba(255,255,255,.76);background:rgba(255,255,255,.14)}
+.family-card h3{margin:16px 0 7px;color:#39366b;font-family:var(--serif);font-size:1.55rem}
+.family-card.featured h3{color:#fff}
+.family-card p{margin:0;color:var(--muted);font-size:.87rem}
+.family-card.featured p{color:rgba(255,255,255,.82)}
+.family-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+.family-meta span{padding:5px 8px;border-radius:999px;background:#f3f6fa;color:#58697e;font-size:.66rem;font-weight:800}
+.family-card.featured .family-meta span{color:#fff;background:rgba(255,255,255,.12)}
+.family-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:17px}
+.family-action{
+  min-height:45px;display:inline-flex;align-items:center;justify-content:center;padding:.7rem .88rem;
+  border:0;border-radius:13px;color:#fff;background:linear-gradient(135deg,var(--purple),var(--pink));
+  text-decoration:none;font-size:.78rem;font-weight:900
+}
+.family-action.light{color:#443f72;background:#f1edff;border:1px solid rgba(116,87,255,.18)}
+.family-card.featured .family-action{color:#173660;background:#fff}
+.family-card.featured .family-action.light{color:#fff;background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.22)}
+.profile-summary{display:flex;align-items:center;gap:12px;margin-top:12px;padding:12px;border-radius:18px;background:#f7f9fc}
+.profile-avatar{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#fff1a8,#ffbd62);font-size:1.85rem;box-shadow:var(--soft)}
+.profile-summary strong{display:block;color:#343967}
+.profile-summary small{display:block;color:var(--muted);font-size:.71rem}
+.pinned-wrap{margin-top:26px;padding:22px;border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:var(--soft)}
+.pinned-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.pinned-head h3{margin:0;color:#413c72;font-family:var(--serif);font-size:1.55rem}
+.pinned-head p{margin:4px 0 0;color:var(--muted);font-size:.8rem}
+.pinned-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:15px}
+.pinned-app{min-height:105px;display:flex;align-items:center;gap:10px;padding:13px;border:1px solid var(--line);border-radius:18px;background:#fbfcff;text-decoration:none}
+.pinned-app:hover{transform:translateY(-3px);box-shadow:var(--soft)}
+.pinned-app i{width:45px;height:45px;flex:0 0 45px;display:grid;place-items:center;border-radius:14px;background:#f1edff;font-style:normal;font-size:1.35rem}
+.pinned-app strong{display:block;color:#403c70;font-size:.79rem;line-height:1.2}
+.pinned-app small{display:block;margin-top:4px;color:var(--muted);font-size:.63rem}
+.pinned-empty{grid-column:1/-1;padding:18px;border:2px dashed #dcd6ee;border-radius:18px;color:var(--muted);text-align:center;font-size:.82rem}
+.continuity-note{margin-top:15px;padding:13px 15px;border-radius:17px;color:#365a4e;background:#e9f8f1;font-size:.76rem}
+.continuity-note strong{color:#176d50}
+
+.profile-overlay{position:fixed;inset:0;z-index:700;display:grid;place-items:center;padding:17px;visibility:hidden;opacity:0;background:rgba(27,34,53,.72);backdrop-filter:blur(11px);transition:.2s}
+.profile-overlay.open{visibility:visible;opacity:1}
+.profile-dialog{width:min(690px,100%);max-height:calc(100svh - 34px);overflow:auto;border:3px solid rgba(255,255,255,.9);border-radius:29px;background:#fffdf7;box-shadow:0 28px 85px rgba(15,25,48,.38)}
+.profile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px;color:#fff;background:linear-gradient(135deg,#173660,#4d3d89 58%,#a74784)}
+.profile-head h2{margin:0;color:#fff;font-size:2rem}
+.profile-head p{margin:7px 0 0;color:rgba(255,255,255,.78);font-size:.82rem}
+.profile-close{width:44px;height:44px;flex:0 0 44px;border:1px solid rgba(255,255,255,.22);border-radius:14px;color:#fff;background:rgba(255,255,255,.1);font-size:1.3rem}
+.profile-body{padding:24px}
+.profile-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.profile-field label{display:block;margin-bottom:6px;color:#3f4e67;font-size:.78rem;font-weight:850}
+.profile-field input,.profile-field select{width:100%;min-height:50px;padding:.75rem .85rem;border:1px solid var(--line);border-radius:13px;color:var(--ink);background:#fff}
+.profile-guardian{display:flex;align-items:flex-start;gap:9px;margin-top:16px;padding:13px;border-radius:14px;color:#315b4d;background:#eaf7f1;font-size:.78rem}
+.profile-guardian input{margin-top:3px;accent-color:var(--green)}
+.profile-privacy{margin-top:14px;color:var(--muted);font-size:.73rem}
+.profile-error{min-height:1.2em;margin-top:8px;color:#b03e48;font-size:.76rem;font-weight:850}
+.profile-foot{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:17px 24px;border-top:1px solid var(--line);background:#fff}
+.profile-save,.profile-cancel{min-height:47px;padding:.72rem 1rem;border:0;border-radius:999px;font-weight:900}
+.profile-save{color:#fff;background:linear-gradient(135deg,var(--purple),var(--pink))}
+.profile-cancel{color:#4e5871;background:#edf2f6}
+
+.profile-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;color:#fff;background:linear-gradient(135deg,#7457ff,#ef5bb8);font-size:.69rem;font-weight:900}
+
+@media(max-width:1080px){.family-grid{grid-template-columns:repeat(2,1fr)}.pinned-list{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.family-grid,.profile-fields{grid-template-columns:1fr}.pinned-list{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.pinned-list{grid-template-columns:1fr}.profile-foot{align-items:stretch;flex-direction:column-reverse}.profile-save,.profile-cancel{width:100%}}
+
 </style>
 </head>
 <body id="top">
@@ -361,7 +442,7 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
   <div class="shell nav">
     <a class="brand" href="#top"><span class="brand-bubble">🌈</span><span><strong>Khaemenes Preschool</strong><small>Crechè · Bright beginnings grow here</small></span></a>
     <nav class="navlinks" aria-label="Child-friendly navigation">
-      <a href="#new">New &amp; Updated</a><a href="#rooms">Adventure Rooms</a><a href="#today">Today’s Pick</a><a href="#activities">All Adventures</a>
+      <a href="./mentor/index.html">Guided Preschool</a><a href="#profiles">Profiles</a><a href="#rooms">Adventure Rooms</a><a href="#today">Today’s Pick</a><a href="#activities">All Adventures</a>
     </nav>
     <button class="menu-btn" id="menuBtn" type="button" aria-label="Open complete menu" aria-expanded="false">☰</button>
   </div>
@@ -369,9 +450,9 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
 
 <nav class="breadcrumbs" aria-label="Breadcrumb">
   <div class="shell">
-    <a href="https://vervenveda.github.io/">Verve N Veda</a>
+    <a href="https://vervenveda.com/">Verve N Veda</a>
     <span aria-hidden="true">›</span>
-    <a href="https://vervenveda.github.io/Khaemenes_Academy.github.io/">Khaemenes Academy</a>
+    <a href="https://vervenveda.com/Khaemenes_Academy.github.io/">Khaemenes Academy</a>
     <span aria-hidden="true">›</span>
     <span aria-current="page">Khaemenes Preschool · Crechè</span>
   </div>
@@ -394,8 +475,12 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
       <p class="eyebrow">🌟 A colorful first doorway to learning</p>
       <h1>Crechè<span>Khaemenes Preschool · Read · Count · Create · Feel · Move · Wonder</span></h1>
       <p class="lead">A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.</p>
-      <div class="actions"><a class="btn primary" href="#rooms">Choose an Adventure Room ↓</a><button class="btn secondary" id="surpriseHero" type="button">Pick One for Me 🎈</button></div>
-      <div class="hero-notes"><span class="hero-note"><strong id="heroKidCount">52</strong>&nbsp;child adventures</span><span class="hero-note">No account required</span><span class="hero-note">Favorites stay on this device</span><span class="hero-note">Large, playful buttons</span></div>
+      <div class="actions">
+        <a class="btn primary" href="./mentor/index.html">Meet My Mentor · Enter Guided Preschool →</a>
+        <a class="btn secondary" href="#rooms">Choose an Adventure Room ↓</a>
+        <button class="btn secondary" id="surpriseHero" type="button">Pick One for Me 🎈</button>
+      </div>
+      <div class="hero-notes"><span class="hero-note"><strong id="heroKidCount">52</strong>&nbsp;child adventures</span><span class="hero-note">No account required</span><span class="hero-note">Favorites pin to the active child profile</span><span class="hero-note">Large, playful buttons</span></div>
     </div>
     <div class="hero-playground" aria-label="Quick adventure buttons">
       <div class="big-rainbow" aria-hidden="true"></div>
@@ -403,6 +488,85 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
       <a class="orbit-button" href="#activities" title="Find an art activity">🎨</a>
       <button class="orbit-button" id="orbitRandom" type="button" title="Open a surprise adventure">🎈</button>
       <a class="orbit-button" href="#today" title="See today's pick">⭐</a>
+    </div>
+  </div>
+</section>
+
+<section class="section family-pathway" id="profiles">
+  <div class="shell">
+    <div class="heading">
+      <p class="kicker">One child · one growing learning pathway</p>
+      <h2>Meet the mentor, save favorites, and continue forward.</h2>
+      <p>Crechè remains an open adventure garden. This family pathway connects the same child profile to guided preschool, Kinder Garden, and Elementary School while keeping information local to the family’s browser.</p>
+    </div>
+
+    <div class="family-grid">
+      <article class="family-card featured" style="--family-glow:rgba(66,199,220,.18)">
+        <span class="family-icon" aria-hidden="true">✨</span>
+        <h3>Guided Preschool &amp; AI Mentor</h3>
+        <p>Meet an age-aligned, clearly identified AI learning friend and receive a balanced daily path through Crechè activities.</p>
+        <div class="family-meta"><span>Guardian-guided</span><span>Local-first</span><span>Balanced learning day</span></div>
+        <div class="family-actions"><a class="family-action" href="./mentor/index.html">Enter the Learning Hub →</a></div>
+      </article>
+
+      <article class="family-card" style="--family-soft:#fff2c8;--family-glow:rgba(255,214,61,.16)">
+        <span class="family-icon" aria-hidden="true">🧒</span>
+        <h3>Child Profile</h3>
+        <p>Favorites, visited adventures, age band, and mentor match belong to the active child instead of the whole browser.</p>
+        <div class="profile-summary">
+          <span class="profile-avatar" id="profileAvatar" aria-hidden="true">🌟</span>
+          <span><strong id="profileName">No child profile yet</strong><small id="profileStatus">Create one with a grown-up to pin favorite games.</small></span>
+        </div>
+        <div class="family-actions">
+          <button class="family-action" id="openChildProfile" type="button">Create Child Profile</button>
+          <button class="family-action light" id="showProfileFavorites" type="button">Show Pinned Games</button>
+        </div>
+      </article>
+
+      <article class="family-card" style="--family-soft:#e6f7ef;--family-glow:rgba(0,174,136,.14)">
+        <span class="family-icon" aria-hidden="true">🧑‍🧒</span>
+        <h3>Parent Profile &amp; Controls</h3>
+        <p>A private local control center for reviewing saved learning data, exporting a record, editing the child profile, or erasing it.</p>
+        <div class="family-meta"><span id="profileFavoriteCount">0 pinned</span><span id="profileVisitCount">0 visited</span><span>No parent account required</span></div>
+        <div class="family-actions">
+          <button class="family-action" id="editProfileFromParent" type="button">Review Profile</button>
+          <button class="family-action light" id="exportFamilyData" type="button">Export</button>
+          <button class="family-action light" id="eraseFamilyData" type="button">Erase</button>
+        </div>
+      </article>
+
+      <article class="family-card" style="--family-soft:#eff9d9;--family-glow:rgba(139,216,62,.15)">
+        <span class="family-icon" aria-hidden="true">🌻</span>
+        <h3>Khaemenes Kinder Garden</h3>
+        <p>Continue into kindness, curiosity, early literacy, number sense, nature, creativity, and school readiness.</p>
+        <div class="family-meta"><span>Next learning stage</span><span>Same custom-domain origin</span></div>
+        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/">Enter Kinder Garden →</a></div>
+      </article>
+
+      <article class="family-card" style="--family-soft:#e7f0ff;--family-glow:rgba(22,143,229,.14)">
+        <span class="family-icon" aria-hidden="true">🏫</span>
+        <h3>Khaemenes Elementary School</h3>
+        <p>Carry the learner’s continuity record toward Kinder Garden through Grade 5 courses, tools, and family resources.</p>
+        <div class="family-meta"><span>Kinder–Grade 5</span><span>Continuity-ready</span></div>
+        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Elementary.github.io/">Enter Elementary School →</a></div>
+      </article>
+
+      <article class="family-card" style="--family-soft:#f2edff;--family-glow:rgba(116,87,255,.13)">
+        <span class="family-icon" aria-hidden="true">🎓</span>
+        <h3>Khaemenes Academy</h3>
+        <p>Open the larger campus directory for every educational level while keeping Crechè as the child’s first joyful doorway.</p>
+        <div class="family-meta"><span>Full campus</span><span>All learning levels</span></div>
+        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Academy.github.io/">Visit the Academy →</a></div>
+      </article>
+    </div>
+
+    <div class="pinned-wrap" id="pinnedGames">
+      <div class="pinned-head">
+        <div><h3>📌 Pinned to the Child Profile</h3><p id="pinnedIntro">Tap a heart on any adventure to place it here.</p></div>
+        <button class="tool-btn" id="managePinnedGames" type="button">Manage in Adventure Garden</button>
+      </div>
+      <div class="pinned-list" id="pinnedList"></div>
+      <div class="continuity-note"><strong>Continuity foundation:</strong> the page writes a small, non-sensitive learner continuity record on the <code>vervenveda.com</code> origin. Kinder Garden and Elementary School can read the same record when their profile adapters are added.</div>
     </div>
   </div>
 </section>
@@ -461,9 +625,14 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
   <div class="shell">
     <div class="heading"><p class="kicker">Parents, caregivers & teachers</p><h2>The grown-up corner</h2><p>Support gentle routines, adjust the visual experience, and continue into the wider family of public educational resources.</p></div>
     <div class="parent-tools">
+      <a class="parent-card" href="#profiles"><span style="font-size:2rem">🧑‍🧒</span><h3>Parent Profile</h3><p>Review the active child, pinned games, local records, privacy controls, export, and reset tools.</p><span>Open Parent Controls ↓</span></a>
+      <a class="parent-card" href="#profiles"><span style="font-size:2rem">🧒</span><h3>Child Profile</h3><p>Create or edit the child’s nickname, broad learning stage, mentor style, and pinned adventures.</p><span>Open Child Profile ↓</span></a>
+      <a class="parent-card" href="./mentor/index.html"><span style="font-size:2rem">✨</span><h3>Guided Preschool</h3><p>Introduce the personal AI mentor and begin a balanced, age-aligned daily learning path.</p><span>Enter Learning Hub →</span></a>
+      <a class="parent-card" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><span style="font-size:2rem">🌻</span><h3>Kinder Garden</h3><p>Continue into the next early-learning stage with curiosity, kindness, literacy, and number sense.</p><span>Enter Kinder Garden →</span></a>
+      <a class="parent-card" href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><span style="font-size:2rem">🏫</span><h3>Elementary School</h3><p>Continue from Kinder Garden through Grade 5 with the learner continuity foundation in place.</p><span>Enter Elementary →</span></a>
       <a class="parent-card" href="./apps/Life_skills_organizer_index.html"><span style="font-size:2rem">🗓️</span><h3>Little Organizer</h3><p>Build simple routines and help children understand what comes next.</p><span>Open Organizer →</span></a>
-      <a class="parent-card" href="./apps/Life_skills_donate_index.html"><span style="font-size:2rem">💝</span><h3>Support Crechè</h3><p>Visit the grown-up support page for helping free early-learning tools continue to grow.</p><span>Open Support Page →</span></a>
-      <a class="parent-card" href="https://vervenveda.github.io/Khaemenes_Academy.github.io/" target="_blank" rel="noopener noreferrer"><span style="font-size:2rem">🎓</span><h3>Khaemenes Academy</h3><p>Continue into the larger free learning campus for children, families, and lifelong learners.</p><span>Visit the Academy ↗</span></a>
+      <a class="parent-card" href="./apps/Life_skills_donate_index.html"><span style="font-size:2rem">💝</span><h3>Support Crechè</h3><p>Help free early-learning tools continue to grow.</p><span>Open Support Page →</span></a>
+      <a class="parent-card" href="https://vervenveda.com/Khaemenes_Academy.github.io/"><span style="font-size:2rem">🎓</span><h3>Khaemenes Academy</h3><p>Continue into the larger free learning campus for children, families, and lifelong learners.</p><span>Visit the Academy →</span></a>
     </div>
     <div class="network-head"><h3>Connected Verve N Veda Learning Network</h3><p>The full current public network is connected below. Every card opens a public landing page rather than a repository screen.</p></div>
     <div class="site-grid" id="siteGrid"></div>
@@ -473,6 +642,29 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
 </main>
 
 <footer class="footer"><div class="shell footer-inner"><span><strong>© <span id="year"></span> Verve N Veda · Khaemenes Academy · Khaemenes Preschool · Jennifer Kay Pearl</strong></span><span><a href="#activities">Adventures</a> · <a href="#grownups">Grown-Ups</a> · <a href="#top">Back to Top</a></span></div></footer>
+
+
+<div class="profile-overlay" id="profileOverlay" aria-hidden="true">
+  <section class="profile-dialog" role="dialog" aria-modal="true" aria-labelledby="profileDialogTitle">
+    <header class="profile-head">
+      <div><h2 id="profileDialogTitle">Child Learning Profile</h2><p>A grown-up creates this small local profile. No surname, exact birthday, email, photograph, or account is requested.</p></div>
+      <button class="profile-close" id="closeProfile" type="button" aria-label="Close child profile">×</button>
+    </header>
+    <div class="profile-body">
+      <div class="profile-fields">
+        <div class="profile-field"><label for="childNickname">First name or nickname</label><input id="childNickname" type="text" maxlength="20" autocomplete="off" placeholder="Example: Sam"></div>
+        <div class="profile-field"><label for="childAgeBand">Broad learning stage</label><select id="childAgeBand"><option value="">Choose a stage</option><option value="2-3">Ages 2–3</option><option value="3-4">Ages 3–4</option><option value="4-5">Ages 4–5</option><option value="5-6">Ages 5–6</option></select></div>
+        <div class="profile-field"><label for="childPersonality">Mentor communication match</label><select id="childPersonality"><option value="playful">Playful and social · Pip</option><option value="curious">Quiet and curious · Miri</option><option value="imaginative">Imaginative and expressive · Nova</option><option value="steady">Steady and determined · Sage</option></select></div>
+        <div class="profile-field"><label for="childStage">Current pathway</label><select id="childStage"><option value="preschool">Crechè Preschool</option><option value="kindergarten">Kinder Garden transition</option><option value="elementary">Elementary transition</option></select></div>
+      </div>
+      <label class="profile-guardian"><input id="profileGuardianConfirm" type="checkbox"><span>I am a parent, guardian, caregiver, or educator helping this child create or update the profile.</span></label>
+      <p class="profile-privacy">The profile and pinned games stay in this browser. The same custom-domain origin allows future Khaemenes school portals to read the continuity record after compatible profile adapters are installed.</p>
+      <div class="profile-error" id="profileError" role="alert"></div>
+    </div>
+    <footer class="profile-foot"><button class="profile-cancel" id="cancelProfile" type="button">Cancel</button><button class="profile-save" id="saveChildProfile" type="button">Save Child Profile</button></footer>
+  </section>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -502,19 +694,63 @@ const NEW_PALETTES=[
   ["#7457ff","#ef5bb8"],
   ["#087d88","#48b8e8"]
 ];
-const SITES=[{"title": "Khaemenes Preschool", "url": "https://vervenveda.github.io/Khaemenes_Preschool.github.io/", "icon": "🌈", "desc": "This colorful early-learning home and Crechè adventure garden.", "status": "live"}, {"title": "Khaemenes Kinder Garden", "url": "https://vervenveda.github.io/Khaemenes_KinderGarden.github.io/", "icon": "🌻", "desc": "Kindness, curiosity, early literacy, number sense, nature, and school readiness.", "status": "live"}, {"title": "Khaemenes Elementary", "url": "https://vervenveda.github.io/Khaemenes_Elementary.github.io/", "icon": "🏫", "desc": "Kinder Garden through Grade 5 learning and family resources.", "status": "live"}, {"title": "Khaemenes Middle", "url": "https://vervenveda.github.io/Khaemenes_Middle.github.io/", "icon": "📘", "desc": "Grades 6–8 academics, independence, exploration, and preparation.", "status": "live"}, {"title": "Khaemenes High", "url": "https://vervenveda.github.io/Khaemenes_High.github.io/", "icon": "📗", "desc": "Grades 9–12 homerooms, courses, records, and graduation pathways.", "status": "live"}, {"title": "Khaemenes Higher Learning", "url": "https://vervenveda.github.io/Khaemenes_Higher_Learning.github.io/", "icon": "🏛️", "desc": "GED, college, careers, professional development, and lifelong learning.", "status": "live"}, {"title": "Khaemenes Linguistics", "url": "https://vervenveda.github.io/Khaemenes_Linguistics.github.io/", "icon": "🗣️", "desc": "Languages, linguistics, writing systems, translation, and communication.", "status": "live"}, {"title": "Khaemenes Academy", "url": "https://vervenveda.github.io/Khaemenes_Academy.github.io/", "icon": "🎓", "desc": "The central international learning campus and Academy directory.", "status": "live"}, {"title": "Verve N Veda", "url": "https://vervenveda.github.io/", "icon": "✦", "desc": "The public front door to the complete resource network.", "status": "live"}, {"title": "Arcade", "url": "https://vervenveda.github.io/arcade.github.io/", "icon": "🕹️", "desc": "Games, puzzles, strategy, trivia, and playful learning.", "status": "live"}, {"title": "ARSHIF", "url": "https://vervenveda.github.io/Arshif.github.io/", "icon": "🏺", "desc": "Research, literature, history, culture, classics, and memory.", "status": "live"}, {"title": "Aurora", "url": "https://vervenveda.github.io/aurora.github.io/", "icon": "☼", "desc": "Rest, reflection, encouragement, wellbeing, and creative renewal.", "status": "live"}, {"title": "Bazaar Art", "url": "https://vervenveda.github.io/bazaarart.github.io/", "icon": "🎨", "desc": "Art tools, classes, galleries, education, and creative resources.", "status": "live"}, {"title": "Finance", "url": "https://vervenveda.github.io/finance.github.io/", "icon": "💰", "desc": "Financial literacy, planning, markets, and practical public resources.", "status": "live"}, {"title": "Firmament Law", "url": "https://vervenveda.github.io/firmament.github.io/", "icon": "⚖️", "desc": "Legal information, rights, civic literacy, and public resources.", "status": "live"}, {"title": "Medicament Hub", "url": "https://vervenveda.github.io/medicament-hub.github.io/", "icon": "⚕️", "desc": "Health, medicine, wellness, family care, and safety resources.", "status": "live"}, {"title": "My Art Gallery", "url": "https://vervenveda.github.io/myartgallery.github.io/", "icon": "🖼️", "desc": "A personal space for preserving and presenting artwork.", "status": "live"}, {"title": "One Nation for All", "url": "https://vervenveda.github.io/onenationforall.github.io/", "icon": "☆", "desc": "Civic learning, public ideas, government, and community solutions.", "status": "live"}, {"title": "PLERA Search", "url": "https://vervenveda.github.io/PLERASearch.github.io/", "icon": "◎", "desc": "Search and trusted public-resource pathways.", "status": "live"}, {"title": "ProResource Hub", "url": "https://vervenveda.github.io/proresource_hub.github.io/", "icon": "🧰", "desc": "Professional writing, design, media, research, and productivity tools.", "status": "live"}, {"title": "River to Road", "url": "https://vervenveda.github.io/river_to_road.github.io/", "icon": "🌿", "desc": "Environmental stewardship, science, service, and community action.", "status": "live"}, {"title": "Solanar", "url": "https://vervenveda.github.io/solanar.github.io/", "icon": "☀️", "desc": "Weather, Earth systems, moon cycles, climate, and observation.", "status": "live"}, {"title": "The Verifier", "url": "https://vervenveda.github.io/theverifier.github.io/", "icon": "🔎", "desc": "News discovery, evidence, research, and media literacy.", "status": "live"}, {"title": "The Refrain", "url": "https://vervenveda.github.io/the_refrain.github.io/", "icon": "🎵", "desc": "Music education, composition, recording, and performance.", "status": "live"}, {"title": "Veterans", "url": "https://vervenveda.github.io/veterans.github.io/", "icon": "★", "desc": "Veteran resources, crisis support, benefits, and family assistance.", "status": "live"}];
+const SITES=[{"title": "Khaemenes Preschool", "url": "https://vervenveda.com/Khaemenes_Preschool.github.io/", "icon": "🌈", "desc": "This colorful early-learning home and Crechè adventure garden.", "status": "live"}, {"title": "Khaemenes Kinder Garden", "url": "https://vervenveda.com/Khaemenes_KinderGarden.github.io/", "icon": "🌻", "desc": "Kindness, curiosity, early literacy, number sense, nature, and school readiness.", "status": "live"}, {"title": "Khaemenes Elementary", "url": "https://vervenveda.com/Khaemenes_Elementary.github.io/", "icon": "🏫", "desc": "Kinder Garden through Grade 5 learning and family resources.", "status": "live"}, {"title": "Khaemenes Middle", "url": "https://vervenveda.com/Khaemenes_Middle.github.io/", "icon": "📘", "desc": "Grades 6–8 academics, independence, exploration, and preparation.", "status": "live"}, {"title": "Khaemenes High", "url": "https://vervenveda.com/Khaemenes_High.github.io/", "icon": "📗", "desc": "Grades 9–12 homerooms, courses, records, and graduation pathways.", "status": "live"}, {"title": "Khaemenes Higher Learning", "url": "https://vervenveda.com/Khaemenes_Higher_Learning.github.io/", "icon": "🏛️", "desc": "GED, college, careers, professional development, and lifelong learning.", "status": "live"}, {"title": "Khaemenes Linguistics", "url": "https://vervenveda.com/Khaemenes_Linguistics.github.io/", "icon": "🗣️", "desc": "Languages, linguistics, writing systems, translation, and communication.", "status": "live"}, {"title": "Khaemenes Academy", "url": "https://vervenveda.com/Khaemenes_Academy.github.io/", "icon": "🎓", "desc": "The central international learning campus and Academy directory.", "status": "live"}, {"title": "Verve N Veda", "url": "https://vervenveda.com/", "icon": "✦", "desc": "The public front door to the complete resource network.", "status": "live"}, {"title": "Arcade", "url": "https://vervenveda.com/arcade.github.io/", "icon": "🕹️", "desc": "Games, puzzles, strategy, trivia, and playful learning.", "status": "live"}, {"title": "ARSHIF", "url": "https://vervenveda.com/Arshif.github.io/", "icon": "🏺", "desc": "Research, literature, history, culture, classics, and memory.", "status": "live"}, {"title": "Aurora", "url": "https://vervenveda.com/aurora.github.io/", "icon": "☼", "desc": "Rest, reflection, encouragement, wellbeing, and creative renewal.", "status": "live"}, {"title": "Bazaar Art", "url": "https://vervenveda.com/bazaarart.github.io/", "icon": "🎨", "desc": "Art tools, classes, galleries, education, and creative resources.", "status": "live"}, {"title": "Finance", "url": "https://vervenveda.com/finance.github.io/", "icon": "💰", "desc": "Financial literacy, planning, markets, and practical public resources.", "status": "live"}, {"title": "Firmament Law", "url": "https://vervenveda.com/firmament.github.io/", "icon": "⚖️", "desc": "Legal information, rights, civic literacy, and public resources.", "status": "live"}, {"title": "Medicament Hub", "url": "https://vervenveda.com/medicament-hub.github.io/", "icon": "⚕️", "desc": "Health, medicine, wellness, family care, and safety resources.", "status": "live"}, {"title": "My Art Gallery", "url": "https://vervenveda.com/myartgallery.github.io/", "icon": "🖼️", "desc": "A personal space for preserving and presenting artwork.", "status": "live"}, {"title": "One Nation for All", "url": "https://vervenveda.com/onenationforall.github.io/", "icon": "☆", "desc": "Civic learning, public ideas, government, and community solutions.", "status": "live"}, {"title": "PLERA Search", "url": "https://vervenveda.com/PLERASearch.github.io/", "icon": "◎", "desc": "Search and trusted public-resource pathways.", "status": "live"}, {"title": "ProResource Hub", "url": "https://vervenveda.com/proresource_hub.github.io/", "icon": "🧰", "desc": "Professional writing, design, media, research, and productivity tools.", "status": "live"}, {"title": "River to Road", "url": "https://vervenveda.com/river_to_road.github.io/", "icon": "🌿", "desc": "Environmental stewardship, science, service, and community action.", "status": "live"}, {"title": "Solanar", "url": "https://vervenveda.com/solanar.github.io/", "icon": "☀️", "desc": "Weather, Earth systems, moon cycles, climate, and observation.", "status": "live"}, {"title": "The Verifier", "url": "https://vervenveda.com/theverifier.github.io/", "icon": "🔎", "desc": "News discovery, evidence, research, and media literacy.", "status": "live"}, {"title": "The Refrain", "url": "https://vervenveda.com/the_refrain.github.io/", "icon": "🎵", "desc": "Music education, composition, recording, and performance.", "status": "live"}, {"title": "Veterans", "url": "https://vervenveda.com/veterans.github.io/", "icon": "★", "desc": "Veteran resources, crisis support, benefits, and family assistance.", "status": "live"}];
 const KID_APPS=APPS.filter(app=>app.category!=="grownup");
 const GROWNUP_APPS=APPS.filter(app=>app.category==="grownup");
 const FAVORITES_KEY="creche-preschool-favorites-v2";
 const VISITS_KEY="creche-preschool-visits-v1";
 const CALM_KEY="creche-preschool-calm-v2";
+const PROFILE_KEY="khaemenes_preschool_profile_v1";
+const PROFILE_FAVORITES_KEY="khaemenes_profile_favorites_v1";
+const PROFILE_VISITS_KEY="khaemenes_profile_visits_v1";
+const CONTINUITY_KEY="khaemenes_learning_continuity_v1";
 const $=id=>document.getElementById(id);
-function readSet(key){try{const value=JSON.parse(localStorage.getItem(key)||"[]");return new Set(Array.isArray(value)?value:[])}catch{return new Set()}}
-function writeSet(key,set){try{localStorage.setItem(key,JSON.stringify([...set]))}catch{}}
+function readJSON(key,fallback){try{const value=localStorage.getItem(key);return value?JSON.parse(value):fallback}catch{return fallback}}
+function writeJSON(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}}
+function readSet(key){const value=readJSON(key,[]);return new Set(Array.isArray(value)?value:[])}
+function writeSet(key,set){writeJSON(key,[...set])}
 function readBool(key){try{return localStorage.getItem(key)==="true"}catch{return false}}
 function writeBool(key,value){try{localStorage.setItem(key,String(value))}catch{}}
-let favorites=readSet(FAVORITES_KEY),visited=readSet(VISITS_KEY),favoritesOnly=false,calm=readBool(CALM_KEY);
-const appUrl=app=>"./apps/"+encodeURI(app.file);
+function makeLocalId(){return globalThis.crypto?.randomUUID?.()||`local-${Date.now()}-${Math.random().toString(16).slice(2)}`}
+const MENTOR_MATCHES={playful:{name:"Pip",avatar:"🌞"},curious:{name:"Miri",avatar:"🦉"},imaginative:{name:"Nova",avatar:"🚀"},steady:{name:"Sage",avatar:"🌿"}};
+let profile=readJSON(PROFILE_KEY,null);
+let favoriteProfiles=readJSON(PROFILE_FAVORITES_KEY,{});
+let visitProfiles=readJSON(PROFILE_VISITS_KEY,{});
+let favoritesOnly=false,calm=readBool(CALM_KEY);
+function learnerKey(){return profile?.learnerId||"anonymous"}
+function loadScopedSet(map,legacyKey){
+  if(!profile)return readSet(legacyKey);
+  const saved=map[learnerKey()];
+  return new Set(Array.isArray(saved)?saved:[]);
+}
+let favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
+let visited=loadScopedSet(visitProfiles,VISITS_KEY);
+function migrateLegacyProfileData(){
+  if(!profile)return;
+  const id=learnerKey();
+  const legacyFavorites=readSet(FAVORITES_KEY),legacyVisits=readSet(VISITS_KEY);
+  if(!Array.isArray(favoriteProfiles[id])&&legacyFavorites.size){favoriteProfiles[id]=[...legacyFavorites];writeJSON(PROFILE_FAVORITES_KEY,favoriteProfiles);localStorage.removeItem(FAVORITES_KEY)}
+  if(!Array.isArray(visitProfiles[id])&&legacyVisits.size){visitProfiles[id]=[...legacyVisits];writeJSON(PROFILE_VISITS_KEY,visitProfiles);localStorage.removeItem(VISITS_KEY)}
+  favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
+  visited=loadScopedSet(visitProfiles,VISITS_KEY);
+}
+function persistFavorites(){
+  if(profile){favoriteProfiles[learnerKey()]=[...favorites];writeJSON(PROFILE_FAVORITES_KEY,favoriteProfiles)}else writeSet(FAVORITES_KEY,favorites);
+  syncContinuity();
+}
+function persistVisits(){
+  if(profile){visitProfiles[learnerKey()]=[...visited];writeJSON(PROFILE_VISITS_KEY,visitProfiles)}else writeSet(VISITS_KEY,visited);
+  syncContinuity();
+}
+function safeProfile(){
+  if(!profile)return null;
+  return {learnerId:profile.learnerId,nickname:profile.nickname,ageBand:profile.ageBand,personality:profile.personality,mentorId:profile.mentorId||null,interests:Array.isArray(profile.interests)?profile.interests:[],pace:profile.pace||"balanced",minutes:Number(profile.minutes)||30,pathway:profile.pathway||"preschool"};
+}
+function syncContinuity(){
+  const pinned=[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean).map(app=>({id:app.id,title:app.title,icon:app.icon,category:app.category,file:app.file,url:new URL(appUrl(app),location.href).href}));
+  writeJSON(CONTINUITY_KEY,{version:1,source:"Khaemenes Preschool · Crechè",origin:location.origin,learner:safeProfile(),favoriteIds:[...favorites],favorites:pinned,visitedIds:[...visited],updatedAt:new Date().toISOString(),formalGradeEligible:false});
+}
+const appUrl=app=>"./apps/"+app.file.split("/").map(encodeURIComponent).join("/");
 const catLabel=key=>CATEGORIES[key]?.label||key;
 const catColor=key=>CATEGORIES[key]?.a||"#7457ff";
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]))}
@@ -536,22 +772,106 @@ function buildCategories(){
 function renderActivities(){
   $("activityGrid").innerHTML=KID_APPS.map(app=>`<article class="activity ${visited.has(app.id)?"visited":""}" data-id="${app.id}" data-category="${app.category}" data-search="${escapeHtml((app.title+" "+app.desc+" "+app.tags+" "+app.file+" "+catLabel(app.category)).toLowerCase())}" style="--category-color:${catColor(app.category)};--card-color:${catColor(app.category)}22"><div class="card-top"><span class="app-icon" aria-hidden="true">${app.icon}</span><button class="favorite" type="button" data-favorite="${app.id}" aria-label="Save ${escapeHtml(app.title)} as a favorite" aria-pressed="${favorites.has(app.id)}">${favorites.has(app.id)?"♥":"♡"}</button></div><p class="category-label">${escapeHtml(catLabel(app.category))}</p><h3>${escapeHtml(app.title)}</h3><p>${escapeHtml(app.desc)}</p><span class="visited-badge">Adventure visited ✓</span><div class="card-actions"><a class="open" data-open-app="${app.id}" href="${appUrl(app)}">Open Adventure</a></div></article>`).join("");
   document.querySelectorAll("[data-favorite]").forEach(button=>button.addEventListener("click",()=>toggleFavorite(button.dataset.favorite,button)));
-  document.querySelectorAll("[data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
+  document.querySelectorAll("#activityGrid [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
 }
-function toggleFavorite(id,button){favorites.has(id)?favorites.delete(id):favorites.add(id);writeSet(FAVORITES_KEY,favorites);button.textContent=favorites.has(id)?"♥":"♡";button.setAttribute("aria-pressed",String(favorites.has(id)));updateFavorites();filterActivities()}
-function markVisited(id){visited.add(id);writeSet(VISITS_KEY,visited);updateProgress()}
+function toggleFavorite(id,button){
+  const wasSaved=favorites.has(id);
+  wasSaved?favorites.delete(id):favorites.add(id);
+  persistFavorites();
+  button.textContent=favorites.has(id)?"♥":"♡";
+  button.setAttribute("aria-pressed",String(favorites.has(id)));
+  updateFavorites();filterActivities();renderProfileCenter();
+  if(!wasSaved)toast(profile?`Pinned to ${profile.nickname}’s child profile.`:"Saved on this device. Create a child profile to carry favorites forward.");
+}
+function markVisited(id){visited.add(id);persistVisits();updateProgress();renderProfileCenter()}
 function updateFavorites(){$("favoriteCount").textContent=favorites.size;$("favoritesBtn").setAttribute("aria-pressed",String(favoritesOnly));$("starMeter").innerHTML=favorites.size?Array.from({length:Math.min(favorites.size,14)},()=>'<span class="saved-star">♥</span>').join(""):`<span class="empty-stars">No favorite adventures yet. Tap a heart below!</span>`}
 function updateProgress(){const count=KID_APPS.filter(app=>visited.has(app.id)).length;$("visitCount").textContent=`${count}/${KID_APPS.length}`;$("progressFill").style.width=`${Math.round(count/KID_APPS.length*100)}%`;document.querySelectorAll(".activity").forEach(card=>card.classList.toggle("visited",visited.has(card.dataset.id)))}
 function filterActivities(){const q=$("search").value.trim().toLowerCase(),category=$("category").value;let count=0;[...$("activityGrid").children].forEach(card=>{const visible=(category==="all"||card.dataset.category===category)&&(!q||card.dataset.search.includes(q))&&(!favoritesOnly||favorites.has(card.dataset.id));card.hidden=!visible;if(visible)count++});$("results").textContent=`${count} of ${KID_APPS.length} child adventures shown${favoritesOnly?" · favorites only":""}.`;$("empty").classList.toggle("show",count===0)}
 function chooseRandom(category){let pool=KID_APPS.filter(app=>!category||category==="all"||app.category===category);if(favoritesOnly)pool=pool.filter(app=>favorites.has(app.id));const app=pool[Math.floor(Math.random()*pool.length)];if(app){markVisited(app.id);toast("Opening a surprise adventure!");setTimeout(()=>location.href=appUrl(app),260)}else toast("No adventures are available in that selection.")}
 function setDaily(){const now=new Date(),day=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000),app=KID_APPS[day%KID_APPS.length];$("dailyTitle").textContent=app.icon+" "+app.title;$("dailyDesc").textContent=app.desc;$("dailyLink").href=appUrl(app);$("dailyLink").dataset.openApp=app.id;$("dailyLink").addEventListener("click",()=>markVisited(app.id))}
-function renderSites(){$("siteGrid").innerHTML=SITES.map(site=>`<a class="site-card ${site.status}" href="${site.url}" target="_blank" rel="noopener noreferrer"><div class="site-top"><span class="site-icon">${site.icon}</span><span class="status live">Open</span></div><h3>${escapeHtml(site.title)}</h3><p>${escapeHtml(site.desc)}</p><small>Open public landing page ↗</small></a>`).join("")}
-function buildMenu(query=""){const q=query.trim().toLowerCase(),appMatches=KID_APPS.filter(app=>!q||(app.title+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q)),grownMatches=GROWNUP_APPS.filter(app=>!q||(app.title+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q)),siteMatches=SITES.filter(site=>!q||(site.title+" "+site.desc).toLowerCase().includes(q));$("menuContent").innerHTML=`<p class="menu-group">Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div><p class="menu-group">Grown-Up Tools · ${grownMatches.length+2}</p><div class="menu-list"><a class="menu-link" href="#grownups"><i>🧑‍🧒</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" href="${site.url}" target="_blank" rel="noopener noreferrer"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No repositories matched.</small>"}</div>`}
+function renderSites(){$("siteGrid").innerHTML=SITES.map(site=>`<a class="site-card ${site.status}" href="${site.url}"><div class="site-top"><span class="site-icon">${site.icon}</span><span class="status live">Open</span></div><h3>${escapeHtml(site.title)}</h3><p>${escapeHtml(site.desc)}</p><small>Open public landing page ↗</small></a>`).join("")}
+function buildMenu(query=""){const q=query.trim().toLowerCase(),appMatches=KID_APPS.filter(app=>!q||(app.title+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q)),grownMatches=GROWNUP_APPS.filter(app=>!q||(app.title+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q)),siteMatches=SITES.filter(site=>!q||(site.title+" "+site.desc).toLowerCase().includes(q));$("menuContent").innerHTML=`<p class="menu-group">Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div><p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+5}</p><div class="menu-list"><a class="menu-link" href="./mentor/index.html"><i>✨</i><span><strong>Guided Preschool &amp; AI Mentor</strong><small>Personal learning path</small></span><span>→</span></a><a class="menu-link" href="#profiles"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>↓</span></a><a class="menu-link" href="#profiles"><i>🧑‍🧒</i><span><strong>Parent Profile &amp; Controls</strong><small>Export, edit, and erase</small></span><span>↓</span></a><a class="menu-link" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No repositories matched.</small>"}</div>`}
+
+function mentorMatch(){return MENTOR_MATCHES[profile?.personality]||MENTOR_MATCHES.playful}
+function renderProfileCenter(){
+  const mentor=mentorMatch();
+  if(profile){
+    $("profileAvatar").textContent=mentor.avatar;
+    $("profileName").textContent=profile.nickname||"Young learner";
+    $("profileStatus").textContent=`Ages ${profile.ageBand||"not set"} · ${mentor.name} mentor · ${favorites.size} pinned adventure${favorites.size===1?"":"s"}`;
+    $("openChildProfile").textContent="Edit Child Profile";
+  }else{
+    $("profileAvatar").textContent="🌟";
+    $("profileName").textContent="No child profile yet";
+    $("profileStatus").textContent="Create one with a grown-up to pin favorite games.";
+    $("openChildProfile").textContent="Create Child Profile";
+  }
+  $("profileFavoriteCount").textContent=`${favorites.size} pinned`;
+  $("profileVisitCount").textContent=`${visited.size} visited`;
+  $("pinnedIntro").textContent=profile?`${profile.nickname}’s favorite Crechè games and learning adventures.`:"Anonymous device favorites are shown until a child profile is created.";
+  renderPinnedGames();
+}
+function renderPinnedGames(){
+  const apps=[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean);
+  $("pinnedList").innerHTML=apps.length?apps.slice(0,12).map(app=>`<a class="pinned-app" href="${appUrl(app)}" data-open-app="${app.id}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>${escapeHtml(catLabel(app.category))}</small></span></a>`).join(""):`<div class="pinned-empty">No pinned adventures yet. Tap a ♡ heart in the complete Adventure Garden to add one to the active child profile.</div>`;
+  document.querySelectorAll("#pinnedList [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
+}
+function openProfileDialog(){
+  $("childNickname").value=profile?.nickname||"";
+  $("childAgeBand").value=profile?.ageBand||"";
+  $("childPersonality").value=profile?.personality||"playful";
+  $("childStage").value=profile?.pathway||"preschool";
+  $("profileGuardianConfirm").checked=Boolean(profile);
+  $("profileError").textContent="";
+  $("profileOverlay").classList.add("open");
+  $("profileOverlay").setAttribute("aria-hidden","false");
+  document.body.classList.add("menu-open");
+  setTimeout(()=>$("childNickname").focus(),60);
+}
+function closeProfileDialog(){
+  $("profileOverlay").classList.remove("open");
+  $("profileOverlay").setAttribute("aria-hidden","true");
+  document.body.classList.remove("menu-open");
+}
+function saveProfile(){
+  const nickname=$("childNickname").value.trim();
+  const ageBand=$("childAgeBand").value;
+  if(!nickname){$("profileError").textContent="Please enter a first name or nickname.";return}
+  if(!ageBand){$("profileError").textContent="Please choose a broad learning stage.";return}
+  if(!$("profileGuardianConfirm").checked){$("profileError").textContent="A grown-up must confirm that they are helping with this profile.";return}
+  const personality=$("childPersonality").value;
+  const mentor=MENTOR_MATCHES[personality];
+  profile={...profile,nickname:nickname.slice(0,20),ageBand,personality,mentorId:mentor.name.toLowerCase(),pathway:$("childStage").value,learnerId:profile?.learnerId||makeLocalId(),interests:Array.isArray(profile?.interests)?profile.interests:[],pace:profile?.pace||"balanced",minutes:Number(profile?.minutes)||30,createdAt:profile?.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};
+  writeJSON(PROFILE_KEY,profile);
+  migrateLegacyProfileData();
+  favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
+  visited=loadScopedSet(visitProfiles,VISITS_KEY);
+  syncContinuity();
+  closeProfileDialog();renderActivities();updateFavorites();updateProgress();filterActivities();renderProfileCenter();buildMenu();
+  toast(`${profile.nickname}’s child profile is ready. Favorites now pin to this profile.`);
+}
+function showPinnedInGarden(){
+  favoritesOnly=true;$("category").value="all";$("search").value="";updateFavorites();filterActivities();$("activities").scrollIntoView({behavior:calm?"auto":"smooth"});
+}
+function exportFamilyRecord(){
+  const record={product:"Khaemenes Preschool · Crechè",version:"0.2.0",exportedAt:new Date().toISOString(),profile:safeProfile(),favorites:[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean),visited:[...visited],continuity:readJSON(CONTINUITY_KEY,null),note:"Local family-controlled educational continuity record. Not a formal grade."};
+  const blob=new Blob([JSON.stringify(record,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),link=document.createElement("a");
+  link.href=url;link.download=`khaemenes-${profile?.nickname?.toLowerCase().replace(/[^a-z0-9]+/g,"-")||"preschool"}-profile.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast("Family learning record exported.");
+}
+function eraseFamilyRecord(){
+  if(!confirm("Erase the active child profile, its pinned games, visits, and continuity record from this browser?"))return;
+  const id=learnerKey();
+  if(profile){delete favoriteProfiles[id];delete visitProfiles[id];writeJSON(PROFILE_FAVORITES_KEY,favoriteProfiles);writeJSON(PROFILE_VISITS_KEY,visitProfiles)}
+  localStorage.removeItem(PROFILE_KEY);localStorage.removeItem(CONTINUITY_KEY);
+  profile=null;favorites=readSet(FAVORITES_KEY);visited=readSet(VISITS_KEY);
+  renderActivities();updateFavorites();updateProgress();filterActivities();renderProfileCenter();buildMenu();toast("Child profile and profile-linked progress erased.");
+}
+
 function openMenu(){$("menuOverlay").classList.add("open");$("menuOverlay").setAttribute("aria-hidden","false");$("menuBtn").setAttribute("aria-expanded","true");document.body.classList.add("menu-open");setTimeout(()=>$("menuSearch").focus(),80)}
 function closeMenu(){$("menuOverlay").classList.remove("open");$("menuOverlay").setAttribute("aria-hidden","true");$("menuBtn").setAttribute("aria-expanded","false");document.body.classList.remove("menu-open")}
 function setCalm(value){calm=value;document.body.classList.toggle("calm",calm);$("calmBtn").setAttribute("aria-pressed",String(calm));$("calmBtn").textContent=calm?"🎨 Animated Visual Mode":"🌤️ Calm Visual Mode";writeBool(CALM_KEY,calm)}
 $("heroKidCount").textContent=KID_APPS.length;
-renderNew();buildCategories();renderActivities();renderSites();buildMenu();updateFavorites();updateProgress();filterActivities();setDaily();setCalm(calm);$("year").textContent=new Date().getFullYear();
+migrateLegacyProfileData();syncContinuity();renderNew();buildCategories();renderActivities();renderSites();buildMenu();updateFavorites();updateProgress();filterActivities();setDaily();setCalm(calm);renderProfileCenter();$("year").textContent=new Date().getFullYear();
 const ticker=$("learningTicker"),tickerToggle=$("tickerToggle");
 tickerToggle.addEventListener("click",()=>{
   const paused=ticker.dataset.paused!=="true";
@@ -565,7 +885,12 @@ $("favoritesBtn").addEventListener("click",()=>{favoritesOnly=!favoritesOnly;upd
 $("randomBtn").addEventListener("click",()=>chooseRandom($("category").value));$("surpriseHero").addEventListener("click",()=>chooseRandom());$("orbitRandom").addEventListener("click",()=>chooseRandom());
 $("calmBtn").addEventListener("click",()=>setCalm(!calm));$("menuBtn").addEventListener("click",openMenu);$("closeMenu").addEventListener("click",closeMenu);
 $("menuOverlay").addEventListener("click",event=>{if(event.target===$("menuOverlay"))closeMenu()});$("menuSearch").addEventListener("input",event=>buildMenu(event.target.value));
-document.addEventListener("keydown",event=>{if(event.key==="Escape")closeMenu();if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
+$("openChildProfile").addEventListener("click",openProfileDialog);$("editProfileFromParent").addEventListener("click",openProfileDialog);
+$("closeProfile").addEventListener("click",closeProfileDialog);$("cancelProfile").addEventListener("click",closeProfileDialog);$("saveChildProfile").addEventListener("click",saveProfile);
+$("profileOverlay").addEventListener("click",event=>{if(event.target===$("profileOverlay"))closeProfileDialog()});
+$("showProfileFavorites").addEventListener("click",showPinnedInGarden);$("managePinnedGames").addEventListener("click",()=>{$("activities").scrollIntoView({behavior:calm?"auto":"smooth"})});
+$("exportFamilyData").addEventListener("click",exportFamilyRecord);$("eraseFamilyData").addEventListener("click",eraseFamilyRecord);
+document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeMenu();closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
 </script>
 </body>
 </html>
