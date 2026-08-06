@@ -1,0 +1,21 @@
+CRECHÈ HOME PAGE — PROMINENT GUIDED PRESCHOOL BUTTON
+
+Add this button as the FIRST item inside the existing hero `.actions` container
+in the repository root `index.html`:
+
+<a class="btn primary" href="khaemenes-preschool/index.html">
+  🧭 Enter Guided Preschool
+</a>
+
+Recommended final order:
+
+<div class="actions">
+  <a class="btn primary" href="khaemenes-preschool/index.html">
+    🧭 Enter Guided Preschool
+  </a>
+
+  <!-- Keep the existing Crechè exploration and grown-up buttons after it. -->
+</div>
+
+No extra CSS is required because the current Crechè page already defines
+`.btn` and `.primary`.
