@@ -894,3 +894,78 @@ document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeMenu()
 </script>
 </body>
 </html>
+creche-revised-index-v0.2.html
+HTML
+can you amke sure all is as it should be I uploaded those
+Worked for 2m 52s
+Analyzed
+from pathlib import Path
+import shutil, zipfile, hashlib, re, subprocess, tempfile
+
+source = Path("/mnt/data/khaemenes-preschool-guided-portal-v0.1/khaemenes-preschool/index.html")
+out_root = Path("/mnt/data/creche-final-housekeeping-fix")
+mentor_dir = out_root / "mentor"
+
+if out_root.exists():
+    shutil.rmtree(out_root)
+mentor_dir.mkdir(parents=True)
+
+text = source.read_text(encoding="utf-8")
+old = 'https://vervenveda.com/Khaemenes_Preschool.github.io/khaemenes-preschool/'
+new = 'https://vervenveda.com/Khaemenes_Preschool.github.io/mentor/'
+if old not in text:
+    raise RuntimeError("Expected old canonical URL was not found.")
+text = text.replace(old, new, 1)
+(mentor_dir / "index.html").write_text(text, encoding="utf-8")
+
+(out_root / ".nojekyll").write_text(
+    "Khaemenes Preschool static-site marker.\n",
+    encoding="utf-8",
+)
+
+(out_root / "UPLOAD_THESE_TWO_ITEMS.txt").write_text(
+    "Upload these two items at the root of "
+    "vervenveda/Khaemenes_Preschool.github.io:\n\n"
+    "1. .nojekyll\n"
+    "2. mentor/index.html (replace the existing mentor/index.html)\n\n"
+    "Do not replace the root Crechè index.html. It is already correct.\n"
+    "Do not alter the apps folder or assets/khaemenes-profile-bridge.js.\n",
+    encoding="utf-8",
+)
+
+# Validate embedded JS syntax from the corrected mentor page.
+scripts = re.findall(r"<script(?:\s[^>]*)?>(.*?)</script>", text, flags=re.S | re.I)
+js = "\n".join(scripts)
+with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8") as tmp:
+    tmp.write(js)
+    js_path = tmp.name
+check = subprocess.run(["node", "--check", js_path], capture_output=True, text=True)
+Path(js_path).unlink(missing_ok=True)
+if check.returncode != 0:
+    raise RuntimeError(check.stderr)
+
+zip_path = Path("/mnt/data/creche-final-housekeeping-fix.zip")
+sha_path = Path("/mnt/data/creche-final-housekeeping-fix.sha256")
+if zip_path.exists():
+    zip_path.unlink()
+
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for p in sorted(out_root.rglob("*")):
+        if p.is_file():
+            z.write(p, p.relative_to(out_root).as_posix())
+
+digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
+sha_path.write_text(f"{digest}  {zip_path.name}\n", encoding="utf-8")
+
+print("Created final housekeeping package")
+print(f"ZIP: {zip_path}")
+print(f"SHA-256: {digest}")
+print("Mentor embedded JavaScript: syntax passed")
+print("Correct canonical:", new)
+
+STDOUT/STDERR
+Created final housekeeping package
+ZIP: /mnt/data/creche-final-housekeeping-fix.zip
+SHA-256: 036730d1fbe738015f1e8f6c110d0b1edea4a2265e56220e31e1aefb1cb9844a
+Mentor embedded JavaScript: syntax passed
+Correct canonical: https://vervenveda.com/Khaemenes_Preschool.github.io/mentor/
