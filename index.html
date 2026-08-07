@@ -23,6 +23,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:#fff7e8}
+  
 body{margin:0;min-width:300px;overflow-x:hidden;color:var(--ink);background:
   radial-gradient(circle at 5% 7%,rgba(255,190,31,.54),transparent 22rem),
   radial-gradient(circle at 94% 6%,rgba(22,143,229,.42),transparent 26rem),
@@ -1531,5 +1532,9 @@ $("showProfileFavorites").addEventListener("click",showPinnedInGarden);$("manage
 $("exportFamilyData").addEventListener("click",exportFamilyRecord);$("eraseFamilyData").addEventListener("click",eraseFamilyRecord);
 document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeMenu();closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
 </script>
+  <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
+<script
+  src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-school-bridge.js"
+  data-khaemenes-stage="preschool"></script>
 </body>
 </html>
