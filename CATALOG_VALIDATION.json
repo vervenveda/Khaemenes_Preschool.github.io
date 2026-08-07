@@ -1,0 +1,13 @@
+{
+  "catalogVersion": "1.0.0",
+  "total": 53,
+  "child": 52,
+  "grownup": 1,
+  "mentorEligible": 36,
+  "uniqueCanonicalIds": true,
+  "uniqueFiles": true,
+  "uniqueMentorLegacyIds": true,
+  "validMentorDomains": true,
+  "validAgeBands": true,
+  "validEnergyLevels": true
+}

@@ -1,0 +1,63 @@
+KHAEMENES PRESCHOOL · ITEM 02
+ROOT Crechè index.html patch
+================================
+
+PURPOSE
+-------
+Make the root Adventure Garden read the same activity catalog used by the Mentor.
+
+1. FIND this line near the bottom of root index.html:
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+Immediately AFTER it and BEFORE the existing inline <script>, add:
+
+<script src="./assets/preschool-catalog.js"></script>
+
+
+2. In the existing inline script, keep:
+
+"use strict";
+
+Then DELETE the entire current blocks beginning with:
+
+const APPS=[
+
+and continuing through the end of:
+
+const CATEGORIES={ ... };
+
+Do NOT delete NEW_IDS, NEW_PALETTES, SITES, KID_APPS, or anything after them.
+
+
+3. Put this replacement directly after "use strict";:
+
+const PRESCHOOL_CATALOG=window.KhaemenesPreschoolCatalog;
+if(!PRESCHOOL_CATALOG){
+  throw new Error("Khaemenes Preschool shared catalog failed to load.");
+}
+const APPS=PRESCHOOL_CATALOG.activities;
+const CATEGORIES=PRESCHOOL_CATALOG.categories;
+
+
+The next existing line should then be:
+
+const NEW_IDS=[
+
+
+RESULT
+------
+The rest of the Crechè JavaScript remains unchanged.
+
+Existing:
+- favorite IDs
+- visited IDs
+- profile continuity
+- search
+- categories
+- Surprise Me
+- daily adventure
+- new-adventure cards
+
+continue to work because canonical Crechè IDs, categories, files, icons,
+descriptions, and tags are preserved exactly in the shared catalog.
