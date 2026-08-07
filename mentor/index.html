@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Khaemenes Guided Preschool — a guardian-guided, local-first preschool pathway where each child meets an age-aligned AI learning mentor and receives a balanced daily learning plan.">
+<meta name="description" content="Khaemenes Guided Preschool — a guardian-guided, local-first preschool pathway with a child learning mentor, parent progress view, mature Family Guide, custom mentor avatars, and a required Parent/Guardian Release for new Mentor profiles.">
 <meta name="theme-color" content="#173660">
 <meta name="color-scheme" content="light">
 <link rel="canonical" href="https://vervenveda.com/Khaemenes_Preschool.github.io/mentor/">
@@ -382,6 +382,119 @@ h1 span{display:block;margin-top:13px;color:var(--violet);font-family:var(--sans
   .welcome-card,.mentor-card,.day-board,.map-card{box-shadow:none;border:1px solid #aaa}
   .plan-grid,.map-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+
+/* ===========================================================
+   Mentor v2 · family mentor system additions
+=========================================================== */
+.breadcrumbs{color:#5e687c;background:#fff9ef;border-bottom:1px solid var(--line)}
+.breadcrumbs .shell{min-height:44px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.55rem;font-size:.8rem}
+.breadcrumbs a{color:#4b3f89;text-decoration:none;font-weight:800}
+
+/* Mentor identity follows the learner while preserving a safe base style */
+body{--mentor-a:var(--coral);--mentor-b:var(--gold)}
+.mentor-card{background:linear-gradient(150deg,var(--mentor-a),var(--mentor-b) 155%)}
+.mentor-avatar,.match-avatar,.parent-mentor-avatar{background:linear-gradient(145deg,#fff,var(--mentor-soft,#fff1a8));}
+.mentor-identity-note{margin-top:10px;color:#dff9ff;font-size:.8rem}
+
+/* More readable small interface text */
+.network-inner,.eyebrow,.privacy-line span,.agent-state,.plan-step,.plan-meta span,.plan-card.done::after,
+.tool-btn,.prompt-btn,.grown-btn,.data-row,.footer-inner,.ai-badge,.map-foot,.interest-choice{font-size:max(.78rem,12.5px)}
+.plan-card p,.map-card p,.grown-card p{font-size:.88rem}
+
+/* Symmetrical and dynamic learning layouts */
+.map-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.plan-grid[data-count="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.plan-grid[data-count="4"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+.plan-grid[data-count="5"]{grid-template-columns:repeat(5,minmax(0,1fr))}
+.offscreen-cue{margin-top:12px;padding:9px 10px;border-radius:13px;background:#f4fbf7;color:#356554;font-size:.78rem;line-height:1.4}
+.plan-feedback{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:9px}
+.feedback-btn{min-height:39px;padding:.5rem .55rem;border:1px solid var(--line);border-radius:11px;background:#fff;color:#4b5b70;font-size:.76rem;font-weight:800}
+.feedback-btn.active{color:#fff;background:linear-gradient(135deg,var(--mentor-a),var(--mentor-b));border-color:transparent}
+.read-station{margin-top:8px;min-height:37px;padding:.45rem .62rem;border:1px solid var(--line);border-radius:999px;background:#fff;color:#53647b;font-size:.76rem;font-weight:800}
+
+/* Learning garden intentionally avoids mastery percentages */
+.map-card{position:relative;overflow:hidden}
+.map-card::after{content:"";position:absolute;right:-35px;bottom:-42px;width:110px;height:110px;border-radius:50%;background:linear-gradient(145deg,rgba(114,84,216,.07),rgba(66,199,220,.11));pointer-events:none}
+.growth-badge{display:inline-flex;margin-top:13px;padding:6px 9px;border-radius:999px;background:#edf8f3;color:#287057;font-size:.78rem;font-weight:850}
+.map-meter{display:none}
+.map-foot{position:relative;z-index:1}
+
+/* Avatar builder */
+.identity-mode{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+.identity-btn{min-height:72px;padding:12px;border:1px solid var(--line);border-radius:var(--r21);background:#fff;color:#43546b;text-align:left;font-weight:850}
+.identity-btn strong{display:block;color:var(--navy)}
+.identity-btn small{display:block;margin-top:4px;color:var(--muted);font-weight:650}
+.identity-btn[aria-pressed="true"]{color:#fff;background:linear-gradient(145deg,var(--violet),var(--rose));border-color:transparent}
+.identity-btn[aria-pressed="true"] strong,.identity-btn[aria-pressed="true"] small{color:#fff}
+.avatar-builder{margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:var(--r21);background:#f7fbff}
+.avatar-builder[hidden]{display:none!important}
+.avatar-preview-row{display:flex;align-items:center;gap:13px;margin-bottom:13px}
+.avatar-preview{width:82px;height:82px;flex:0 0 82px;display:grid;place-items:center;border:4px solid #fff;border-radius:50%;background:linear-gradient(145deg,var(--custom-a,#7457ff),var(--custom-b,#ef5bb8));box-shadow:var(--soft);font-size:2.8rem}
+.avatar-options,.color-options{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.avatar-choice{width:48px;height:48px;border:1px solid var(--line);border-radius:14px;background:#fff;font-size:1.55rem}
+.avatar-choice[aria-pressed="true"]{box-shadow:0 0 0 4px rgba(114,84,216,.16);border-color:var(--violet)}
+.color-choice{width:42px;height:42px;border:4px solid #fff;border-radius:50%;box-shadow:0 0 0 1px var(--line)}
+.color-choice[aria-pressed="true"]{box-shadow:0 0 0 4px rgba(23,54,96,.18)}
+
+/* Setup dialog can always be dismissed */
+.setup-close{width:44px;height:44px;flex:0 0 44px;border:1px solid rgba(255,255,255,.22);border-radius:14px;color:#fff;background:rgba(255,255,255,.1);font-size:1.3rem}
+.setup-head-actions{display:flex;align-items:center;gap:12px}
+.not-now{min-height:48px;padding:.75rem 1rem;border:1px solid var(--line)!important;background:#fff!important;color:#4c5c71!important}
+
+/* Parent portal */
+.parent-portal{background:linear-gradient(145deg,#173660,#294f79 58%,#1b6f79);color:#fff}
+.parent-portal .section-heading h2,.parent-portal .section-heading p{color:#fff}
+.parent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.parent-panel{position:relative;overflow:hidden;padding:23px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r21);background:rgba(255,255,255,.09)}
+.parent-panel.wide{grid-column:1/-1}
+.parent-panel h3{margin:0;color:#fff;font-family:var(--serif);font-size:1.5rem}
+.parent-panel p{color:#dbeafa}
+.parent-mentor-head{display:flex;align-items:center;gap:13px}
+.parent-mentor-avatar{width:72px;height:72px;flex:0 0 72px;display:grid;place-items:center;border:4px solid rgba(255,255,255,.86);border-radius:50%;box-shadow:0 13px 28px rgba(0,0,0,.18);font-size:2.35rem}
+.parent-response{min-height:132px;margin-top:15px;padding:15px;border:1px solid rgba(255,255,255,.16);border-radius:17px;background:rgba(255,255,255,.09);color:#fff;line-height:1.55}
+.parent-question-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.parent-question{min-height:41px;padding:.58rem .72rem;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font-size:.78rem;font-weight:800}
+.parent-question:hover{background:rgba(255,255,255,.16)}
+.parent-ask{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px}
+.parent-ask input,.parent-guide-select{min-height:46px;padding:.68rem .78rem;border:1px solid rgba(255,255,255,.20);border-radius:13px;background:#fff;color:#24354e}
+.parent-ask button{min-height:46px;padding:.65rem .82rem;border:0;border-radius:13px;background:#ffe39a;color:#173660;font-weight:900}
+.parent-guide-badge{display:inline-flex;margin-top:7px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.12);color:#ffe5a0;font-size:.78rem;font-weight:800}
+.progress-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:15px}
+.progress-fact{padding:13px;border-radius:15px;background:rgba(255,255,255,.09);text-align:center}
+.progress-fact strong{display:block;color:#ffe39a;font-family:var(--serif);font-size:1.45rem}
+.progress-fact span{display:block;margin-top:4px;color:#dbeafa;font-size:.76rem}
+.parent-privacy{margin-top:14px;padding:12px;border-radius:14px;background:rgba(255,255,255,.07);color:#dcecff;font-size:.8rem}
+
+/* Parent / Guardian release */
+.release-card{margin-top:16px;padding:18px;border:1px solid var(--line);border-radius:var(--r21);background:linear-gradient(145deg,#fffdf2,#f5f9ff)}
+.release-card h4{margin:0;color:var(--navy);font-family:var(--serif);font-size:1.25rem}
+.release-card p{margin:8px 0;color:#52677d;font-size:.86rem}
+.release-version{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}
+.release-version span{padding:5px 8px;border-radius:999px;background:#edf4fb;color:#53657b;font-size:.78rem;font-weight:800}
+.release-scroll{max-height:330px;overflow:auto;padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff;scrollbar-gutter:stable}
+.release-scroll h5{margin:14px 0 5px;color:#253d5b;font-size:.96rem}
+.release-scroll h5:first-child{margin-top:0}
+.release-scroll p,.release-scroll li{color:#53657b;font-size:.84rem;line-height:1.55}
+.release-scroll ul{margin:7px 0 8px;padding-left:1.25rem}
+.release-checks{display:grid;gap:9px;margin-top:14px}
+.release-check{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff;color:#344b65;font-size:.82rem;line-height:1.45}
+.release-check input{margin-top:3px;accent-color:var(--green);transform:scale(1.08)}
+.release-note{margin-top:12px;padding:11px 13px;border-radius:13px;background:#eef8f4;color:#315b4d;font-size:.8rem}
+.release-status{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.12);color:#ffe5a0;font-size:.78rem;font-weight:850}
+.release-status.missing{color:#fff;background:rgba(239,106,102,.28)}
+.release-review{margin-top:12px;padding:13px;border:1px solid rgba(255,255,255,.15);border-radius:15px;background:rgba(255,255,255,.07)}
+.release-review p{margin:0;color:#dcecff;font-size:.8rem}
+
+/* Feeling suggestions */
+.feeling-suggestion{margin-top:12px;padding:12px;border-radius:15px;background:#eef8f4;color:#315b4d;font-size:.82rem}
+.feeling-suggestion button{margin-top:8px;min-height:39px;padding:.5rem .7rem;border:0;border-radius:999px;background:#fff;color:#315b4d;font-weight:850}
+
+@media(max-width:1120px){.plan-grid[data-count="5"]{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1020px){.map-grid{grid-template-columns:repeat(2,1fr)}.plan-grid[data-count="3"],.plan-grid[data-count="4"],.plan-grid[data-count="5"]{grid-template-columns:repeat(2,1fr)}.progress-facts{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.map-grid,.plan-grid[data-count="3"],.plan-grid[data-count="4"],.plan-grid[data-count="5"],.parent-grid,.identity-mode{grid-template-columns:1fr}.parent-panel.wide{grid-column:auto}.parent-ask{grid-template-columns:1fr}.progress-facts{grid-template-columns:1fr 1fr}}
+@media(max-width:430px){.progress-facts{grid-template-columns:1fr}.avatar-preview-row{align-items:flex-start}}
+
 </style>
 </head>
 <body>
@@ -410,6 +523,15 @@ h1 span{display:block;margin-top:13px;color:var(--violet);font-family:var(--sans
     </nav>
   </div>
 </header>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="shell">
+    <a href="https://vervenveda.com/">Verve N Veda</a><span aria-hidden="true">›</span>
+    <a href="https://vervenveda.com/Khaemenes_Academy.github.io/">Khaemenes Academy</a><span aria-hidden="true">›</span>
+    <a href="../index.html">Khaemenes Preschool · Crechè</a><span aria-hidden="true">›</span>
+    <span aria-current="page">Guided Preschool Mentor</span>
+  </div>
+</nav>
 
 <main id="main">
   <section class="hero" aria-labelledby="heroTitle">
@@ -500,8 +622,8 @@ h1 span{display:block;margin-top:13px;color:var(--violet);font-family:var(--sans
     <div class="shell">
       <div class="section-heading">
         <div>
-          <h2 id="mapTitle">The Whole-Child Learning Map</h2>
-          <p>The mentor rotates through foundational domains so preschool does not become only letters, only screens, or only games.</p>
+          <h2 id="mapTitle">My Learning Garden</h2>
+          <p>The mentor gently rotates through foundational domains. This garden reflects exploration and practice—not grades, mastery scores, or competition.</p>
         </div>
       </div>
       <div class="map-grid" id="mapGrid"></div>
@@ -521,6 +643,7 @@ h1 span{display:block;margin-top:13px;color:var(--violet);font-family:var(--sans
           <button class="feeling-btn" data-feeling="frustrated" aria-pressed="false" type="button"><span>😣</span>Frustrated</button>
           <button class="feeling-btn" data-feeling="calm" aria-pressed="false" type="button"><span>😌</span>Calm</button>
         </div>
+        <div class="feeling-suggestion" id="feelingSuggestion" hidden></div>
       </article>
 
       <article class="dialogue-card">
@@ -540,45 +663,100 @@ h1 span{display:block;margin-top:13px;color:var(--violet);font-family:var(--sans
     </div>
   </section>
 
-  <section class="section grownup" id="grownups" aria-labelledby="grownTitle">
+  <section class="section parent-portal" id="grownups" aria-labelledby="grownTitle">
     <div class="shell">
       <div class="section-heading">
         <div>
-          <h2 id="grownTitle">Grown-Up Corner</h2>
-          <p>The mentor supports the child but never replaces the parent, caregiver, teacher, or real human relationships.</p>
+          <h2 id="grownTitle">Parent &amp; Family Mentor Portal</h2>
+          <p>The child’s mentor can explain structured learning progress to a grown-up, while a separate mature Family Guide helps the adult navigate Khaemenes. Neither mentor exposes private child conversations or invents diagnoses.</p>
         </div>
       </div>
-      <div class="grown-grid">
-        <article class="grown-card">
-          <h3>Profile and learning records</h3>
-          <p>Only a nickname, age band, broad interests, mentor style, and completed activity IDs are stored locally. You can inspect, export, edit, or erase them.</p>
+
+      <div class="parent-grid">
+        <article class="parent-panel">
+          <div class="parent-mentor-head">
+            <div class="parent-mentor-avatar" id="parentChildMentorAvatar">🌞</div>
+            <div><h3 id="parentChildMentorName">Your child’s mentor</h3><span class="parent-guide-badge">Same mentor · adult-facing progress view</span></div>
+          </div>
+          <div class="parent-response" id="parentChildMentorResponse" aria-live="polite">Create a learner profile and I can explain today’s plan, explored learning domains, favorites, and activity feedback using the records stored in this browser.</div>
+          <div class="parent-question-row">
+            <button class="parent-question" data-child-question="progress" type="button">How are we progressing?</button>
+            <button class="parent-question" data-child-question="today" type="button">What happened today?</button>
+            <button class="parent-question" data-child-question="interests" type="button">What seems engaging?</button>
+            <button class="parent-question" data-child-question="support" type="button">Where can I help?</button>
+            <button class="parent-question" data-child-question="offline" type="button">What can we do offline?</button>
+          </div>
+          <form class="parent-ask" id="childMentorAskForm">
+            <input id="childMentorQuestion" type="text" maxlength="160" placeholder="Ask the child’s mentor about learning progress…" aria-label="Ask the child mentor about progress">
+            <button type="submit">Ask</button>
+          </form>
+        </article>
+
+        <article class="parent-panel">
+          <div class="parent-mentor-head">
+            <div class="parent-mentor-avatar" id="familyGuideAvatar">🧭</div>
+            <div><h3 id="familyGuideName">Aster · Family Guide</h3><span class="parent-guide-badge">Mature parent mentor · ecosystem guide</span></div>
+          </div>
+          <p>Choose the adult guidance style that feels most useful. This preference is local and can later move into the shared Khaemenes Mentor Core.</p>
+          <select class="parent-guide-select" id="familyGuideStyle" aria-label="Choose family guide style">
+            <option value="aster">Aster · organized and strategic</option>
+            <option value="elara">Elara · calm and reflective</option>
+            <option value="rowan">Rowan · practical and encouraging</option>
+          </select>
+          <div class="parent-response" id="familyGuideResponse" aria-live="polite">I can help you understand the preschool rhythm, choose family activities, review privacy controls, and find the next Khaemenes learning destination.</div>
+          <div class="parent-question-row">
+            <button class="parent-question" data-guide-question="review" type="button">What should I review?</button>
+            <button class="parent-question" data-guide-question="routine" type="button">Help with our routine</button>
+            <button class="parent-question" data-guide-question="next" type="button">Where do we go next?</button>
+            <button class="parent-question" data-guide-question="privacy" type="button">Explain our data</button>
+            <button class="parent-question" data-guide-question="ecosystem" type="button">Show the ecosystem</button>
+          </div>
+          <form class="parent-ask" id="familyGuideAskForm">
+            <input id="familyGuideQuestion" type="text" maxlength="160" placeholder="Ask your Family Guide about Khaemenes…" aria-label="Ask the family guide">
+            <button type="submit">Ask</button>
+          </form>
           <div class="grown-actions">
-            <button class="grown-btn" id="editProfile" type="button">Edit profile</button>
-            <button class="grown-btn" id="exportData" type="button">Export local record</button>
-            <button class="grown-btn" id="resetData" type="button">Erase profile and progress</button>
+            <a class="grown-btn" href="../index.html">Crechè Family Home</a>
+            <a class="grown-btn" href="https://vervenveda.com/Khaemenes_Academy.github.io/">Khaemenes Academy</a>
+            <a class="grown-btn" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/">Kinder Garden</a>
+            <a class="grown-btn" href="https://vervenveda.com/Khaemenes_Elementary.github.io/">Elementary</a>
+          </div>
+        </article>
+
+        <article class="parent-panel wide">
+          <h3>Local learning snapshot</h3>
+          <p>These facts come from the active learner’s structured records in this browser. They are observational learning information, not formal grades or developmental diagnoses.</p>
+          <div class="progress-facts">
+            <div class="progress-fact"><strong id="parentCompletedCount">0</strong><span>completed stations</span></div>
+            <div class="progress-fact"><strong id="parentTodayCount">0/0</strong><span>today’s current path</span></div>
+            <div class="progress-fact"><strong id="parentFavoriteCount">0</strong><span>pinned favorites</span></div>
+            <div class="progress-fact"><strong id="parentDomainCount">0</strong><span>domains explored</span></div>
+          </div>
+          <div class="grown-actions">
+            <button class="grown-btn" id="editProfile" type="button">Edit learner &amp; mentor</button>
+            <button class="grown-btn" id="exportData" type="button">Export full Preschool record</button>
+            <button class="grown-btn" id="resetData" type="button">Erase active learner data</button>
+            <button class="grown-btn" id="calmMode" type="button">Toggle calm colors</button>
+            <button class="grown-btn" id="motionMode" type="button">Reduce movement</button>
+            <button class="grown-btn" id="readPageIntro" type="button">Read today’s plan</button>
+            <button class="grown-btn" id="reviewGuardianRelease" type="button">📜 Review Parent/Guardian Release</button>
+          </div>
+          <div class="release-review">
+            <p><strong>Parent/Guardian Release:</strong> Every newly activated Preschool Mentor profile requires adult authorization, acknowledgment of parental responsibility, AI and educational-tool limits, privacy terms, and the Respectful Use Policy.</p>
+            <span class="release-status missing" id="guardianReleaseStatus">Not yet accepted for this learner</span>
           </div>
           <div class="data-list">
             <div class="data-row"><span>Account required</span><span>No</span></div>
             <div class="data-row"><span>Advertising or analytics</span><span>None</span></div>
-            <div class="data-row"><span>Open private messaging</span><span>Disabled</span></div>
+            <div class="data-row"><span>Child open private messaging</span><span>Disabled</span></div>
+            <div class="data-row"><span>Parent mentor questions</span><span>Answered from structured local records</span></div>
             <div class="data-row"><span>Formal grade authority</span><span>None</span></div>
+            <div class="data-row"><span>Accredited school status</span><span>Not an accredited school</span></div>
+            <div class="data-row"><span>Child welfare &amp; supervision</span><span>Parent/guardian responsibility</span></div>
+            <div class="data-row"><span>Mentor activity source</span><span id="catalogActivityStatus">Shared catalog · auto-discovered</span></div>
+            <div class="data-row"><span>Saved location</span><span>This browser</span></div>
           </div>
-        </article>
-
-        <article class="grown-card">
-          <h3>Comfort and accessibility</h3>
-          <p>Use a calmer palette, reduce movement, or read the mentor’s current message aloud using the device’s built-in speech capability.</p>
-          <div class="grown-actions">
-            <button class="grown-btn" id="calmMode" type="button">Toggle calm colors</button>
-            <button class="grown-btn" id="motionMode" type="button">Reduce movement</button>
-            <button class="grown-btn" id="readPageIntro" type="button">Read mentor message</button>
-          </div>
-          <div class="data-list">
-            <div class="data-row"><span>Recommended use</span><span>With a nearby grown-up</span></div>
-            <div class="data-row"><span>Screen rhythm</span><span>Short activities + movement</span></div>
-            <div class="data-row"><span>Mentor identity</span><span>Always disclosed as AI</span></div>
-            <div class="data-row"><span>Saved location</span><span>This browser only</span></div>
-          </div>
+          <div class="parent-privacy"><strong>Family boundary:</strong> the adult-facing child mentor summarizes activity records, preferences, and progress. It does not reveal private feelings check-ins, fabricate psychological interpretations, or replace a parent, educator, clinician, or other human professional.</div>
         </article>
       </div>
     </div>
@@ -600,8 +778,11 @@ h1 span{display:block;margin-top:13px;color:var(--violet);font-family:var(--sans
           <h2 id="setupTitle">Meet Your Learning Mentor</h2>
           <p>A grown-up and child create this small local profile together.</p>
         </div>
-        <div class="step-dots" aria-label="Profile setup progress">
-          <span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
+        <div class="setup-head-actions">
+          <div class="step-dots" aria-label="Profile setup progress">
+            <span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
+          </div>
+          <button class="setup-close" id="setupClose" type="button" aria-label="Close mentor setup">×</button>
         </div>
       </div>
     </header>
@@ -641,6 +822,42 @@ h1 span{display:block;margin-top:13px;color:var(--violet);font-family:var(--sans
             <label class="choice"><input type="radio" name="personality" value="steady"><span><strong>Steady and determined</strong><small>Likes clear steps, practice, and finishing a mission</small></span></label>
           </div>
         </fieldset>
+        <div class="field">
+          <label>Mentor identity</label>
+          <div class="identity-mode">
+            <button class="identity-btn" id="useMatchedMentor" type="button" aria-pressed="true"><strong>✨ Use the matched Khaemenes mentor</strong><small>Pip, Miri, Nova, or Sage appears as designed.</small></button>
+            <button class="identity-btn" id="useCustomMentor" type="button" aria-pressed="false"><strong>🎨 Create my own mentor avatar</strong><small>Choose a name, character, and color while keeping the safe communication style above.</small></button>
+          </div>
+          <div class="avatar-builder" id="avatarBuilder" hidden>
+            <div class="avatar-preview-row">
+              <div class="avatar-preview" id="customAvatarPreview">🦊</div>
+              <div style="flex:1">
+                <label for="customMentorName">Mentor nickname</label>
+                <input id="customMentorName" type="text" maxlength="14" autocomplete="off" placeholder="Example: Spark">
+                <small style="display:block;margin-top:5px;color:var(--muted)">This changes the mentor’s visible identity, not its safety rules or learning responsibilities.</small>
+              </div>
+            </div>
+            <label>Choose a character</label>
+            <div class="avatar-options" id="avatarOptions">
+              <button class="avatar-choice" data-avatar="🦊" type="button" aria-pressed="true">🦊</button>
+              <button class="avatar-choice" data-avatar="🐼" type="button" aria-pressed="false">🐼</button>
+              <button class="avatar-choice" data-avatar="🐰" type="button" aria-pressed="false">🐰</button>
+              <button class="avatar-choice" data-avatar="🦄" type="button" aria-pressed="false">🦄</button>
+              <button class="avatar-choice" data-avatar="🐉" type="button" aria-pressed="false">🐉</button>
+              <button class="avatar-choice" data-avatar="🤖" type="button" aria-pressed="false">🤖</button>
+              <button class="avatar-choice" data-avatar="🚀" type="button" aria-pressed="false">🚀</button>
+              <button class="avatar-choice" data-avatar="🌟" type="button" aria-pressed="false">🌟</button>
+            </div>
+            <label style="display:block;margin-top:12px">Choose a color</label>
+            <div class="color-options" id="colorOptions">
+              <button class="color-choice" data-color="#ef6a66,#f6bf3a" style="background:linear-gradient(145deg,#ef6a66,#f6bf3a)" type="button" aria-label="Sunset colors" aria-pressed="false"></button>
+              <button class="color-choice" data-color="#2398d5,#42c7dc" style="background:linear-gradient(145deg,#2398d5,#42c7dc)" type="button" aria-label="Sky colors" aria-pressed="false"></button>
+              <button class="color-choice" data-color="#7254d8,#e95ca8" style="background:linear-gradient(145deg,#7254d8,#e95ca8)" type="button" aria-label="Cosmic colors" aria-pressed="true"></button>
+              <button class="color-choice" data-color="#23a67c,#8ccf54" style="background:linear-gradient(145deg,#23a67c,#8ccf54)" type="button" aria-label="Garden colors" aria-pressed="false"></button>
+              <button class="color-choice" data-color="#ff8a1f,#ff5ca8" style="background:linear-gradient(145deg,#ff8a1f,#ff5ca8)" type="button" aria-label="Bright colors" aria-pressed="false"></button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="setup-step" data-step="3" hidden>
@@ -686,12 +903,78 @@ h1 span{display:block;margin-top:13px;color:var(--violet);font-family:var(--sans
         </div>
       </div>
 
+      <div class="setup-step" data-step="5" hidden>
+        <h3>Parent / Guardian Release &amp; Authorization</h3>
+        <p>A parent, legal guardian, caregiver, or authorized educator must review and accept this release before a new Preschool Mentor profile is activated.</p>
+
+        <div class="release-card">
+          <h4>Preschool Mentor Release</h4>
+          <div class="release-version">
+            <span id="releaseVersionLabel">Preschool Mentor Release v1.0</span>
+            <span>Last revised August 7, 2026</span>
+            <span>Jennifer Kay Pearl · Verve N Veda · Khaemenes Academy</span>
+          </div>
+
+          <div class="release-scroll" id="releasePolicyText" tabindex="0" aria-label="Parent and guardian release policy">
+            <h5>1. Educational tools — not an accredited school</h5>
+            <p>Khaemenes Academy, Crechè Preschool, the Khaemenes Mentor, Verve N Veda, and related learning pages are educational and informational tools. Khaemenes Academy is not an accredited school, licensed childcare provider, medical provider, therapist, emergency service, or substitute for professional educational, medical, developmental, psychological, legal, or safety advice.</p>
+
+            <h5>2. Parent and guardian responsibility</h5>
+            <p>The parent or guardian remains responsible for the child’s supervision, physical and emotional welfare, healthcare, device and internet use, educational decisions, compliance with applicable education or homeschool requirements, and deciding whether a particular activity is suitable for the child. A nearby responsible adult should participate when an activity calls for real-world movement, cooking, hygiene, outdoor exploration, animals, tools, or other hands-on activity.</p>
+
+            <h5>3. AI Mentor role and boundaries</h5>
+            <p>The Khaemenes Mentor is an AI-assisted educational guide. It may organize activities, offer encouragement, summarize structured learning records, provide age-aligned prompts, and recommend breaks or adult help. It is not a human teacher, guardian, counselor, clinician, therapist, physician, emergency responder, or decision-maker for the child. The child-facing Preschool Mentor does not provide unrestricted private chat.</p>
+
+            <h5>4. Custom mentor avatars</h5>
+            <p>A child may choose an embedded Khaemenes mentor or create a custom visible mentor name, character, and color. A custom avatar changes presentation only. It does not change the underlying age-aligned learning rules, safety boundaries, or adult supervision requirements.</p>
+
+            <h5>5. Learning records and parent access</h5>
+            <p>The Preschool Mentor may use the learner’s nickname, broad age band, interests, selected mentor style, favorites, visited activities, structured activity feedback, and local progress records to personalize recommendations. The child’s mentor may summarize those structured educational records to the authorized parent-facing portal. Private feelings check-ins are not exposed as a psychological profile. The separate adult Family Guide may use approved family-learning context to help the grown-up navigate Khaemenes resources.</p>
+
+            <h5>6. Respectful Use Policy</h5>
+            <p>Khaemenes maintains a respectful learning environment for children, families, educators, contributors, and its AI learning systems. Deliberate abusive, threatening, hateful, sexually inappropriate, degrading, exploitative, or intentionally destructive interaction with the Mentor system is not permitted.</p>
+            <ul>
+              <li>Do not harass, threaten, demean, or repeatedly abuse the Mentor system.</li>
+              <li>Do not introduce sexual, violent, hateful, or otherwise age-inappropriate material into a child learning session.</li>
+              <li>Do not deliberately manipulate the Mentor into producing unsafe or age-inappropriate content.</li>
+              <li>Do not attempt to bypass, disable, probe, corrupt, or interfere with Mentor safeguards, learner records, recommendations, or adaptive-learning behavior.</li>
+              <li>Do not use the Mentor to harass, impersonate, exploit, or target another person.</li>
+            </ul>
+            <p>Preschool children will be redirected gently and developmentally appropriately. Exploratory, accidental, impulsive, or developmentally typical child behavior should not be treated as adult misconduct. Deliberate or repeated misuse by an adult or older user may cause an interaction to be redirected, paused, ended, or referred back to a responsible adult. A broader protective layer will be maintained by the shared Khaemenes Mentor system.</p>
+
+            <h5>7. Voluntary use, assumption of responsibility, and limits</h5>
+            <p>Use of these learning tools is voluntary. The parent or guardian accepts responsibility for deciding when, where, and how the child uses them and assumes the ordinary risks associated with voluntary use of educational websites, devices, and suggested activities.</p>
+            <p>To the fullest extent permitted by applicable law, the parent or guardian agrees that Jennifer Kay Pearl, Verve N Veda, Khaemenes Academy, Crechè Preschool, and their related projects, contributors, agents, or affiliates are not responsible for outcomes arising solely from voluntary use, misuse, unsupervised use, or reliance on these educational tools. Nothing in this release is intended to waive, eliminate, or limit any right, duty, claim, protection, or liability that cannot lawfully be waived or limited.</p>
+
+            <h5>8. Privacy and local control</h5>
+            <p>The Preschool experience is designed to avoid unnecessary personal information. No surname, exact birthday, email address, photograph, or required account is requested for the learner profile. Preschool learning records are designed to remain in the family’s browser unless the family deliberately exports them or later uses a separately disclosed connected service. The family may review, export, or erase locally stored learner data.</p>
+
+            <h5>9. No guarantee of educational outcome</h5>
+            <p>The tools may support practice, curiosity, routines, and exploration, but no particular academic, developmental, therapeutic, behavioral, or future educational outcome is promised. Progress displays are observational learning records and are not formal grades, diagnoses, credentials, or accreditation.</p>
+          </div>
+
+          <div class="release-checks">
+            <label class="release-check"><input id="releaseAuthority" type="checkbox"><span>I confirm that I am the child’s parent, legal guardian, caregiver, or authorized educator and have authority to activate this Mentor profile.</span></label>
+            <label class="release-check"><input id="releaseEducation" type="checkbox"><span>I understand that Khaemenes Academy is not an accredited school and that these are educational tools, not childcare, medical, therapeutic, emergency, or professional services.</span></label>
+            <label class="release-check"><input id="releaseResponsibility" type="checkbox"><span>I accept responsibility for the child’s supervision, safety, welfare, educational decisions, and determining whether activities are appropriate.</span></label>
+            <label class="release-check"><input id="releaseAI" type="checkbox"><span>I understand the AI Mentor’s role and limits, including parent-facing structured progress summaries and the separate adult Family Guide.</span></label>
+            <label class="release-check"><input id="releaseRespect" type="checkbox"><span>I have reviewed and agree to the Respectful Use Policy, including the prohibition on deliberate abuse, exploitation, unsafe use, or attempts to bypass Mentor protections.</span></label>
+            <label class="release-check"><input id="releaseLimits" type="checkbox"><span>I understand the voluntary-use, assumption-of-responsibility, and limitation language above, including that legally non-waivable rights and duties remain unaffected.</span></label>
+            <label class="release-check"><input id="releasePrivacy" type="checkbox"><span>I understand the local-first data practices and the family’s ability to review, export, or erase the learner’s locally stored records.</span></label>
+          </div>
+          <div class="release-note"><strong>No signature or sensitive identity data is required.</strong> The browser stores only the release version, acceptance date, learner ID, and acknowledgment flags with the local learner profile.</div>
+        </div>
+      </div>
+
       <div class="setup-error" id="setupError" role="alert"></div>
     </div>
 
     <footer class="setup-foot">
-      <button class="back-btn" id="setupBack" type="button" hidden>Back</button>
-      <button class="next-btn" id="setupNext" type="button">Continue</button>
+      <button class="not-now" id="setupNotNow" type="button">Not now</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+        <button class="back-btn" id="setupBack" type="button" hidden>Back</button>
+        <button class="next-btn" id="setupNext" type="button">Continue</button>
+      </div>
     </footer>
   </section>
 </div>
@@ -699,640 +982,351 @@ h1 span{display:block;margin-top:13px;color:var(--violet);font-family:var(--sans
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="confetti" id="confetti" aria-hidden="true"></div>
 
+<script src="../assets/preschool-catalog.js"></script>
 <script>
 "use strict";
 
 /* -----------------------------------------------------------
-   Khaemenes Guided Preschool
-   Local-first profile + mentor-directed daily path
+   Khaemenes Guided Preschool Mentor v2
+   Shared catalog + child mentor + parent mentor prototype
 ----------------------------------------------------------- */
-const PROFILE_KEY = "khaemenes_preschool_profile_v1";
-const PROGRESS_KEY = "khaemenes_preschool_progress_v1";
-const SETTINGS_KEY = "khaemenes_preschool_settings_v1";
-const PLAN_KEY = "khaemenes_preschool_daily_plan_v1";
+const PROFILE_KEY="khaemenes_preschool_profile_v1";
+const PROGRESS_KEY="khaemenes_preschool_progress_v1";
+const SETTINGS_KEY="khaemenes_preschool_settings_v1";
+const PLAN_KEY="khaemenes_preschool_daily_plan_v1";
+const RELEASE_VERSION="preschool-mentor-release-v1.0";
+const RELEASE_LABEL="Preschool Mentor Release v1.0";
+const PROFILE_FAVORITES_KEY="khaemenes_profile_favorites_v1";
+const PROFILE_VISITS_KEY="khaemenes_profile_visits_v1";
+const CONTINUITY_KEY="khaemenes_learning_continuity_v1";
+const LAST_OPEN_KEY="khaemenes_preschool_last_open_v1";
+const FAMILY_GUIDE_KEY="khaemenes_parent_mentor_v1";
 
-const MENTORS = {
-  playful: {
-    id:"pip", name:"Pip", avatar:"🌞", colors:["#ef6a66","#f6bf3a"],
-    traits:["playful","social","encouraging"],
-    intro:"I love learning with a little laughter and movement. We can try, wiggle, wonder, and try again."
-  },
-  curious: {
-    id:"miri", name:"Miri", avatar:"🦉", colors:["#2398d5","#42c7dc"],
-    traits:["quiet","curious","patient"],
-    intro:"I like looking closely and asking gentle questions. We never have to rush a good idea."
-  },
-  imaginative: {
-    id:"nova", name:"Nova", avatar:"🚀", colors:["#7254d8","#e95ca8"],
-    traits:["imaginative","expressive","adventurous"],
-    intro:"I turn learning into stories, pictures, and little worlds. Your ideas will help guide our adventures."
-  },
-  steady: {
-    id:"sage", name:"Sage", avatar:"🌿", colors:["#23a67c","#8ccf54"],
-    traits:["steady","patient","determined"],
-    intro:"I like clear steps and calm practice. We will notice every bit of progress and keep going together."
-  }
+const CATALOG=window.KhaemenesPreschoolCatalog;
+if(!CATALOG)throw new Error("Khaemenes Preschool shared catalog failed to load.");
+const DOMAINS=CATALOG.mentorDomains;
+const ACTIVITIES=CATALOG.mentorActivities({preserveLegacyIds:true});
+const SLOT_BLUEPRINTS={20:["feelings","letters","movement"],30:["feelings","letters","numbers","creative"],45:["feelings","letters","numbers","movement","wonder"]};
+
+const MENTORS={
+  playful:{id:"pip",name:"Pip",avatar:"🌞",colors:["#ef6a66","#f6bf3a"],traits:["playful","social","encouraging"],intro:"I love learning with a little laughter and movement. We can try, wiggle, wonder, and try again."},
+  curious:{id:"miri",name:"Miri",avatar:"🦉",colors:["#2398d5","#42c7dc"],traits:["quiet","curious","patient"],intro:"I like looking closely and asking gentle questions. We never have to rush a good idea."},
+  imaginative:{id:"nova",name:"Nova",avatar:"🚀",colors:["#7254d8","#e95ca8"],traits:["imaginative","expressive","adventurous"],intro:"I turn learning into stories, pictures, and little worlds. Your ideas will help guide our adventures."},
+  steady:{id:"sage",name:"Sage",avatar:"🌿",colors:["#23a67c","#8ccf54"],traits:["steady","patient","determined"],intro:"I like clear steps and calm practice. We will notice every bit of progress and keep going together."}
+};
+const FAMILY_GUIDES={
+  aster:{id:"aster",name:"Aster",avatar:"🧭",intro:"I help families see the whole learning path, organize next steps, and find the right Khaemenes resource without turning childhood into a checklist."},
+  elara:{id:"elara",name:"Elara",avatar:"🌙",intro:"I help families slow information down, notice patterns gently, and make thoughtful choices about routines, learning, and transitions."},
+  rowan:{id:"rowan",name:"Rowan",avatar:"🌳",intro:"I help families turn information into practical next steps, useful routines, and clear connections across the Khaemenes ecosystem."}
 };
 
-const DOMAINS = {
-  letters:{label:"Language & Early Literacy",icon:"🔤",a:"#ef6a66",b:"#f6a83a"},
-  numbers:{label:"Numbers & Early Reasoning",icon:"🔢",a:"#2398d5",b:"#42c7dc"},
-  feelings:{label:"Feelings, Friendship & Self-Knowledge",icon:"💛",a:"#e95ca8",b:"#ef7a6b"},
-  creative:{label:"Art, Music & Imagination",icon:"🎨",a:"#7254d8",b:"#e95ca8"},
-  movement:{label:"Movement, Health & Life Skills",icon:"🦘",a:"#23a67c",b:"#8ccf54"},
-  wonder:{label:"Nature, Weather & Wonder",icon:"🌎",a:"#168a88",b:"#42c7dc"}
-};
+let profile=normalizeProfile(loadJSON(PROFILE_KEY,null));
+let progress=normalizeProgress(loadJSON(PROGRESS_KEY,{completed:{},domainCounts:{},days:{},feedback:{}}));
+let settings={calm:false,noMotion:false,...loadJSON(SETTINGS_KEY,{})};
+let familyGuideState={style:"aster",...loadJSON(FAMILY_GUIDE_KEY,{})};
+let currentEnergy="steady";
+let currentFeeling=null;
+let currentPlan=[];
+let currentDecisions={};
+let agent=null;
+let setupStep=1;
+let releaseOnlyMode=false;
+let selectedInterests=new Set();
+let identityMode="embedded";
+let customAvatar="🦊";
+let customColors=["#7254d8","#e95ca8"];
+let toastTimer=null;
+let setupReturnFocus=null;
 
-const ACTIVITIES = [
-  {id:"abc-story",title:"ABC Story Time",file:"ABC_Story_Time/index.html",domain:"letters",icon:"📖",ages:["2-3","3-4","4-5"],minutes:7,energy:"gentle",interests:["stories"],desc:"Listen to a gentle alphabet story and notice letters."},
-  {id:"sunny-story",title:"Sunny ABCs & 123s Storytime",file:"Sunny_ABCs_123s_Storytime/index.html",domain:"letters",icon:"🌞",ages:["2-3","3-4","4-5"],minutes:8,energy:"steady",interests:["stories","numbers"],desc:"Meet letters and numbers in a cheerful storytime."},
-  {id:"alphabet-adventure",title:"Alphabet Adventure",file:"ABC_Alphabet_Adventure_index.html",domain:"letters",icon:"🧭",ages:["3-4","4-5","5-6"],minutes:9,energy:"steady",interests:["stories"],desc:"Travel through a bright world of letters and pictures."},
-  {id:"abc-match",title:"ABC Match",file:"ABC_match_index.html",domain:"letters",icon:"🔤",ages:["3-4","4-5","5-6"],minutes:7,energy:"steady",interests:["stories"],desc:"Match letters and pictures to build recognition."},
-  {id:"abc-bubbles",title:"ABC Bubble Adventure",file:"ABC_bubble_adventure_index.html",domain:"letters",icon:"🫧",ages:["3-4","4-5","5-6"],minutes:7,energy:"wiggly",interests:["movement"],desc:"Pop and match playful alphabet bubbles."},
-  {id:"bilingual-abc",title:"Bilingual ABC",file:"ABC_bilingual_index.html",domain:"letters",icon:"🌍",ages:["3-4","4-5","5-6"],minutes:8,energy:"steady",interests:["stories"],desc:"Explore alphabet words across languages."},
-  {id:"cosmic-arabic",title:"Cosmic Arabic Alphabet Quest",file:"cosmic_arabic_alphabet_quest_index.html",domain:"letters",icon:"🌙",ages:["4-5","5-6"],minutes:10,energy:"steady",interests:["space","stories"],desc:"Trace and hear Arabic letters in a constellation journey."},
-  {id:"sight-words",title:"Sight Words",file:"reading_sight_words_index.html",domain:"letters",icon:"👀",ages:["4-5","5-6"],minutes:8,energy:"steady",interests:["stories"],desc:"Practice common early-reading words."},
-  {id:"storybird",title:"Storybird Grove",file:"reading_storybird_grove/index.html",domain:"letters",icon:"🐦",ages:["3-4","4-5","5-6"],minutes:10,energy:"gentle",interests:["stories","nature"],desc:"Read, imagine, and explore a gentle story grove."},
-  {id:"spelling-safari",title:"Spelling Safari",file:"Spelling_safari_index.html",domain:"letters",icon:"🦒",ages:["5-6"],minutes:9,energy:"steady",interests:["stories","nature"],desc:"Go on a word safari with early spelling patterns."},
-
-  {id:"numbers-1-12",title:"Numbers 1–12 Fun",file:"numbers_1-12_fun_index.html",domain:"numbers",icon:"1️⃣",ages:["2-3","3-4","4-5"],minutes:7,energy:"steady",interests:["numbers"],desc:"Count and recognize numbers one through twelve."},
-  {id:"numbers-drag",title:"Numbers Drag & Drop",file:"numbers_drag_n_drop_index.html",domain:"numbers",icon:"🖐️",ages:["3-4","4-5","5-6"],minutes:7,energy:"steady",interests:["numbers","movement"],desc:"Drag numbers into order and matching spaces."},
-  {id:"math-cloud",title:"Pre-K Math Cloud",file:"math_cloud_index.html",domain:"numbers",icon:"☁️",ages:["4-5","5-6"],minutes:10,energy:"steady",interests:["numbers"],desc:"Travel through a complete early-math journey."},
-  {id:"shape-match",title:"Match the Shapes",file:"shapes_match_index.html",domain:"numbers",icon:"🟦",ages:["2-3","3-4","4-5"],minutes:6,energy:"gentle",interests:["numbers","art"],desc:"Match shapes by form and color."},
-  {id:"shapes-game",title:"Shapes Game",file:"shapes_game_index.html",domain:"numbers",icon:"🔺",ages:["3-4","4-5","5-6"],minutes:7,energy:"steady",interests:["numbers","art"],desc:"Explore common shapes through colorful play."},
-
-  {id:"feelings-explorer",title:"Feelings Emotional Explorer",file:"Feelings_emotional_explorer/index.html",domain:"feelings",icon:"🧭",ages:["3-4","4-5","5-6"],minutes:8,energy:"gentle",interests:["helping"],desc:"Name feelings, notice body clues, and explore caring responses."},
-  {id:"friendship-garden",title:"Emotions & Friendship Garden",file:"Life_skills_little_Tikes_Life_Skills_Emotions_Friendship_Garden/index.html",domain:"feelings",icon:"🌻",ages:["3-4","4-5","5-6"],minutes:9,energy:"gentle",interests:["helping","nature"],desc:"Practice friendship, boundaries, kindness, and repair."},
-  {id:"kindness",title:"Acts of Kindness",file:"feelings_act_of_kindness_index.html",domain:"feelings",icon:"💛",ages:["2-3","3-4","4-5","5-6"],minutes:6,energy:"gentle",interests:["helping"],desc:"Practice kind choices and caring actions."},
-  {id:"feelings-game",title:"Feelings Game",file:"feelings_game_index.html",domain:"feelings",icon:"🎭",ages:["3-4","4-5","5-6"],minutes:7,energy:"steady",interests:["helping","stories"],desc:"Identify feelings in everyday situations."},
-
-  {id:"color-studio",title:"Art Color Studio",file:"Art_color_studio/index.html",domain:"creative",icon:"🎨",ages:["2-3","3-4","4-5","5-6"],minutes:10,energy:"gentle",interests:["art"],desc:"Explore colors, drawing, and creative choices."},
-  {id:"color-mixing",title:"Color Mixing Studio",file:"Art_color_mixing_index.html",domain:"creative",icon:"🌈",ages:["3-4","4-5","5-6"],minutes:8,energy:"steady",interests:["art"],desc:"Mix colors and discover new combinations."},
-  {id:"drawing",title:"Drawing Tool",file:"art_drawing_tool_index.html",domain:"creative",icon:"🖍️",ages:["2-3","3-4","4-5","5-6"],minutes:10,energy:"gentle",interests:["art"],desc:"Draw, doodle, and create freely."},
-  {id:"piano",title:"Little Composer Piano",file:"music_piano_index.html",domain:"creative",icon:"🎹",ages:["2-3","3-4","4-5","5-6"],minutes:8,energy:"wiggly",interests:["music"],desc:"Play rainbow keys and explore sound."},
-  {id:"music-staff",title:"Harmony Haven Staff Studio",file:"Music_staff_studio_index.html",domain:"creative",icon:"🎼",ages:["4-5","5-6"],minutes:9,energy:"steady",interests:["music"],desc:"Place notes on a staff and hear a simple score."},
-  {id:"little-museum",title:"Little Museum",file:"Art_little_museum_index.html",domain:"creative",icon:"🏛️",ages:["3-4","4-5","5-6"],minutes:8,energy:"gentle",interests:["art","stories"],desc:"Explore a child-friendly museum of art and ideas."},
-
-  {id:"move-groove",title:"Move & Groove",file:"PE_move_n_groove_index.html",domain:"movement",icon:"💃",ages:["2-3","3-4","4-5","5-6"],minutes:8,energy:"wiggly",interests:["movement","music"],desc:"Move through a safe warm-up, active game, and cool-down."},
-  {id:"brush-teeth",title:"How to Brush Your Teeth",file:"Life_skills_little_Tikes_How_to_Brush_Your_Teeth/index.html",domain:"movement",icon:"🪥",ages:["2-3","3-4","4-5","5-6"],minutes:6,energy:"gentle",interests:["helping"],desc:"Learn a child-friendly tooth-brushing routine."},
-  {id:"make-bed",title:"Making Your Bed",file:"Life_skills_make_bed_index.html",domain:"movement",icon:"🛏️",ages:["3-4","4-5","5-6"],minutes:7,energy:"steady",interests:["helping"],desc:"Practice caring for a sleeping space one step at a time."},
-  {id:"organizer",title:"Mini Organizer",file:"Life_skills_organizer_index.html",domain:"movement",icon:"🗓️",ages:["4-5","5-6"],minutes:8,energy:"steady",interests:["helping"],desc:"Practice a small tidy mission and simple routine."},
-  {id:"kitchen-helper",title:"Little Kitchen Helper",file:"Life_skills_kitchen_helper_index.html",domain:"movement",icon:"👩‍🍳",ages:["3-4","4-5","5-6"],minutes:8,energy:"steady",interests:["helping"],desc:"Learn safe ways to help in the kitchen with an adult."},
-
-  {id:"weather-tots",title:"Weather for Tots",file:"weather_for_tots_index.html",domain:"wonder",icon:"🌦️",ages:["2-3","3-4","4-5"],minutes:7,energy:"gentle",interests:["nature"],desc:"Meet sunshine, clouds, rain, snow, wind, and fog."},
-  {id:"sunny-weather",title:"Sunny’s Weather Adventure",file:"weather_index.html",domain:"wonder",icon:"☀️",ages:["3-4","4-5","5-6"],minutes:8,energy:"steady",interests:["nature"],desc:"Explore animated weather scenes with Sunny."},
-  {id:"moon",title:"Sunny’s Moon Adventure",file:"weather_moon_phase_index.html",domain:"wonder",icon:"🌙",ages:["4-5","5-6"],minutes:8,energy:"gentle",interests:["space","nature"],desc:"Explore the eight main lunar phases."},
-  {id:"little-worlds",title:"Little Worlds Promenade",file:"little_worlds_promenade_index.html",domain:"wonder",icon:"🎠",ages:["2-3","3-4","4-5","5-6"],minutes:9,energy:"gentle",interests:["stories","art"],desc:"Visit imaginative little worlds filled with gentle discovery."},
-  {id:"wondercabinet",title:"The Wondercabinet",file:"wondercabinet_index.html",domain:"wonder",icon:"🗝️",ages:["3-4","4-5","5-6"],minutes:9,energy:"steady",interests:["stories","art","music"],desc:"Open drawers for words, tracing, stories, art, calm, and music."},
-  {id:"compass",title:"Compass Exploration",file:"Life_skills_compass_exploration_index.html",domain:"wonder",icon:"🧭",ages:["4-5","5-6"],minutes:8,energy:"wiggly",interests:["nature","movement"],desc:"Learn directions through a walking adventure."}
-];
-
-const SLOT_BLUEPRINTS = {
-  20:["feelings","letters","movement"],
-  30:["feelings","letters","numbers","creative"],
-  45:["feelings","letters","numbers","movement","wonder"]
-};
-
-let profile = loadJSON(PROFILE_KEY, null);
-let progress = loadJSON(PROGRESS_KEY, {completed:{},domainCounts:{},days:{}});
-let settings = loadJSON(SETTINGS_KEY, {calm:false,noMotion:false});
-let currentEnergy = "steady";
-let currentFeeling = null;
-let currentPlan = [];
-let currentDecisions = {};
-let agent = null;
-let setupStep = 1;
-let selectedInterests = new Set();
-let toastTimer = null;
-
-const $ = (sel, root=document) => root.querySelector(sel);
-const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
-
-function loadJSON(key, fallback){
-  try{
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : fallback;
-  }catch{return fallback}
+const $=(sel,root=document)=>root.querySelector(sel);
+const $$=(sel,root=document)=>[...root.querySelectorAll(sel)];
+function loadJSON(key,fallback){try{const value=localStorage.getItem(key);return value?JSON.parse(value):fallback}catch{return fallback}}
+function saveJSON(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}}
+function normalizeProfile(value){
+  if(!value||typeof value!=="object")return null;
+  return {...value,interests:Array.isArray(value.interests)?value.interests:[],pace:value.pace||"balanced",minutes:[20,30,45].includes(Number(value.minutes))?Number(value.minutes):30,pathway:value.pathway||"preschool",mentorIdentity:value.mentorIdentity&&typeof value.mentorIdentity==="object"?value.mentorIdentity:{mode:"embedded"}};
 }
-function saveJSON(key, value){
-  try{localStorage.setItem(key, JSON.stringify(value));return true}catch{return false}
+function normalizeProgress(value){
+  const p=value&&typeof value==="object"?value:{};
+  return {completed:p.completed&&typeof p.completed==="object"?p.completed:{},domainCounts:p.domainCounts&&typeof p.domainCounts==="object"?p.domainCounts:{},days:p.days&&typeof p.days==="object"?p.days:{},feedback:p.feedback&&typeof p.feedback==="object"?p.feedback:{}};
 }
-function todayKey(){
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function randomId(){return globalThis.crypto?.randomUUID?.()||`local-${Date.now()}-${Math.random().toString(16).slice(2)}`}
+function stableHash(text){let h=2166136261;for(const ch of String(text)){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function seededValue(text){let x=stableHash(text)||1;x^=x<<13;x^=x>>>17;x^=x<<5;return ((x>>>0)%100000)/100000}
+function shuffleStable(items,seed){return [...items].sort((a,b)=>seededValue(`${seed}:${a.id}`)-seededValue(`${seed}:${b.id}`))}
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
+function appUrl(file){return "../apps/"+file.split("/").map(part=>encodeURIComponent(part)).join("/")}
+function toast(message){const el=$("#toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600)}
+function speak(text){if(!("speechSynthesis" in window)){toast("Read-aloud is not available on this device.");return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(text).replace(/[“”]/g,""));u.rate=.88;u.pitch=1.05;speechSynthesis.speak(u)}
+function profileName(){return profile?.nickname?.trim()||"friend"}
+function baseMentor(p=profile){return MENTORS[p?.personality]||MENTORS.playful}
+function mentorDisplay(p=profile){
+  const base=baseMentor(p),id=p?.mentorIdentity||{};
+  if(id.mode==="custom")return {id:base.id,name:(id.name||"My Mentor").slice(0,14),avatar:id.avatar||"🦊",colors:Array.isArray(id.colors)&&id.colors.length===2?id.colors:base.colors,traits:base.traits,intro:base.intro,baseName:base.name,custom:true};
+  return {...base,baseName:base.name,custom:false};
 }
-function stableHash(text){
-  let h=2166136261;
-  for(const ch of String(text)){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}
-  return h>>>0;
+function applyMentorTheme(){const m=mentorDisplay();document.body.style.setProperty("--mentor-a",m.colors[0]);document.body.style.setProperty("--mentor-b",m.colors[1]);document.body.style.setProperty("--mentor-soft",m.colors[1]+"55")}
+function stationCount(){return profile?(SLOT_BLUEPRINTS[String(profile.minutes)]?.length||4):4}
+function dayCompletedSet(){return new Set(progress.days?.[todayKey()]||[])}
+function currentPlanCompletedSet(){const all=dayCompletedSet();return new Set(currentPlan.map(a=>a.id).filter(id=>all.has(id)))}
+function learnerFavorites(){
+  if(!profile)return new Set();
+  const map=loadJSON(PROFILE_FAVORITES_KEY,{}),arr=map?.[profile.learnerId];
+  return new Set(Array.isArray(arr)?arr:[]);
 }
-function seededValue(text){
-  let x=stableHash(text)||1;
-  x ^= x<<13;x ^= x>>>17;x ^= x<<5;
-  return ((x>>>0)%100000)/100000;
+function learnerVisits(){
+  if(!profile)return new Set();
+  const map=loadJSON(PROFILE_VISITS_KEY,{}),arr=map?.[profile.learnerId];
+  return new Set(Array.isArray(arr)?arr:[]);
 }
-function shuffleStable(items, seed){
-  return [...items].sort((a,b)=>seededValue(`${seed}:${a.id}`)-seededValue(`${seed}:${b.id}`));
+function rebuildProgressAggregates(){
+  const completed={},domainCounts={};
+  Object.entries(progress.days||{}).forEach(([date,ids])=>{
+    if(!Array.isArray(ids))return;
+    [...new Set(ids)].forEach(id=>{
+      const a=ACTIVITIES.find(x=>x.id===id);if(!a)return;
+      const prior=completed[id]||{count:0,last:null};prior.count++;if(!prior.last||date>prior.last)prior.last=date;completed[id]=prior;
+      domainCounts[a.domain]=(domainCounts[a.domain]||0)+1;
+    });
+  });
+  progress.completed=completed;progress.domainCounts=domainCounts;saveJSON(PROGRESS_KEY,progress);
 }
-function appUrl(file){
-  return "../apps/" + file.split("/").map(part=>encodeURIComponent(part)).join("/");
-}
-function toast(message){
-  const el=$("#toast");
-  el.textContent=message;
-  el.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>el.classList.remove("show"),2600);
-}
-function speak(text){
-  if(!("speechSynthesis" in window)){toast("Read-aloud is not available on this device.");return}
-  speechSynthesis.cancel();
-  const utterance=new SpeechSynthesisUtterance(String(text).replace(/[“”]/g,""));
-  utterance.rate=.88;utterance.pitch=1.08;
-  speechSynthesis.speak(utterance);
-}
-function randomId(){
-  if(globalThis.crypto?.randomUUID)return crypto.randomUUID();
-  return `local-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-}
-function mentorFor(p=profile){
-  return MENTORS[p?.personality] || MENTORS.playful;
-}
-function stationCount(){
-  return profile ? SLOT_BLUEPRINTS[String(profile.minutes)]?.length || 4 : 4;
-}
-function dayCompletedSet(){
-  const key=todayKey();
-  return new Set(progress.days?.[key] || []);
-}
-function saveProgress(){
-  saveJSON(PROGRESS_KEY,progress);
-}
-function profileName(){
-  return profile?.nickname?.trim() || "friend";
+function syncContinuity(){
+  if(!profile)return;
+  const favorites=learnerFavorites(),visits=learnerVisits();
+  const pinned=[...favorites].map(id=>CATALOG.byId(id)).filter(Boolean).map(a=>({id:a.id,title:a.title,icon:a.icon,category:a.category,file:a.file,url:new URL("../apps/"+a.file.split("/").map(encodeURIComponent).join("/"),location.href).href}));
+  saveJSON(CONTINUITY_KEY,{version:2,source:"Khaemenes Preschool · Guided Mentor",origin:location.origin,learner:{learnerId:profile.learnerId,nickname:profile.nickname,ageBand:profile.ageBand,personality:profile.personality,mentorId:profile.mentorId,mentorIdentity:profile.mentorIdentity,interests:profile.interests,pace:profile.pace,minutes:profile.minutes,pathway:profile.pathway||"preschool"},favoriteIds:[...favorites],favorites:pinned,visitedIds:[...visits],mentorProgress:{completed:progress.completed,domainCounts:progress.domainCounts},updatedAt:new Date().toISOString(),formalGradeEligible:false});
 }
 
 async function connectAgent(){
-  if(!profile){
-    $("#agentState").textContent="Learning guide: profile needed";
-    return;
-  }
+  if(!profile){$("#agentState").textContent="Learning guide: profile needed";return}
   try{
     const mod=await import("/assessment-engine/agents/core/sovereign-agent.js");
-    agent=new mod.SovereignProblemSolvingAgent({
-      id:"creche.guided-preschool.mentor",
-      name:"Khaemenes Preschool Mentor",
-      version:"0.1.0",
-      sourceApp:"creche.guided-preschool",
-      learnerId:profile.learnerId || "local-preschool-learner",
-      memoryKey:`creche_mentor_memory_${profile.learnerId || "local"}`
-    });
+    agent=new mod.SovereignProblemSolvingAgent({id:"creche.guided-preschool.mentor",name:"Khaemenes Preschool Mentor",version:"0.2.0",sourceApp:"creche.guided-preschool",learnerId:profile.learnerId||"local-preschool-learner",memoryKey:`creche_mentor_memory_${profile.learnerId||"local"}`});
     $("#agentState").textContent="Learning guide: Sovereign Agent connected · local memory only";
-  }catch(error){
-    console.warn("Central agent unavailable; using local safe guide.",error);
-    agent=null;
-    $("#agentState").textContent="Learning guide: local safe mode";
-  }
+  }catch(error){console.warn("Central agent unavailable; using local safe guide.",error);agent=null;$("#agentState").textContent="Learning guide: local safe mode"}
 }
-
 function mentorGreeting(){
-  const mentor=mentorFor();
-  if(!profile)return "Ask a grown-up to help create your learning profile. I will meet you at your learning stage and help choose a gentle first adventure.";
-  const completed=dayCompletedSet().size;
-  if(completed>=stationCount())return `${profileName()}, we finished today’s path! I noticed your effort across different kinds of learning. Let’s tell a grown-up what felt best.`;
-  const hour=new Date().getHours();
-  const hello=hour<12?"Good morning":hour<17?"Good afternoon":"Hello";
-  return `${hello}, ${profileName()}! I’m ${mentor.name}, your age-aligned AI learning friend. ${mentor.intro} Today I chose ${stationCount()} short stations for us.`;
+  const m=mentorDisplay();
+  if(!profile)return "Ask a grown-up to help create your learning profile when you are ready. You can look around first—I will not force you to begin setup.";
+  const completed=currentPlanCompletedSet().size;
+  if(currentPlan.length&&completed>=currentPlan.length)return `${profileName()}, we finished today’s current path! Let’s tell a grown-up what felt best and choose something away from the screen.`;
+  const hour=new Date().getHours(),hello=hour<12?"Good morning":hour<17?"Good afternoon":"Hello";
+  const identity=m.custom?`My learning style is safely based on ${m.baseName}, while you chose how I look and what you call me.`:"";
+  return `${hello}, ${profileName()}! I’m ${m.name}, your age-aligned AI learning friend. ${m.intro} ${identity} Today I chose ${stationCount()} short stations for us.`;
 }
-
 function updateMentorCard(){
-  const mentor=mentorFor();
-  $("#mentorAvatar").textContent=mentor.avatar;
-  $("#mentorName").textContent=profile ? `${mentor.name} · ${profileName()}’s mentor` : "Your mentor is waiting";
-  $("#mentorMessage").textContent=mentorGreeting();
-  $("#editProfileTop").textContent=profile ? "✏️ Edit Profile" : "✨ Create Profile";
-  $("#beginProfile").textContent=profile ? "🌟 Begin Today’s Path" : "🌟 Meet My Mentor";
-  $("#heroLead").textContent=profile
-    ? `${mentor.name} has prepared a ${profile.minutes}-minute guided preschool rhythm for ${profileName()}, balanced across foundational learning domains.`
-    : "A grown-up helps create a simple local profile. Then an age-aligned mentor organizes a balanced preschool day using Crechè stories, letters, numbers, art, feelings, movement, life skills, music, and wonder.";
+  const m=mentorDisplay();applyMentorTheme();
+  $("#mentorAvatar").textContent=m.avatar;$("#mentorName").textContent=profile?`${m.name} · ${profileName()}’s mentor`:"Your mentor is waiting";$("#mentorMessage").textContent=mentorGreeting();
+  $("#editProfileTop").textContent=profile?"✏️ Edit Profile & Mentor":"✨ Create Profile";$("#beginProfile").textContent=profile?"🌟 Begin Today’s Path":"🌟 Meet My Mentor";
+  $("#heroLead").textContent=profile?`${m.name} has prepared a ${profile.minutes}-minute guided preschool rhythm for ${profileName()}, using every mentor-eligible activity currently registered in the shared Preschool catalog.`:"A grown-up helps create a simple local profile. Choose Pip, Miri, Nova, or Sage—or let the child create a custom mentor avatar while Khaemenes keeps the underlying age-aligned guidance and safety rules.";
+  renderParentPortal();
 }
-
-function localScore(activity, domain, index){
+function feedbackAdjustment(id){const latest=progress.feedback?.[id]?.latest;return ({loved:.10,"just-right":.05,"too-easy":-.035,"too-hard":-.09})[latest]||0}
+function localScore(activity,domain,index){
   if(!profile)return 0;
+  const favorites=learnerFavorites();
   const interestFit=activity.interests.some(i=>profile.interests.includes(i))?1:.35;
-  const energyFit=activity.energy===currentEnergy?1:
-    (currentEnergy==="wiggly"&&activity.energy==="steady")|| (currentEnergy==="gentle"&&activity.energy==="steady") ? .7:.45;
+  const energyFit=activity.energy===currentEnergy?1:(((currentEnergy==="wiggly"&&activity.energy==="steady")||(currentEnergy==="gentle"&&activity.energy==="steady")) ? .7 : .45);
   const novelty=progress.completed?.[activity.id]?Math.max(.15,1-(progress.completed[activity.id].count||1)*.15):1;
   const domainNeed=1/((progress.domainCounts?.[domain]||0)+1);
-  const paceFit=profile.pace==="gentle"?(activity.energy==="gentle"?1:.65):
-    profile.pace==="adventurous"?(activity.energy==="wiggly"?1:.78):.82;
+  const paceFit=profile.pace==="gentle"?(activity.energy==="gentle"?1:.65):profile.pace==="adventurous"?(activity.energy==="wiggly"?1:.78):.82;
+  const favoriteFit=favorites.has(activity.catalogId)?1:0;
   const tie=seededValue(`${todayKey()}:${activity.id}:${index}`)*.08;
-  return interestFit*.30+energyFit*.20+novelty*.22+domainNeed*.18+paceFit*.10+tie;
+  return interestFit*.28+energyFit*.18+novelty*.20+domainNeed*.17+paceFit*.09+favoriteFit*.08+feedbackAdjustment(activity.id)+tie;
 }
-
 async function chooseActivity(domain,index,used){
-  let candidates=ACTIVITIES.filter(a=>a.domain===domain && a.ages.includes(profile.ageBand) && !used.has(a.id));
-  if(!candidates.length)candidates=ACTIVITIES.filter(a=>a.domain===domain && !used.has(a.id));
-  if(!candidates.length)return null;
+  let candidates=ACTIVITIES.filter(a=>a.domain===domain&&a.ages.includes(profile.ageBand)&&!used.has(a.id));
+  if(!candidates.length){console.warn(`No age-aligned mentor activity for ${domain}/${profile.ageBand}; station omitted.`);return null}
   candidates=shuffleStable(candidates,`${todayKey()}:${profile.learnerId}:${currentEnergy}:${index}`);
-
   if(agent){
     try{
-      const actions=candidates.map((a,position)=>{
-        const interestFit=a.interests.some(i=>profile.interests.includes(i))?1:.3;
-        const energyFit=a.energy===currentEnergy?1:.62;
-        const novelty=progress.completed?.[a.id]?Math.max(.12,1-(progress.completed[a.id].count||1)*.16):1;
-        const domainBalance=1/((progress.domainCounts?.[domain]||0)+1);
-        const ageFit=a.ages.includes(profile.ageBand)?1:.25;
-        return {
-          ...a,
-          label:a.title,
-          features:{interestFit,energyFit,novelty,domainBalance,ageFit,rotation:1-position/candidates.length}
-        };
-      });
-      const problem={
-        id:`preschool-${todayKey()}-${domain}-${index}-${currentEnergy}`,
-        domainId:`preschool.${domain}`,
-        type:"decision",
-        strategy:"hybrid",
-        context:{domain,energy:currentEnergy,ageBand:profile.ageBand,pace:profile.pace},
-        weights:{interestFit:.82,energyFit:.72,novelty:.76,domainBalance:.58,ageFit:1,rotation:.18},
-        memoryWeight:.15,
-        actions,
-        hardConstraints:[
-          {id:"age-stage",message:"Activity is outside the selected age band.",test:a=>a.ages.includes(profile.ageBand)},
-          {id:"short-session",message:"Activity is too long for a preschool station.",test:a=>a.minutes<=12}
-        ],
-        simulate(action,rng){
-          const base=.34+action.features.interestFit*.20+action.features.energyFit*.16+action.features.novelty*.15+action.features.ageFit*.20;
-          return Math.max(-1,Math.min(1,base+(rng()-.5)*.18));
-        }
-      };
+      const favorites=learnerFavorites();
+      const actions=candidates.map((a,position)=>({
+        ...a,label:a.title,
+        features:{interestFit:a.interests.some(i=>profile.interests.includes(i))?1:.3,energyFit:a.energy===currentEnergy?1:.62,novelty:progress.completed?.[a.id]?Math.max(.12,1-(progress.completed[a.id].count||1)*.16):1,domainBalance:1/((progress.domainCounts?.[domain]||0)+1),ageFit:1,favoriteFit:favorites.has(a.catalogId)?1:0,feedbackFit:.5+feedbackAdjustment(a.id),rotation:1-position/candidates.length}
+      }));
+      const problem={id:`preschool-${todayKey()}-${domain}-${index}-${currentEnergy}`,domainId:`preschool.${domain}`,type:"decision",strategy:"hybrid",context:{domain,energy:currentEnergy,ageBand:profile.ageBand,pace:profile.pace},weights:{interestFit:.78,energyFit:.66,novelty:.72,domainBalance:.56,ageFit:1,favoriteFit:.18,feedbackFit:.20,rotation:.14},memoryWeight:.15,actions,hardConstraints:[{id:"age-stage",message:"Activity is outside the selected age band.",test:a=>a.ages.includes(profile.ageBand)},{id:"short-session",message:"Activity is too long for a preschool station.",test:a=>a.minutes<=12}],simulate(action,rng){const base=.34+action.features.interestFit*.19+action.features.energyFit*.15+action.features.novelty*.14+action.features.ageFit*.20+action.features.favoriteFit*.05;return Math.max(-1,Math.min(1,base+(rng()-.5)*.18))}};
       const decision=agent.chooseAction(problem,{simulations:70,timeBudgetMs:45,seed:`${todayKey()}:${profile.learnerId}:${domain}:${index}`});
-      if(decision?.action){
-        currentDecisions[decision.action.id]=decision;
-        return candidates.find(a=>a.id===decision.action.id)||decision.action;
-      }
+      if(decision?.action){currentDecisions[decision.action.id]=decision;return candidates.find(a=>a.id===decision.action.id)||decision.action}
     }catch(error){console.warn("Agent recommendation failed; using local score.",error)}
   }
   return [...candidates].sort((a,b)=>localScore(b,domain,index)-localScore(a,domain,index))[0];
 }
-
 async function buildPlan(force=false){
-  const grid=$("#planGrid");
-  grid.innerHTML='<div style="grid-column:1/-1;padding:24px;text-align:center;color:#607087">Your mentor is preparing a balanced path…</div>';
-
-  if(!profile){
-    currentPlan=[
-      ACTIVITIES.find(a=>a.id==="kindness"),
-      ACTIVITIES.find(a=>a.id==="abc-story"),
-      ACTIVITIES.find(a=>a.id==="numbers-1-12"),
-      ACTIVITIES.find(a=>a.id==="move-groove")
-    ].filter(Boolean);
-    renderPlan(true);
-    return;
-  }
-
-  const cached=loadJSON(PLAN_KEY,null);
-  const cacheValid=!force && cached?.date===todayKey() && cached?.learnerId===profile.learnerId && cached?.energy===currentEnergy &&
-    Array.isArray(cached.ids) && cached.ids.length===stationCount();
-
-  if(cacheValid){
-    currentPlan=cached.ids.map(id=>ACTIVITIES.find(a=>a.id===id)).filter(Boolean);
-    if(currentPlan.length===stationCount()){renderPlan(false);return}
-  }
-
-  const blueprint=SLOT_BLUEPRINTS[String(profile.minutes)] || SLOT_BLUEPRINTS["30"];
-  const used=new Set();
-  currentPlan=[];
-  currentDecisions={};
-  for(let i=0;i<blueprint.length;i++){
-    const activity=await chooseActivity(blueprint[i],i,used);
-    if(activity){used.add(activity.id);currentPlan.push(activity)}
-  }
-  saveJSON(PLAN_KEY,{date:todayKey(),learnerId:profile.learnerId,energy:currentEnergy,ids:currentPlan.map(a=>a.id)});
-  renderPlan(false);
+  const grid=$("#planGrid");grid.innerHTML='<div style="grid-column:1/-1;padding:24px;text-align:center;color:#607087">Your mentor is preparing a balanced path…</div>';
+  if(!profile){currentPlan=["kindness","abc-story","numbers-1-12","move-groove"].map(id=>ACTIVITIES.find(a=>a.id===id)).filter(Boolean);renderPlan(true);return}
+  const cached=loadJSON(PLAN_KEY,null);const cacheValid=!force&&cached?.date===todayKey()&&cached?.learnerId===profile.learnerId&&cached?.energy===currentEnergy&&Array.isArray(cached.ids)&&cached.ids.length===stationCount();
+  if(cacheValid){currentPlan=cached.ids.map(id=>ACTIVITIES.find(a=>a.id===id)).filter(Boolean);if(currentPlan.length===stationCount()){renderPlan(false);return}}
+  const blueprint=SLOT_BLUEPRINTS[String(profile.minutes)]||SLOT_BLUEPRINTS["30"],used=new Set();currentPlan=[];currentDecisions={};
+  for(let i=0;i<blueprint.length;i++){const a=await chooseActivity(blueprint[i],i,used);if(a){used.add(a.id);currentPlan.push(a)}}
+  saveJSON(PLAN_KEY,{date:todayKey(),learnerId:profile.learnerId,energy:currentEnergy,ids:currentPlan.map(a=>a.id),catalogVersion:CATALOG.version});renderPlan(false);renderParentPortal();
 }
-
+function offscreenCue(domain,index){const cues={feelings:["Tell a grown-up one feeling word.","Make three silly faces together."],letters:["Find one object whose name starts with a letter you know.","Tell a tiny story without looking at the screen."],numbers:["Count five real things nearby.","Find a circle, square, or triangle in the room."],creative:["Draw one idea on paper.","Hum a tune or make a rhythm with your hands."],movement:["Stand up, stretch tall, and take ten walking steps.","Help with one tiny real-life job."],wonder:["Look outside and notice one thing about the sky.","Ask a grown-up one wonder question."]};const list=cues[domain]||["Look away from the screen and notice something in the room."];return list[index%list.length]}
 function renderPlan(sample=false){
-  const grid=$("#planGrid");
-  const completed=dayCompletedSet();
-  grid.innerHTML="";
+  const grid=$("#planGrid"),completed=currentPlanCompletedSet();grid.innerHTML="";grid.dataset.count=String(currentPlan.length||4);
   currentPlan.forEach((a,index)=>{
-    const domain=DOMAINS[a.domain]||DOMAINS.wonder;
-    const done=completed.has(a.id);
-    const card=document.createElement("article");
-    card.className=`plan-card${done?" done":""}`;
-    card.style.setProperty("--accent-a",domain.a);
-    card.style.setProperty("--accent-b",domain.b);
-    card.dataset.activity=a.id;
-    card.innerHTML=`
-      <div class="plan-step"><span>Station ${index+1}</span><span>${domain.label}</span></div>
-      <div class="plan-icon" aria-hidden="true">${a.icon}</div>
-      <h3>${escapeHTML(a.title)}</h3>
-      <p>${escapeHTML(a.desc)}</p>
-      <div class="plan-meta"><span>About ${a.minutes} min</span><span>${a.energy} energy</span>${sample?'<span>sample</span>':""}</div>
-      <div class="plan-actions">
-        <a class="start-link" href="${appUrl(a.file)}" data-start="${a.id}">Begin with mentor</a>
-        <button class="complete-btn" type="button" aria-label="${done?"Activity complete":"Mark activity complete"}" data-complete="${a.id}">${done?"✓":"○"}</button>
-      </div>`;
+    const d=DOMAINS[a.domain]||DOMAINS.wonder,done=completed.has(a.id),feedback=progress.feedback?.[a.id]?.latest||"";
+    const card=document.createElement("article");card.className=`plan-card${done?" done":""}`;card.style.setProperty("--accent-a",d.a);card.style.setProperty("--accent-b",d.b);card.dataset.activity=a.id;
+    card.innerHTML=`<div class="plan-step"><span>Station ${index+1}</span><span>${escapeHTML(d.label)}</span></div><div class="plan-icon" aria-hidden="true">${a.icon}</div><h3>${escapeHTML(a.title)}</h3><p>${escapeHTML(a.desc)}</p><div class="plan-meta"><span>About ${a.minutes} min</span><span>${a.energy} energy</span>${learnerFavorites().has(a.catalogId)?'<span>♥ favorite</span>':""}${sample?'<span>sample</span>':""}</div><button class="read-station" type="button" data-read-station="${a.id}">🔊 Hear this station</button><div class="offscreen-cue"><strong>🌿 Away from the screen:</strong> ${escapeHTML(offscreenCue(a.domain,index))}</div><div class="plan-actions"><a class="start-link" href="${appUrl(a.file)}" data-start="${a.id}">Begin with mentor</a><button class="complete-btn" type="button" aria-label="${done?"Activity complete":"Mark activity complete"}" data-complete="${a.id}">${done?"✓":"○"}</button></div>${done?`<div class="plan-feedback" aria-label="How did this activity feel?"><button class="feedback-btn ${feedback==="loved"?"active":""}" data-feedback="loved" data-feedback-id="${a.id}" type="button">💛 Loved it</button><button class="feedback-btn ${feedback==="just-right"?"active":""}" data-feedback="just-right" data-feedback-id="${a.id}" type="button">👍 Just right</button><button class="feedback-btn ${feedback==="too-easy"?"active":""}" data-feedback="too-easy" data-feedback-id="${a.id}" type="button">🌱 Too easy</button><button class="feedback-btn ${feedback==="too-hard"?"active":""}" data-feedback="too-hard" data-feedback-id="${a.id}" type="button">🧩 Too hard</button></div>`:""}`;
     grid.appendChild(card);
-  });
-  updateProgressUI();
+  });updateProgressUI();
 }
-
-function escapeHTML(value){
-  return String(value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-}
-
 function markComplete(id){
-  if(!profile){openSetup();return}
-  const key=todayKey();
-  progress.days=progress.days||{};
-  const set=new Set(progress.days[key]||[]);
-  const wasDone=set.has(id);
-  if(wasDone)set.delete(id); else set.add(id);
-  progress.days[key]=[...set];
-
-  const activity=ACTIVITIES.find(a=>a.id===id);
-  progress.completed=progress.completed||{};
-  progress.domainCounts=progress.domainCounts||{};
-  if(!wasDone && activity){
-    const prior=progress.completed[id]||{count:0,last:null};
-    progress.completed[id]={count:prior.count+1,last:key};
-    progress.domainCounts[activity.domain]=(progress.domainCounts[activity.domain]||0)+1;
-    const decision=currentDecisions[id];
-    if(agent && decision){
-      try{agent.receiveOutcome({decision,reward:1,label:"child-marked-complete",learningRate:.12})}catch{}
-    }
-    toast(`${mentorFor().name} noticed your effort in ${activity.title}.`);
-  }else{
-    toast("Completion mark removed.");
-  }
-  saveProgress();
-  renderPlan(false);
-  renderLearningMap();
-  updateMentorCard();
-  if(set.size>=stationCount())celebrate();
+  if(!profile){openSetup();return}const key=todayKey();progress.days=progress.days||{};const set=new Set(progress.days[key]||[]),was=set.has(id);was?set.delete(id):set.add(id);progress.days[key]=[...set];rebuildProgressAggregates();syncContinuity();renderPlan(false);renderLearningGarden();updateMentorCard();
+  const a=ACTIVITIES.find(x=>x.id===id);if(!was&&a){const decision=currentDecisions[id];if(agent&&decision){try{agent.receiveOutcome({decision,reward:1,label:"child-marked-complete",learningRate:.12})}catch{}}toast(`${mentorDisplay().name} noticed your effort in ${a.title}.`)}else toast("Completion mark removed and learning totals recalculated.");
+  if(currentPlan.length&&currentPlanCompletedSet().size>=currentPlan.length)celebrate();
 }
-
-function updateProgressUI(){
-  const count=profile?dayCompletedSet().size:0;
-  const total=currentPlan.length||stationCount();
-  const percent=Math.round((count/Math.max(1,total))*100);
-  $("#progressRing").style.setProperty("--p",percent);
-  $("#progressPercent").textContent=`${percent}%`;
-  $("#progressCount").textContent=`${count} of ${total} complete`;
-  $("#dayGreeting").textContent=profile?`${profileName()} and ${mentorFor().name}’s guided day`:"A sample guided preschool day";
-  $("#todayIntro").textContent=profile
-    ? `${mentorFor().name} balanced today’s path for the ${profile.ageBand} learning stage, ${currentEnergy} energy, and ${profile.minutes} available minutes.`
-    : "After the profile is created, the mentor selects a balanced sequence instead of asking a young child to choose from the entire activity collection.";
+function recordFeedback(id,label){
+  const entry=progress.feedback[id]||{counts:{},latest:null,updatedAt:null};entry.counts[label]=(entry.counts[label]||0)+1;entry.latest=label;entry.updatedAt=new Date().toISOString();progress.feedback[id]=entry;saveJSON(PROGRESS_KEY,progress);
+  const decision=currentDecisions[id],reward=({loved:1,"just-right":.7,"too-easy":.15,"too-hard":-.25})[label]??0;if(agent&&decision){try{agent.receiveOutcome({decision,reward,label:`child-feedback-${label}`,learningRate:.10})}catch{}}
+  renderPlan(false);renderParentPortal();toast("Thanks. Your mentor will use that gentle feedback when choosing future activities.");
 }
-
-function renderLearningMap(){
-  const grid=$("#mapGrid");
-  grid.innerHTML="";
-  const max=Math.max(4,...Object.values(progress.domainCounts||{}));
-  Object.entries(DOMAINS).forEach(([id,d])=>{
-    const count=progress.domainCounts?.[id]||0;
-    const value=Math.min(100,Math.round((count/max)*100));
-    const card=document.createElement("article");
-    card.className="map-card";
-    card.innerHTML=`
-      <div class="map-icon" aria-hidden="true">${d.icon}</div>
-      <h3>${d.label}</h3>
-      <p>${domainDescription(id)}</p>
-      <div class="map-meter" style="--a:${d.a};--b:${d.b}"><span style="--value:${value}%"></span></div>
-      <div class="map-foot"><span>${count} completed station${count===1?"":"s"}</span><span>${value}% of current local map</span></div>`;
-    grid.appendChild(card);
-  });
-}
-function domainDescription(id){
-  return ({
-    letters:"Listening, speaking, letters, sounds, stories, and early words.",
-    numbers:"Counting, quantity, shapes, patterns, comparison, and reasoning.",
-    feelings:"Naming feelings, kindness, boundaries, friendship, and calming skills.",
-    creative:"Color, drawing, music, imagination, expression, and creative choice.",
-    movement:"Gross motor play, healthy routines, independence, and practical care.",
-    wonder:"Nature, weather, space, observation, directions, and curious questions."
-  })[id]||"A balanced early-learning domain.";
-}
-
-function celebrate(){
-  const colors=["#ef6a66","#f6bf3a","#23a67c","#2398d5","#7254d8","#e95ca8"];
-  const box=$("#confetti");
-  box.innerHTML="";
-  for(let i=0;i<42;i++){
-    const s=document.createElement("span");
-    s.style.left=`${Math.random()*100}%`;
-    s.style.background=colors[i%colors.length];
-    s.style.animationDelay=`${Math.random()*.65}s`;
-    s.style.transform=`rotate(${Math.random()*180}deg)`;
-    box.appendChild(s);
-  }
-  setTimeout(()=>box.innerHTML="",3200);
-  $("#mentorDialogue").textContent=`${profileName()}, we completed a whole balanced path! Choose one favorite station to tell a grown-up about.`;
-  toast("Today’s guided path is complete!");
-}
-
-function responseFor(prompt){
-  const mentor=mentorFor();
-  const next=currentPlan.find(a=>!dayCompletedSet().has(a.id));
-  const responses={
-    start:`Let’s make the first step tiny. ${next?`Open ${next.title}, then look for just one thing you recognize.`:"Choose one picture or button that looks friendly."} You do not need to know everything before you begin.`,
-    stuck:`Being stuck means your brain found something new. Pause, take one slow breath, and show a grown-up the exact place that feels hard. Then we will try one smaller step.`,
-    finished:`I noticed that you kept going! Finishing matters, and so does the way you tried. What is one thing you can show or tell a grown-up?`,
-    break:`Good noticing. Let’s look away from the screen, stretch high, touch our toes, and get a sip of water. We can return when your body feels ready.`,
-    together:`Yes—I can guide the steps and encourage you while you do the thinking, pointing, moving, drawing, or answering. A nearby grown-up is part of our learning team too.`
-  };
-  return `${mentor.name}: ${responses[prompt]||mentor.intro}`;
-}
-
+function updateProgressUI(){const count=profile?currentPlanCompletedSet().size:0,total=currentPlan.length||stationCount(),percent=Math.round(count/Math.max(1,total)*100);$("#progressRing").style.setProperty("--p",percent);$("#progressPercent").textContent=`${percent}%`;$("#progressCount").textContent=`${count} of ${total} current stations complete`;$("#dayGreeting").textContent=profile?`${profileName()} and ${mentorDisplay().name}’s guided day`:"A sample guided preschool day";$("#todayIntro").textContent=profile?`${mentorDisplay().name} balanced today’s path for ages ${profile.ageBand}, ${currentEnergy} energy, ${profile.minutes} available minutes, current interests, favorites, prior activity, and child feedback.`:"After a profile is created, the mentor selects a balanced sequence from every eligible activity in the shared Preschool catalog.";renderParentPortal()}
+function growthLabel(count){if(count<=0)return ["🌱","Just beginning"];if(count<=2)return ["🌿","Growing"];if(count<=5)return ["🌼","Explored several times"];return ["🌳","A familiar learning garden"]}
+function renderLearningGarden(){const grid=$("#mapGrid");grid.innerHTML="";Object.entries(DOMAINS).forEach(([id,d])=>{const count=progress.domainCounts?.[id]||0,[icon,label]=growthLabel(count),card=document.createElement("article");card.className="map-card";card.innerHTML=`<div class="map-icon" aria-hidden="true">${d.icon}</div><h3>${escapeHTML(d.label)}</h3><p>${escapeHTML(domainDescription(id))}</p><span class="growth-badge">${icon} ${label}</span><div class="map-foot"><span>${count} completed station${count===1?"":"s"}</span><span>Exploration only · not a grade</span></div>`;grid.appendChild(card)})}
+function domainDescription(id){return ({letters:"Listening, speaking, letters, sounds, stories, and early words.",numbers:"Counting, quantity, shapes, patterns, comparison, and reasoning.",feelings:"Naming feelings, kindness, boundaries, friendship, and calming skills.",creative:"Color, drawing, music, imagination, expression, and creative choice.",movement:"Gross motor play, healthy routines, independence, and practical care.",wonder:"Nature, weather, space, observation, directions, and curious questions."})[id]||"A balanced early-learning domain."}
+function celebrate(){if(settings.noMotion){toast("Today’s guided path is complete!");return}const colors=["#ef6a66","#f6bf3a","#23a67c","#2398d5","#7254d8","#e95ca8"],box=$("#confetti");box.innerHTML="";for(let i=0;i<42;i++){const s=document.createElement("span");s.style.left=`${Math.random()*100}%`;s.style.background=colors[i%colors.length];s.style.animationDelay=`${Math.random()*.65}s`;s.style.transform=`rotate(${Math.random()*180}deg)`;box.appendChild(s)}setTimeout(()=>box.innerHTML="",3200);$("#mentorDialogue").textContent=`${profileName()}, we completed today’s whole path! Choose one favorite station to tell a grown-up about.`;toast("Today’s guided path is complete!")}
+function responseFor(prompt){const m=mentorDisplay(),next=currentPlan.find(a=>!currentPlanCompletedSet().has(a.id)),responses={start:`Let’s make the first step tiny. ${next?`Open ${next.title}, then look for just one thing you recognize.`:"Choose one picture or button that looks friendly."} You do not need to know everything before you begin.`,stuck:"Being stuck means we found something new. Pause, take one slow breath, and show a grown-up the exact place that feels hard. Then we will try one smaller step.",finished:"I noticed that you kept going! Finishing matters, and so does the way you tried. What is one thing you can show or tell a grown-up?",break:"Good noticing. Let’s look away from the screen, stretch high, touch our toes, and get a sip of water. We can return when your body feels ready.",together:"Yes—I can guide the steps and encourage you while you do the thinking, pointing, moving, drawing, or answering. A nearby grown-up is part of our learning team too."};return `${m.name}: ${responses[prompt]||m.intro}`}
 function setFeeling(feeling){
-  currentFeeling=feeling;
-  $$(".feeling-btn").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.feeling===feeling)));
-  const messages={
-    happy:"I’m glad you feel happy. Let’s use that bright energy to begin one small station.",
-    unsure:"It is okay to be unsure. I will keep the first step simple, and a grown-up can stay nearby.",
-    tired:"Thank you for noticing. We can choose a gentle activity, lower the sound, or rest first.",
-    excited:"That excitement can help us learn! We will start with one clear mission so it does not feel too big.",
-    frustrated:"Frustration is a signal to pause—not a reason to give up. Let’s breathe, ask for help, and try a smaller step.",
-    calm:"Calm is a wonderful learning place. Let’s look closely and take our time."
+  currentFeeling=feeling;$$('.feeling-btn').forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.feeling===feeling)));const m=mentorDisplay(),messages={happy:"I’m glad you feel happy. Let’s use that bright energy to begin one small station.",unsure:"It is okay to be unsure. I will keep the first step simple, and a grown-up can stay nearby.",tired:"Thank you for noticing. We can choose gentler energy or rest first.",excited:"That excitement can help us learn! We can start with movement if you want.",frustrated:"Frustration is a signal to pause. We can keep the same learning goals but begin with the shortest step.",calm:"Calm is a wonderful learning place. Let’s look closely and take our time."};$("#mentorDialogue").textContent=`${m.name}: ${messages[feeling]}`;
+  const box=$("#feelingSuggestion"),suggestions={tired:["Would you like today’s plan to use Gentle energy?","gentle"],excited:["Would you like today’s plan to use Wiggly energy?","wiggly"],frustrated:["Would you like me to switch to Gentle energy and rebuild the current path?","gentle"],calm:["Would you like to keep a Gentle learning rhythm?","gentle"]};const sug=suggestions[feeling];if(sug){box.hidden=false;box.innerHTML=`${escapeHTML(sug[0])}<br><button type="button" data-feeling-energy="${sug[1]}">Yes · adjust the plan</button>`}else box.hidden=true;
+}
+
+function releaseCheckboxes(){return ["#releaseAuthority","#releaseEducation","#releaseResponsibility","#releaseAI","#releaseRespect","#releaseLimits","#releasePrivacy"]}
+function guardianReleaseValid(release=profile?.guardianRelease){return Boolean(release?.accepted&&release?.version===RELEASE_VERSION)}
+function setReleaseCheckboxes(value=false){releaseCheckboxes().forEach(sel=>{const el=$(sel);if(el)el.checked=Boolean(value)})}
+function collectGuardianRelease(){
+  return {
+    accepted:true,
+    version:RELEASE_VERSION,
+    label:RELEASE_LABEL,
+    acceptedAt:new Date().toISOString(),
+    learnerId:profile?.learnerId||null,
+    attribution:"Jennifer Kay Pearl · Verve N Veda · Khaemenes Academy",
+    adultAuthority:Boolean($("#releaseAuthority")?.checked),
+    educationalToolNotice:Boolean($("#releaseEducation")?.checked),
+    parentalResponsibility:Boolean($("#releaseResponsibility")?.checked),
+    aiMentorBoundaries:Boolean($("#releaseAI")?.checked),
+    respectfulUsePolicy:Boolean($("#releaseRespect")?.checked),
+    voluntaryUseAndLimits:Boolean($("#releaseLimits")?.checked),
+    localPrivacyControls:Boolean($("#releasePrivacy")?.checked)
   };
-  $("#mentorDialogue").textContent=`${mentorFor().name}: ${messages[feeling]}`;
+}
+function validateRelease(){return releaseCheckboxes().every(sel=>$(sel)?.checked)?"":"Please review the release and check every acknowledgment before activating the Mentor."}
+function updateReleaseStatus(){
+  const el=$("#guardianReleaseStatus");if(!el)return;
+  if(guardianReleaseValid()){
+    const date=profile.guardianRelease?.acceptedAt?new Date(profile.guardianRelease.acceptedAt):null;
+    const readable=date&&!Number.isNaN(date.getTime())?new Intl.DateTimeFormat(undefined,{year:"numeric",month:"short",day:"numeric"}).format(date):"accepted";
+    el.textContent=`Accepted · ${RELEASE_LABEL} · ${readable}`;el.classList.remove("missing");
+  }else{el.textContent=`Not yet accepted · ${RELEASE_LABEL}`;el.classList.add("missing")}
+}
+function openReleaseReview(){
+  if(!profile){openSetup();return}
+  openSetup();releaseOnlyMode=true;setupStep=5;setReleaseCheckboxes(guardianReleaseValid());renderSetup();setTimeout(()=>$("#releasePolicyText")?.focus(),60);
+}
+function saveReleaseOnly(){
+  const error=validateRelease();if(error){$("#setupError").textContent=error;return}
+  profile={...profile,guardianRelease:{...collectGuardianRelease(),learnerId:profile.learnerId},updatedAt:new Date().toISOString()};
+  saveJSON(PROFILE_KEY,profile);syncContinuity();closeSetup();updateReleaseStatus();renderParentPortal();toast("Parent/Guardian Release accepted and saved locally for this learner.");
 }
 
 function openSetup(){
-  selectedInterests=new Set(profile?.interests||[]);
-  setupStep=1;
-  $("#nickname").value=profile?.nickname||"";
-  $$('input[name="ageBand"]').forEach(r=>r.checked=r.value===profile?.ageBand);
-  $$('input[name="personality"]').forEach(r=>r.checked=r.value===profile?.personality);
-  $("#guardianConfirm").checked=Boolean(profile);
-  $("#pace").value=profile?.pace||"balanced";
-  $("#minutes").value=String(profile?.minutes||30);
-  $$(".interest-choice").forEach(b=>b.setAttribute("aria-pressed",String(selectedInterests.has(b.dataset.interest))));
-  renderSetup();
-  $("#setupOverlay").hidden=false;
-  document.body.style.overflow="hidden";
-  setTimeout(()=>$("#nickname").focus(),60);
+  releaseOnlyMode=false;setupReturnFocus=document.activeElement;selectedInterests=new Set(profile?.interests||[]);setupStep=1;identityMode=profile?.mentorIdentity?.mode==="custom"?"custom":"embedded";customAvatar=profile?.mentorIdentity?.avatar||"🦊";customColors=Array.isArray(profile?.mentorIdentity?.colors)?profile.mentorIdentity.colors:["#7254d8","#e95ca8"];
+  $("#nickname").value=profile?.nickname||"";setReleaseCheckboxes(guardianReleaseValid());$$('input[name="ageBand"]').forEach(r=>r.checked=r.value===profile?.ageBand);$$('input[name="personality"]').forEach(r=>r.checked=r.value===profile?.personality);$("#guardianConfirm").checked=Boolean(profile);$("#pace").value=profile?.pace||"balanced";$("#minutes").value=String(profile?.minutes||30);$("#customMentorName").value=profile?.mentorIdentity?.name||"";$$('.interest-choice').forEach(b=>b.setAttribute("aria-pressed",String(selectedInterests.has(b.dataset.interest))));syncIdentityBuilder();renderSetup();$("#setupOverlay").hidden=false;document.body.style.overflow="hidden";setTimeout(()=>$("#nickname").focus(),60)
 }
-function closeSetup(){
-  $("#setupOverlay").hidden=true;
-  document.body.style.overflow="";
+function closeSetup(){if($("#setupOverlay").hidden)return;$("#setupOverlay").hidden=true;document.body.style.overflow="";setupReturnFocus?.focus?.()}
+function syncIdentityBuilder(){
+  $("#useMatchedMentor").setAttribute("aria-pressed",String(identityMode==="embedded"));$("#useCustomMentor").setAttribute("aria-pressed",String(identityMode==="custom"));$("#avatarBuilder").hidden=identityMode!=="custom";$("#customAvatarPreview").textContent=customAvatar;$("#customAvatarPreview").style.setProperty("--custom-a",customColors[0]);$("#customAvatarPreview").style.setProperty("--custom-b",customColors[1]);$$('.avatar-choice').forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.avatar===customAvatar)));$$('.color-choice').forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.color===customColors.join(","))))
 }
 function renderSetup(){
-  $$(".setup-step").forEach(step=>step.hidden=Number(step.dataset.step)!==setupStep);
-  $$(".step-dot").forEach((dot,i)=>dot.classList.toggle("active",i===setupStep-1));
-  $("#setupBack").hidden=setupStep===1;
-  $("#setupNext").textContent=setupStep===4?"Meet My Mentor":"Continue";
+  $$('.setup-step').forEach(step=>step.hidden=Number(step.dataset.step)!==setupStep);
+  $$('.step-dot').forEach((dot,i)=>dot.classList.toggle("active",i===setupStep-1));
+  $("#setupBack").hidden=setupStep===1||releaseOnlyMode;
+  $("#setupNotNow").textContent=releaseOnlyMode?"Close":"Not now";
+  $("#setupNext").textContent=setupStep===5?(releaseOnlyMode?"I Agree · Save Release":"I Agree · Activate Mentor"):"Continue";
   $("#setupError").textContent="";
   if(setupStep===4)updateMatchPreview();
 }
-function selectedRadio(name){
-  return $(`input[name="${name}"]:checked`)?.value||"";
-}
+function selectedRadio(name){return $(`input[name="${name}"]:checked`)?.value||""}
 function validateStep(){
-  if(setupStep===1){
-    if(!$("#nickname").value.trim())return "Please enter a first name or nickname.";
-    if(!selectedRadio("ageBand"))return "Please choose a broad learning stage.";
-    if(!$("#guardianConfirm").checked)return "A grown-up must confirm that they are helping with setup.";
-  }
-  if(setupStep===2 && !selectedRadio("personality"))return "Please choose one personality style.";
-  if(setupStep===3 && selectedInterests.size<2)return "Please choose at least two interests.";
+  if(setupStep===1){if(!$("#nickname").value.trim())return "Please enter a first name or nickname.";if(!selectedRadio("ageBand"))return "Please choose a broad learning stage.";if(!$("#guardianConfirm").checked)return "A grown-up must confirm that they are helping with setup."}
+  if(setupStep===2){if(!selectedRadio("personality"))return "Please choose one communication style.";if(identityMode==="custom"&&!$("#customMentorName").value.trim())return "Please give the custom mentor a short nickname."}
+  if(setupStep===3&&selectedInterests.size<2)return "Please choose at least two interests.";
+  if(setupStep===5)return validateRelease();
   return "";
 }
-function updateMatchPreview(){
-  const personality=selectedRadio("personality")||profile?.personality||"playful";
-  const mentor=MENTORS[personality];
-  const age=selectedRadio("ageBand")||profile?.ageBand||"the selected";
-  $("#matchAvatar").textContent=mentor.avatar;
-  $("#matchName").textContent=`${mentor.name} · age-aligned AI mentor`;
-  $("#matchText").textContent=`Matched to the ${age} learning stage with a ${mentor.traits.join(", ")} style. ${mentor.intro}`;
-}
+function setupMentorPreview(){const base=MENTORS[selectedRadio("personality")||profile?.personality||"playful"];if(identityMode==="custom")return {...base,name:$("#customMentorName").value.trim()||"My Mentor",avatar:customAvatar,colors:customColors,custom:true};return {...base,custom:false}}
+function updateMatchPreview(){const m=setupMentorPreview(),age=selectedRadio("ageBand")||profile?.ageBand||"selected";$("#matchAvatar").textContent=m.avatar;$("#matchName").textContent=`${m.name} · age-aligned AI mentor`;$("#matchText").textContent=`Matched to ages ${age} with a ${m.traits.join(", ")} communication style. ${m.custom?`The custom avatar is safely powered by ${MENTORS[selectedRadio("personality")||"playful"].name}’s guidance style. `:""}${m.intro}`}
 async function finishSetup(){
-  const priorId=profile?.learnerId||randomId();
-  profile={
-    nickname:$("#nickname").value.trim().slice(0,20),
-    ageBand:selectedRadio("ageBand"),
-    personality:selectedRadio("personality"),
-    interests:[...selectedInterests],
-    pace:$("#pace").value,
-    minutes:Number($("#minutes").value),
-    mentorId:MENTORS[selectedRadio("personality")].id,
-    learnerId:priorId,
-    createdAt:profile?.createdAt||new Date().toISOString(),
-    updatedAt:new Date().toISOString()
-  };
-  saveJSON(PROFILE_KEY,profile);
-  localStorage.removeItem(PLAN_KEY);
-  closeSetup();
-  updateMentorCard();
-  await connectAgent();
-  await buildPlan(true);
-  renderLearningMap();
-  $("#dayGreeting").scrollIntoView({behavior:settings.noMotion?"auto":"smooth",block:"center"});
-  toast(`${mentorFor().name} is ready to learn with ${profileName()}.`);
+  const personality=selectedRadio("personality"),base=MENTORS[personality],priorId=profile?.learnerId||randomId();
+  profile={...profile,nickname:$("#nickname").value.trim().slice(0,20),ageBand:selectedRadio("ageBand"),personality,interests:[...selectedInterests],pace:$("#pace").value,minutes:Number($("#minutes").value),mentorId:base.id,mentorIdentity:identityMode==="custom"?{mode:"custom",name:$("#customMentorName").value.trim().slice(0,14),avatar:customAvatar,colors:[...customColors],baseStyle:personality}:{mode:"embedded",baseStyle:personality},pathway:profile?.pathway||"preschool",learnerId:priorId,guardianRelease:{...collectGuardianRelease(),learnerId:priorId},createdAt:profile?.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};
+  saveJSON(PROFILE_KEY,profile);localStorage.removeItem(PLAN_KEY);syncContinuity();closeSetup();updateMentorCard();await connectAgent();await buildPlan(true);renderLearningGarden();$("#dayGreeting").scrollIntoView({behavior:settings.noMotion?"auto":"smooth",block:"center"});toast(`${mentorDisplay().name} is ready to learn with ${profileName()}.`)
 }
 
+function totalCompleted(){return Object.values(progress.completed||{}).reduce((sum,item)=>sum+(Number(item?.count)||0),0)}
+function mostExploredDomain(){const entries=Object.entries(progress.domainCounts||{}).sort((a,b)=>b[1]-a[1]);return entries[0]?.[1]>0?entries[0]:null}
+function latestFeedbackSummary(){const entries=Object.entries(progress.feedback||{}).sort((a,b)=>String(b[1]?.updatedAt||"").localeCompare(String(a[1]?.updatedAt||"")));return entries[0]||null}
+function renderParentPortal(){
+  const m=mentorDisplay(),guide=FAMILY_GUIDES[familyGuideState.style]||FAMILY_GUIDES.aster;$("#parentChildMentorAvatar").textContent=m.avatar;$("#parentChildMentorName").textContent=profile?`${m.name} · ${profileName()}’s mentor`:`${m.name} · child mentor`;$("#familyGuideAvatar").textContent=guide.avatar;$("#familyGuideName").textContent=`${guide.name} · Family Guide`;$("#familyGuideStyle").value=guide.id;
+  const today=currentPlanCompletedSet().size,total=currentPlan.length||stationCount(),fav=learnerFavorites().size,domains=Object.values(progress.domainCounts||{}).filter(n=>n>0).length;$("#parentCompletedCount").textContent=String(totalCompleted());$("#parentTodayCount").textContent=`${today}/${total}`;$("#parentFavoriteCount").textContent=String(fav);$("#parentDomainCount").textContent=String(domains);$("#catalogActivityStatus").textContent=`${ACTIVITIES.length} eligible activities · catalog v${CATALOG.version}`;
+  updateReleaseStatus();
+  if(profile && $("#parentChildMentorResponse").textContent.startsWith("Create a learner profile"))$("#parentChildMentorResponse").textContent=childMentorAnswer("progress");
+}
+function childMentorAnswer(kind,text=""){
+  const m=mentorDisplay();if(!profile)return `${m.name}: Please create the learner profile first. I only summarize structured records for the active learner.`;
+  const top=mostExploredDomain(),topLabel=top?DOMAINS[top[0]]?.label:null,today=currentPlanCompletedSet().size,total=currentPlan.length||stationCount(),fav=learnerFavorites().size,latest=latestFeedbackSummary();
+  const answers={progress:`${m.name}: ${profileName()} has ${totalCompleted()} completed mentor station${totalCompleted()===1?"":"s"} recorded across ${Object.values(progress.domainCounts).filter(n=>n>0).length} learning domain${Object.values(progress.domainCounts).filter(n=>n>0).length===1?"":"s"}. Today’s current path is ${today} of ${total} complete.${topLabel?` The most frequently explored mentor domain so far is ${topLabel}.`:""} This is an exploration summary, not a grade.`,today:`${m.name}: Today’s current path has ${today} of ${total} stations complete. The planned activities are ${currentPlan.map(a=>a.title).join(", ")||"not yet generated"}.`,interests:`${m.name}: The profile says ${profileName()} enjoys ${profile.interests.join(", ")||"a broad mix of activities"}. There are ${fav} pinned favorite${fav===1?"":"s"}.${latest?` The most recent activity feedback was “${latest[1].latest.replace(/-/g," ")}” for ${ACTIVITIES.find(a=>a.id===latest[0])?.title||"an activity"}.`:""}`,support:`${m.name}: Use “Too hard” feedback when an activity feels frustrating, stay nearby for life-skill and real-world activities, and help with one small step rather than giving the answer. ${topLabel?`You can also invite a different domain occasionally so the learning day stays balanced.`:""}`,offline:`${m.name}: Try this now: ${offscreenCue(currentPlan[0]?.domain||"wonder",today)} A short conversation, drawing, counting walk, helper job, or movement break is meaningful learning too.`};
+  if(kind&&answers[kind])return answers[kind];const q=text.toLowerCase();if(/today|plan|did/.test(q))return answers.today;if(/favorite|interest|enjoy|like/.test(q))return answers.interests;if(/help|hard|support|strug/.test(q))return answers.support;if(/offline|screen|home|away/.test(q))return answers.offline;return answers.progress;
+}
+function familyGuideAnswer(kind,text=""){
+  const g=FAMILY_GUIDES[familyGuideState.style]||FAMILY_GUIDES.aster,child=profile?profileName():"your child",answers={review:`${g.name}: Review the current learning path, one recent activity feedback signal, and whether ${child} needs a break or an off-screen invitation. You do not need to inspect every metric.`,routine:`${g.name}: Keep the routine predictable: a short check-in, a few mentor stations, an off-screen movement or helper break, then stop while learning still feels positive. The selected guided time is ${profile?.minutes||30} minutes.`,next:`${g.name}: Preschool can continue into Khaemenes Kinder Garden and then Elementary School through the same vervenveda.com learning ecosystem. The shared learner continuity record is designed to make that transition possible as adapters are added.`,privacy:`${g.name}: The Preschool profile uses a nickname, broad age band, interests, mentor style, and local activity records. No surname, exact birthday, email, photograph, advertising profile, or unrestricted child chat is required. Export and erase controls remain with the family.`,ecosystem:`${g.name}: From here you can return to the Crechè Family Home, visit Khaemenes Academy, continue later into Kinder Garden and Elementary, or use the wider Verve N Veda learning network. I will eventually become the adult guide across those connected spaces.`};
+  if(kind&&answers[kind])return answers[kind];const q=text.toLowerCase();if(/privacy|data|erase|export/.test(q))return answers.privacy;if(/next|kind|elementary|school|transition/.test(q))return answers.next;if(/routine|schedule|time|day/.test(q))return answers.routine;if(/ecosystem|academy|where|navigate/.test(q))return answers.ecosystem;return answers.review;
+}
 function exportLocalData(){
-  const data={
-    exportedAt:new Date().toISOString(),
-    product:"Khaemenes Guided Preschool",
-    version:"0.1.0",
-    profile,
-    progress,
-    settings,
-    agentEvidence:agent?.exportEvidence?.()||null,
-    note:"Local educational record. Agent evidence is not a formal grade."
-  };
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;a.download=`khaemenes-preschool-${todayKey()}.json`;a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1200);
-  toast("Local learning record exported.");
+  const favoriteMap=loadJSON(PROFILE_FAVORITES_KEY,{}),visitMap=loadJSON(PROFILE_VISITS_KEY,{}),data={exportedAt:new Date().toISOString(),product:"Khaemenes Preschool Family Mentor",version:"0.2.0",catalogVersion:CATALOG.version,profile,mentor:{display:mentorDisplay(),progress,settings,dailyPlan:loadJSON(PLAN_KEY,null),agentEvidence:agent?.exportEvidence?.()||null},creche:{favoriteIds:profile?favoriteMap[profile.learnerId]||[]:[],visitedIds:profile?visitMap[profile.learnerId]||[]:[],lastOpened:loadJSON(LAST_OPEN_KEY,null)},familyGuide:familyGuideState,guardianRelease:profile?.guardianRelease||null,continuity:loadJSON(CONTINUITY_KEY,null),note:"Family-controlled local educational record. Khaemenes Academy is not an accredited school. Exploration and agent evidence are not formal grades or diagnoses. Parent/guardian retains responsibility for the child’s supervision, safety, welfare, and educational decisions."};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=`khaemenes-preschool-${profile?.nickname?.toLowerCase().replace(/[^a-z0-9]+/g,"-")||"learner"}-${todayKey()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1200);toast("Full Preschool family learning record exported.")
 }
 function resetAll(){
-  const ok=confirm("Erase the preschool profile, progress, daily plan, settings, and mentor memory from this browser?");
-  if(!ok)return;
-  [PROFILE_KEY,PROGRESS_KEY,SETTINGS_KEY,PLAN_KEY].forEach(k=>localStorage.removeItem(k));
-  try{agent?.resetMemory?.()}catch{}
-  profile=null;progress={completed:{},domainCounts:{},days:{}};settings={calm:false,noMotion:false};agent=null;
-  document.body.classList.remove("calm","no-motion");
-  updateMentorCard();renderLearningMap();buildPlan(true);openSetup();
+  if(!confirm("Erase the active Preschool learner profile, Crechè favorites/visits, mentor progress, daily plan, settings, continuity record, and this learner’s mentor memory from this browser? The adult Family Guide preference will remain."))return;
+  const id=profile?.learnerId,memoryKey=id?`creche_mentor_memory_${id}`:null;if(id){const fm=loadJSON(PROFILE_FAVORITES_KEY,{}),vm=loadJSON(PROFILE_VISITS_KEY,{});delete fm[id];delete vm[id];saveJSON(PROFILE_FAVORITES_KEY,fm);saveJSON(PROFILE_VISITS_KEY,vm)}
+  [PROFILE_KEY,PROGRESS_KEY,SETTINGS_KEY,PLAN_KEY,CONTINUITY_KEY,LAST_OPEN_KEY].forEach(k=>localStorage.removeItem(k));if(memoryKey)localStorage.removeItem(memoryKey);try{agent?.resetMemory?.()}catch{}
+  profile=null;progress=normalizeProgress({});settings={calm:false,noMotion:false};currentPlan=[];agent=null;document.body.classList.remove("calm","no-motion");applySettings();updateMentorCard();renderLearningGarden();buildPlan(true);toast("Active learner data erased. Your adult Family Guide preference was kept.")
 }
-function applySettings(){
-  document.body.classList.toggle("calm",Boolean(settings.calm));
-  document.body.classList.toggle("no-motion",Boolean(settings.noMotion));
-  $("#calmMode").textContent=settings.calm?"Use bright colors":"Toggle calm colors";
-  $("#motionMode").textContent=settings.noMotion?"Allow gentle movement":"Reduce movement";
-}
+function applySettings(){document.body.classList.toggle("calm",Boolean(settings.calm));document.body.classList.toggle("no-motion",Boolean(settings.noMotion));$("#calmMode").textContent=settings.calm?"Use bright colors":"Toggle calm colors";$("#motionMode").textContent=settings.noMotion?"Allow gentle movement":"Reduce movement"}
 function saveSettings(){saveJSON(SETTINGS_KEY,settings);applySettings()}
 
 /* Events */
 $("#beginProfile").addEventListener("click",()=>profile?$("#today").scrollIntoView({behavior:settings.noMotion?"auto":"smooth"}):openSetup());
-$("#editProfileTop").addEventListener("click",openSetup);
-$("#editProfile").addEventListener("click",openSetup);
-$("#setupBack").addEventListener("click",()=>{setupStep=Math.max(1,setupStep-1);renderSetup()});
-$("#setupNext").addEventListener("click",async()=>{
-  const error=validateStep();
-  if(error){$("#setupError").textContent=error;return}
-  if(setupStep<4){setupStep++;renderSetup()}else await finishSetup();
-});
-$$(".interest-choice").forEach(btn=>btn.addEventListener("click",()=>{
-  const key=btn.dataset.interest;
-  selectedInterests.has(key)?selectedInterests.delete(key):selectedInterests.add(key);
-  btn.setAttribute("aria-pressed",String(selectedInterests.has(key)));
-}));
-$$('input[name="personality"],input[name="ageBand"]').forEach(input=>input.addEventListener("change",updateMatchPreview));
-$$(".energy-btn").forEach(btn=>btn.addEventListener("click",async()=>{
-  currentEnergy=btn.dataset.energy;
-  $$(".energy-btn").forEach(b=>b.setAttribute("aria-pressed",String(b===btn)));
-  if(profile){localStorage.removeItem(PLAN_KEY);await buildPlan(true);toast(`${mentorFor().name} adjusted today’s path for ${currentEnergy} energy.`)}
-}));
-$("#planGrid").addEventListener("click",event=>{
-  const complete=event.target.closest("[data-complete]");
-  if(complete){event.preventDefault();markComplete(complete.dataset.complete);return}
-  const start=event.target.closest("[data-start]");
-  if(start && profile){
-    const activity=ACTIVITIES.find(a=>a.id===start.dataset.start);
-    $("#mentorDialogue").textContent=`${mentorFor().name}: We are opening ${activity?.title||"this activity"}. First, look for one thing you already know. Then try one new thing.`;
-  }
-});
-$("#refreshPlan").addEventListener("click",async()=>{
-  if(!profile){openSetup();return}
-  localStorage.removeItem(PLAN_KEY);
-  await buildPlan(true);toast("A new balanced path is ready.");
-});
-$("#printPlan").addEventListener("click",()=>window.print());
-$$(".feeling-btn").forEach(btn=>btn.addEventListener("click",()=>setFeeling(btn.dataset.feeling)));
-$$(".prompt-btn").forEach(btn=>btn.addEventListener("click",()=>{$("#mentorDialogue").textContent=responseFor(btn.dataset.prompt)}));
-$("#mentorHint").addEventListener("click",()=>{$("#mentorDialogue").textContent=responseFor("start");$("#mentorRoomTitle").scrollIntoView({behavior:settings.noMotion?"auto":"smooth"})});
-$("#mentorPlay").addEventListener("click",()=>{
-  const playful=currentPlan.find(a=>a.energy==="wiggly")||currentPlan[0];
-  $("#mentorDialogue").textContent=`${mentorFor().name}: Let’s play with a learning purpose. ${playful?`${playful.title} is a good match for today.`:"Create a profile and I will choose a game for us."}`;
-  if(playful)toast(`Play suggestion: ${playful.title}`);
-});
-$("#readMentor").addEventListener("click",()=>speak($("#mentorMessage").textContent));
-$("#readPageIntro").addEventListener("click",()=>speak($("#mentorMessage").textContent));
-$("#exportData").addEventListener("click",exportLocalData);
-$("#resetData").addEventListener("click",resetAll);
-$("#calmMode").addEventListener("click",()=>{settings.calm=!settings.calm;saveSettings()});
-$("#motionMode").addEventListener("click",()=>{settings.noMotion=!settings.noMotion;saveSettings()});
-document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!$("#setupOverlay").hidden&&profile)closeSetup()});
+$("#editProfileTop").addEventListener("click",openSetup);$("#editProfile").addEventListener("click",openSetup);$("#setupClose").addEventListener("click",closeSetup);$("#setupNotNow").addEventListener("click",closeSetup);
+$("#setupOverlay").addEventListener("click",e=>{if(e.target===$("#setupOverlay"))closeSetup()});
+$("#setupBack").addEventListener("click",()=>{setupStep=Math.max(1,setupStep-1);renderSetup()});$("#setupNext").addEventListener("click",async()=>{const error=validateStep();if(error){$("#setupError").textContent=error;return}if(releaseOnlyMode&&setupStep===5){saveReleaseOnly();return}if(setupStep<5){setupStep++;renderSetup();if(setupStep===5)setTimeout(()=>$("#releasePolicyText")?.focus(),60)}else await finishSetup()});
+$("#useMatchedMentor").addEventListener("click",()=>{identityMode="embedded";syncIdentityBuilder();updateMatchPreview()});$("#useCustomMentor").addEventListener("click",()=>{identityMode="custom";syncIdentityBuilder();updateMatchPreview()});$("#customMentorName").addEventListener("input",updateMatchPreview);
+$$('.avatar-choice').forEach(b=>b.addEventListener("click",()=>{customAvatar=b.dataset.avatar;syncIdentityBuilder();updateMatchPreview()}));$$('.color-choice').forEach(b=>b.addEventListener("click",()=>{customColors=b.dataset.color.split(",");syncIdentityBuilder();updateMatchPreview()}));
+$$('.interest-choice').forEach(btn=>btn.addEventListener("click",()=>{const key=btn.dataset.interest;selectedInterests.has(key)?selectedInterests.delete(key):selectedInterests.add(key);btn.setAttribute("aria-pressed",String(selectedInterests.has(key)))}));$$('input[name="personality"],input[name="ageBand"]').forEach(input=>input.addEventListener("change",updateMatchPreview));
+$$('.energy-btn').forEach(btn=>btn.addEventListener("click",async()=>{currentEnergy=btn.dataset.energy;$$('.energy-btn').forEach(b=>b.setAttribute("aria-pressed",String(b===btn)));if(profile){localStorage.removeItem(PLAN_KEY);await buildPlan(true);toast(`${mentorDisplay().name} adjusted today’s path for ${currentEnergy} energy.`)}}));
+$("#feelingSuggestion").addEventListener("click",async e=>{const b=e.target.closest("[data-feeling-energy]");if(!b)return;currentEnergy=b.dataset.feelingEnergy;$$('.energy-btn').forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.energy===currentEnergy)));localStorage.removeItem(PLAN_KEY);await buildPlan(true);$("#feelingSuggestion").hidden=true;toast(`Plan adjusted to ${currentEnergy} energy.`)});
+$("#planGrid").addEventListener("click",e=>{const complete=e.target.closest("[data-complete]");if(complete){e.preventDefault();markComplete(complete.dataset.complete);return}const feedback=e.target.closest("[data-feedback]");if(feedback){recordFeedback(feedback.dataset.feedbackId,feedback.dataset.feedback);return}const read=e.target.closest("[data-read-station]");if(read){const a=ACTIVITIES.find(x=>x.id===read.dataset.readStation);if(a)speak(`${a.title}. ${a.desc}. About ${a.minutes} minutes. ${offscreenCue(a.domain,currentPlan.indexOf(a))}`);return}const start=e.target.closest("[data-start]");if(start&&profile){const a=ACTIVITIES.find(x=>x.id===start.dataset.start);saveJSON(LAST_OPEN_KEY,{catalogId:a?.catalogId||null,mentorId:a?.id||null,title:a?.title||"",openedAt:new Date().toISOString()});$("#mentorDialogue").textContent=`${mentorDisplay().name}: We are opening ${a?.title||"this activity"}. First, look for one thing you already know. Then try one new thing.`}});
+$("#refreshPlan").addEventListener("click",async()=>{if(!profile){openSetup();return}localStorage.removeItem(PLAN_KEY);await buildPlan(true);toast("A new balanced current path is ready. Earlier completed activities remain in the history but do not inflate this new path.")});$("#printPlan").addEventListener("click",()=>window.print());
+$$('.feeling-btn').forEach(btn=>btn.addEventListener("click",()=>setFeeling(btn.dataset.feeling)));$$('.prompt-btn').forEach(btn=>btn.addEventListener("click",()=>{$("#mentorDialogue").textContent=responseFor(btn.dataset.prompt)}));
+$("#mentorHint").addEventListener("click",()=>{$("#mentorDialogue").textContent=responseFor("start");$("#mentorRoomTitle").scrollIntoView({behavior:settings.noMotion?"auto":"smooth"})});$("#mentorPlay").addEventListener("click",()=>{const a=currentPlan.find(x=>x.energy==="wiggly")||currentPlan[0];$("#mentorDialogue").textContent=`${mentorDisplay().name}: Let’s play with a learning purpose. ${a?`${a.title} is a good match for today.`:"Create a profile and I will choose a game for us."}`;if(a)toast(`Play suggestion: ${a.title}`)});
+$("#readMentor").addEventListener("click",()=>speak($("#mentorMessage").textContent));$("#readPageIntro").addEventListener("click",()=>speak(currentPlan.map((a,i)=>`Station ${i+1}. ${a.title}. ${a.desc}.`).join(" ")||$("#mentorMessage").textContent));
+$("#exportData").addEventListener("click",exportLocalData);$("#resetData").addEventListener("click",resetAll);$("#reviewGuardianRelease").addEventListener("click",openReleaseReview);$("#calmMode").addEventListener("click",()=>{settings.calm=!settings.calm;saveSettings()});$("#motionMode").addEventListener("click",()=>{settings.noMotion=!settings.noMotion;saveSettings()});
+$$('[data-child-question]').forEach(b=>b.addEventListener("click",()=>{$("#parentChildMentorResponse").textContent=childMentorAnswer(b.dataset.childQuestion)}));$("#childMentorAskForm").addEventListener("submit",e=>{e.preventDefault();const q=$("#childMentorQuestion").value.trim();if(q)$("#parentChildMentorResponse").textContent=childMentorAnswer("",q)});
+$("#familyGuideStyle").addEventListener("change",()=>{familyGuideState={...familyGuideState,style:$("#familyGuideStyle").value,updatedAt:new Date().toISOString()};saveJSON(FAMILY_GUIDE_KEY,familyGuideState);renderParentPortal();const g=FAMILY_GUIDES[familyGuideState.style];$("#familyGuideResponse").textContent=`${g.name}: ${g.intro}`});$$('[data-guide-question]').forEach(b=>b.addEventListener("click",()=>{$("#familyGuideResponse").textContent=familyGuideAnswer(b.dataset.guideQuestion)}));$("#familyGuideAskForm").addEventListener("submit",e=>{e.preventDefault();const q=$("#familyGuideQuestion").value.trim();if(q)$("#familyGuideResponse").textContent=familyGuideAnswer("",q)});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#setupOverlay").hidden)closeSetup();if(e.key==="Tab"&&!$("#setupOverlay").hidden){const nodes=$$('button,input,select,[href],[tabindex]:not([tabindex="-1"])',$("#setupOverlay")).filter(n=>!n.disabled&&!n.hidden&&n.offsetParent!==null);if(!nodes.length)return;const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
 
-/* Initialize */
 (async function init(){
-  $("#year").textContent=new Date().getFullYear();
-  $("#dayDate").textContent=new Intl.DateTimeFormat(undefined,{weekday:"long",month:"long",day:"numeric"}).format(new Date());
-  applySettings();
-  updateMentorCard();
-  renderLearningMap();
-  if(profile)await connectAgent();
-  await buildPlan(false);
-  if(!profile)setTimeout(openSetup,450);
+  $("#year").textContent=new Date().getFullYear();$("#releaseVersionLabel").textContent=RELEASE_LABEL;updateReleaseStatus();$("#dayDate").textContent=new Intl.DateTimeFormat(undefined,{weekday:"long",month:"long",day:"numeric"}).format(new Date());rebuildProgressAggregates();applySettings();updateMentorCard();renderLearningGarden();if(profile)await connectAgent();await buildPlan(false);
+  const g=FAMILY_GUIDES[familyGuideState.style]||FAMILY_GUIDES.aster;$("#familyGuideResponse").textContent=`${g.name}: ${g.intro}`;
 })();
+
 </script>
 </body>
 </html>
+index.html
+HTML
+MENTOR_V2_FINAL_VALIDATION.json
+Code
