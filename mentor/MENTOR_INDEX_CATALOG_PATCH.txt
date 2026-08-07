@@ -1,0 +1,69 @@
+KHAEMENES PRESCHOOL · ITEM 02
+mentor/index.html patch
+================================
+
+PURPOSE
+-------
+Make Guided Preschool read the same activity source used by Crechè while
+preserving all existing mentor progress IDs.
+
+1. Near the bottom of mentor/index.html, locate:
+
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+Immediately AFTER it and BEFORE the existing inline <script>, add:
+
+<script src="../assets/preschool-catalog.js"></script>
+
+
+2. Inside the existing inline script, KEEP:
+- PROFILE_KEY
+- PROGRESS_KEY
+- SETTINGS_KEY
+- PLAN_KEY
+- MENTORS
+
+DELETE the current complete blocks:
+
+const DOMAINS = { ... };
+
+and
+
+const ACTIVITIES = [
+  ...
+];
+
+
+3. In their place, immediately AFTER the closing `};` for MENTORS, add:
+
+const PRESCHOOL_CATALOG=window.KhaemenesPreschoolCatalog;
+if(!PRESCHOOL_CATALOG){
+  throw new Error("Khaemenes Preschool shared catalog failed to load.");
+}
+const DOMAINS=PRESCHOOL_CATALOG.mentorDomains;
+const ACTIVITIES=PRESCHOOL_CATALOG.mentorActivities({preserveLegacyIds:true});
+
+
+The next existing block should then be:
+
+const SLOT_BLUEPRINTS = {
+  20:["feelings","letters","movement"],
+  30:["feelings","letters","numbers","creative"],
+  45:["feelings","letters","numbers","movement","wonder"]
+};
+
+
+WHY preserveLegacyIds:true?
+---------------------------
+The existing Mentor has already stored progress under IDs such as:
+- abc-story
+- sunny-story
+- abc-bubbles
+- friendship-garden
+- color-studio
+- moon
+
+The shared catalog keeps those IDs as compatibility aliases.
+
+Therefore Item 02 consolidates the source data WITHOUT resetting existing
+mentor progress or daily-plan records.
