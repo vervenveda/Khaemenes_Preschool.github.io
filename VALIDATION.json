@@ -1,0 +1,29 @@
+{
+  "release": "Crech\u00e8 Open Access + Guest Mentor v1",
+  "valid": true,
+  "catalogBaseline": {
+    "total": 53,
+    "child": 52,
+    "grownup": 1,
+    "mentorEligible": 36
+  },
+  "accessPolicy": {
+    "gamesApps": "open-no-registration",
+    "guestMentor": "open-no-registration",
+    "favorites": "browser-local-no-registration",
+    "formalCurriculumRecords": "registration-required"
+  },
+  "checks": {
+    "catalogNotDuplicated": true,
+    "openGamesWording": true,
+    "guestMentorWording": true,
+    "guestUsesSessionStorage": true,
+    "guestDoesNotWriteLearnerId": true,
+    "formalRegistrationSeparated": true,
+    "familyRegistrationLink": true,
+    "manifestOpenAdventure": true,
+    "manifestOpenMentor": true,
+    "manifestFormalGate": true
+  },
+  "issues": []
+}

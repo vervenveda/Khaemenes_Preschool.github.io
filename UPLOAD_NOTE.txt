@@ -1,0 +1,37 @@
+KHAEMENES PRESCHOOL · CRECHÈ OPEN-ACCESS + GUEST MENTOR UPDATE
+
+Upload these THREE files into the existing repository:
+
+Khaemenes_Preschool.github.io/
+├── index.html
+├── mentor/
+│   └── index.html
+└── mentor-manifest.json
+
+DO NOT DELETE OR MOVE:
+- apps/
+- assets/preschool-catalog.js
+- any of the 52 child adventure targets
+- existing validation/audit files
+
+WHAT CHANGES
+------------
+1. Games/apps/stories/art/music/movement/wonder remain open to everyone.
+2. Favorites work browser-locally with no child registration.
+3. Khaemenes Mentor is explicitly open in Guest Mode.
+4. Guest Mentor uses sessionStorage only for temporary age/style/energy/interest choices.
+5. Guest Mentor does not create a learnerId, family account, academic record, transcript, grade, or permanent mentor-memory claim.
+6. Existing registered learners may be recognized if a Family Registry is already active, but registration is optional for Mentor use.
+7. Registration is clearly reserved for formal curriculum pathways requiring persistent progress, assessments, portfolio, certification, or cross-grade records.
+8. The page continues to consume the existing shared preschool catalog, so the 52 game/app routes remain their current source of truth.
+
+CURRENT LIVE CATALOG BASELINE
+-----------------------------
+53 total catalog entries
+52 child adventures
+1 grown-up entry
+36 mentor-eligible activities
+unique canonical IDs: true
+unique files: true
+valid mentor age bands: true
+valid mentor energy levels: true
