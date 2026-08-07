@@ -6,8 +6,10 @@
 <meta name="description" content="Khaemenes Preschool — the Crechè activity garden, guided preschool AI mentor hub, child and parent profile center, pinned educational games, and pathways to Kinder Garden and Elementary School.">
 <meta name="theme-color" content="#3eb8ed">
 <meta name="color-scheme" content="light">
+<meta name="application-name" content="Khaemenes Preschool · Crechè Family Home">
+<meta name="format-detection" content="telephone=no">
 <link rel="canonical" href="https://vervenveda.com/Khaemenes_Preschool.github.io/">
-<title>Khaemenes Preschool · Crechè | Bright Beginnings</title>
+<title>Khaemenes Preschool · Crechè Family Home | Bright Beginnings</title>
 <style>
 :root{
   --ink:#26324a;--muted:#626e83;--paper:#fffdf8;--surface:#fff;--line:rgba(45,58,92,.14);
@@ -398,42 +400,165 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
 @media(max-width:720px){.family-grid,.profile-fields{grid-template-columns:1fr}.pinned-list{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.pinned-list{grid-template-columns:1fr}.profile-foot{align-items:stretch;flex-direction:column-reverse}.profile-save,.profile-cancel{width:100%}}
 
+
+/* ============================================================
+   CRECHÈ FAMILY HOME v3 · EXPERIENCE + ORGANIZATION LAYER
+   ============================================================ */
+body[data-view="child"] .grownup-mode-only{display:none!important}
+body[data-view="grownup"] .child-mode-only{display:none!important}
+body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+
+.view-switch{display:flex;align-items:center;padding:4px;border:1px solid var(--line);border-radius:999px;background:#f5f2ff;box-shadow:0 5px 14px rgba(50,58,103,.08)}
+.view-choice{min-height:38px;padding:.5rem .72rem;border:0;border-radius:999px;color:#5b6280;background:transparent;font-size:.8rem;font-weight:850;white-space:nowrap}
+.view-choice[aria-pressed="true"]{color:#fff;background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 6px 15px rgba(116,87,255,.2)}
+
+.compact-heading{margin-bottom:26px}
+.learner-home{padding-top:70px;padding-bottom:74px;background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(241,249,255,.9))}
+.home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.home-card{position:relative;min-height:300px;display:flex;flex-direction:column;padding:25px;overflow:hidden;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow)}
+.home-card::after{content:"";position:absolute;right:-55px;bottom:-62px;width:170px;height:170px;border-radius:50%;background:rgba(116,87,255,.08);pointer-events:none}
+.mentor-companion{color:#fff;background:linear-gradient(145deg,#173660,#2e5685 58%,#15858c);border-color:rgba(255,255,255,.55)}
+.mentor-companion::after{background:rgba(66,199,220,.18)}
+.home-card>*{position:relative;z-index:1}
+.home-card-top{display:flex;align-items:center;gap:14px}
+.home-avatar{width:74px;height:74px;flex:0 0 74px;display:grid;place-items:center;border:4px solid rgba(255,255,255,.86);border-radius:25px;background:linear-gradient(145deg,#fff3aa,#ffc66a);box-shadow:var(--soft);font-size:2.35rem}
+.home-label{display:inline-block;color:var(--pink);font-size:.82rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.mentor-companion .home-label{color:#ffe59b}
+.home-card h3{margin:7px 0 8px;color:#3d3a70;font-family:var(--serif);font-size:1.7rem;line-height:1.12}
+.mentor-companion h3{color:#fff}
+.home-card p{margin:0;color:#657187;font-size:.94rem}
+.mentor-companion p{color:rgba(255,255,255,.84)}
+.home-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:18px}
+.home-btn{min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:.7rem .88rem;border:1px solid var(--line);border-radius:13px;color:#51487e;background:#fff;text-decoration:none;font-size:.84rem;font-weight:900}
+.primary-home{color:#fff;background:linear-gradient(135deg,var(--purple),var(--pink));border-color:transparent}
+.mentor-companion .primary-home{color:#173660;background:#fff}
+.continue-icon,.away-icon{width:74px;height:74px;display:grid;place-items:center;margin:10px 0 4px;border-radius:23px;background:linear-gradient(145deg,#fff0b6,#dff7ff);font-size:2.4rem;box-shadow:var(--soft)}
+.away-icon{background:linear-gradient(145deg,#e5faee,#e7f7ff)}
+.mini-plan{display:grid;gap:7px;margin-top:13px}
+.mini-station{display:grid;grid-template-columns:28px 34px 1fr;align-items:center;gap:8px;padding:8px 9px;border:1px solid var(--line);border-radius:13px;background:#f8f9fd;font-size:.8rem}
+.mini-station>span{width:25px;height:25px;display:grid;place-items:center;border-radius:50%;color:#fff;background:#8d7de0;font-size:.7rem;font-weight:900}
+.mini-station i{font-style:normal;font-size:1.25rem}
+.mini-station strong{color:#48446f;font-size:.8rem}
+.mini-station.done{background:#eaf8f1}
+.mini-station.done>span{background:var(--green)}
+.mini-plan-empty{padding:13px;border:2px dashed #ddd7ee;border-radius:13px;color:#7c8496;font-size:.82rem;text-align:center}
+.quick-comfort{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:17px;padding:12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.9)}
+.quick-comfort span,.quick-comfort button{min-height:40px;display:inline-flex;align-items:center;padding:0 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#566178;font-size:.82rem;font-weight:800}
+.quick-comfort strong{color:#473f7b;margin-right:4px}
+.quick-comfort button[aria-pressed="true"]{color:#fff;background:#6257aa}
+
+.parent-dashboard{margin:0 0 24px;padding:24px;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow)}
+.dashboard-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.dashboard-head h3{margin:5px 0 0;color:#3d3a70;font-family:var(--serif);font-size:2rem}
+.dashboard-head p{margin:7px 0 0;color:var(--muted);font-size:.9rem}
+.dashboard-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.dashboard-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:20px}
+.metric-card{min-height:126px;display:flex;flex-direction:column;justify-content:center;padding:16px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#fff,#f8f9fd)}
+.metric-icon{font-size:1.6rem}
+.metric-card strong{display:block;margin-top:7px;color:#3e3b70;font-family:var(--serif);font-size:1.15rem;line-height:1.15}
+.metric-card small{display:block;margin-top:5px;color:#707b8e;font-size:.8rem}
+.family-idea{margin-top:14px;padding:14px 16px;border-radius:17px;color:#315c4d;background:#e8f8f0;font-size:.86rem}
+.family-idea strong{color:#176f51}
+
+.trail-section{background:linear-gradient(145deg,#fff9e9,#eaf9ff 56%,#f4efff)}
+.trail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.trail-stop{min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;border:4px solid #fff;border-radius:26px;color:#46536a;background:linear-gradient(145deg,#fff,#f7f8fc);box-shadow:var(--soft);text-align:center}
+.trail-stop.lit{color:#fff;background:linear-gradient(145deg,var(--trail-a),var(--trail-b));box-shadow:0 18px 36px rgba(48,58,103,.18)}
+.trail-icon{font-size:2.8rem}
+.trail-stop strong{margin-top:9px;font-size:1rem}
+.trail-stop small{margin-top:5px;font-size:.82rem;font-weight:800;opacity:.86}
+.trail-meter{width:80%;height:8px;margin-top:12px;overflow:hidden;border-radius:999px;background:rgba(90,97,121,.12)}
+.trail-stop.lit .trail-meter{background:rgba(255,255,255,.26)}
+.trail-meter i{display:block;width:var(--trail-p);height:100%;border-radius:inherit;background:linear-gradient(90deg,#ffd63d,#fff)}
+.trail-celebration{margin-top:15px;padding:13px 16px;border:1px solid rgba(116,87,255,.14);border-radius:17px;color:#534c82;background:rgba(255,255,255,.78);font-size:.88rem;font-weight:800;text-align:center}
+
+.stage-badge{display:inline-flex;width:max-content;margin-top:4px;padding:6px 9px;border-radius:999px;font-size:.76rem;font-weight:850}
+.stage-badge.fit{color:#176f51;background:#e3f7ed}
+.stage-badge.together{color:#7a5a1d;background:#fff1cb}
+.card-actions{grid-template-columns:minmax(0,1fr) auto}
+.read-card{min-height:48px;padding:0 12px;border:1px solid var(--line);border-radius:13px;color:#554d80;background:#f5f1ff;font-size:.8rem;font-weight:900}
+
+.network-directory{margin-top:36px;border:1px solid rgba(255,255,255,.15);border-radius:24px;background:rgba(255,255,255,.07);overflow:hidden}
+.network-directory>summary{min-height:84px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 21px;cursor:pointer;list-style:none}
+.network-directory>summary::-webkit-details-marker{display:none}
+.network-directory>summary strong{display:block;color:#fff;font-family:var(--serif);font-size:1.3rem}
+.network-directory>summary small{display:block;margin-top:4px;color:rgba(255,255,255,.7);font-size:.82rem}
+.summary-arrow{font-size:1.5rem;transition:transform .18s}
+.network-directory[open] .summary-arrow{transform:rotate(180deg)}
+.network-directory .network-head{margin:0 21px 18px;padding-top:20px}
+.network-directory .site-grid{padding:0 21px 21px}
+.parent-card{appearance:none;width:100%;border-color:rgba(255,255,255,.14);text-align:left;font:inherit;cursor:pointer}
+.parent-icon{font-size:2rem!important}
+
+.menu-action{width:100%;border:1px solid var(--line);text-align:left;font:inherit;cursor:pointer}
+.menu-link button{font:inherit}
+
+.new-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.parent-tools{grid-template-columns:repeat(4,minmax(0,1fr))}
+.site-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+
+/* Meaningful small text gets a readable floor. */
+.new-card::before{font-size:.74rem}
+.status{font-size:.74rem}
+.pinned-app small{font-size:.76rem}
+.visited-badge{font-size:.76rem}
+.family-meta span{font-size:.76rem}
+.menu-link small{font-size:.76rem}
+.category-label{font-size:.78rem}
+.profile-chip{font-size:.78rem}
+.profile-summary small{font-size:.8rem}
+.breadcrumbs .shell{font-size:.8rem}
+.profile-privacy{font-size:.8rem}
+.hero-note{font-size:.8rem}
+.kicker{font-size:.8rem}
+
+@media(max-width:1180px){
+  .navlinks{display:none}
+  .parent-tools{grid-template-columns:repeat(2,1fr)}
+  .site-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:900px){
+  .new-grid,.category-grid{grid-template-columns:repeat(2,1fr)}
+  .home-grid{grid-template-columns:1fr}
+  .dashboard-head{align-items:flex-start;flex-direction:column}
+  .dashboard-actions{justify-content:flex-start}
+  .dashboard-grid{grid-template-columns:repeat(2,1fr)}
+  .trail-grid{grid-template-columns:repeat(3,1fr)}
+  .site-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:720px){
+  .view-switch{margin-left:auto}
+  .view-choice{padding:.48rem .62rem;font-size:.75rem}
+  .trail-grid{grid-template-columns:repeat(2,1fr)}
+  .parent-tools{grid-template-columns:1fr}
+  .site-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:580px){
+  .new-grid,.category-grid{grid-template-columns:1fr}
+  .view-choice{font-size:0;width:42px;padding:0}
+  .view-choice:first-child::before{content:"🌈";font-size:1rem}
+  .view-choice:last-child::before{content:"🧑‍🧒";font-size:1rem}
+  .home-card{min-height:270px;padding:21px}
+  .dashboard-grid,.trail-grid,.site-grid{grid-template-columns:1fr}
+  .quick-comfort{align-items:stretch}
+  .quick-comfort span,.quick-comfort button{width:100%;justify-content:center}
+  .card-actions{grid-template-columns:1fr}
+}
+@media print{
+  .view-switch,.learner-home,.trail-section,.network-directory,.read-card{display:none!important}
+  .parent-dashboard{box-shadow:none}
+}
+
 </style>
 </head>
-<body id="top">
+<body id="top" data-view="child">
 <a class="skip" href="#activities">Skip to learning adventures</a>
 <div class="sky-decor" aria-hidden="true"><span class="float-shape">⭐</span><span class="float-shape">♥</span><span class="float-shape">●</span><span class="float-shape">▲</span></div>
 
 <div class="learning-ticker" id="learningTicker" data-paused="false" aria-label="New and updated Khaemenes Preschool adventures">
   <div class="ticker-window">
-    <div class="ticker-track">
-      <div class="ticker-set">
-        <span class="ticker-title">Crechè New &amp; Updated</span>
-        <a class="ticker-link" href="./apps/ABC_Story_Time/index.html">ABC Story Time</a>
-        <a class="ticker-link" href="./apps/Art_color_studio/index.html">Art Color Studio</a>
-        <a class="ticker-link" href="./apps/Feelings_emotional_explorer/index.html">Feelings Explorer</a>
-        <a class="ticker-link" href="./apps/Life_skills_little_Tikes_How_to_Brush_Your_Teeth/index.html">Brush Your Teeth</a>
-        <a class="ticker-link" href="./apps/Life_skills_little_Tikes_Life_Skills_Emotions_Friendship_Garden/index.html">Friendship Garden</a>
-        <a class="ticker-link" href="./apps/Sunny_ABCs_123s_Storytime/index.html">Sunny ABCs &amp; 123s</a>
-        <a class="ticker-link" href="./apps/reading_storybird_grove/index.html">Storybird Grove</a>
-        <a class="ticker-link" href="./apps/ABC_adventure_hub_index.html">ABC Adventure Hub</a>
-        <a class="ticker-link" href="./apps/cosmic_arabic_alphabet_quest_index.html">Cosmic Arabic</a>
-        <a class="ticker-link" href="./apps/little_worlds_promenade_index.html">Little Worlds</a>
-      </div>
-      <div class="ticker-set" aria-hidden="true">
-        <span class="ticker-title">Crechè New &amp; Updated</span>
-        <a class="ticker-link" tabindex="-1" href="./apps/ABC_Story_Time/index.html">ABC Story Time</a>
-        <a class="ticker-link" tabindex="-1" href="./apps/Art_color_studio/index.html">Art Color Studio</a>
-        <a class="ticker-link" tabindex="-1" href="./apps/Feelings_emotional_explorer/index.html">Feelings Explorer</a>
-        <a class="ticker-link" tabindex="-1" href="./apps/Life_skills_little_Tikes_How_to_Brush_Your_Teeth/index.html">Brush Your Teeth</a>
-        <a class="ticker-link" tabindex="-1" href="./apps/Life_skills_little_Tikes_Life_Skills_Emotions_Friendship_Garden/index.html">Friendship Garden</a>
-        <a class="ticker-link" tabindex="-1" href="./apps/Sunny_ABCs_123s_Storytime/index.html">Sunny ABCs &amp; 123s</a>
-        <a class="ticker-link" tabindex="-1" href="./apps/reading_storybird_grove/index.html">Storybird Grove</a>
-        <a class="ticker-link" tabindex="-1" href="./apps/ABC_adventure_hub_index.html">ABC Adventure Hub</a>
-        <a class="ticker-link" tabindex="-1" href="./apps/cosmic_arabic_alphabet_quest_index.html">Cosmic Arabic</a>
-        <a class="ticker-link" tabindex="-1" href="./apps/little_worlds_promenade_index.html">Little Worlds</a>
-      </div>
-    </div>
+    <div class="ticker-track" id="tickerTrack"></div>
   </div>
   <button class="ticker-toggle" id="tickerToggle" type="button" aria-pressed="false" aria-label="Pause learning ticker">Ⅱ</button>
 </div>
@@ -441,9 +566,13 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
 <header class="header">
   <div class="shell nav">
     <a class="brand" href="#top"><span class="brand-bubble">🌈</span><span><strong>Khaemenes Preschool</strong><small>Crechè · Bright beginnings grow here</small></span></a>
-    <nav class="navlinks" aria-label="Child-friendly navigation">
+    <nav class="navlinks" aria-label="Primary navigation">
       <a href="./mentor/index.html">Guided Preschool</a><a href="#profiles">Profiles</a><a href="#rooms">Adventure Rooms</a><a href="#today">Today’s Pick</a><a href="#activities">All Adventures</a>
     </nav>
+    <div class="view-switch" role="group" aria-label="Choose child or grown-up view">
+      <button class="view-choice" id="childViewBtn" type="button" data-view-choice="child" aria-pressed="true">🌈 Child</button>
+      <button class="view-choice" id="grownupViewBtn" type="button" data-view-choice="grownup" aria-pressed="false">🧑‍🧒 Grown-Up</button>
+    </div>
     <button class="menu-btn" id="menuBtn" type="button" aria-label="Open complete menu" aria-expanded="false">☰</button>
   </div>
 </header>
@@ -460,7 +589,7 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
 
 
 <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
-  <aside class="drawer" aria-label="Khaemenes Preschool complete directory">
+  <aside class="drawer" id="drawer" aria-label="Khaemenes Preschool complete directory">
     <div class="drawer-top"><h2>Preschool Menu</h2><button class="close" id="closeMenu" type="button" aria-label="Close menu">×</button></div>
     <p>Find a child adventure, a new or updated activity, a grown-up tool, or a connected public learning destination.</p>
     <input class="drawer-search" id="menuSearch" type="search" placeholder="Search Khaemenes Preschool…" autocomplete="off">
@@ -472,9 +601,9 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
 <section class="hero">
   <div class="shell hero-inner">
     <div class="hero-copy">
-      <p class="eyebrow">🌟 A colorful first doorway to learning</p>
+      <p class="eyebrow" id="heroEyebrow">🌟 A colorful first doorway to learning</p>
       <h1>Crechè<span>Khaemenes Preschool · Read · Count · Create · Feel · Move · Wonder</span></h1>
-      <p class="lead">A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.</p>
+      <p class="lead" id="heroLead">A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.</p>
       <div class="actions">
         <a class="btn primary" href="./mentor/index.html">Meet My Mentor · Enter Guided Preschool →</a>
         <a class="btn secondary" href="#rooms">Choose an Adventure Room ↓</a>
@@ -492,6 +621,72 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
   </div>
 </section>
 
+<section class="section learner-home child-mode-only" id="myHome" aria-labelledby="myHomeTitle">
+  <div class="shell">
+    <div class="heading compact-heading">
+      <p class="kicker" id="homeKicker">My Crechè Home</p>
+      <h2 id="myHomeTitle">A little home base for today.</h2>
+      <p id="myHomeIntro">Create a child profile with a grown-up and Crechè can remember favorites, adventures explored, and the child’s mentor match on this browser.</p>
+    </div>
+
+    <div class="home-grid">
+      <article class="home-card mentor-companion">
+        <div class="home-card-top">
+          <span class="home-avatar" id="homeMentorAvatar" aria-hidden="true">✨</span>
+          <div>
+            <span class="home-label">My Mentor</span>
+            <h3 id="homeMentorName">Your mentor is waiting</h3>
+          </div>
+        </div>
+        <p id="homeMentorMessage">A grown-up can help create your profile, then your mentor will prepare a short, balanced learning path.</p>
+        <div class="home-actions">
+          <a class="home-btn primary-home" id="homeMentorLink" href="./mentor/index.html">Meet My Mentor →</a>
+          <button class="home-btn" id="readHomeMentor" type="button">🔊 Read to Me</button>
+        </div>
+      </article>
+
+      <article class="home-card continue-card">
+        <span class="home-label">Continue My Adventure</span>
+        <div class="continue-icon" id="continueIcon" aria-hidden="true">🎈</div>
+        <h3 id="continueTitle">Choose your first adventure</h3>
+        <p id="continueDesc">Every place you open becomes part of your local Adventure Trail.</p>
+        <div class="home-actions">
+          <a class="home-btn primary-home" id="continueLink" href="#rooms">Choose a Room →</a>
+          <button class="home-btn" id="homeSurprise" type="button">Surprise Me 🎉</button>
+        </div>
+      </article>
+
+      <article class="home-card today-mentor-card">
+        <span class="home-label">Today With My Mentor</span>
+        <h3 id="mentorPlanTitle">A balanced little day</h3>
+        <p id="mentorPlanIntro">The Guided Preschool Mentor can prepare today’s age-aware sequence.</p>
+        <div class="mini-plan" id="mentorPlanPreview"></div>
+        <div class="home-actions">
+          <a class="home-btn primary-home" href="./mentor/index.html#today">Open My Day →</a>
+        </div>
+      </article>
+
+      <article class="home-card away-card">
+        <span class="home-label">Away From the Screen</span>
+        <div class="away-icon" aria-hidden="true">🌿</div>
+        <h3 id="awayTitle">Tiny real-world adventure</h3>
+        <p id="awayPrompt">Look around the room and find something that makes you smile.</p>
+        <div class="home-actions">
+          <button class="home-btn primary-home" id="newAwayPrompt" type="button">Give Me Another 🎲</button>
+          <button class="home-btn" id="readAwayPrompt" type="button">🔊 Read It</button>
+        </div>
+      </article>
+    </div>
+
+    <div class="quick-comfort">
+      <span><strong id="homeVisitedCount">0</strong> explored</span>
+      <span><strong id="homeFavoriteCount">0</strong> favorites</span>
+      <button id="homeCalmBtn" type="button" aria-pressed="false">🌤️ Calm colors</button>
+      <button id="motionBtn" type="button" aria-pressed="false">🫧 Reduce movement</button>
+    </div>
+  </div>
+</section>
+
 <section class="section family-pathway" id="profiles">
   <div class="shell">
     <div class="heading">
@@ -499,6 +694,31 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
       <h2>Meet the mentor, save favorites, and continue forward.</h2>
       <p>Crechè remains an open adventure garden. This family pathway connects the same child profile to guided preschool, Kinder Garden, and Elementary School while keeping information local to the family’s browser.</p>
     </div>
+
+    <section class="parent-dashboard grownup-mode-only" id="parentDashboard" aria-labelledby="parentDashboardTitle">
+      <div class="dashboard-head">
+        <div>
+          <p class="kicker">Local family dashboard</p>
+          <h3 id="parentDashboardTitle">Preschool at a glance</h3>
+          <p id="dashboardIntro">Create a child profile to see a simple family-controlled learning summary.</p>
+        </div>
+        <div class="dashboard-actions">
+          <button class="family-action" id="dashboardEditProfile" type="button">Edit Child Profile</button>
+          <button class="family-action light" id="dashboardExport" type="button">Export Full Preschool Record</button>
+          <button class="family-action light" id="dashboardCalm" type="button">🌤️ Calm Colors</button>
+          <button class="family-action light" id="dashboardMotion" type="button">🫧 Reduce Movement</button>
+        </div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="metric-card"><span class="metric-icon" id="dashMentorIcon">✨</span><strong id="dashMentor">No mentor yet</strong><small>Mentor match</small></div>
+        <div class="metric-card"><span class="metric-icon">🧭</span><strong id="dashStage">Not set</strong><small>Learning stage</small></div>
+        <div class="metric-card"><span class="metric-icon">⭐</span><strong id="dashExplored">0 of 52</strong><small>Adventures explored</small></div>
+        <div class="metric-card"><span class="metric-icon">♥</span><strong id="dashFavorites">0</strong><small>Pinned favorites</small></div>
+        <div class="metric-card"><span class="metric-icon">🌈</span><strong id="dashTopRoom">Not enough visits yet</strong><small>Most explored room</small></div>
+        <div class="metric-card"><span class="metric-icon">🗓️</span><strong id="dashToday">No mentor path yet</strong><small>Today’s guided path</small></div>
+      </div>
+      <div class="family-idea"><strong>Try together:</strong> <span id="familyIdea">Choose one favorite adventure and ask the child to show you one thing they noticed.</span></div>
+    </section>
 
     <div class="family-grid">
       <article class="family-card featured" style="--family-glow:rgba(66,199,220,.18)">
@@ -604,6 +824,18 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
   </div>
 </section>
 
+<section class="section trail-section child-mode-only" id="trail" aria-labelledby="trailTitle">
+  <div class="shell">
+    <div class="heading compact-heading">
+      <p class="kicker">My Adventure Trail</p>
+      <h2 id="trailTitle">Look where curiosity has taken you.</h2>
+      <p>This is not a grade or a race. Each room lights up as the child explores it.</p>
+    </div>
+    <div class="trail-grid" id="trailGrid"></div>
+    <div class="trail-celebration" id="trailCelebration" aria-live="polite"></div>
+  </div>
+</section>
+
 <section class="section alt" id="activities">
   <div class="shell">
     <div class="heading"><p class="kicker">The complete adventure garden</p><h2>Keep clicking. Keep discovering.</h2><p>Search, choose a room, save favorites, or ask Crechè for a surprise.</p></div>
@@ -621,21 +853,25 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
   </div>
 </section>
 
-<section class="section grownup" id="grownups">
+<section class="section grownup grownup-mode-only" id="grownups">
   <div class="shell">
     <div class="heading"><p class="kicker">Parents, caregivers & teachers</p><h2>The grown-up corner</h2><p>Support gentle routines, adjust the visual experience, and continue into the wider family of public educational resources.</p></div>
     <div class="parent-tools">
-      <a class="parent-card" href="#profiles"><span style="font-size:2rem">🧑‍🧒</span><h3>Parent Profile</h3><p>Review the active child, pinned games, local records, privacy controls, export, and reset tools.</p><span>Open Parent Controls ↓</span></a>
-      <a class="parent-card" href="#profiles"><span style="font-size:2rem">🧒</span><h3>Child Profile</h3><p>Create or edit the child’s nickname, broad learning stage, mentor style, and pinned adventures.</p><span>Open Child Profile ↓</span></a>
-      <a class="parent-card" href="./mentor/index.html"><span style="font-size:2rem">✨</span><h3>Guided Preschool</h3><p>Introduce the personal AI mentor and begin a balanced, age-aligned daily learning path.</p><span>Enter Learning Hub →</span></a>
-      <a class="parent-card" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><span style="font-size:2rem">🌻</span><h3>Kinder Garden</h3><p>Continue into the next early-learning stage with curiosity, kindness, literacy, and number sense.</p><span>Enter Kinder Garden →</span></a>
-      <a class="parent-card" href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><span style="font-size:2rem">🏫</span><h3>Elementary School</h3><p>Continue from Kinder Garden through Grade 5 with the learner continuity foundation in place.</p><span>Enter Elementary →</span></a>
-      <a class="parent-card" href="./apps/Life_skills_organizer_index.html"><span style="font-size:2rem">🗓️</span><h3>Little Organizer</h3><p>Build simple routines and help children understand what comes next.</p><span>Open Organizer →</span></a>
-      <a class="parent-card" href="./apps/Life_skills_donate_index.html"><span style="font-size:2rem">💝</span><h3>Support Crechè</h3><p>Help free early-learning tools continue to grow.</p><span>Open Support Page →</span></a>
-      <a class="parent-card" href="https://vervenveda.com/Khaemenes_Academy.github.io/"><span style="font-size:2rem">🎓</span><h3>Khaemenes Academy</h3><p>Continue into the larger free learning campus for children, families, and lifelong learners.</p><span>Visit the Academy →</span></a>
+      <button class="parent-card" id="parentProfileCard" type="button"><span class="parent-icon">🧑‍🧒</span><h3>Parent Dashboard</h3><p>Review the active child, local learning summary, privacy controls, export, and reset tools.</p><span>Open Parent Dashboard ↑</span></button>
+      <button class="parent-card" id="childProfileCard" type="button"><span class="parent-icon">🧒</span><h3>Child Profile</h3><p>Create or edit the child’s nickname, broad learning stage, mentor style, and pathway.</p><span>Open Child Profile →</span></button>
+      <a class="parent-card" href="./mentor/index.html"><span class="parent-icon">✨</span><h3>Guided Preschool</h3><p>Meet the personal mentor and begin a balanced, age-aligned daily learning path.</p><span>Enter Learning Hub →</span></a>
+      <button class="parent-card" id="parentAccessibilityCard" type="button"><span class="parent-icon">🌤️</span><h3>Comfort &amp; Accessibility</h3><p>Choose bright or calm colors, reduce movement, and use read-aloud support.</p><span>Adjust this page ↑</span></button>
+      <a class="parent-card" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><span class="parent-icon">🌻</span><h3>Kinder Garden</h3><p>Continue into kindness, curiosity, early literacy, number sense, nature, and school readiness.</p><span>Enter Kinder Garden →</span></a>
+      <a class="parent-card" href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><span class="parent-icon">🏫</span><h3>Elementary School</h3><p>Continue toward Kinder Garden through Grade 5 learning and family resources.</p><span>Enter Elementary →</span></a>
+      <a class="parent-card" href="./apps/Life_skills_organizer_index.html"><span class="parent-icon">🗓️</span><h3>Little Organizer</h3><p>Build simple routines and help children understand what comes next.</p><span>Open Organizer →</span></a>
+      <a class="parent-card" href="./apps/Life_skills_donate_index.html"><span class="parent-icon">💝</span><h3>Support Crechè</h3><p>Help free early-learning tools continue to grow.</p><span>Open Support Page →</span></a>
     </div>
-    <div class="network-head"><h3>Connected Verve N Veda Learning Network</h3><p>The full current public network is connected below. Every card opens a public landing page rather than a repository screen.</p></div>
-    <div class="site-grid" id="siteGrid"></div>
+
+    <details class="network-directory" id="networkDirectory">
+      <summary><span><strong>Connected Verve N Veda Learning Network</strong><small>Open the complete public learning network when you need it.</small></span><span class="summary-arrow" aria-hidden="true">⌄</span></summary>
+      <div class="network-head"><h3>Explore the wider learning network</h3><p>These links are kept available for grown-ups without crowding the child’s Preschool experience.</p></div>
+      <div class="site-grid" id="siteGrid"></div>
+    </details>
     <div class="parent-note"><strong>Family note:</strong> Young children benefit most when a caring adult explores with them, talks about what they see, celebrates effort, and offers breaks before frustration grows. Crechè activities are educational tools and do not replace professional medical, developmental, or educational evaluation.</div>
   </div>
 </section>
@@ -667,21 +903,23 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="./assets/preschool-catalog.js"></script>
 <script>
 "use strict";
-const APPS=[{"id":"abc-story-time-folder","title":"ABC Story Time","file":"ABC_Story_Time/index.html","category":"letters","icon":"📖","desc":"Open a gentle alphabet story experience for early readers and listeners.","tags":"abc story time alphabet reading folder"},{"id":"art-color-studio-folder","title":"Art Color Studio","file":"Art_color_studio/index.html","category":"art","icon":"🎨","desc":"Explore colors, drawing, and creative choices in a playful studio.","tags":"art color studio drawing folder"},{"id":"feelings-explorer-folder","title":"Feelings Emotional Explorer","file":"Feelings_emotional_explorer/index.html","category":"feelings","icon":"🧭","desc":"Name feelings, notice body clues, and explore caring responses.","tags":"feelings emotional explorer sel folder"},{"id":"brush-teeth-folder","title":"How to Brush Your Teeth","file":"Life_skills_little_Tikes_How_to_Brush_Your_Teeth/index.html","category":"life","icon":"🪥","desc":"Learn a safe, child-friendly tooth-brushing routine.","tags":"life skills brush teeth hygiene folder"},{"id":"emotions-friendship-garden-folder","title":"Emotions & Friendship Garden","file":"Life_skills_little_Tikes_Life_Skills_Emotions_Friendship_Garden/index.html","category":"feelings","icon":"🌻","desc":"Practice feelings, friendship, boundaries, kindness, and repair.","tags":"life skills emotions friendship garden folder"},{"id":"sunny-abcs-folder","title":"Sunny ABCs & 123s Storytime","file":"Sunny_ABCs_123s_Storytime/index.html","category":"letters","icon":"🌞","desc":"Explore letters, numbers, and cheerful storytime activities.","tags":"sunny abc 123 storytime folder"},{"id":"storybird-folder","title":"Storybird Grove","file":"reading_storybird_grove/index.html","category":"words","icon":"🐦","desc":"Read, imagine, and explore stories in a gentle story grove.","tags":"reading storybird grove folder"},{"id":"alphabet-adventure","title":"Alphabet Adventure","file":"ABC_Alphabet_Adventure_index.html","category":"letters","icon":"🧭","desc":"Travel through a bright alphabet world filled with letters and pictures.","tags":"alphabet adventure letters phonics"},{"id":"abc-bilingual","title":"Bilingual ABC","file":"ABC_bilingual_index.html","category":"letters","icon":"🌎","desc":"Explore alphabet words across languages.","tags":"alphabet bilingual language"},{"id":"abc-bubble","title":"ABC Bubble Adventure","file":"ABC_bubble_adventure_index.html","category":"letters","icon":"🫧","desc":"Pop and match playful alphabet bubbles.","tags":"alphabet bubbles game"},{"id":"abc-cosmic","title":"Cosmic Alphabet","file":"ABC_cosmic_alphabet_index.html","category":"letters","icon":"🚀","desc":"Practice letters among stars and planets.","tags":"alphabet cosmic space"},{"id":"abc-match","title":"ABC Match","file":"ABC_match_index.html","category":"letters","icon":"🔤","desc":"Match letters and pictures to build recognition.","tags":"alphabet matching"},{"id":"abc-time","title":"ABC Time","file":"ABC_time_index.html","category":"letters","icon":"⏰","desc":"Practice letters, sounds, and simple words.","tags":"alphabet time phonics"},{"id":"art-resources","title":"Little Artist Resources","file":"Art _resources_index.html","category":"art","icon":"🧰","desc":"Open a colorful collection of creative ideas and art resources.","tags":"art resources supplies"},{"id":"art-color-mixing","title":"Color Mixing Studio","file":"Art_color_mixing_index.html","category":"art","icon":"🌈","desc":"Mix colors and discover new combinations.","tags":"art color mixing primary secondary"},{"id":"art-museum","title":"Little Museum","file":"Art_little_museum_index.html","category":"art","icon":"🏛️","desc":"Explore a child-friendly little museum of art and ideas.","tags":"art museum gallery"},{"id":"art-match-colors","title":"Match the Colors","file":"Art_match_colors_index.html","category":"art","icon":"🎯","desc":"Match and name colors through visual play.","tags":"art colors matching"},{"id":"recipes","title":"Little Kitchen Recipes","file":"Life_Skills_kitchen_ resipes_index.html","category":"life","icon":"🥗","desc":"Explore child-friendly recipes with adult help and kitchen safety.","tags":"life skills kitchen recipes cooking"},{"id":"schoolwork","title":"Schoolwork Helper","file":"Life_Skills_schoolwork_index.html","category":"life","icon":"🎒","desc":"Practice small, supportive steps for starting schoolwork.","tags":"life skills schoolwork focus"},{"id":"compass","title":"Compass Exploration","file":"Life_skills_compass_exploration_index.html","category":"life","icon":"🧭","desc":"Learn directions through a walking adventure.","tags":"life skills compass directions"},{"id":"support","title":"Support Crechè","file":"Life_skills_donate_index.html","category":"grownup","icon":"💝","desc":"A grown-up support page for helping free learning tools grow.","tags":"support donate grownup"},{"id":"life-skills-home","title":"Life Skills Clubhouse","file":"Life_skills_index.html","category":"life","icon":"🏡","desc":"Enter the central life-skills learning space.","tags":"life skills routines"},{"id":"kitchen-helper","title":"Little Kitchen Helper","file":"Life_skills_kitchen_helper_index.html","category":"life","icon":"👩‍🍳","desc":"Learn safe, simple ways to help in the kitchen.","tags":"life skills kitchen helper"},{"id":"make-bed","title":"Making Your Bed","file":"Life_skills_make_bed_index.html","category":"life","icon":"🛏️","desc":"Practice caring for a sleeping space one step at a time.","tags":"life skills make bed"},{"id":"organizer","title":"Mini Organizer","file":"Life_skills_organizer_index.html","category":"life","icon":"🗓️","desc":"Practice tidy missions and simple routines.","tags":"life skills organizer tidy"},{"id":"walk-dog","title":"Walking With a Dog Safely","file":"Life_skills_walk_dog_index.html","category":"life","icon":"🐕","desc":"Learn adult-guided dog-walking safety and care.","tags":"life skills dog safety"},{"id":"music-staff","title":"Harmony Haven Staff Studio","file":"Music_staff_studio_index.html","category":"music","icon":"🎼","desc":"Write notes on a staff and play back a simple score.","tags":"music staff notation composer"},{"id":"move-groove","title":"Move & Groove","file":"PE_move_n_groove_index.html","category":"movement","icon":"💃","desc":"Move through 42 warm-ups, active games, cool-downs, and safe learning checks.","tags":"movement physical education pe exercise dance fitness"},{"id":"spelling-game","title":"Spelling Game","file":"Spelling_game_index.html","category":"words","icon":"🧩","desc":"Build words through playful spelling practice.","tags":"spelling game"},{"id":"spelling-journal","title":"Spelling Journal","file":"Spelling_journal_index.html","category":"words","icon":"📓","desc":"Record and practice new spelling words.","tags":"spelling journal writing"},{"id":"spelling-safari","title":"Spelling Safari","file":"Spelling_safari_index.html","category":"words","icon":"🦒","desc":"Go on a word safari with letters and spelling patterns.","tags":"spelling safari"},{"id":"sunny-abcs-file","title":"Sunny ABCs & 123s Storytime","file":"Sunny_ABCs_123s_Storytime_index.html","category":"letters","icon":"☀️","desc":"A single-file Sunny letters, numbers, and storytime adventure.","tags":"sunny abc 123 storytime"},{"id":"drawing-tool","title":"Drawing Tool","file":"art_drawing_tool_index.html","category":"art","icon":"🖍️","desc":"Draw, doodle, and create freely.","tags":"art drawing tool"},{"id":"kindness","title":"Acts of Kindness","file":"feelings_act_of_kindness_index.html","category":"feelings","icon":"💛","desc":"Practice kind choices and caring actions.","tags":"feelings kindness empathy"},{"id":"feelings-game","title":"Feelings Game","file":"feelings_game_index.html","category":"feelings","icon":"🎭","desc":"Identify emotions in everyday situations.","tags":"feelings game emotions"},{"id":"noetic-emotions","title":"Noetic Emotions Explorer","file":"feelings_noetic_emotions_index.html","category":"feelings","icon":"🧠","desc":"Explore emotions, thoughts, and inner experiences gently.","tags":"feelings noetic emotions"},{"id":"joke-jar","title":"Joke Jar","file":"joke_jar_index.html","category":"wonder","icon":"😂","desc":"Open the jar for a child-friendly joke and giggle.","tags":"jokes humor language"},{"id":"math-cloud","title":"Pre-K Math Cloud","file":"math_cloud_index.html","category":"numbers","icon":"☁️","desc":"Travel through a complete early-math learning journey.","tags":"math numbers curriculum"},{"id":"piano","title":"Little Composer Piano","file":"music_piano_index.html","category":"music","icon":"🎹","desc":"Play rainbow keys, record melodies, and explore sound.","tags":"music piano composer"},{"id":"numbers-1-12","title":"Numbers 1–12 Fun","file":"numbers_1-12_fun_index.html","category":"numbers","icon":"1️⃣","desc":"Count and recognize numbers one through twelve.","tags":"numbers counting"},{"id":"numbers-drag","title":"Numbers Drag & Drop","file":"numbers_drag_n_drop_index.html","category":"numbers","icon":"🖐️","desc":"Drag numbers into order and matching spaces.","tags":"numbers drag drop"},{"id":"learn-word","title":"Learn a New Word","file":"reading_learnanewword_index.html","category":"words","icon":"💬","desc":"Discover one new word at a time.","tags":"reading vocabulary"},{"id":"sight-words","title":"Sight Words","file":"reading_sight_words_index.html","category":"words","icon":"👀","desc":"Practice common early-reading words.","tags":"reading sight words"},{"id":"shapes-game","title":"Shapes Game","file":"shapes_game_index.html","category":"numbers","icon":"🔺","desc":"Explore common shapes through colorful play.","tags":"shapes geometry"},{"id":"shapes-match","title":"Match the Shapes","file":"shapes_match_index.html","category":"numbers","icon":"🟦","desc":"Match shapes by form and color.","tags":"shapes matching"},{"id":"weather-tots","title":"Weather for Tots","file":"weather_for_tots_index.html","category":"wonder","icon":"🌦️","desc":"Meet sunshine, clouds, rain, snow, wind, and fog.","tags":"weather tots"},{"id":"weather-adventure","title":"Sunny's Weather Adventure","file":"weather_index.html","category":"wonder","icon":"☀️","desc":"Explore animated weather scenes with Sunny.","tags":"weather sunny adventure"},{"id":"moon-phase","title":"Sunny's Moon Adventure","file":"weather_moon_phase_index.html","category":"wonder","icon":"🌙","desc":"Explore the eight main lunar phases.","tags":"moon phases"},{"id":"solanar-weather","title":"Solanar Kid Weather","file":"weather_solonarium_index.html","category":"wonder","icon":"🌤️","desc":"See real current weather, hourly conditions, and a 7-day forecast.","tags":"weather real forecast solanar"},{"id":"wondercabinet","title":"The Wondercabinet","file":"wondercabinet_index.html","category":"wonder","icon":"🗝️","desc":"Open tiny drawers for words, tracing, stories, art, calm, music, and rewards.","tags":"wonder cabinet curiosity"},{"id":"abc-adventure-hub","title":"ABC Adventure Hub","file":"ABC_adventure_hub_index.html","category":"letters","icon":"🚪","desc":"Enter the central alphabet hub and choose from several letter-learning adventures.","tags":"abc alphabet adventure hub letters phonics portal"},{"id":"cosmic-arabic","title":"Cosmic Arabic Alphabet Quest","file":"cosmic_arabic_alphabet_quest_index.html","category":"letters","icon":"🌙","desc":"Explore all 28 Arabic letters through tracing, listening, matching, and a 42-week constellation journey.","tags":"arabic alphabet language tracing phonics multilingual cosmic"},{"id":"little-worlds","title":"Little Worlds Promenade","file":"little_worlds_promenade_index.html","category":"wonder","icon":"🎠","desc":"Visit imaginative little worlds filled with gentle discovery, play, and curiosity.","tags":"little worlds promenade imagination exploration wonder"}];
-const CATEGORIES={"all":{"label":"All Adventures","icon":"✨","a":"#7457ff","b":"#ef5bb8"},"letters":{"label":"ABC Rocket","icon":"🔤","a":"#ff526d","b":"#ff9d2e"},"words":{"label":"Words & Stories","icon":"📚","a":"#9a55e8","b":"#ef5bb8"},"numbers":{"label":"Numbers & Shapes","icon":"🔢","a":"#168fe5","b":"#22d0e8"},"art":{"label":"Little Art Studio","icon":"🎨","a":"#ff8a1f","b":"#ffd437"},"feelings":{"label":"Feelings Garden","icon":"💛","a":"#f14fa8","b":"#ff756c"},"life":{"label":"Life Skills Club","icon":"🏡","a":"#00ae88","b":"#8bd738"},"music":{"label":"Music & Movement","icon":"🎵","a":"#6b63ee","b":"#1ebfe8"},"movement":{"label":"Move & Groove","icon":"🦘","a":"#ff7a4f","b":"#ffd23f"},"wonder":{"label":"Weather & Wonder","icon":"🌎","a":"#08a987","b":"#48b8e8"},"grownup":{"label":"Grown-Up Corner","icon":"🧑‍🧒","a":"#4e5874","b":"#28324d"}};
+const PRESCHOOL_CATALOG=window.KhaemenesPreschoolCatalog;
+if(!PRESCHOOL_CATALOG){
+  throw new Error("Khaemenes Preschool shared catalog failed to load.");
+}
+const APPS=PRESCHOOL_CATALOG.activities;
+const CATEGORIES=PRESCHOOL_CATALOG.categories;
 const NEW_IDS=[
   "abc-story-time-folder",
   "art-color-studio-folder",
   "feelings-explorer-folder",
   "brush-teeth-folder",
-  "emotions-friendship-garden-folder",
   "sunny-abcs-folder",
   "storybird-folder",
   "wondercabinet",
-  "abc-adventure-hub",
-  "cosmic-arabic",
   "little-worlds"
 ];
 const NEW_PALETTES=[
@@ -704,6 +942,12 @@ const PROFILE_KEY="khaemenes_preschool_profile_v1";
 const PROFILE_FAVORITES_KEY="khaemenes_profile_favorites_v1";
 const PROFILE_VISITS_KEY="khaemenes_profile_visits_v1";
 const CONTINUITY_KEY="khaemenes_learning_continuity_v1";
+const LAST_OPEN_KEY="khaemenes_preschool_last_open_v1";
+const VIEW_KEY="khaemenes_preschool_view_v1";
+const MOTION_KEY="khaemenes_preschool_reduce_motion_v1";
+const MENTOR_PROGRESS_KEY="khaemenes_preschool_progress_v1";
+const MENTOR_SETTINGS_KEY="khaemenes_preschool_settings_v1";
+const MENTOR_PLAN_KEY="khaemenes_preschool_daily_plan_v1";
 const $=id=>document.getElementById(id);
 function readJSON(key,fallback){try{const value=localStorage.getItem(key);return value?JSON.parse(value):fallback}catch{return fallback}}
 function writeJSON(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}}
@@ -717,6 +961,8 @@ let profile=readJSON(PROFILE_KEY,null);
 let favoriteProfiles=readJSON(PROFILE_FAVORITES_KEY,{});
 let visitProfiles=readJSON(PROFILE_VISITS_KEY,{});
 let favoritesOnly=false,calm=readBool(CALM_KEY);
+let reduceMotion=readBool(MOTION_KEY);
+let currentView=readJSON(VIEW_KEY,"child")==="grownup"?"grownup":"child";
 function learnerKey(){return profile?.learnerId||"anonymous"}
 function loadScopedSet(map,legacyKey){
   if(!profile)return readSet(legacyKey);
@@ -759,7 +1005,7 @@ function renderNew(){
   const chosen=NEW_IDS.map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean);
   $("newGrid").innerHTML=chosen.map((app,index)=>{
     const [a,b]=NEW_PALETTES[index%NEW_PALETTES.length];
-    return `<article class="new-card" style="--new-a:${a};--new-b:${b}"><span class="new-icon" aria-hidden="true">${app.icon}</span><h3>${escapeHtml(app.title)}</h3><p>${escapeHtml(app.desc)}</p><a class="new-open" data-open-app="${app.id}" href="${appUrl(app)}">Open New Adventure →</a></article>`;
+    return `<article class="new-card" style="--new-a:${a};--new-b:${b}"><span class="new-icon" aria-hidden="true">${app.icon}</span><h3>${escapeHtml(displayTitle(app))}</h3><p>${escapeHtml(app.desc)}</p><a class="new-open" data-open-app="${app.id}" href="${appUrl(app)}">Open New Adventure →</a></article>`;
   }).join("");
   document.querySelectorAll("#newGrid [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
 }
@@ -769,10 +1015,24 @@ function buildCategories(){
   $("categoryGrid").innerHTML=Object.entries(CATEGORIES).filter(([key])=>!["all","grownup"].includes(key)).map(([key,data])=>`<button class="category-card" type="button" data-pick="${key}" style="background:linear-gradient(145deg,${data.a},${data.b})"><span>${data.icon}</span><strong>${escapeHtml(data.label)}</strong><small>${counts[key]||0} adventures</small></button>`).join("");
   document.querySelectorAll("[data-pick]").forEach(button=>button.addEventListener("click",()=>{favoritesOnly=false;$("category").value=button.dataset.pick;$("search").value="";updateFavorites();filterActivities();$("activities").scrollIntoView({behavior:"smooth"})}));
 }
+function stageBadge(app){
+  if(!profile||!app.mentor?.eligible)return "";
+  const fits=Array.isArray(app.mentor.ages)&&app.mentor.ages.includes(profile.ageBand);
+  return fits
+    ? '<span class="stage-badge fit">✓ Fits this learning stage</span>'
+    : '<span class="stage-badge together">Try together with a grown-up</span>';
+}
+function displayTitle(app){
+  return app.id==="sunny-abcs-file" ? `${app.title} · Classic` : app.title;
+}
 function renderActivities(){
-  $("activityGrid").innerHTML=KID_APPS.map(app=>`<article class="activity ${visited.has(app.id)?"visited":""}" data-id="${app.id}" data-category="${app.category}" data-search="${escapeHtml((app.title+" "+app.desc+" "+app.tags+" "+app.file+" "+catLabel(app.category)).toLowerCase())}" style="--category-color:${catColor(app.category)};--card-color:${catColor(app.category)}22"><div class="card-top"><span class="app-icon" aria-hidden="true">${app.icon}</span><button class="favorite" type="button" data-favorite="${app.id}" aria-label="Save ${escapeHtml(app.title)} as a favorite" aria-pressed="${favorites.has(app.id)}">${favorites.has(app.id)?"♥":"♡"}</button></div><p class="category-label">${escapeHtml(catLabel(app.category))}</p><h3>${escapeHtml(app.title)}</h3><p>${escapeHtml(app.desc)}</p><span class="visited-badge">Adventure visited ✓</span><div class="card-actions"><a class="open" data-open-app="${app.id}" href="${appUrl(app)}">Open Adventure</a></div></article>`).join("");
+  $("activityGrid").innerHTML=KID_APPS.map(app=>`<article class="activity ${visited.has(app.id)?"visited":""}" data-id="${app.id}" data-category="${app.category}" data-search="${escapeHtml((displayTitle(app)+" "+app.desc+" "+app.tags+" "+app.file+" "+catLabel(app.category)).toLowerCase())}" style="--category-color:${catColor(app.category)};--card-color:${catColor(app.category)}22"><div class="card-top"><span class="app-icon" aria-hidden="true">${app.icon}</span><button class="favorite" type="button" data-favorite="${app.id}" aria-label="Save ${escapeHtml(displayTitle(app))} as a favorite" aria-pressed="${favorites.has(app.id)}">${favorites.has(app.id)?"♥":"♡"}</button></div><p class="category-label">${escapeHtml(catLabel(app.category))}</p><h3>${escapeHtml(displayTitle(app))}</h3><p>${escapeHtml(app.desc)}</p>${stageBadge(app)}<span class="visited-badge">Adventure visited ✓</span><div class="card-actions"><a class="open" data-open-app="${app.id}" href="${appUrl(app)}">Open Adventure</a><button class="read-card" type="button" data-read-app="${app.id}" aria-label="Read about ${escapeHtml(displayTitle(app))}">🔊 Read</button></div></article>`).join("");
   document.querySelectorAll("[data-favorite]").forEach(button=>button.addEventListener("click",()=>toggleFavorite(button.dataset.favorite,button)));
   document.querySelectorAll("#activityGrid [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
+  document.querySelectorAll("#activityGrid [data-read-app]").forEach(button=>button.addEventListener("click",()=>{
+    const app=KID_APPS.find(item=>item.id===button.dataset.readApp);
+    if(app)speakText(`${displayTitle(app)}. ${app.desc}`);
+  }));
 }
 function toggleFavorite(id,button){
   const wasSaved=favorites.has(id);
@@ -783,14 +1043,30 @@ function toggleFavorite(id,button){
   updateFavorites();filterActivities();renderProfileCenter();
   if(!wasSaved)toast(profile?`Pinned to ${profile.nickname}’s child profile.`:"Saved on this device. Create a child profile to carry favorites forward.");
 }
-function markVisited(id){visited.add(id);persistVisits();updateProgress();renderProfileCenter()}
+function markVisited(id){
+  visited.add(id);
+  writeJSON(LAST_OPEN_KEY,{id,at:new Date().toISOString()});
+  persistVisits();
+  updateProgress();
+  renderProfileCenter();
+  renderLearnerHome();
+  renderAdventureTrail();
+  renderParentDashboard();
+}
 function updateFavorites(){$("favoriteCount").textContent=favorites.size;$("favoritesBtn").setAttribute("aria-pressed",String(favoritesOnly));$("starMeter").innerHTML=favorites.size?Array.from({length:Math.min(favorites.size,14)},()=>'<span class="saved-star">♥</span>').join(""):`<span class="empty-stars">No favorite adventures yet. Tap a heart below!</span>`}
 function updateProgress(){const count=KID_APPS.filter(app=>visited.has(app.id)).length;$("visitCount").textContent=`${count}/${KID_APPS.length}`;$("progressFill").style.width=`${Math.round(count/KID_APPS.length*100)}%`;document.querySelectorAll(".activity").forEach(card=>card.classList.toggle("visited",visited.has(card.dataset.id)))}
 function filterActivities(){const q=$("search").value.trim().toLowerCase(),category=$("category").value;let count=0;[...$("activityGrid").children].forEach(card=>{const visible=(category==="all"||card.dataset.category===category)&&(!q||card.dataset.search.includes(q))&&(!favoritesOnly||favorites.has(card.dataset.id));card.hidden=!visible;if(visible)count++});$("results").textContent=`${count} of ${KID_APPS.length} child adventures shown${favoritesOnly?" · favorites only":""}.`;$("empty").classList.toggle("show",count===0)}
 function chooseRandom(category){let pool=KID_APPS.filter(app=>!category||category==="all"||app.category===category);if(favoritesOnly)pool=pool.filter(app=>favorites.has(app.id));const app=pool[Math.floor(Math.random()*pool.length)];if(app){markVisited(app.id);toast("Opening a surprise adventure!");setTimeout(()=>location.href=appUrl(app),260)}else toast("No adventures are available in that selection.")}
 function setDaily(){const now=new Date(),day=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000),app=KID_APPS[day%KID_APPS.length];$("dailyTitle").textContent=app.icon+" "+app.title;$("dailyDesc").textContent=app.desc;$("dailyLink").href=appUrl(app);$("dailyLink").dataset.openApp=app.id;$("dailyLink").addEventListener("click",()=>markVisited(app.id))}
 function renderSites(){$("siteGrid").innerHTML=SITES.map(site=>`<a class="site-card ${site.status}" href="${site.url}"><div class="site-top"><span class="site-icon">${site.icon}</span><span class="status live">Open</span></div><h3>${escapeHtml(site.title)}</h3><p>${escapeHtml(site.desc)}</p><small>Open public landing page ↗</small></a>`).join("")}
-function buildMenu(query=""){const q=query.trim().toLowerCase(),appMatches=KID_APPS.filter(app=>!q||(app.title+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q)),grownMatches=GROWNUP_APPS.filter(app=>!q||(app.title+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q)),siteMatches=SITES.filter(site=>!q||(site.title+" "+site.desc).toLowerCase().includes(q));$("menuContent").innerHTML=`<p class="menu-group">Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div><p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+5}</p><div class="menu-list"><a class="menu-link" href="./mentor/index.html"><i>✨</i><span><strong>Guided Preschool &amp; AI Mentor</strong><small>Personal learning path</small></span><span>→</span></a><a class="menu-link" href="#profiles"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>↓</span></a><a class="menu-link" href="#profiles"><i>🧑‍🧒</i><span><strong>Parent Profile &amp; Controls</strong><small>Export, edit, and erase</small></span><span>↓</span></a><a class="menu-link" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No repositories matched.</small>"}</div>`}
+function buildMenu(query=""){
+  const q=query.trim().toLowerCase();
+  const appMatches=KID_APPS.filter(app=>!q||(displayTitle(app)+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q));
+  const grownMatches=GROWNUP_APPS.filter(app=>!q||(app.title+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q));
+  const siteMatches=SITES.filter(site=>!q||(site.title+" "+site.desc).toLowerCase().includes(q));
+  const familyFixed=8;
+  $("menuContent").innerHTML=`<p class="menu-group">Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(displayTitle(app))}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div><p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+familyFixed}</p><div class="menu-list"><a class="menu-link" data-close-menu href="./mentor/index.html"><i>✨</i><span><strong>Guided Preschool &amp; AI Mentor</strong><small>Personal learning path</small></span><span>→</span></a><button class="menu-link menu-action" type="button" data-menu-action="child-profile"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="parent-dashboard"><i>🧑‍🧒</i><span><strong>Parent Dashboard &amp; Controls</strong><small>Summary, export, edit, and erase</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="comfort"><i>🌤️</i><span><strong>Comfort &amp; Accessibility</strong><small>Calm colors, motion, and read-aloud</small></span><span>→</span></button><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_donate_index.html"><i>💝</i><span><strong>Support Crechè</strong><small>Support free early learning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" data-close-menu href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No repositories matched.</small>"}</div>`;
+}
 
 function mentorMatch(){return MENTOR_MATCHES[profile?.personality]||MENTOR_MATCHES.playful}
 function renderProfileCenter(){
@@ -810,6 +1086,9 @@ function renderProfileCenter(){
   $("profileVisitCount").textContent=`${visited.size} visited`;
   $("pinnedIntro").textContent=profile?`${profile.nickname}’s favorite Crechè games and learning adventures.`:"Anonymous device favorites are shown until a child profile is created.";
   renderPinnedGames();
+  renderLearnerHome();
+  renderParentDashboard();
+  renderAdventureTrail();
 }
 function renderPinnedGames(){
   const apps=[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean);
@@ -854,24 +1133,353 @@ function showPinnedInGarden(){
   favoritesOnly=true;$("category").value="all";$("search").value="";updateFavorites();filterActivities();$("activities").scrollIntoView({behavior:calm?"auto":"smooth"});
 }
 function exportFamilyRecord(){
-  const record={product:"Khaemenes Preschool · Crechè",version:"0.2.0",exportedAt:new Date().toISOString(),profile:safeProfile(),favorites:[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean),visited:[...visited],continuity:readJSON(CONTINUITY_KEY,null),note:"Local family-controlled educational continuity record. Not a formal grade."};
-  const blob=new Blob([JSON.stringify(record,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),link=document.createElement("a");
-  link.href=url;link.download=`khaemenes-${profile?.nickname?.toLowerCase().replace(/[^a-z0-9]+/g,"-")||"preschool"}-profile.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast("Family learning record exported.");
+  const mentorProgress=readJSON(MENTOR_PROGRESS_KEY,null);
+  const mentorSettings=readJSON(MENTOR_SETTINGS_KEY,null);
+  const mentorPlan=readJSON(MENTOR_PLAN_KEY,null);
+  const record={
+    product:"Khaemenes Preschool · Crechè Family Home",
+    version:"0.3.0",
+    exportedAt:new Date().toISOString(),
+    profile:safeProfile(),
+    favorites:[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean),
+    visited:[...visited],
+    lastOpened:readJSON(LAST_OPEN_KEY,null),
+    continuity:readJSON(CONTINUITY_KEY,null),
+    guidedPreschool:{progress:mentorProgress,settings:mentorSettings,dailyPlan:mentorPlan},
+    note:"Family-controlled local educational continuity record. Not a formal grade."
+  };
+  const blob=new Blob([JSON.stringify(record,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),link=document.createElement("a");
+  link.href=url;
+  link.download=`khaemenes-${profile?.nickname?.toLowerCase().replace(/[^a-z0-9]+/g,"-")||"preschool"}-profile.json`;
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  toast("Full preschool learning record exported.");
 }
 function eraseFamilyRecord(){
-  if(!confirm("Erase the active child profile, its pinned games, visits, and continuity record from this browser?"))return;
+  if(!confirm("Erase the active child profile, pinned games, visits, continuity record, Guided Preschool progress, daily plan, mentor settings, and mentor memory from this browser?"))return;
   const id=learnerKey();
-  if(profile){delete favoriteProfiles[id];delete visitProfiles[id];writeJSON(PROFILE_FAVORITES_KEY,favoriteProfiles);writeJSON(PROFILE_VISITS_KEY,visitProfiles)}
-  localStorage.removeItem(PROFILE_KEY);localStorage.removeItem(CONTINUITY_KEY);
-  profile=null;favorites=readSet(FAVORITES_KEY);visited=readSet(VISITS_KEY);
-  renderActivities();updateFavorites();updateProgress();filterActivities();renderProfileCenter();buildMenu();toast("Child profile and profile-linked progress erased.");
+  if(profile){
+    delete favoriteProfiles[id];
+    delete visitProfiles[id];
+    writeJSON(PROFILE_FAVORITES_KEY,favoriteProfiles);
+    writeJSON(PROFILE_VISITS_KEY,visitProfiles);
+    try{localStorage.removeItem(`creche_mentor_memory_${id}`)}catch{}
+  }
+  [
+    PROFILE_KEY,CONTINUITY_KEY,LAST_OPEN_KEY,
+    MENTOR_PROGRESS_KEY,MENTOR_SETTINGS_KEY,MENTOR_PLAN_KEY
+  ].forEach(key=>localStorage.removeItem(key));
+  profile=null;
+  favorites=readSet(FAVORITES_KEY);
+  visited=readSet(VISITS_KEY);
+  renderActivities();
+  updateFavorites();
+  updateProgress();
+  filterActivities();
+  renderProfileCenter();
+  buildMenu();
+  toast("Active child and Guided Preschool records erased from this browser.");
+}
+
+
+const OFFSCREEN_PROMPTS={
+  letters:[
+    "Find something nearby that begins with the same sound as your name.",
+    "Choose a letter and draw it in the air with your finger.",
+    "Ask a grown-up to say three words. Clap when you hear two that start alike."
+  ],
+  words:[
+    "Pick an object and make up one silly sentence about it.",
+    "Tell a grown-up the beginning of a tiny story. Let them add the next part.",
+    "Find a picture and name three things you notice in it."
+  ],
+  numbers:[
+    "Find five things you can count together.",
+    "Look for three circles, squares, or rectangles around you.",
+    "Make two little groups of objects. Which group has more?"
+  ],
+  art:[
+    "Draw the silliest animal you can imagine.",
+    "Find three colors around you and name them.",
+    "Make a tiny picture using only lines, dots, and circles."
+  ],
+  feelings:[
+    "Show a grown-up a happy face, a worried face, and a surprised face.",
+    "Name one kind thing you can do for someone today.",
+    "Put one hand on your belly and take three slow breaths together."
+  ],
+  life:[
+    "Choose one tiny helping job you can do with a grown-up.",
+    "Put three things back where they belong.",
+    "Practice one step of a healthy routine together."
+  ],
+  music:[
+    "Clap a short rhythm and ask someone to copy it.",
+    "Make three different sounds using safe objects around you.",
+    "Hum a tiny tune, then make it faster or slower."
+  ],
+  movement:[
+    "Hop three times, stretch tall, then wiggle your fingers.",
+    "Walk like three different animals across the room.",
+    "Reach high, touch low, turn around slowly, then take a water break."
+  ],
+  wonder:[
+    "Look outside. What colors do you notice in the sky or trees?",
+    "Find something rough and something smooth.",
+    "Ask one curious question about something you can see."
+  ]
+};
+const FAMILY_IDEAS=[
+  "Choose one favorite adventure and ask the child to show you one thing they noticed.",
+  "Let the child teach you something from today’s activity—even if the explanation is wonderfully imperfect.",
+  "Pair one screen activity with one movement or real-world activity.",
+  "Ask: “What felt easy, what felt new, and what would you like to do again?”",
+  "Celebrate effort with a specific observation such as, “You kept trying when that was new.”"
+];
+function todayLocalKey(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function speakText(text){
+  if(!("speechSynthesis" in window)){toast("Read-aloud is not available in this browser.");return}
+  speechSynthesis.cancel();
+  const utterance=new SpeechSynthesisUtterance(String(text||"").replace(/[“”]/g,""));
+  utterance.rate=.88;
+  utterance.pitch=1.05;
+  speechSynthesis.speak(utterance);
+}
+function renderTicker(){
+  const chosen=NEW_IDS.map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean);
+  const oneSet=()=>`<div class="ticker-set"><span class="ticker-title">Crechè Featured Adventures</span>${chosen.map(app=>`<a class="ticker-link" data-open-app="${app.id}" href="${appUrl(app)}">${escapeHtml(displayTitle(app))}</a>`).join("")}</div>`;
+  const twoSet=()=>`<div class="ticker-set" aria-hidden="true"><span class="ticker-title">Crechè Featured Adventures</span>${chosen.map(app=>`<a class="ticker-link" tabindex="-1" data-open-app="${app.id}" href="${appUrl(app)}">${escapeHtml(displayTitle(app))}</a>`).join("")}</div>`;
+  $("tickerTrack").innerHTML=oneSet()+twoSet();
+  document.querySelectorAll("#tickerTrack [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
+}
+function setView(view,{scroll=false}={}){
+  currentView=view==="grownup"?"grownup":"child";
+  document.body.dataset.view=currentView;
+  writeJSON(VIEW_KEY,currentView);
+  document.querySelectorAll("[data-view-choice]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.viewChoice===currentView)));
+  if(scroll){
+    const target=currentView==="grownup"?$("parentDashboard"):$("myHome");
+    target?.scrollIntoView({behavior:reduceMotion||calm?"auto":"smooth",block:"start"});
+  }
+}
+function setReducedMotion(value){
+  reduceMotion=Boolean(value);
+  document.body.classList.toggle("reduce-motion",reduceMotion);
+  writeBool(MOTION_KEY,reduceMotion);
+  $("motionBtn").setAttribute("aria-pressed",String(reduceMotion));
+  $("motionBtn").textContent=reduceMotion?"✨ Allow gentle movement":"🫧 Reduce movement";
+  renderParentDashboard();
+}
+function randomPromptCategory(){
+  if(profile){
+    const interestToCategory={stories:"words",numbers:"numbers",art:"art",music:"music",nature:"wonder",movement:"movement",helping:"life",space:"wonder"};
+    const choices=(profile.interests||[]).map(i=>interestToCategory[i]).filter(Boolean);
+    if(choices.length)return choices[Math.floor(Math.random()*choices.length)];
+  }
+  const cats=Object.keys(OFFSCREEN_PROMPTS);
+  return cats[Math.floor(Math.random()*cats.length)];
+}
+function chooseOffscreenPrompt(){
+  const category=randomPromptCategory();
+  const prompts=OFFSCREEN_PROMPTS[category]||OFFSCREEN_PROMPTS.wonder;
+  const prompt=prompts[Math.floor(Math.random()*prompts.length)];
+  const data=CATEGORIES[category]||{icon:"🌿",label:"Little Adventure"};
+  $("awayTitle").textContent=`${data.icon} ${data.label}`;
+  $("awayPrompt").textContent=prompt;
+  return prompt;
+}
+function mentorPlanData(){
+  const plan=readJSON(MENTOR_PLAN_KEY,null);
+  const progress=readJSON(MENTOR_PROGRESS_KEY,{days:{}});
+  if(!profile||!plan||plan.learnerId!==profile.learnerId||plan.date!==todayLocalKey()||!Array.isArray(plan.ids))return null;
+  const completed=new Set(progress?.days?.[todayLocalKey()]||[]);
+  const items=plan.ids.map(id=>{
+    const app=PRESCHOOL_CATALOG.byMentorId(id)||PRESCHOOL_CATALOG.byId(id);
+    if(!app)return null;
+    return {id,app,done:completed.has(id)};
+  }).filter(Boolean);
+  return {plan,items,completed};
+}
+function renderMentorPlanPreview(){
+  const data=mentorPlanData();
+  if(!profile){
+    $("mentorPlanTitle").textContent="A balanced little day";
+    $("mentorPlanIntro").textContent="Create a child profile, then Guided Preschool can prepare today’s short learning path.";
+    $("mentorPlanPreview").innerHTML='<div class="mini-plan-empty">No learner profile yet.</div>';
+    return;
+  }
+  const mentor=mentorMatch();
+  if(!data||!data.items.length){
+    $("mentorPlanTitle").textContent=`${mentor.name} can plan today with ${profile.nickname}`;
+    $("mentorPlanIntro").textContent="Open Guided Preschool once to create today’s balanced, age-aware learning path.";
+    $("mentorPlanPreview").innerHTML='<div class="mini-plan-empty">Today’s guided path has not been created yet.</div>';
+    return;
+  }
+  const done=data.items.filter(item=>item.done).length;
+  $("mentorPlanTitle").textContent=`${profile.nickname} + ${mentor.name} · ${done} of ${data.items.length} complete`;
+  $("mentorPlanIntro").textContent=`Today’s ${data.plan.energy||"ready"}-energy path is shared directly from the Guided Preschool Mentor.`;
+  $("mentorPlanPreview").innerHTML=data.items.map((item,index)=>`<div class="mini-station ${item.done?"done":""}"><span>${item.done?"✓":index+1}</span><i>${item.app.icon}</i><strong>${escapeHtml(displayTitle(item.app))}</strong></div>`).join("");
+}
+function renderLearnerHome(){
+  const mentor=mentorMatch();
+  if(profile){
+    const hour=new Date().getHours();
+    const greeting=hour<12?"Good morning":hour<17?"Good afternoon":"Hello";
+    $("homeKicker").textContent=`${greeting}, ${profile.nickname}`;
+    $("myHomeTitle").textContent=`${profile.nickname}’s Crechè home`;
+    $("myHomeIntro").textContent=`Favorites, explored adventures, and ${mentor.name}’s guided learning path stay connected to this local child profile.`;
+    $("homeMentorAvatar").textContent=mentor.avatar;
+    $("homeMentorName").textContent=`${mentor.name} · ${profile.nickname}’s mentor`;
+    $("homeMentorMessage").textContent=`${mentor.name} can help ${profile.nickname} choose a short, balanced learning path for the ${profile.ageBand} stage.`;
+    $("homeMentorLink").textContent="Open My Mentor →";
+    $("heroEyebrow").textContent=`${mentor.avatar} ${greeting}, ${profile.nickname} · ${mentor.name} is here too`;
+    $("heroLead").textContent=`Welcome back to a joyful preschool world built around ${profile.nickname}’s curiosity. Continue an adventure, visit a favorite, or let ${mentor.name} guide today’s learning path.`;
+  }else{
+    $("homeKicker").textContent="My Crechè Home";
+    $("myHomeTitle").textContent="A little home base for today.";
+    $("myHomeIntro").textContent="Create a child profile with a grown-up and Crechè can remember favorites, adventures explored, and the child’s mentor match on this browser.";
+    $("homeMentorAvatar").textContent="✨";
+    $("homeMentorName").textContent="Your mentor is waiting";
+    $("homeMentorMessage").textContent="A grown-up can help create your profile, then your mentor will prepare a short, balanced learning path.";
+    $("homeMentorLink").textContent="Meet My Mentor →";
+    $("heroEyebrow").textContent="🌟 A colorful first doorway to learning";
+    $("heroLead").textContent="A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.";
+  }
+  const last=readJSON(LAST_OPEN_KEY,null);
+  const lastApp=last?.id?KID_APPS.find(app=>app.id===last.id):null;
+  if(lastApp){
+    $("continueIcon").textContent=lastApp.icon;
+    $("continueTitle").textContent=displayTitle(lastApp);
+    $("continueDesc").textContent=`Continue the last adventure opened on this browser. ${lastApp.desc}`;
+    $("continueLink").href=appUrl(lastApp);
+    $("continueLink").dataset.continueApp=lastApp.id;
+    $("continueLink").textContent="Continue Adventure →";
+  }else{
+    $("continueIcon").textContent="🎈";
+    $("continueTitle").textContent="Choose your first adventure";
+    $("continueDesc").textContent="Every place you open becomes part of your local Adventure Trail.";
+    $("continueLink").href="#rooms";
+    delete $("continueLink").dataset.continueApp;
+    $("continueLink").textContent="Choose a Room →";
+  }
+  $("homeVisitedCount").textContent=KID_APPS.filter(app=>visited.has(app.id)).length;
+  $("homeFavoriteCount").textContent=favorites.size;
+  $("homeCalmBtn").setAttribute("aria-pressed",String(calm));
+  $("homeCalmBtn").textContent=calm?"🎨 Bright colors":"🌤️ Calm colors";
+  renderMentorPlanPreview();
+}
+function renderAdventureTrail(){
+  if(!$("trailGrid"))return;
+  const trailCategories=Object.entries(CATEGORIES).filter(([key])=>!["all","grownup"].includes(key));
+  $("trailGrid").innerHTML=trailCategories.map(([key,data])=>{
+    const apps=KID_APPS.filter(app=>app.category===key);
+    const count=apps.filter(app=>visited.has(app.id)).length;
+    const lit=count>0;
+    const pct=apps.length?Math.round(count/apps.length*100):0;
+    return `<button class="trail-stop ${lit?"lit":""}" type="button" data-trail-category="${key}" style="--trail-a:${data.a};--trail-b:${data.b};--trail-p:${pct}%"><span class="trail-icon">${data.icon}</span><strong>${escapeHtml(data.label)}</strong><small>${count} of ${apps.length} explored</small><span class="trail-meter"><i></i></span></button>`;
+  }).join("");
+  document.querySelectorAll("[data-trail-category]").forEach(button=>button.addEventListener("click",()=>{
+    favoritesOnly=false;
+    $("category").value=button.dataset.trailCategory;
+    $("search").value="";
+    updateFavorites();
+    filterActivities();
+    $("activities").scrollIntoView({behavior:reduceMotion||calm?"auto":"smooth"});
+  }));
+  const roomsStarted=trailCategories.filter(([key])=>KID_APPS.some(app=>app.category===key&&visited.has(app.id))).length;
+  $("trailCelebration").textContent=roomsStarted===0
+    ?"Open any adventure and the trail will begin to glow."
+    :roomsStarted===trailCategories.length
+      ?"🌟 Every adventure room has been explored at least once. What a wonderfully curious trail!"
+      :`🌈 ${roomsStarted} of ${trailCategories.length} adventure rooms have begun to glow.`;
+}
+function topVisitedRoom(){
+  const counts={};
+  for(const id of visited){
+    const app=KID_APPS.find(item=>item.id===id);
+    if(app)counts[app.category]=(counts[app.category]||0)+1;
+  }
+  const best=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
+  return best?CATEGORIES[best[0]]?.label||best[0]:"Not enough visits yet";
+}
+function renderParentDashboard(){
+  if(!$("parentDashboard"))return;
+  const mentor=mentorMatch();
+  const explored=KID_APPS.filter(app=>visited.has(app.id)).length;
+  const data=mentorPlanData();
+  if(profile){
+    $("dashboardIntro").textContent=`A local snapshot for ${profile.nickname}. This summary stays in this browser unless a grown-up exports it.`;
+    $("dashMentorIcon").textContent=mentor.avatar;
+    $("dashMentor").textContent=mentor.name;
+    $("dashStage").textContent=`Ages ${profile.ageBand}`;
+  }else{
+    $("dashboardIntro").textContent="Create a child profile to see a simple family-controlled learning summary.";
+    $("dashMentorIcon").textContent="✨";
+    $("dashMentor").textContent="No mentor yet";
+    $("dashStage").textContent="Not set";
+  }
+  $("dashExplored").textContent=`${explored} of ${KID_APPS.length}`;
+  $("dashFavorites").textContent=String(favorites.size);
+  $("dashTopRoom").textContent=topVisitedRoom();
+  $("dashToday").textContent=data?`${data.items.filter(item=>item.done).length} of ${data.items.length} stations complete`:"No mentor path yet";
+  $("dashboardCalm").textContent=calm?"🎨 Use Bright Colors":"🌤️ Calm Colors";
+  $("dashboardCalm").setAttribute("aria-pressed",String(calm));
+  $("dashboardMotion").textContent=reduceMotion?"✨ Allow Gentle Movement":"🫧 Reduce Movement";
+  $("dashboardMotion").setAttribute("aria-pressed",String(reduceMotion));
+  const day=Math.floor(Date.now()/86400000);
+  $("familyIdea").textContent=FAMILY_IDEAS[day%FAMILY_IDEAS.length];
+}
+function scrollToParentDashboard(){
+  setView("grownup");
+  $("parentDashboard")?.scrollIntoView({behavior:reduceMotion||calm?"auto":"smooth",block:"start"});
+}
+function focusableWithin(root){
+  return [...root.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(el=>!el.hidden&&el.offsetParent!==null);
+}
+function trapFocus(event,root){
+  if(event.key!=="Tab")return;
+  const items=focusableWithin(root);
+  if(!items.length)return;
+  const first=items[0],last=items[items.length-1];
+  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
 }
 
 function openMenu(){$("menuOverlay").classList.add("open");$("menuOverlay").setAttribute("aria-hidden","false");$("menuBtn").setAttribute("aria-expanded","true");document.body.classList.add("menu-open");setTimeout(()=>$("menuSearch").focus(),80)}
 function closeMenu(){$("menuOverlay").classList.remove("open");$("menuOverlay").setAttribute("aria-hidden","true");$("menuBtn").setAttribute("aria-expanded","false");document.body.classList.remove("menu-open")}
-function setCalm(value){calm=value;document.body.classList.toggle("calm",calm);$("calmBtn").setAttribute("aria-pressed",String(calm));$("calmBtn").textContent=calm?"🎨 Animated Visual Mode":"🌤️ Calm Visual Mode";writeBool(CALM_KEY,calm)}
+function setCalm(value){
+  calm=value;
+  document.body.classList.toggle("calm",calm);
+  $("calmBtn").setAttribute("aria-pressed",String(calm));
+  $("calmBtn").textContent=calm?"🎨 Animated Visual Mode":"🌤️ Calm Visual Mode";
+  $("homeCalmBtn").setAttribute("aria-pressed",String(calm));
+  $("homeCalmBtn").textContent=calm?"🎨 Bright colors":"🌤️ Calm colors";
+  writeBool(CALM_KEY,calm);
+  renderParentDashboard();
+}
 $("heroKidCount").textContent=KID_APPS.length;
-migrateLegacyProfileData();syncContinuity();renderNew();buildCategories();renderActivities();renderSites();buildMenu();updateFavorites();updateProgress();filterActivities();setDaily();setCalm(calm);renderProfileCenter();$("year").textContent=new Date().getFullYear();
+migrateLegacyProfileData();
+syncContinuity();
+renderTicker();
+renderNew();
+buildCategories();
+renderActivities();
+renderSites();
+buildMenu();
+updateFavorites();
+updateProgress();
+filterActivities();
+setDaily();
+setCalm(calm);
+setReducedMotion(reduceMotion);
+setView(currentView);
+renderProfileCenter();
+chooseOffscreenPrompt();
+$("year").textContent=new Date().getFullYear();
 const ticker=$("learningTicker"),tickerToggle=$("tickerToggle");
 tickerToggle.addEventListener("click",()=>{
   const paused=ticker.dataset.paused!=="true";
@@ -884,10 +1492,41 @@ $("search").addEventListener("input",filterActivities);$("category").addEventLis
 $("favoritesBtn").addEventListener("click",()=>{favoritesOnly=!favoritesOnly;updateFavorites();filterActivities()});
 $("randomBtn").addEventListener("click",()=>chooseRandom($("category").value));$("surpriseHero").addEventListener("click",()=>chooseRandom());$("orbitRandom").addEventListener("click",()=>chooseRandom());
 $("calmBtn").addEventListener("click",()=>setCalm(!calm));$("menuBtn").addEventListener("click",openMenu);$("closeMenu").addEventListener("click",closeMenu);
-$("menuOverlay").addEventListener("click",event=>{if(event.target===$("menuOverlay"))closeMenu()});$("menuSearch").addEventListener("input",event=>buildMenu(event.target.value));
+$("childViewBtn").addEventListener("click",()=>setView("child",{scroll:true}));
+$("grownupViewBtn").addEventListener("click",()=>setView("grownup",{scroll:true}));
+$("homeSurprise").addEventListener("click",()=>chooseRandom());
+$("homeCalmBtn").addEventListener("click",()=>setCalm(!calm));
+$("motionBtn").addEventListener("click",()=>setReducedMotion(!reduceMotion));
+$("readHomeMentor").addEventListener("click",()=>speakText($("homeMentorMessage").textContent));
+$("newAwayPrompt").addEventListener("click",()=>{chooseOffscreenPrompt();toast("A new off-screen adventure is ready.")});
+$("readAwayPrompt").addEventListener("click",()=>speakText($("awayPrompt").textContent));
+$("continueLink").addEventListener("click",()=>{const id=$("continueLink").dataset.continueApp;if(id)markVisited(id)});
+$("dashboardEditProfile").addEventListener("click",openProfileDialog);
+$("dashboardExport").addEventListener("click",exportFamilyRecord);
+$("childProfileCard").addEventListener("click",openProfileDialog);
+$("parentProfileCard").addEventListener("click",scrollToParentDashboard);
+$("parentAccessibilityCard").addEventListener("click",scrollToParentDashboard);
+$("dashboardCalm").addEventListener("click",()=>setCalm(!calm));
+$("dashboardMotion").addEventListener("click",()=>setReducedMotion(!reduceMotion));
+$("menuOverlay").addEventListener("click",event=>{
+  if(event.target===$("menuOverlay")){closeMenu();return}
+  const action=event.target.closest("[data-menu-action]");
+  if(action){
+    const kind=action.dataset.menuAction;
+    closeMenu();
+    if(kind==="child-profile")openProfileDialog();
+    else if(kind==="parent-dashboard")scrollToParentDashboard();
+    else if(kind==="comfort")scrollToParentDashboard()
+    return;
+  }
+  if(event.target.closest("[data-close-menu]"))closeMenu();
+});
+$("menuSearch").addEventListener("input",event=>buildMenu(event.target.value));
+$("menuOverlay").addEventListener("keydown",event=>{if($("menuOverlay").classList.contains("open"))trapFocus(event,$("drawer")||$("menuOverlay"))});
 $("openChildProfile").addEventListener("click",openProfileDialog);$("editProfileFromParent").addEventListener("click",openProfileDialog);
 $("closeProfile").addEventListener("click",closeProfileDialog);$("cancelProfile").addEventListener("click",closeProfileDialog);$("saveChildProfile").addEventListener("click",saveProfile);
 $("profileOverlay").addEventListener("click",event=>{if(event.target===$("profileOverlay"))closeProfileDialog()});
+$("profileOverlay").addEventListener("keydown",event=>{if($("profileOverlay").classList.contains("open"))trapFocus(event,$("profileOverlay"))});
 $("showProfileFavorites").addEventListener("click",showPinnedInGarden);$("managePinnedGames").addEventListener("click",()=>{$("activities").scrollIntoView({behavior:calm?"auto":"smooth"})});
 $("exportFamilyData").addEventListener("click",exportFamilyRecord);$("eraseFamilyData").addEventListener("click",eraseFamilyRecord);
 document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeMenu();closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
