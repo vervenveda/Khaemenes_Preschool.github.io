@@ -1,37 +1,22 @@
-KHAEMENES PRESCHOOL · CRECHÈ OPEN-ACCESS + GUEST MENTOR UPDATE
+CRECHÈ RICH PUBLIC RESTORATION v3
 
-Upload these THREE files into the existing repository:
+This package restores the rich, animated Preschool experience rather than replacing it.
 
+UPLOAD THESE FOUR FILES:
 Khaemenes_Preschool.github.io/
 ├── index.html
+├── assets/
+│   └── preschool-catalog.js
 ├── mentor/
 │   └── index.html
 └── mentor-manifest.json
 
-DO NOT DELETE OR MOVE:
-- apps/
-- assets/preschool-catalog.js
-- any of the 52 child adventure targets
-- existing validation/audit files
-
-WHAT CHANGES
-------------
-1. Games/apps/stories/art/music/movement/wonder remain open to everyone.
-2. Favorites work browser-locally with no child registration.
-3. Khaemenes Mentor is explicitly open in Guest Mode.
-4. Guest Mentor uses sessionStorage only for temporary age/style/energy/interest choices.
-5. Guest Mentor does not create a learnerId, family account, academic record, transcript, grade, or permanent mentor-memory claim.
-6. Existing registered learners may be recognized if a Family Registry is already active, but registration is optional for Mentor use.
-7. Registration is clearly reserved for formal curriculum pathways requiring persistent progress, assessments, portfolio, certification, or cross-grade records.
-8. The page continues to consume the existing shared preschool catalog, so the 52 game/app routes remain their current source of truth.
-
-CURRENT LIVE CATALOG BASELINE
------------------------------
-53 total catalog entries
-52 child adventures
-1 grown-up entry
-36 mentor-eligible activities
-unique canonical IDs: true
-unique files: true
-valid mentor age bands: true
-valid mentor energy levels: true
+IMPORTANT:
+- DO NOT delete /apps/
+- DO NOT move or rename any adventure file.
+- The root page is based on the intact rich Crechè Family Home (animated ticker, rainbow hero, orbit buttons, learner home, Adventure Rooms, Today’s Pick, all 52 adventures, trail, child/grown-up modes, family dashboard).
+- The mentor is based on the intact full Guided Preschool Mentor (Pip/Miri/Nova/Sage, balanced path logic, feelings check-in, hints, play, read-aloud, Family Guide, local-safe fallback).
+- Guest Mentor is public and requires no registration.
+- Guest progress/settings/plan use sessionStorage and are not academic records.
+- Optional learner profile remains available for formal curriculum continuity.
+- Academy-wide Family/Learner Registration is only for formal curricula that need persistent assessments, portfolios, certification, transcripts/records, or cross-grade continuity.

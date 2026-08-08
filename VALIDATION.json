@@ -1,29 +1,36 @@
 {
-  "release": "Crech\u00e8 Open Access + Guest Mentor v1",
+  "release": "Crech\u00e8 Rich Public Restoration v3",
   "valid": true,
-  "catalogBaseline": {
-    "total": 53,
-    "child": 52,
-    "grownup": 1,
-    "mentorEligible": 36
+  "restorationBase": {
+    "home": "Khaemenes_Preschool_Creche_Family_Home_v3.html",
+    "mentor": "Khaemenes_Preschool_Mentor_v2_Final.html",
+    "catalog": "Khaemenes Preschool Shared Catalog v1.0.0"
   },
-  "accessPolicy": {
-    "gamesApps": "open-no-registration",
-    "guestMentor": "open-no-registration",
-    "favorites": "browser-local-no-registration",
+  "policy": {
+    "gamesApps": "public",
+    "mentor": "public-guest-mode",
+    "favorites": "public-browser-local",
     "formalCurriculumRecords": "registration-required"
   },
   "checks": {
-    "catalogNotDuplicated": true,
-    "openGamesWording": true,
-    "guestMentorWording": true,
-    "guestUsesSessionStorage": true,
-    "guestDoesNotWriteLearnerId": true,
-    "formalRegistrationSeparated": true,
-    "familyRegistrationLink": true,
-    "manifestOpenAdventure": true,
-    "manifestOpenMentor": true,
-    "manifestFormalGate": true
+    "richAnimatedTicker": true,
+    "richRainbowHero": true,
+    "adventureRooms": true,
+    "todaysPick": true,
+    "allAdventureGarden": true,
+    "public52Count": true,
+    "anonymousFavorites": true,
+    "familyRegistryConnected": true,
+    "catalogRestored": true,
+    "fullMentorUI": true,
+    "pipMiriNovaSage": true,
+    "mentorHints": true,
+    "mentorReadAloud": true,
+    "guestMode": true,
+    "guestSessionStorage": true,
+    "guestNoAgentMemory": true,
+    "formalRegistrationOptional": true,
+    "manifestPolicy": true
   },
   "issues": []
 }
