@@ -735,6 +735,104 @@ body.anchor-scrolling .header{
   :root{--mentor-anchor-offset:238px}
 }
 
+
+
+/* ===========================================================
+   v7 · Curriculum + NOEMA-coordinated learning layer
+   =========================================================== */
+.curriculum-section{
+  background:
+    radial-gradient(circle at 10% 10%,rgba(246,191,58,.20),transparent 22rem),
+    radial-gradient(circle at 90% 18%,rgba(66,199,220,.16),transparent 25rem),
+    linear-gradient(180deg,#fffdf6,#f5fbff);
+  border-block:1px solid var(--line);
+}
+.curriculum-shell{display:grid;gap:16px}
+.curriculum-current{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:16px;
+  padding:22px;border:1px solid var(--line);border-radius:var(--r21);background:#fff;box-shadow:var(--shadow)
+}
+.curriculum-kicker{color:var(--violet);font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.curriculum-current h3{margin:7px 0 0;color:var(--navy);font-family:var(--serif);font-size:clamp(1.65rem,3vw,2.45rem);line-height:1.08}
+.curriculum-current p{margin:9px 0 0;color:var(--muted)}
+.curriculum-week{display:inline-flex;margin-top:11px;padding:6px 9px;border-radius:999px;background:#eef6ff;color:#285b83;font-size:.75rem;font-weight:850}
+.curriculum-objectives{display:grid;gap:7px;margin:14px 0 0;padding:0;list-style:none}
+.curriculum-objectives li{display:flex;align-items:flex-start;gap:8px;color:#4f6278;font-size:.84rem}
+.curriculum-objectives li::before{content:"✓";flex:0 0 auto;color:var(--green);font-weight:950}
+.curriculum-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.curriculum-btn{
+  min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:.65rem .82rem;
+  border:1px solid var(--line);border-radius:999px;background:#fff;color:#4b4688;font-size:.78rem;font-weight:900;text-decoration:none
+}
+.curriculum-btn.primary{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--violet),var(--rose))}
+.curriculum-btn:hover{transform:translateY(-2px);box-shadow:var(--soft)}
+.curriculum-companions{padding:18px;border:1px solid var(--line);border-radius:var(--r21);background:linear-gradient(145deg,#edf9ff,#fff9e8)}
+.curriculum-companions h4{margin:0;color:var(--navy);font-family:var(--serif);font-size:1.25rem}
+.curriculum-companions>p{margin:6px 0 12px;color:var(--muted);font-size:.79rem}
+.unit-apps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.unit-app{
+  min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:9px;align-items:center;padding:10px;
+  border:1px solid var(--line);border-radius:14px;background:#fff;text-decoration:none;box-shadow:0 6px 16px rgba(23,54,96,.06)
+}
+.unit-app:hover{transform:translateY(-2px);box-shadow:var(--soft)}
+.unit-app i{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:#f1edff;font-style:normal;font-size:1.25rem}
+.unit-app strong{display:block;min-width:0;color:#3f4670;font-size:.78rem;line-height:1.2;overflow-wrap:anywhere}
+.unit-app small{display:block;margin-top:3px;color:var(--muted);font-size:.64rem;line-height:1.25}
+.noema-band{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:13px;align-items:center;padding:15px 17px;
+  border:1px solid rgba(23,54,96,.14);border-radius:var(--r21);background:linear-gradient(135deg,#173660,#244d7a 62%,#1b7783);color:#fff;box-shadow:var(--soft)
+}
+.noema-mark{width:52px;height:52px;display:grid;place-items:center;border:2px solid rgba(255,255,255,.72);border-radius:50%;background:rgba(255,255,255,.11);font-family:var(--serif);font-size:1.25rem;font-weight:900}
+.noema-band strong{display:block;color:#fff;font-family:var(--serif);font-size:1.08rem}
+.noema-band span{display:block;margin-top:3px;color:#d9eaf5;font-size:.75rem;line-height:1.45}
+.noema-band .curriculum-btn{white-space:nowrap;color:#173660;background:#ffe39a;border-color:transparent}
+.unit-badge{background:#f1edff!important;color:#5a4799!important}
+.curriculum-progress-note{margin-top:9px;color:#66768a;font-size:.72rem}
+
+.curriculum-overlay{
+  position:fixed;inset:0;z-index:1500;display:grid;place-items:center;padding:16px;visibility:hidden;opacity:0;
+  background:rgba(14,31,57,.74);backdrop-filter:blur(10px);transition:.18s
+}
+.curriculum-overlay.open{visibility:visible;opacity:1}
+.curriculum-dialog{width:min(1050px,100%);max-height:calc(100svh - 32px);overflow:auto;border:3px solid rgba(255,255,255,.92);border-radius:28px;background:#fffdf7;box-shadow:0 28px 90px rgba(0,0,0,.36)}
+.curriculum-dialog-head{position:sticky;top:0;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:20px 22px;color:#fff;background:linear-gradient(135deg,#173660,#7254d8 68%,#e95ca8)}
+.curriculum-dialog-head h2{margin:0;color:#fff;font-family:var(--serif);font-size:clamp(1.55rem,3vw,2.2rem)}
+.curriculum-dialog-head p{margin:5px 0 0;color:#e7e5ff;font-size:.78rem}
+.curriculum-close{width:44px;height:44px;flex:0 0 44px;border:1px solid rgba(255,255,255,.25);border-radius:14px;color:#fff;background:rgba(255,255,255,.1);font-size:1.3rem}
+.curriculum-dialog-body{padding:20px}
+.curriculum-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.curriculum-unit{
+  min-height:270px;display:flex;flex-direction:column;padding:17px;border:1px solid var(--line);border-radius:var(--r21);background:#fff;box-shadow:var(--soft);text-align:left
+}
+.curriculum-unit.current{border-color:rgba(114,84,216,.55);box-shadow:0 0 0 4px rgba(114,84,216,.10),var(--soft)}
+.curriculum-unit .unit-number{color:var(--rose);font-size:.68rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase}
+.curriculum-unit h3{margin:8px 0 0;color:var(--navy);font-family:var(--serif);font-size:1.28rem;line-height:1.2}
+.curriculum-unit p{margin:8px 0 0;color:var(--muted);font-size:.79rem;line-height:1.5}
+.curriculum-unit .domain-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.curriculum-unit .domain-chips span{padding:4px 7px;border-radius:999px;background:#f2f5fb;color:#53657b;font-size:.62rem;font-weight:800}
+.curriculum-unit button{width:100%;min-height:43px;margin-top:auto;padding:.65rem .75rem;border:0;border-radius:12px;color:#fff;background:linear-gradient(135deg,var(--violet),var(--rose));font-weight:900}
+.curriculum-unit.current button{background:var(--green)}
+
+.parent-curriculum-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center}
+.parent-curriculum-grid .grown-actions{margin-top:0;justify-content:flex-end}
+
+/* Keep lower page headings proportional to the hero title. */
+.section-heading h2{font-size:clamp(1.85rem,3.3vw,2.85rem)}
+.checkin-card h2,.dialogue-card h2{font-size:clamp(1.55rem,2.6vw,2rem)}
+.parent-panel h3{font-size:clamp(1.18rem,2vw,1.5rem)}
+
+@media(max-width:960px){
+  .curriculum-current{grid-template-columns:1fr}
+  .curriculum-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .noema-band{grid-template-columns:auto 1fr}.noema-band .curriculum-btn{grid-column:1/-1;width:100%}
+}
+@media(max-width:650px){
+  .curriculum-grid,.unit-apps{grid-template-columns:1fr}
+  .curriculum-current{padding:16px}
+  .noema-band{grid-template-columns:1fr;text-align:center}.noema-mark{margin:auto}
+  .parent-curriculum-grid{grid-template-columns:1fr}.parent-curriculum-grid .grown-actions{justify-content:flex-start}
+}
+
 </style>
 </head>
 <body data-portal-view="child">
@@ -783,6 +881,7 @@ body.anchor-scrolling .header{
 
         <div class="mentor-menu-panel" id="mentorMenuPanel" hidden>
           <div class="menu-label">Child Learning</div>
+          <a href="#curriculum" data-menu-close>📘 My Curriculum</a>
           <a href="#today" data-menu-close>📚 Today’s Learning Path</a>
           <a href="#learningGarden" data-menu-close>🌱 My Learning Garden</a>
           <a href="#mentorRoom" data-menu-close>💬 My Mentor Room</a>
@@ -825,6 +924,8 @@ body.anchor-scrolling .header{
         </p>
         <div class="hero-actions">
           <button class="btn btn-primary" id="beginProfile" type="button">🌟 Begin Guest Mentor Path</button>
+          <button class="btn btn-secondary" id="editProfileTop" type="button">🎓 Optional Curriculum Profile</button>
+          <a class="btn btn-secondary" href="#curriculum">📘 Open My Curriculum</a>
           <a class="btn btn-secondary" href="#today">🧭 See How a Guided Day Works</a>
         </div>
 
@@ -871,6 +972,55 @@ body.anchor-scrolling .header{
         </div>
         <div class="agent-state" id="agentState">Learning guide: preparing local safe mode…</div>
       </aside>
+    </div>
+  </section>
+
+
+
+  <section class="section curriculum-section" id="curriculum" aria-labelledby="curriculumTitle">
+    <div class="shell curriculum-shell">
+      <div class="section-heading">
+        <div>
+          <h2 id="curriculumTitle">My Preschool Curriculum</h2>
+          <p>The curriculum gives learning a clear year-long direction. Your mentor keeps today’s path connected to the current unit, then recommends Crechè apps and learning games that reinforce the same ideas without turning preschool into a rigid screen schedule.</p>
+        </div>
+      </div>
+
+      <div class="curriculum-current">
+        <article>
+          <div class="curriculum-kicker" id="currentUnitNumber">Unit 1 of 12</div>
+          <h3 id="currentUnitTitle">Me, My Feelings &amp; Our Learning Team</h3>
+          <span class="curriculum-week" id="currentUnitWeeks">Weeks 1–3</span>
+          <p id="currentUnitFocus">Build belonging, feeling words, safe routines, and the idea that learning happens with a child, mentor, and grown-up working together.</p>
+          <ul class="curriculum-objectives" id="currentUnitObjectives"></ul>
+          <div class="curriculum-actions">
+            <button class="curriculum-btn primary" id="openCurriculumMap" type="button">📚 Open Full Curriculum Map</button>
+            <button class="curriculum-btn" id="nextCurriculumUnit" type="button">Next Unit →</button>
+            <button class="curriculum-btn" id="readCurriculumUnit" type="button">🔊 Read This Unit</button>
+          </div>
+          <p class="curriculum-progress-note" id="curriculumProgressNote">Unit changes are family-controlled. They are not grades, locks, or mastery gates.</p>
+        </article>
+
+        <aside class="curriculum-companions">
+          <h4>Apps &amp; games for this unit</h4>
+          <p>Suggestions come from the validated Preschool catalog. Mentor-station activities can enter today’s guided path; other child apps remain optional companions.</p>
+          <div class="unit-apps" id="unitApps"></div>
+          <div id="noemaSuggestionsWrap" hidden style="margin-top:14px;padding-top:13px;border-top:1px solid var(--line)">
+            <h4 style="font-size:1rem">NOEMA federation suggestions</h4>
+            <p id="noemaSuggestionsNote">Age-aware learning federation recommendations.</p>
+            <div class="unit-apps" id="noemaUnitApps"></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="noema-band" role="note">
+        <div class="noema-mark" aria-hidden="true">N</div>
+        <div>
+          <strong>NOEMA-aligned curriculum coordination</strong>
+          <span>The Preschool page keeps child-facing learning local and age-aligned. NOEMA’s federation model supplies the coordination principles: current curriculum first, current school next, educational games only when their learning purpose is established, and no invented unit or lesson coverage.</span>
+        </div>
+        <a class="curriculum-btn" href="#grownups" id="openNoemaParentCoordination">Parent / Educator View</a>
+      </div>
     </div>
   </section>
 
@@ -975,6 +1125,23 @@ body.anchor-scrolling .header{
       </div>
 
       <div class="parent-grid">
+
+        <article class="parent-panel wide" id="parentCurriculumPanel">
+          <div class="parent-curriculum-grid">
+            <div>
+              <h3>Curriculum &amp; NOEMA coordination</h3>
+              <p id="parentCurriculumSummary">The active unit is loading. The child-facing mentor remains inside Preschool; NOEMA / NAIB is an adult-parent intelligence surface and does not receive this browser’s learner record automatically.</p>
+              <span class="parent-guide-badge" id="parentCurriculumBadge">Curriculum-first guidance</span>
+            </div>
+            <div class="grown-actions">
+              <button class="grown-btn" id="parentOpenCurriculum" type="button">Open curriculum map</button>
+              <button class="grown-btn" id="downloadNoemaContext" type="button">Download NOEMA context</button>
+              <a class="grown-btn" href="https://artist1970.github.io/noema-ai.github.io/" target="_blank" rel="noopener noreferrer">Open NOEMA / NAIB ↗</a>
+            </div>
+          </div>
+          <div class="parent-privacy"><strong>Coordination boundary:</strong> NOEMA currently lives on a separate public origin. This page does not silently transmit a child profile across origins. The context download contains only broad curriculum and learning-context fields for a parent or educator to review before using elsewhere.</div>
+        </article>
+
         <article class="parent-panel">
           <div class="parent-mentor-head">
             <div class="parent-mentor-avatar" id="parentChildMentorAvatar">🌞</div>
@@ -1281,6 +1448,19 @@ body.anchor-scrolling .header{
   </section>
 </div>
 
+
+<div class="curriculum-overlay" id="curriculumOverlay" aria-hidden="true">
+  <section class="curriculum-dialog" id="curriculumDialog" role="dialog" aria-modal="true" aria-labelledby="curriculumDialogTitle">
+    <header class="curriculum-dialog-head">
+      <div><h2 id="curriculumDialogTitle">Guided Preschool Curriculum Map</h2><p>12 thematic units · 36-week framework · play-based, whole-child, locally coordinated</p></div>
+      <button class="curriculum-close" id="closeCurriculumMap" type="button" aria-label="Close curriculum map">×</button>
+    </header>
+    <div class="curriculum-dialog-body">
+      <div class="curriculum-grid" id="curriculumGrid"></div>
+    </div>
+  </section>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="confetti" id="confetti" aria-hidden="true"></div>
 
@@ -1306,6 +1486,26 @@ const LAST_OPEN_KEY="khaemenes_preschool_last_open_v1";
 const FAMILY_GUIDE_KEY="khaemenes_parent_mentor_v1";
 const GUEST_PROFILE_KEY="khaemenes_preschool_guest_profile_v1";
 const GUEST_SESSION_KEYS=new Set([PROGRESS_KEY,SETTINGS_KEY,PLAN_KEY,LAST_OPEN_KEY]);
+
+const CURRICULUM_STATE_KEY="khaemenes_preschool_curriculum_state_v1";
+const NOEMA_PUBLIC_URL="https://artist1970.github.io/noema-ai.github.io/";
+const CURRICULUM_UNITS=Object.freeze([
+  {id:"unit-01",number:1,weeks:"Weeks 1–3",title:"Me, My Feelings & Our Learning Team",focus:"Build belonging, feeling words, safe routines, and the idea that learning happens with a child, mentor, and grown-up working together.",domains:["feelings","movement"],categories:["feelings","life"],keywords:["feelings","emotions","kindness","friendship","routine","helping"],objectives:["Name and notice a growing set of feelings.","Practice kind, safe learning routines with a nearby grown-up.","Use simple words, gestures, art, or movement to communicate needs and ideas."]},
+  {id:"unit-02",number:2,weeks:"Weeks 4–6",title:"Letters Live Everywhere",focus:"Notice letters, sounds, names, signs, and symbols in stories and everyday surroundings.",domains:["letters","feelings"],categories:["letters","words"],keywords:["alphabet","abc","letters","phonics","sounds","story"],objectives:["Recognize familiar letters and connect some letters with sounds.","Notice print in names, books, labels, and the environment.","Listen, point, match, and play with language without pressure to perform."]},
+  {id:"unit-03",number:3,weeks:"Weeks 7–9",title:"Stories, Words & Imagination",focus:"Grow vocabulary, listening, storytelling, sequencing, and confidence with early words.",domains:["letters","creative"],categories:["words","letters"],keywords:["reading","story","stories","word","spelling","vocabulary","sight"],objectives:["Listen to and retell simple story ideas.","Explore new words and meaningful early print.","Use imagination to create characters, events, sounds, or pictures."]},
+  {id:"unit-04",number:4,weeks:"Weeks 10–12",title:"Numbers Are All Around Us",focus:"Connect counting and quantity to real objects, movement, songs, and simple everyday choices.",domains:["numbers","movement"],categories:["numbers"],keywords:["numbers","count","counting","math","quantity","order"],objectives:["Count small groups of real objects with growing one-to-one correspondence.","Recognize and order familiar numerals through play.","Compare simple groups using ideas such as more, less, same, first, and next."]},
+  {id:"unit-05",number:5,weeks:"Weeks 13–15",title:"Shapes, Patterns & Little Builders",focus:"Explore shapes, spatial language, matching, patterns, and early problem solving.",domains:["numbers","creative"],categories:["numbers","art"],keywords:["shape","shapes","match","pattern","geometry","color"],objectives:["Recognize and describe common shapes in play and surroundings.","Match, sort, and notice simple repeating patterns.","Use drawing, building, or movement to explore position and space."]},
+  {id:"unit-06",number:6,weeks:"Weeks 16–18",title:"Color, Art & Creative Choice",focus:"Use color, drawing, visual matching, and open-ended creation to express observations and ideas.",domains:["creative","feelings"],categories:["art"],keywords:["art","color","drawing","museum","creative","mixing"],objectives:["Experiment with colors, marks, and visual choices.","Talk about or point to details noticed in art and the world.","Use creative work to express an idea, feeling, or story."]},
+  {id:"unit-07",number:7,weeks:"Weeks 19–21",title:"Music, Rhythm & Move-and-Groove",focus:"Connect sound, beat, movement, listening, and joyful physical expression.",domains:["creative","movement"],categories:["music","movement"],keywords:["music","piano","rhythm","move","groove","sound"],objectives:["Keep or imitate a simple beat using body, voice, or safe objects.","Explore high/low, fast/slow, loud/soft, and start/stop contrasts.","Use whole-body movement with awareness of space and safety."]},
+  {id:"unit-08",number:8,weeks:"Weeks 22–24",title:"I Can Care for Myself",focus:"Practice healthy routines, hygiene, organization, independence, and asking for adult help when needed.",domains:["movement","feelings"],categories:["life"],keywords:["brush","teeth","bed","organizer","schoolwork","routine","life skills"],objectives:["Practice a few safe self-care routines with adult guidance.","Follow short sequences such as first, next, then, done.","Build confidence asking for help and caring for personal spaces."]},
+  {id:"unit-09",number:9,weeks:"Weeks 25–27",title:"Helping at Home & in My Community",focus:"Explore cooperation, responsibility, kitchen help, pet safety, directions, and acts of kindness.",domains:["movement","feelings","wonder"],categories:["life","feelings"],keywords:["helping","kitchen","dog","kindness","compass","friendship","community"],objectives:["Participate in simple real-life helping tasks with adult supervision.","Practice kindness, turn-taking, repair, and shared responsibility.","Notice safety rules around kitchens, animals, outdoors, and movement."]},
+  {id:"unit-10",number:10,weeks:"Weeks 28–30",title:"Weather, Sky & Changing Days",focus:"Observe weather, moon, sky, seasons, and changes that can be noticed over time.",domains:["wonder","movement"],categories:["wonder"],keywords:["weather","moon","sky","solanar","sunny","nature"],objectives:["Describe simple weather conditions using observation words.","Notice that sky and weather conditions can change over time.","Connect weather observations to clothing, movement, and safe daily choices."]},
+  {id:"unit-11",number:11,weeks:"Weeks 31–33",title:"Nature, Directions & Little Worlds",focus:"Investigate living things, places, directions, habitats, and curious questions about the world.",domains:["wonder","letters"],categories:["wonder","life"],keywords:["wonder","world","nature","compass","exploration","weather"],objectives:["Ask and explore simple questions about places, living things, and nature.","Use early direction and location words in real-world play.","Represent observations through speech, drawing, movement, counting, or story."]},
+  {id:"unit-12",number:12,weeks:"Weeks 34–36",title:"Wonder, Remember & Celebrate Growth",focus:"Revisit favorite learning experiences, notice growth, create, tell stories, move, and celebrate curiosity without turning exploration into grades.",domains:["feelings","letters","numbers","creative","movement","wonder"],categories:["letters","words","numbers","art","feelings","life","music","movement","wonder"],keywords:["story","numbers","art","feelings","music","weather","wonder","favorite"],objectives:["Revisit favorite experiences and explain or show what feels familiar now.","Combine ideas across language, number, art, movement, feelings, and wonder.","Celebrate effort, curiosity, kindness, and readiness for the next learning stage."]}
+]);
+let noemaFederation=null;
+let noemaFederationState="not-connected";
+
 
 const CATALOG=window.KhaemenesPreschoolCatalog;
 if(!CATALOG)throw new Error("Khaemenes Preschool shared catalog failed to load.");
@@ -1444,21 +1644,21 @@ function syncContinuity(){
   if(!profile||guestMode)return;
   const favorites=learnerFavorites(),visits=learnerVisits();
   const pinned=[...favorites].map(id=>CATALOG.byId(id)).filter(Boolean).map(a=>({id:a.id,title:a.title,icon:a.icon,category:a.category,file:a.file,url:new URL("../apps/"+a.file.split("/").map(encodeURIComponent).join("/"),location.href).href}));
-  saveJSON(CONTINUITY_KEY,{version:2,source:"Khaemenes Preschool · Guided Mentor",origin:location.origin,learner:{learnerId:profile.learnerId,nickname:profile.nickname,ageBand:profile.ageBand,personality:profile.personality,mentorId:profile.mentorId,mentorIdentity:profile.mentorIdentity,interests:profile.interests,pace:profile.pace,minutes:profile.minutes,pathway:profile.pathway||"preschool"},favoriteIds:[...favorites],favorites:pinned,visitedIds:[...visits],mentorProgress:{completed:progress.completed,domainCounts:progress.domainCounts},updatedAt:new Date().toISOString(),formalGradeEligible:false});
+  const unit=currentCurriculumUnit();saveJSON(CONTINUITY_KEY,{version:3,source:"Khaemenes Preschool · Guided Mentor",origin:location.origin,learner:{learnerId:profile.learnerId,nickname:profile.nickname,ageBand:profile.ageBand,personality:profile.personality,mentorId:profile.mentorId,mentorIdentity:profile.mentorIdentity,interests:profile.interests,pace:profile.pace,minutes:profile.minutes,pathway:profile.pathway||"preschool"},curriculum:{framework:"Guided Preschool · 12 units · 36 weeks",unitId:unit.id,unitNumber:unit.number,title:unit.title,weeks:unit.weeks,objectives:[...unit.objectives]},favoriteIds:[...favorites],favorites:pinned,visitedIds:[...visits],mentorProgress:{completed:progress.completed,domainCounts:progress.domainCounts},updatedAt:new Date().toISOString(),formalGradeEligible:false});
 }
 
 async function connectAgent(){
   if(guestMode){
     agent=null;
-    $("#agentState").textContent="Learning guide: Guest Mode · local safe guide · this tab only";
+    $("#agentState").textContent="Learning guide: Guest Mode · local curriculum coordinator · this tab only";
     return;
   }
   if(!profile){$("#agentState").textContent="Learning guide: profile needed";return}
   try{
     const mod=await import("/assessment-engine/agents/core/sovereign-agent.js");
     agent=new mod.SovereignProblemSolvingAgent({id:"creche.guided-preschool.mentor",name:"Khaemenes Preschool Mentor",version:"0.2.0",sourceApp:"creche.guided-preschool",learnerId:profile.learnerId||"local-preschool-learner",memoryKey:`creche_mentor_memory_${profile.learnerId||"local"}`});
-    $("#agentState").textContent="Learning guide: Sovereign Agent connected · local memory only";
-  }catch(error){console.warn("Central agent unavailable; using local safe guide.",error);agent=null;$("#agentState").textContent="Learning guide: local safe mode"}
+    $("#agentState").textContent="Learning guide: curriculum-first local agent · NOEMA-aligned policy";
+  }catch(error){console.warn("Central agent unavailable; using local safe guide.",error);agent=null;$("#agentState").textContent="Learning guide: local curriculum coordinator · NOEMA-aligned policy"}
 }
 function mentorGreeting(){
   const m=mentorDisplay();
@@ -1467,13 +1667,13 @@ function mentorGreeting(){
   if(currentPlan.length&&completed>=currentPlan.length)return `${profileName()}, we finished today’s current path! Let’s tell a grown-up what felt best and choose something away from the screen.`;
   const hour=new Date().getHours(),hello=hour<12?"Good morning":hour<17?"Good afternoon":"Hello";
   const identity=m.custom?`My learning style is safely based on ${m.baseName}, while you chose how I look and what you call me.`:"";
-  return `${hello}, ${profileName()}! I’m ${m.name}, your age-aligned AI learning friend. ${m.intro} ${identity} Today I chose ${stationCount()} short stations for us.`;
+  const unit=currentCurriculumUnit();return `${hello}, ${profileName()}! I’m ${m.name}, your age-aligned AI learning friend. ${m.intro} ${identity} We are in ${unit.title}. I chose ${stationCount()} short stations that support this unit while keeping our day balanced.`;
 }
 function updateMentorCard(){
   const m=mentorDisplay();applyMentorTheme();
   $("#mentorAvatar").textContent=m.avatar;$("#mentorName").textContent=guestMode?`${m.name} · Guest Mentor`:(profile?`${m.name} · ${profileName()}’s mentor`:"Your mentor is waiting");$("#mentorMessage").textContent=mentorGreeting();
   $("#editProfileTop").textContent=guestMode?"🎓 Optional Curriculum Profile":(profile?"✏️ Edit Profile & Mentor":"🎓 Optional Curriculum Profile");$("#beginProfile").textContent=guestMode?"🌟 Begin Guest Mentor Path":"🌟 Begin Today’s Path";
-  $("#heroLead").textContent=guestMode?`${m.name} is guiding a temporary ${profile.minutes}-minute Guest Mode path. No registration is required and Guest progress stays in this tab.`:`${m.name} has prepared a ${profile.minutes}-minute guided preschool rhythm for ${profileName()}, using every mentor-eligible activity currently registered in the shared Preschool catalog.`;
+  $("#heroLead").textContent=guestMode?`${m.name} is guiding a temporary ${profile.minutes}-minute Guest Mode path. No registration is required and Guest progress stays in this tab.`:`${m.name} has prepared a ${profile.minutes}-minute guided preschool rhythm for ${profileName()}, anchored to ${currentCurriculumUnit().title} and supported by the shared Preschool catalog.`;
   renderParentPortal();
 }
 function feedbackAdjustment(id){const latest=progress.feedback?.[id]?.latest;return ({loved:.10,"just-right":.05,"too-easy":-.035,"too-hard":-.09})[latest]||0}
@@ -1487,7 +1687,7 @@ function localScore(activity,domain,index){
   const paceFit=profile.pace==="gentle"?(activity.energy==="gentle"?1:.65):profile.pace==="adventurous"?(activity.energy==="wiggly"?1:.78):.82;
   const favoriteFit=favorites.has(activity.catalogId)?1:0;
   const tie=seededValue(`${todayKey()}:${activity.id}:${index}`)*.08;
-  return interestFit*.28+energyFit*.18+novelty*.20+domainNeed*.17+paceFit*.09+favoriteFit*.08+feedbackAdjustment(activity.id)+tie;
+  const unitFit=curriculumActivityFit(activity,currentCurriculumUnit());return interestFit*.23+energyFit*.15+novelty*.17+domainNeed*.14+paceFit*.08+favoriteFit*.07+unitFit*.20+feedbackAdjustment(activity.id)+tie;
 }
 async function chooseActivity(domain,index,used){
   let candidates=ACTIVITIES.filter(a=>a.domain===domain&&a.ages.includes(profile.ageBand)&&!used.has(a.id));
@@ -1498,9 +1698,9 @@ async function chooseActivity(domain,index,used){
       const favorites=learnerFavorites();
       const actions=candidates.map((a,position)=>({
         ...a,label:a.title,
-        features:{interestFit:a.interests.some(i=>profile.interests.includes(i))?1:.3,energyFit:a.energy===currentEnergy?1:.62,novelty:progress.completed?.[a.id]?Math.max(.12,1-(progress.completed[a.id].count||1)*.16):1,domainBalance:1/((progress.domainCounts?.[domain]||0)+1),ageFit:1,favoriteFit:favorites.has(a.catalogId)?1:0,feedbackFit:.5+feedbackAdjustment(a.id),rotation:1-position/candidates.length}
+        features:{interestFit:a.interests.some(i=>profile.interests.includes(i))?1:.3,energyFit:a.energy===currentEnergy?1:.62,novelty:progress.completed?.[a.id]?Math.max(.12,1-(progress.completed[a.id].count||1)*.16):1,domainBalance:1/((progress.domainCounts?.[domain]||0)+1),ageFit:1,favoriteFit:favorites.has(a.catalogId)?1:0,feedbackFit:.5+feedbackAdjustment(a.id),unitFit:curriculumActivityFit(a,currentCurriculumUnit()),rotation:1-position/candidates.length}
       }));
-      const problem={id:`preschool-${todayKey()}-${domain}-${index}-${currentEnergy}`,domainId:`preschool.${domain}`,type:"decision",strategy:"hybrid",context:{domain,energy:currentEnergy,ageBand:profile.ageBand,pace:profile.pace},weights:{interestFit:.78,energyFit:.66,novelty:.72,domainBalance:.56,ageFit:1,favoriteFit:.18,feedbackFit:.20,rotation:.14},memoryWeight:.15,actions,hardConstraints:[{id:"age-stage",message:"Activity is outside the selected age band.",test:a=>a.ages.includes(profile.ageBand)},{id:"short-session",message:"Activity is too long for a preschool station.",test:a=>a.minutes<=12}],simulate(action,rng){const base=.34+action.features.interestFit*.19+action.features.energyFit*.15+action.features.novelty*.14+action.features.ageFit*.20+action.features.favoriteFit*.05;return Math.max(-1,Math.min(1,base+(rng()-.5)*.18))}};
+      const problem={id:`preschool-${todayKey()}-${domain}-${index}-${currentEnergy}`,domainId:`preschool.${domain}`,type:"decision",strategy:"hybrid",context:{domain,energy:currentEnergy,ageBand:profile.ageBand,pace:profile.pace,curriculumUnit:currentCurriculumUnit().id},weights:{interestFit:.68,energyFit:.58,novelty:.62,domainBalance:.50,ageFit:1,favoriteFit:.16,feedbackFit:.18,unitFit:.82,rotation:.12},memoryWeight:.15,actions,hardConstraints:[{id:"age-stage",message:"Activity is outside the selected age band.",test:a=>a.ages.includes(profile.ageBand)},{id:"short-session",message:"Activity is too long for a preschool station.",test:a=>a.minutes<=12}],simulate(action,rng){const base=.34+action.features.interestFit*.19+action.features.energyFit*.15+action.features.novelty*.14+action.features.ageFit*.20+action.features.favoriteFit*.05;return Math.max(-1,Math.min(1,base+(rng()-.5)*.18))}};
       const decision=agent.chooseAction(problem,{simulations:70,timeBudgetMs:45,seed:`${todayKey()}:${profile.learnerId}:${domain}:${index}`});
       if(decision?.action){currentDecisions[decision.action.id]=decision;return candidates.find(a=>a.id===decision.action.id)||decision.action}
     }catch(error){console.warn("Agent recommendation failed; using local score.",error)}
@@ -1510,11 +1710,11 @@ async function chooseActivity(domain,index,used){
 async function buildPlan(force=false){
   const grid=$("#planGrid");grid.innerHTML='<div style="grid-column:1/-1;padding:24px;text-align:center;color:#607087">Your mentor is preparing a balanced path…</div>';
   if(!profile){currentPlan=["kindness","abc-story","numbers-1-12","move-groove"].map(id=>ACTIVITIES.find(a=>a.id===id)).filter(Boolean);renderPlan(true);return}
-  const cached=loadJSON(PLAN_KEY,null);const cacheValid=!force&&cached?.date===todayKey()&&cached?.learnerId===profile.learnerId&&cached?.energy===currentEnergy&&Array.isArray(cached.ids)&&cached.ids.length===stationCount();
+  const cached=loadJSON(PLAN_KEY,null);const unit=currentCurriculumUnit();const cacheValid=!force&&cached?.date===todayKey()&&cached?.learnerId===profile.learnerId&&cached?.energy===currentEnergy&&cached?.unitId===unit.id&&Array.isArray(cached.ids)&&cached.ids.length===stationCount();
   if(cacheValid){currentPlan=cached.ids.map(id=>ACTIVITIES.find(a=>a.id===id)).filter(Boolean);if(currentPlan.length===stationCount()){renderPlan(false);return}}
-  const blueprint=SLOT_BLUEPRINTS[String(profile.minutes)]||SLOT_BLUEPRINTS["30"],used=new Set();currentPlan=[];currentDecisions={};
+  const blueprint=curriculumBlueprint(SLOT_BLUEPRINTS[String(profile.minutes)]||SLOT_BLUEPRINTS["30"],unit),used=new Set();currentPlan=[];currentDecisions={};
   for(let i=0;i<blueprint.length;i++){const a=await chooseActivity(blueprint[i],i,used);if(a){used.add(a.id);currentPlan.push(a)}}
-  saveJSON(PLAN_KEY,{date:todayKey(),learnerId:profile.learnerId,energy:currentEnergy,ids:currentPlan.map(a=>a.id),catalogVersion:CATALOG.version});renderPlan(false);renderParentPortal();
+  saveJSON(PLAN_KEY,{date:todayKey(),learnerId:profile.learnerId,energy:currentEnergy,unitId:unit.id,ids:currentPlan.map(a=>a.id),catalogVersion:CATALOG.version});renderPlan(false);renderParentPortal();renderCurriculumUI();
 }
 function offscreenCue(domain,index){const cues={feelings:["Tell a grown-up one feeling word.","Make three silly faces together."],letters:["Find one object whose name starts with a letter you know.","Tell a tiny story without looking at the screen."],numbers:["Count five real things nearby.","Find a circle, square, or triangle in the room."],creative:["Draw one idea on paper.","Hum a tune or make a rhythm with your hands."],movement:["Stand up, stretch tall, and take ten walking steps.","Help with one tiny real-life job."],wonder:["Look outside and notice one thing about the sky.","Ask a grown-up one wonder question."]};const list=cues[domain]||["Look away from the screen and notice something in the room."];return list[index%list.length]}
 function renderPlan(sample=false){
@@ -1522,7 +1722,7 @@ function renderPlan(sample=false){
   currentPlan.forEach((a,index)=>{
     const d=DOMAINS[a.domain]||DOMAINS.wonder,done=completed.has(a.id),feedback=progress.feedback?.[a.id]?.latest||"";
     const card=document.createElement("article");card.className=`plan-card${done?" done":""}`;card.style.setProperty("--accent-a",d.a);card.style.setProperty("--accent-b",d.b);card.dataset.activity=a.id;
-    card.innerHTML=`<div class="plan-step"><span>Station ${index+1}</span><span>${escapeHTML(d.label)}</span></div><div class="plan-icon" aria-hidden="true">${a.icon}</div><h3>${escapeHTML(a.title)}</h3><p>${escapeHTML(a.desc)}</p><div class="plan-meta"><span>About ${a.minutes} min</span><span>${a.energy} energy</span>${learnerFavorites().has(a.catalogId)?'<span>♥ favorite</span>':""}${sample?'<span>sample</span>':""}</div><button class="read-station" type="button" data-read-station="${a.id}">🔊 Hear this station</button><div class="offscreen-cue"><strong>🌿 Away from the screen:</strong> ${escapeHTML(offscreenCue(a.domain,index))}</div><div class="plan-actions"><a class="start-link" href="${appUrl(a.file)}" data-start="${a.id}">Begin with mentor</a><button class="complete-btn" type="button" aria-label="${done?"Activity complete":"Mark activity complete"}" data-complete="${a.id}">${done?"✓":"○"}</button></div>${done?`<div class="plan-feedback" aria-label="How did this activity feel?"><button class="feedback-btn ${feedback==="loved"?"active":""}" data-feedback="loved" data-feedback-id="${a.id}" type="button">💛 Loved it</button><button class="feedback-btn ${feedback==="just-right"?"active":""}" data-feedback="just-right" data-feedback-id="${a.id}" type="button">👍 Just right</button><button class="feedback-btn ${feedback==="too-easy"?"active":""}" data-feedback="too-easy" data-feedback-id="${a.id}" type="button">🌱 Too easy</button><button class="feedback-btn ${feedback==="too-hard"?"active":""}" data-feedback="too-hard" data-feedback-id="${a.id}" type="button">🧩 Too hard</button></div>`:""}`;
+    card.innerHTML=`<div class="plan-step"><span>Station ${index+1}</span><span>${escapeHTML(d.label)}</span></div><div class="plan-icon" aria-hidden="true">${a.icon}</div><h3>${escapeHTML(a.title)}</h3><p>${escapeHTML(a.desc)}</p><div class="plan-meta"><span>About ${a.minutes} min</span><span>${a.energy} energy</span>${learnerFavorites().has(a.catalogId)?'<span>♥ favorite</span>':""}<span class="unit-badge">Unit ${currentCurriculumUnit().number}</span>${sample?'<span>sample</span>':""}</div><button class="read-station" type="button" data-read-station="${a.id}">🔊 Hear this station</button><div class="offscreen-cue"><strong>🌿 Away from the screen:</strong> ${escapeHTML(offscreenCue(a.domain,index))}</div><div class="plan-actions"><a class="start-link" href="${appUrl(a.file)}" data-start="${a.id}">Begin with mentor</a><button class="complete-btn" type="button" aria-label="${done?"Activity complete":"Mark activity complete"}" data-complete="${a.id}">${done?"✓":"○"}</button></div>${done?`<div class="plan-feedback" aria-label="How did this activity feel?"><button class="feedback-btn ${feedback==="loved"?"active":""}" data-feedback="loved" data-feedback-id="${a.id}" type="button">💛 Loved it</button><button class="feedback-btn ${feedback==="just-right"?"active":""}" data-feedback="just-right" data-feedback-id="${a.id}" type="button">👍 Just right</button><button class="feedback-btn ${feedback==="too-easy"?"active":""}" data-feedback="too-easy" data-feedback-id="${a.id}" type="button">🌱 Too easy</button><button class="feedback-btn ${feedback==="too-hard"?"active":""}" data-feedback="too-hard" data-feedback-id="${a.id}" type="button">🧩 Too hard</button></div>`:""}`;
     grid.appendChild(card);
   });updateProgressUI();
 }
@@ -1536,7 +1736,7 @@ function recordFeedback(id,label){
   const decision=currentDecisions[id],reward=({loved:1,"just-right":.7,"too-easy":.15,"too-hard":-.25})[label]??0;if(agent&&decision){try{agent.receiveOutcome({decision,reward,label:`child-feedback-${label}`,learningRate:.10})}catch{}}
   renderPlan(false);renderParentPortal();toast("Thanks. Your mentor will use that gentle feedback when choosing future activities.");
 }
-function updateProgressUI(){const count=profile?currentPlanCompletedSet().size:0,total=currentPlan.length||stationCount(),percent=Math.round(count/Math.max(1,total)*100);$("#progressRing").style.setProperty("--p",percent);$("#progressPercent").textContent=`${percent}%`;$("#progressCount").textContent=`${count} of ${total} current stations complete`;$("#dayGreeting").textContent=guestMode?`${mentorDisplay().name}’s Guest Mentor path`:`${profileName()} and ${mentorDisplay().name}’s guided day`;$("#todayIntro").textContent=guestMode?`${mentorDisplay().name} balanced this temporary Guest Mode path for ages ${profile.ageBand} and ${currentEnergy} energy. Guest progress is session-only.`:`${mentorDisplay().name} balanced today’s path for ages ${profile.ageBand}, ${currentEnergy} energy, ${profile.minutes} available minutes, current interests, favorites, prior activity, and child feedback.`;renderParentPortal()}
+function updateProgressUI(){const count=profile?currentPlanCompletedSet().size:0,total=currentPlan.length||stationCount(),percent=Math.round(count/Math.max(1,total)*100);$("#progressRing").style.setProperty("--p",percent);$("#progressPercent").textContent=`${percent}%`;$("#progressCount").textContent=`${count} of ${total} current stations complete`;$("#dayGreeting").textContent=guestMode?`${mentorDisplay().name}’s Guest Mentor path`:`${profileName()} and ${mentorDisplay().name}’s guided day`;$("#todayIntro").textContent=guestMode?`${mentorDisplay().name} balanced this temporary Guest Mode path for ages ${profile.ageBand} and ${currentEnergy} energy. Guest progress is session-only.`:`${mentorDisplay().name} anchored today’s path to ${currentCurriculumUnit().title}, then balanced age ${profile.ageBand}, ${currentEnergy} energy, ${profile.minutes} available minutes, interests, favorites, prior activity, and child feedback.`;renderParentPortal()}
 function growthLabel(count){if(count<=0)return ["🌱","Just beginning"];if(count<=2)return ["🌿","Growing"];if(count<=5)return ["🌼","Explored several times"];return ["🌳","A familiar learning garden"]}
 function renderLearningGarden(){const grid=$("#mapGrid");grid.innerHTML="";Object.entries(DOMAINS).forEach(([id,d])=>{const count=progress.domainCounts?.[id]||0,[icon,label]=growthLabel(count),card=document.createElement("article");card.className="map-card";card.innerHTML=`<div class="map-icon" aria-hidden="true">${d.icon}</div><h3>${escapeHTML(d.label)}</h3><p>${escapeHTML(domainDescription(id))}</p><span class="growth-badge">${icon} ${label}</span><div class="map-foot"><span>${count} completed station${count===1?"":"s"}</span><span>Exploration only · not a grade</span></div>`;grid.appendChild(card)})}
 function domainDescription(id){return ({letters:"Listening, speaking, letters, sounds, stories, and early words.",numbers:"Counting, quantity, shapes, patterns, comparison, and reasoning.",feelings:"Naming feelings, kindness, boundaries, friendship, and calming skills.",creative:"Color, drawing, music, imagination, expression, and creative choice.",movement:"Gross motor play, healthy routines, independence, and practical care.",wonder:"Nature, weather, space, observation, directions, and curious questions."})[id]||"A balanced early-learning domain."}
@@ -1545,6 +1745,153 @@ function responseFor(prompt){const m=mentorDisplay(),next=currentPlan.find(a=>!c
 function setFeeling(feeling){
   currentFeeling=feeling;$$('.feeling-btn').forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.feeling===feeling)));const m=mentorDisplay(),messages={happy:"I’m glad you feel happy. Let’s use that bright energy to begin one small station.",unsure:"It is okay to be unsure. I will keep the first step simple, and a grown-up can stay nearby.",tired:"Thank you for noticing. We can choose gentler energy or rest first.",excited:"That excitement can help us learn! We can start with movement if you want.",frustrated:"Frustration is a signal to pause. We can keep the same learning goals but begin with the shortest step.",calm:"Calm is a wonderful learning place. Let’s look closely and take our time."};$("#mentorDialogue").textContent=`${m.name}: ${messages[feeling]}`;
   const box=$("#feelingSuggestion"),suggestions={tired:["Would you like today’s plan to use Gentle energy?","gentle"],excited:["Would you like today’s plan to use Wiggly energy?","wiggly"],frustrated:["Would you like me to switch to Gentle energy and rebuild the current path?","gentle"],calm:["Would you like to keep a Gentle learning rhythm?","gentle"]};const sug=suggestions[feeling];if(sug){box.hidden=false;box.innerHTML=`${escapeHTML(sug[0])}<br><button type="button" data-feeling-energy="${sug[1]}">Yes · adjust the plan</button>`}else box.hidden=true;
+}
+
+
+
+
+async function connectNoemaFederation(){
+  if(noemaFederation)return true;
+  if(noemaFederationState==="unavailable")return false;
+  try{
+    const mod=await import("https://artist1970.github.io/noema-ai.github.io/resources/learning-federation.js");
+    if(typeof mod.LearningFederation!=="function")throw new Error("LearningFederation export unavailable");
+    noemaFederation=new mod.LearningFederation();
+    noemaFederationState="connected";
+    return true;
+  }catch(error){
+    console.info("NOEMA learning federation is not reachable from this origin; Preschool local curriculum coordination remains active.",error);
+    noemaFederationState="unavailable";
+    return false;
+  }
+}
+function noemaLearningContext(){
+  return {enrollment:{
+    ageBand:"child-under-13",
+    role:"student",
+    learning:{gradeLevel:"preschool",learningStage:"preschool",favoriteSubject:"",interests:[...(profile?.interests||[])]}
+  }};
+}
+async function renderNoemaUnitSuggestions(){
+  const wrap=$("#noemaSuggestionsWrap"),grid=$("#noemaUnitApps"),note=$("#noemaSuggestionsNote");
+  if(!wrap||!grid||!note)return;
+  const connected=await connectNoemaFederation();
+  if(!connected){wrap.hidden=true;return;}
+  const unit=currentCurriculumUnit();
+  try{
+    const result=noemaFederation.discover({
+      query:`preschool ${unit.title} educational game practice`,
+      mode:"personal",context:noemaLearningContext(),maxResults:12
+    });
+    const resources=(result?.results||[]).filter(resource=>resource?.url&&resource.educationalGame?.game).slice(0,4);
+    if(!resources.length){wrap.hidden=true;return;}
+    wrap.hidden=false;
+    note.textContent=`${resources.length} age-gated game suggestion${resources.length===1?"":"s"} from NOEMA’s learning federation. Direct Preschool curriculum remains the higher-priority source.`;
+    grid.innerHTML=resources.map(resource=>`<a class="unit-app" href="${escapeHTML(resource.url)}" target="_blank" rel="noopener noreferrer"><i>🎮</i><span><strong>${escapeHTML(resource.title||"Learning game")}</strong><small>NOEMA federation · educational game</small></span></a>`).join("");
+  }catch(error){
+    console.info("NOEMA federation discovery failed; using local curriculum suggestions.",error);
+    wrap.hidden=true;
+  }
+}
+
+function curriculumStateStore(){return guestMode?sessionStorage:localStorage}
+function curriculumStateId(){return guestMode?"guest":(profile?.learnerId||"local")}
+function loadCurriculumState(){
+  try{const raw=curriculumStateStore().getItem(CURRICULUM_STATE_KEY),all=raw?JSON.parse(raw):{};return all&&typeof all==="object"?all:{}}
+  catch{return {}}
+}
+function currentCurriculumUnit(){
+  const state=loadCurriculumState(),id=state[curriculumStateId()]?.unitId||"unit-01";
+  return CURRICULUM_UNITS.find(unit=>unit.id===id)||CURRICULUM_UNITS[0]
+}
+function saveCurriculumUnitId(unitId){
+  const unit=CURRICULUM_UNITS.find(item=>item.id===unitId);if(!unit)return;
+  const store=curriculumStateStore(),state=loadCurriculumState();state[curriculumStateId()]={unitId:unit.id,updatedAt:new Date().toISOString()};
+  try{store.setItem(CURRICULUM_STATE_KEY,JSON.stringify(state))}catch{}
+}
+function curriculumActivityFit(activity,unit=currentCurriculumUnit()){
+  if(!activity||!unit)return 0;
+  let score=0;
+  if(unit.domains.includes(activity.domain))score+=.58;
+  if(unit.categories.includes(activity.category))score+=.22;
+  const hay=`${activity.title||""} ${activity.tags||""} ${activity.desc||""}`.toLowerCase();
+  const matches=unit.keywords.filter(k=>hay.includes(k.toLowerCase())).length;
+  score+=Math.min(.28,matches*.07);
+  return Math.min(1,score)
+}
+function curriculumBlueprint(base,unit=currentCurriculumUnit()){
+  const result=[...base],targets=unit.domains.filter(domain=>DOMAINS[domain]);
+  if(!targets.length)return result;
+  // Preserve the feelings check-in when the base plan includes it, then make
+  // at least one or two stations explicitly support the current curriculum unit.
+  const protectedIndex=result[0]==="feelings"?0:-1;
+  let targetIndex=0;
+  for(let i=0;i<result.length&&targetIndex<Math.min(2,targets.length);i++){
+    if(i===protectedIndex&&targets[targetIndex]!=="feelings")continue;
+    const target=targets[targetIndex++];
+    if(!result.includes(target))result[i]=target;
+  }
+  return result
+}
+function curriculumSuggestions(unit=currentCurriculumUnit(),limit=6){
+  const children=CATALOG.childActivities();
+  const scored=children.map(app=>{
+    let score=0;
+    if(unit.categories.includes(app.category))score+=5;
+    const mentor=app.mentor?.eligible?app.mentor:null;
+    if(mentor&&unit.domains.includes(mentor.domain))score+=5;
+    const hay=`${app.title||""} ${app.tags||""} ${app.desc||""}`.toLowerCase();
+    unit.keywords.forEach(word=>{if(hay.includes(word.toLowerCase()))score+=2});
+    if(mentor?.ages?.includes(profile?.ageBand))score+=2;
+    if(mentor?.interests?.some(i=>profile?.interests?.includes(i)))score+=1;
+    return {app,score};
+  }).filter(row=>row.score>0).sort((a,b)=>b.score-a.score||a.app.title.localeCompare(b.app.title));
+  return scored.slice(0,limit).map(row=>row.app)
+}
+function unitDomainLabel(domain){return DOMAINS[domain]?.label||domain}
+function renderCurriculumUI(){
+  const unit=currentCurriculumUnit();
+  const num=$("#currentUnitNumber"),title=$("#currentUnitTitle"),weeks=$("#currentUnitWeeks"),focus=$("#currentUnitFocus"),objectives=$("#currentUnitObjectives");
+  if(!num||!title||!weeks||!focus||!objectives)return;
+  num.textContent=`Unit ${unit.number} of ${CURRICULUM_UNITS.length}`;title.textContent=unit.title;weeks.textContent=unit.weeks;focus.textContent=unit.focus;
+  objectives.innerHTML=unit.objectives.map(item=>`<li>${escapeHTML(item)}</li>`).join("");
+  const apps=curriculumSuggestions(unit,6);
+  $("#unitApps").innerHTML=apps.map(app=>{
+    const mentorEligible=Boolean(app.mentor?.eligible),kind=mentorEligible?"Mentor station":"Companion app";
+    return `<a class="unit-app" href="${appUrl(app.file)}" data-curriculum-app="${escapeHTML(app.id)}"><i>${app.icon}</i><span><strong>${escapeHTML(app.title)}</strong><small>${kind} · ${escapeHTML(CATALOG.categories[app.category]?.label||app.category)}</small></span></a>`
+  }).join("")||'<span style="color:var(--muted);font-size:.8rem">No companion app is mapped to this unit yet.</span>';
+  $("#curriculumProgressNote").textContent=`${unit.weeks} · ${apps.length} current companion suggestions · Unit changes are family-controlled, not mastery gates.`;
+  const parentSummary=$("#parentCurriculumSummary"),parentBadge=$("#parentCurriculumBadge");
+  if(parentSummary)parentSummary.textContent=`Current curriculum: Unit ${unit.number} · ${unit.title} (${unit.weeks}). The child mentor prioritizes this unit while preserving whole-child domain balance.`;
+  if(parentBadge)parentBadge.textContent=`Unit ${unit.number} · ${unit.title}`;
+  renderCurriculumGrid();
+  renderNoemaUnitSuggestions();
+}
+function renderCurriculumGrid(){
+  const grid=$("#curriculumGrid");if(!grid)return;const current=currentCurriculumUnit();
+  grid.innerHTML=CURRICULUM_UNITS.map(unit=>`<article class="curriculum-unit ${unit.id===current.id?"current":""}"><div class="unit-number">Unit ${unit.number} · ${unit.weeks}</div><h3>${escapeHTML(unit.title)}</h3><p>${escapeHTML(unit.focus)}</p><div class="domain-chips">${unit.domains.map(domain=>`<span>${escapeHTML(unitDomainLabel(domain))}</span>`).join("")}</div><button type="button" data-select-unit="${unit.id}">${unit.id===current.id?"✓ Current Unit":"Use This Unit"}</button></article>`).join("")
+}
+function openCurriculumDialog(){const overlay=$("#curriculumOverlay");if(!overlay)return;renderCurriculumGrid();overlay.classList.add("open");overlay.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";setTimeout(()=>$("#closeCurriculumMap")?.focus(),40)}
+function closeCurriculumDialog(){const overlay=$("#curriculumOverlay");if(!overlay)return;overlay.classList.remove("open");overlay.setAttribute("aria-hidden","true");document.body.style.overflow="";$("#openCurriculumMap")?.focus()}
+async function selectCurriculumUnit(unitId){
+  const unit=CURRICULUM_UNITS.find(item=>item.id===unitId);if(!unit)return;
+  saveCurriculumUnitId(unit.id);removeJSON(PLAN_KEY);renderCurriculumUI();syncContinuity();updateMentorCard();await buildPlan(true);renderParentPortal();
+  toast(`Curriculum set to Unit ${unit.number}: ${unit.title}.`)
+}
+async function nextCurriculumUnit(){const current=currentCurriculumUnit(),index=CURRICULUM_UNITS.findIndex(unit=>unit.id===current.id),next=CURRICULUM_UNITS[(index+1)%CURRICULUM_UNITS.length];await selectCurriculumUnit(next.id)}
+function readCurriculumUnit(){const unit=currentCurriculumUnit();speak(`Unit ${unit.number}. ${unit.title}. ${unit.weeks}. ${unit.focus}. Learning goals: ${unit.objectives.join(" ")}`)}
+function downloadNoemaContext(){
+  const unit=currentCurriculumUnit();
+  const packet={
+    schema:"khaemenes.noema.learning-context.v1",createdAt:new Date().toISOString(),source:"Khaemenes Guided Preschool",
+    audience:"preschool",role:"parent-or-educator-review",noAutomaticTransmission:true,
+    learnerContext:{ageBand:profile?.ageBand||"guest",interests:[...(profile?.interests||[])],pace:profile?.pace||"balanced",availableMinutes:Number(profile?.minutes)||30},
+    curriculum:{framework:"Guided Preschool · 12 units · 36 weeks",unitId:unit.id,unitNumber:unit.number,title:unit.title,weeks:unit.weeks,focus:unit.focus,objectives:[...unit.objectives],domains:[...unit.domains]},
+    suggestedResources:curriculumSuggestions(unit,8).map(app=>({id:app.id,title:app.title,category:app.category,url:new URL(appUrl(app.file),location.href).href,mentorEligible:Boolean(app.mentor?.eligible)})),
+    learningRecord:{completedStations:progress?.completed?Object.values(progress.completed).reduce((sum,item)=>sum+(item?.count||0),0):0,domainCounts:{...(progress?.domainCounts||{})}},
+    coordinationNote:"Review this packet before using it with NOEMA / NAIB. The separate NOEMA origin cannot read Preschool localStorage automatically."
+  };
+  const blob=new Blob([JSON.stringify(packet,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=`khaemenes-preschool-noema-context-${unit.id}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1200);toast("NOEMA learning-context packet downloaded for parent review.")
 }
 
 function releaseCheckboxes(){return ["#releaseAuthority","#releaseEducation","#releaseResponsibility","#releaseAI","#releaseRespect","#releaseLimits","#releasePrivacy"]}
@@ -1716,7 +2063,19 @@ $("#readMentor").addEventListener("click",()=>speak($("#mentorMessage").textCont
 $("#exportData").addEventListener("click",exportLocalData);$("#resetData").addEventListener("click",resetAll);$("#reviewGuardianRelease").addEventListener("click",openReleaseReview);$("#calmMode").addEventListener("click",()=>{settings.calm=!settings.calm;saveSettings()});$("#motionMode").addEventListener("click",()=>{settings.noMotion=!settings.noMotion;saveSettings()});
 $$('[data-child-question]').forEach(b=>b.addEventListener("click",()=>{$("#parentChildMentorResponse").textContent=childMentorAnswer(b.dataset.childQuestion)}));$("#childMentorAskForm").addEventListener("submit",e=>{e.preventDefault();const q=$("#childMentorQuestion").value.trim();if(q)$("#parentChildMentorResponse").textContent=childMentorAnswer("",q)});
 $("#familyGuideStyle").addEventListener("change",()=>{familyGuideState={...familyGuideState,style:$("#familyGuideStyle").value,updatedAt:new Date().toISOString()};saveJSON(FAMILY_GUIDE_KEY,familyGuideState);renderParentPortal();const g=FAMILY_GUIDES[familyGuideState.style];$("#familyGuideResponse").textContent=`${g.name}: ${g.intro}`});$$('[data-guide-question]').forEach(b=>b.addEventListener("click",()=>{$("#familyGuideResponse").textContent=familyGuideAnswer(b.dataset.guideQuestion)}));$("#familyGuideAskForm").addEventListener("submit",e=>{e.preventDefault();const q=$("#familyGuideQuestion").value.trim();if(q)$("#familyGuideResponse").textContent=familyGuideAnswer("",q)});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#setupOverlay").hidden)closeSetup();if(e.key==="Tab"&&!$("#setupOverlay").hidden){const nodes=$$('button,input,select,[href],[tabindex]:not([tabindex="-1"])',$("#setupOverlay")).filter(n=>!n.disabled&&!n.hidden&&n.offsetParent!==null);if(!nodes.length)return;const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
+
+$("#openCurriculumMap")?.addEventListener("click",openCurriculumDialog);
+$("#parentOpenCurriculum")?.addEventListener("click",openCurriculumDialog);
+$("#closeCurriculumMap")?.addEventListener("click",closeCurriculumDialog);
+$("#curriculumOverlay")?.addEventListener("click",event=>{if(event.target===$("#curriculumOverlay"))closeCurriculumDialog()});
+$("#curriculumGrid")?.addEventListener("click",async event=>{const button=event.target.closest("[data-select-unit]");if(!button)return;await selectCurriculumUnit(button.dataset.selectUnit);closeCurriculumDialog()});
+$("#nextCurriculumUnit")?.addEventListener("click",nextCurriculumUnit);
+$("#readCurriculumUnit")?.addEventListener("click",readCurriculumUnit);
+$("#downloadNoemaContext")?.addEventListener("click",downloadNoemaContext);
+$("#openNoemaParentCoordination")?.addEventListener("click",()=>setPortalView("parent",{scroll:true}));
+$("#unitApps")?.addEventListener("click",event=>{const link=event.target.closest("[data-curriculum-app]");if(!link)return;const app=CATALOG.byId(link.dataset.curriculumApp);if(app)saveJSON(LAST_OPEN_KEY,{catalogId:app.id,mentorId:app.mentor?.legacyId||null,title:app.title,openedAt:new Date().toISOString(),source:"curriculum-companion"})});
+
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#curriculumOverlay")?.classList.contains("open")){closeCurriculumDialog();return}if(e.key==="Escape"&&!$("#setupOverlay").hidden)closeSetup();if(e.key==="Tab"&&!$("#setupOverlay").hidden){const nodes=$$('button,input,select,[href],[tabindex]:not([tabindex="-1"])',$("#setupOverlay")).filter(n=>!n.disabled&&!n.hidden&&n.offsetParent!==null);if(!nodes.length)return;const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
 
 
 
@@ -1866,7 +2225,7 @@ try{
 }
 
 (async function init(){
-  $("#year").textContent=new Date().getFullYear();$("#releaseVersionLabel").textContent=RELEASE_LABEL;updateReleaseStatus();syncGuestControls();$("#dayDate").textContent=new Intl.DateTimeFormat(undefined,{weekday:"long",month:"long",day:"numeric"}).format(new Date());rebuildProgressAggregates();applySettings();updateMentorCard();renderLearningGarden();if(profile)await connectAgent();await buildPlan(false);
+  $("#year").textContent=new Date().getFullYear();$("#releaseVersionLabel").textContent=RELEASE_LABEL;updateReleaseStatus();syncGuestControls();$("#dayDate").textContent=new Intl.DateTimeFormat(undefined,{weekday:"long",month:"long",day:"numeric"}).format(new Date());rebuildProgressAggregates();applySettings();connectNoemaFederation().then(()=>renderNoemaUnitSuggestions());renderCurriculumUI();updateMentorCard();renderLearningGarden();if(profile)await connectAgent();await buildPlan(false);
   const g=FAMILY_GUIDES[familyGuideState.style]||FAMILY_GUIDES.aster;$("#familyGuideResponse").textContent=`${g.name}: ${g.intro}`;
 })();
 
