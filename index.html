@@ -22,8 +22,9 @@
   --deep:#18244a;--deep-2:#28386d;--glow:0 0 0 7px rgba(255,255,255,.14);
 }
 *{box-sizing:border-box}
-section[id],div[id].anchor-target{scroll-margin-top:calc(var(--ticker-height) + var(--header-height) + 24px)}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--ticker-height) + var(--header-height) + 24px);background:#fff7e8}
+:root{--creche-anchor-offset:146px}
+section[id],div[id].anchor-target{scroll-margin-top:0}
+html{scroll-behavior:smooth;scroll-padding-top:0;background:#fff7e8}
 body{margin:0;min-width:300px;overflow-x:hidden;color:var(--ink);background:
   radial-gradient(circle at 5% 7%,rgba(255,190,31,.54),transparent 22rem),
   radial-gradient(circle at 94% 6%,rgba(22,143,229,.42),transparent 26rem),
@@ -646,6 +647,85 @@ body.app-modal-open{overflow:hidden}
   .parent-dashboard{box-shadow:none}
 }
 
+
+/* ===========================================================
+   v7 · Crechè home header + clean anchor system
+   =========================================================== */
+.nav{
+  min-height:var(--header-height);
+  display:grid;
+  grid-template-columns:minmax(270px,330px) minmax(0,1fr) auto auto;
+  align-items:center;
+  gap:10px;
+  padding:8px 0;
+}
+.brand{min-width:0}
+.brand>span:last-child{min-width:0}
+.brand strong{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.brand small{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.navlinks{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  flex-wrap:nowrap;
+}
+.navlinks a{
+  min-height:42px;
+  padding:.62rem .67rem;
+  white-space:nowrap;
+  font-size:.78rem;
+}
+.view-switch{flex:0 0 auto}
+.menu-btn{flex:0 0 50px}
+
+/* The script measures the real live ticker + header stack. */
+.section[id],.learner-home[id],#top{
+  scroll-margin-top:0!important;
+}
+body[data-anchor-moving="true"] .header{
+  box-shadow:0 7px 20px rgba(44,55,87,.10);
+}
+
+@media(max-width:1260px){
+  .nav{
+    grid-template-columns:minmax(260px,1fr) auto auto;
+  }
+  .navlinks{display:none}
+}
+@media(max-width:760px){
+  .nav{
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:7px 9px;
+  }
+  .brand{grid-column:1/-1}
+  .view-switch{justify-self:start}
+  .menu-btn{justify-self:end}
+}
+@media(max-width:580px){
+  .nav{padding:7px 0}
+  .brand strong{font-size:1.08rem}
+  .brand small{display:block;font-size:.62rem;letter-spacing:.075em}
+  .view-choice{font-size:.72rem;width:auto;padding:.45rem .58rem}
+  .view-choice:first-child::before,.view-choice:last-child::before{content:none}
+}
+
+/* Clear focus treatment for the active portal view. */
+.view-choice[aria-pressed="true"]{
+  box-shadow:0 7px 16px rgba(116,87,255,.22);
+}
+
 </style>
 </head>
 <body id="top" data-view="child">
@@ -661,15 +741,43 @@ body.app-modal-open{overflow:hidden}
 
 <header class="header">
   <div class="shell nav">
-    <a class="brand" href="#top"><span class="brand-bubble">🌈</span><span><strong>Khaemenes Preschool</strong><small>Crechè · Bright beginnings grow here</small></span></a>
-    <nav class="navlinks" aria-label="Primary navigation">
-      <a href="#familyMentorEntry">Open Mentor</a><a href="#profiles">Optional Profiles</a><a href="#rooms">Adventure Rooms</a><a href="#today">Today’s Pick</a><a href="#activities">All Adventures</a>
+    <a class="brand"
+       href="https://vervenveda.com/Khaemenes_Academy.github.io/"
+       aria-label="Khaemenes Academy home">
+      <span class="brand-bubble" aria-hidden="true">🌈</span>
+      <span>
+        <strong>Khaemenes Preschool</strong>
+        <small>Crechè · Bright beginnings grow here</small>
+      </span>
+    </a>
+
+    <nav class="navlinks" aria-label="Preschool sections">
+      <a href="#familyMentorEntry" aria-label="Parent and Family Mentor Account">Mentor</a>
+      <a href="#profiles">Profiles</a>
+      <a href="#rooms">Rooms</a>
+      <a href="#today">Today</a>
+      <a href="#activities">Adventures</a>
     </nav>
+
     <div class="view-switch" role="group" aria-label="Choose child or grown-up view">
-      <button class="view-choice" id="childViewBtn" type="button" data-view-choice="child" aria-pressed="true">🌈 Child</button>
-      <button class="view-choice" id="grownupViewBtn" type="button" data-view-choice="grownup" aria-pressed="false">🧑‍🧒 Grown-Up</button>
+      <button class="view-choice"
+              id="childViewBtn"
+              type="button"
+              data-view-choice="child"
+              aria-pressed="true">🌈 Child</button>
+      <button class="view-choice"
+              id="grownupViewBtn"
+              type="button"
+              data-view-choice="grownup"
+              aria-pressed="false">🧑‍🧒 Grown-Up</button>
     </div>
-    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open complete menu" aria-expanded="false">☰</button>
+
+    <button class="menu-btn"
+            id="menuBtn"
+            type="button"
+            aria-label="Open complete Preschool menu"
+            aria-controls="menuOverlay"
+            aria-expanded="false">☰</button>
   </div>
 </header>
 
@@ -701,11 +809,11 @@ body.app-modal-open{overflow:hidden}
       <h1>Crechè<span>Khaemenes Preschool · Read · Count · Create · Feel · Move · Wonder</span></h1>
       <p class="lead" id="heroLead">A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.</p>
       <div class="actions">
-        <a class="btn primary" href="#familyMentorEntry">Meet My Mentor · No Registration →</a>
+        <a class="btn primary" href="#familyMentorEntry">Parent / Family Mentor Account →</a>
         <a class="btn secondary" href="#rooms">Choose an Adventure Room ↓</a>
         <button class="btn secondary" id="surpriseHero" type="button">Pick One for Me 🎈</button>
       </div>
-      <div class="hero-notes"><span class="hero-note"><strong id="heroKidCount">52</strong>&nbsp;child adventures</span><span class="hero-note">No account required</span><span class="hero-note">Mentor open · no registration</span><span class="hero-note">Large, playful buttons</span></div>
+      <div class="hero-notes"><span class="hero-note"><strong id="heroKidCount">52</strong>&nbsp;child adventures</span><span class="hero-note">No account required</span><span class="hero-note">Personalized Mentor after family setup</span><span class="hero-note">Large, playful buttons</span></div>
     </div>
     <div class="hero-playground" aria-label="Quick adventure buttons">
       <div class="big-rainbow" aria-hidden="true"></div>
@@ -722,7 +830,7 @@ body.app-modal-open{overflow:hidden}
     <div class="heading compact-heading">
       <p class="kicker" id="homeKicker">My Crechè Home</p>
       <h2 id="myHomeTitle">A little home base for today.</h2>
-      <p id="myHomeIntro">Play, save favorites, explore rooms, and meet the Mentor without registration. A learner profile is optional and is only needed when a family wants persistent curriculum records and cross-grade continuity.</p>
+      <p id="myHomeIntro">Play, save favorites, and explore every Crechè adventure without registration. A family learner profile is used for the child’s personalized Mentor and formal curriculum continuity.</p>
     </div>
 
     <article class="family-mentor-entry" id="familyMentorEntry" aria-label="Parent and Family Mentor Account">
@@ -794,8 +902,8 @@ body.app-modal-open{overflow:hidden}
   <div class="shell">
     <div class="heading">
       <p class="kicker">One child · one growing learning pathway</p>
-      <h2>Play freely. Use profiles only when curriculum records need continuity.</h2>
-      <p>Crechè remains an open adventure garden and the Khaemenes Mentor remains public. Optional family and learner profiles are reserved for formal curriculum progress, assessments, portfolio records, certification, and cross-grade continuity.</p>
+      <h2>Play freely. Use a family learner profile for the personalized Mentor and curriculum continuity.</h2>
+      <p>Crechè remains an open adventure garden. Family and learner profiles are used for a child’s personalized Mentor, formal curriculum progress, assessments, portfolio records, certification, and cross-grade continuity.</p>
     </div>
 
     <section class="parent-dashboard grownup-mode-only" id="parentDashboard" aria-labelledby="parentDashboardTitle">
@@ -826,9 +934,9 @@ body.app-modal-open{overflow:hidden}
     <div class="family-grid">
       <article class="family-card featured" style="--family-glow:rgba(66,199,220,.18)">
         <span class="family-icon" aria-hidden="true">✨</span>
-        <h3>Open Khaemenes Preschool Mentor</h3>
-        <p>Meet Pip, Miri, Nova, or Sage and receive a balanced daily path through Crechè activities. Guest Mentor use does not require registration.</p>
-        <div class="family-meta"><span>No registration</span><span>Guest Mode</span><span>Balanced learning day</span></div>
+        <h3>Personalized Khaemenes Preschool Mentor</h3>
+        <p>After a family creates a child learner account, that child receives a named Mentor button and a personalized daily path through Crechè activities.</p>
+        <div class="family-meta"><span>Family learner account</span><span>Personalized Mentor</span><span>Balanced learning day</span></div>
         <div class="family-actions"><a class="family-action" href="#familyMentorEntry">Enter the Learning Hub →</a></div>
       </article>
 
@@ -1029,7 +1137,9 @@ body.app-modal-open{overflow:hidden}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="./assets/preschool-catalog.js"></script>
+<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
 <script>
+
 "use strict";
 const PRESCHOOL_CATALOG=window.KhaemenesPreschoolCatalog;
 if(!PRESCHOOL_CATALOG){
@@ -1138,7 +1248,7 @@ function buildCategories(){
   $("category").innerHTML=Object.entries(CATEGORIES).filter(([key])=>key!=="grownup").map(([key,data])=>`<option value="${key}">${escapeHtml(data.label)}</option>`).join("");
   const counts={};KID_APPS.forEach(app=>counts[app.category]=(counts[app.category]||0)+1);
   $("categoryGrid").innerHTML=Object.entries(CATEGORIES).filter(([key])=>!["all","grownup"].includes(key)).map(([key,data])=>`<button class="category-card" type="button" data-pick="${key}" style="background:linear-gradient(145deg,${data.a},${data.b})"><span>${data.icon}</span><strong>${escapeHtml(data.label)}</strong><small>${counts[key]||0} adventures</small></button>`).join("");
-  document.querySelectorAll("[data-pick]").forEach(button=>button.addEventListener("click",()=>{favoritesOnly=false;$("category").value=button.dataset.pick;$("search").value="";updateFavorites();filterActivities();$("activities").scrollIntoView({behavior:"smooth"})}));
+  document.querySelectorAll("[data-pick]").forEach(button=>button.addEventListener("click",()=>{favoritesOnly=false;$("category").value=button.dataset.pick;$("search").value="";updateFavorites();filterActivities();goToSection("#activities",{history:false})}));
 }
 function stageBadge(app){
   if(!profile||!app.mentor?.eligible)return "";
@@ -1255,7 +1365,7 @@ function saveProfile(){
   toast(`${profile.nickname}’s child profile is ready. Favorites now pin to this profile.`);
 }
 function showPinnedInGarden(){
-  favoritesOnly=true;$("category").value="all";$("search").value="";updateFavorites();filterActivities();$("activities").scrollIntoView({behavior:calm?"auto":"smooth"});
+  favoritesOnly=true;$("category").value="all";$("search").value="";updateFavorites();filterActivities();goToSection("#activities",{history:false,behavior:calm?"auto":"smooth"});
 }
 function exportFamilyRecord(){
   const mentorProgress=readJSON(MENTOR_PROGRESS_KEY,null);
@@ -1458,10 +1568,16 @@ function setView(view,{scroll=false}={}){
   currentView=view==="grownup"?"grownup":"child";
   document.body.dataset.view=currentView;
   writeJSON(VIEW_KEY,currentView);
-  document.querySelectorAll("[data-view-choice]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.viewChoice===currentView)));
+  document.querySelectorAll("[data-view-choice]").forEach(btn=>{
+    btn.setAttribute("aria-pressed",String(btn.dataset.viewChoice===currentView));
+  });
   if(scroll){
-    const target=currentView==="grownup"?$("parentDashboard"):$("myHome");
-    target?.scrollIntoView({behavior:reduceMotion||calm?"auto":"smooth",block:"start"});
+    requestAnimationFrame(()=>{
+      goToSection(currentView==="grownup"?"#profiles":"#myHome",{
+        history:false,
+        behavior:reduceMotion||calm?"auto":"smooth"
+      });
+    });
   }
 }
 function setReducedMotion(value){
@@ -1503,24 +1619,26 @@ function mentorPlanData(){
   return {plan,items,completed};
 }
 function renderMentorPlanPreview(){
+  const titleEl=titleEl,introEl=introEl,previewEl=previewEl;
+  if(!titleEl||!introEl||!previewEl)return;
   const data=mentorPlanData();
   if(!profile){
-    $("mentorPlanTitle").textContent="A balanced little day";
-    $("mentorPlanIntro").textContent="Open the public Guest Mentor to prepare today’s short learning path. No registration required.";
-    $("mentorPlanPreview").innerHTML='<div class="mini-plan-empty">No learner profile yet.</div>';
+    titleEl.textContent="A balanced little day";
+    introEl.textContent="Open the public Guest Mentor to prepare today’s short learning path. No registration required.";
+    previewEl.innerHTML='<div class="mini-plan-empty">No learner profile yet.</div>';
     return;
   }
   const mentor=mentorMatch();
   if(!data||!data.items.length){
-    $("mentorPlanTitle").textContent=`${mentor.name} can plan today with ${profile.nickname}`;
-    $("mentorPlanIntro").textContent="Open the Guest Mentor once to create today’s balanced, age-aware learning path.";
-    $("mentorPlanPreview").innerHTML='<div class="mini-plan-empty">Today’s guided path has not been created yet.</div>';
+    titleEl.textContent=`${mentor.name} can plan today with ${profile.nickname}`;
+    introEl.textContent="Open the Guest Mentor once to create today’s balanced, age-aware learning path.";
+    previewEl.innerHTML='<div class="mini-plan-empty">Today’s guided path has not been created yet.</div>';
     return;
   }
   const done=data.items.filter(item=>item.done).length;
-  $("mentorPlanTitle").textContent=`${profile.nickname} + ${mentor.name} · ${done} of ${data.items.length} complete`;
-  $("mentorPlanIntro").textContent=`Today’s ${data.plan.energy||"ready"}-energy path is shared directly from the Guided Preschool Mentor.`;
-  $("mentorPlanPreview").innerHTML=data.items.map((item,index)=>`<div class="mini-station ${item.done?"done":""}"><span>${item.done?"✓":index+1}</span><i>${item.app.icon}</i><strong>${escapeHtml(displayTitle(item.app))}</strong></div>`).join("");
+  titleEl.textContent=`${profile.nickname} + ${mentor.name} · ${done} of ${data.items.length} complete`;
+  introEl.textContent=`Today’s ${data.plan.energy||"ready"}-energy path is shared directly from the Guided Preschool Mentor.`;
+  previewEl.innerHTML=data.items.map((item,index)=>`<div class="mini-station ${item.done?"done":""}"><span>${item.done?"✓":index+1}</span><i>${item.app.icon}</i><strong>${escapeHtml(displayTitle(item.app))}</strong></div>`).join("");
 }
 function renderLearnerHome(){
   const mentor=mentorMatch();
@@ -1530,20 +1648,12 @@ function renderLearnerHome(){
     $("homeKicker").textContent=`${greeting}, ${profile.nickname}`;
     $("myHomeTitle").textContent=`${profile.nickname}’s Crechè home`;
     $("myHomeIntro").textContent=`Favorites, explored adventures, and ${mentor.name}’s guided learning path stay connected to this local child profile.`;
-    $("homeMentorAvatar").textContent=mentor.avatar;
-    $("homeMentorName").textContent=`${mentor.name} · ${profile.nickname}’s mentor`;
-    $("homeMentorMessage").textContent=`Free, privacy-conscious, personalized early education. ${mentor.name} can help ${profile.nickname} choose age-aligned activities, gentle hints, movement breaks, and balanced play.`;
-    $("homeMentorLink").textContent="Open My Mentor →";
     $("heroEyebrow").textContent=`${mentor.avatar} ${greeting}, ${profile.nickname} · ${mentor.name} is here too`;
     $("heroLead").textContent=`Welcome back to a joyful preschool world built around ${profile.nickname}’s curiosity. Continue an adventure, visit a favorite, or let ${mentor.name} guide today’s learning path.`;
   }else{
     $("homeKicker").textContent="My Crechè Home";
     $("myHomeTitle").textContent="A little home base for today.";
-    $("myHomeIntro").textContent="Play, save favorites, explore rooms, and meet the Mentor without registration. A learner profile is optional and is only needed when a family wants persistent curriculum records and cross-grade continuity.";
-    $("homeMentorAvatar").textContent="✨";
-    $("homeMentorName").textContent="Your mentor is waiting";
-    $("homeMentorMessage").textContent="Free, privacy-conscious, personalized early education. The Mentor offers age-aligned activities, gentle hints, read-aloud, movement breaks, and balanced play. Guest Mode is open to everyone.";
-    $("homeMentorLink").textContent="Meet My Mentor →";
+    $("myHomeIntro").textContent="Play, save favorites, and explore every Crechè adventure without registration. A family learner profile is used for the child’s personalized Mentor and formal curriculum continuity.";
     $("heroEyebrow").textContent="🌟 A colorful first doorway to learning";
     $("heroLead").textContent="A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.";
   }
@@ -1586,7 +1696,7 @@ function renderAdventureTrail(){
     $("search").value="";
     updateFavorites();
     filterActivities();
-    $("activities").scrollIntoView({behavior:reduceMotion||calm?"auto":"smooth"});
+    goToSection("#activities",{history:false,behavior:reduceMotion||calm?"auto":"smooth"});
   }));
   const roomsStarted=trailCategories.filter(([key])=>KID_APPS.some(app=>app.category===key&&visited.has(app.id))).length;
   $("trailCelebration").textContent=roomsStarted===0
@@ -1632,8 +1742,11 @@ function renderParentDashboard(){
   $("familyIdea").textContent=FAMILY_IDEAS[day%FAMILY_IDEAS.length];
 }
 function scrollToParentDashboard(){
-  setView("grownup");
-  $("parentDashboard")?.scrollIntoView({behavior:reduceMotion||calm?"auto":"smooth",block:"start"});
+  setView("grownup",{scroll:false});
+  requestAnimationFrame(()=>goToSection("#profiles",{
+    history:false,
+    behavior:reduceMotion||calm?"auto":"smooth"
+  }));
 }
 function focusableWithin(root){
   return [...root.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(el=>!el.hidden&&el.offsetParent!==null);
@@ -1676,8 +1789,91 @@ document.addEventListener("click",event=>{
 });
 
 
+
+/* ===========================================================
+   v7 · clean section navigation
+   =========================================================== */
+const CLEAN_ANCHOR_MAP={
+  "#familyMentorEntry":"#myHome",
+  "#parentDashboard":"#profiles",
+  "#pinnedGames":"#profiles"
+};
+
+function measureStickyStack(){
+  const ticker=$("learningTicker");
+  const header=document.querySelector(".header");
+  const tickerHeight=Math.ceil(ticker?.getBoundingClientRect().height||0);
+  const headerHeight=Math.ceil(header?.getBoundingClientRect().height||0);
+
+  document.documentElement.style.setProperty("--ticker-height",`${tickerHeight}px`);
+  document.documentElement.style.setProperty("--header-height",`${headerHeight}px`);
+
+  const offset=tickerHeight+headerHeight+24;
+  document.documentElement.style.setProperty("--creche-anchor-offset",`${offset}px`);
+  return offset;
+}
+
+function cleanAnchorTarget(hash){
+  if(!hash||hash==="#")return null;
+  if(hash==="#top")return document.body;
+
+  const mapped=CLEAN_ANCHOR_MAP[hash]||hash;
+  let target=null;
+  try{target=document.querySelector(mapped)}catch{return null}
+  if(!target)return null;
+
+  /* If a heading/card was linked, arrive at the containing section boundary. */
+  return target.closest("section[id]")||target;
+}
+
+function goToSection(hash,{history=true,behavior=null}={}){
+  const target=cleanAnchorTarget(hash);
+  if(!target)return false;
+
+  const offset=measureStickyStack();
+  const motion=behavior||(reduceMotion||calm?"auto":"smooth");
+  const top=hash==="#top"
+    ? 0
+    : Math.max(0,target.getBoundingClientRect().top+window.scrollY-offset);
+
+  document.body.dataset.anchorMoving="true";
+  window.scrollTo({top,behavior:motion});
+  window.setTimeout(()=>delete document.body.dataset.anchorMoving,450);
+
+  if(history){
+    try{window.history.pushState(null,"",hash)}catch{}
+  }
+  return true;
+}
+
+function prepareViewForHash(hash){
+  if(["#grownups","#parentDashboard"].includes(hash)){
+    setView("grownup",{scroll:false});
+  }else if(["#myHome","#familyMentorEntry","#trail"].includes(hash)){
+    setView("child",{scroll:false});
+  }
+}
+
+document.addEventListener("click",event=>{
+  const link=event.target.closest('a[href^="#"]');
+  if(!link)return;
+
+  const hash=link.getAttribute("href");
+  if(!hash||hash==="#")return;
+
+  event.preventDefault();
+  prepareViewForHash(hash);
+  if($("menuOverlay")?.classList.contains("open"))closeMenu();
+
+  /* Let any view-mode display change settle before measuring the destination. */
+  requestAnimationFrame(()=>goToSection(hash));
+});
+
+window.addEventListener("resize",measureStickyStack,{passive:true});
+window.addEventListener("orientationchange",()=>setTimeout(measureStickyStack,120),{passive:true});
+
 function renderFamilyMentorEntry(){
-  const box=$("#childMentorButtons"),status=$("#familyAccountStatus");
+  const box=$("childMentorButtons"),status=$("familyAccountStatus");
   if(!box||!status)return;
   const registry=window.KhaemenesFamilyRegistry;
 
@@ -1702,8 +1898,8 @@ function renderFamilyMentorEntry(){
   }
 
   box.innerHTML=learners.map(learner=>{
-    const nickname=escapeHTML(learner.nickname||"My Child");
-    const learnerId=escapeHTML(learner.learnerId||"");
+    const nickname=escapeHtml(learner.nickname||"My Child");
+    const learnerId=escapeHtml(learner.learnerId||"");
     return `<a class="child-mentor-button" href="./mentor/index.html" data-enter-child-mentor="${learnerId}">
       <span class="child-star" aria-hidden="true">🌟</span>
       <span>Enter ${nickname}’s Mentor</span>
@@ -1763,7 +1959,7 @@ $("grownupViewBtn").addEventListener("click",()=>setView("grownup",{scroll:true}
 $("homeSurprise").addEventListener("click",()=>chooseRandom());
 $("homeCalmBtn").addEventListener("click",()=>setCalm(!calm));
 $("motionBtn").addEventListener("click",()=>setReducedMotion(!reduceMotion));
-$("readHomeMentor").addEventListener("click",()=>speakText($("homeMentorMessage").textContent));
+$("readHomeMentor")?.addEventListener("click",()=>speakText($("homeMentorMessage")?.textContent||""));
 $("newAwayPrompt").addEventListener("click",()=>{chooseOffscreenPrompt();toast("A new off-screen adventure is ready.")});
 $("readAwayPrompt").addEventListener("click",()=>speakText($("awayPrompt").textContent));
 $("continueLink").addEventListener("click",()=>{const id=$("continueLink").dataset.continueApp;if(id)markVisited(id)});
@@ -1793,19 +1989,36 @@ $("openChildProfile").addEventListener("click",openProfileDialog);$("editProfile
 $("closeProfile").addEventListener("click",closeProfileDialog);$("cancelProfile").addEventListener("click",closeProfileDialog);$("saveChildProfile").addEventListener("click",saveProfile);
 $("profileOverlay").addEventListener("click",event=>{if(event.target===$("profileOverlay"))closeProfileDialog()});
 $("profileOverlay").addEventListener("keydown",event=>{if($("profileOverlay").classList.contains("open"))trapFocus(event,$("profileOverlay"))});
-$("showProfileFavorites").addEventListener("click",showPinnedInGarden);$("managePinnedGames").addEventListener("click",()=>{$("activities").scrollIntoView({behavior:calm?"auto":"smooth"})});
+$("showProfileFavorites").addEventListener("click",showPinnedInGarden);$("managePinnedGames").addEventListener("click",()=>goToSection("#activities",{history:false,behavior:calm?"auto":"smooth"}));
 $("exportFamilyData").addEventListener("click",exportFamilyRecord);$("eraseFamilyData").addEventListener("click",eraseFamilyRecord);
 document.addEventListener("keydown",event=>{if(event.key==="Escape"){if(!$("appModal").hidden){closeAppModal();return}closeMenu();closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
-</script>
-  <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
-  <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-school-bridge.js" data-khaemenes-stage="preschool">
+
+
 window.addEventListener("khaemenes-family-changed",renderFamilyMentorEntry);
 window.addEventListener("storage",event=>{
-  if(["khaemenes_family_registry_v1","khaemenes_active_learner_v1","khaemenes_active_family_v1"].includes(event.key)){
+  if([
+    "khaemenes_family_registry_v1",
+    "khaemenes_active_learner_v1",
+    "khaemenes_active_family_v1"
+  ].includes(event.key)){
     renderFamilyMentorEntry();
   }
 });
 
+/* Correct a bookmarked/deep-linked section after the full layout settles. */
+window.addEventListener("load",()=>{
+  measureStickyStack();
+  if(location.hash){
+    prepareViewForHash(location.hash);
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        goToSection(location.hash,{history:false,behavior:"auto"});
+      });
+    });
+  }
+});
+
 </script>
+<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-school-bridge.js" data-khaemenes-stage="preschool"></script>
 </body>
 </html>
