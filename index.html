@@ -70,12 +70,12 @@ a{color:inherit}button,input,select{font:inherit}button{cursor:pointer}
 }
 .ticker-track{
   width:max-content;height:100%;display:flex;align-items:center;white-space:nowrap;
-  animation:ticker-slide 54s linear infinite;will-change:transform
+  animation:ticker-slide 30s linear infinite;will-change:transform
 }
 .learning-ticker:hover .ticker-track,
 .learning-ticker:focus-within .ticker-track,
 .learning-ticker[data-paused="true"] .ticker-track{animation-play-state:paused}
-.ticker-set{display:flex;align-items:center;gap:28px;padding-inline:28px}
+.ticker-set{flex:0 0 auto;display:flex;align-items:center;gap:20px;padding:0 10px}
 .ticker-title{color:#ffe69d;font-family:var(--serif);font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
 .ticker-link{min-height:var(--ticker-height);display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:.76rem;font-weight:800;letter-spacing:.065em}
 .ticker-link::before{content:"";width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--pink));box-shadow:0 0 0 3px rgba(255,255,255,.12)}
@@ -269,6 +269,28 @@ h2{margin:8px 0 0;color:#413c72;font-family:var(--serif);font-size:clamp(2.3rem,
 .site-card small{margin-top:auto;padding-top:12px;color:#f1dcae;word-break:break-word}
 .parent-note{margin-top:22px;padding:17px;border-radius:18px;color:rgba(255,255,255,.72);background:rgba(255,255,255,.07);font-size:.8rem}
 
+/* Support + original-work protector */
+.support-section{
+  position:relative;overflow:hidden;border-block:1px solid rgba(45,58,92,.14);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(255,214,61,.26),transparent 20rem),
+    radial-gradient(circle at 90% 85%,rgba(34,203,230,.20),transparent 23rem),
+    linear-gradient(145deg,#fffdf7,#eef9ff 55%,#fff4dc);
+}
+.support-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:22px;align-items:stretch}
+.support-copy,.support-card,.protector-note{border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow)}
+.support-copy{padding:30px}.support-copy h2{font-size:clamp(2.1rem,4.5vw,3.8rem)}
+.support-copy p{color:var(--muted)}
+.support-badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.support-badges span{padding:6px 9px;border-radius:999px;background:#f3f6fa;color:#59677b;font-size:.7rem;font-weight:800}
+.support-card{display:grid;place-items:center;align-content:center;padding:28px;text-align:center;background:linear-gradient(160deg,#fff,#fff8e5)}
+.support-card h3{margin:0;color:#413c72;font-family:var(--serif);font-size:1.65rem}.support-card p{max-width:420px;color:var(--muted);font-size:.84rem}
+.support-card stripe-buy-button{display:block;max-width:100%}
+.protector-note{margin-top:22px;padding:20px 22px;color:#516078;background:rgba(255,255,255,.88);font-size:.78rem;line-height:1.7}
+.protector-note strong{display:block;margin-bottom:4px;color:#373765;font-family:var(--serif);font-size:1rem}
+.protector-note .family-rights{margin-top:7px;color:#26705c;font-weight:800}
+.ticker-support{color:#fff7b7}.ticker-support::before{background:linear-gradient(135deg,#fff1a8,#ff8ac8)}
+@media(max-width:820px){.support-grid{grid-template-columns:1fr}}
+
 .footer{padding:35px 0;color:rgba(255,255,255,.74);background:#1b2235}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .footer strong{color:#fff}
@@ -298,7 +320,7 @@ body.calm .activity:hover,body.calm .category-card:hover,body.calm .new-card:hov
 
 @media(max-width:1080px){.hero-inner{grid-template-columns:1fr}.hero-copy{text-align:center}.lead{margin-inline:auto}.actions,.hero-notes{justify-content:center}.hero-playground{width:min(100%,540px);margin:auto}.new-grid{grid-template-columns:repeat(3,1fr)}.category-grid{grid-template-columns:repeat(3,1fr)}.category-card{min-height:220px}.activity-grid{grid-template-columns:repeat(2,1fr)}.site-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:820px){.navlinks{display:none}.daily-grid{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr 1fr}.toolbar .field:first-child{grid-column:1/-1}.new-grid,.category-grid{grid-template-columns:repeat(2,1fr)}.category-card{min-height:210px}.category-card span{min-width:100px;min-height:100px;font-size:4rem}.parent-tools{grid-template-columns:1fr}.site-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:580px){:root{--ticker-height:34px;--header-height:72px}.learning-ticker{grid-template-columns:minmax(0,1fr) 38px}.ticker-toggle{width:38px}.ticker-set{gap:20px;padding-inline:20px}.ticker-track{animation-duration:38s}.brand-bubble{width:48px;height:48px;flex-basis:48px}.brand strong{font-size:1.13rem}.hero{min-height:auto;padding-top:48px}h1{font-size:3.8rem}.hero-copy{padding:28px 19px}.hero-playground{min-height:400px}.orbit-button{width:70px;height:70px;font-size:1.8rem}.actions{display:grid}.btn{width:100%}.new-grid,.category-grid,.activity-grid,.site-grid{grid-template-columns:1fr}.category-card{min-height:200px}.category-card span{min-width:105px;min-height:105px}.toolbar{grid-template-columns:1fr}.toolbar .field:first-child{grid-column:auto}.card-actions{grid-template-columns:1fr}.brand small{display:none}}
+@media(max-width:580px){:root{--ticker-height:34px;--header-height:72px}.learning-ticker{grid-template-columns:minmax(0,1fr) 38px}.ticker-toggle{width:38px}.ticker-set{gap:18px;padding-inline:10px}.ticker-track{animation-duration:26s}.brand-bubble{width:48px;height:48px;flex-basis:48px}.brand strong{font-size:1.13rem}.hero{min-height:auto;padding-top:48px}h1{font-size:3.8rem}.hero-copy{padding:28px 19px}.hero-playground{min-height:400px}.orbit-button{width:70px;height:70px;font-size:1.8rem}.actions{display:grid}.btn{width:100%}.new-grid,.category-grid,.activity-grid,.site-grid{grid-template-columns:1fr}.category-card{min-height:200px}.category-card span{min-width:105px;min-height:105px}.toolbar{grid-template-columns:1fr}.toolbar .field:first-child{grid-column:auto}.card-actions{grid-template-columns:1fr}.brand small{display:none}}
 @media print{.learning-ticker,.header,.menu-overlay,.hero-playground,.hero .actions,.category-grid,.toolbar,.favorite,.card-actions,.grownup,.footer,.toast,.sky-decor{display:none!important}.hero{min-height:0;padding:1rem 0;background:#fff}.hero-inner{grid-template-columns:1fr}.section{padding:1.5rem 0}.activity-grid{grid-template-columns:repeat(2,1fr)}.activity{box-shadow:none;break-inside:avoid}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
@@ -1122,8 +1144,8 @@ body.category-directory-open{overflow:hidden}
 
 <section class="section alt" id="rooms">
   <div class="shell">
-    <div class="heading"><p class="kicker">Pick a colorful adventure room</p><h2>Where shall we play and learn?</h2><p>Every room is a giant button. Tap one to open a focused pop-up shelf of adventures, or open the complete Preschool app directory.</p></div>
-    <div class="room-directory-actions"><button class="directory-launch" id="allAppsBtn" type="button">✨ Complete App Directory · <span id="allAppsCount">53</span> Apps</button></div>
+    <div class="heading"><p class="kicker">Pick a colorful adventure room</p><h2>Where shall we play and learn?</h2><p>Every room is a giant button. Tap one to open a focused pop-up shelf of adventures, or open the complete Preschool directory with 52 child adventures plus grown-up resources.</p></div>
+    <div class="room-directory-actions"><button class="directory-launch" id="allAppsBtn" type="button">✨ Complete Directory · <span id="allAppsCount">53</span> Total Resources</button></div>
     <div class="category-grid" id="categoryGrid"></div>
   </div>
 </section>
@@ -1172,6 +1194,37 @@ body.category-directory-open{overflow:hidden}
   </div>
 </section>
 
+<section class="section support-section" id="support" aria-labelledby="supportTitle">
+  <div class="shell">
+    <div class="support-grid">
+      <article class="support-copy">
+        <p class="kicker">For grown-ups who want to help the garden grow</p>
+        <h2 id="supportTitle">Support original learning, play, and creation.</h2>
+        <p>Crechè is an open preschool adventure garden. Voluntary contributions help Verve N Veda and Khaemenes Academy continue developing original learning games, curriculum, creative tools, family resources, hosting, research, and new public educational experiences.</p>
+        <div class="support-badges"><span>Open child adventures</span><span>Original learning tools</span><span>Independent development</span><span>Voluntary support</span></div>
+        <div class="actions">
+          <a class="btn secondary" href="./apps/Life_skills_donate_index.html">Open Crechè Support Page</a>
+        </div>
+      </article>
+      <aside class="support-card" aria-label="Contribution options">
+        <span style="font-size:2.4rem" aria-hidden="true">💝</span>
+        <h3>Contribute to Verve N Veda</h3>
+        <p>Thank you for helping independent educational and creative work remain available and continue to grow.</p>
+        <stripe-buy-button
+          buy-button-id="buy_btn_1TtUqXJv39zQCMS1skiXSbvP"
+          publishable-key="pk_live_51RpGqiJv39zQCMS1Gms5qklNYpH8haeue2dSLG76KHSims5CbWbitNjqlwhxDvjewGefNyrh24zNMsdQSk5m3mbE00Ajsji1iw">
+        </stripe-buy-button>
+        <small style="display:block;margin-top:10px;color:#737d8c">Voluntary support for Verve N Veda / Khaemenes educational and creative development. This is separate from any political campaign contribution.</small>
+      </aside>
+    </div>
+    <div class="protector-note">
+      <strong>Curriculum &amp; Creative Works Protector · All Rights Reserved</strong>
+      Unless otherwise credited, the original Khaemenes Academy and Verve N Veda curriculum, lesson sequencing, instructional text, assessments, games, activities, page designs, learning tools, and course structures on this site are original works of Jennifer Kay Pearl and are protected. Families are welcome to use Crechè freely for their own children and learners. Copying, scraping, mirroring, republishing, redistributing, reselling, or publishing derivative versions of protected site content requires written permission except where otherwise permitted by law.
+      <div class="family-rights">Family-created learner records, portfolio work, favorites, and personal educational data remain under family control.</div>
+    </div>
+  </div>
+</section>
+
 <section class="section grownup grownup-mode-only" id="grownups">
   <div class="shell">
     <div class="heading"><p class="kicker">Parents, caregivers & teachers</p><h2>The grown-up corner</h2><p>Support gentle routines, adjust the visual experience, and continue into the wider family of public educational resources.</p></div>
@@ -1183,7 +1236,7 @@ body.category-directory-open{overflow:hidden}
       <a class="parent-card" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><span class="parent-icon">🌻</span><h3>Kinder Garden</h3><p>Continue into kindness, curiosity, early literacy, number sense, nature, and school readiness.</p><span>Enter Kinder Garden →</span></a>
       <a class="parent-card" href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><span class="parent-icon">🏫</span><h3>Elementary School</h3><p>Continue toward Kinder Garden through Grade 5 learning and family resources.</p><span>Enter Elementary →</span></a>
       <a class="parent-card" href="./apps/Life_skills_organizer_index.html"><span class="parent-icon">🗓️</span><h3>Little Organizer</h3><p>Build simple routines and help children understand what comes next.</p><span>Open Organizer →</span></a>
-      <a class="parent-card" href="./apps/Life_skills_donate_index.html"><span class="parent-icon">💝</span><h3>Support Crechè</h3><p>Help free early-learning tools continue to grow.</p><span>Open Support Page →</span></a>
+      <a class="parent-card" href="#support"><span class="parent-icon">💝</span><h3>Support Crechè</h3><p>Help original early-learning tools, games, and curriculum continue to grow.</p><span>Contribute →</span></a>
     </div>
 
     <details class="network-directory" id="networkDirectory">
@@ -1196,7 +1249,7 @@ body.category-directory-open{overflow:hidden}
 </section>
 </main>
 
-<footer class="footer"><div class="shell footer-inner"><span><strong>© <span id="year"></span> Verve N Veda · Khaemenes Academy · Khaemenes Preschool · Jennifer Kay Pearl</strong></span><span><a href="#activities">Adventures</a> · <a href="#grownups">Grown-Ups</a> · <a href="#top">Back to Top</a></span></div></footer>
+<footer class="footer"><div class="shell footer-inner"><span><strong>© <span id="year"></span> Jennifer Kay Pearl · Verve N Veda · Khaemenes Academy · Khaemenes Preschool · All Rights Reserved</strong></span><span><a href="#activities">Adventures</a> · <a href="#support">Contribute</a> · <a href="#grownups">Grown-Ups</a> · <a href="#top">Back to Top</a></span></div></footer>
 
 
 
@@ -1265,6 +1318,7 @@ body.category-directory-open{overflow:hidden}
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
 <script src="./assets/preschool-catalog.js"></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
 <script>
@@ -1483,8 +1537,8 @@ function buildMenu(query=""){
   const roomButtons=Object.entries(CATEGORIES).filter(([key])=>!["all","grownup"].includes(key)).map(([key,data])=>`<button class="menu-room-button" type="button" data-menu-category="${key}"><i>${data.icon}</i><span><strong>${escapeHtml(data.label)}</strong><small>${counts[key]||0} adventures</small></span></button>`).join("");
   const childSection=q
     ? `<p class="menu-group">Matching Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(displayTitle(app))}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div>`
-    : `<p class="menu-group">Adventure Rooms · ${KID_APPS.length} child apps</p><div class="menu-room-grid"><button class="menu-room-button all-apps" type="button" data-menu-category="all"><i>✨</i><span><strong>Complete App Directory</strong><small>All ${APPS.length} validated catalog entries</small></span></button>${roomButtons}</div>`;
-  $("menuContent").innerHTML=`${childSection}<p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+familyFixed}</p><div class="menu-list"><a class="menu-link" data-close-menu href="#familyMentorEntry"><i>✨</i><span><strong>Open Preschool Mentor</strong><small>Guest learning path · no registration</small></span><span>→</span></a><button class="menu-link menu-action" type="button" data-menu-action="child-profile"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="parent-dashboard"><i>🧑‍🧒</i><span><strong>Parent Dashboard &amp; Controls</strong><small>Summary, export, edit, and erase</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="comfort"><i>🌤️</i><span><strong>Comfort &amp; Accessibility</strong><small>Calm colors, motion, and read-aloud</small></span><span>→</span></button><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_donate_index.html"><i>💝</i><span><strong>Support Crechè</strong><small>Support free early learning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" data-close-menu href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No public destinations matched.</small>"}</div>`;
+    : `<p class="menu-group">Adventure Rooms · ${KID_APPS.length} child apps</p><div class="menu-room-grid"><button class="menu-room-button all-apps" type="button" data-menu-category="all"><i>✨</i><span><strong>Complete Preschool Directory</strong><small>${KID_APPS.length} child adventures + ${GROWNUP_APPS.length} grown-up resource${GROWNUP_APPS.length===1?"":"s"}</small></span></button>${roomButtons}</div>`;
+  $("menuContent").innerHTML=`${childSection}<p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+familyFixed}</p><div class="menu-list"><a class="menu-link" data-close-menu href="#familyMentorEntry"><i>✨</i><span><strong>Open Preschool Mentor</strong><small>Guest learning path · no registration</small></span><span>→</span></a><button class="menu-link menu-action" type="button" data-menu-action="child-profile"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="parent-dashboard"><i>🧑‍🧒</i><span><strong>Parent Dashboard &amp; Controls</strong><small>Summary, export, edit, and erase</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="comfort"><i>🌤️</i><span><strong>Comfort &amp; Accessibility</strong><small>Calm colors, motion, and read-aloud</small></span><span>→</span></button><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#support"><i>💝</i><span><strong>Support Crechè</strong><small>Support original learning and creative work</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" data-close-menu href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No public destinations matched.</small>"}</div>`;
 }
 
 function mentorMatch(){return MENTOR_MATCHES[profile?.personality]||MENTOR_MATCHES.playful}
@@ -1743,8 +1797,9 @@ function renderFeaturedGame(){
 
 function renderTicker(){
   const chosen=NEW_IDS.map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean);
-  const oneSet=()=>`<div class="ticker-set"><span class="ticker-title">Crechè Featured Adventures</span>${chosen.map(app=>`<a class="ticker-link" data-open-app="${app.id}" href="${appUrl(app)}">${escapeHtml(displayTitle(app))}</a>`).join("")}</div>`;
-  const twoSet=()=>`<div class="ticker-set" aria-hidden="true"><span class="ticker-title">Crechè Featured Adventures</span>${chosen.map(app=>`<a class="ticker-link" tabindex="-1" data-open-app="${app.id}" href="${appUrl(app)}">${escapeHtml(displayTitle(app))}</a>`).join("")}</div>`;
+  const adventureLinks=(tabIndex="")=>chosen.map(app=>`<a class="ticker-link" ${tabIndex} data-open-app="${app.id}" href="${appUrl(app)}">${escapeHtml(displayTitle(app))}</a>`).join("");
+  const oneSet=()=>`<div class="ticker-set"><span class="ticker-title">Crechè Featured Adventures</span>${adventureLinks()}<a class="ticker-link ticker-support" href="#support">💝 Support Original Work · Contribute</a></div>`;
+  const twoSet=()=>`<div class="ticker-set" aria-hidden="true"><span class="ticker-title">Crechè Featured Adventures</span>${adventureLinks('tabindex="-1"')}<a class="ticker-link ticker-support" tabindex="-1" href="#support">💝 Support Original Work · Contribute</a></div>`;
   $("tickerTrack").innerHTML=oneSet()+twoSet();
   document.querySelectorAll("#tickerTrack [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
 }
