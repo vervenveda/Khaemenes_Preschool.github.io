@@ -1,22 +1,27 @@
-CRECHÈ RICH PUBLIC RESTORATION v3
+CRECHÈ INTERACTIVE POP-UP REFINEMENT v4
 
-This package restores the rich, animated Preschool experience rather than replacing it.
+Upload ONLY:
 
-UPLOAD THESE FOUR FILES:
 Khaemenes_Preschool.github.io/
 ├── index.html
-├── assets/
-│   └── preschool-catalog.js
-├── mentor/
-│   └── index.html
-└── mentor-manifest.json
+└── mentor/
+    └── index.html
 
-IMPORTANT:
-- DO NOT delete /apps/
-- DO NOT move or rename any adventure file.
-- The root page is based on the intact rich Crechè Family Home (animated ticker, rainbow hero, orbit buttons, learner home, Adventure Rooms, Today’s Pick, all 52 adventures, trail, child/grown-up modes, family dashboard).
-- The mentor is based on the intact full Guided Preschool Mentor (Pip/Miri/Nova/Sage, balanced path logic, feelings check-in, hints, play, read-aloud, Family Guide, local-safe fallback).
-- Guest Mentor is public and requires no registration.
-- Guest progress/settings/plan use sessionStorage and are not academic records.
-- Optional learner profile remains available for formal curriculum continuity.
-- Academy-wide Family/Learner Registration is only for formal curricula that need persistent assessments, portfolios, certification, transcripts/records, or cross-grade continuity.
+Keep /apps/ and assets/preschool-catalog.js exactly where they are.
+
+CHANGES
+-------
+• Sticky ticker/header anchor alignment corrected.
+• Front Mentor reduced to a compact introduction:
+  free, privacy-conscious, personalized early education; Guest Mode; no ads.
+• Large front Mentor card replaced by a live random Crechè game preview.
+• "Another Game" picks another repository app.
+• "Open Larger" opens the featured game in a resizable in-page app window.
+• Every internal Crechè /apps/ link now opens in that same in-page modal.
+• Modal has a prominent × Close button.
+• Modal is resizable on desktop from its lower-right corner.
+• Modal has Maximize / Restore.
+• Escape or clicking outside closes it.
+• Closing returns the visitor to the same landing-page position.
+• Read-aloud now prefers a gentler English system voice and raises pitch/rate to avoid a deep, intimidating sound.
+• Rich animations, ticker, rainbow, Adventure Rooms, full catalog, family areas, and public Guest Mentor remain intact.

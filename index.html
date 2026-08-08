@@ -22,7 +22,8 @@
   --deep:#18244a;--deep-2:#28386d;--glow:0 0 0 7px rgba(255,255,255,.14);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;background:#fff7e8}
+section[id],div[id].anchor-target{scroll-margin-top:calc(var(--ticker-height) + var(--header-height) + 24px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--ticker-height) + var(--header-height) + 24px);background:#fff7e8}
 body{margin:0;min-width:300px;overflow-x:hidden;color:var(--ink);background:
   radial-gradient(circle at 5% 7%,rgba(255,190,31,.54),transparent 22rem),
   radial-gradient(circle at 94% 6%,rgba(22,143,229,.42),transparent 26rem),
@@ -414,6 +415,54 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{an
 
 .compact-heading{margin-bottom:26px}
 .learner-home{padding-top:70px;padding-bottom:74px;background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(241,249,255,.9))}
+
+/* v4 · Compact Mentor intro + featured live game + resizable app modal */
+.mentor-intro-strip{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;
+  margin-bottom:16px;padding:17px 20px;border:1px solid rgba(255,255,255,.7);border-radius:24px;
+  color:#fff;background:linear-gradient(120deg,#173660,#2e5685 52%,#15858c);box-shadow:var(--shadow)
+}
+.mentor-intro-icon{width:66px;height:66px;display:grid;place-items:center;border:4px solid rgba(255,255,255,.82);border-radius:50%;background:linear-gradient(145deg,#f6bf3a,#ef6a66);font-size:2rem;box-shadow:0 10px 24px rgba(0,0,0,.14)}
+.mentor-intro-strip h3{margin:0;color:#fff;font-family:var(--serif);font-size:1.35rem}
+.mentor-intro-strip p{margin:.25rem 0 0;color:rgba(255,255,255,.84);font-size:.84rem}
+.mentor-free{display:inline-flex;margin-top:.4rem;padding:.23rem .45rem;border-radius:999px;background:rgba(255,255,255,.12);color:#ffe8a8;font-size:.65rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.mentor-intro-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.mentor-intro-actions a,.mentor-intro-actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:.55rem .72rem;border:1px solid rgba(255,255,255,.24);border-radius:999px;color:#173660;background:#fff;font-size:.73rem;font-weight:850;text-decoration:none}
+.mentor-intro-actions button{color:#fff;background:rgba(255,255,255,.1)}
+.mentor-plan-data{display:none!important}
+
+.featured-game-card{min-height:360px;padding:18px}
+.featured-game-card::after{background:rgba(34,203,230,.09)}
+.featured-game-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.featured-game-title{min-width:0;text-align:left}.featured-game-title span{display:block;color:#7d5aa2;font-size:.65rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.featured-game-title h3{margin:.2rem 0 0;font-size:1.35rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.featured-game-actions{display:flex;gap:6px}.featured-game-actions button{min-height:38px;padding:.48rem .62rem;border:1px solid var(--line);border-radius:999px;background:#fff;color:#46536a;font-size:.68rem;font-weight:850}
+.featured-game-frame-wrap{position:relative;min-height:265px;overflow:hidden;border:3px solid #fff;border-radius:18px;background:linear-gradient(145deg,#dff7ff,#fff0bd);box-shadow:inset 0 0 0 1px var(--line),var(--soft)}
+.featured-game-frame{display:block;width:100%;height:285px;border:0;background:#fff}
+.featured-game-hint{position:absolute;right:8px;bottom:8px;padding:.3rem .48rem;border-radius:999px;color:#fff;background:rgba(24,36,74,.78);font-size:.6rem;font-weight:800;pointer-events:none}
+
+body.app-modal-open{overflow:hidden}
+.app-modal{position:fixed;inset:0;z-index:4000;display:grid;place-items:center;padding:20px;background:rgba(18,27,53,.66);backdrop-filter:blur(8px)}
+.app-modal[hidden]{display:none}
+.app-window{
+  width:min(88vw,1120px);height:min(82vh,820px);min-width:420px;min-height:340px;
+  max-width:calc(100vw - 30px);max-height:calc(100vh - 30px);
+  display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden;resize:both;
+  border:4px solid #fff;border-radius:20px;background:#fff;box-shadow:0 34px 100px rgba(0,0,0,.38)
+}
+.app-window.maximized{width:calc(100vw - 24px)!important;height:calc(100vh - 24px)!important;max-width:none;max-height:none;resize:none}
+.app-window-bar{min-height:54px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 8px 7px 14px;color:#fff;background:linear-gradient(90deg,#17224a,#493a87 45%,#087d88)}
+.app-window-title{min-width:0;display:flex;align-items:center;gap:8px}.app-window-title i{font-style:normal;font-size:1.25rem}.app-window-title strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--serif)}.app-window-title small{display:block;color:rgba(255,255,255,.72);font-size:.6rem}
+.app-window-controls{display:flex;gap:5px}.app-window-controls button{width:40px;height:40px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.2);border-radius:10px;color:#fff;background:rgba(255,255,255,.1);font-size:1rem;font-weight:900}.app-window-controls .app-close{background:#d94b65;font-size:1.3rem}.app-window-controls button:hover{background:rgba(255,255,255,.22)}
+.app-window-body{position:relative;min-height:0;background:#f7fbff}.app-window-frame{display:block;width:100%;height:100%;border:0;background:#fff}
+.app-window-loading{position:absolute;inset:0;display:grid;place-items:center;color:#59677b;background:linear-gradient(145deg,#fffdf8,#e9f7ff);font-size:.82rem;font-weight:800;pointer-events:none}.app-window-loading.done{display:none}
+.app-resize-note{position:absolute;right:8px;bottom:6px;z-index:2;padding:.25rem .38rem;border-radius:7px;color:#fff;background:rgba(24,36,74,.66);font-size:.55rem;pointer-events:none}
+@media(max-width:700px){
+  .mentor-intro-strip{grid-template-columns:auto 1fr}.mentor-intro-actions{grid-column:1/-1;justify-content:stretch}.mentor-intro-actions a,.mentor-intro-actions button{flex:1}
+  .app-modal{padding:6px}.app-window{width:calc(100vw - 12px);height:calc(100vh - 12px);min-width:0;min-height:0;max-width:none;max-height:none;resize:none;border-radius:15px}
+  .app-resize-note{display:none}
+}
+
 .home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .home-card{position:relative;min-height:300px;display:flex;flex-direction:column;padding:25px;overflow:hidden;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow)}
 .home-card::after{content:"";position:absolute;right:-55px;bottom:-62px;width:170px;height:170px;border-radius:50%;background:rgba(116,87,255,.08);pointer-events:none}
@@ -629,22 +678,25 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{an
       <p id="myHomeIntro">Play, save favorites, explore rooms, and meet the Mentor without registration. A learner profile is optional and is only needed when a family wants persistent curriculum records and cross-grade continuity.</p>
     </div>
 
-    <div class="home-grid">
-      <article class="home-card mentor-companion">
-        <div class="home-card-top">
-          <span class="home-avatar" id="homeMentorAvatar" aria-hidden="true">✨</span>
-          <div>
-            <span class="home-label">My Mentor</span>
-            <h3 id="homeMentorName">Your mentor is waiting</h3>
-          </div>
-        </div>
-        <p id="homeMentorMessage">Open the Mentor now in Guest Mode. No learner account is required for a short, balanced learning path.</p>
-        <div class="home-actions">
-          <a class="home-btn primary-home" id="homeMentorLink" href="./mentor/index.html">Meet My Mentor →</a>
-          <button class="home-btn" id="readHomeMentor" type="button">🔊 Read to Me</button>
-        </div>
-      </article>
+    <article class="mentor-intro-strip" aria-label="Khaemenes Preschool Mentor introduction">
+      <span class="mentor-intro-icon" id="homeMentorAvatar" aria-hidden="true">✨</span>
+      <div>
+        <h3 id="homeMentorName">Meet the Khaemenes Preschool Mentor</h3>
+        <p id="homeMentorMessage">Free, privacy-conscious, personalized early education. The Mentor helps children choose age-aligned activities, offers gentle hints, read-aloud, movement breaks, and balanced play. Guest Mode is open to everyone.</p>
+        <span class="mentor-free">Free · Guest Mode · no registration · no ads</span>
+      </div>
+      <div class="mentor-intro-actions">
+        <a id="homeMentorLink" href="./mentor/index.html">Meet My Mentor →</a>
+        <button id="readHomeMentor" type="button">🔊 Hear Introduction</button>
+      </div>
+      <div class="mentor-plan-data" aria-hidden="true">
+        <h3 id="mentorPlanTitle">A balanced little day</h3>
+        <p id="mentorPlanIntro">The Guest Mentor can prepare today’s age-aware sequence.</p>
+        <div id="mentorPlanPreview"></div>
+      </div>
+    </article>
 
+    <div class="home-grid">
       <article class="home-card continue-card">
         <span class="home-label">Continue My Adventure</span>
         <div class="continue-icon" id="continueIcon" aria-hidden="true">🎈</div>
@@ -656,13 +708,20 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{an
         </div>
       </article>
 
-      <article class="home-card today-mentor-card">
-        <span class="home-label">Today With My Mentor</span>
-        <h3 id="mentorPlanTitle">A balanced little day</h3>
-        <p id="mentorPlanIntro">The Guided Preschool Mentor can prepare today’s age-aware sequence.</p>
-        <div class="mini-plan" id="mentorPlanPreview"></div>
-        <div class="home-actions">
-          <a class="home-btn primary-home" href="./mentor/index.html#today">Open My Day →</a>
+      <article class="home-card featured-game-card">
+        <div class="featured-game-head">
+          <div class="featured-game-title">
+            <span>🎮 Featured Crechè Game</span>
+            <h3 id="featuredGameTitle">Choosing a game…</h3>
+          </div>
+          <div class="featured-game-actions">
+            <button id="featuredAnother" type="button">Another Game 🎲</button>
+            <button id="featuredOpenLarge" type="button">Open Larger ↗</button>
+          </div>
+        </div>
+        <div class="featured-game-frame-wrap">
+          <iframe class="featured-game-frame" id="featuredGameFrame" title="Featured Crechè game preview" loading="lazy"></iframe>
+          <span class="featured-game-hint">Play here or open larger</span>
         </div>
       </article>
 
@@ -902,6 +961,27 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{an
   </section>
 </div>
 
+
+<div class="app-modal" id="appModal" hidden aria-hidden="true">
+  <section class="app-window" id="appWindow" role="dialog" aria-modal="true" aria-labelledby="appWindowTitle">
+    <header class="app-window-bar">
+      <div class="app-window-title">
+        <i id="appWindowIcon">🌈</i>
+        <span><strong id="appWindowTitle">Crechè Adventure</strong><small>Play without leaving the Preschool home page</small></span>
+      </div>
+      <div class="app-window-controls">
+        <button id="appMaximize" type="button" aria-label="Maximize app window" title="Maximize / Restore">□</button>
+        <button class="app-close" id="appClose" type="button" aria-label="Close app window" title="Close">×</button>
+      </div>
+    </header>
+    <div class="app-window-body">
+      <div class="app-window-loading" id="appWindowLoading">Opening your Crechè adventure…</div>
+      <iframe class="app-window-frame" id="appWindowFrame" title="Crechè app"></iframe>
+      <span class="app-resize-note">↘ drag this corner to resize</span>
+    </div>
+  </section>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="./assets/preschool-catalog.js"></script>
@@ -1057,7 +1137,7 @@ function markVisited(id){
 function updateFavorites(){$("favoriteCount").textContent=favorites.size;$("favoritesBtn").setAttribute("aria-pressed",String(favoritesOnly));$("starMeter").innerHTML=favorites.size?Array.from({length:Math.min(favorites.size,14)},()=>'<span class="saved-star">♥</span>').join(""):`<span class="empty-stars">No favorite adventures yet. Tap a heart below!</span>`}
 function updateProgress(){const count=KID_APPS.filter(app=>visited.has(app.id)).length;$("visitCount").textContent=`${count}/${KID_APPS.length}`;$("progressFill").style.width=`${Math.round(count/KID_APPS.length*100)}%`;document.querySelectorAll(".activity").forEach(card=>card.classList.toggle("visited",visited.has(card.dataset.id)))}
 function filterActivities(){const q=$("search").value.trim().toLowerCase(),category=$("category").value;let count=0;[...$("activityGrid").children].forEach(card=>{const visible=(category==="all"||card.dataset.category===category)&&(!q||card.dataset.search.includes(q))&&(!favoritesOnly||favorites.has(card.dataset.id));card.hidden=!visible;if(visible)count++});$("results").textContent=`${count} of ${KID_APPS.length} child adventures shown${favoritesOnly?" · favorites only":""}.`;$("empty").classList.toggle("show",count===0)}
-function chooseRandom(category){let pool=KID_APPS.filter(app=>!category||category==="all"||app.category===category);if(favoritesOnly)pool=pool.filter(app=>favorites.has(app.id));const app=pool[Math.floor(Math.random()*pool.length)];if(app){markVisited(app.id);toast("Opening a surprise adventure!");setTimeout(()=>location.href=appUrl(app),260)}else toast("No adventures are available in that selection.")}
+function chooseRandom(category){let pool=KID_APPS.filter(app=>!category||category==="all"||app.category===category);if(favoritesOnly)pool=pool.filter(app=>favorites.has(app.id));const app=pool[Math.floor(Math.random()*pool.length)];if(app){markVisited(app.id);toast("Opening a surprise adventure!");openAppModal(appUrl(app),displayTitle(app),app.icon,app.id)}else toast("No adventures are available in that selection.")}
 function setDaily(){const now=new Date(),day=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000),app=KID_APPS[day%KID_APPS.length];$("dailyTitle").textContent=app.icon+" "+app.title;$("dailyDesc").textContent=app.desc;$("dailyLink").href=appUrl(app);$("dailyLink").dataset.openApp=app.id;$("dailyLink").addEventListener("click",()=>markVisited(app.id))}
 function renderSites(){$("siteGrid").innerHTML=SITES.map(site=>`<a class="site-card ${site.status}" href="${site.url}"><div class="site-top"><span class="site-icon">${site.icon}</span><span class="status live">Open</span></div><h3>${escapeHtml(site.title)}</h3><p>${escapeHtml(site.desc)}</p><small>Open public landing page ↗</small></a>`).join("")}
 function buildMenu(query=""){
@@ -1242,14 +1322,87 @@ function todayLocalKey(){
   const d=new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 }
+function pickGentleVoice(){
+  const voices=speechSynthesis.getVoices?.()||[];
+  const preferred=["Samantha","Ava","Allison","Susan","Zira","Jenny","Aria","Google US English","Google UK English Female"];
+  for(const name of preferred){
+    const found=voices.find(v=>v.name.toLowerCase().includes(name.toLowerCase())&&/^en/i.test(v.lang||""));
+    if(found)return found;
+  }
+  return voices.find(v=>/^en-US/i.test(v.lang||""))||voices.find(v=>/^en/i.test(v.lang||""))||null;
+}
 function speakText(text){
   if(!("speechSynthesis" in window)){toast("Read-aloud is not available in this browser.");return}
   speechSynthesis.cancel();
   const utterance=new SpeechSynthesisUtterance(String(text||"").replace(/[“”]/g,""));
-  utterance.rate=.88;
-  utterance.pitch=1.05;
+  utterance.rate=.94;
+  utterance.pitch=1.32;
+  utterance.volume=.92;
+  const voice=pickGentleVoice();
+  if(voice)utterance.voice=voice;
   speechSynthesis.speak(utterance);
 }
+
+let featuredGame=null;
+let appModalRestoreFocus=null;
+function isPreschoolAppHref(href){
+  try{
+    const target=new URL(href,location.href);
+    const base=new URL("./apps/",location.href);
+    return target.href.startsWith(base.href);
+  }catch{return false}
+}
+function appFromHref(href){
+  try{
+    const target=new URL(href,location.href).href;
+    return KID_APPS.find(app=>new URL(appUrl(app),location.href).href===target)||null;
+  }catch{return null}
+}
+function openAppModal(href,title="Crechè Adventure",icon="🌈",appId=""){
+  if(!isPreschoolAppHref(href))return;
+  appModalRestoreFocus=document.activeElement;
+  const modal=$("appModal"),win=$("appWindow"),frame=$("appWindowFrame"),loading=$("appWindowLoading");
+  if(appId)markVisited(appId);
+  $("appWindowTitle").textContent=title||"Crechè Adventure";
+  $("appWindowIcon").textContent=icon||"🌈";
+  loading.classList.remove("done");
+  frame.title=title||"Crechè app";
+  frame.src=new URL(href,location.href).href;
+  win.classList.remove("maximized");
+  $("appMaximize").textContent="□";
+  modal.hidden=false;
+  modal.setAttribute("aria-hidden","false");
+  document.body.classList.add("app-modal-open");
+  setTimeout(()=>$("appClose").focus(),20);
+}
+function closeAppModal(){
+  const modal=$("appModal"),frame=$("appWindowFrame");
+  modal.hidden=true;modal.setAttribute("aria-hidden","true");
+  frame.src="about:blank";
+  document.body.classList.remove("app-modal-open");
+  $("appWindow").classList.remove("maximized");
+  $("appMaximize").textContent="□";
+  appModalRestoreFocus?.focus?.();
+}
+function toggleAppMaximize(){
+  const max=$("appWindow").classList.toggle("maximized");
+  $("appMaximize").textContent=max?"❐":"□";
+  $("appMaximize").setAttribute("aria-label",max?"Restore app window":"Maximize app window");
+}
+function randomFeaturedGame(){
+  if(!KID_APPS.length)return null;
+  let pool=KID_APPS.filter(app=>app.category!=="grownup");
+  if(featuredGame&&pool.length>1)pool=pool.filter(app=>app.id!==featuredGame.id);
+  return pool[Math.floor(Math.random()*pool.length)]||KID_APPS[0];
+}
+function renderFeaturedGame(){
+  featuredGame=randomFeaturedGame();
+  if(!featuredGame)return;
+  $("featuredGameTitle").textContent=displayTitle(featuredGame);
+  $("featuredGameFrame").src=appUrl(featuredGame);
+  $("featuredGameFrame").title=`Featured Crechè game: ${displayTitle(featuredGame)}`;
+}
+
 function renderTicker(){
   const chosen=NEW_IDS.map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean);
   const oneSet=()=>`<div class="ticker-set"><span class="ticker-title">Crechè Featured Adventures</span>${chosen.map(app=>`<a class="ticker-link" data-open-app="${app.id}" href="${appUrl(app)}">${escapeHtml(displayTitle(app))}</a>`).join("")}</div>`;
@@ -1335,7 +1488,7 @@ function renderLearnerHome(){
     $("myHomeIntro").textContent=`Favorites, explored adventures, and ${mentor.name}’s guided learning path stay connected to this local child profile.`;
     $("homeMentorAvatar").textContent=mentor.avatar;
     $("homeMentorName").textContent=`${mentor.name} · ${profile.nickname}’s mentor`;
-    $("homeMentorMessage").textContent=`${mentor.name} can help ${profile.nickname} choose a short, balanced learning path for the ${profile.ageBand} stage.`;
+    $("homeMentorMessage").textContent=`Free, privacy-conscious, personalized early education. ${mentor.name} can help ${profile.nickname} choose age-aligned activities, gentle hints, movement breaks, and balanced play.`;
     $("homeMentorLink").textContent="Open My Mentor →";
     $("heroEyebrow").textContent=`${mentor.avatar} ${greeting}, ${profile.nickname} · ${mentor.name} is here too`;
     $("heroLead").textContent=`Welcome back to a joyful preschool world built around ${profile.nickname}’s curiosity. Continue an adventure, visit a favorite, or let ${mentor.name} guide today’s learning path.`;
@@ -1345,7 +1498,7 @@ function renderLearnerHome(){
     $("myHomeIntro").textContent="Play, save favorites, explore rooms, and meet the Mentor without registration. A learner profile is optional and is only needed when a family wants persistent curriculum records and cross-grade continuity.";
     $("homeMentorAvatar").textContent="✨";
     $("homeMentorName").textContent="Your mentor is waiting";
-    $("homeMentorMessage").textContent="Open the Mentor now in Guest Mode. No learner account is required for a short, balanced learning path.";
+    $("homeMentorMessage").textContent="Free, privacy-conscious, personalized early education. The Mentor offers age-aligned activities, gentle hints, read-aloud, movement breaks, and balanced play. Guest Mode is open to everyone.";
     $("homeMentorLink").textContent="Meet My Mentor →";
     $("heroEyebrow").textContent="🌟 A colorful first doorway to learning";
     $("heroLead").textContent="A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.";
@@ -1462,9 +1615,26 @@ function setCalm(value){
   writeBool(CALM_KEY,calm);
   renderParentDashboard();
 }
+
+$("appClose").addEventListener("click",closeAppModal);
+$("appMaximize").addEventListener("click",toggleAppMaximize);
+$("appWindowFrame").addEventListener("load",()=>$("appWindowLoading").classList.add("done"));
+$("appModal").addEventListener("click",event=>{if(event.target===$("appModal"))closeAppModal()});
+$("featuredAnother").addEventListener("click",renderFeaturedGame);
+$("featuredOpenLarge").addEventListener("click",()=>{if(featuredGame)openAppModal(appUrl(featuredGame),displayTitle(featuredGame),featuredGame.icon,featuredGame.id)});
+document.addEventListener("click",event=>{
+  const link=event.target.closest("a[href]");
+  if(!link||!isPreschoolAppHref(link.getAttribute("href")))return;
+  event.preventDefault();
+  if($("menuOverlay")?.classList.contains("open"))closeMenu();
+  const app=link.dataset.openApp?KID_APPS.find(a=>a.id===link.dataset.openApp):appFromHref(link.href);
+  openAppModal(link.href,app?displayTitle(app):(link.textContent.trim()||"Crechè Adventure"),app?.icon||"🌈",app?.id||link.dataset.openApp||"");
+});
+
 $("heroKidCount").textContent=KID_APPS.length;
 migrateLegacyProfileData();
 syncContinuity();
+renderFeaturedGame();
 renderTicker();
 renderNew();
 buildCategories();
@@ -1530,7 +1700,7 @@ $("profileOverlay").addEventListener("click",event=>{if(event.target===$("profil
 $("profileOverlay").addEventListener("keydown",event=>{if($("profileOverlay").classList.contains("open"))trapFocus(event,$("profileOverlay"))});
 $("showProfileFavorites").addEventListener("click",showPinnedInGarden);$("managePinnedGames").addEventListener("click",()=>{$("activities").scrollIntoView({behavior:calm?"auto":"smooth"})});
 $("exportFamilyData").addEventListener("click",exportFamilyRecord);$("eraseFamilyData").addEventListener("click",eraseFamilyRecord);
-document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeMenu();closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"){if(!$("appModal").hidden){closeAppModal();return}closeMenu();closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
 </script>
   <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
   <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-school-bridge.js" data-khaemenes-stage="preschool"></script>
