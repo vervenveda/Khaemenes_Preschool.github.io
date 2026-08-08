@@ -1803,7 +1803,7 @@ function mentorPlanData(){
   return {plan,items,completed};
 }
 function renderMentorPlanPreview(){
-  const titleEl=titleEl,introEl=introEl,previewEl=previewEl;
+  const titleEl=document.getElementById("mentorPlanTitle"),introEl=document.getElementById("mentorPlanIntro"),previewEl=document.getElementById("mentorPlanPreview");
   if(!titleEl||!introEl||!previewEl)return;
   const data=mentorPlanData();
   if(!profile){
@@ -1945,8 +1945,24 @@ function trapFocus(event,root){
 }
 
 let menuRestoreFocus=null;
-function openMenu(){menuRestoreFocus=document.activeElement;$("menuOverlay").classList.add("open");$("menuOverlay").setAttribute("aria-hidden","false");$("menuBtn").setAttribute("aria-expanded","true");document.body.classList.add("menu-open");setTimeout(()=>$("menuSearch").focus(),80)}
-function closeMenu(returnFocus=false){$("menuOverlay").classList.remove("open");$("menuOverlay").setAttribute("aria-hidden","true");$("menuBtn").setAttribute("aria-expanded","false");document.body.classList.remove("menu-open");if(returnFocus)menuRestoreFocus?.focus?.()}
+function openMenu(){
+  menuRestoreFocus=document.activeElement;
+  buildMenu($("menuSearch")?.value||"");
+  $("menuOverlay").classList.add("open");
+  $("menuOverlay").setAttribute("aria-hidden","false");
+  $("menuBtn").setAttribute("aria-expanded","true");
+  $("menuBtn").setAttribute("aria-label","Close complete Preschool menu");
+  document.body.classList.add("menu-open");
+  setTimeout(()=>$("menuSearch")?.focus(),80);
+}
+function closeMenu(returnFocus=false){
+  $("menuOverlay").classList.remove("open");
+  $("menuOverlay").setAttribute("aria-hidden","true");
+  $("menuBtn").setAttribute("aria-expanded","false");
+  $("menuBtn").setAttribute("aria-label","Open complete Preschool menu");
+  document.body.classList.remove("menu-open");
+  if(returnFocus)menuRestoreFocus?.focus?.();
+}
 function setCalm(value){
   calm=value;
   document.body.classList.toggle("calm",calm);
@@ -2107,6 +2123,21 @@ document.addEventListener("click",event=>{
   location.href=link.href;
 });
 
+/* Core header controls bind before the application dashboard renders.
+   This keeps Child / Grown-Up view and the Preschool menu available even
+   if a nonessential content panel encounters a later rendering problem. */
+let coreHeaderControlsBound=false;
+function bindCoreHeaderControls(){
+  if(coreHeaderControlsBound)return;
+  coreHeaderControlsBound=true;
+
+  $("menuBtn")?.addEventListener("click",openMenu);
+  $("closeMenu")?.addEventListener("click",()=>closeMenu(true));
+  $("childViewBtn")?.addEventListener("click",()=>setView("child",{scroll:true}));
+  $("grownupViewBtn")?.addEventListener("click",()=>setView("grownup",{scroll:true}));
+}
+bindCoreHeaderControls();
+
 $("heroKidCount").textContent=KID_APPS.length;
 migrateLegacyProfileData();
 syncContinuity();
@@ -2139,9 +2170,7 @@ tickerToggle.addEventListener("click",()=>{
 $("search").addEventListener("input",filterActivities);$("category").addEventListener("change",filterActivities);
 $("favoritesBtn").addEventListener("click",()=>{favoritesOnly=!favoritesOnly;updateFavorites();filterActivities()});
 $("randomBtn").addEventListener("click",()=>chooseRandom($("category").value));$("surpriseHero").addEventListener("click",()=>chooseRandom());$("orbitRandom").addEventListener("click",()=>chooseRandom());
-$("calmBtn").addEventListener("click",()=>setCalm(!calm));$("menuBtn").addEventListener("click",openMenu);$("closeMenu").addEventListener("click",()=>closeMenu(true));
-$("childViewBtn").addEventListener("click",()=>setView("child",{scroll:true}));
-$("grownupViewBtn").addEventListener("click",()=>setView("grownup",{scroll:true}));
+$("calmBtn").addEventListener("click",()=>setCalm(!calm));
 $("homeSurprise").addEventListener("click",()=>chooseRandom());
 $("homeCalmBtn").addEventListener("click",()=>setCalm(!calm));
 $("motionBtn").addEventListener("click",()=>setReducedMotion(!reduceMotion));

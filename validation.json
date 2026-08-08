@@ -1,0 +1,26 @@
+{
+  "source_lines": 2245,
+  "html_ids": 134,
+  "duplicate_html_ids": [],
+  "javascript_dom_id_references": 119,
+  "missing_javascript_dom_ids": [],
+  "hash_links": [
+    "#activities",
+    "#familyMentorEntry",
+    "#grownups",
+    "#profiles",
+    "#rooms",
+    "#today",
+    "#top"
+  ],
+  "missing_hash_targets": [],
+  "static_relative_links": [
+    "./",
+    "./apps/Life_skills_donate_index.html",
+    "./apps/Life_skills_organizer_index.html"
+  ],
+  "node_syntax_check_returncode": 0,
+  "node_syntax_check_stderr": "",
+  "fatal_mentor_preview_self_reference_remaining": false,
+  "core_header_controls_bind_before_profile_render": true
+}
