@@ -726,6 +726,112 @@ body[data-anchor-moving="true"] .header{
   box-shadow:0 7px 16px rgba(116,87,255,.22);
 }
 
+
+
+/* ===========================================================
+   v8 · proportionate headings + complete app directory
+   =========================================================== */
+.heading{max-width:860px}
+.heading h2{
+  max-width:840px;
+  margin-inline:auto;
+  font-size:clamp(2rem,4vw,3.45rem);
+  line-height:1.08;
+  letter-spacing:-.018em;
+  overflow-wrap:anywhere;
+}
+.compact-heading h2{font-size:clamp(1.8rem,3.2vw,2.7rem);line-height:1.12}
+#profiles .heading h2{max-width:980px;font-size:clamp(1.85rem,3.25vw,2.95rem);line-height:1.12}
+#new .heading h2,#rooms .heading h2,#today .heading h2,#trail .heading h2,#activities .heading h2,#grownups .heading h2{font-size:clamp(2rem,3.8vw,3.25rem)}
+.network-head h3{font-size:clamp(1.4rem,2.5vw,1.72rem)}
+.drawer-top h2{font-size:clamp(1.45rem,3vw,1.72rem)}
+.profile-head h2{font-size:clamp(1.45rem,3vw,1.78rem)}
+
+.room-directory-actions{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:-8px 0 26px
+}
+.directory-launch{
+  min-height:52px;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  max-width:100%;padding:.82rem 1.15rem;border:3px solid #fff;border-radius:999px;
+  color:#fff;background:linear-gradient(135deg,#7457ff,#ef5bb8 48%,#ff942b);
+  box-shadow:0 12px 27px rgba(91,71,174,.2);font-size:.86rem;font-weight:900;
+  line-height:1.25;text-align:center;overflow-wrap:anywhere;transition:.18s
+}
+.directory-launch:hover{transform:translateY(-3px);box-shadow:0 18px 35px rgba(91,71,174,.25)}
+
+body.category-directory-open{overflow:hidden}
+.category-overlay{
+  position:fixed;inset:0;z-index:3400;display:grid;place-items:center;padding:18px;
+  visibility:hidden;opacity:0;background:rgba(26,34,58,.66);backdrop-filter:blur(10px);transition:.2s
+}
+.category-overlay.open{visibility:visible;opacity:1}
+.category-dialog{
+  width:min(1080px,100%);max-height:calc(100svh - 36px);display:grid;grid-template-rows:auto minmax(0,1fr);
+  overflow:hidden;border:4px solid rgba(255,255,255,.96);border-radius:28px;
+  background:linear-gradient(180deg,#fffdf7,#f7fbff);box-shadow:0 32px 95px rgba(18,27,53,.36)
+}
+.category-dialog-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:20px 22px;
+  color:#fff;background:linear-gradient(100deg,#173660,#544090 48%,#087d88)
+}
+.category-dialog-head .kicker{color:#ffe69d}
+.category-dialog-head h2{
+  margin:4px 0 0;color:#fff;font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.7rem);
+  font-weight:700;line-height:1.08;letter-spacing:-.015em;overflow-wrap:anywhere
+}
+.category-dialog-head p:last-child{max-width:720px;margin:7px 0 0;color:rgba(255,255,255,.78);font-size:.8rem}
+.category-close{
+  width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.3);
+  border-radius:15px;color:#fff;background:rgba(255,255,255,.11);font-size:1.35rem;font-weight:900
+}
+.category-dialog-body{min-height:0;overflow:auto;padding:18px 20px 22px}
+.category-popup-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin-bottom:13px}
+.category-popup-tab{
+  min-height:42px;padding:.58rem .78rem;border:1px solid var(--line);border-radius:999px;
+  color:#525a77;background:#fff;font-size:.72rem;font-weight:850;line-height:1.2
+}
+.category-popup-tab[aria-pressed="true"]{color:#fff;background:linear-gradient(135deg,var(--purple),var(--pink));border-color:transparent}
+.category-popup-tools{display:grid;grid-template-columns:minmax(230px,1fr) auto;gap:10px;align-items:center;margin-bottom:14px}
+.category-popup-search{
+  width:100%;min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:15px;
+  color:var(--ink);background:#fff;outline:none
+}
+.category-popup-search:focus{border-color:#9d80ff;box-shadow:0 0 0 4px rgba(116,87,255,.12)}
+.category-popup-count{color:var(--muted);font-size:.78rem;font-weight:800;white-space:nowrap}
+.category-popup-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.category-app{
+  min-width:0;min-height:176px;display:flex;flex-direction:column;align-items:center;padding:16px;
+  border:1px solid var(--line);border-top:4px solid var(--popup-color,#7457ff);border-radius:20px;
+  color:var(--ink);background:#fff;box-shadow:var(--soft);text-align:center
+}
+.category-app-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:17px;background:var(--popup-soft,#f0edff);font-size:1.65rem}
+.category-app small{margin-top:10px;color:var(--popup-color,#7457ff);font-size:.62rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.category-app strong{display:block;margin-top:7px;color:#413c72;font-family:var(--serif);font-size:1.08rem;line-height:1.15;overflow-wrap:anywhere}
+.category-app p{margin:8px 0 12px;color:var(--muted);font-size:.76rem;line-height:1.5}
+.category-app a{
+  width:100%;min-height:44px;display:flex;align-items:center;justify-content:center;margin-top:auto;padding:.64rem .75rem;
+  border-radius:12px;color:#fff;background:var(--popup-color,#7457ff);text-decoration:none;font-size:.74rem;font-weight:900
+}
+.category-popup-empty{grid-column:1/-1;padding:24px;border:2px dashed #d9d3ef;border-radius:18px;color:var(--muted);text-align:center}
+.menu-room-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.menu-room-button{
+  min-height:64px;display:flex;align-items:center;gap:9px;padding:9px 10px;border:1px solid var(--line);border-radius:15px;
+  color:#443f72;background:#fff;text-align:left
+}
+.menu-room-button i{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:12px;background:#f0edff;font-style:normal}
+.menu-room-button span{min-width:0}.menu-room-button strong{display:block;font-size:.78rem;line-height:1.15}.menu-room-button small{display:block;margin-top:3px;color:var(--muted);font-size:.62rem}
+.menu-room-button.all-apps{grid-column:1/-1;color:#fff;background:linear-gradient(135deg,#7457ff,#ef5bb8);border-color:transparent}.menu-room-button.all-apps i{color:#443f72;background:#fff}
+
+@media(max-width:820px){
+  .category-popup-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:580px){
+  .heading h2,#profiles .heading h2,#new .heading h2,#rooms .heading h2,#today .heading h2,#trail .heading h2,#activities .heading h2,#grownups .heading h2{font-size:clamp(1.75rem,9.2vw,2.55rem);line-height:1.1}
+  .category-overlay{padding:6px}.category-dialog{max-height:calc(100svh - 12px);border-radius:18px}.category-dialog-head{padding:16px}.category-dialog-body{padding:13px}
+  .category-popup-tools,.category-popup-grid,.menu-room-grid{grid-template-columns:1fr}.menu-room-button.all-apps{grid-column:auto}.category-popup-count{text-align:center;white-space:normal}
+}
+@media print{.category-overlay,.room-directory-actions{display:none!important}}
+
 </style>
 </head>
 <body id="top" data-view="child">
@@ -793,7 +899,7 @@ body[data-anchor-moving="true"] .header{
 
 
 <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
-  <aside class="drawer" id="drawer" aria-label="Khaemenes Preschool complete directory">
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Khaemenes Preschool complete directory">
     <div class="drawer-top"><h2>Preschool Menu</h2><button class="close" id="closeMenu" type="button" aria-label="Close menu">×</button></div>
     <p>Find a child adventure, a new or updated activity, a grown-up tool, or a connected public learning destination.</p>
     <input class="drawer-search" id="menuSearch" type="search" placeholder="Search Khaemenes Preschool…" autocomplete="off">
@@ -1016,7 +1122,8 @@ body[data-anchor-moving="true"] .header{
 
 <section class="section alt" id="rooms">
   <div class="shell">
-    <div class="heading"><p class="kicker">Pick a colorful adventure room</p><h2>Where shall we play and learn?</h2><p>Every room is a giant button. Tap one to reveal its adventures.</p></div>
+    <div class="heading"><p class="kicker">Pick a colorful adventure room</p><h2>Where shall we play and learn?</h2><p>Every room is a giant button. Tap one to open a focused pop-up shelf of adventures, or open the complete Preschool app directory.</p></div>
+    <div class="room-directory-actions"><button class="directory-launch" id="allAppsBtn" type="button">✨ Complete App Directory · <span id="allAppsCount">53</span> Apps</button></div>
     <div class="category-grid" id="categoryGrid"></div>
   </div>
 </section>
@@ -1091,6 +1198,28 @@ body[data-anchor-moving="true"] .header{
 
 <footer class="footer"><div class="shell footer-inner"><span><strong>© <span id="year"></span> Verve N Veda · Khaemenes Academy · Khaemenes Preschool · Jennifer Kay Pearl</strong></span><span><a href="#activities">Adventures</a> · <a href="#grownups">Grown-Ups</a> · <a href="#top">Back to Top</a></span></div></footer>
 
+
+
+<div class="category-overlay" id="categoryOverlay" aria-hidden="true">
+  <section class="category-dialog" id="categoryDialog" role="dialog" aria-modal="true" aria-labelledby="categoryDialogTitle">
+    <header class="category-dialog-head">
+      <div>
+        <p class="kicker">Complete Preschool app directory</p>
+        <h2 id="categoryDialogTitle">All Crechè Apps</h2>
+        <p id="categoryDialogIntro">Every validated Preschool app is reachable here without exposing repository filenames or technical structure.</p>
+      </div>
+      <button class="category-close" id="closeCategoryDirectory" type="button" aria-label="Close app directory">×</button>
+    </header>
+    <div class="category-dialog-body">
+      <div class="category-popup-tabs" id="categoryPopupTabs" role="group" aria-label="Choose an app category"></div>
+      <div class="category-popup-tools">
+        <input class="category-popup-search" id="categoryPopupSearch" type="search" placeholder="Search all Preschool apps…" autocomplete="off" aria-label="Search the Preschool app directory">
+        <span class="category-popup-count" id="categoryPopupCount" aria-live="polite"></span>
+      </div>
+      <div class="category-popup-grid" id="categoryPopupGrid"></div>
+    </div>
+  </section>
+</div>
 
 <div class="profile-overlay" id="profileOverlay" aria-hidden="true">
   <section class="profile-dialog" role="dialog" aria-modal="true" aria-labelledby="profileDialogTitle">
@@ -1244,11 +1373,61 @@ function renderNew(){
   }).join("");
   document.querySelectorAll("#newGrid [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
 }
+let categoryPopupKey="all";
+let categoryPopupRestoreFocus=null;
+function popupCategoryEntries(){
+  return Object.entries(CATEGORIES).filter(([key])=>key!=="grownup");
+}
+function renderCategoryPopupTabs(){
+  const entries=[...popupCategoryEntries(),["grownup",CATEGORIES.grownup||{label:"Grown-Up Corner",icon:"🧑‍🧒",a:"#4e5874"}]];
+  $("categoryPopupTabs").innerHTML=entries.map(([key,data])=>{
+    const count=key==="all"?APPS.length:APPS.filter(app=>app.category===key).length;
+    return `<button class="category-popup-tab" type="button" data-popup-category="${key}" aria-pressed="${categoryPopupKey===key}">${data.icon||"✨"} ${escapeHtml(data.label||key)} · ${count}</button>`;
+  }).join("");
+  document.querySelectorAll("[data-popup-category]").forEach(button=>button.addEventListener("click",()=>{
+    categoryPopupKey=button.dataset.popupCategory;
+    $("categoryPopupSearch").value="";
+    renderCategoryPopupTabs();
+    renderCategoryPopupApps();
+  }));
+}
+function renderCategoryPopupApps(){
+  const q=$("categoryPopupSearch").value.trim().toLowerCase();
+  const pool=APPS.filter(app=>(categoryPopupKey==="all"||app.category===categoryPopupKey)&&(!q||(displayTitle(app)+" "+app.desc+" "+app.tags+" "+catLabel(app.category)).toLowerCase().includes(q)));
+  const selected=CATEGORIES[categoryPopupKey];
+  $("categoryDialogTitle").textContent=categoryPopupKey==="all"?"All Crechè Apps":(selected?.label||"Preschool Apps");
+  $("categoryDialogIntro").textContent=categoryPopupKey==="all"
+    ?`All ${APPS.length} validated Preschool catalog entries are available here, organized without exposing technical filenames.`
+    :`${pool.length} ${selected?.label||"Preschool"} app${pool.length===1?"":"s"} in this focused shelf.`;
+  $("categoryPopupCount").textContent=`${pool.length} of ${APPS.length} catalog apps shown.`;
+  $("categoryPopupGrid").innerHTML=pool.length?pool.map(app=>{
+    const color=catColor(app.category),soft=color+"18";
+    const grown=app.category==="grownup";
+    return `<article class="category-app" style="--popup-color:${color};--popup-soft:${soft}"><span class="category-app-icon" aria-hidden="true">${app.icon}</span><small>${escapeHtml(catLabel(app.category))}</small><strong>${escapeHtml(displayTitle(app))}</strong><p>${escapeHtml(app.desc)}</p><a href="${appUrl(app)}" ${grown?'data-grownup-app="true"':`data-open-app="${app.id}"`}>${grown?"Open Grown-Up Resource":"Open Adventure"}</a></article>`;
+  }).join(""):`<div class="category-popup-empty">No Preschool app matches this search.</div>`;
+}
+function openCategoryPopup(key="all"){
+  categoryPopupRestoreFocus=document.activeElement;
+  categoryPopupKey=(CATEGORIES[key]||key==="grownup")?key:"all";
+  $("categoryPopupSearch").value="";
+  renderCategoryPopupTabs();renderCategoryPopupApps();
+  $("categoryOverlay").classList.add("open");
+  $("categoryOverlay").setAttribute("aria-hidden","false");
+  document.body.classList.add("category-directory-open");
+  setTimeout(()=>$(`closeCategoryDirectory`).focus(),40);
+}
+function closeCategoryPopup(returnFocus=false){
+  $("categoryOverlay").classList.remove("open");
+  $("categoryOverlay").setAttribute("aria-hidden","true");
+  document.body.classList.remove("category-directory-open");
+  if(returnFocus)categoryPopupRestoreFocus?.focus?.();
+}
 function buildCategories(){
   $("category").innerHTML=Object.entries(CATEGORIES).filter(([key])=>key!=="grownup").map(([key,data])=>`<option value="${key}">${escapeHtml(data.label)}</option>`).join("");
   const counts={};KID_APPS.forEach(app=>counts[app.category]=(counts[app.category]||0)+1);
-  $("categoryGrid").innerHTML=Object.entries(CATEGORIES).filter(([key])=>!["all","grownup"].includes(key)).map(([key,data])=>`<button class="category-card" type="button" data-pick="${key}" style="background:linear-gradient(145deg,${data.a},${data.b})"><span>${data.icon}</span><strong>${escapeHtml(data.label)}</strong><small>${counts[key]||0} adventures</small></button>`).join("");
-  document.querySelectorAll("[data-pick]").forEach(button=>button.addEventListener("click",()=>{favoritesOnly=false;$("category").value=button.dataset.pick;$("search").value="";updateFavorites();filterActivities();goToSection("#activities",{history:false})}));
+  $("categoryGrid").innerHTML=Object.entries(CATEGORIES).filter(([key])=>!["all","grownup"].includes(key)).map(([key,data])=>`<button class="category-card" type="button" data-pick="${key}" aria-haspopup="dialog" style="background:linear-gradient(145deg,${data.a},${data.b})"><span>${data.icon}</span><strong>${escapeHtml(data.label)}</strong><small>${counts[key]||0} adventures · open shelf</small></button>`).join("");
+  $("allAppsCount").textContent=APPS.length;
+  document.querySelectorAll("[data-pick]").forEach(button=>button.addEventListener("click",()=>openCategoryPopup(button.dataset.pick)));
 }
 function stageBadge(app){
   if(!profile||!app.mentor?.eligible)return "";
@@ -1300,7 +1479,12 @@ function buildMenu(query=""){
   const grownMatches=GROWNUP_APPS.filter(app=>!q||(app.title+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q));
   const siteMatches=SITES.filter(site=>!q||(site.title+" "+site.desc).toLowerCase().includes(q));
   const familyFixed=8;
-  $("menuContent").innerHTML=`<p class="menu-group">Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(displayTitle(app))}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div><p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+familyFixed}</p><div class="menu-list"><a class="menu-link" data-close-menu href="#familyMentorEntry"><i>✨</i><span><strong>Open Preschool Mentor</strong><small>Guest learning path · no registration</small></span><span>→</span></a><button class="menu-link menu-action" type="button" data-menu-action="child-profile"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="parent-dashboard"><i>🧑‍🧒</i><span><strong>Parent Dashboard &amp; Controls</strong><small>Summary, export, edit, and erase</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="comfort"><i>🌤️</i><span><strong>Comfort &amp; Accessibility</strong><small>Calm colors, motion, and read-aloud</small></span><span>→</span></button><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_donate_index.html"><i>💝</i><span><strong>Support Crechè</strong><small>Support free early learning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" data-close-menu href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No repositories matched.</small>"}</div>`;
+  const counts={};KID_APPS.forEach(app=>counts[app.category]=(counts[app.category]||0)+1);
+  const roomButtons=Object.entries(CATEGORIES).filter(([key])=>!["all","grownup"].includes(key)).map(([key,data])=>`<button class="menu-room-button" type="button" data-menu-category="${key}"><i>${data.icon}</i><span><strong>${escapeHtml(data.label)}</strong><small>${counts[key]||0} adventures</small></span></button>`).join("");
+  const childSection=q
+    ? `<p class="menu-group">Matching Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(displayTitle(app))}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div>`
+    : `<p class="menu-group">Adventure Rooms · ${KID_APPS.length} child apps</p><div class="menu-room-grid"><button class="menu-room-button all-apps" type="button" data-menu-category="all"><i>✨</i><span><strong>Complete App Directory</strong><small>All ${APPS.length} validated catalog entries</small></span></button>${roomButtons}</div>`;
+  $("menuContent").innerHTML=`${childSection}<p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+familyFixed}</p><div class="menu-list"><a class="menu-link" data-close-menu href="#familyMentorEntry"><i>✨</i><span><strong>Open Preschool Mentor</strong><small>Guest learning path · no registration</small></span><span>→</span></a><button class="menu-link menu-action" type="button" data-menu-action="child-profile"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="parent-dashboard"><i>🧑‍🧒</i><span><strong>Parent Dashboard &amp; Controls</strong><small>Summary, export, edit, and erase</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="comfort"><i>🌤️</i><span><strong>Comfort &amp; Accessibility</strong><small>Calm colors, motion, and read-aloud</small></span><span>→</span></button><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_donate_index.html"><i>💝</i><span><strong>Support Crechè</strong><small>Support free early learning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" data-close-menu href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No public destinations matched.</small>"}</div>`;
 }
 
 function mentorMatch(){return MENTOR_MATCHES[profile?.personality]||MENTOR_MATCHES.playful}
@@ -1509,7 +1693,7 @@ function isPreschoolAppHref(href){
 function appFromHref(href){
   try{
     const target=new URL(href,location.href).href;
-    return KID_APPS.find(app=>new URL(appUrl(app),location.href).href===target)||null;
+    return APPS.find(app=>new URL(appUrl(app),location.href).href===target)||null;
   }catch{return null}
 }
 function openAppModal(href,title="Crechè Adventure",icon="🌈",appId=""){
@@ -1760,8 +1944,9 @@ function trapFocus(event,root){
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
 }
 
-function openMenu(){$("menuOverlay").classList.add("open");$("menuOverlay").setAttribute("aria-hidden","false");$("menuBtn").setAttribute("aria-expanded","true");document.body.classList.add("menu-open");setTimeout(()=>$("menuSearch").focus(),80)}
-function closeMenu(){$("menuOverlay").classList.remove("open");$("menuOverlay").setAttribute("aria-hidden","true");$("menuBtn").setAttribute("aria-expanded","false");document.body.classList.remove("menu-open")}
+let menuRestoreFocus=null;
+function openMenu(){menuRestoreFocus=document.activeElement;$("menuOverlay").classList.add("open");$("menuOverlay").setAttribute("aria-hidden","false");$("menuBtn").setAttribute("aria-expanded","true");document.body.classList.add("menu-open");setTimeout(()=>$("menuSearch").focus(),80)}
+function closeMenu(returnFocus=false){$("menuOverlay").classList.remove("open");$("menuOverlay").setAttribute("aria-hidden","true");$("menuBtn").setAttribute("aria-expanded","false");document.body.classList.remove("menu-open");if(returnFocus)menuRestoreFocus?.focus?.()}
 function setCalm(value){
   calm=value;
   document.body.classList.toggle("calm",calm);
@@ -1784,6 +1969,7 @@ document.addEventListener("click",event=>{
   if(!link||!isPreschoolAppHref(link.getAttribute("href")))return;
   event.preventDefault();
   if($("menuOverlay")?.classList.contains("open"))closeMenu();
+  if($("categoryOverlay")?.classList.contains("open"))closeCategoryPopup();
   const app=link.dataset.openApp?KID_APPS.find(a=>a.id===link.dataset.openApp):appFromHref(link.href);
   openAppModal(link.href,app?displayTitle(app):(link.textContent.trim()||"Crechè Adventure"),app?.icon||"🌈",app?.id||link.dataset.openApp||"");
 });
@@ -1953,13 +2139,12 @@ tickerToggle.addEventListener("click",()=>{
 $("search").addEventListener("input",filterActivities);$("category").addEventListener("change",filterActivities);
 $("favoritesBtn").addEventListener("click",()=>{favoritesOnly=!favoritesOnly;updateFavorites();filterActivities()});
 $("randomBtn").addEventListener("click",()=>chooseRandom($("category").value));$("surpriseHero").addEventListener("click",()=>chooseRandom());$("orbitRandom").addEventListener("click",()=>chooseRandom());
-$("calmBtn").addEventListener("click",()=>setCalm(!calm));$("menuBtn").addEventListener("click",openMenu);$("closeMenu").addEventListener("click",closeMenu);
+$("calmBtn").addEventListener("click",()=>setCalm(!calm));$("menuBtn").addEventListener("click",openMenu);$("closeMenu").addEventListener("click",()=>closeMenu(true));
 $("childViewBtn").addEventListener("click",()=>setView("child",{scroll:true}));
 $("grownupViewBtn").addEventListener("click",()=>setView("grownup",{scroll:true}));
 $("homeSurprise").addEventListener("click",()=>chooseRandom());
 $("homeCalmBtn").addEventListener("click",()=>setCalm(!calm));
 $("motionBtn").addEventListener("click",()=>setReducedMotion(!reduceMotion));
-$("readHomeMentor")?.addEventListener("click",()=>speakText($("homeMentorMessage")?.textContent||""));
 $("newAwayPrompt").addEventListener("click",()=>{chooseOffscreenPrompt();toast("A new off-screen adventure is ready.")});
 $("readAwayPrompt").addEventListener("click",()=>speakText($("awayPrompt").textContent));
 $("continueLink").addEventListener("click",()=>{const id=$("continueLink").dataset.continueApp;if(id)markVisited(id)});
@@ -1971,7 +2156,9 @@ $("parentAccessibilityCard").addEventListener("click",scrollToParentDashboard);
 $("dashboardCalm").addEventListener("click",()=>setCalm(!calm));
 $("dashboardMotion").addEventListener("click",()=>setReducedMotion(!reduceMotion));
 $("menuOverlay").addEventListener("click",event=>{
-  if(event.target===$("menuOverlay")){closeMenu();return}
+  if(event.target===$("menuOverlay")){closeMenu(true);return}
+  const room=event.target.closest("[data-menu-category]");
+  if(room){const key=room.dataset.menuCategory;closeMenu();openCategoryPopup(key);return}
   const action=event.target.closest("[data-menu-action]");
   if(action){
     const kind=action.dataset.menuAction;
@@ -1985,13 +2172,18 @@ $("menuOverlay").addEventListener("click",event=>{
 });
 $("menuSearch").addEventListener("input",event=>buildMenu(event.target.value));
 $("menuOverlay").addEventListener("keydown",event=>{if($("menuOverlay").classList.contains("open"))trapFocus(event,$("drawer")||$("menuOverlay"))});
+$("allAppsBtn").addEventListener("click",()=>openCategoryPopup("all"));
+$("closeCategoryDirectory").addEventListener("click",()=>closeCategoryPopup(true));
+$("categoryPopupSearch").addEventListener("input",renderCategoryPopupApps);
+$("categoryOverlay").addEventListener("click",event=>{if(event.target===$("categoryOverlay"))closeCategoryPopup(true)});
+$("categoryOverlay").addEventListener("keydown",event=>{if($("categoryOverlay").classList.contains("open"))trapFocus(event,$("categoryDialog"))});
 $("openChildProfile").addEventListener("click",openProfileDialog);$("editProfileFromParent").addEventListener("click",openProfileDialog);
 $("closeProfile").addEventListener("click",closeProfileDialog);$("cancelProfile").addEventListener("click",closeProfileDialog);$("saveChildProfile").addEventListener("click",saveProfile);
 $("profileOverlay").addEventListener("click",event=>{if(event.target===$("profileOverlay"))closeProfileDialog()});
 $("profileOverlay").addEventListener("keydown",event=>{if($("profileOverlay").classList.contains("open"))trapFocus(event,$("profileOverlay"))});
 $("showProfileFavorites").addEventListener("click",showPinnedInGarden);$("managePinnedGames").addEventListener("click",()=>goToSection("#activities",{history:false,behavior:calm?"auto":"smooth"}));
 $("exportFamilyData").addEventListener("click",exportFamilyRecord);$("eraseFamilyData").addEventListener("click",eraseFamilyRecord);
-document.addEventListener("keydown",event=>{if(event.key==="Escape"){if(!$("appModal").hidden){closeAppModal();return}closeMenu();closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"){if(!$("appModal").hidden){closeAppModal();return}if($("categoryOverlay").classList.contains("open")){closeCategoryPopup(true);return}if($("menuOverlay").classList.contains("open")){closeMenu(true);return}closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
 
 
 window.addEventListener("khaemenes-family-changed",renderFamilyMentorEntry);
