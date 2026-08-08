@@ -1,25 +1,45 @@
 {
-  "release": "Crech\u00e8 Interactive Pop-up Refinement v4",
+  "release": "Crech\u00e8 Parent Entrance + Child Mentor v5",
   "valid": true,
   "filesToUpload": [
     "index.html",
     "mentor/index.html"
   ],
+  "policy": {
+    "gamesAndApps": "public-no-registration",
+    "parentFamilyEntrance": "main Crech\u00e8 index",
+    "childMentor": "appears after linked learner account exists",
+    "childMentorButton": "large bright Comic Sans, personalized with child nickname",
+    "parentControls": "outside child Mentor page",
+    "parentProfileButton": "visible on child Mentor page"
+  },
+  "mentor": {
+    "childFirst": true,
+    "friendlyVoiceEngine": true,
+    "learningPath": true,
+    "feelings": true,
+    "resizableApps": true,
+    "learnerScopedStars": true
+  },
   "checks": {
-    "anchorOffset": true,
-    "scrollMargin": true,
-    "compactMentorIntro": true,
-    "featuredGame": true,
-    "resizablePopup": true,
-    "closeX": true,
-    "maximizeRestore": true,
-    "appLinksIntercepted": true,
-    "randomGameUsesPopup": true,
-    "gentleLandingVoice": true,
-    "gentleMentorVoice": true,
-    "richVisualsPreserved": true,
-    "catalogPreserved": true,
-    "guestMentorPreserved": true
+    "publicGamesStillPresent": true,
+    "familyEntranceOnHome": true,
+    "namedChildButtons": true,
+    "childButtonComicSans": true,
+    "childButtonSetsActiveLearner": true,
+    "mentorRequiresLearner": true,
+    "kidOnlyMentor": true,
+    "parentProfileButton": true,
+    "learningPath": true,
+    "feelings": true,
+    "friendlyVoiceFriends": true,
+    "provenVoiceMatching": true,
+    "voicesChangedHandled": true,
+    "mentorControls": true,
+    "resizableAppModal": true,
+    "completionStars": true,
+    "sharedCatalog": true,
+    "familyRegistry": true
   },
   "issues": []
 }

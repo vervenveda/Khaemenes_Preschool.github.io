@@ -1,27 +1,47 @@
-CRECHÈ INTERACTIVE POP-UP REFINEMENT v4
+CRECHÈ PARENT ENTRANCE + CHILD MENTOR v5
 
-Upload ONLY:
+Upload only:
 
 Khaemenes_Preschool.github.io/
 ├── index.html
 └── mentor/
     └── index.html
 
-Keep /apps/ and assets/preschool-catalog.js exactly where they are.
+MAIN CRECHÈ PAGE
+----------------
+• All games/apps remain public.
+• Parent / Family Mentor Account entrance lives on the main page.
+• No generic child Mentor button appears until a linked learner exists.
+• Once learner accounts exist, the page renders one large bright button per child:
+    🌟 Enter Maya’s Mentor
+    🌟 Enter Noah’s Mentor
+• Child names use bold Comic Sans / rounded fallback.
+• Clicking a named button activates that learnerId before opening the Mentor.
 
-CHANGES
--------
-• Sticky ticker/header anchor alignment corrected.
-• Front Mentor reduced to a compact introduction:
-  free, privacy-conscious, personalized early education; Guest Mode; no ads.
-• Large front Mentor card replaced by a live random Crechè game preview.
-• "Another Game" picks another repository app.
-• "Open Larger" opens the featured game in a resizable in-page app window.
-• Every internal Crechè /apps/ link now opens in that same in-page modal.
-• Modal has a prominent × Close button.
-• Modal is resizable on desktop from its lower-right corner.
-• Modal has Maximize / Restore.
-• Escape or clicking outside closes it.
-• Closing returns the visitor to the same landing-page position.
-• Read-aloud now prefers a gentler English system voice and raises pitch/rate to avoid a deep, intimidating sound.
-• Rich animations, ticker, rainbow, Adventure Rooms, full catalog, family areas, and public Guest Mentor remain intact.
+CHILD MENTOR PAGE
+-----------------
+• Child-first only: no embedded adult dashboard or Family Guide.
+• Top bar includes a separate 👨‍👩‍👧 Parent Profile button back to the Academy Family Profile.
+• Large My Learning Path button.
+• Personalized mentor identity.
+• Feelings controls.
+• Four-step adaptive learning path.
+• Learning Garden.
+• Random learning game.
+• Off-screen break ideas.
+• Resizable in-page app window with × Close, maximize, and ⭐ I’m Done.
+• Learner-scoped exploration stars.
+
+VOICE REPAIR
+------------
+The old generic high-pitch workaround is removed.
+The child Mentor now uses the stronger voice-selection approach already used by Crechè story games:
+• waits for browser voices to load
+• filters English voices
+• prefers Samantha / Aria / Jenny / Ava / Karen / Victoria / Zira / Serena where available
+• then prefers Natural / Enhanced / Premium voices
+• uses modest child-friendly pitch rather than exaggerated pitch
+• includes Sunny, Benny Bunny, Rainbow Rae, and Story Owl guide voices
+• includes Slow & gentle / Storytime / A little lively speeds
+• handles voiceschanged
+• includes Stop

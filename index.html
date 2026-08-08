@@ -416,6 +416,53 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{an
 .compact-heading{margin-bottom:26px}
 .learner-home{padding-top:70px;padding-bottom:74px;background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(241,249,255,.9))}
 
+
+/* v5 · Family Mentor entrance + named learner Mentor buttons */
+.family-mentor-entry{
+  margin:18px 0 0;padding:20px;border:3px solid rgba(255,255,255,.96);border-radius:28px;
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(240,249,255,.96));
+  box-shadow:0 20px 48px rgba(50,58,103,.14);text-align:left
+}
+.family-mentor-entry-head{display:flex;align-items:center;gap:14px}
+.family-mentor-entry-icon{
+  width:68px;height:68px;display:grid;place-items:center;flex:0 0 68px;border:4px solid #fff;
+  border-radius:22px;background:linear-gradient(145deg,#7254d8,#e95ca8);color:#fff;
+  box-shadow:0 12px 26px rgba(60,51,106,.18);font-size:2rem
+}
+.family-mentor-entry h3{margin:0;color:#343067;font-family:var(--serif);font-size:1.5rem}
+.family-mentor-entry p{margin:.35rem 0 0;color:var(--muted);font-size:.84rem}
+.family-mentor-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.family-mentor-actions a{
+  min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:.65rem .9rem;
+  border-radius:999px;color:#fff;background:linear-gradient(135deg,#173660,#7254d8);
+  box-shadow:0 9px 20px rgba(55,62,115,.16);text-decoration:none;font-size:.78rem;font-weight:850
+}
+.child-mentor-buttons{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:15px
+}
+.child-mentor-button{
+  min-height:78px;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;
+  border:5px solid #fff;border-radius:25px;color:#fff;
+  background:linear-gradient(135deg,#ff526d,#ff942b 58%,#ffd63d);
+  box-shadow:0 16px 32px rgba(69,55,106,.22);
+  text-align:center;text-decoration:none;
+  font-family:"Comic Sans MS","Arial Rounded MT Bold",ui-rounded,cursive;
+  font-size:clamp(1.28rem,2.8vw,1.8rem);font-weight:900;line-height:1.05;
+  text-shadow:0 2px 2px rgba(77,44,68,.18);
+  transition:transform .17s,box-shadow .17s,filter .17s
+}
+.child-mentor-button:hover{transform:translateY(-5px) scale(1.02) rotate(-.5deg);box-shadow:0 22px 42px rgba(69,55,106,.29);filter:saturate(1.08)}
+.child-mentor-button:nth-child(2n){background:linear-gradient(135deg,#2398d5,#42c7dc,#79e4d0)}
+.child-mentor-button:nth-child(3n){background:linear-gradient(135deg,#7254d8,#e95ca8,#ff8bab)}
+.child-mentor-button:nth-child(4n){background:linear-gradient(135deg,#23a67c,#8ccf54,#c6e94d)}
+.child-mentor-button .child-star{font-size:1.8rem;filter:drop-shadow(0 3px 3px rgba(0,0,0,.15))}
+.family-account-status{margin-top:9px;color:#68758a;font-size:.72rem;font-weight:700}
+@media(max-width:600px){
+  .family-mentor-entry-head{align-items:flex-start}
+  .child-mentor-buttons{grid-template-columns:1fr}
+  .child-mentor-button{min-height:74px}
+}
+
 /* v4 · Compact Mentor intro + featured live game + resizable app modal */
 .mentor-intro-strip{
   display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;
@@ -616,7 +663,7 @@ body.app-modal-open{overflow:hidden}
   <div class="shell nav">
     <a class="brand" href="#top"><span class="brand-bubble">🌈</span><span><strong>Khaemenes Preschool</strong><small>Crechè · Bright beginnings grow here</small></span></a>
     <nav class="navlinks" aria-label="Primary navigation">
-      <a href="./mentor/index.html">Open Mentor</a><a href="#profiles">Optional Profiles</a><a href="#rooms">Adventure Rooms</a><a href="#today">Today’s Pick</a><a href="#activities">All Adventures</a>
+      <a href="#familyMentorEntry">Open Mentor</a><a href="#profiles">Optional Profiles</a><a href="#rooms">Adventure Rooms</a><a href="#today">Today’s Pick</a><a href="#activities">All Adventures</a>
     </nav>
     <div class="view-switch" role="group" aria-label="Choose child or grown-up view">
       <button class="view-choice" id="childViewBtn" type="button" data-view-choice="child" aria-pressed="true">🌈 Child</button>
@@ -654,7 +701,7 @@ body.app-modal-open{overflow:hidden}
       <h1>Crechè<span>Khaemenes Preschool · Read · Count · Create · Feel · Move · Wonder</span></h1>
       <p class="lead" id="heroLead">A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.</p>
       <div class="actions">
-        <a class="btn primary" href="./mentor/index.html">Meet My Mentor · No Registration →</a>
+        <a class="btn primary" href="#familyMentorEntry">Meet My Mentor · No Registration →</a>
         <a class="btn secondary" href="#rooms">Choose an Adventure Room ↓</a>
         <button class="btn secondary" id="surpriseHero" type="button">Pick One for Me 🎈</button>
       </div>
@@ -678,22 +725,19 @@ body.app-modal-open{overflow:hidden}
       <p id="myHomeIntro">Play, save favorites, explore rooms, and meet the Mentor without registration. A learner profile is optional and is only needed when a family wants persistent curriculum records and cross-grade continuity.</p>
     </div>
 
-    <article class="mentor-intro-strip" aria-label="Khaemenes Preschool Mentor introduction">
-      <span class="mentor-intro-icon" id="homeMentorAvatar" aria-hidden="true">✨</span>
-      <div>
-        <h3 id="homeMentorName">Meet the Khaemenes Preschool Mentor</h3>
-        <p id="homeMentorMessage">Free, privacy-conscious, personalized early education. The Mentor helps children choose age-aligned activities, offers gentle hints, read-aloud, movement breaks, and balanced play. Guest Mode is open to everyone.</p>
-        <span class="mentor-free">Free · Guest Mode · no registration · no ads</span>
+    <article class="family-mentor-entry" id="familyMentorEntry" aria-label="Parent and Family Mentor Account">
+      <div class="family-mentor-entry-head">
+        <span class="family-mentor-entry-icon" aria-hidden="true">👨‍👩‍👧‍👦</span>
+        <div>
+          <h3>Parent / Family Mentor Account</h3>
+          <p>Crechè games and apps are always open. A family account creates each child’s personalized Mentor and carries that learner’s curriculum progress forward.</p>
+        </div>
       </div>
-      <div class="mentor-intro-actions">
-        <a id="homeMentorLink" href="./mentor/index.html">Meet My Mentor →</a>
-        <button id="readHomeMentor" type="button">🔊 Hear Introduction</button>
+      <div class="family-mentor-actions">
+        <a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Parent / Family Account →</a>
       </div>
-      <div class="mentor-plan-data" aria-hidden="true">
-        <h3 id="mentorPlanTitle">A balanced little day</h3>
-        <p id="mentorPlanIntro">The Guest Mentor can prepare today’s age-aware sequence.</p>
-        <div id="mentorPlanPreview"></div>
-      </div>
+      <div class="child-mentor-buttons" id="childMentorButtons" aria-live="polite"></div>
+      <div class="family-account-status" id="familyAccountStatus">Checking for linked child learner accounts…</div>
     </article>
 
     <div class="home-grid">
@@ -785,7 +829,7 @@ body.app-modal-open{overflow:hidden}
         <h3>Open Khaemenes Preschool Mentor</h3>
         <p>Meet Pip, Miri, Nova, or Sage and receive a balanced daily path through Crechè activities. Guest Mentor use does not require registration.</p>
         <div class="family-meta"><span>No registration</span><span>Guest Mode</span><span>Balanced learning day</span></div>
-        <div class="family-actions"><a class="family-action" href="./mentor/index.html">Enter the Learning Hub →</a></div>
+        <div class="family-actions"><a class="family-action" href="#familyMentorEntry">Enter the Learning Hub →</a></div>
       </article>
 
       <article class="family-card" style="--family-soft:#fff2c8;--family-glow:rgba(255,214,61,.16)">
@@ -919,7 +963,7 @@ body.app-modal-open{overflow:hidden}
     <div class="parent-tools">
       <button class="parent-card" id="parentProfileCard" type="button"><span class="parent-icon">🧑‍🧒</span><h3>Parent Dashboard</h3><p>Review the active child, local learning summary, privacy controls, export, and reset tools.</p><span>Open Parent Dashboard ↑</span></button>
       <button class="parent-card" id="childProfileCard" type="button"><span class="parent-icon">🧒</span><h3>Child Profile</h3><p>Create or edit the child’s nickname, broad learning stage, mentor style, and pathway.</p><span>Open Child Profile →</span></button>
-      <a class="parent-card" href="./mentor/index.html"><span class="parent-icon">✨</span><h3>Guided Preschool</h3><p>Meet the personal mentor and begin a balanced, age-aligned daily learning path.</p><span>Enter Learning Hub →</span></a>
+      <a class="parent-card" href="#familyMentorEntry"><span class="parent-icon">✨</span><h3>Guided Preschool</h3><p>Meet the personal mentor and begin a balanced, age-aligned daily learning path.</p><span>Enter Learning Hub →</span></a>
       <button class="parent-card" id="parentAccessibilityCard" type="button"><span class="parent-icon">🌤️</span><h3>Comfort &amp; Accessibility</h3><p>Choose bright or calm colors, reduce movement, and use read-aloud support.</p><span>Adjust this page ↑</span></button>
       <a class="parent-card" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><span class="parent-icon">🌻</span><h3>Kinder Garden</h3><p>Continue into kindness, curiosity, early literacy, number sense, nature, and school readiness.</p><span>Enter Kinder Garden →</span></a>
       <a class="parent-card" href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><span class="parent-icon">🏫</span><h3>Elementary School</h3><p>Continue toward Kinder Garden through Grade 5 learning and family resources.</p><span>Enter Elementary →</span></a>
@@ -1146,7 +1190,7 @@ function buildMenu(query=""){
   const grownMatches=GROWNUP_APPS.filter(app=>!q||(app.title+" "+app.desc+" "+app.tags+" "+app.file).toLowerCase().includes(q));
   const siteMatches=SITES.filter(site=>!q||(site.title+" "+site.desc).toLowerCase().includes(q));
   const familyFixed=8;
-  $("menuContent").innerHTML=`<p class="menu-group">Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(displayTitle(app))}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div><p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+familyFixed}</p><div class="menu-list"><a class="menu-link" data-close-menu href="./mentor/index.html"><i>✨</i><span><strong>Open Preschool Mentor</strong><small>Guest learning path · no registration</small></span><span>→</span></a><button class="menu-link menu-action" type="button" data-menu-action="child-profile"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="parent-dashboard"><i>🧑‍🧒</i><span><strong>Parent Dashboard &amp; Controls</strong><small>Summary, export, edit, and erase</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="comfort"><i>🌤️</i><span><strong>Comfort &amp; Accessibility</strong><small>Calm colors, motion, and read-aloud</small></span><span>→</span></button><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_donate_index.html"><i>💝</i><span><strong>Support Crechè</strong><small>Support free early learning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" data-close-menu href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No repositories matched.</small>"}</div>`;
+  $("menuContent").innerHTML=`<p class="menu-group">Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(displayTitle(app))}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div><p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+familyFixed}</p><div class="menu-list"><a class="menu-link" data-close-menu href="#familyMentorEntry"><i>✨</i><span><strong>Open Preschool Mentor</strong><small>Guest learning path · no registration</small></span><span>→</span></a><button class="menu-link menu-action" type="button" data-menu-action="child-profile"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="parent-dashboard"><i>🧑‍🧒</i><span><strong>Parent Dashboard &amp; Controls</strong><small>Summary, export, edit, and erase</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="comfort"><i>🌤️</i><span><strong>Comfort &amp; Accessibility</strong><small>Calm colors, motion, and read-aloud</small></span><span>→</span></button><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_donate_index.html"><i>💝</i><span><strong>Support Crechè</strong><small>Support free early learning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" data-close-menu href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No repositories matched.</small>"}</div>`;
 }
 
 function mentorMatch(){return MENTOR_MATCHES[profile?.personality]||MENTOR_MATCHES.playful}
@@ -1631,9 +1675,60 @@ document.addEventListener("click",event=>{
   openAppModal(link.href,app?displayTitle(app):(link.textContent.trim()||"Crechè Adventure"),app?.icon||"🌈",app?.id||link.dataset.openApp||"");
 });
 
+
+function renderFamilyMentorEntry(){
+  const box=$("#childMentorButtons"),status=$("#familyAccountStatus");
+  if(!box||!status)return;
+  const registry=window.KhaemenesFamilyRegistry;
+
+  if(!registry){
+    box.innerHTML="";
+    status.textContent="Family registration is available through the Khaemenes Academy Family Profile. Games and apps remain open.";
+    return;
+  }
+
+  const family=registry.getFamily?.();
+  if(!family){
+    box.innerHTML="";
+    status.textContent="No family account is active on this browser yet. Games and apps remain open to everyone.";
+    return;
+  }
+
+  const learners=Array.isArray(family.learners)?family.learners:[];
+  if(!learners.length){
+    box.innerHTML="";
+    status.textContent="Family account found. Add a child learner account to reveal that child’s bright Mentor button.";
+    return;
+  }
+
+  box.innerHTML=learners.map(learner=>{
+    const nickname=escapeHTML(learner.nickname||"My Child");
+    const learnerId=escapeHTML(learner.learnerId||"");
+    return `<a class="child-mentor-button" href="./mentor/index.html" data-enter-child-mentor="${learnerId}">
+      <span class="child-star" aria-hidden="true">🌟</span>
+      <span>Enter ${nickname}’s Mentor</span>
+    </a>`;
+  }).join("");
+
+  status.textContent=`${learners.length} child learner account${learners.length===1?" is":"s are"} ready. Each button opens that child’s own Mentor space.`;
+}
+
+document.addEventListener("click",event=>{
+  const link=event.target.closest("[data-enter-child-mentor]");
+  if(!link)return;
+  const registry=window.KhaemenesFamilyRegistry;
+  const family=registry?.getFamily?.();
+  const learnerId=link.dataset.enterChildMentor;
+  if(!registry||!family||!learnerId)return;
+  event.preventDefault();
+  registry.setActive?.({familyId:family.familyId,learnerId});
+  location.href=link.href;
+});
+
 $("heroKidCount").textContent=KID_APPS.length;
 migrateLegacyProfileData();
 syncContinuity();
+renderFamilyMentorEntry();
 renderFeaturedGame();
 renderTicker();
 renderNew();
@@ -1703,6 +1798,14 @@ $("exportFamilyData").addEventListener("click",exportFamilyRecord);$("eraseFamil
 document.addEventListener("keydown",event=>{if(event.key==="Escape"){if(!$("appModal").hidden){closeAppModal();return}closeMenu();closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
 </script>
   <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
-  <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-school-bridge.js" data-khaemenes-stage="preschool"></script>
+  <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-school-bridge.js" data-khaemenes-stage="preschool">
+window.addEventListener("khaemenes-family-changed",renderFamilyMentorEntry);
+window.addEventListener("storage",event=>{
+  if(["khaemenes_family_registry_v1","khaemenes_active_learner_v1","khaemenes_active_family_v1"].includes(event.key)){
+    renderFamilyMentorEntry();
+  }
+});
+
+</script>
 </body>
 </html>
