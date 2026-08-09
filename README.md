@@ -1,206 +1,230 @@
 # Khaemenes Preschool · Crechè
 
-**A local-first early-learning environment for young children, families, caregivers, and educators.**
+**A public early-learning adventure garden with an optional family-linked personalized Mentor pathway.**
 
-Khaemenes Preschool is the early-learning entrance to the Khaemenes Academy and Verve N Veda educational ecosystem. It combines a free-choice **Crechè Adventure Garden** with a separate **Guided Preschool Mentor** pathway so children can explore independently with a grown-up or follow a balanced, age-aware learning rhythm.
+Khaemenes Preschool is the Preschool entrance to Khaemenes Academy. The repository intentionally separates **public play** from **personalized learner identity**.
 
-**Public site:**  
-https://vervenveda.com/Khaemenes_Preschool.github.io/
+Public site:
 
-**Guided Preschool Mentor:**  
-https://vervenveda.com/Khaemenes_Preschool.github.io/mentor/
+`https://vervenveda.com/Khaemenes_Preschool.github.io/`
 
----
+Personalized child Mentor:
 
-## Current Program Architecture
+`https://vervenveda.com/Khaemenes_Preschool.github.io/mentor/`
 
-Khaemenes Preschool intentionally provides two complementary learning experiences.
+Academy Family Profile:
 
-### 1. Crechè Adventure Garden
-
-The repository root `index.html` is the open exploration portal.
-
-Children and families can:
-
-- Browse the complete preschool activity garden
-- Search by title, topic, description, category, or filename
-- Enter subject-based learning rooms
-- Save favorite activities
-- Pin favorites to an active child profile
-- Track visited adventures locally
-- Open a daily featured adventure
-- Use **Surprise Me** for playful discovery
-- Switch to a calmer visual mode
-- Open parent and child profile controls
-- Continue to Guided Preschool
-- Continue toward Kinder Garden and Elementary School
-- Export or erase the family-controlled local learning record
-
-The Adventure Garden is designed to preserve child choice, curiosity, play, and exploration.
-
-### 2. Guided Preschool Mentor
-
-`mentor/index.html` provides a more structured educational pathway.
-
-A grown-up helps create a small local learner profile using:
-
-- First name or nickname only
-- Broad age band
-- General communication/personality style
-- Broad interests
-- Preferred learning pace
-- Approximate daily guided-learning time
-
-The mentor then builds a short, balanced daily path from the preschool activity collection.
-
-The mentor is always identified as an AI learning guide and uses **guided choices rather than an unrestricted private chat box**.
+`https://vervenveda.com/Khaemenes_Academy.github.io/family/`
 
 ---
 
-## Current Catalog
-
-The production Crechè catalog currently contains:
-
-- **53 catalog entries**
-- **52 child learning adventures**
-- **1 grown-up support resource**
-- **0 duplicate catalog IDs**
-- **0 duplicate catalog file paths**
-- **0 catalog targets missing from the repository tree**
-
-The current catalog has been validated against the repository tree.
-
-Some historical filenames contain spaces or older spellings. The production portal safely URL-encodes each path segment so those existing routes can remain functional until compatibility-safe aliases are introduced.
-
-Examples include:
+## Final Access Architecture
 
 ```text
-apps/Art _resources_index.html
-apps/Life_Skills_kitchen_ resipes_index.html
+Crechè Home
+│
+├── 52 child games / apps / stories / tools
+│   └── public · no registration required
+│
+├── Parent / Family Mentor Account
+│   └── Academy Family Registry
+│       ├── one family
+│       ├── authorized adults
+│       └── separate learner accounts
+│
+└── linked Preschool learner
+    └── bright named Mentor button
+        └── mentor/index.html
+            ├── child-only personalized Mentor
+            ├── My Learning Path
+            ├── feelings check-in
+            ├── learning garden
+            ├── gentle read-aloud
+            ├── real-world breaks
+            └── Crechè apps in a resizable in-page window
 ```
 
-These filenames should not be mass-renamed without providing compatibility routes.
+**Games and apps are never gated by the learner account.**
+
+The learner account is used when a child enters the personalized Mentor / structured learning path or when persistent academic/curriculum records need a stable learner identity.
+
+There is no Preschool Guest-Mentor mode in the final architecture.
 
 ---
 
-## Learning Areas
+## Public Crechè Adventure Garden
 
-The Crechè collection supports whole-child early learning across several connected areas.
+The repository root `index.html` is the open Preschool portal.
 
-### Language, Literacy & Storytelling
+The current shared catalog contains:
 
-Examples include:
+- **53 total catalog entries**
+- **52 child adventures**
+- **1 grown-up support entry**
+- **0 duplicate catalog IDs**
+- **0 duplicate catalog paths**
+- **0 catalog targets missing from the audited repository tree**
 
-- ABC Story Time
-- Alphabet Adventure
-- Bilingual ABC
-- ABC Bubble Adventure
-- Cosmic Alphabet
-- ABC Match
-- ABC Time
-- ABC Adventure Hub
-- Cosmic Arabic Alphabet Quest
-- Learn a New Word
-- Sight Words
-- Spelling Game
-- Spelling Journal
-- Spelling Safari
-- Storybird Grove
-- Sunny ABCs & 123s Storytime
+The Adventure Garden supports:
 
-### Numbers, Shapes & Early Reasoning
+- Full activity browsing
+- Search and category filtering
+- Adventure Rooms
+- Today’s Pick
+- Surprise Me
+- Browser-local favorites
+- Visited activity history
+- Child / Grown-Up presentation modes
+- Resizable in-page app windows
+- Parent / Family Mentor Account entrance
+- Named child Mentor buttons after learner registration
 
-Examples include:
-
-- Pre-K Math Cloud
-- Numbers 1–12 Fun
-- Numbers Drag & Drop
-- Shapes Game
-- Match the Shapes
-
-### Feelings, Friendship & Social-Emotional Learning
-
-Examples include:
-
-- Feelings Emotional Explorer
-- Emotions & Friendship Garden
-- Acts of Kindness
-- Feelings Game
-- Noetic Emotions Explorer
-
-### Art, Music & Creative Expression
-
-Examples include:
-
-- Art Color Studio
-- Little Artist Resources
-- Color Mixing Studio
-- Little Museum
-- Match the Colors
-- Drawing Tool
-- Harmony Haven Staff Studio
-- Little Composer Piano
-
-### Movement, Health & Life Skills
-
-Examples include:
-
-- Move & Groove
-- How to Brush Your Teeth
-- Life Skills Clubhouse
-- Little Kitchen Helper
-- Little Kitchen Recipes
-- Making Your Bed
-- Mini Organizer
-- Schoolwork Helper
-- Walking With a Dog Safely
-- Compass Exploration
-
-### Nature, Weather & Wonder
-
-Examples include:
-
-- Weather for Tots
-- Sunny's Weather Adventure
-- Sunny's Moon Adventure
-- Solanar Kid Weather
-- The Wondercabinet
-- Little Worlds Promenade
-- Joke Jar
+Public play remains available even when the Family Registry is unavailable.
 
 ---
 
-## Guided Mentor Learning Map
+## Shared Preschool Catalog
 
-The Guided Preschool Mentor currently organizes its educational planning across six whole-child domains:
+The production catalog is:
 
-1. **Language & Early Literacy**
-2. **Numbers & Early Reasoning**
-3. **Feelings, Friendship & Self-Knowledge**
-4. **Art, Music & Imagination**
-5. **Movement, Health & Life Skills**
-6. **Nature, Weather & Wonder**
+```text
+assets/preschool-catalog.js
+```
 
-The mentor uses broad age bands:
+It is the source of truth for:
 
-- Ages 2–3
-- Ages 3–4
-- Ages 4–5
-- Ages 5–6
+- Crechè activity metadata
+- File routes
+- Categories
+- Mentor eligibility
+- Mentor age bands
+- Mentor learning domains
+- Activity duration
+- Energy level
+- Broad interests
 
-Daily guided-learning rhythms currently support:
+The repository also currently contains a root `preschool-catalog.js` copy. Treat that as a compatibility duplicate; new code should consume `assets/preschool-catalog.js` so catalog metadata is not maintained independently in multiple places.
 
-- **20 minutes** · 3 short stations
-- **30 minutes** · 4 balanced stations
-- **45 minutes** · 5 stations with broader rotation
-
-The mentor attempts to balance domains rather than turning preschool into only letters, only mathematics, or only screen-based games.
+Legacy filenames with spaces or historical spellings are preserved. Consumers URL-encode each path segment instead of destructively renaming files.
 
 ---
 
-## Mentor Personalities
+## Family and Learner Identity
 
-The current preschool interface includes four communication matches:
+The Preschool portal uses the Academy-wide Family Registry:
+
+```text
+https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js
+```
+
+Important shared keys include:
+
+```text
+khaemenes_family_registry_v1
+khaemenes_active_family_v1
+khaemenes_active_adult_v1
+khaemenes_active_learner_v1
+```
+
+The registry supports a family containing multiple adults and multiple learners. Each learner has a stable learner ID.
+
+The main Crechè page is the family-facing Mentor entrance. Once a Preschool learner is linked, it reveals a bright button using the child’s nickname. Clicking that button selects the learner before opening `mentor/index.html`.
+
+### Current storage boundary
+
+The current Family Registry is local to the shared `vervenveda.com` browser origin. It is an Academy-wide identity model, but this Preschool repository does **not** by itself provide authenticated cross-device synchronization or email invitation delivery. Those capabilities require the separate connected/server account layer.
+
+---
+
+## Legacy Preschool Profile Compatibility
+
+Older Preschool builds used:
+
+```text
+khaemenes_preschool_profile_v1
+khaemenes_learning_continuity_v1
+khaemenes_profile_favorites_v1
+khaemenes_profile_visits_v1
+```
+
+These records remain compatibility data.
+
+The Academy Family Registry includes a non-destructive `migrateLegacyPreschool()` path so an older learner can be attached to the unified family model without silently erasing existing Preschool data.
+
+New identity creation should happen through the Academy Family Profile rather than through a second independent Preschool child-profile form.
+
+The local bridge remains at:
+
+```text
+assets/khaemenes-profile-bridge.js
+```
+
+It is a compatibility/continuity reader and does not create an account.
+
+---
+
+## Personalized Preschool Mentor
+
+`mentor/index.html` is a **child-only** learning environment.
+
+It does not:
+
+- Create a family
+- Create a learner account
+- Offer Guest Mode
+- Contain a parent dashboard
+- Contain an adult Family Guide
+- Collect unrestricted child text
+- Claim formal grading authority
+
+It reads the active Preschool learner selected through the Academy Family Registry.
+
+If no Preschool learner is active, it shows a friendly doorway back to the Crechè family entrance and the Academy Parent / Family Profile.
+
+The header always includes a separate **Parent Profile** button for an adult to leave the child environment and manage the family account.
+
+See `mentor/README.md` for implementation details.
+
+---
+
+## My Learning Path
+
+The Preschool repository does not currently contain a separate root `/curriculum/` directory.
+
+The personalized Mentor’s **My Learning Path** is therefore the current structured Preschool guidance interface. It builds a short sequence from Mentor-eligible Crechè activities using:
+
+- Broad age band
+- Broad interests
+- Current session feeling/energy
+- Activity duration
+- Learning-domain balance
+- Novelty / previously explored activities
+- Stable learner-specific daily variation
+
+The path is guidance, not a formal grade.
+
+Formal persistent records should remain linked to the stable learner ID.
+
+---
+
+## Whole-Child Mentor Domains
+
+The shared catalog currently supports six Mentor domains:
+
+1. Language & Early Literacy
+2. Numbers & Early Reasoning
+3. Feelings, Friendship & Self-Knowledge
+4. Art, Music & Imagination
+5. Movement, Health & Life Skills
+6. Nature, Weather & Wonder
+
+The Mentor balances domains instead of turning Preschool into a single-subject screen routine.
+
+---
+
+## Mentor Communication Styles
+
+Current Mentor presentations:
 
 | Mentor | Style |
 |---|---|
@@ -209,294 +233,143 @@ The current preschool interface includes four communication matches:
 | **Nova** 🚀 | Imaginative, expressive, adventurous |
 | **Sage** 🌿 | Steady, patient, determined |
 
-These mentor identities are communication styles, not human identities.
-
-The child is not placed into a fixed academic track because of the selected style.
+A learner record may also carry a custom visible Mentor identity. Custom appearance changes presentation; it does not bypass age, safety, or learning-path rules.
 
 ---
 
-## Adaptive Learning Engine
+## Child Safety Boundary
 
-When available on the shared Verve N Veda origin, Guided Preschool connects to the Khaemenes/Verve **Sovereign Problem-Solving Agent**:
+The Preschool Mentor is not an unrestricted private chatbot.
 
-```text
-/assessment-engine/agents/core/sovereign-agent.js
-```
+Child interaction uses bounded controls such as:
 
-The shared agent can combine:
+- Give Me a Hint
+- Let’s Play
+- I Feel Stuck
+- I Need a Break
+- Feelings buttons
+- Read-aloud controls
+- Activity choices
 
-- Hard age/stage constraints
-- Heuristic ranking
-- Monte Carlo outcome simulation
-- Interest fit
-- Energy fit
-- Novelty
-- Domain balance
-- Age fit
-- Local outcome memory
+There is no free-form private child chat field.
 
-Preschool currently uses short activity constraints and age-stage constraints before an activity can be recommended.
-
-If the shared agent cannot load, the Mentor deliberately falls back to a local deterministic scoring system rather than preventing the child from learning.
-
-The adaptive memory is browser-local and bounded. It is designed to store action/outcome values rather than free-form private learner conversations.
+The Mentor encourages nearby adult help when appropriate and includes real-world breaks.
 
 ---
 
-## Child Profile & Local Continuity
+## Voice and Read-Aloud
 
-The active preschool profile uses:
+The child Mentor uses browser speech synthesis only after a user presses a read-aloud control.
 
-```text
-khaemenes_preschool_profile_v1
-```
+The final voice engine:
 
-Crechè also maintains learner-scoped favorites and visits and writes a small cross-school continuity record:
+- Waits for browser voices
+- Filters for English voices
+- Prefers known friendly / natural / enhanced voices
+- Avoids a list of commonly harsh/deep system voices
+- Uses modest pitch changes rather than extreme artificial pitch
+- Provides four child-facing voice presentations:
+  - Sunny
+  - Benny Bunny
+  - Rainbow Rae
+  - Story Owl
+- Provides slow, storytime, and lively speeds
+- Refuses to choose an arbitrary default voice when no suitable gentle voice is exposed by the device
 
-```text
-khaemenes_learning_continuity_v1
-```
-
-The continuity record can include:
-
-- Learner ID
-- Nickname
-- Broad age band
-- Current pathway
-- Mentor match
-- Broad interests
-- Pinned activity metadata
-- Favorite activity IDs
-- Visited activity IDs
-- Last update time
-
-The profile does **not** require:
-
-- Surname
-- Exact birthday
-- Email address
-- Home address
-- Student identification number
-- Photograph
-- Microphone recording
-- Account creation
-
-The shared reader is located at:
-
-```text
-assets/khaemenes-profile-bridge.js
-```
-
-It exposes:
-
-```text
-getProfile()
-getContinuity()
-getPinnedActivities()
-getFavoriteIds()
-getVisitedIds()
-getSummary()
-subscribe(listener)
-```
+Individual Crechè apps may have their own narration systems.
 
 ---
 
-## Current Continuity Boundary
+## Mentor Progress
 
-The Preschool side of cross-school continuity is implemented.
-
-Kinder Garden and Elementary School still need to install the compatible profile bridge/display layer before pinned Crechè activities and learner continuity are visibly surfaced inside those portals.
-
-This repository should therefore be treated as the **source foundation**, not as proof that every downstream school interface is already integrated.
-
-The long-term Khaemenes goal is a continuous learner-controlled pathway:
+The child Mentor stores small learner-scoped local progress under:
 
 ```text
-Preschool
-   ↓
-Kinder Garden
-   ↓
-Elementary
-   ↓
-Middle School
-   ↓
-High School
-   ↓
-Higher Learning
+khaemenes_preschool_child_mentor_progress_v3
 ```
 
-The mentor is intended to become a shared Khaemenes capability across these repositories, with age-appropriate interfaces and safeguards at each level.
+Current progress includes:
+
+- Completed Mentor-recommended activity IDs
+- Completion time/title
+- Exploration star count
+
+This is not a grade or transcript.
+
+Voice preference is learner-scoped under:
+
+```text
+khaemenes_preschool_child_mentor_voice_v2
+```
+
+Current session feelings are not written as a permanent psychological profile.
 
 ---
 
-## Privacy & Local-First Design
+## Parent Boundary
 
-Khaemenes Preschool is designed around minimal data collection and family control.
+Parent administration belongs outside the child Mentor page.
 
-Core principles include:
+The child Mentor header contains:
 
-- No required user account
-- No advertising
-- No behavioral advertising profile
-- No required cloud database
-- No required social-media login
-- Browser-local learner records
-- User-controlled export
-- User-controlled erase/reset
-- Guided rather than unrestricted AI interaction for young children
-- Short learning sessions
-- Adult participation encouraged
-- Reduced-motion and calmer visual options
+```text
+Parent Profile
+```
 
-Most activities are local or self-contained.
+which links to:
 
-### Network-Dependent Exceptions
+```text
+https://vervenveda.com/Khaemenes_Academy.github.io/family/
+```
 
-Some learning tools intentionally use outside network services for their educational function.
+The Academy family layer owns adult identity, learner management, permissions, exports, and future connected account/invitation services.
 
-For example, **Solanar Kid Weather** uses Open-Meteo services for live forecast data and can optionally use browser geolocation when a grown-up chooses **My Location**.
-
-Network-dependent applications should clearly disclose their network and location behavior inside the app.
-
-See:
-
-- `SECURITY.md`
-- `THIRD_PARTY_NOTICES.md`
-
-for additional repository-wide information.
+Preschool should not duplicate those controls inside the child learning environment.
 
 ---
 
-## Accessibility
-
-Current preschool interfaces include or are designed to support features such as:
-
-- Large touch targets
-- Keyboard navigation
-- Visible focus states
-- Responsive layouts
-- Reduced-motion support
-- Calm visual modes
-- Read-aloud through browser speech synthesis
-- Print-friendly output where appropriate
-- Clear child/grown-up separation
-- Simple language
-- Local accessibility preferences
-
-Individual apps may provide additional controls such as larger text, simplified layouts, narration speed, high contrast, or animation controls.
-
----
-
-## Key Repository Files
+## Repository Structure
 
 ```text
 Khaemenes_Preschool.github.io/
 ├── index.html
+├── mentor-manifest.json
 ├── README.md
-├── LICENSE.md
-├── SECURITY.md
-├── THIRD_PARTY_NOTICES.md
-├── PROFILE_CONTINUITY_ADAPTER.md
-├── CRECHE_LINK_AUDIT.md
-├── UPLOAD_INSTRUCTIONS.md
+├── VALIDATION.json
 │
 ├── mentor/
 │   ├── index.html
 │   └── README.md
 │
 ├── assets/
-│   ├── khaemenes-profile-bridge.js
-│   ├── ABC.js
-│   ├── ABC_arabic.js
-│   ├── dictionary.js
-│   ├── settings.js
-│   ├── story_actions.js
-│   └── additional local support files
+│   ├── preschool-catalog.js
+│   └── khaemenes-profile-bridge.js
 │
 └── apps/
-    ├── ABC_Story_Time/
-    ├── Art_color_studio/
-    ├── Feelings_emotional_explorer/
-    ├── Sunny_ABCs_123s_Storytime/
-    ├── reading_storybird_grove/
-    └── additional preschool applications
+    └── 52 public child learning adventures + grown-up support resource
 ```
 
 ---
 
-## Current Validation
+## Privacy and Reliability
 
-The current production audit records that:
+Core principles:
 
-- The catalog was compared with the recursive repository tree
-- All current catalog targets exist
-- Catalog IDs are unique
-- Catalog paths are unique
-- Root HTML parsed successfully
-- Element IDs were unique
-- JavaScript DOM ID references resolved
-- Inline JavaScript passed syntax checking
-- The profile bridge passed syntax checking
-- Mentor, Kinder Garden, Elementary, Parent Profile, and Child Profile pathways are present
-
-See:
-
-```text
-CRECHE_LINK_AUDIT.md
-```
-
-for the detailed catalog audit.
+- Public games do not require registration
+- Minimal learner data
+- Shared family identity rather than duplicate school accounts
+- Browser-local compatibility records
+- No advertising
+- No unrestricted child chat
+- No automatic microphone recording
+- No arbitrary background voice playback
+- Parent administration outside the child page
+- App failure should not disable public Crechè browsing
 
 ---
 
-## Development Priorities
+## Ownership
 
-The current architecture is intentionally being consolidated rather than rebuilt.
+Copyright © 2026 Jennifer Kay Pearl · Verve N Veda · Khaemenes Academy.
 
-Near-term priorities are:
-
-1. Maintain one shared preschool activity catalog for both Crechè and Mentor.
-2. Maintain one shared preschool learner/profile storage API.
-3. Unify export and full learner-data erasure across Crechè and Mentor.
-4. Preserve pathway state when the mentor profile is edited.
-5. Add profile-aware developmental guidance to the free-choice Adventure Garden.
-6. Expand adaptive feedback without collecting unrestricted child text.
-7. Make approaches-to-learning and fine-motor development more explicit in the adult-facing learning framework.
-8. Install learner-continuity readers in Kinder Garden and Elementary.
-9. Extend the Khaemenes mentor architecture through all school repositories.
-10. Replace legacy filenames gradually using compatibility-safe aliases rather than destructive renaming.
-
----
-
-## Educational Philosophy
-
-Khaemenes Preschool is not intended to turn early childhood into a miniature version of secondary school.
-
-The program is designed around:
-
-- Play
-- Language
-- Relationships
-- Curiosity
-- Movement
-- Creativity
-- Early reasoning
-- Healthy routines
-- Emotional awareness
-- Adult-child interaction
-- Safe experimentation
-- Repetition without penalty
-- Progressive independence
-
-The mentor supports the child and the grown-up. It does not replace parents, caregivers, teachers, real human relationships, professional developmental evaluation, or formal educational authority.
-
----
-
-## Ownership & Use
-
-Khaemenes Preschool is part of the Verve N Veda and Khaemenes Academy educational ecosystem.
-
-Copyright © 2026 Jennifer Kay Pearl, Verve N Veda, and Khaemenes Academy.  
-All Rights Reserved.
-
-See `LICENSE.md`, `SECURITY.md`, and `THIRD_PARTY_NOTICES.md` for current repository terms and notices.
+See the repository license, security, and third-party notices for current terms.
