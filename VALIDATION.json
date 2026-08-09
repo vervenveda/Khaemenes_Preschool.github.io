@@ -1,45 +1,66 @@
 {
-  "release": "Crech\u00e8 Parent Entrance + Child Mentor v5",
+  "release": "Crechè Preschool Final Mentor Architecture v8",
   "valid": true,
   "filesToUpload": [
-    "index.html",
-    "mentor/index.html"
+    "mentor/index.html",
+    "mentor-manifest.json",
+    "README.md",
+    "mentor/README.md",
+    "VALIDATION.json"
   ],
-  "policy": {
-    "gamesAndApps": "public-no-registration",
-    "parentFamilyEntrance": "main Crech\u00e8 index",
-    "childMentor": "appears after linked learner account exists",
-    "childMentorButton": "large bright Comic Sans, personalized with child nickname",
-    "parentControls": "outside child Mentor page",
-    "parentProfileButton": "visible on child Mentor page"
+  "catalogBaseline": {
+    "totalEntries": 53,
+    "childAdventures": 52,
+    "grownupEntries": 1,
+    "mentorEligibleActivities": 36,
+    "note": "Baseline carried from the repository catalog audit and current shared catalog architecture."
   },
-  "mentor": {
-    "childFirst": true,
-    "friendlyVoiceEngine": true,
-    "learningPath": true,
-    "feelings": true,
-    "resizableApps": true,
-    "learnerScopedStars": true
+  "finalAccessPolicy": {
+    "gamesAppsStoriesTools": "public-no-registration",
+    "personalizedPreschoolMentor": "active-linked-preschool-learner-required",
+    "parentAdministration": "academy-family-profile",
+    "guestMentor": "removed",
+    "legacyPreschoolProfile": "compatibility-migration-only"
+  },
+  "mentorRuntime": {
+    "childOnly": true,
+    "boundedInteraction": true,
+    "activeLearnerRequired": true,
+    "preschoolStageGuard": true,
+    "familyRegistry": true,
+    "sharedCatalog": true,
+    "adaptiveLearningPath": true,
+    "learnerScopedStars": true,
+    "friendlyVoiceSelection": true,
+    "arbitraryDefaultVoiceFallback": false,
+    "resizableAppWindow": true,
+    "dynamicCleanAnchors": true
   },
   "checks": {
-    "publicGamesStillPresent": true,
-    "familyEntranceOnHome": true,
-    "namedChildButtons": true,
-    "childButtonComicSans": true,
-    "childButtonSetsActiveLearner": true,
-    "mentorRequiresLearner": true,
-    "kidOnlyMentor": true,
+    "childOnlyMentor": true,
+    "noUnrestrictedChat": true,
+    "activeLearnerRequired": true,
+    "preschoolStageGuard": true,
+    "familyRegistryLoaded": true,
+    "catalogLoaded": true,
+    "academyLogo": true,
     "parentProfileButton": true,
-    "learningPath": true,
+    "crecheHomeButton": true,
+    "cleanAnchorEngine": true,
+    "boundedPrompts": true,
     "feelings": true,
-    "friendlyVoiceFriends": true,
-    "provenVoiceMatching": true,
-    "voicesChangedHandled": true,
-    "mentorControls": true,
-    "resizableAppModal": true,
-    "completionStars": true,
-    "sharedCatalog": true,
-    "familyRegistry": true
+    "learningPath": true,
+    "learningGarden": true,
+    "appWindow": true,
+    "learnerScopedProgress": true,
+    "friendlyVoiceWhitelist": true,
+    "voiceChanged": true,
+    "noArbitraryVoiceFallback": true,
+    "manifestNoGuest": true,
+    "manifestMentorRequiresLearner": true,
+    "rootDocsFinalArchitecture": true,
+    "mentorDocsChildOnly": true,
+    "docsPublicGames": true
   },
   "issues": []
 }
