@@ -1,20 +1,22 @@
 {
-  "version": 4,
+  "version": 5,
   "sourceId": "khaemenes.preschool",
   "name": "Khaemenes Preschool · Crechè",
   "classification": "educational",
   "mentorSearchable": true,
-  "audiences": [
-    "preschool",
-    "parent"
-  ],
-  "roles": [
-    "student",
-    "parent",
-    "educator"
-  ],
+  "audiences": ["preschool", "parent"],
+  "roles": ["student", "parent", "educator"],
   "homepage": "https://vervenveda.com/Khaemenes_Preschool.github.io/",
   "repository": "vervenveda/Khaemenes_Preschool.github.io",
+  "mentorPolicy": {
+    "currentMentorId": "archaemenes",
+    "currentMentorName": "Archaemenes",
+    "assignmentAuthority": "NAIB",
+    "pageMaySelfAssignMentor": false,
+    "alternateLocalMentors": false,
+    "futureMentorAdoption": "planned-not-active",
+    "presentationModesAreSeparatePersonalities": false
+  },
   "accessPolicy": {
     "gamesAppsStoriesTools": "open-no-registration",
     "browserLocalFavorites": "open-no-registration",
@@ -29,30 +31,13 @@
     {
       "id": "preschool-adventure-garden",
       "title": "Crechè Adventure Garden",
-      "description": "Public Preschool learning garden with 52 child adventures, search, rooms, favorites, featured activities, and in-page app windows. No family registration is required to play.",
+      "description": "Public Preschool learning garden with child adventures, search, rooms, favorites, featured activities, and contained app windows. No family registration is required to play.",
       "url": "https://vervenveda.com/Khaemenes_Preschool.github.io/",
-      "audiences": [
-        "preschool",
-        "parent"
-      ],
-      "roles": [
-        "student",
-        "parent",
-        "educator"
-      ],
-      "domains": [
-        "early-learning",
-        "family-learning"
-      ],
+      "audiences": ["preschool", "parent"],
+      "roles": ["student", "parent", "educator"],
+      "domains": ["early-learning", "family-learning"],
       "skills": [],
-      "tags": [
-        "preschool",
-        "play",
-        "activities",
-        "open-access",
-        "no-registration",
-        "52-adventures"
-      ],
+      "tags": ["preschool", "play", "activities", "open-access", "no-registration"],
       "mentorEligible": true,
       "featured": true,
       "requiresLinkedLearner": false
@@ -60,82 +45,48 @@
     {
       "id": "preschool-family-mentor-entry",
       "title": "Parent / Family Mentor Account",
-      "description": "Family entry on the Crechè home page. Once a Preschool learner is linked, the page reveals that child's personalized Mentor button.",
+      "description": "Family entry on the Crechè home page. Once a Preschool learner is linked, the page can reveal that child's Mentor entrance.",
       "url": "https://vervenveda.com/Khaemenes_Preschool.github.io/#familyMentorEntry",
-      "audiences": [
-        "parent"
-      ],
-      "roles": [
-        "parent",
-        "educator"
-      ],
-      "domains": [
-        "family-learning",
-        "mentor"
-      ],
+      "audiences": ["parent"],
+      "roles": ["parent", "educator"],
+      "domains": ["family-learning", "mentor"],
       "skills": [],
-      "tags": [
-        "family-profile",
-        "learner-account",
-        "mentor-entry"
-      ],
+      "tags": ["family-profile", "learner-account", "mentor-entry"],
       "mentorEligible": false,
       "featured": true,
       "requiresLinkedLearner": false
     },
     {
-      "id": "preschool-personalized-mentor",
-      "title": "Khaemenes Preschool Personalized Mentor",
-      "description": "Child-only personalized Mentor using the active linked Preschool learner, the shared Crechè catalog, bounded help prompts, feelings check-in, adaptive learning path, learning garden, gentle read-aloud, breaks, and learner-scoped exploration progress.",
+      "id": "preschool-archaemenes-mentor",
+      "title": "Archaemenes · Preschool Mentor",
+      "description": "Child-facing Preschool mentor experience for an active linked learner. Archaemenes provides bounded, clue-first, age-appropriate educational guidance using the approved Crechè activity catalog.",
       "url": "https://vervenveda.com/Khaemenes_Preschool.github.io/mentor/",
-      "audiences": [
-        "preschool"
-      ],
-      "roles": [
-        "student"
-      ],
-      "domains": [
-        "early-learning",
-        "mentor"
-      ],
+      "audiences": ["preschool"],
+      "roles": ["student"],
+      "domains": ["early-learning", "mentor"],
       "skills": [],
-      "tags": [
-        "mentor",
-        "personalized-learning",
-        "bounded-interaction",
-        "linked-learner"
-      ],
+      "tags": ["archaemenes", "mentor", "personalized-learning", "bounded-interaction", "linked-learner"],
       "mentorEligible": true,
       "featured": true,
       "requiresLinkedLearner": true,
-      "requiredStage": "preschool"
+      "requiredStage": "preschool",
+      "mentorId": "archaemenes",
+      "assignedBy": "NAIB"
     },
     {
       "id": "academy-family-profile",
       "title": "Khaemenes Family Profile",
       "description": "Academy-wide family and learner identity, adult access, and learner management for Khaemenes educational pathways.",
       "url": "https://vervenveda.com/Khaemenes_Academy.github.io/family/",
-      "audiences": [
-        "parent"
-      ],
-      "roles": [
-        "parent",
-        "educator"
-      ],
-      "domains": [
-        "family-learning",
-        "academic-records"
-      ],
+      "audiences": ["parent"],
+      "roles": ["parent", "educator"],
+      "domains": ["family-learning", "academic-records"],
       "skills": [],
-      "tags": [
-        "family-profile",
-        "learner-account",
-        "parent-controls"
-      ],
+      "tags": ["family-profile", "learner-account", "parent-controls"],
       "mentorEligible": false,
       "featured": false,
       "requiresLinkedLearner": false
     }
   ],
-  "mentorNotes": "Crechè games/apps remain public. The Preschool Mentor is personalized rather than Guest Mode: it requires an active linked Preschool learner selected through the Family Registry. mentor/index.html is child-only and contains no parent dashboard or profile-creation workflow. Adult administration lives in the Academy Family Profile. Child interaction is bounded; there is no unrestricted private chat."
+  "mentorNotes": "Archaemenes is the current Preschool mentor. Presentation may adapt by developmental context without creating separate mentor personalities. The child page does not own privileged mentor assignment or private AI implementation. A future responsible Mentor Adoption program is planned but is not active in the current Preschool platform."
 }
