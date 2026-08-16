@@ -174,5 +174,6 @@ $('theme').value=state.theme;$('clef').value=state.clef;$('instrument').value=st
 $('theme').onchange=e=>applyTheme(e.target.value);$('clef').onchange=()=>{score.forEach(it=>{if(it.type==='note'){const p=pitchFromStep(it.step,it.acc||0);it.name=p.name;it.midi=p.midi}});drawStaff();save()};$('instrument').onchange=save;$('tempo').onchange=save;$('volume').oninput=()=>{if(master)master.gain.value=Number($('volume').value);save()};$('labels').onchange=()=>{drawStaff();save()};
 applyTheme(state.theme);renderSymbols();drawStaff();lesson();
 </script>
+<script src="/assets/vnv-beta-link.js" defer></script>
 </body>
 </html>

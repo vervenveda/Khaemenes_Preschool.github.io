@@ -89,4 +89,6 @@ $('hearBtn').onclick=()=>speak(`${current.name}. ${current.description}. Look an
 $('surpriseBtn').onclick=()=>{let n=current;while(n.id===current.id)n=WEATHER[Math.floor(Math.random()*WEATHER.length)];selectWeather(n.id)};$('observedBtn').onclick=()=>{state.observations.push({weather:current.id,date:new Date().toISOString()});state.dates.push(new Date().toLocaleDateString('en-CA'));save();updateStats();$('feedback').textContent=`Observation saved: ${current.name}. 🌟`;speak(`${current.name} observation saved.`)};
 if('speechSynthesis'in window){refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;setTimeout(refreshVoices,250)}else{['previewVoiceBtn','repeatVoiceBtn','stopVoiceBtn','hearBtn'].forEach(id=>$(id).disabled=true);$('voiceStatus').textContent='Read-aloud is not available in this browser.'}
 document.querySelectorAll('[data-voice]').forEach(x=>x.classList.toggle('active',x.dataset.voice===state.voiceFriend));applyTheme(state.theme);selectWeather(current.id);window.addEventListener('beforeunload',()=>stopSpeaking(''));
-</script></body></html>
+</script>
+<script src="/assets/vnv-beta-link.js" defer></script>
+</body></html>

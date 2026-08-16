@@ -239,5 +239,6 @@ if('speechSynthesis'in window){refreshVoices();speechSynthesis.addEventListener?
 $('theme').innerHTML=Object.entries(THEMES).map(([id,t])=>`<option value="${id}">${t.emoji} ${t.name}</option>`).join('');
 $('theme').value=state.theme;updateVoiceButtons();applyAccessibility();applyTheme(state.theme);render();window.addEventListener('beforeunload',()=>stopSpeaking(''));
 </script>
+<script src="/assets/vnv-beta-link.js" defer></script>
 </body>
 </html>
