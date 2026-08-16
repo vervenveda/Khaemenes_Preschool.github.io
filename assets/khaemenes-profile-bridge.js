@@ -1,5 +1,5 @@
 /*
-  Khaemenes Learner Profile Bridge v1
+  Khaemenes Learner Profile Bridge v1.1
   Local-first continuity reader for Verve N Veda educational portals.
   This file does not transmit data and does not create an account.
 */
@@ -71,8 +71,18 @@
     return () => global.removeEventListener("storage", handler);
   }
 
+  function ensureBetaProgramLink(){
+    if(!global.document)return;
+    if(global.document.querySelector('script[data-vnv-beta-link],script[src="https://vervenveda.com/assets/vnv-beta-link.js"]'))return;
+    const script=global.document.createElement("script");
+    script.src="https://vervenveda.com/assets/vnv-beta-link.js";
+    script.defer=true;
+    script.dataset.vnvBetaLink="preschool";
+    global.document.head.appendChild(script);
+  }
+
   global.KhaemenesLearnerProfile = Object.freeze({
-    version: "1.0.0",
+    version: "1.1.0",
     keys: KEYS,
     getProfile,
     getContinuity,
@@ -80,6 +90,10 @@
     getFavoriteIds,
     getVisitedIds,
     getSummary,
-    subscribe
+    subscribe,
+    ensureBetaProgramLink
   });
+
+  if(global.document?.readyState==="loading")global.document.addEventListener("DOMContentLoaded",ensureBetaProgramLink,{once:true});
+  else ensureBetaProgramLink();
 })(window);
