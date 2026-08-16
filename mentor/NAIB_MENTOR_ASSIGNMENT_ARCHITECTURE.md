@@ -1,75 +1,41 @@
-# NAIB Mentor Assignment Architecture
+# Preschool Mentor Assignment — Public Contract
 
-## Canonical hierarchy
+Khaemenes Preschool uses an Academy-approved mentor assignment contract so learner-facing pages do not create or redefine mentor identities independently.
 
-```text
-Person
-  ↓
-Current page / app / game / school / service
-  ↓
-NAIB
-  ↓
-mentor assignment
-  ↓
-assigned Mentor AI
-  ↓
-context-specific mentoring
-```
+## Current young-learner mentor
 
-NAIB is the assignment and routing authority.
+The approved transitional mentor for Preschool, Kindergarten, and Elementary learners is **Archaemenes**.
 
-A page must not decide the person's mentor from its own local character table.
+Archaemenes remains one continuous mentor identity. His presentation may adapt to developmental context so wording, pacing, visuals, and activity guidance remain appropriate for the learner's stage.
 
-## Transitional young-learner policy
+## Learner-facing page responsibilities
 
-Until the full AI Adoption application is available:
+A preschool page may manage:
 
-```text
-Preschool    → NAIB assigns Archaemenes
-Kindergarten → NAIB assigns Archaemenes
-Elementary   → NAIB assigns Archaemenes
-```
+- the current activity or lesson interface;
+- local progress and display state;
+- accessibility controls;
+- read-aloud and explicitly initiated voice features;
+- age-appropriate hints and activity recommendations;
+- contained game or app windows.
 
-Archaemenes is one stable mentor identity. Presentation changes with developmental context:
+A public page must not contain privileged credentials, private AI implementation, unrestricted child-chat endpoints, private cross-system identity data, or administrative authority.
 
-```text
-Preschool 2–3  → Nestling
-Preschool 3–5  → Storybook
-Kindergarten   → Early Scholar
-Elementary     → Young Scholar
-```
+## Mentor behavior
 
-These are presentation modes, not separate AI personalities.
+Young-learner mentoring should remain:
 
-## Authority boundaries
+- clue-first;
+- age-appropriate;
+- encouraging without falsely awarding mastery;
+- bounded to the educational context;
+- respectful of parent, guardian, and educator authority;
+- careful not to infer intelligence, personality, diagnosis, or risk from appearance or demographic traits.
 
-**Person / Family Registry owns:** stable learner identity, stage, broad age band, permissions, broad interests, and later the adopted-mentor identity reference.
+## Privacy
 
-**NAIB owns:** mentor assignment, routing to the appropriate specialist, assignment continuity, and future adopted-mentor routing.
+Only the minimum context needed for the immediate learning experience should be passed to a public mentor adapter. Public assignment results should avoid echoing unnecessary learner identifiers or sensitive profile information.
 
-**Assigned mentor owns:** mentoring behavior inside its authorized domain, context-appropriate wording, clue-first guidance, and approved resource suggestions.
+## Future compatibility
 
-**Page owns:** current UI, current task context, bounded controls, local progress display, accessibility presentation, and contained workspace behavior.
-
-**Page does not own:** mentor identity assignment, cross-ecosystem identity, or private AI implementation.
-
-## Future AI Adoption
-
-```text
-Person
-  ↓
-AI Adoption Account
-  ↓
-NAIB
-  ├── reads adopted mentor identity
-  ├── reads current context
-  └── assigns/routes that mentor
-       ↓
-same person-owned mentor across school · career · gaming · art · writing · crisis support · veterans · research · etc.
-```
-
-Archaemenes remains available to learners who want to keep him.
-
-## Public/private boundary
-
-`khaemenes-naib-mentor-router.js` is only a public transitional contract. It must never contain private Noema implementation, credentials, server secrets, model keys, private reasoning, or unrestricted child-chat endpoints.
+The public preschool page should depend on a stable Academy mentor interface rather than private implementation details. This allows the protected service behind that interface to evolve without exposing internal architecture or requiring child-facing pages to contain privileged logic.
