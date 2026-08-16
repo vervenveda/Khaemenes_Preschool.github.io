@@ -1,45 +1,34 @@
-# Preschool Mentor — NAIB → Archaemenes patch
+# Preschool Mentor — NAIB → Archaemenes integration
 
-Target: `vervenveda/Khaemenes_Preschool.github.io/mentor/index.html`
+Target: `mentor/index.html`
 
-Correct authority chain:
+Current authority model:
 
 ```text
 Preschool Mentor Page
         ↓
        NAIB
         ↓
-NAIB assigns mentor AI
+mentor assignment
         ↓
-Archaemenes the Owl
+   Archaemenes
         ↓
 age/stage-adaptive presentation
 ```
 
-The page still owns child-safe controls, learner-scoped progress, activity recommendations, session feelings, the contained app window, and voice/read-aloud controls. The page does **not** own mentor assignment.
+The page owns child-safe controls, learner-scoped progress, activity recommendations, session feelings, contained activity presentation, accessibility, and read-aloud controls. The page does **not** own privileged mentor assignment.
 
-## 1. Load the NAIB public router
+## Required public dependencies
 
-Find:
+The Mentor page should load the shared Preschool catalog, Academy Family Registry, and the Academy public NAIB mentor router.
 
-```html
-<script src="../assets/preschool-catalog.js"></script>
-<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
-<script>
-```
+The public router is a transitional contract only. It must not expose credentials, server secrets, private AI implementation, unrestricted child-chat endpoints, or privileged authorization logic.
 
-Replace with:
+## Remove local alternate mentor authority
 
-```html
-<script src="../assets/preschool-catalog.js"></script>
-<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
-<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-naib-mentor-router.js"></script>
-<script>
-```
+The old local mentor table must be removed from the production Mentor page. The page should not select a mentor from local learner fields or a local character list.
 
-## 2. Replace the local mentor authority
-
-Replace the complete `const MENTORS={...};` block with:
+Use a single safe visual fallback only to avoid a blank interface if the public router does not load:
 
 ```js
 const ARCHAEMENES_FALLBACK=Object.freeze({
@@ -54,116 +43,53 @@ const ARCHAEMENES_FALLBACK=Object.freeze({
 });
 ```
 
-The fallback only prevents a blank page if the router fails to load. It is not a second assignment authority.
+The fallback is presentation continuity, not a second assignment authority.
 
-## 3. Initialize with the fallback
+## Ask NAIB for the mentor
 
-Find:
+The page should call the public router with only the minimum context required for the educational presentation. Do not pass private account data or privileged identifiers merely to style the Mentor.
 
-```js
-let mentor=MENTORS.pip;
-```
-
-Replace with:
+Conceptually:
 
 ```js
-let mentor=ARCHAEMENES_FALLBACK;
-let mentorAssignment=null;
+const assignment=window.KhaemenesNAIB?.assignMentor?.({
+  stage:learner?.stage||"preschool",
+  ageBand:currentAgeBand(),
+  surface:"khaemenes-preschool-mentor",
+  intent:"learning-mentor"
+});
+
+const mentor=(assignment?.status==="assigned"&&assignment.mentor)
+  ? assignment.mentor
+  : ARCHAEMENES_FALLBACK;
 ```
 
-## 4. Make the page ask NAIB
+The current Academy policy returns Archaemenes for Preschool learners.
 
-Replace the entire current `mentorDisplay()` function with:
+## Presentation modes
 
-```js
-function mentorDisplay(){
-  const naib=window.KhaemenesNAIB||null;
+Developmental presentation may adapt Archaemenes for younger or older Preschool learners. These modes are not different AI identities.
 
-  mentorAssignment=naib?.assignMentor?.({
-    personType:"learner",
-    personId:learner?.accountId||learner?.learnerId||"",
-    learnerId:learner?.learnerId||"",
-    accountId:learner?.accountId||"",
-    stage:learner?.stage||legacy?.pathway||"preschool",
-    ageBand:currentAgeBand(),
-    interests:currentInterests(),
-    surface:"khaemenes-preschool-mentor",
-    intent:"learning-mentor"
-  })||null;
+Voice choices should likewise be labeled as **voice styles** or pacing/tone options for Archaemenes. They must not appear to the child or documentation as separate mentors.
 
-  if(mentorAssignment?.status==="assigned"&&mentorAssignment.mentor){
-    try{
-      window.dispatchEvent(new CustomEvent("khaemenes-mentor-assigned",{
-        detail:{
-          assignedBy:"NAIB",
-          mentorId:mentorAssignment.mentorId,
-          specialist:mentorAssignment.specialist,
-          stage:mentorAssignment.stage,
-          presentationMode:mentorAssignment.mentor.presentationMode
-        }
-      }));
-    }catch{}
-    return mentorAssignment.mentor;
-  }
+## Future Mentor Adoption
 
-  return ARCHAEMENES_FALLBACK;
-}
-```
+A future responsible Mentor Adoption program may permit a person or family to design and adopt an AI avatar/mentor under Academy safety, privacy, identity, guardian, and continuity rules.
 
-The page no longer reads `mentorId` or `mentorIdentity` to decide who the mentor is. Those fields can remain temporarily for compatibility and future migration.
+That program is not active yet. The current Preschool page must not simulate future adoption through local alternate mentor characters or locally self-assigned custom mentors.
 
-## 5. Make the assignment visible
+When the future service is introduced, Preschool should continue asking NAIB for the authorized mentor. The implementation behind the router can change without transferring mentor authority to the page.
 
-Inside `renderMentor()`, find:
+## Hardening requirements for the production page
 
-```js
-$("mentorLabel").textContent=`${learner.nickname||"Your"}’s learning Mentor`;
-```
+Before merging the Mentor integration to production:
 
-Replace with:
-
-```js
-$("mentorLabel").textContent=`${learner.nickname||"Your"}’s learning Mentor · assigned by NAIB`;
-```
-
-The child-facing identity remains **Archaemenes**.
-
-## 6. Voice choices are voice styles, not other mentor identities
-
-Replace the four labels in the `voiceFriends` HTML:
-
-```html
-<button class="voice-friend" data-voice-friend="sunny" aria-pressed="true"><span>☀️</span>Bright</button>
-<button class="voice-friend" data-voice-friend="bunny" aria-pressed="false"><span>🐰</span>Playful</button>
-<button class="voice-friend" data-voice-friend="rainbow" aria-pressed="false"><span>🌈</span>Warm</button>
-<button class="voice-friend" data-voice-friend="owl" aria-pressed="false"><span>🦉</span>Story</button>
-```
-
-Then change the `VOICE_FRIENDS` display names/greetings so all greetings identify **Archaemenes**, not Sunny/Benny/Rae/Story Owl. Keep the current voice-selection regexes, rates, and pitches.
-
-Suggested names/greetings:
-
-```js
-sunny:   {name:"Bright",   greeting:"Hello, learning friend. Archaemenes is ready for a bright little adventure."}
-bunny:   {name:"Playful",  greeting:"Hello, learning friend. Archaemenes is ready for a playful learning adventure."}
-rainbow: {name:"Warm",     greeting:"Hello, learning friend. Archaemenes is ready for a warm and colorful learning adventure."}
-owl:     {name:"Story",    greeting:"Hello, careful listener. Archaemenes is ready for a gentle storytime adventure."}
-```
-
-Only replace `name` and `greeting`; preserve the existing `rate`, `pitch`, and `preferred` values.
-
-## Future transport seam
-
-Current transitional call:
-
-```js
-KhaemenesNAIB.assignMentor(context)
-```
-
-The router also exposes:
-
-```js
-await KhaemenesNAIB.requestMentor(context)
-```
-
-When the full NAIB / AI Adoption service exists, the pages keep calling NAIB. Only the implementation behind the router changes.
+- remove the local alternate mentor table;
+- do not use legacy `mentorId` or `mentorIdentity` as assignment authority;
+- validate activity routes against the approved Preschool catalog;
+- sandbox the contained activity iframe as tightly as practical;
+- render learner-controlled text safely;
+- keep microphone use explicit and non-continuous;
+- preserve keyboard escape and guardian exit paths;
+- keep personalized identity-dependent features fail-closed;
+- do not embed secrets or private topology in public code.
