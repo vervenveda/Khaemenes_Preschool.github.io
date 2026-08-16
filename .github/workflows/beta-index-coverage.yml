@@ -31,10 +31,12 @@ jobs:
             if 'vnv-beta-link.js' in t: already.append(str(p));continue
             c=re.search(r'<meta[^>]+http-equiv=["\']Content-Security-Policy["\'][^>]+content=["\']([^"\']*)',t,re.I)
             if c and re.search(r"(?:^|;)\s*script-src\s+'none'\s*(?:;|$)",c.group(1),re.I): skipped.append((str(p),'csp-script-none'));continue
-            m=list(re.finditer(r'</body\s*>',t,re.I))
-            if not m: skipped.append((str(p),'missing-body-close'));continue
-            i=m[-1].start();p.write_text(t[:i].rstrip()+'\n'+tag+'\n'+t[i:],encoding='utf-8');changed.append(str(p))
-          lines=['# Beta Index Coverage','',f'- Added in this run: **{len(changed)}**',f'- Already covered: **{len(already)}**',f'- Skipped: **{len(skipped)}**','', 'Rule: visible HTML filenames ending in `index.html` (including `_index.html` and common `inndex.html` typos) receive `/assets/vnv-beta-link.js`. The widget reports only public hostname + pathname; never learner/family IDs, answers, form values, query/hash, storage, or credentials.']
+            body=list(re.finditer(r'</body\s*>',t,re.I)); html=list(re.finditer(r'</html\s*>',t,re.I))
+            if body: i=body[-1].start(); u=t[:i].rstrip()+'\n'+tag+'\n'+t[i:]
+            elif html: i=html[-1].start(); u=t[:i].rstrip()+'\n'+tag+'\n'+t[i:]
+            else: u=t.rstrip()+'\n'+tag+'\n'
+            p.write_text(u,encoding='utf-8');changed.append(str(p))
+          lines=['# Beta Index Coverage','',f'- Added in this run: **{len(changed)}**',f'- Already covered: **{len(already)}**',f'- Skipped: **{len(skipped)}**','', 'Rule: visible HTML filenames ending in `index.html` (including `_index.html` and common `inndex.html` typos) receive `/assets/vnv-beta-link.js`. If legacy markup lacks a closing `body`, coverage falls back before `html` or safely at EOF. The widget reports only public hostname + pathname; never learner/family IDs, answers, form values, query/hash, storage, or credentials.']
           if changed:lines+=['','## Added','']+[f'- `{x}`' for x in changed]
           if skipped:lines+=['','## Skipped','']+[f'- `{x}` — {y}' for x,y in skipped]
           Path('BETA_INDEX_COVERAGE.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
