@@ -1,314 +1,161 @@
-# Khaemenes Preschool · Personalized Child Mentor
+# Khaemenes Preschool · Archaemenes Mentor
 
-`mentor/index.html` is the child-facing personalized Mentor for Crechè Preschool.
+`mentor/index.html` is the child-facing Preschool Mentor environment for Crechè Preschool.
 
-It is **not** the family registration page, parent dashboard, or a public Guest Mentor.
+**Archaemenes is the current Academy mentor for Preschool learners.**
+
+The page is not the family registration page, parent dashboard, a guest mentor, or an unrestricted child chatbot.
 
 ---
 
 ## Access Contract
 
-The Mentor requires an **active linked Preschool learner** from the Academy Family Registry.
-
-Expected flow:
+The Mentor requires an active linked Preschool learner from the Academy Family Registry.
 
 ```text
 Crechè Home
    ↓
-Parent / Family Mentor Account
+Parent / Family Profile
    ↓
-Family + child learner
-   ↓
-bright named child button
-   ↓
-active learnerId selected
+linked Preschool learner
    ↓
 mentor/index.html
+   ↓
+NAIB mentor-routing boundary
+   ↓
+Archaemenes
 ```
 
-If there is no active learner, the page shows a friendly locked state with links back to Crechè and to the Parent / Family Profile.
+If there is no active Preschool learner, the page should remain locked and provide clear links back to Crechè and the Parent / Family Profile.
 
-If the active learner belongs to another Khaemenes school stage, the Preschool Mentor does not silently use that learner. It directs the family back to the correct school entrance.
+If the active learner belongs to another Khaemenes school stage, the Preschool Mentor should not silently reuse that learner.
 
 ---
 
-## Parent Boundary
+## Authority Boundary
 
-The Mentor page is for the child.
+The Preschool page owns the immediate child-facing experience: layout, activity context, local progress display, accessibility, read-aloud controls, feelings buttons, and contained activity windows.
 
-It does not contain:
+The page does **not** own privileged mentor assignment, cross-ecosystem identity, private AI implementation, server authorization, or long-term authority over the learner.
 
-- Parent registration
-- Adult account creation
-- Adult permission management
-- Guardian invitation tools
-- Family exports
-- Adult Family Guide
-- Guardian release forms
-- A Child / Parent mode toggle
-
-A clear **Parent Profile** button in the sticky header sends the adult to:
-
-```text
-https://vervenveda.com/Khaemenes_Academy.github.io/family/
-```
-
-This keeps adult administration out of the young child’s learning interface.
+Mentor assignment is coordinated through the Academy/NAIB public routing contract. The page should present Archaemenes and degrade safely if that public router is unavailable.
 
 ---
 
-## Required Dependencies
+## Archaemenes Presentation
 
-The page loads:
+Archaemenes is one continuous mentor identity. Preschool presentation may adapt for developmental context, such as a gentler Nestling or Storybook presentation, without creating additional personalities.
 
-```text
-../assets/preschool-catalog.js
-```
+Voice tone, pacing, visual treatment, and activity wording may vary as presentation settings. They do not create alternate mentors.
 
-and:
+Archaemenes should remain:
 
-```text
-https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js
-```
+- clue-first;
+- age-appropriate;
+- encouraging without overclaiming mastery;
+- bounded to educational support;
+- non-coercive;
+- transparent about uncertainty;
+- respectful of family/guardian authority.
 
-The first supplies activity and Mentor-planning metadata.
+---
 
-The second supplies the active family/learner identity.
+## Future Responsible Mentor Adoption
 
-If the Family Registry is unavailable, the Mentor stays locked rather than inventing a learner identity. Public Crechè games remain available from the repository root.
+A future Mentor Adoption program may allow a learner or family to design and adopt an AI avatar/mentor under Academy safety, privacy, identity, continuity, and guardian rules.
+
+That program is **future work**. The current Preschool experience should not emulate it by inventing local alternate mentor identities or by allowing a page to self-assign a different mentor.
+
+Until the formal program exists, Archaemenes remains the Preschool mentor.
+
+---
+
+## Required Public Dependencies
+
+The page may load the shared Preschool catalog and the Academy Family Registry. It may also load the Academy public mentor router.
+
+These public dependencies must not contain credentials, private keys, authentication secrets, privileged server configuration, unrestricted child-chat endpoints, or private AI implementation details.
+
+If family identity or mentor routing is unavailable, the personalized Mentor path should fail closed rather than inventing identity or authority. Public Crechè activities may remain available independently.
 
 ---
 
 ## Learner Inputs
 
-The Mentor reads available learner information such as:
+The Mentor should use only the minimum learner information necessary for the immediate educational experience, such as a display nickname, Preschool stage, broad age band, broad interests, and learner-scoped local progress.
 
-- learnerId
-- nickname
-- Preschool stage
-- broad age band
-- broad interests
-- mentorId
-- mentorIdentity
+Legacy local fields that previously selected a mentor may remain temporarily for compatibility, but they must not be treated as the authority for mentor assignment.
 
-For compatibility, missing Preschool fields may be read from the older matching:
-
-```text
-khaemenes_preschool_profile_v1
-```
-
-The Mentor does not create or overwrite that legacy profile.
-
----
-
-## Personalized Mentor
-
-Built-in presentations:
-
-| Mentor | Presentation |
-|---|---|
-| Pip 🌞 | Playful and encouraging |
-| Miri 🦉 | Quiet and curious |
-| Nova 🚀 | Imaginative and adventurous |
-| Sage 🌿 | Steady and patient |
-
-If the learner already has a valid custom visible Mentor identity, the child page can display it while continuing to use the same bounded learning rules.
+Sensitive information should not be requested from the child unless a separate authorized feature clearly requires it.
 
 ---
 
 ## Bounded Child Interaction
 
-The Mentor deliberately avoids unrestricted private child chat.
+The current Mentor deliberately avoids unrestricted private child chat. Appropriate controls include hints, play suggestions, stuck/help prompts, breaks, feelings choices, read-aloud, and activity selections.
 
-Current child controls include:
+Feelings are session context for gentle adaptation, not diagnosis or a permanent psychological profile.
 
-- Give Me a Hint
-- Let’s Play
-- I Feel Stuck
-- I Need a Break
-- Happy
-- Okay
-- Wiggly
-- Tired
-- Frustrated
-
-These controls change encouragement and recommendations without collecting free-form private Preschool conversation.
+Archaemenes must not infer intelligence, academic potential, protected traits, diagnosis, politics, religion, socioeconomic status, or disciplinary risk from appearance, voice, age, interests, or other presentation details.
 
 ---
 
-## My Learning Path
+## Learning Path
 
-The Mentor creates a short learning path from the shared Crechè catalog.
+The Mentor may build a short learning path from Mentor-eligible Crechè activities using broad developmental suitability, interests, current session energy, activity duration, learning-domain balance, novelty, and prior exploration.
 
-Hard eligibility checks include:
-
-- `mentor.eligible === true`
-- broad age-band compatibility
-- gentle-energy filtering when the child reports tired/frustrated
-
-Ranking can consider:
-
-- broad learner interests
-- current session feeling
-- activity energy
-- novelty
-- already explored activities
-- deterministic learner/day variation
-
-The path first tries to select different learning domains before filling additional stations.
-
-Current station count:
-
-```text
-20 minutes → 3 stations
-30 minutes → 4 stations
-45 minutes → 5 stations
-```
-
-If the legacy Preschool profile does not contain a current duration, the child receives a four-station path.
+The path is educational guidance and encouragement, not a formal grade, transcript, diagnosis, or mastery determination.
 
 ---
 
-## Learning Garden
+## Contained Activity Window
 
-The child can also choose a broad learning area:
+Recommended activities may open in a contained in-page window. The parent Mentor page should validate activity routes against the approved Preschool catalog and should sandbox embedded activities as tightly as practical for their actual feature needs.
 
-- Letters & Stories
-- Numbers
-- Art & Music
-- Move & Life Skills
-- Weather & Wonder
-
-The page chooses an eligible activity from that area rather than exposing an overwhelming list inside the Mentor.
-
-The complete 52-adventure directory remains on the public Crechè home page.
+The child should always have a clear way to close or exit the activity. Keyboard and assistive-technology access should remain intact.
 
 ---
 
-## In-Page App Window
+## Local Progress
 
-Recommended activities open inside a reusable resizable window.
+Learner-scoped progress may retain lightweight items such as completed activity IDs, exploration stars, and user-selected voice preferences.
 
-Controls:
-
-- `×` Close
-- Maximize / Restore
-- `⭐ I’m Done!`
-- Escape to close
-- Click the backdrop to close
-
-Marking an activity done adds one local exploration star the first time that activity is completed.
-
-This completion is encouragement/progress, not a formal grade.
+Browser storage is local device data, not a secure vault. Do not store passwords, access tokens, private keys, government identifiers, financial information, medical records, or privileged account material in the Mentor page.
 
 ---
 
-## Learner-Scoped Progress
+## Voice and Read-Aloud
 
-Storage key:
+Read-aloud should start only after a user action. Any selectable voices or styles are **Archaemenes voice presentations**, not separate mentor identities.
 
-```text
-khaemenes_preschool_child_mentor_progress_v3
-```
-
-Data is stored by `learnerId`.
-
-Current shape is conceptually:
-
-```json
-{
-  "learner_123": {
-    "completed": {
-      "activity-id": {
-        "completedAt": "ISO timestamp",
-        "title": "Activity title"
-      }
-    },
-    "stars": 4,
-    "updatedAt": "ISO timestamp"
-  }
-}
-```
+Continuous microphone listening is outside the current Preschool design. Any future voice input should remain explicit, visible, and push-to-talk or similarly bounded.
 
 ---
 
-## Feelings Boundary
+## Parent Boundary
 
-Current feelings are held in the page session only.
+Parent administration belongs in the Academy Family Profile rather than inside the child Mentor page.
 
-They affect activity energy and Mentor wording but are not written as a permanent diagnostic or psychological profile.
-
----
-
-## Friendly Voice Engine
-
-The Mentor does **not** blindly use the browser’s default voice.
-
-Read-aloud:
-
-1. waits for `speechSynthesis.getVoices()`;
-2. filters to English;
-3. prefers known friendly voice names and `Natural` / `Enhanced` / `Premium` voices;
-4. excludes a set of commonly harsh/deep default names;
-5. uses modest rate/pitch adjustments;
-6. speaks only after a child presses a read-aloud button;
-7. refuses to speak if the device exposes no suitable gentle voice.
-
-Voice presentations:
-
-- Sunny
-- Benny Bunny
-- Rainbow Rae
-- Story Owl
-
-Speed choices:
-
-- Slow & gentle
-- Storytime
-- A little lively
-
-Learner-scoped voice preference key:
-
-```text
-khaemenes_preschool_child_mentor_voice_v2
-```
+The child experience should not expose adult account controls, guardian invitation tools, privileged family exports, administrative secrets, or private service contracts.
 
 ---
 
-## Clean Anchor Navigation
+## Security Expectations
 
-The sticky header is measured at runtime.
+- no embedded credentials or secrets;
+- no `eval` or dynamically constructed executable code;
+- validate routes before placing them in an iframe or navigation target;
+- render user-controlled content as text wherever possible;
+- use narrowly scoped network access;
+- avoid analytics, advertising, tracking, and unnecessary third-party scripts;
+- keep microphone/camera/geolocation disabled unless explicitly needed;
+- preserve clear escape and keyboard behavior;
+- fail closed for learner identity and mentor assignment.
 
-Same-page links use one navigation function that:
-
-- measures the live header height;
-- adds breathing room;
-- promotes nested targets to the full section boundary;
-- remeasures on resize/orientation change;
-- corrects direct hash URLs after load.
-
-The page does not combine competing `scroll-padding` and `scroll-margin` offsets.
-
----
-
-## No Guest Mode
-
-The final architecture intentionally removes the earlier Guest Mentor implementation.
-
-The access rule is:
-
-```text
-Public Crechè games/apps → open
-Personalized Preschool Mentor → linked Preschool learner required
-Parent administration → Academy Family Profile
-```
-
-This is the contract that `mentor-manifest.json`, the root README, and validation should all describe.
+See the root `SECURITY.md` for the public security boundary.
 
 ---
 
 ## Ownership
 
 Copyright © 2026 Jennifer Kay Pearl · Verve N Veda · Khaemenes Academy.
-
-See the repository root `LICENSE.md`, `SECURITY.md`, and `THIRD_PARTY_NOTICES.md` for current terms and notices.
