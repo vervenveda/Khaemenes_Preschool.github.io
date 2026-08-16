@@ -3,267 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Khaemenes Preschool personalized child Mentor — a bright, bounded, age-aware learning space connected to the Khaemenes Family Registry and the public Crechè activity catalog.">
+<meta name="description" content="Khaemenes Preschool personalized child Mentor — a bright, bounded, age-aware learning space connected to the Khaemenes Family Registry and the Crechè activity catalog.">
 <meta name="theme-color" content="#55bff0">
 <meta name="color-scheme" content="light">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://vervenveda.com; style-src 'self'; img-src 'self' data:; frame-src 'self' https://vervenveda.com; connect-src 'self' https://vervenveda.com; object-src 'none'; base-uri 'none'; form-action 'self'; media-src 'self'; worker-src 'none'; upgrade-insecure-requests">
 <link rel="canonical" href="https://vervenveda.com/Khaemenes_Preschool.github.io/mentor/">
-<title>Khaemenes Preschool · My Mentor</title>
-<style>
-:root{
-  --ink:#26324a;--muted:#647087;--paper:#fffdf8;--surface:#fff;
-  --line:rgba(45,58,92,.14);--sun:#ffd65a;--coral:#ff7d74;--pink:#f27db8;
-  --purple:#7c65d7;--blue:#48baf0;--cyan:#6bd8e7;--green:#5ac996;--lime:#9edb5c;
-  --navy:#24456f;--shadow:0 18px 45px rgba(44,59,102,.15);--soft:0 9px 22px rgba(44,59,102,.10);
-  --comic:"Comic Sans MS","Arial Rounded MT Bold",ui-rounded,cursive;
-  --sans:ui-rounded,"Avenir Next","Segoe UI",Arial,sans-serif;
-  --anchor-offset:92px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:0;background:#fff5d4}
-body{
-  margin:0;min-width:300px;overflow-x:hidden;color:var(--ink);font:16px/1.55 var(--sans);
-  background:
-    radial-gradient(circle at 8% 7%,rgba(255,214,90,.62),transparent 21rem),
-    radial-gradient(circle at 93% 10%,rgba(72,186,240,.45),transparent 24rem),
-    radial-gradient(circle at 4% 76%,rgba(242,125,184,.25),transparent 24rem),
-    radial-gradient(circle at 96% 72%,rgba(90,201,150,.22),transparent 25rem),
-    linear-gradient(180deg,#fff3bd,#def7ff 31rem,#fff9e9 78rem,#ebfff7)
-}
-body.menu-open,body.app-open{overflow:hidden}
-button,select{font:inherit}button{cursor:pointer}a{color:inherit}
-img,svg{max-width:100%}[hidden]{display:none!important}
-.shell{width:min(calc(100% - 24px),1180px);margin:auto}
-:focus-visible{outline:4px solid rgba(124,101,215,.48);outline-offset:3px}
-section[id],main[id],div[id].anchor-target{scroll-margin-top:0}
-
-/* Header */
-.header{
-  position:sticky;top:0;z-index:220;background:rgba(255,253,248,.97);border-bottom:2px solid #fff;
-  box-shadow:0 8px 22px rgba(44,59,102,.12);backdrop-filter:blur(14px)
-}
-.nav{
-  min-height:78px;display:grid;grid-template-columns:minmax(245px,1fr) auto;align-items:center;
-  gap:12px;padding:8px 0
-}
-.brand{min-width:0;display:flex;align-items:center;gap:10px;text-decoration:none}
-.brand-mark{
-  width:54px;height:54px;display:grid;place-items:center;flex:0 0 54px;border:3px solid #fff;border-radius:18px;
-  background:conic-gradient(#ff7d74,#ffd65a,#9edb5c,#6bd8e7,#48baf0,#7c65d7,#f27db8,#ff7d74);
-  font-size:1.58rem;box-shadow:var(--soft)
-}
-.brand-copy{min-width:0}.brand strong{
-  display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  color:#4a3d85;font:900 clamp(1rem,2.2vw,1.22rem)/1.06 var(--comic)
-}
-.brand small{display:block;margin-top:.28rem;color:#6b7384;font-size:.64rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
-.nav-actions{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
-.nav-link,.menu-button{
-  min-height:43px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:.58rem .72rem;
-  border:1px solid var(--line);border-radius:999px;background:#fff;text-decoration:none;color:#46566f;
-  font-size:.72rem;font-weight:900
-}
-.nav-link:hover,.menu-button:hover{transform:translateY(-1px);box-shadow:var(--soft)}
-.nav-link.parent{color:#fff;border:0;background:linear-gradient(135deg,#24456f,#7c65d7)}
-.menu-wrap{position:relative}
-.menu-button[aria-expanded="true"]{color:#fff;border-color:transparent;background:linear-gradient(135deg,#7c65d7,#f27db8)}
-.menu-panel{
-  position:absolute;right:0;top:calc(100% + 10px);z-index:500;width:min(330px,calc(100vw - 24px));padding:10px;
-  border:1px solid var(--line);border-radius:18px;background:rgba(255,253,248,.99);
-  box-shadow:0 26px 70px rgba(44,59,102,.25)
-}
-.menu-panel a{
-  min-height:44px;display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:12px;
-  text-decoration:none;color:#46566f;font-size:.78rem;font-weight:850
-}
-.menu-panel a:hover{background:#f1f6fb}
-.menu-label{padding:7px 9px 4px;color:#7c65d7;font-size:.62rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase}
-.menu-divider{height:1px;margin:5px 7px;background:var(--line)}
-
-/* Locked state */
-.locked{
-  width:min(calc(100% - 24px),760px);margin:70px auto;padding:clamp(25px,5vw,42px);
-  border:4px solid #fff;border-radius:30px;background:#fff;box-shadow:var(--shadow);text-align:center
-}
-.locked .emoji{font-size:4rem}.locked h1{margin:.7rem 0 0;color:#4a3d85;font:900 clamp(2rem,5vw,3.1rem)/1 var(--comic)}
-.locked p{max-width:600px;margin:1rem auto;color:#68758a}
-.locked-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:15px}
-.locked a{
-  min-height:52px;display:inline-flex;align-items:center;padding:.7rem 1rem;border-radius:18px;
-  color:#fff;background:linear-gradient(135deg,#ff6c75,#7c65d7);text-decoration:none;font:900 .88rem var(--comic)
-}
-.locked a.secondary{color:#4a3d85;background:#eef4ff}
-
-/* Hero */
-.hero{padding:34px 0 28px}
-.hero-grid{display:grid;grid-template-columns:1fr .84fr;gap:16px;align-items:stretch}
-.welcome,.mentor-card{border:4px solid #fff;border-radius:30px;box-shadow:var(--shadow)}
-.welcome{padding:clamp(24px,5vw,44px);background:linear-gradient(145deg,#fff,#fff9df)}
-.eyebrow{
-  display:inline-flex;padding:.4rem .6rem;border:1px solid var(--line);border-radius:999px;background:#fff;
-  color:#7c65d7;font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase
-}
-.welcome h1{margin:13px 0 0;color:#3f4d7b;font:900 clamp(2.7rem,7vw,5rem)/.98 var(--comic);letter-spacing:-.04em}
-.welcome h1 span{display:block;color:#e15c94}.welcome p{max-width:650px;margin:14px 0 0;color:#5c6b7e;font-size:1rem}
-.hero-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.big-btn{
-  min-height:60px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:.84rem 1.05rem;
-  border:3px solid #fff;border-radius:20px;color:#fff;background:linear-gradient(135deg,#ff6c75,#ff9d37,#ffd65a);
-  box-shadow:0 12px 24px rgba(70,58,98,.16);font:900 1rem var(--comic);text-decoration:none
-}
-.big-btn.blue{background:linear-gradient(135deg,#48baf0,#7c65d7)}.big-btn.green{background:linear-gradient(135deg,#4abf90,#9edb5c)}
-.mentor-card{
-  position:relative;overflow:hidden;padding:20px;color:#fff;background:linear-gradient(145deg,var(--ma,#ff7d74),var(--mb,#ffd65a))
-}
-.mentor-card::after{
-  content:"";position:absolute;width:220px;height:220px;right:-90px;top:-100px;border-radius:50%;background:rgba(255,255,255,.17)
-}
-.mentor-head{position:relative;z-index:1;display:flex;align-items:center;gap:13px}
-.avatar{
-  width:88px;height:88px;display:grid;place-items:center;flex:0 0 88px;border:5px solid rgba(255,255,255,.9);
-  border-radius:50%;background:rgba(255,255,255,.2);font-size:2.9rem
-}
-.mentor-head h2{margin:0;font:900 1.9rem var(--comic)}.mentor-head small{display:block;margin-top:.2rem;color:rgba(255,255,255,.82)}
-.speech{
-  position:relative;z-index:1;margin-top:14px;padding:14px;border:1px solid rgba(255,255,255,.22);
-  border-radius:18px;background:rgba(255,255,255,.11);font-size:.94rem
-}
-.mentor-actions{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
-.mentor-actions button{
-  min-height:48px;border:1px solid rgba(255,255,255,.24);border-radius:15px;color:#fff;background:rgba(255,255,255,.12);
-  font:900 .78rem var(--comic)
-}
-
-/* Sections */
-.section{padding:48px 0}.heading{text-align:center;max-width:800px;margin:0 auto 18px}
-.heading h2{margin:0;color:#4a3d85;font:900 clamp(2rem,5vw,3.3rem)/1 var(--comic)}
-.heading p{color:var(--muted)}.feelings{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
-.feel{
-  min-height:94px;padding:10px;border:3px solid #fff;border-radius:22px;background:#fff;box-shadow:var(--soft);
-  font:900 .78rem var(--comic);color:#556079
-}
-.feel span{display:block;font-size:2.2rem}.feel[aria-pressed="true"]{color:#fff;background:linear-gradient(145deg,#7c65d7,#f27db8)}
-.path-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-.path-top button{
-  min-height:44px;padding:.6rem .76rem;border:1px solid var(--line);border-radius:999px;background:#fff;color:#506078;font-weight:850
-}
-.progress-strip{
-  display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:10px 12px;border:2px solid #fff;
-  border-radius:18px;background:rgba(255,255,255,.82);box-shadow:var(--soft)
-}
-.progress-strip strong{color:#4a3d85;font:900 1rem var(--comic)}
-.progress-track{height:12px;flex:1;border-radius:999px;background:#e8edf4;overflow:hidden}
-.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#48baf0,#7c65d7,#f27db8);border-radius:999px}
-.plan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.plan-card{
-  min-height:275px;display:flex;flex-direction:column;padding:15px;border:3px solid #fff;border-radius:22px;background:#fff;
-  box-shadow:var(--shadow);text-align:left
-}
-.plan-card .icon{font-size:2.2rem}.plan-card h3{margin:.5rem 0 0;color:#465078;font:900 1.05rem var(--comic)}
-.plan-card p{color:var(--muted);font-size:.76rem}
-.meta{display:flex;flex-wrap:wrap;gap:4px;margin:.2rem 0 .6rem}.meta span{padding:.2rem .35rem;border-radius:999px;background:#f0f4f8;color:#667485;font-size:.58rem}
-.play-btn{
-  margin-top:auto;min-height:46px;border:0;border-radius:14px;color:#fff;background:linear-gradient(135deg,#48baf0,#7c65d7);
-  font:900 .8rem var(--comic)
-}
-.garden{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
-.garden-card{min-height:165px;padding:14px;border:3px solid #fff;border-radius:22px;color:#fff;box-shadow:var(--soft);text-align:center}
-.garden-card span{font-size:2.4rem}.garden-card h3{margin:.35rem 0 0;font:900 .95rem var(--comic)}
-.garden-card button{
-  margin-top:.6rem;min-height:40px;padding:.5rem .62rem;border:0;border-radius:999px;background:#fff;color:#4f5579;font:900 .7rem var(--comic)
-}
-.break-card{
-  max-width:790px;margin:auto;padding:20px;border:3px solid #fff;border-radius:24px;background:linear-gradient(145deg,#eafff3,#fff9dc);
-  box-shadow:var(--shadow);text-align:center
-}
-.break-card .emoji{font-size:3rem}.break-card h3{margin:.4rem 0;color:#3f7860;font:900 1.5rem var(--comic)}.break-card p{color:#65756c}
-
-/* Voice */
-.voice-studio{
-  padding:18px;border:3px solid #fff;border-radius:24px;background:linear-gradient(145deg,#fff,#fff8dc,#eef9ff);box-shadow:var(--shadow)
-}
-.voice-friends{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
-.voice-friend{
-  min-height:74px;border:2px solid #ded4e8;border-radius:18px;background:#fff;color:#5c3d87;font:900 .72rem var(--comic)
-}
-.voice-friend span{display:block;font-size:1.7rem}
-.voice-friend[aria-pressed="true"]{color:#fff;border-color:#fff;background:linear-gradient(135deg,#7562c8,#e977a9)}
-.voice-row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end}
-.field{display:grid;gap:.3rem}.field label{font-size:.7rem;font-weight:850;color:#667085}
-.field select{min-height:44px;padding:.6rem;border:1px solid var(--line);border-radius:12px;background:#fff}
-.voice-row button{
-  min-height:44px;padding:.6rem .72rem;border:0;border-radius:12px;color:#fff;background:linear-gradient(135deg,#7c65d7,#f27db8);font-weight:900
-}
-.voice-status{margin-top:.6rem;color:#697587;font-size:.72rem;text-align:center}
-.voice-note{margin:.6rem 0 0;color:#718094;font-size:.67rem;text-align:center}
-
-/* App window */
-.app-modal{
-  position:fixed;inset:0;z-index:700;display:grid;place-items:center;padding:14px;background:rgba(25,34,65,.67);backdrop-filter:blur(7px)
-}
-.app-modal[hidden]{display:none}.app-win{
-  width:min(90vw,1050px);height:min(84vh,780px);min-width:400px;min-height:330px;display:grid;
-  grid-template-rows:auto 1fr;overflow:hidden;resize:both;border:4px solid #fff;border-radius:20px;background:#fff;
-  box-shadow:0 30px 90px rgba(0,0,0,.38)
-}
-.app-win.max{width:calc(100vw - 18px)!important;height:calc(100vh - 18px)!important;max-width:none;max-height:none;resize:none}
-.app-bar{
-  min-height:54px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 7px 6px 13px;
-  color:#fff;background:linear-gradient(90deg,#4a3d85,#48baf0)
-}
-.app-bar strong{font:900 .95rem var(--comic)}.app-controls{display:flex;gap:5px}
-.app-controls button{
-  min-width:40px;height:40px;padding:0 8px;border:1px solid rgba(255,255,255,.2);border-radius:10px;color:#fff;
-  background:rgba(255,255,255,.11);font-weight:900
-}
-.app-controls .done{background:#48a978}.app-controls .close{background:#e0526b;font-size:1.25rem}.app-frame{width:100%;height:100%;border:0;background:#fff}
-.resize-note{position:absolute;right:19px;bottom:18px;padding:.2rem .35rem;border-radius:7px;background:rgba(36,69,111,.72);color:#fff;font-size:.55rem;pointer-events:none}
-
-/* Footer */
-footer{padding:1.5rem 0;color:#d7e1ef;background:#24456f;text-align:center;font-size:.72rem}
-
-@media(max-width:980px){
-  .nav{grid-template-columns:1fr}.nav-actions{justify-content:flex-start}
-  .hero-grid{grid-template-columns:1fr}.plan-grid{grid-template-columns:repeat(2,1fr)}.garden{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:700px){
-  .nav-actions .desktop-link{display:none}.feelings{grid-template-columns:repeat(3,1fr)}
-  .plan-grid,.garden,.voice-friends{grid-template-columns:1fr 1fr}.mentor-actions{grid-template-columns:1fr}.voice-row{grid-template-columns:1fr}
-  .menu-panel{left:0;right:auto}
-  .app-modal{padding:5px}.app-win{width:calc(100vw - 10px);height:calc(100vh - 10px);min-width:0;min-height:0;resize:none}.resize-note{display:none}
-}
-@media(max-width:430px){
-  .plan-grid,.garden,.voice-friends{grid-template-columns:1fr}.hero-buttons{display:grid}.big-btn{width:100%}
-  .brand small{display:none}.mentor-head{align-items:flex-start}
-}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
-</style>
+<link rel="stylesheet" href="./mentor.css">
+<title>Khaemenes Preschool · Archaemenes</title>
 </head>
 <body>
-
 <header class="header">
   <div class="shell nav">
-    <a class="brand"
-       href="https://vervenveda.com/Khaemenes_Academy.github.io/"
-       aria-label="Khaemenes Academy home">
+    <a class="brand" href="https://vervenveda.com/Khaemenes_Academy.github.io/" aria-label="Khaemenes Academy home">
       <span class="brand-mark" aria-hidden="true">🌈</span>
       <span class="brand-copy">
         <strong id="brandName">My Khaemenes Mentor</strong>
         <small>Crechè · personalized early learning</small>
       </span>
     </a>
-
     <div class="nav-actions">
       <a class="nav-link desktop-link" href="#learningPath">📚 My Path</a>
       <a class="nav-link desktop-link" href="../">🎠 Crechè Home</a>
-      <a class="nav-link parent"
-         href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">👨‍👩‍👧 Parent Profile</a>
-
+      <a class="nav-link parent" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">👨‍👩‍👧 Parent Profile</a>
       <div class="menu-wrap">
-        <button class="menu-button"
-                id="menuButton"
-                type="button"
-                aria-expanded="false"
-                aria-controls="menuPanel">☰ Menu</button>
+        <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="menuPanel">☰ Menu</button>
         <div class="menu-panel" id="menuPanel" hidden>
           <div class="menu-label">My Mentor</div>
           <a href="#feelingsSection">😊 How I Feel</a>
@@ -300,23 +65,23 @@ footer{padding:1.5rem 0;color:#d7e1ef;background:#24456f;text-align:center;font-
     <article class="welcome">
       <span class="eyebrow">🌟 My personalized learning space</span>
       <h1 id="childTitle">Hello!<span>Ready to learn and play?</span></h1>
-      <p id="childIntro">Your Mentor can help you choose a story, a game, a movement break, or one small next step.</p>
+      <p id="childIntro">Archaemenes can help you choose a story, a game, a movement break, or one small next step.</p>
       <div class="hero-buttons">
         <a class="big-btn" href="#learningPath">📚 My Learning Path</a>
         <button class="big-btn blue" id="surpriseGame" type="button">🎲 Pick a Game</button>
-        <button class="big-btn green" id="hearHello" type="button">🔊 Hear My Mentor</button>
+        <button class="big-btn green" id="hearHello" type="button">🔊 Hear Archaemenes</button>
       </div>
     </article>
 
     <article class="mentor-card" id="mentorCard">
       <div class="mentor-head">
-        <div class="avatar" id="mentorAvatar">🌞</div>
+        <div class="avatar" id="mentorAvatar">🦉</div>
         <div>
-          <h2 id="mentorName">Pip</h2>
-          <small id="mentorLabel">Your learning mentor</small>
+          <h2 id="mentorName">Archaemenes</h2>
+          <small id="mentorLabel">Your learning Mentor · assigned by NAIB</small>
         </div>
       </div>
-      <div class="speech" id="mentorSpeech">Hi! We can learn one little step at a time.</div>
+      <div class="speech" id="mentorSpeech">I am Archaemenes the Owl. We can learn one little step at a time.</div>
       <div class="mentor-actions">
         <button type="button" data-mentor-action="hint">💡 Give Me a Hint</button>
         <button type="button" data-mentor-action="play">🎮 Let’s Play</button>
@@ -331,7 +96,7 @@ footer{padding:1.5rem 0;color:#d7e1ef;background:#24456f;text-align:center;font-
   <div class="shell">
     <div class="heading">
       <h2>How do you feel?</h2>
-      <p>Tap one. Your Mentor will gently change today’s learning path. This check-in stays in this page session.</p>
+      <p>Tap one. Archaemenes will gently change today’s learning path. This check-in stays in this page session.</p>
     </div>
     <div class="feelings" id="feelings">
       <button class="feel" data-feeling="happy" aria-pressed="false"><span>😊</span>Happy</button>
@@ -346,19 +111,17 @@ footer{padding:1.5rem 0;color:#d7e1ef;background:#24456f;text-align:center;font-
 <section class="section" id="learningPath">
   <div class="shell">
     <div class="path-top">
-      <div class="heading" style="margin:0;text-align:left">
+      <div class="heading">
         <h2>My Learning Path</h2>
         <p id="pathIntro">A few little adventures chosen for you from the Crechè learning garden.</p>
       </div>
       <button id="newPath" type="button">↻ New Path</button>
     </div>
-
     <div class="progress-strip">
       <strong id="starCount">0 stars ⭐</strong>
       <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
       <span id="progressText">Let’s begin!</span>
     </div>
-
     <div class="plan-grid" id="planGrid"></div>
   </div>
 </section>
@@ -367,7 +130,7 @@ footer{padding:1.5rem 0;color:#d7e1ef;background:#24456f;text-align:center;font-
   <div class="shell">
     <div class="heading">
       <h2>My Learning Garden</h2>
-      <p>Choose the kind of learning you want right now. Your Mentor picks an age-appropriate Crechè activity from that area.</p>
+      <p>Choose the kind of learning you want right now. Archaemenes picks an age-appropriate Crechè activity from that area.</p>
     </div>
     <div class="garden" id="garden"></div>
   </div>
@@ -387,23 +150,21 @@ footer{padding:1.5rem 0;color:#d7e1ef;background:#24456f;text-align:center;font-
 <section class="section" id="voiceStudio">
   <div class="shell">
     <div class="heading">
-      <h2>My Mentor Voice</h2>
-      <p>Pick a gentle story voice. The Mentor speaks only when you press a read-aloud button.</p>
+      <h2>Archaemenes’ Voice</h2>
+      <p>Choose how Archaemenes reads aloud. These are voice styles, not different mentors.</p>
     </div>
-
     <div class="voice-studio">
       <div class="voice-friends" id="voiceFriends">
-        <button class="voice-friend" data-voice-friend="sunny" aria-pressed="true"><span>☀️</span>Sunny</button>
-        <button class="voice-friend" data-voice-friend="bunny" aria-pressed="false"><span>🐰</span>Benny Bunny</button>
-        <button class="voice-friend" data-voice-friend="rainbow" aria-pressed="false"><span>🌈</span>Rainbow Rae</button>
-        <button class="voice-friend" data-voice-friend="owl" aria-pressed="false"><span>🦉</span>Story Owl</button>
+        <button class="voice-friend" data-voice-friend="sunny" aria-pressed="true"><span>☀️</span>Bright</button>
+        <button class="voice-friend" data-voice-friend="bunny" aria-pressed="false"><span>🐰</span>Playful</button>
+        <button class="voice-friend" data-voice-friend="rainbow" aria-pressed="false"><span>🌈</span>Warm</button>
+        <button class="voice-friend" data-voice-friend="owl" aria-pressed="false"><span>🦉</span>Story</button>
       </div>
-
       <div class="voice-row">
         <div class="field">
           <label for="voiceSpeed">Reading speed</label>
           <select id="voiceSpeed">
-            <option value="slow">Slow & gentle</option>
+            <option value="slow">Slow &amp; gentle</option>
             <option value="normal" selected>Storytime</option>
             <option value="lively">A little lively</option>
           </select>
@@ -411,9 +172,8 @@ footer{padding:1.5rem 0;color:#d7e1ef;background:#24456f;text-align:center;font-
         <button id="previewVoice" type="button">🔊 Meet My Voice</button>
         <button id="stopVoice" type="button">■ Stop</button>
       </div>
-
       <div class="voice-status" id="voiceStatus" role="status" aria-live="polite">Loading the device’s friendly story voices…</div>
-      <p class="voice-note">The page deliberately avoids arbitrary default voices. If the device does not expose a suitable gentle English voice, read-aloud stays off rather than choosing a harsh voice.</p>
+      <p class="voice-note">Read-aloud starts only after a button press. If the device does not expose a suitable gentle English voice, read-aloud stays off rather than choosing an arbitrary voice.</p>
     </div>
   </div>
 </section>
@@ -429,7 +189,7 @@ footer{padding:1.5rem 0;color:#d7e1ef;background:#24456f;text-align:center;font-
         <button class="close" id="appClose" type="button" aria-label="Close app window">×</button>
       </div>
     </header>
-    <iframe class="app-frame" id="appFrame" title="Crechè adventure"></iframe>
+    <iframe class="app-frame" id="appFrame" title="Crechè adventure" src="about:blank" sandbox="allow-scripts allow-forms allow-modals allow-downloads allow-pointer-lock allow-same-origin" allow="camera 'none'; microphone 'none'; geolocation 'none'; payment 'none'" referrerpolicy="no-referrer"></iframe>
     <span class="resize-note">↘ resize</span>
   </section>
 </div>
@@ -438,658 +198,7 @@ footer{padding:1.5rem 0;color:#d7e1ef;background:#24456f;text-align:center;font-
 
 <script src="../assets/preschool-catalog.js"></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
-<script>
-"use strict";
-
-const $=id=>document.getElementById(id);
-const $$=selector=>[...document.querySelectorAll(selector)];
-const C=window.KhaemenesPreschoolCatalog||null;
-
-const PROGRESS_KEY="khaemenes_preschool_child_mentor_progress_v3";
-const VOICE_KEY="khaemenes_preschool_child_mentor_voice_v2";
-const LEGACY_PROFILE_KEY="khaemenes_preschool_profile_v1";
-
-const MENTORS={
-  pip:{id:"pip",name:"Pip",avatar:"🌞",colors:["#ff7d74","#ffd65a"],intro:"I love learning with laughter, little games, and movement."},
-  miri:{id:"miri",name:"Miri",avatar:"🦉",colors:["#48baf0","#6bd8e7"],intro:"I like looking closely, wondering, and taking our time."},
-  nova:{id:"nova",name:"Nova",avatar:"🚀",colors:["#7c65d7","#f27db8"],intro:"I turn learning into stories, pictures, and little adventures."},
-  sage:{id:"sage",name:"Sage",avatar:"🌿",colors:["#5ac996","#9edb5c"],intro:"I like calm steps, practice, and noticing every bit of progress."}
-};
-
-const VOICE_FRIENDS={
-  sunny:{
-    name:"Sunny",rate:.84,pitch:1.06,
-    preferred:/samantha|aria|jenny|ava|karen|victoria|allison|susan|zira|google us english|natural|enhanced|premium/i,
-    greeting:"Hello, learning friend. Sunny is ready for a bright little adventure."
-  },
-  bunny:{
-    name:"Benny Bunny",rate:.86,pitch:1.10,
-    preferred:/samantha|aria|jenny|ava|karen|victoria|allison|susan|zira|google us english|natural|enhanced|premium/i,
-    greeting:"Hello, little learner. Benny Bunny is ready to hop into a happy learning adventure."
-  },
-  rainbow:{
-    name:"Rainbow Rae",rate:.85,pitch:1.07,
-    preferred:/natural|enhanced|premium|samantha|aria|jenny|ava|victoria|allison|susan|google us english/i,
-    greeting:"Hello, bright learner. Rainbow Rae is ready for a colorful learning adventure."
-  },
-  owl:{
-    name:"Story Owl",rate:.78,pitch:1.01,
-    preferred:/samantha|serena|moira|aria|ava|karen|allison|susan|natural|enhanced|premium/i,
-    greeting:"Hello, careful listener. Story Owl is ready for a gentle storytime adventure."
-  }
-};
-
-const VOICE_SPEEDS={slow:.91,normal:1,lively:1.07};
-const AVOID_VOICE=/alex|daniel|fred|ralph|bruce|tom\b|thomas|albert|junior|jorge|diego|aaron|gordon|lee\b|reed\b/i;
-const FRIENDLY_VOICE=/samantha|aria|jenny|ava|karen|victoria|allison|susan|zira|serena|moira|google us english|natural|enhanced|premium/i;
-
-const GARDEN_DOMAINS=[
-  {id:"letters",label:"Letters & Stories",icon:"🔤",colors:["#ff7d74","#f27db8"],aliases:["letters","literacy","stories","language","words"]},
-  {id:"numbers",label:"Numbers",icon:"🔢",colors:["#48baf0","#6bd8e7"],aliases:["numbers","math","counting","reasoning","shapes"]},
-  {id:"creative",label:"Art & Music",icon:"🎨",colors:["#7c65d7","#f27db8"],aliases:["creative","art","music","imagination"]},
-  {id:"movement",label:"Move & Life Skills",icon:"🦘",colors:["#5ac996","#9edb5c"],aliases:["movement","physical","life","health"]},
-  {id:"wonder",label:"Weather & Wonder",icon:"🔭",colors:["#f6bf3a","#ff942b"],aliases:["wonder","science","nature","weather","space"]}
-];
-
-const BREAKS=[
-  "Stretch your arms up like a tall tree. Wiggle your fingers like leaves.",
-  "Find three blue things in the room, then come back.",
-  "March slowly in place while you count to ten.",
-  "Take three gentle breaths and pretend you are smelling a flower.",
-  "Look out a window. What is one thing moving and one thing staying still?",
-  "Touch your toes, reach for the sky, then shake out your hands.",
-  "Get a sip of water and notice whether it feels cold, cool, or warm.",
-  "Walk like your favorite animal for thirty seconds."
-];
-
-let registry=null;
-let learner=null;
-let legacy=null;
-let mentor=MENTORS.pip;
-let currentFeeling="okay";
-let currentPlan=[];
-let activeApp=null;
-let progress={completed:{},stars:0};
-let voices=[];
-let selectedVoice=null;
-let voiceFriend="sunny";
-let voiceSpeed="normal";
-let restoreFocus=null;
-
-/* ---------- Utilities ---------- */
-function escapeHtml(value){
-  return String(value??"").replace(/[&<>"']/g,char=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[char]));
-}
-function loadJSON(key,fallback=null){
-  try{
-    const raw=localStorage.getItem(key);
-    return raw?JSON.parse(raw):fallback;
-  }catch{return fallback}
-}
-function saveJSON(key,value){
-  try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}
-}
-function getRegistry(){
-  registry=window.KhaemenesFamilyRegistry||null;
-  return registry;
-}
-function getActiveLearner(){
-  const r=getRegistry();
-  return r?.getLearner?.()||null;
-}
-function getLegacyProfile(learnerId){
-  const profile=loadJSON(LEGACY_PROFILE_KEY,null);
-  return profile?.learnerId===learnerId?profile:null;
-}
-function preschoolStage(value){
-  return !value||String(value).toLowerCase()==="preschool";
-}
-function currentAgeBand(){
-  return learner?.ageBand||legacy?.ageBand||"4-5";
-}
-function currentInterests(){
-  const value=learner?.interests?.length?learner.interests:(legacy?.interests||[]);
-  return Array.isArray(value)?value:[];
-}
-function sessionMinutes(){
-  const raw=Number(legacy?.minutes||30);
-  return [20,30,45].includes(raw)?raw:30;
-}
-function stationCount(){
-  const minutes=sessionMinutes();
-  return minutes<=20?3:minutes>=45?5:4;
-}
-function mentorDisplay(){
-  const identity=learner?.mentorIdentity||legacy?.mentorIdentity||null;
-  const rawId=String(learner?.mentorId||legacy?.mentorId||identity?.baseStyle||"pip").toLowerCase();
-  let base=MENTORS[rawId]||Object.values(MENTORS).find(item=>item.id===rawId)||MENTORS.pip;
-  if(identity?.mode==="custom"){
-    return {
-      ...base,
-      name:String(identity.name||base.name).slice(0,20),
-      avatar:identity.avatar||base.avatar,
-      colors:Array.isArray(identity.colors)&&identity.colors.length===2?identity.colors:base.colors
-    };
-  }
-  return base;
-}
-function catalogActivities(){
-  if(!C)return [];
-  return typeof C.mentorActivities==="function"
-    ? C.mentorActivities()
-    : (C.activities||[]).filter(activity=>activity.mentor?.eligible);
-}
-function appUrl(activity){
-  return "../apps/"+String(activity.file||"").split("/").map(encodeURIComponent).join("/");
-}
-
-/* ---------- Clean anchor navigation ---------- */
-function updateAnchorOffset(){
-  const header=document.querySelector(".header");
-  const offset=Math.ceil(header?.getBoundingClientRect().height||0)+22;
-  document.documentElement.style.setProperty("--anchor-offset",`${offset}px`);
-  return offset;
-}
-function cleanTarget(hash){
-  if(!hash||hash==="#")return null;
-  let target=null;
-  try{target=document.querySelector(hash)}catch{return null}
-  if(!target)return null;
-  return target.closest("section[id]")||target;
-}
-function goTo(hash,{history=true,behavior="smooth"}={}){
-  const target=cleanTarget(hash);
-  if(!target)return false;
-  const offset=updateAnchorOffset();
-  const top=Math.max(0,target.getBoundingClientRect().top+window.scrollY-offset);
-  window.scrollTo({top,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":behavior});
-  if(history){
-    try{window.history.pushState(null,"",hash)}catch{}
-  }
-  return true;
-}
-
-/* ---------- Header menu ---------- */
-function openMenu(){
-  $("menuPanel").hidden=false;
-  $("menuButton").setAttribute("aria-expanded","true");
-  document.body.classList.add("menu-open");
-}
-function closeMenu(){
-  $("menuPanel").hidden=true;
-  $("menuButton").setAttribute("aria-expanded","false");
-  document.body.classList.remove("menu-open");
-}
-function toggleMenu(){
-  $("menuPanel").hidden?openMenu():closeMenu();
-}
-
-/* ---------- Learner-scoped progress ---------- */
-function loadProgress(){
-  const map=loadJSON(PROGRESS_KEY,{});
-  const state=map?.[learner.learnerId]||{};
-  progress={
-    completed:state.completed&&typeof state.completed==="object"?state.completed:{},
-    stars:Number(state.stars||0)
-  };
-}
-function saveProgress(){
-  const map=loadJSON(PROGRESS_KEY,{})||{};
-  map[learner.learnerId]={...progress,updatedAt:new Date().toISOString()};
-  saveJSON(PROGRESS_KEY,map);
-}
-
-/* ---------- Adaptive path ---------- */
-function eligibleActivities(){
-  const age=currentAgeBand();
-  return catalogActivities().filter(activity=>{
-    const ages=activity.mentor?.ages||[];
-    if(ages.length&&!ages.includes(age))return false;
-    const energy=String(activity.mentor?.energy||"steady").toLowerCase();
-    if(["tired","frustrated"].includes(currentFeeling)&&energy==="wiggly")return false;
-    return true;
-  });
-}
-function seededNumber(text){
-  let h=2166136261;
-  for(const ch of String(text)){
-    h^=ch.charCodeAt(0);
-    h=Math.imul(h,16777619);
-  }
-  h+=h<<13;h^=h>>>7;h+=h<<3;h^=h>>>17;h+=h<<5;
-  return (h>>>0)/4294967295;
-}
-function activityScore(activity){
-  let score=seededNumber(`${learner.learnerId}:${new Date().toDateString()}:${currentFeeling}:${activity.id}`)*1.5;
-  const interests=currentInterests();
-  for(const interest of interests){
-    if((activity.mentor?.interests||[]).includes(interest))score+=2.2;
-  }
-  const energy=String(activity.mentor?.energy||"steady").toLowerCase();
-  if(currentFeeling==="wiggly"&&energy==="wiggly")score+=3;
-  if(["tired","frustrated"].includes(currentFeeling)&&energy==="gentle")score+=3;
-  if(progress.completed[activity.id])score-=1.3;
-  return score;
-}
-function buildPath(){
-  const count=stationCount();
-  const pool=[...eligibleActivities()].sort((a,b)=>activityScore(b)-activityScore(a));
-  const picked=[];
-  const domains=new Set();
-
-  for(const activity of pool){
-    const domain=activity.mentor?.domain||activity.category||"wonder";
-    if(!domains.has(domain)){
-      picked.push(activity);
-      domains.add(domain);
-    }
-    if(picked.length>=count)break;
-  }
-  for(const activity of pool){
-    if(picked.length>=count)break;
-    if(!picked.some(item=>item.id===activity.id))picked.push(activity);
-  }
-  currentPlan=picked;
-  renderPlan();
-}
-function renderPlan(){
-  const grid=$("planGrid");
-  if(!currentPlan.length){
-    grid.innerHTML='<article class="plan-card"><h3>Let’s try another path.</h3><p>No Mentor-ready activities matched this learning stage yet.</p></article>';
-    return;
-  }
-
-  grid.innerHTML=currentPlan.map((activity,index)=>`
-    <article class="plan-card">
-      <span class="icon">${activity.icon||"✨"}</span>
-      <h3>${escapeHtml(activity.title)}</h3>
-      <div class="meta">
-        <span>Step ${index+1}</span>
-        <span>${escapeHtml(activity.mentor?.minutes||"?")} min</span>
-        <span>${escapeHtml(activity.mentor?.domain||activity.category||"learning")}</span>
-      </div>
-      <p>${escapeHtml(activity.mentor?.desc||activity.desc||"A little Crechè learning adventure.")}</p>
-      <button class="play-btn" data-open-app="${escapeHtml(activity.id)}" type="button">
-        ${progress.completed[activity.id]?"Play Again ↻":"Play This →"}
-      </button>
-    </article>
-  `).join("");
-
-  $("pathIntro").textContent=`${mentor.name} chose ${currentPlan.length} little adventures for ${learner.nickname||"you"} from the public Crechè learning garden.`;
-  renderProgress();
-}
-function matchesDomain(activity,domain){
-  const hay=[
-    activity.mentor?.domain,activity.category,activity.tags,
-    ...(activity.mentor?.interests||[])
-  ].filter(Boolean).join(" ").toLowerCase();
-  return domain.aliases.some(alias=>hay.includes(alias));
-}
-function renderGarden(){
-  const pool=eligibleActivities();
-  $("garden").innerHTML=GARDEN_DOMAINS.map(domain=>{
-    const candidates=pool.filter(activity=>matchesDomain(activity,domain))
-      .sort((a,b)=>activityScore(b)-activityScore(a));
-    const sample=candidates[0]||null;
-    return `<article class="garden-card" style="background:linear-gradient(145deg,${domain.colors[0]},${domain.colors[1]})">
-      <span>${domain.icon}</span>
-      <h3>${domain.label}</h3>
-      ${sample?`<button type="button" data-open-app="${escapeHtml(sample.id)}">Try One →</button>`:""}
-    </article>`;
-  }).join("");
-}
-function renderProgress(){
-  const completed=Object.keys(progress.completed).length;
-  const total=Math.max(1,catalogActivities().length);
-  const percent=Math.min(100,Math.round((completed/total)*100));
-  $("starCount").textContent=`${progress.stars} star${progress.stars===1?"":"s"} ⭐`;
-  $("progressFill").style.width=`${percent}%`;
-  $("progressText").textContent=completed?`${completed} Mentor adventures explored`:"Let’s begin!";
-}
-
-/* ---------- Mentor ---------- */
-function renderMentor(){
-  mentor=mentorDisplay();
-  document.documentElement.style.setProperty("--ma",mentor.colors[0]);
-  document.documentElement.style.setProperty("--mb",mentor.colors[1]);
-  $("mentorAvatar").textContent=mentor.avatar;
-  $("mentorName").textContent=mentor.name;
-  $("mentorLabel").textContent=`${learner.nickname||"Your"}’s learning Mentor`;
-  $("brandName").textContent=`${learner.nickname||"My"}’s Mentor`;
-  $("childTitle").innerHTML=`Hello, ${escapeHtml(learner.nickname||"friend")}!<span>Ready to learn and play?</span>`;
-  $("childIntro").textContent=`${mentor.name} can help you choose one little next step, a game, a story, or a real-world break.`;
-  $("mentorSpeech").textContent=`${mentor.name}: ${mentor.intro} What would you like to try first?`;
-}
-function mentorResponse(action){
-  const child=learner.nickname||"friend";
-  const lines={
-    hint:`${mentor.name}: ${child}, let’s make it smaller. Look at just one part. What is the first thing you notice?`,
-    play:`${mentor.name}: Yes! I’ll pick a learning game that matches how you feel today.`,
-    stuck:`${mentor.name}: Being stuck is okay. We can try one tiny step, or ask a nearby grown-up to look with us.`,
-    break:`${mentor.name}: Great noticing. Let’s take a real-world break. Stretch, breathe, get some water, and come back when your body feels ready.`
-  };
-  $("mentorSpeech").textContent=lines[action]||lines.hint;
-  if(action==="play")openRandomGame();
-  if(action==="break")newBreakIdea();
-}
-function setFeeling(feeling){
-  currentFeeling=feeling;
-  $$("[data-feeling]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.feeling===feeling)));
-  const messages={
-    happy:`${mentor.name}: Happy energy! Let’s use some of it for a bright learning adventure.`,
-    okay:`${mentor.name}: That sounds just right. We can take one comfortable step at a time.`,
-    wiggly:`${mentor.name}: Wiggly bodies can learn too! I’ll look for movement and hands-on play.`,
-    tired:`${mentor.name}: We can keep today gentle and short. No rushing.`,
-    frustrated:`${mentor.name}: Thank you for telling me. We’ll slow down, choose something gentle, and make the next step very small.`
-  };
-  $("mentorSpeech").textContent=messages[feeling]||messages.okay;
-  buildPath();
-  renderGarden();
-}
-
-/* ---------- Apps ---------- */
-function openRandomGame(){
-  const pool=eligibleActivities();
-  if(!pool.length)return;
-  openApp(pool[Math.floor(Math.random()*pool.length)]);
-}
-function openApp(activity){
-  if(!activity)return;
-  activeApp=activity;
-  restoreFocus=document.activeElement;
-  $("appTitle").textContent=activity.title||"Crechè Adventure";
-  $("appFrame").src=appUrl(activity);
-  $("appModal").hidden=false;
-  $("appModal").setAttribute("aria-hidden","false");
-  document.body.classList.add("app-open");
-  setTimeout(()=>$("appClose").focus(),30);
-}
-function closeApp(){
-  $("appModal").hidden=true;
-  $("appModal").setAttribute("aria-hidden","true");
-  $("appFrame").src="about:blank";
-  $("appWin").classList.remove("max");
-  $("appMax").textContent="□";
-  $("appMax").setAttribute("aria-label","Maximize app window");
-  document.body.classList.remove("app-open");
-  activeApp=null;
-  restoreFocus?.focus?.();
-}
-function markAppDone(){
-  if(!activeApp)return;
-  if(!progress.completed[activeApp.id]){
-    progress.completed[activeApp.id]={
-      completedAt:new Date().toISOString(),
-      title:activeApp.title
-    };
-    progress.stars+=1;
-    saveProgress();
-  }
-  $("mentorSpeech").textContent=`${mentor.name}: You did it, ${learner.nickname||"friend"}! I noticed your effort. You earned a learning star! ⭐`;
-  renderPlan();
-  renderProgress();
-  closeApp();
-}
-
-/* ---------- Breaks ---------- */
-function newBreakIdea(){
-  $("breakIdea").textContent=BREAKS[Math.floor(Math.random()*BREAKS.length)];
-}
-
-/* ---------- Friendly voice engine ---------- */
-function loadVoiceSettings(){
-  const all=loadJSON(VOICE_KEY,{})||{};
-  const state=all[learner.learnerId]||{};
-  voiceFriend=VOICE_FRIENDS[state.friend]?state.friend:"sunny";
-  voiceSpeed=VOICE_SPEEDS[state.speed]?state.speed:"normal";
-}
-function saveVoiceSettings(){
-  const all=loadJSON(VOICE_KEY,{})||{};
-  all[learner.learnerId]={
-    friend:voiceFriend,
-    speed:voiceSpeed,
-    updatedAt:new Date().toISOString()
-  };
-  saveJSON(VOICE_KEY,all);
-}
-function scoreVoice(voice,guide){
-  const name=String(voice?.name||"");
-  const lang=String(voice?.lang||"");
-  if(!/^en([-_]|$)/i.test(lang))return -1000;
-  if(AVOID_VOICE.test(name))return -500;
-
-  let score=0;
-  if(guide.preferred.test(name))score+=90;
-  if(FRIENDLY_VOICE.test(name))score+=65;
-  if(/natural|enhanced|premium/i.test(name))score+=30;
-  if(/^en-US/i.test(lang))score+=14;
-  if(voice.localService)score+=4;
-  return score;
-}
-function refreshVoices(){
-  if(!("speechSynthesis" in window))return;
-  voices=speechSynthesis.getVoices()||[];
-  chooseVoice();
-}
-function chooseVoice(){
-  const guide=VOICE_FRIENDS[voiceFriend]||VOICE_FRIENDS.sunny;
-  const ranked=voices
-    .map(voice=>({voice,score:scoreVoice(voice,guide)}))
-    .filter(item=>item.score>0)
-    .sort((a,b)=>b.score-a.score);
-
-  selectedVoice=ranked[0]?.voice||null;
-  if(selectedVoice){
-    $("voiceStatus").textContent=`${guide.name} is ready with a gentle device voice.`;
-  }else if(voices.length){
-    $("voiceStatus").textContent="This device is not exposing a suitable gentle English voice, so Mentor read-aloud is staying off.";
-  }else{
-    $("voiceStatus").textContent="Loading the device’s friendly story voices…";
-  }
-}
-function speak(text,{preview=false}={}){
-  if(!("speechSynthesis" in window)){
-    $("voiceStatus").textContent="Read-aloud is not available in this browser.";
-    return;
-  }
-  refreshVoices();
-  const guide=VOICE_FRIENDS[voiceFriend]||VOICE_FRIENDS.sunny;
-  if(!selectedVoice){
-    $("voiceStatus").textContent="No suitable gentle voice is available on this device. The Mentor will not use an arbitrary default voice.";
-    return;
-  }
-
-  const phrase=preview?guide.greeting:String(text||"").trim();
-  if(!phrase)return;
-
-  speechSynthesis.cancel();
-  const utterance=new SpeechSynthesisUtterance(phrase);
-  utterance.lang=selectedVoice.lang||"en-US";
-  utterance.voice=selectedVoice;
-  utterance.rate=Math.max(.70,Math.min(1.12,guide.rate*(VOICE_SPEEDS[voiceSpeed]||1)));
-  utterance.pitch=guide.pitch;
-  utterance.volume=.90;
-  utterance.onstart=()=>{$("voiceStatus").textContent=`${guide.name} is talking…`;};
-  utterance.onend=()=>{$("voiceStatus").textContent=`${guide.name} is ready.`;};
-  utterance.onerror=()=>{$("voiceStatus").textContent="The friendly voice could not start. Try again or choose another voice friend.";};
-  speechSynthesis.speak(utterance);
-}
-function updateVoiceButtons(){
-  $$("[data-voice-friend]").forEach(button=>{
-    button.setAttribute("aria-pressed",String(button.dataset.voiceFriend===voiceFriend));
-  });
-  $("voiceSpeed").value=voiceSpeed;
-  chooseVoice();
-}
-
-/* ---------- Access boundary ---------- */
-function showLocked(reason="no-learner"){
-  $("kidApp").hidden=true;
-  $("lockedState").hidden=false;
-
-  if(reason==="wrong-stage"){
-    $("lockedTitle").textContent="This Mentor Is for Crechè";
-    $("lockedMessage").textContent="The active learner belongs to another Khaemenes school level. Return to Crechè and choose a Preschool learner’s bright Mentor button.";
-  }else if(reason==="registry-unavailable"){
-    $("lockedTitle").textContent="Family Profile Connection Needed";
-    $("lockedMessage").textContent="The Khaemenes Family Registry could not load. Public Crechè games are still available from the home page.";
-  }else{
-    $("lockedTitle").textContent="Choose Your Mentor Button";
-    $("lockedMessage").textContent="A grown-up can create or open the family account, then choose the bright button with your name on the Crechè home page.";
-  }
-}
-function initializeLearner(){
-  if(!C){
-    showLocked("registry-unavailable");
-    return false;
-  }
-
-  const r=getRegistry();
-  if(!r){
-    showLocked("registry-unavailable");
-    return false;
-  }
-
-  learner=getActiveLearner();
-  if(!learner?.learnerId){
-    showLocked("no-learner");
-    return false;
-  }
-
-  legacy=getLegacyProfile(learner.learnerId);
-  if(!preschoolStage(learner.stage||legacy?.pathway)){
-    showLocked("wrong-stage");
-    return false;
-  }
-
-  loadProgress();
-  loadVoiceSettings();
-  $("lockedState").hidden=true;
-  $("kidApp").hidden=false;
-  renderMentor();
-  renderGarden();
-  buildPath();
-  renderProgress();
-  updateVoiceButtons();
-  newBreakIdea();
-  updateAnchorOffset();
-  return true;
-}
-
-/* ---------- Events ---------- */
-$("menuButton").addEventListener("click",event=>{
-  event.stopPropagation();
-  toggleMenu();
-});
-document.addEventListener("click",event=>{
-  if(!$("menuPanel").hidden&&!event.target.closest(".menu-wrap"))closeMenu();
-
-  const samePage=event.target.closest('a[href^="#"]');
-  if(samePage){
-    const hash=samePage.getAttribute("href");
-    if(hash&&hash!=="#"){
-      event.preventDefault();
-      closeMenu();
-      goTo(hash);
-      return;
-    }
-  }
-
-  const appButton=event.target.closest("[data-open-app]");
-  if(appButton){
-    const activity=C?.byId?.(appButton.dataset.openApp)||(C?.activities||[]).find(item=>item.id===appButton.dataset.openApp);
-    if(activity)openApp(activity);
-    return;
-  }
-
-  const mentorButton=event.target.closest("[data-mentor-action]");
-  if(mentorButton){
-    mentorResponse(mentorButton.dataset.mentorAction);
-    return;
-  }
-
-  const feelButton=event.target.closest("[data-feeling]");
-  if(feelButton){
-    setFeeling(feelButton.dataset.feeling);
-    return;
-  }
-
-  const voiceButton=event.target.closest("[data-voice-friend]");
-  if(voiceButton){
-    voiceFriend=voiceButton.dataset.voiceFriend;
-    saveVoiceSettings();
-    updateVoiceButtons();
-    speak("",{preview:true});
-  }
-});
-document.addEventListener("keydown",event=>{
-  if(event.key!=="Escape")return;
-  if(!$("appModal").hidden){closeApp();return;}
-  if(!$("menuPanel").hidden){closeMenu();$("menuButton").focus();}
-});
-window.addEventListener("resize",updateAnchorOffset,{passive:true});
-window.addEventListener("orientationchange",()=>setTimeout(updateAnchorOffset,120),{passive:true});
-
-$("newPath").addEventListener("click",()=>{
-  buildPath();
-  $("mentorSpeech").textContent=`${mentor.name}: I made a fresh learning path for you.`;
-});
-$("surpriseGame").addEventListener("click",openRandomGame);
-$("hearHello").addEventListener("click",()=>speak($("mentorSpeech").textContent));
-$("newBreak").addEventListener("click",newBreakIdea);
-$("previewVoice").addEventListener("click",()=>speak("",{preview:true}));
-$("stopVoice").addEventListener("click",()=>{
-  if("speechSynthesis" in window)speechSynthesis.cancel();
-  $("voiceStatus").textContent="Voice stopped.";
-});
-$("voiceSpeed").addEventListener("change",()=>{
-  voiceSpeed=$("voiceSpeed").value;
-  saveVoiceSettings();
-  $("voiceStatus").textContent="Reading speed saved.";
-});
-$("appClose").addEventListener("click",closeApp);
-$("appDone").addEventListener("click",markAppDone);
-$("appMax").addEventListener("click",()=>{
-  const max=$("appWin").classList.toggle("max");
-  $("appMax").textContent=max?"❐":"□";
-  $("appMax").setAttribute("aria-label",max?"Restore app window":"Maximize app window");
-});
-$("appModal").addEventListener("click",event=>{
-  if(event.target===$("appModal"))closeApp();
-});
-
-if("speechSynthesis" in window){
-  refreshVoices();
-  if(typeof speechSynthesis.addEventListener==="function"){
-    speechSynthesis.addEventListener("voiceschanged",refreshVoices);
-  }else{
-    speechSynthesis.onvoiceschanged=refreshVoices;
-  }
-}
-
-window.addEventListener("khaemenes-family-ready",initializeLearner);
-window.addEventListener("khaemenes-family-changed",initializeLearner);
-window.addEventListener("storage",event=>{
-  if([
-    "khaemenes_family_registry_v1",
-    "khaemenes_active_family_v1",
-    "khaemenes_active_learner_v1",
-    LEGACY_PROFILE_KEY
-  ].includes(event.key)){
-    initializeLearner();
-  }
-});
-
-window.addEventListener("load",()=>{
-  updateAnchorOffset();
-  if(location.hash){
-    requestAnimationFrame(()=>requestAnimationFrame(()=>goTo(location.hash,{history:false,behavior:"auto"})));
-  }
-});
-
-initializeLearner();
-</script>
+<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-naib-mentor-router.js"></script>
+<script src="./mentor.js"></script>
 </body>
 </html>
