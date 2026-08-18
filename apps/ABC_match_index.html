@@ -461,6 +461,38 @@ button:hover{transform:translateY(-2px)}
   line-height:1.5;
 }
 .site-footer strong{color:#503a76;}
+
+/* Eiren Preschool Edition — playful, roomy, touch-friendly */
+.app{width:min(1100px,calc(100% - 28px));padding:36px 0 62px}
+.hero{padding:40px 24px 35px;border-radius:40px;border:3px solid rgba(255,255,255,.45)}
+.hero p{max-width:660px;line-height:1.78}.confetti-dots{gap:15px;margin-top:21px}.confetti-dots span{width:54px;height:54px;font-size:1.75rem}
+.toolbar{gap:12px;margin:23px 0}.toolbar button{min-height:52px;padding:11px 19px}
+.voice-panel{max-width:900px;margin:0 auto 24px;padding:21px 23px;border-radius:30px;border:2px solid rgba(139,109,232,.14)}
+.eiren-panel{background:linear-gradient(145deg,#fff9fc,#f6f2ff,#effdff)}
+.eiren-head{display:grid;grid-template-columns:auto 1fr;gap:17px;align-items:center;max-width:760px;margin:auto}
+.eiren-mark{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdce9,#e5e0ff);font-size:2.1rem}
+.voice-panel .eiren-head h2{text-align:left;margin:0 0 6px;font-size:1.16rem}.eiren-head p{margin:0;color:var(--muted);line-height:1.6;font-size:.91rem}
+.voice-options{margin-top:18px;gap:10px}.voice-options select,.voice-options button{min-height:50px}
+.stats{gap:14px;margin-bottom:22px}.stat{padding:15px;border-radius:22px;border:2px solid rgba(255,255,255,.85)}
+.game-grid{gap:22px}.panel{padding:22px;border-radius:32px;border:2px solid rgba(255,255,255,.95)}
+.letter-card{min-height:430px;padding:27px;border-radius:31px}.letter-orb{width:min(255px,68vw);box-shadow:inset -16px -18px 26px rgba(0,0,0,.10),inset 13px 14px 24px rgba(255,255,255,.25),0 18px 34px rgba(62,50,117,.18)}
+.word{margin-top:20px}.nav-row{gap:12px;margin-top:20px}.nav-row button,.quick-tools button{min-height:50px}
+.quick-tools{gap:10px;margin-top:13px}.alphabet-strip{gap:9px;margin-top:20px;padding:4px 2px 9px}.alpha-btn{width:48px;height:48px}
+.activity{margin-bottom:19px;padding:20px;border-radius:27px;border:2px solid #f0eaf4}.activity h2{margin-bottom:9px}
+.choices{gap:13px;margin-top:16px}.letter-choice{width:82px;height:82px;font-size:2.15rem}
+.dropzone{min-height:125px;margin-top:16px;padding:19px;border-radius:27px}.quiz-buttons{gap:12px;margin-top:14px}.quiz-buttons button{min-width:78px;min-height:54px}
+.progress{height:15px;margin-top:14px}.message{min-height:34px;line-height:1.5}
+.footer{margin-top:24px;line-height:1.6}.site-footer{margin:22px auto;padding:18px;border-radius:22px}
+@media(max-width:620px){
+ .app{width:min(100% - 14px,1100px);padding-top:10px}.hero{padding:30px 16px;border-radius:29px}
+ .toolbar{display:grid;grid-template-columns:1fr}.toolbar button{width:100%}
+ .eiren-head{grid-template-columns:1fr;text-align:center}.eiren-mark{margin:auto}.voice-panel .eiren-head h2{text-align:center}
+ .voice-options{display:grid;grid-template-columns:1fr}.voice-options>*{width:100%}
+ .stats{gap:9px}.panel{padding:16px}.letter-card{min-height:390px;padding:20px}
+ .nav-row,.quick-tools{display:grid;grid-template-columns:1fr 1fr}.nav-row button,.quick-tools button{width:100%}
+ .activity{padding:17px}.letter-choice{width:74px;height:74px}.dropzone{min-height:115px}
+}
+
 </style>
 </head>
 <body>
@@ -480,39 +512,25 @@ button:hover{transform:translateY(-2px)}
   </div>
 
 
-  <section class="voice-panel" aria-labelledby="voiceTitle">
-    <h2 id="voiceTitle">Choose an Alphabet Buddy</h2>
-
-    <div class="voice-friends" id="voiceFriends">
-      <button type="button" class="voice-friend" data-voice="rosie">
-        <span class="emoji">🐰</span><span class="name">Rosie Rabbit</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="leo">
-        <span class="emoji">🦁</span><span class="name">Leo Lion</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="penny">
-        <span class="emoji">🐧</span><span class="name">Penny Penguin</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="freddie">
-        <span class="emoji">🐸</span><span class="name">Freddie Frog</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="panda">
-        <span class="emoji">🐼</span><span class="name">Panda Pal</span>
-      </button>
+  <section class="voice-panel eiren-panel" aria-labelledby="voiceTitle">
+    <div class="eiren-head">
+      <div class="eiren-mark" aria-hidden="true">🌸</div>
+      <div>
+        <h2 id="voiceTitle">Eiren · Your Alphabet Guide</h2>
+        <p>I’ll say each letter and word, help with the games, and cheer you on from A all the way to Z.</p>
+      </div>
     </div>
-
     <div class="voice-options">
-      <select id="voiceSpeed" aria-label="Reading speed">
+      <select id="voiceSpeed" aria-label="Eiren reading speed">
         <option value="slow">🐢 Slow and gentle</option>
         <option value="normal">🙂 Just right</option>
         <option value="lively">🐇 A little lively</option>
       </select>
-      <button id="previewVoiceBtn" class="secondary" type="button">👋 Meet My Buddy</button>
-      <button id="hearWordBtn" class="secondary" type="button">🔤 Hear Word</button>
-      <button id="stopVoiceBtn" class="secondary" type="button">⏹ Stop Voice</button>
+      <button id="previewVoiceBtn" class="secondary" type="button">🌸 Meet Eiren</button>
+      <button id="hearWordBtn" class="secondary" type="button">🔤 Eiren, Say My Word</button>
+      <button id="stopVoiceBtn" class="secondary" type="button">⏹ Stop Eiren</button>
     </div>
-
-    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+    <p class="voice-status" id="voiceStatus" aria-live="polite">Eiren is ready to play.</p>
   </section>
 
   <section class="stats">
@@ -577,7 +595,7 @@ button:hover{transform:translateY(-2px)}
 <div class="modal" id="resetModal" aria-hidden="true">
   <div class="modal-card">
     <h2>Start the Alphabet Again?</h2>
-    <p>This will clear the score, streak, and completed letters. Your chosen alphabet buddy and reading speed will stay saved.</p>
+    <p>This will clear the score, streak, and completed letters. Eiren will stay with you, and your reading speed will stay saved.</p>
     <div class="modal-actions">
       <button id="cancelResetBtn" class="secondary" type="button">Keep Learning</button>
       <button id="confirmResetBtn" class="primary" type="button">Reset Progress</button>
@@ -598,7 +616,7 @@ button:hover{transform:translateY(-2px)}
     ["F","Fish","🐟","f, as in fish"],
     ["G","Grapes","🍇","g, as in grapes"],
     ["H","Hat","🎩","h, as in hat"],
-    ["I","Ice Cream","🍦","long i, as in ice"],
+    ["I","Igloo","🧊","short i, as in igloo"],
     ["J","Juice","🧃","j, as in juice"],
     ["K","Kite","🪁","k, as in kite"],
     ["L","Lion","🦁","l, as in lion"],
@@ -626,12 +644,17 @@ button:hover{transform:translateY(-2px)}
   ];
 
   const state = {
-    index:Number(localStorage.getItem("alphabetFunIndex")||0),
+    index:Math.max(0,Math.min(25,Number(localStorage.getItem("alphabetFunIndex")||0)||0)),
     score:Number(localStorage.getItem("alphabetFunScore")||0),
     streak:Number(localStorage.getItem("alphabetFunStreak")||0),
-    completed:new Set(JSON.parse(localStorage.getItem("alphabetFunCompleted")||"[]")),
-    theme:Number(localStorage.getItem("alphabetFunTheme")||0),
-    voiceFriend:localStorage.getItem("alphabetFunVoiceFriend")||"rosie",
+    completed:new Set((()=>{
+      try{
+        const saved=JSON.parse(localStorage.getItem("alphabetFunCompleted")||"[]");
+        return Array.isArray(saved)?saved.filter(x=>typeof x==="string"&&/^[A-Z]$/.test(x)):[];
+      }catch(_err){return [];}
+    })()),
+    theme:Math.max(0,Number(localStorage.getItem("alphabetFunTheme")||0)||0)%4,
+    voiceFriend:"eiren",
     voiceSpeed:localStorage.getItem("alphabetFunVoiceSpeed")||"slow",
     selected:null,
     matchDone:false,
@@ -646,7 +669,7 @@ button:hover{transform:translateY(-2px)}
     localStorage.setItem("alphabetFunStreak",String(state.streak));
     localStorage.setItem("alphabetFunCompleted",JSON.stringify([...state.completed]));
     localStorage.setItem("alphabetFunTheme",String(state.theme));
-    localStorage.setItem("alphabetFunVoiceFriend",state.voiceFriend);
+    localStorage.setItem("alphabetFunVoiceFriend","eiren");
     localStorage.setItem("alphabetFunVoiceSpeed",state.voiceSpeed);
   }
 
@@ -666,32 +689,10 @@ button:hover{transform:translateY(-2px)}
     return copy;
   }
 
-  const VOICE_BUDDIES={
-    rosie:{
-      name:"Rosie Rabbit",emoji:"🐰",rate:.86,pitch:1.16,
-      preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,
-      greeting:"Hop hop hooray. Rosie Rabbit is ready to learn the alphabet with you."
-    },
-    leo:{
-      name:"Leo Lion",emoji:"🦁",rate:.78,pitch:.9,
-      preferred:/daniel|david|alex|fred|george|male|tom/i,
-      greeting:"Roar. Leo Lion is ready for a brave alphabet adventure."
-    },
-    penny:{
-      name:"Penny Penguin",emoji:"🐧",rate:.8,pitch:1.02,
-      preferred:/moira|serena|samantha|aria|karen|victoria/i,
-      greeting:"Waddle waddle. Penny Penguin is ready to practice letters."
-    },
-    freddie:{
-      name:"Freddie Frog",emoji:"🐸",rate:.88,pitch:1.08,
-      preferred:/alex|david|daniel|fred|ralph/i,
-      greeting:"Ribbit. Freddie Frog is ready to jump into alphabet fun."
-    },
-    panda:{
-      name:"Panda Pal",emoji:"🐼",rate:.76,pitch:.98,
-      preferred:/natural|enhanced|premium|samantha|daniel|alex|aria/i,
-      greeting:"Hello, friend. Panda Pal is ready to learn one letter at a time."
-    }
+  const EIREN={
+    name:"Eiren",emoji:"🌸",rate:.80,pitch:1.06,
+    preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
+    greeting:"Hello, little artist of letters. I’m Eiren. Let’s play with the alphabet together, one bright letter at a time."
   };
 
   const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
@@ -701,31 +702,21 @@ button:hover{transform:translateY(-2px)}
   function refreshVoices(){
     if(!("speechSynthesis" in window))return;
     voices=speechSynthesis.getVoices()||[];
-    const buddy=VOICE_BUDDIES[state.voiceFriend]||VOICE_BUDDIES.rosie;
     $("voiceStatus").textContent=voices.length
-      ?`${buddy.emoji} ${buddy.name} is ready.`
-      :"Loading a friendly voice…";
+      ?"🌸 Eiren is ready to play."
+      :"Eiren is finding a gentle voice…";
   }
 
   function chooseVoice(){
     if(!voices.length)refreshVoices();
-    const buddy=VOICE_BUDDIES[state.voiceFriend]||VOICE_BUDDIES.rosie;
     const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
     const pool=english.length?english:voices;
-
-    if(state.voiceFriend==="panda"&&pool.length){
-      const natural=pool.filter(v=>/natural|enhanced|premium/i.test(v.name));
-      const choices=natural.length?natural:pool;
-      return choices[Math.floor(Math.random()*choices.length)]||null;
-    }
-
-    return pool.find(v=>buddy.preferred.test(v.name))
+    return pool.find(v=>EIREN.preferred.test(v.name))
       ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
-      ||pool[0]
-      ||null;
+      ||pool[0]||null;
   }
 
-  function stopSpeaking(statusText="Voice stopped."){
+  function stopSpeaking(statusText="Eiren paused."){
     speechToken++;
     if("speechSynthesis" in window)speechSynthesis.cancel();
     document.querySelector(".letter-card")?.classList.remove("speaking");
@@ -738,32 +729,31 @@ button:hover{transform:translateY(-2px)}
 
     stopSpeaking("");
     const token=++speechToken;
-    const buddy=VOICE_BUDDIES[state.voiceFriend]||VOICE_BUDDIES.rosie;
-    const phrase=preview?buddy.greeting:text;
+    const phrase=preview?EIREN.greeting:text;
     const u=new SpeechSynthesisUtterance(phrase);
     const voice=chooseVoice();
 
     if(voice)u.voice=voice;
     u.lang=(voice&&voice.lang)||"en-US";
-    u.rate=Math.max(.55,Math.min(1.15,buddy.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
-    u.pitch=buddy.pitch;
+    u.rate=Math.max(.55,Math.min(1.15,EIREN.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+    u.pitch=EIREN.pitch;
     u.volume=1;
 
     u.onstart=()=>{
       document.querySelector(".letter-card")?.classList.add("speaking");
-      $("voiceStatus").textContent=`${buddy.emoji} ${buddy.name} is reading.`;
+      $("voiceStatus").textContent="🌸 Eiren is reading.";
     };
     u.onend=()=>{
       if(token!==speechToken)return;
       document.querySelector(".letter-card")?.classList.remove("speaking");
-      $("voiceStatus").textContent="Ready for another letter! 🌟";
+      $("voiceStatus").textContent="Eiren is ready for another letter! 🌟";
     };
     u.onerror=event=>{
       if(token!==speechToken)return;
       document.querySelector(".letter-card")?.classList.remove("speaking");
       $("voiceStatus").textContent=event&&["interrupted","canceled"].includes(event.error)
-        ?"Voice stopped."
-        :"The voice had a little hiccup. Try again.";
+        ?"Eiren paused."
+        :"Eiren’s voice had a little hiccup. Try again.";
     };
 
     speechSynthesis.speak(u);
@@ -772,6 +762,22 @@ button:hover{transform:translateY(-2px)}
   function speak(){
     const item=DATA[state.index];
     speakText(`${item.letter}. ${item.letter} is for ${item.word}. The sound is ${item.sound}.`);
+  }
+
+  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  let eirenBoundaryReady=false;
+  async function connectEirenBoundary(){
+    try{
+      const mod=await import(EIREN_PUBLIC_ADAPTER);
+      if(mod?.EirenAdapter?.prepare){
+        const prepared=mod.EirenAdapter.prepare({
+          mode:"reading",
+          message:"Preschool Alphabet Fun A-Z letter-recognition guidance."
+        });
+        eirenBoundaryReady=prepared?.specialist==="eiren";
+      }
+    }catch(_err){eirenBoundaryReady=false;}
+    if(eirenBoundaryReady)$("voiceStatus").textContent="🌸 Eiren’s public reading boundary is connected.";
   }
 
   function reward(target){
@@ -847,6 +853,7 @@ button:hover{transform:translateY(-2px)}
       $("dropzone").className="dropzone correct";
       $("dropzone").textContent=`Correct! ${target} is the match.`;
       state.matchDone=true;
+      document.querySelectorAll(".letter-choice").forEach(btn=>btn.disabled=true);
       state.score+=5;
       state.streak++;
       reward(source||$("dropzone"));
@@ -882,11 +889,13 @@ button:hover{transform:translateY(-2px)}
           b.classList.add("correct");
           $("message").textContent="Wonderful! That is the correct quiz answer!";
           state.quizDone=true;
+          box.querySelectorAll("button").forEach(btn=>btn.disabled=true);
           state.score+=5;
           state.streak++;
           reward(b);
         }else{
           b.classList.add("wrong");
+          b.disabled=true;
           $("message").textContent="Great try! Choose another answer.";
           state.streak=0;
         }
@@ -936,15 +945,6 @@ button:hover{transform:translateY(-2px)}
   }
 
 
-  function updateVoiceButtons(){
-    document.querySelectorAll("[data-voice]").forEach(button=>{
-      const active=button.dataset.voice===state.voiceFriend;
-      button.classList.toggle("active",active);
-      button.setAttribute("aria-pressed",String(active));
-    });
-    $("voiceSpeed").value=state.voiceSpeed;
-  }
-
   function openReset(){
     $("resetModal").classList.add("show");
     $("resetModal").setAttribute("aria-hidden","false");
@@ -955,21 +955,10 @@ button:hover{transform:translateY(-2px)}
     $("resetModal").setAttribute("aria-hidden","true");
   }
 
-  $("voiceFriends").onclick=event=>{
-    const button=event.target.closest("[data-voice]");
-    if(!button)return;
-    state.voiceFriend=button.dataset.voice;
-    updateVoiceButtons();
-    save();
-    const buddy=VOICE_BUDDIES[state.voiceFriend];
-    $("voiceStatus").textContent=
-      `${buddy.emoji} ${buddy.name} selected. Tap Meet My Buddy to listen.`;
-  };
-
   $("voiceSpeed").onchange=event=>{
     state.voiceSpeed=event.target.value;
     save();
-    $("voiceStatus").textContent="Reading speed saved.";
+    $("voiceStatus").textContent="Eiren’s reading speed is saved.";
   };
 
   $("previewVoiceBtn").onclick=()=>speakText("",{preview:true});
@@ -977,7 +966,7 @@ button:hover{transform:translateY(-2px)}
     const item=DATA[state.index];
     speakText(`${item.word}. ${item.letter} is for ${item.word}.`);
   };
-  $("stopVoiceBtn").onclick=()=>stopSpeaking("Voice stopped.");
+  $("stopVoiceBtn").onclick=()=>stopSpeaking("Eiren paused.");
 
   $("nextUnfinishedBtn").onclick=()=>{
     const start=state.index;
@@ -1064,7 +1053,7 @@ button:hover{transform:translateY(-2px)}
     $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
   }
 
-  updateVoiceButtons();
+  connectEirenBoundary();
   applyTheme();
   render();
 
