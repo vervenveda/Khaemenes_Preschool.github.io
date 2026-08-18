@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="ABC Adventure Hub — an offline preschool alphabet game with eight colorful worlds, friendly readers, rewards, and local progress.">
+<meta name="description" content="ABC Adventure Hub — an offline preschool alphabet game with eight colorful worlds, Eiren as the gentle adventure guide, rewards, and local progress.">
 <title>ABC Adventure Hub™</title>
 <style>
 :root{
@@ -489,6 +489,27 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
 }
+
+/* Eiren + preschool breathing-room pass */
+.app{width:min(1180px,calc(100% - 28px));padding:28px 0 54px}
+.hero{padding:38px 26px 34px;border-radius:38px;border:3px solid rgba(255,255,255,.72)}
+.hero p{max-width:700px;line-height:1.75}
+.topbar{gap:12px;margin:22px 0}.topbar button{min-height:52px;padding:11px 18px}
+.hub{gap:22px}.hub-note{padding:18px 20px;border-radius:25px;line-height:1.65;border:2px solid var(--line)}
+.world-grid{gap:18px}.world-card{min-height:175px;padding:20px;border-radius:28px;border-width:3px}.world-icon{font-size:3rem}.world-card strong{font-size:1.12rem}.world-card small{line-height:1.5}
+.voice-panel,.reward-panel,.parent-panel{padding:22px;border-radius:29px;border:2px solid var(--line)}
+.eiren-guide{background:linear-gradient(145deg,#fff7fb,#f7f3ff,#f2fffb)}
+.eiren-guide-head{display:grid;grid-template-columns:auto 1fr;gap:17px;align-items:center;max-width:800px;margin:0 auto}
+.eiren-guide-mark{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdce9,#e6e0ff);font-size:2.15rem}
+.voice-panel.eiren-guide h2{text-align:left;margin:0 0 6px;font-size:1.2rem}.eiren-guide p{margin:0;color:var(--muted);line-height:1.6}
+.voice-options{margin-top:18px;gap:11px}.voice-options select,.voice-options button{min-height:50px}
+.reward-panel h2{margin-bottom:16px}.sticker-grid,.passport-grid{gap:12px}.sticker,.passport-stamp{min-height:92px;padding:12px 7px;border-radius:19px}
+.treasure{margin-top:16px;padding:16px;border-radius:21px;gap:13px}.parent-panel summary{padding:2px 0}.parent-grid{gap:14px;margin-top:16px}.parent-card{padding:16px;border-radius:20px}
+.stats{gap:12px;margin:18px 0}.stat{padding:14px;border-radius:20px}.message{min-height:72px;margin-bottom:14px}
+.game-shell{min-height:600px;border-radius:36px;border-width:8px}.footer{margin-top:20px}.site-footer{margin-top:20px;padding:18px;border-radius:22px}
+@media(max-width:700px){.app{width:min(100% - 16px,1180px)}.hero{padding:28px 17px;border-radius:28px}.topbar{display:grid;grid-template-columns:1fr 1fr}.topbar button{width:100%}.world-grid{gap:12px}.world-card{min-height:155px;padding:16px}.eiren-guide-head{grid-template-columns:1fr;text-align:center}.eiren-guide-mark{margin:auto}.voice-panel.eiren-guide h2{text-align:center}.voice-options{display:grid;grid-template-columns:1fr}.voice-options>*{width:100%}.game-shell{min-height:540px}}
+@media(max-width:480px){.world-grid{grid-template-columns:1fr;gap:12px}.world-card{min-height:135px}.stats{gap:8px}.stat{padding:11px}.sticker-grid,.passport-grid{gap:9px}.topbar{grid-template-columns:1fr}.message{font-size:1.2rem}}
+
 </style>
 </head>
 <body>
@@ -496,7 +517,7 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
   <header class="hero">
     <div class="hero-badge">🌈 Khaemenes Academy · Little Tikes Learning Engine</div>
     <h1>ABC Adventure Hub™</h1>
-    <p>Choose a world, listen for the target letter, and tap the correct moving character. Bubble Adventure remains the protected original world.</p>
+    <p>Choose a colorful world and explore the alphabet with Eiren. Listen for the target letter, find it, and celebrate every discovery together.</p>
   </header>
 
   <div class="topbar">
@@ -515,25 +536,24 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
 
     <div class="world-grid" id="worldGrid"></div>
 
-    <section class="voice-panel">
-      <h2>🔊 Choose Your Reading Friend</h2>
-      <div class="voice-friends" id="voiceFriends">
-        <button type="button" class="voice-friend" data-voice="fairy"><span class="emoji">🧚</span><span class="name">Fairy Lily</span></button>
-        <button type="button" class="voice-friend" data-voice="bear"><span class="emoji">🐻</span><span class="name">Benny Bear</span></button>
-        <button type="button" class="voice-friend" data-voice="owl"><span class="emoji">🦉</span><span class="name">Professor Owl</span></button>
-        <button type="button" class="voice-friend" data-voice="robot"><span class="emoji">🤖</span><span class="name">Robo Reader</span></button>
-        <button type="button" class="voice-friend" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Friend</span></button>
+    <section class="voice-panel eiren-guide" aria-labelledby="eirenGuideTitle">
+      <div class="eiren-guide-head">
+        <div class="eiren-guide-mark" aria-hidden="true">🌸</div>
+        <div>
+          <h2 id="eirenGuideTitle">Eiren · Your ABC Adventure Guide</h2>
+          <p>Hello, little explorer. I’ll help you listen for letters, cheer for every discovery, and remind you that trying again is part of learning.</p>
+        </div>
       </div>
       <div class="voice-options">
-        <select id="voiceSpeed" aria-label="Reading speed">
+        <select id="voiceSpeed" aria-label="Eiren reading speed">
           <option value="slow">🐢 Slow and gentle</option>
           <option value="normal">🙂 Just right</option>
           <option value="lively">🐇 A little lively</option>
         </select>
-        <button id="previewVoiceBtn" class="secondary">👋 Meet My Voice</button>
-        <button id="stopVoiceBtn" class="secondary">⏹ Stop Voice</button>
+        <button id="previewVoiceBtn" class="primary">🌸 Meet Eiren</button>
+        <button id="stopVoiceBtn" class="secondary">⏹ Stop Eiren</button>
       </div>
-      <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+      <p class="voice-status" id="voiceStatus" aria-live="polite">Eiren is ready for an alphabet adventure.</p>
     </section>
 
     <section class="reward-panel">
@@ -686,17 +706,13 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
     {name:"Challenge", speed:4200, spawn:950, size:[78,105]}
   ];
 
-  const VOICE_FRIENDS = {
-    fairy:{name:"Fairy Lily",emoji:"🧚",rate:.82,pitch:1.2,preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,
-      hello:"Hello, little explorer. Fairy Lily is ready for an alphabet adventure."},
-    bear:{name:"Benny Bear",emoji:"🐻",rate:.76,pitch:.9,preferred:/daniel|david|alex|fred|george|male|tom/i,
-      hello:"Hello, friend. Benny Bear will help you find every letter."},
-    owl:{name:"Professor Owl",emoji:"🦉",rate:.72,pitch:1,preferred:/daniel|samantha|alex|serena|moira/i,
-      hello:"Welcome, young learner. Professor Owl is ready for careful letter finding."},
-    robot:{name:"Robo Reader",emoji:"🤖",rate:.84,pitch:.72,preferred:/fred|ralph|alex|david|google us english/i,
-      hello:"Beep boop. Alphabet systems online. Robo Reader is ready."},
-    rainbow:{name:"Rainbow Friend",emoji:"🌈",rate:.85,pitch:1.08,preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i,
-      hello:"Hello, sunshine. Rainbow Friend is ready to make letters colorful."}
+  const EIREN = {
+    name:"Eiren",
+    emoji:"🌸",
+    rate:.78,
+    pitch:1.08,
+    preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
+    hello:"Hello, little explorer. I’m Eiren. We can visit every alphabet world together. I’ll help you listen for letters, celebrate what you discover, and remember that trying again is part of learning."
   };
   const SPEEDS={slow:.88,normal:1,lively:1.1};
 
@@ -711,7 +727,7 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
     rounds:Number(localStorage.getItem("abcBubbleRounds") || 0),
     stars:Number(localStorage.getItem("abcHubStars") || 0),
     world:localStorage.getItem("abcHubWorld") || "bubble",
-    voiceFriend:localStorage.getItem("abcHubVoiceFriend") || "fairy",
+    voiceFriend:"eiren",
     voiceSpeed:localStorage.getItem("abcHubVoiceSpeed") || "slow",
     stickers:new Set(JSON.parse(localStorage.getItem("abcHubStickers") || "[]")),
     visitedWorlds:new Set(JSON.parse(localStorage.getItem("abcHubVisitedWorlds") || '["bubble"]')),
@@ -737,7 +753,7 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
     localStorage.setItem("abcBubbleRounds",String(state.rounds));
     localStorage.setItem("abcHubStars",String(state.stars));
     localStorage.setItem("abcHubWorld",state.world);
-    localStorage.setItem("abcHubVoiceFriend",state.voiceFriend);
+    localStorage.setItem("abcHubVoiceFriend","eiren");
     localStorage.setItem("abcHubVoiceSpeed",state.voiceSpeed);
     localStorage.setItem("abcHubStickers",JSON.stringify([...state.stickers]));
     localStorage.setItem("abcHubVisitedWorlds",JSON.stringify([...state.visitedWorlds]));
@@ -752,21 +768,14 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
   function refreshVoices(){
     if(!("speechSynthesis" in window))return;
     voices=speechSynthesis.getVoices()||[];
-    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
-    $("voiceStatus").textContent=voices.length?`${friend.emoji} ${friend.name} is ready.`:"Loading a friendly voice…";
+    $("voiceStatus").textContent=voices.length?"🌸 Eiren is ready.":"Eiren is finding a gentle reading voice…";
   }
 
   function chooseVoice(){
     if(!voices.length)refreshVoices();
-    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
     const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
     const pool=english.length?english:voices;
-    if(state.voiceFriend==="rainbow"&&pool.length){
-      const friendly=pool.filter(v=>/natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));
-      const choices=friendly.length?friendly:pool;
-      return choices[Math.floor(Math.random()*choices.length)]||null;
-    }
-    return pool.find(v=>friend.preferred.test(v.name))
+    return pool.find(v=>EIREN.preferred.test(v.name))
       ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
       ||pool[0]||null;
   }
@@ -782,19 +791,31 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
     if(!preview&&!String(text||"").trim())return;
     stopSpeaking("");
     const token=++speechToken;
-    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
-    const phrase=preview?friend.hello:text;
+    const phrase=preview?EIREN.hello:text;
     const u=new SpeechSynthesisUtterance(phrase);
     const voice=chooseVoice();
     if(voice)u.voice=voice;
     u.lang=(voice&&voice.lang)||"en-US";
-    u.rate=Math.max(.55,Math.min(1.15,friend.rate*(SPEEDS[state.voiceSpeed]||1)));
-    u.pitch=friend.pitch;
+    u.rate=Math.max(.55,Math.min(1.08,EIREN.rate*(SPEEDS[state.voiceSpeed]||1)));
+    u.pitch=EIREN.pitch;
     u.volume=1;
-    u.onstart=()=>$("voiceStatus").textContent=`${friend.emoji} ${friend.name} is speaking.`;
-    u.onend=()=>{if(token===speechToken)$("voiceStatus").textContent="Ready for another adventure! 🌟"};
+    u.onstart=()=>$("voiceStatus").textContent="🌸 Eiren is speaking.";
+    u.onend=()=>{if(token===speechToken)$("voiceStatus").textContent="Eiren is ready for another adventure! 🌟"};
     u.onerror=e=>{if(token===speechToken)$("voiceStatus").textContent=e&&["interrupted","canceled"].includes(e.error)?"Voice stopped.":"The voice had a little hiccup. Try again."};
     speechSynthesis.speak(u);
+  }
+
+  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  let eirenBoundaryReady=false;
+  async function connectEirenBoundary(){
+    try{
+      const mod=await import(EIREN_PUBLIC_ADAPTER);
+      if(mod?.EirenAdapter?.prepare){
+        const prepared=mod.EirenAdapter.prepare({mode:"reading",message:"Preschool ABC Adventure Hub alphabet guidance."});
+        eirenBoundaryReady=prepared?.specialist==="eiren";
+      }
+    }catch(_err){eirenBoundaryReady=false;}
+    if(eirenBoundaryReady)$("voiceStatus").textContent="🌸 Eiren’s public reading boundary is connected.";
   }
 
   function ensureAudio(){
@@ -869,11 +890,6 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
   }
 
   function updateVoiceButtons(){
-    document.querySelectorAll("[data-voice]").forEach(b=>{
-      const active=b.dataset.voice===state.voiceFriend;
-      b.classList.toggle("active",active);
-      b.setAttribute("aria-pressed",String(active));
-    });
     $("voiceSpeed").value=state.voiceSpeed;
   }
 
@@ -979,7 +995,7 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
     state.rounds++;
     const world=WORLDS[state.world];
     setMessage(`${world.icon} Find the letter`,state.target);
-    speak(`Find the letter ${state.target}`);
+    speak(`Let’s find the letter ${state.target}.`);
     createObject(state.target,true);
     updateStats();
     save();
@@ -1087,7 +1103,7 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
         const praise=["Wonderful!","Amazing!","You found it!","Fantastic!","Super letter finding!","Brilliant!"];
         const line=praise[Math.floor(Math.random()*praise.length)];
         setMessage(`${line} You found`,objectLetter);
-        speak(`${line} You found the letter ${objectLetter}`);
+        speak(`${line} You found the letter ${objectLetter}.`);
         if(state.streak>0&&state.streak%5===0)state.stickers.add(state.world);
         maybeOpenChest();
         setTimeout(()=>{
@@ -1102,7 +1118,7 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
         state.streak=0;
         state.wrongByLetter[state.target]=(state.wrongByLetter[state.target]||0)+1;
         setMessage("Great try! Look again for",state.target);
-        speak(`Great try. Look again for the letter ${state.target}`);
+        speak(`Great try. Let’s look again for the letter ${state.target}.`);
         setTimeout(()=>{
           obj.remove();
           state.bubbles.delete(item);
@@ -1174,17 +1190,9 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
   $("confirmResetBtn").onclick=resetProgress;
   $("resetModal").onclick=e=>{if(e.target.id==="resetModal")closeReset()};
 
-  $("voiceFriends").onclick=e=>{
-    const b=e.target.closest("[data-voice]");
-    if(!b)return;
-    state.voiceFriend=b.dataset.voice;
-    updateVoiceButtons();save();
-    const f=VOICE_FRIENDS[state.voiceFriend];
-    $("voiceStatus").textContent=`${f.emoji} ${f.name} selected. Tap Meet My Voice to listen.`;
-  };
-  $("voiceSpeed").onchange=e=>{state.voiceSpeed=e.target.value;save();$("voiceStatus").textContent="Reading speed saved."};
+  $("voiceSpeed").onchange=e=>{state.voiceSpeed=e.target.value;save();$("voiceStatus").textContent="Eiren’s reading speed is saved."};
   $("previewVoiceBtn").onclick=()=>speak("",{preview:true});
-  $("stopVoiceBtn").onclick=()=>stopSpeaking("Voice stopped.");
+  $("stopVoiceBtn").onclick=()=>stopSpeaking("Eiren paused.");
 
   [["largeTextToggle","largeText"],["contrastToggle","contrast"],["fontToggle","font"],["motionToggle","motion"]]
     .forEach(([id,key])=>$(id).onchange=e=>{state.access[key]=e.target.checked;applyAccessibility();save()});
@@ -1213,6 +1221,7 @@ body.reduced-motion *{animation-duration:.001ms!important;animation-iteration-co
     $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
   }
 
+  connectEirenBoundary();
   applyAccessibility();
   updateVoiceButtons();
   updateStats();
