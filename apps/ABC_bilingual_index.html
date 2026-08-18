@@ -494,6 +494,35 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .site-footer strong {
   color: #503a76;
 }
+
+/* =========================================================
+   Eiren + Under-5 Breathing Room Pass
+   ========================================================= */
+.app{width:min(1180px,calc(100% - 28px));padding:36px 0 62px}
+.hero{padding:38px 25px;border-radius:38px;border:3px solid rgba(255,255,255,.72)}
+.hero p{max-width:690px;line-height:1.75}
+.language-panel{margin:24px auto 20px;padding:22px;border-radius:30px;border:2px solid #eadff0}
+.language-panel h2{margin-bottom:15px;font-size:1.15rem}
+.language-row{gap:15px}.language-row label{gap:8px}.language-row select{min-height:52px;border-radius:17px;padding:11px 13px}
+.eiren-guide{max-width:780px;margin:20px auto 0;padding:18px 20px;border-radius:24px;background:linear-gradient(145deg,#fff7fb,#f4f1ff,#f1fffb);border:2px solid rgba(109,75,195,.12);display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:center;text-align:left}
+.eiren-mark{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdbe9,#e7e0ff);font-size:2rem}
+.eiren-copy strong{display:block;color:var(--violet);font-size:1.08rem}.eiren-copy span{display:block;margin-top:5px;color:var(--muted);line-height:1.55;font-size:.9rem}
+.language-actions{margin-top:16px;gap:10px}.language-actions button{min-height:50px}
+.voice-status{margin-top:11px;line-height:1.45}
+.toolbar{gap:11px;margin:22px 0 16px}.pill,.toolbar button{min-height:50px;padding:10px 16px}
+.week-strip{gap:9px;padding:11px 5px 18px}.week-btn{min-width:58px;min-height:48px;border-radius:16px}
+.dashboard{gap:13px;margin-bottom:22px}.stat{padding:15px 10px;border-radius:21px;border:2px solid rgba(255,255,255,.75)}
+.layout{gap:22px}.panel{padding:22px;border-radius:30px;border:2px solid rgba(255,255,255,.95)}
+.lesson-card{padding:22px;gap:20px;margin-bottom:22px;border-radius:29px}.lesson-letter{min-height:175px;border-radius:28px}.lesson-info h3{margin-bottom:5px}.sound-line{margin:8px 0;line-height:1.5}.example{margin-top:13px;padding:13px 15px;border-radius:19px}.forms{gap:10px;margin-top:13px}.form-box{padding:11px 7px;border-radius:17px}
+.panel h2{margin-bottom:8px}.panel-note{margin-bottom:16px;line-height:1.5}
+.canvas-shell{padding:15px;border-radius:28px}#tracingCanvas{border-radius:21px}.trace-tools{gap:10px;margin-top:13px}.trace-tools label,.trace-tools button{min-height:48px}
+.activity-grid{gap:17px}.activity{padding:19px;border-radius:25px;border:2px solid #efe6f2}.activity h3{margin-bottom:10px}.activity p{line-height:1.55}.activity button{min-height:48px}
+.tiles,.cards{gap:10px}.tile,.match-card{min-width:82px;min-height:62px;padding:12px;border-radius:18px}
+.message{min-height:34px;margin-top:11px;line-height:1.45}.progress-track{height:14px;margin-top:12px}.bottom-nav{gap:13px;margin-top:22px}.bottom-nav button{min-height:52px;padding:11px 18px}
+.footer{margin-top:24px;line-height:1.6}.site-footer{margin:22px auto;padding:18px;border-radius:22px}
+@media(max-width:900px){.layout{grid-template-columns:1fr;gap:18px}.dashboard{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.app{width:min(100% - 14px,1180px);padding-top:10px}.hero{padding:28px 15px;border-radius:28px}.language-panel{padding:17px;border-radius:24px}.eiren-guide{grid-template-columns:1fr;text-align:center;padding:17px}.eiren-mark{margin:auto}.language-actions{display:grid;grid-template-columns:1fr}.language-actions button{width:100%}.toolbar{display:grid;grid-template-columns:1fr 1fr}.toolbar .pill{grid-column:1/-1}.toolbar button{width:100%}.lesson-card{padding:17px;gap:16px}.forms{gap:8px}.dashboard{gap:9px}.panel{padding:15px}.canvas-shell{padding:10px}.trace-tools{display:grid;grid-template-columns:1fr 1fr}.trace-tools label{justify-content:center}.activity{padding:16px}.bottom-nav button{flex:1}.week-btn{min-width:54px}}
+
 </style>
 </head>
 <body>
@@ -534,29 +563,19 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       </label>
     </div>
 
-    <div class="voice-friends" id="voiceFriends">
-      <button type="button" class="voice-friend" data-voice="fairy">
-        <span class="emoji">🧚</span><span class="name">Fairy Lily</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="bear">
-        <span class="emoji">🐻</span><span class="name">Benny Bear</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="owl">
-        <span class="emoji">🦉</span><span class="name">Professor Owl</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="robot">
-        <span class="emoji">🤖</span><span class="name">Robo Reader</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="rainbow">
-        <span class="emoji">🌈</span><span class="name">Rainbow Friend</span>
-      </button>
+    <div class="eiren-guide" aria-labelledby="eirenGuideTitle">
+      <div class="eiren-mark" aria-hidden="true">🌸</div>
+      <div class="eiren-copy">
+        <strong id="eirenGuideTitle">Eiren · Your Language Guide</strong>
+        <span id="eirenGuideText">I’ll help you listen carefully, say each Arabic letter gently, and celebrate every try.</span>
+      </div>
     </div>
 
     <div class="language-actions">
-      <button id="previewVoiceBtn" type="button">👋 Meet My Voice</button>
+      <button id="previewVoiceBtn" type="button">🌸 Meet Eiren</button>
       <button id="hearMeaningBtn" type="button" class="secondary">🏠 Hear Meaning</button>
       <button id="repeatBtn" type="button" class="secondary">🗣 Repeat After Me</button>
-      <button id="stopVoiceBtn" type="button" class="secondary">⏹ Stop Voice</button>
+      <button id="stopVoiceBtn" type="button" class="secondary">⏹ Stop Eiren</button>
     </div>
 
     <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
@@ -659,7 +678,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     matchDone: false,
     homeLanguage: localStorage.getItem("cosmicArabicHomeLanguage") || "en",
     readingSpeed: localStorage.getItem("cosmicArabicReadingSpeed") || "slow",
-    voiceFriend: localStorage.getItem("cosmicArabicVoiceFriend") || "fairy"
+    voiceFriend: "eiren"
   };
 
   const themes = [
@@ -681,7 +700,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     localStorage.setItem("cosmicArabicTheme", String(state.theme));
     localStorage.setItem("cosmicArabicHomeLanguage", state.homeLanguage);
     localStorage.setItem("cosmicArabicReadingSpeed", state.readingSpeed);
-    localStorage.setItem("cosmicArabicVoiceFriend", state.voiceFriend);
+    localStorage.setItem("cosmicArabicVoiceFriend", "eiren");
   }
 
   function applyTheme() {
@@ -701,7 +720,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       slow:"🐢 Slow and gentle",normal:"🙂 Just right",lively:"🐇 A little lively",
       hearLesson:"🔊 Hear Lesson",theme:"🎨 Choose My Adventure",reset:"↺ Reset Progress",
       hearArabic:"Hear Arabic",hearEnglish:"Hear English",hearMeaning:"🏠 Hear Meaning",
-      repeat:"🗣 Repeat After Me",stop:"⏹ Stop Voice",meet:"👋 Meet My Voice",
+      repeat:"🗣 Repeat After Me",stop:"⏹ Stop Eiren",meet:"🌸 Meet Eiren",
       traceTitle:"✏️ Large Tracing Studio",traceNote:"Trace over the pale guide letters. Use Clear to practice again.",
       listenMove:"🔊 Listen & Move",tiles:"🔤 Letter Tiles",match:"🧩 Matching Game",
       progress:"Week Progress",complete:"🏆 Complete Week",previous:"◀ Previous Week",next:"Next Week ▶",
@@ -714,7 +733,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       slow:"🐢 Lento y suave",normal:"🙂 Ritmo normal",lively:"🐇 Un poco animado",
       hearLesson:"🔊 Escuchar lección",theme:"🎨 Elegir aventura",reset:"↺ Reiniciar progreso",
       hearArabic:"Escuchar árabe",hearEnglish:"Escuchar inglés",hearMeaning:"🏠 Escuchar significado",
-      repeat:"🗣 Repite conmigo",stop:"⏹ Detener voz",meet:"👋 Conocer mi voz",
+      repeat:"🗣 Repite conmigo",stop:"⏹ Detener a Eiren",meet:"🌸 Conocer a Eiren",
       traceTitle:"✏️ Estudio grande de trazado",traceNote:"Repasa las letras guía. Usa Borrar para practicar otra vez.",
       listenMove:"🔊 Escucha y muévete",tiles:"🔤 Fichas de letras",match:"🧩 Juego de parejas",
       progress:"Progreso semanal",complete:"🏆 Completar semana",previous:"◀ Semana anterior",next:"Semana siguiente ▶",
@@ -727,7 +746,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       slow:"🐢 Lent et doux",normal:"🙂 Juste comme il faut",lively:"🐇 Un peu dynamique",
       hearLesson:"🔊 Écouter la leçon",theme:"🎨 Choisir mon aventure",reset:"↺ Réinitialiser",
       hearArabic:"Écouter l’arabe",hearEnglish:"Écouter l’anglais",hearMeaning:"🏠 Écouter le sens",
-      repeat:"🗣 Répète après moi",stop:"⏹ Arrêter la voix",meet:"👋 Découvrir ma voix",
+      repeat:"🗣 Répète après moi",stop:"⏹ Arrêter Eiren",meet:"🌸 Découvrir Eiren",
       traceTitle:"✏️ Grand atelier de tracé",traceNote:"Repasse sur les lettres-guides. Efface pour recommencer.",
       listenMove:"🔊 Écoute et bouge",tiles:"🔤 Tuiles de lettres",match:"🧩 Jeu d’association",
       progress:"Progrès de la semaine",complete:"🏆 Terminer la semaine",previous:"◀ Semaine précédente",next:"Semaine suivante ▶",
@@ -740,7 +759,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       slow:"🐢 Devagar e suave",normal:"🙂 No ritmo certo",lively:"🐇 Um pouco animado",
       hearLesson:"🔊 Ouvir lição",theme:"🎨 Escolher aventura",reset:"↺ Reiniciar progresso",
       hearArabic:"Ouvir árabe",hearEnglish:"Ouvir inglês",hearMeaning:"🏠 Ouvir significado",
-      repeat:"🗣 Repita comigo",stop:"⏹ Parar voz",meet:"👋 Conhecer minha voz",
+      repeat:"🗣 Repita comigo",stop:"⏹ Parar Eiren",meet:"🌸 Conhecer Eiren",
       traceTitle:"✏️ Estúdio de traçado",traceNote:"Trace sobre as letras-guia. Use Limpar para praticar novamente.",
       listenMove:"🔊 Ouça e mova-se",tiles:"🔤 Blocos de letras",match:"🧩 Jogo de combinação",
       progress:"Progresso da semana",complete:"🏆 Concluir semana",previous:"◀ Semana anterior",next:"Próxima semana ▶",
@@ -753,7 +772,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       slow:"🐢 آہستہ اور نرم",normal:"🙂 مناسب رفتار",lively:"🐇 قدرے تیز",
       hearLesson:"🔊 سبق سنیں",theme:"🎨 مہم منتخب کریں",reset:"↺ پیش رفت دوبارہ شروع کریں",
       hearArabic:"عربی سنیں",hearEnglish:"انگریزی سنیں",hearMeaning:"🏠 معنی سنیں",
-      repeat:"🗣 میرے بعد دہرائیں",stop:"⏹ آواز روکیں",meet:"👋 میری آواز سنیں",
+      repeat:"🗣 میرے بعد دہرائیں",stop:"⏹ Eiren کو روکیں",meet:"🌸 Eiren سے ملیں",
       traceTitle:"✏️ بڑا حروف لکھنے کا اسٹوڈیو",traceNote:"ہلکے حروف پر لکیر کھینچیں۔ دوبارہ مشق کے لیے صاف کریں۔",
       listenMove:"🔊 سنیں اور حرکت کریں",tiles:"🔤 حروف کی ٹائلیں",match:"🧩 ملاپ کا کھیل",
       progress:"ہفتے کی پیش رفت",complete:"🏆 ہفتہ مکمل کریں",previous:"◀ پچھلا ہفتہ",next:"اگلا ہفتہ ▶",
@@ -766,7 +785,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       slow:"🐢 آرام و آهسته",normal:"🙂 سرعت مناسب",lively:"🐇 کمی پرانرژی",
       hearLesson:"🔊 شنیدن درس",theme:"🎨 انتخاب ماجراجویی",reset:"↺ بازنشانی پیشرفت",
       hearArabic:"شنیدن عربی",hearEnglish:"شنیدن انگلیسی",hearMeaning:"🏠 شنیدن معنی",
-      repeat:"🗣 بعد از من تکرار کن",stop:"⏹ توقف صدا",meet:"👋 شنیدن صدای من",
+      repeat:"🗣 بعد از من تکرار کن",stop:"⏹ توقف Eiren",meet:"🌸 آشنایی با Eiren",
       traceTitle:"✏️ کارگاه بزرگ تمرین نوشتن",traceNote:"روی حروف کم‌رنگ تمرین کنید. برای تمرین دوباره پاک کنید.",
       listenMove:"🔊 گوش کن و حرکت کن",tiles:"🔤 کارت‌های حروف",match:"🧩 بازی تطبیق",
       progress:"پیشرفت هفته",complete:"🏆 تکمیل هفته",previous:"◀ هفته قبل",next:"هفته بعد ▶",
@@ -783,12 +802,12 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     fa:{speech:"fa-IR",rtl:true}
   };
 
-  const VOICE_FRIENDS = {
-    fairy:{name:"Fairy Lily",emoji:"🧚",rate:.84,pitch:1.2,preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i},
-    bear:{name:"Benny Bear",emoji:"🐻",rate:.78,pitch:.9,preferred:/daniel|david|alex|fred|george|male|tom/i},
-    owl:{name:"Professor Owl",emoji:"🦉",rate:.74,pitch:1,preferred:/daniel|samantha|alex|serena|moira/i},
-    robot:{name:"Robo Reader",emoji:"🤖",rate:.86,pitch:.72,preferred:/fred|ralph|alex|david|google us english/i},
-    rainbow:{name:"Rainbow Friend",emoji:"🌈",rate:.86,pitch:1.08,preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i}
+  const EIREN = {
+    name:"Eiren",
+    emoji:"🌸",
+    rate:.80,
+    pitch:1.06,
+    preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i
   };
 
   const SPEEDS = {slow:.88,normal:1,lively:1.1};
@@ -798,33 +817,24 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
   function refreshVoices(){
     if(!("speechSynthesis" in window)) return;
     voices = speechSynthesis.getVoices() || [];
-    const friend = VOICE_FRIENDS[state.voiceFriend] || VOICE_FRIENDS.fairy;
     const status = document.getElementById("voiceStatus");
     if(status) status.textContent = voices.length
-      ? `${friend.emoji} ${friend.name} is ready.`
-      : "Loading a friendly voice…";
+      ? "🌸 Eiren is ready."
+      : "Eiren is finding a gentle voice…";
   }
 
-  function chooseVoice(langCode, friendKey = state.voiceFriend){
+  function chooseVoice(langCode){
     if(!voices.length) refreshVoices();
-    const friend = VOICE_FRIENDS[friendKey] || VOICE_FRIENDS.fairy;
     const exact = voices.filter(v => (v.lang || "").toLowerCase().startsWith(langCode.toLowerCase()));
     const family = voices.filter(v => (v.lang || "").toLowerCase().startsWith(langCode.slice(0,2).toLowerCase()));
     const pool = exact.length ? exact : family.length ? family : voices;
-
-    if(friendKey === "rainbow" && pool.length){
-      const friendly = pool.filter(v => /natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));
-      const choices = friendly.length ? friendly : pool;
-      return choices[Math.floor(Math.random()*choices.length)] || null;
-    }
-
-    return pool.find(v => friend.preferred.test(v.name))
+    return pool.find(v => EIREN.preferred.test(v.name))
       || pool.find(v => /natural|enhanced|premium/i.test(v.name))
       || pool[0]
       || null;
   }
 
-  function stopSpeaking(message = "Voice stopped."){
+  function stopSpeaking(message = "Eiren paused."){
     speechToken++;
     if("speechSynthesis" in window) speechSynthesis.cancel();
     document.querySelector(".lesson-card")?.classList.remove("speaking");
@@ -838,27 +848,26 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
 
     stopSpeaking("");
     const token = ++speechToken;
-    const friend = VOICE_FRIENDS[state.voiceFriend] || VOICE_FRIENDS.fairy;
     const utterance = new SpeechSynthesisUtterance(text);
-    const voice = chooseVoice(lang, state.voiceFriend);
+    const voice = chooseVoice(lang);
 
     utterance.lang = lang;
-    utterance.rate = Math.max(.55, Math.min(1.15, friend.rate * (SPEEDS[state.readingSpeed] || 1)));
-    utterance.pitch = lang.startsWith("ar") ? 1.02 : friend.pitch;
+    utterance.rate = Math.max(.55, Math.min(1.08, EIREN.rate * (SPEEDS[state.readingSpeed] || 1)));
+    utterance.pitch = lang.startsWith("ar") ? 1.01 : EIREN.pitch;
     utterance.volume = 1;
     if (voice) utterance.voice = voice;
 
     utterance.onstart = () => {
       document.querySelector(".lesson-card")?.classList.add("speaking");
       const status = document.getElementById("voiceStatus");
-      if(status) status.textContent = `${friend.emoji} ${friend.name} is reading.`;
+      if(status) status.textContent = "🌸 Eiren is reading.";
     };
 
     utterance.onend = () => {
       if(token !== speechToken) return;
       document.querySelector(".lesson-card")?.classList.remove("speaking");
       const status = document.getElementById("voiceStatus");
-      if(status) status.textContent = "Wonderful listening! 🌟";
+      if(status) status.textContent = "Wonderful listening! Eiren is ready when you are. 🌟";
       if(typeof options.onEnd === "function") options.onEnd();
     };
 
@@ -867,8 +876,8 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
       document.querySelector(".lesson-card")?.classList.remove("speaking");
       const status = document.getElementById("voiceStatus");
       if(status) status.textContent = event && ["interrupted","canceled"].includes(event.error)
-        ? "Voice stopped."
-        : "The voice had a little hiccup. Try again.";
+        ? "Eiren paused."
+        : "Eiren’s voice had a little hiccup. Try again.";
     };
 
     speechSynthesis.speak(utterance);
@@ -882,6 +891,23 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     setTimeout(refreshVoices,900);
   }
 
+
+  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  let eirenBoundaryReady=false;
+  async function connectEirenBoundary(){
+    try{
+      const mod=await import(EIREN_PUBLIC_ADAPTER);
+      if(mod?.EirenAdapter?.prepare){
+        const prepared=mod.EirenAdapter.prepare({
+          mode:"reading",
+          message:"Preschool Arabic alphabet pronunciation and language guidance."
+        });
+        eirenBoundaryReady=prepared?.specialist==="eiren";
+      }
+    }catch(_err){ eirenBoundaryReady=false; }
+    const status=document.getElementById("voiceStatus");
+    if(status && eirenBoundaryReady) status.textContent="🌸 Eiren’s public reading boundary is connected.";
+  }
 
   function t(key){
     return (UI[state.homeLanguage] && UI[state.homeLanguage][key]) || UI.en[key] || key;
@@ -910,13 +936,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     document.getElementById("stopVoiceBtn").textContent = t("stop");
   }
 
-  function updateVoiceFriendButtons(){
-    document.querySelectorAll("[data-voice]").forEach(button => {
-      const active = button.dataset.voice === state.voiceFriend;
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-pressed", String(active));
-    });
-  }
+
 
   function currentMeaningText(){
     const data = CURRICULUM[state.currentWeek - 1];
@@ -1333,7 +1353,6 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
 
   document.getElementById("homeLanguage").value = state.homeLanguage;
   document.getElementById("readingSpeed").value = state.readingSpeed;
-  updateVoiceFriendButtons();
   localizeStaticUI();
 
   document.getElementById("homeLanguage").onchange = event => {
@@ -1347,30 +1366,19 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     state.readingSpeed = event.target.value;
     save();
     const status = document.getElementById("voiceStatus");
-    if(status) status.textContent = "Reading speed saved.";
+    if(status) status.textContent = "Eiren’s reading speed is saved.";
   };
 
-  document.getElementById("voiceFriends").onclick = event => {
-    const button = event.target.closest("[data-voice]");
-    if(!button) return;
-    state.voiceFriend = button.dataset.voice;
-    updateVoiceFriendButtons();
-    save();
-    const friend = VOICE_FRIENDS[state.voiceFriend];
-    document.getElementById("voiceStatus").textContent =
-      `${friend.emoji} ${friend.name} selected. Tap Meet My Voice to listen.`;
-  };
 
   document.getElementById("previewVoiceBtn").onclick = () => {
     const meta = LANGUAGE_META[state.homeLanguage] || LANGUAGE_META.en;
-    const friend = VOICE_FRIENDS[state.voiceFriend] || VOICE_FRIENDS.fairy;
     const greetings = {
-      en:`Hello, little learner. ${friend.name} is ready to explore Arabic letters with you.`,
-      es:`Hola, pequeño aprendiz. ${friend.name} está listo para explorar las letras árabes contigo.`,
-      fr:`Bonjour, petit apprenant. ${friend.name} est prêt à explorer les lettres arabes avec toi.`,
-      pt:`Olá, pequeno aprendiz. ${friend.name} está pronto para explorar as letras árabes com você.`,
-      ur:`سلام ننھے طالب علم۔ ${friend.name} آپ کے ساتھ عربی حروف سیکھنے کے لیے تیار ہے۔`,
-      fa:`سلام زبان‌آموز کوچک. ${friend.name} آماده است حروف عربی را با تو یاد بگیرد.`
+      en:"Hello, little learner. I’m Eiren. We can explore Arabic letters together, one gentle sound at a time.",
+      es:"Hola, pequeño aprendiz. Soy Eiren. Podemos explorar juntos las letras árabes, un sonido suave a la vez.",
+      fr:"Bonjour, petit apprenant. Je suis Eiren. Nous pouvons explorer ensemble les lettres arabes, un son doux à la fois.",
+      pt:"Olá, pequeno aprendiz. Eu sou Eiren. Podemos explorar juntos as letras árabes, um som suave de cada vez.",
+      ur:"سلام ننھے طالب علم۔ میں Eiren ہوں۔ ہم مل کر عربی حروف کو ایک ایک نرم آواز کے ساتھ سیکھ سکتے ہیں۔",
+      fa:"سلام زبان‌آموز کوچک. من Eiren هستم. می‌توانیم حروف عربی را با هم، یک صدای آرام در هر مرحله، یاد بگیریم."
     };
     speak(greetings[state.homeLanguage] || greetings.en, meta.speech);
   };
@@ -1412,6 +1420,7 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
     render();
   };
 
+  connectEirenBoundary();
   applyTheme();
   render();
 })();
