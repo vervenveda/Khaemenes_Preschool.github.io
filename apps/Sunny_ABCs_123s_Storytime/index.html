@@ -147,6 +147,146 @@ body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .pr
 @media(max-width:480px){.page-wrap{padding-left:7px;padding-right:7px}.hero h1{font-size:2.45rem}.app-shell{border-radius:20px}.book-card{padding:8px;border-radius:20px}.book-page{padding:15px;border-radius:17px}.top-controls{gap:6px}.pill-btn{padding:8px 10px;font-size:.78rem}.nav-row{grid-template-columns:1fr 1fr}.page-indicator{grid-column:1/-1;grid-row:1}.nav-btn{grid-row:2}.spell-box{width:36px;height:43px}.practice-studio{padding:10px}.trace-stage{aspect-ratio:1.55/1}.reward-row{gap:6px}.reward{font-size:.75rem}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 @media print{body>*:not(#printArea){display:none!important}#printArea{display:block!important;color:#111;font-family:Georgia,serif;padding:36px}.print-card{border:7px double #bc7b24;padding:35px;text-align:center;min-height:680px}.print-card h1{font-size:3rem;color:#8b4d12}.print-card .name{font-size:2.2rem;border-bottom:2px solid #333;display:inline-block;min-width:360px;padding:8px}.print-summary{text-align:left;max-width:700px;margin:30px auto;font-size:1.1rem;line-height:1.8}}
+
+/* =========================================================
+   Sunny ABCs & 123s — Preschool Breathing Room Edition
+   Visual-only enhancement. Learning logic remains unchanged.
+   ========================================================= */
+:root{--radius:32px}
+.page-wrap{max-width:1200px;padding:38px 18px 68px}
+.hero{margin-bottom:30px;padding:12px 14px 0}
+.hero-badge{padding:10px 17px;font-size:.86rem}
+.hero h1{margin:22px auto 13px}
+.hero p{max-width:800px;line-height:1.75}
+.app-shell{padding:25px;border-radius:36px}
+
+.mascot-banner{
+  margin:0 0 22px;padding:22px 25px;border-radius:28px;gap:18px;
+}
+.mascot-face{font-size:3.7rem}
+.mascot-banner h3{font-size:1.15rem}
+.mascot-banner p{margin-top:7px;line-height:1.6}
+
+.voice-studio{
+  margin:0 auto 24px;padding:21px 23px;border-radius:28px;
+}
+.eiren-reader{gap:17px}
+.eiren-reader-mark{width:66px;height:66px;font-size:2.15rem}
+.eiren-reader h3{font-size:1.12rem}
+.eiren-reader p{font-size:.9rem;line-height:1.6}
+.voice-options{margin-top:15px;gap:12px}
+.voice-options .action-btn{min-height:52px}
+
+.app-header{padding:2px 10px 4px}
+.app-header h2{font-size:clamp(1.55rem,4vw,2rem)}
+#modeLabel{display:block;margin-top:5px}
+.top-controls{gap:10px;margin-top:17px}
+.pill-btn{min-height:50px;padding:10px 16px}
+.progress-wrap{margin:20px auto 7px}
+.progress-track{height:14px}
+
+.book-row{margin-top:24px}
+.book-card{
+  max-width:900px;gap:18px;padding:18px;border-radius:32px;
+}
+.book-card::after{top:18px;bottom:18px}
+.book-page{min-height:455px;border-radius:25px;padding:25px}
+.page-label{margin-bottom:7px}
+.symbol-wrap{margin-top:13px}
+.page-word{margin-top:12px}
+.letter-prompt{margin-top:18px;padding:15px 16px;border-radius:20px;line-height:1.55}
+.action-row{gap:11px;margin-top:16px}
+.action-btn{min-height:50px;padding:10px 15px}
+.quantity-grid{margin-top:15px;gap:7px;min-height:62px}
+.story-title{margin:16px 0 6px;font-size:1.32rem}
+.story-subtitle{margin-bottom:15px}
+.rhyme-lines{gap:10px}
+.rhyme-line{padding:13px 15px;border-radius:16px;line-height:1.55}
+.nav-row{margin-top:19px;gap:11px}
+.nav-btn{min-height:50px;padding:10px 16px}
+
+.narration-strip{
+  max-width:900px;margin:20px auto 0;padding:16px 18px;border-radius:23px;
+}
+.narration-controls{gap:10px}
+.narration-controls .action-btn{min-height:50px}
+.narration-controls label{min-height:46px;padding:8px 12px}
+.narration-status{margin-top:10px;line-height:1.45}
+
+.dot-row{gap:9px;margin:18px auto 0;max-width:800px;max-height:92px;padding:7px}
+.dot-row button{width:38px;height:38px;min-height:38px}
+.dot-row button.active{width:46px}
+
+.practice-studio{
+  max-width:900px;margin:22px auto 0;padding:21px;border-radius:29px;
+}
+.practice-head{gap:15px}
+.practice-head h3{font-size:1.3rem}
+.practice-tabs{gap:10px}
+.practice-btn{min-height:50px;padding:10px 15px}
+.practice-panel{margin-top:17px;padding:20px;border-radius:23px}
+.practice-instructions{margin-bottom:15px;line-height:1.6}
+.trace-stage{border-radius:24px}
+.practice-actions{gap:11px;margin-top:16px}
+.spell-boxes{gap:10px;margin:17px 0}
+.spell-box{width:47px;height:53px;border-radius:14px}
+.choice-grid{gap:12px;margin-top:16px}
+.choice-btn{min-height:68px;border-radius:19px}
+.match-feedback{margin-top:13px}
+
+.passport{
+  max-width:900px;margin:22px auto 0;padding:20px;border-radius:26px;
+}
+.passport h3{margin-bottom:14px}
+.stamp-row{gap:11px}
+.passport-stamp{padding:13px 8px;border-radius:18px}
+.passport-stamp span{font-size:1.65rem}
+.passport-stamp small{font-size:.72rem}
+
+.reward-row{gap:11px;margin-top:20px}
+.reward{padding:10px 15px}
+.badge-shelf{gap:9px;margin-top:13px}
+.badge{padding:9px 12px}
+.instructions,.footer-note{margin-top:18px;line-height:1.6}
+.site-footer{margin-top:22px;padding:18px;border-radius:22px;line-height:1.65}
+
+.modal{border-radius:30px;padding:25px}
+.settings-grid{gap:13px;margin:18px 0}
+.setting{padding:14px;border-radius:18px}
+.adult-actions{gap:11px}
+.adult-btn{min-height:50px}
+.name-row{gap:11px;margin:14px 0}
+.name-row input{min-height:50px;padding:12px 14px;border-radius:17px}
+
+@media(max-width:780px){
+  .page-wrap{padding:22px 11px 50px}
+  .app-shell{padding:17px;border-radius:28px}
+  .book-card{padding:11px;gap:12px;border-radius:25px}
+  .book-page{padding:21px;min-height:0}
+  .practice-studio,.voice-studio,.passport{padding:17px}
+}
+@media(max-width:560px){
+  .page-wrap{padding-left:8px;padding-right:8px}
+  .hero{margin-bottom:20px}
+  .hero h1{font-size:2.55rem}
+  .mascot-banner{padding:18px;margin-bottom:16px}
+  .voice-studio{margin-bottom:18px}
+  .top-controls{gap:8px}
+  .pill-btn{min-height:48px;padding:9px 12px}
+  .book-row{margin-top:18px}
+  .book-page{padding:18px}
+  .action-row{display:grid;grid-template-columns:1fr 1fr}
+  .action-row .action-btn{width:100%}
+  .narration-controls{display:grid;grid-template-columns:1fr 1fr}
+  .narration-controls label{justify-content:center}
+  .practice-head{align-items:flex-start}
+  .practice-tabs{width:100%}
+  .practice-tabs .practice-btn{flex:1}
+  .stamp-row{grid-template-columns:1fr 1fr}
+  .passport-stamp:last-child{grid-column:1/-1}
+  .reward-row{display:grid;grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body class="theme-sunny">
