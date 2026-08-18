@@ -313,6 +313,45 @@ button:hover{transform:translateY(-2px)}
   line-height:1.5;
 }
 .site-footer strong{color:#503a76;}
+
+/* Eiren Preschool Game Board — clean, roomy, touch-friendly */
+.app{width:min(1120px,calc(100% - 28px));padding:34px 0 58px}
+.hero{padding:36px 24px 32px;border-radius:38px;border:3px solid rgba(255,255,255,.72)}
+.hero p{max-width:650px;line-height:1.75}
+.toolbar{gap:12px;margin:22px 0}.toolbar button{min-height:52px;padding:11px 18px}
+.voice-panel{max-width:900px;margin:0 auto 22px;padding:20px 22px;border-radius:28px;border:2px solid rgba(138,111,232,.14)}
+.eiren-panel{background:linear-gradient(145deg,#fff8fc,#f4f1ff,#effffc)}
+.eiren-head{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;max-width:760px;margin:auto}
+.eiren-mark{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdbe9,#e4dfff);font-size:2.05rem}
+.voice-panel .eiren-head h2{text-align:left;margin:0 0 5px;font-size:1.15rem}.eiren-head p{margin:0;color:#665b72;line-height:1.55;font-size:.9rem}
+.voice-options{margin-top:17px;gap:10px}.voice-options select,.voice-options button{min-height:50px}
+.stats{gap:13px;margin-bottom:18px}.stat{padding:15px;border-radius:22px;border:2px solid rgba(255,255,255,.82)}
+.message{min-height:68px;margin:0 auto 16px;padding:10px 16px;max-width:800px;border-radius:22px;line-height:1.35}
+.target-letter{width:58px;height:58px;font-size:1.45rem}
+.game-shell{min-height:600px;border-radius:38px;border-width:8px;box-shadow:0 20px 48px rgba(44,39,88,.16)}
+.bubble{border-width:5px}
+.footer{margin-top:20px;line-height:1.55}.site-footer{margin:20px auto;padding:18px;border-radius:22px}
+@media(max-width:700px){
+  .app{width:min(100% - 16px,1120px);padding-top:10px}
+  .hero{padding:28px 16px;border-radius:28px}
+  .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .toolbar button{width:100%}
+  .toolbar button:first-child{grid-column:1/-1}
+  .eiren-head{grid-template-columns:1fr;text-align:center}
+  .eiren-mark{margin:auto}
+  .voice-panel .eiren-head h2{text-align:center}
+  .voice-options{display:grid;grid-template-columns:1fr}
+  .voice-options>*{width:100%}
+  .stats{grid-template-columns:repeat(2,1fr);gap:9px}
+  .message{min-height:72px}
+  .game-shell{min-height:540px;border-radius:30px;border-width:6px}
+}
+@media(max-width:430px){
+  .toolbar{grid-template-columns:1fr}
+  .toolbar button:first-child{grid-column:auto}
+  .game-shell{min-height:500px}
+}
+
 </style>
 </head>
 <body>
@@ -331,39 +370,25 @@ button:hover{transform:translateY(-2px)}
   </div>
 
 
-  <section class="voice-panel" aria-labelledby="voiceTitle">
-    <h2 id="voiceTitle">Choose a Friendly Reading Voice</h2>
-
-    <div class="voice-friends" id="voiceFriends">
-      <button type="button" class="voice-friend" data-voice="fairy">
-        <span class="emoji">🧚</span><span class="name">Fairy Lily</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="bear">
-        <span class="emoji">🐻</span><span class="name">Benny Bear</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="owl">
-        <span class="emoji">🦉</span><span class="name">Professor Owl</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="robot">
-        <span class="emoji">🤖</span><span class="name">Robo Reader</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="rainbow">
-        <span class="emoji">🌈</span><span class="name">Rainbow Friend</span>
-      </button>
+  <section class="voice-panel eiren-panel" aria-labelledby="voiceTitle">
+    <div class="eiren-head">
+      <div class="eiren-mark" aria-hidden="true">🌸</div>
+      <div>
+        <h2 id="voiceTitle">Eiren · Your Bubble Adventure Guide</h2>
+        <p>“I’ll say the letter, cheer when you find it, and help you try again if a bubble floats away.”</p>
+      </div>
     </div>
-
     <div class="voice-options">
-      <select id="voiceSpeed" aria-label="Reading speed">
+      <select id="voiceSpeed" aria-label="Eiren reading speed">
         <option value="slow">🐢 Slow and gentle</option>
         <option value="normal">🙂 Just right</option>
         <option value="lively">🐇 A little lively</option>
       </select>
-      <button type="button" id="previewVoiceBtn" class="secondary">👋 Meet My Voice</button>
-      <button type="button" id="repeatTargetBtn" class="secondary">🔤 Repeat Letter</button>
-      <button type="button" id="stopVoiceBtn" class="secondary">⏹ Stop Voice</button>
+      <button type="button" id="previewVoiceBtn" class="secondary">🌸 Meet Eiren</button>
+      <button type="button" id="repeatTargetBtn" class="secondary">🔤 Eiren, Say My Letter</button>
+      <button type="button" id="stopVoiceBtn" class="secondary">⏹ Stop Eiren</button>
     </div>
-
-    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+    <p class="voice-status" id="voiceStatus" aria-live="polite">Eiren is ready to play.</p>
   </section>
 
   <section class="stats">
@@ -418,7 +443,7 @@ button:hover{transform:translateY(-2px)}
     streak:Number(localStorage.getItem("abcBubbleStreak") || 0),
     best:Number(localStorage.getItem("abcBubbleBest") || 0),
     rounds:Number(localStorage.getItem("abcBubbleRounds") || 0),
-    voiceFriend:localStorage.getItem("abcBubbleVoiceFriend") || "fairy",
+    voiceFriend:"eiren",
     voiceSpeed:localStorage.getItem("abcBubbleVoiceSpeed") || "slow",
     target:null,
     spawnTimer:null,
@@ -438,7 +463,7 @@ button:hover{transform:translateY(-2px)}
     localStorage.setItem("abcBubbleStreak",String(state.streak));
     localStorage.setItem("abcBubbleBest",String(state.best));
     localStorage.setItem("abcBubbleRounds",String(state.rounds));
-    localStorage.setItem("abcBubbleVoiceFriend",state.voiceFriend);
+    localStorage.setItem("abcBubbleVoiceFriend","eiren");
     localStorage.setItem("abcBubbleVoiceSpeed",state.voiceSpeed);
   }
 
@@ -451,48 +476,31 @@ button:hover{transform:translateY(-2px)}
     levelBtn.textContent="⭐ Level: "+levels[state.level].name;
   }
 
+  let audioCtx=null;
   function beep(kind="good"){
     if(!state.sound) return;
     const AudioCtx=window.AudioContext||window.webkitAudioContext;
     if(!AudioCtx) return;
-    const ctx=new AudioCtx();
-    const osc=ctx.createOscillator();
-    const gain=ctx.createGain();
-    osc.type=kind==="good"?"sine":"triangle";
-    osc.frequency.value=kind==="good"?660:220;
-    gain.gain.setValueAtTime(.16,ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.22);
-    osc.connect(gain).connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime+.23);
+    try{
+      if(!audioCtx) audioCtx=new AudioCtx();
+      if(audioCtx.state==="suspended") audioCtx.resume();
+      const osc=audioCtx.createOscillator();
+      const gain=audioCtx.createGain();
+      osc.type=kind==="good"?"sine":"triangle";
+      osc.frequency.value=kind==="good"?660:220;
+      gain.gain.setValueAtTime(.12,audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.18);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime+.19);
+    }catch(_err){}
   }
 
-  const VOICE_FRIENDS={
-    fairy:{
-      name:"Fairy Lily",emoji:"🧚",rate:.82,pitch:1.2,
-      preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,
-      greeting:"Hello, little explorer. Fairy Lily is ready to pop some letter bubbles."
-    },
-    bear:{
-      name:"Benny Bear",emoji:"🐻",rate:.76,pitch:.9,
-      preferred:/daniel|david|alex|fred|george|male|tom/i,
-      greeting:"Hello, friend. Benny Bear will help you find the letters."
-    },
-    owl:{
-      name:"Professor Owl",emoji:"🦉",rate:.72,pitch:1,
-      preferred:/daniel|samantha|alex|serena|moira/i,
-      greeting:"Welcome, young learner. Professor Owl is ready for careful letter finding."
-    },
-    robot:{
-      name:"Robo Reader",emoji:"🤖",rate:.84,pitch:.72,
-      preferred:/fred|ralph|alex|david|google us english/i,
-      greeting:"Beep boop. Robo Reader is ready for the bubble mission."
-    },
-    rainbow:{
-      name:"Rainbow Friend",emoji:"🌈",rate:.85,pitch:1.08,
-      preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i,
-      greeting:"Hello, sunshine. Rainbow Friend is ready for a colorful alphabet adventure."
-    }
+
+  const EIREN={
+    name:"Eiren",emoji:"🌸",rate:.80,pitch:1.06,
+    preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
+    greeting:"Hello, little explorer. I’m Eiren. Let’s listen for a letter and pop the matching bubble together."
   };
 
   const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
@@ -502,34 +510,22 @@ button:hover{transform:translateY(-2px)}
   function refreshVoices(){
     if(!("speechSynthesis" in window)) return;
     voices=speechSynthesis.getVoices()||[];
-    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
     const status=document.getElementById("voiceStatus");
-    if(status){
-      status.textContent=voices.length
-        ? `${friend.emoji} ${friend.name} is ready.`
-        : "Loading a friendly voice…";
-    }
+    if(status) status.textContent=voices.length
+      ? "🌸 Eiren is ready to play."
+      : "Eiren is finding a gentle voice…";
   }
 
   function chooseVoice(){
     if(!voices.length) refreshVoices();
-    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
     const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
     const pool=english.length?english:voices;
-
-    if(state.voiceFriend==="rainbow"&&pool.length){
-      const friendly=pool.filter(v=>/natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));
-      const choices=friendly.length?friendly:pool;
-      return choices[Math.floor(Math.random()*choices.length)]||null;
-    }
-
-    return pool.find(v=>friend.preferred.test(v.name))
+    return pool.find(v=>EIREN.preferred.test(v.name))
       ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
-      ||pool[0]
-      ||null;
+      ||pool[0]||null;
   }
 
-  function stopSpeaking(statusText="Voice stopped."){
+  function stopSpeaking(statusText="Eiren paused."){
     speechToken++;
     if("speechSynthesis" in window) speechSynthesis.cancel();
     message.classList.remove("speaking");
@@ -543,28 +539,27 @@ button:hover{transform:translateY(-2px)}
 
     stopSpeaking("");
     const token=++speechToken;
-    const friend=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
-    const phrase=preview?friend.greeting:text;
+    const phrase=preview?EIREN.greeting:text;
     const u=new SpeechSynthesisUtterance(phrase);
     const voice=chooseVoice();
 
     if(voice) u.voice=voice;
     u.lang=(voice&&voice.lang)||"en-US";
-    u.rate=Math.max(.55,Math.min(1.15,friend.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
-    u.pitch=friend.pitch;
+    u.rate=Math.max(.55,Math.min(1.08,EIREN.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+    u.pitch=EIREN.pitch;
     u.volume=1;
 
     u.onstart=()=>{
       message.classList.add("speaking");
       const status=document.getElementById("voiceStatus");
-      if(status) status.textContent=`${friend.emoji} ${friend.name} is speaking.`;
+      if(status) status.textContent="🌸 Eiren is speaking.";
     };
 
     u.onend=()=>{
       if(token!==speechToken) return;
       message.classList.remove("speaking");
       const status=document.getElementById("voiceStatus");
-      if(status) status.textContent="Ready for the next letter! 🌟";
+      if(status) status.textContent="Eiren is ready for the next letter! 🌟";
     };
 
     u.onerror=event=>{
@@ -574,11 +569,28 @@ button:hover{transform:translateY(-2px)}
       if(status){
         status.textContent=event&&["interrupted","canceled"].includes(event.error)
           ?"Voice stopped."
-          :"The voice had a little hiccup. Tap Repeat Letter.";
+          :"Eiren’s voice had a little hiccup. Tap Say My Letter.";
       }
     };
 
     speechSynthesis.speak(u);
+  }
+
+  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  let eirenBoundaryReady=false;
+  async function connectEirenBoundary(){
+    try{
+      const mod=await import(EIREN_PUBLIC_ADAPTER);
+      if(mod?.EirenAdapter?.prepare){
+        const prepared=mod.EirenAdapter.prepare({
+          mode:"reading",
+          message:"Preschool ABC Bubble Adventure letter-recognition guidance."
+        });
+        eirenBoundaryReady=prepared?.specialist==="eiren";
+      }
+    }catch(_err){eirenBoundaryReady=false;}
+    const status=document.getElementById("voiceStatus");
+    if(status&&eirenBoundaryReady) status.textContent="🌸 Eiren’s public reading boundary is connected.";
   }
 
   function spark(target,symbol="⭐"){
@@ -613,11 +625,19 @@ button:hover{transform:translateY(-2px)}
       : text;
   }
 
+  function hasTargetBubble(){
+    return [...state.bubbles].some(item =>
+      document.body.contains(item.el) &&
+      item.el.dataset.target==="true" &&
+      item.el.textContent===state.target
+    );
+  }
+
   function pickNewLetter(){
     state.target=randomLetter();
     state.rounds++;
     setMessage("Pop the bubble with the letter",state.target);
-    speak("Find the letter "+state.target);
+    speak("Let’s find the letter "+state.target+".");
     createBubble(state.target,true);
     updateStats();
     save();
@@ -629,6 +649,7 @@ button:hover{transform:translateY(-2px)}
     const config=levels[state.level];
     const bubble=document.createElement("button");
     bubble.className="bubble";
+    bubble.dataset.target=isTarget?"true":"false";
     bubble.type="button";
 
     const bubbleLetter=letter||randomLetter();
@@ -650,7 +671,7 @@ button:hover{transform:translateY(-2px)}
 
     gameArea.appendChild(bubble);
 
-    const item={el:bubble,raf:null,start:null,pausedAt:0};
+    const item={el:bubble,raf:null,start:null,pauseStarted:null,pausedTotal:0};
     state.bubbles.add(item);
 
     function animate(time){
@@ -659,11 +680,16 @@ button:hover{transform:translateY(-2px)}
         return;
       }
       if(state.paused){
+        if(item.pauseStarted===null) item.pauseStarted=time;
         item.raf=requestAnimationFrame(animate);
         return;
       }
+      if(item.pauseStarted!==null){
+        item.pausedTotal+=time-item.pauseStarted;
+        item.pauseStarted=null;
+      }
       if(!item.start) item.start=time;
-      const elapsed=time-item.start;
+      const elapsed=time-item.start-item.pausedTotal;
       const distance=gameArea.clientHeight-size-80;
       const progress=elapsed/config.speed;
       bubble.style.bottom=(-size+progress*(distance+size))+"px";
@@ -679,7 +705,12 @@ button:hover{transform:translateY(-2px)}
           beep("bad");
           updateStats();
           save();
-          setTimeout(()=>createBubble(state.target,true),350);
+          const missedTarget=state.target;
+          setTimeout(()=>{
+            if(state.running&&!state.paused&&state.target===missedTarget&&!hasTargetBubble()){
+              createBubble(missedTarget,true);
+            }
+          },350);
         }
       }
     }
@@ -698,10 +729,11 @@ button:hover{transform:translateY(-2px)}
         state.streak++;
         state.best=Math.max(state.best,state.streak);
         setMessage("Great job! You found",bubbleLetter);
-        speak("Great job. You found "+bubbleLetter);
+        speak("You found "+bubbleLetter+"! Wonderful looking.");
         setTimeout(()=>{
           bubble.remove();
           state.bubbles.delete(item);
+          clearBubbles();
           pickNewLetter();
         },280);
       }else{
@@ -735,49 +767,33 @@ button:hover{transform:translateY(-2px)}
     if(!state.running) return;
     state.paused=!state.paused;
     pauseBtn.textContent=state.paused?"▶ Resume":"⏸ Pause";
-    setMessage(state.paused?"Game paused.":"Keep looking for",state.paused?null:state.target);
+    if(state.paused){
+      stopSpeaking("Eiren is waiting with you.");
+      setMessage("Game paused.");
+    }else{
+      setMessage("Keep looking for",state.target);
+      speak("Let’s keep looking for the letter "+state.target+".");
+    }
   }
 
-
-  function updateVoiceButtons(){
-    document.querySelectorAll("[data-voice]").forEach(button=>{
-      const active=button.dataset.voice===state.voiceFriend;
-      button.classList.toggle("active",active);
-      button.setAttribute("aria-pressed",String(active));
-    });
-    document.getElementById("voiceSpeed").value=state.voiceSpeed;
-  }
-
-  document.getElementById("voiceFriends").onclick=event=>{
-    const button=event.target.closest("[data-voice]");
-    if(!button) return;
-
-    state.voiceFriend=button.dataset.voice;
-    updateVoiceButtons();
-    save();
-
-    const friend=VOICE_FRIENDS[state.voiceFriend];
-    document.getElementById("voiceStatus").textContent=
-      `${friend.emoji} ${friend.name} selected. Tap Meet My Voice to listen.`;
-  };
 
   document.getElementById("voiceSpeed").onchange=event=>{
     state.voiceSpeed=event.target.value;
     save();
-    document.getElementById("voiceStatus").textContent="Reading speed saved.";
+    document.getElementById("voiceStatus").textContent="Eiren’s reading speed is saved.";
   };
 
   document.getElementById("previewVoiceBtn").onclick=()=>speak("",{preview:true});
 
   document.getElementById("repeatTargetBtn").onclick=()=>{
     if(state.target){
-      speak("Find the letter "+state.target);
+      speak("Let’s find the letter "+state.target+".");
     }else{
-      speak("Press Start Game when you are ready.");
+      speak("Press Start Game when you are ready, and we’ll play together.");
     }
   };
 
-  document.getElementById("stopVoiceBtn").onclick=()=>stopSpeaking("Voice stopped.");
+  document.getElementById("stopVoiceBtn").onclick=()=>stopSpeaking("Eiren paused.");
 
   startBtn.onclick=startGame;
   pauseBtn.onclick=togglePause;
@@ -819,7 +835,7 @@ button:hover{transform:translateY(-2px)}
       "Read-aloud voices are not available in this browser.";
   }
 
-  updateVoiceButtons();
+  connectEirenBoundary();
   updateStats();
 
   window.addEventListener("beforeunload",()=>{
