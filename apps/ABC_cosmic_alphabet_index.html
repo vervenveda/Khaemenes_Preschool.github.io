@@ -474,6 +474,35 @@ button.danger{
   line-height:1.5;
 }
 .site-footer strong{color:#503a76;}
+
+/* Eiren Preschool Cosmic Board — clean, spacious, touch-friendly */
+.app{width:min(1160px,calc(100% - 28px));padding:36px 0 62px}
+.hero{padding:42px 25px 36px;border-radius:40px;border:3px solid rgba(255,255,255,.25)}
+.hero p{max-width:700px;line-height:1.78}.hero-icons{gap:15px;margin-top:22px}.hero-icons span{width:58px;height:58px;border-radius:19px}
+.toolbar{gap:12px;margin:23px 0}.toolbar button{min-height:52px;padding:11px 18px}
+.voice-panel{max-width:920px;margin:0 auto 24px;padding:21px 23px;border-radius:30px;border:2px solid rgba(123,91,214,.14)}
+.eiren-panel{background:linear-gradient(145deg,#fff9fc,#f4f1ff,#effcff)}
+.eiren-head{display:grid;grid-template-columns:auto 1fr;gap:17px;align-items:center;max-width:790px;margin:auto}
+.eiren-mark{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdce9,#e5e0ff);font-size:2.1rem}
+.voice-panel .eiren-head h2{text-align:left;margin:0 0 6px;font-size:1.16rem}.eiren-head p{margin:0;color:var(--muted);line-height:1.6;font-size:.9rem}
+.voice-options{margin-top:18px;gap:10px}.voice-options select,.voice-options button{min-height:50px}
+.stats{gap:14px;margin-bottom:22px}.stat{padding:15px;border-radius:22px;border:2px solid rgba(255,255,255,.85)}
+.main-grid{gap:22px}.panel{padding:22px;border-radius:31px;border:2px solid rgba(255,255,255,.95)}
+.letter-stage{gap:21px;padding:22px;border-radius:30px}.big-letter{min-height:220px;border-radius:31px}.example-card{margin-top:15px;padding:15px;border-radius:21px}.forms{gap:10px;margin-top:15px}.form{padding:11px;border-radius:17px}
+.game-block{margin-top:22px;padding:20px;border-radius:28px}.choices{gap:14px;margin-top:16px}.choice{min-height:132px;border-radius:25px;border-width:3px}
+.side-stack{gap:18px}.letter-grid{gap:9px;max-height:350px;padding:2px}.letter-btn{border-radius:16px;min-height:46px}
+.story-card{min-height:220px;padding:19px;border-radius:25px}.progress{height:15px;margin-top:13px}.message{min-height:34px;line-height:1.5}
+.footer{margin-top:24px;line-height:1.6}.site-footer{margin:22px auto;padding:18px;border-radius:22px}
+@media(max-width:900px){.main-grid{grid-template-columns:1fr;gap:18px}}
+@media(max-width:620px){
+ .app{width:min(100% - 14px,1160px);padding-top:10px}.hero{padding:30px 16px;border-radius:29px}
+ .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:9px}.toolbar button{width:100%}.toolbar button:first-child{grid-column:1/-1}
+ .eiren-head{grid-template-columns:1fr;text-align:center}.eiren-mark{margin:auto}.voice-panel .eiren-head h2{text-align:center}
+ .voice-options{display:grid;grid-template-columns:1fr}.voice-options>*{width:100%}
+ .stats{gap:9px}.letter-stage{padding:17px}.panel{padding:16px}.choices{gap:10px}.choice{min-height:115px}
+ .letter-grid{grid-template-columns:repeat(4,1fr);gap:9px}.letter-btn{min-height:52px}
+}
+
 </style>
 </head>
 <body>
@@ -496,39 +525,25 @@ button.danger{
   </div>
 
 
-  <section class="voice-panel" aria-labelledby="voiceTitle">
-    <h2 id="voiceTitle">Choose a Cosmic Reading Guide</h2>
-
-    <div class="voice-friends" id="voiceFriends">
-      <button type="button" class="voice-friend" data-voice="mira">
-        <span class="emoji">🌙</span><span class="name">Moonbeam Mira</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="comet">
-        <span class="emoji">☄️</span><span class="name">Captain Comet</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="nova">
-        <span class="emoji">🦊</span><span class="name">Nova Fox</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="owl">
-        <span class="emoji">🦉</span><span class="name">Professor Owl</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="starlight">
-        <span class="emoji">✨</span><span class="name">Starlight Friend</span>
-      </button>
+  <section class="voice-panel eiren-panel" aria-labelledby="voiceTitle">
+    <div class="eiren-head">
+      <div class="eiren-mark" aria-hidden="true">🌸</div>
+      <div>
+        <h2 id="voiceTitle">Eiren · Your Cosmic Language Guide</h2>
+        <p>I’ll help you listen to each Arabic letter, discover its word, and explore the constellation one star at a time.</p>
+      </div>
     </div>
-
     <div class="voice-options">
-      <select id="voiceSpeed" aria-label="Reading speed">
+      <select id="voiceSpeed" aria-label="Eiren reading speed">
         <option value="slow">🐢 Slow and gentle</option>
         <option value="normal">🙂 Just right</option>
         <option value="lively">🚀 A little lively</option>
       </select>
-      <button id="previewVoiceBtn" type="button" class="secondary">👋 Meet My Guide</button>
-      <button id="hearMeaningBtn" type="button" class="secondary">🌍 Hear Meaning</button>
-      <button id="stopVoiceBtn" type="button" class="secondary">⏹ Stop Voice</button>
+      <button id="previewVoiceBtn" type="button" class="secondary">🌸 Meet Eiren</button>
+      <button id="hearMeaningBtn" type="button" class="secondary">🌍 Eiren, Tell Me More</button>
+      <button id="stopVoiceBtn" type="button" class="secondary">⏹ Stop Eiren</button>
     </div>
-
-    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+    <p class="voice-status" id="voiceStatus" aria-live="polite">Eiren is ready to explore.</p>
   </section>
 
   <section class="stats">
@@ -656,14 +671,19 @@ const themes = [
 ];
 
 const state = {
-  index:Number(localStorage.getItem("cosmicAlphabetIndex")||0),
+  index:Math.max(0,Math.min(27,Number(localStorage.getItem("cosmicAlphabetIndex")||0)||0)),
   stars:Number(localStorage.getItem("cosmicAlphabetStars")||0),
   correct:Number(localStorage.getItem("cosmicAlphabetCorrect")||0),
-  explored:new Set(JSON.parse(localStorage.getItem("cosmicAlphabetExplored")||"[]")),
-  theme:Number(localStorage.getItem("cosmicAlphabetTheme")||0),
+  explored:new Set((()=>{
+    try{
+      const saved=JSON.parse(localStorage.getItem("cosmicAlphabetExplored")||"[]");
+      return Array.isArray(saved)?saved.filter(i=>Number.isInteger(i)&&i>=0&&i<28):[];
+    }catch(_err){return [];}
+  })()),
+  theme:Math.max(0,Number(localStorage.getItem("cosmicAlphabetTheme")||0)||0)%4,
   currentRound:null,
   storyIndex:0,
-  voiceFriend:localStorage.getItem("cosmicAlphabetVoiceFriend")||"mira",
+  voiceFriend:"eiren",
   voiceSpeed:localStorage.getItem("cosmicAlphabetVoiceSpeed")||"slow"
 };
 
@@ -675,7 +695,7 @@ function save(){
   localStorage.setItem("cosmicAlphabetCorrect",String(state.correct));
   localStorage.setItem("cosmicAlphabetExplored",JSON.stringify([...state.explored]));
   localStorage.setItem("cosmicAlphabetTheme",String(state.theme));
-  localStorage.setItem("cosmicAlphabetVoiceFriend",state.voiceFriend);
+  localStorage.setItem("cosmicAlphabetVoiceFriend","eiren");
   localStorage.setItem("cosmicAlphabetVoiceSpeed",state.voiceSpeed);
 }
 
@@ -686,32 +706,10 @@ function applyTheme(){
   }
 }
 
-const VOICE_GUIDES={
-  mira:{
-    name:"Moonbeam Mira",emoji:"🌙",rate:.8,pitch:1.14,
-    preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,
-    greeting:"Hello, little explorer. Moonbeam Mira is ready to discover Arabic letters beneath the stars."
-  },
-  comet:{
-    name:"Captain Comet",emoji:"☄️",rate:.84,pitch:.92,
-    preferred:/daniel|david|alex|fred|george|male|tom/i,
-    greeting:"Welcome aboard. Captain Comet is ready for an Arabic alphabet mission."
-  },
-  nova:{
-    name:"Nova Fox",emoji:"🦊",rate:.86,pitch:1.06,
-    preferred:/samantha|aria|jenny|ava|karen|moira|serena/i,
-    greeting:"Hello, clever explorer. Nova Fox is ready to find a new cosmic letter."
-  },
-  owl:{
-    name:"Professor Owl",emoji:"🦉",rate:.74,pitch:1,
-    preferred:/daniel|samantha|alex|serena|moira/i,
-    greeting:"Welcome, young learner. Professor Owl is ready for careful Arabic letter practice."
-  },
-  starlight:{
-    name:"Starlight Friend",emoji:"✨",rate:.84,pitch:1.08,
-    preferred:/natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria/i,
-    greeting:"Hello, shining star. Your Starlight Friend is ready to learn Arabic with you."
-  }
+const EIREN={
+  name:"Eiren",emoji:"🌸",rate:.80,pitch:1.06,
+  preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
+  greeting:"Hello, little explorer. I’m Eiren. Let’s discover Arabic letters among the stars, one gentle sound at a time."
 };
 
 const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
@@ -721,45 +719,27 @@ let speechToken=0;
 function refreshVoices(){
   if(!("speechSynthesis" in window))return;
   browserVoices=speechSynthesis.getVoices()||[];
-  const guide=VOICE_GUIDES[state.voiceFriend]||VOICE_GUIDES.mira;
   const status=$("voiceStatus");
-  if(status){
-    status.textContent=browserVoices.length
-      ?`${guide.emoji} ${guide.name} is ready.`
-      :"Loading a friendly browser voice…";
-  }
+  if(status)status.textContent=browserVoices.length
+    ?"🌸 Eiren is ready to explore."
+    :"Eiren is finding a gentle voice…";
 }
 
-function chooseVoice(lang,guideKey=state.voiceFriend){
+function chooseVoice(lang){
   if(!browserVoices.length)refreshVoices();
-  const guide=VOICE_GUIDES[guideKey]||VOICE_GUIDES.mira;
   const family=lang.slice(0,2).toLowerCase();
   const languagePool=browserVoices.filter(v=>(v.lang||"").toLowerCase().startsWith(family));
-
   if(family==="ar"){
     return languagePool.find(v=>/natural|enhanced|premium/i.test(v.name))
-      ||languagePool[0]
-      ||null;
+      ||languagePool[0]||null;
   }
-
-  const pool=languagePool.length
-    ?languagePool
-    :browserVoices.filter(v=>/^en/i.test(v.lang||""));
-
-  if(guideKey==="starlight"&&pool.length){
-    const friendly=pool.filter(v=>/natural|enhanced|premium|samantha|aria|jenny|ava|karen|moira|serena|victoria/i.test(v.name));
-    const choices=friendly.length?friendly:pool;
-    return choices[Math.floor(Math.random()*choices.length)]||null;
-  }
-
-  return pool.find(v=>guide.preferred.test(v.name))
+  const pool=languagePool.length?languagePool:browserVoices.filter(v=>/^en/i.test(v.lang||""));
+  return pool.find(v=>EIREN.preferred.test(v.name))
     ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
-    ||pool[0]
-    ||browserVoices[0]
-    ||null;
+    ||pool[0]||browserVoices[0]||null;
 }
 
-function stopSpeaking(statusText="Voice stopped."){
+function stopSpeaking(statusText="Eiren paused."){
   speechToken++;
   if("speechSynthesis" in window)speechSynthesis.cancel();
   document.querySelectorAll(".panel").forEach(p=>p.classList.remove("speaking"));
@@ -773,28 +753,27 @@ function speak(text,lang="ar-SA",{preview=false}={}){
 
   stopSpeaking("");
   const token=++speechToken;
-  const guide=VOICE_GUIDES[state.voiceFriend]||VOICE_GUIDES.mira;
-  const phrase=preview?guide.greeting:text;
+  const phrase=preview?EIREN.greeting:text;
   const u=new SpeechSynthesisUtterance(phrase);
   const voice=chooseVoice(lang);
 
   if(voice)u.voice=voice;
   u.lang=(voice&&voice.lang)||lang;
-  u.rate=Math.max(.55,Math.min(1.15,guide.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
-  u.pitch=lang.startsWith("ar")?1.02:guide.pitch;
+  u.rate=Math.max(.55,Math.min(1.15,EIREN.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=lang.startsWith("ar")?1.01:EIREN.pitch;
   u.volume=1;
 
   u.onstart=()=>{
     document.querySelector(".panel")?.classList.add("speaking");
     const status=$("voiceStatus");
-    if(status)status.textContent=`${guide.emoji} ${guide.name} is reading.`;
+    if(status)status.textContent="🌸 Eiren is reading.";
   };
 
   u.onend=()=>{
     if(token!==speechToken)return;
     document.querySelectorAll(".panel").forEach(p=>p.classList.remove("speaking"));
     const status=$("voiceStatus");
-    if(status)status.textContent="Wonderful listening! 🌟";
+    if(status)status.textContent="Wonderful listening! Eiren is ready for the next discovery. 🌟";
   };
 
   u.onerror=event=>{
@@ -803,12 +782,28 @@ function speak(text,lang="ar-SA",{preview=false}={}){
     const status=$("voiceStatus");
     if(status){
       status.textContent=event&&["interrupted","canceled"].includes(event.error)
-        ?"Voice stopped."
-        :"The voice had a little hiccup. Try again.";
+        ?"Eiren paused."
+        :"Eiren’s voice had a little hiccup. Try again.";
     }
   };
 
   speechSynthesis.speak(u);
+}
+
+const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+let eirenBoundaryReady=false;
+async function connectEirenBoundary(){
+  try{
+    const mod=await import(EIREN_PUBLIC_ADAPTER);
+    if(mod?.EirenAdapter?.prepare){
+      const prepared=mod.EirenAdapter.prepare({
+        mode:"reading",
+        message:"Preschool Cosmic Alphabet Arabic-language discovery guidance."
+      });
+      eirenBoundaryReady=prepared?.specialist==="eiren";
+    }
+  }catch(_err){eirenBoundaryReady=false;}
+  if(eirenBoundaryReady)$("voiceStatus").textContent="🌸 Eiren’s public reading boundary is connected.";
 }
 
 function reward(target,symbol="⭐"){
@@ -884,8 +879,12 @@ function makeRound(){
     const candidate=pool[Math.floor(Math.random()*pool.length)];
     if(!distractors.some(x=>x.id===candidate.id)) distractors.push(candidate);
   }
-  const choices=[answer,...distractors].sort(()=>Math.random()-.5);
-  return {answer,choices};
+  const choices=[answer,...distractors];
+  for(let i=choices.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [choices[i],choices[j]]=[choices[j],choices[i]];
+  }
+  return {answer,choices,solved:false};
 }
 
 function newRound(){
@@ -909,7 +908,10 @@ function renderRound(){
     b.className="choice";
     b.innerHTML=`<span>${choice.emoji}</span><small>${choice.exampleEnglish}</small>`;
     b.onclick=()=>{
+      if(round.solved)return;
       if(choice.id===round.answer.id){
+        round.solved=true;
+        box.querySelectorAll(".choice").forEach(btn=>btn.disabled=true);
         b.classList.add("correct");
         $("message").textContent="Wonderful! "+round.answer.exampleArabic+" means "+round.answer.exampleEnglish+".";
         state.stars++;
@@ -928,8 +930,8 @@ function renderRound(){
   });
 }
 
-function newStory(){
-  state.storyIndex=(state.storyIndex+1)%STORY_LINES.length;
+function newStory(advance=true){
+  if(advance)state.storyIndex=(state.storyIndex+1)%STORY_LINES.length;
   const s=STORY_LINES[state.storyIndex];
   const icons=[
     ICONS.character[Math.floor(Math.random()*ICONS.character.length)],
@@ -965,32 +967,10 @@ function renderAll(){
 }
 
 
-function updateVoiceButtons(){
-  document.querySelectorAll("[data-voice]").forEach(button=>{
-    const active=button.dataset.voice===state.voiceFriend;
-    button.classList.toggle("active",active);
-    button.setAttribute("aria-pressed",String(active));
-  });
-  $("voiceSpeed").value=state.voiceSpeed;
-}
-
-$("voiceFriends").onclick=event=>{
-  const button=event.target.closest("[data-voice]");
-  if(!button)return;
-
-  state.voiceFriend=button.dataset.voice;
-  updateVoiceButtons();
-  save();
-
-  const guide=VOICE_GUIDES[state.voiceFriend];
-  $("voiceStatus").textContent=
-    `${guide.emoji} ${guide.name} selected. Tap Meet My Guide to listen.`;
-};
-
 $("voiceSpeed").onchange=event=>{
   state.voiceSpeed=event.target.value;
   save();
-  $("voiceStatus").textContent="Reading speed saved.";
+  $("voiceStatus").textContent="Eiren’s reading speed is saved.";
 };
 
 $("previewVoiceBtn").onclick=()=>speak("","en-US",{preview:true});
@@ -1000,14 +980,14 @@ $("hearMeaningBtn").onclick=()=>{
   speak(`${l.transliteration}. ${l.exampleEnglish}. ${l.englishSound}.`,"en-US");
 };
 
-$("stopVoiceBtn").onclick=()=>stopSpeaking("Voice stopped.");
+$("stopVoiceBtn").onclick=()=>stopSpeaking("Eiren paused.");
 
 $("hearBtn").onclick=()=>{
   const l=current();
   speak(`${l.nameArabic}. ${l.exampleArabic}`,"ar-SA");
 };
 $("newRoundBtn").onclick=newRound;
-$("storyBtn").onclick=newStory;
+$("storyBtn").onclick=()=>newStory(true);
 $("speakStoryBtn").onclick=()=>{
   const s=STORY_LINES[state.storyIndex];
   speak(s.ar,"ar-SA");
@@ -1040,10 +1020,10 @@ if("speechSynthesis" in window){
   $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
 }
 
-updateVoiceButtons();
+connectEirenBoundary();
 applyTheme();
-newStory();
-newRound();
+newStory(false);
+state.currentRound=makeRound();
 renderAll();
 
 window.addEventListener("beforeunload",()=>stopSpeaking(""));
