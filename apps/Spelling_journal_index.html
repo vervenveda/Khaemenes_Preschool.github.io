@@ -333,6 +333,42 @@ textarea:focus{
   color: #503a76;
 }
 }
+
+/* Eiren Bright Day Journal — spacious preschool edition */
+.site-footer{
+  margin:18px auto 30px;width:min(1080px,calc(100% - 22px));padding:17px 12px;text-align:center;
+  border-radius:20px;background:rgba(255,255,255,.78);border:1px solid rgba(90,60,120,.12);
+  color:#665b72;font-size:.84rem;line-height:1.5
+}
+.site-footer strong{color:#503a76}
+.app{width:min(1100px,calc(100% - 28px));padding:36px 0 52px}
+.hero{padding:39px 24px 34px;border-radius:40px;border:3px solid rgba(255,255,255,.38)}
+.hero p{max-width:670px;line-height:1.75}.hero-icons{gap:15px;margin-top:21px}.hero-icons span{width:56px;height:56px;border-radius:19px}
+.toolbar{gap:11px;margin:22px 0}.toolbar button,.toolbar .pill{min-height:50px}
+.eiren-panel{max-width:920px;margin:0 auto 22px;padding:21px 23px;border-radius:30px;background:linear-gradient(145deg,#fff9fc,#f5f1ff,#effcff);border:2px solid rgba(114,87,200,.13);box-shadow:0 10px 28px rgba(62,43,82,.08)}
+.eiren-head{display:grid;grid-template-columns:auto 1fr;gap:17px;align-items:center;max-width:790px;margin:auto}
+.eiren-mark{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdce9,#e5e0ff);font-size:2.1rem}
+.eiren-head h2{margin:0 0 6px;color:var(--purple);font-size:1.18rem}.eiren-head p{margin:0;color:var(--muted);line-height:1.62}
+.eiren-controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.eiren-controls select,.eiren-controls button{min-height:50px}
+.eiren-controls select{border:1px solid #e0d8ec;border-radius:999px;padding:9px 13px;background:white;color:var(--purple);font-weight:800}
+.eiren-status{min-height:1.3em;text-align:center;color:var(--muted);margin:10px 0 0;font-size:.86rem}
+.journal{padding:23px;border-radius:35px}.top-grid{gap:20px}.card{padding:20px;border-radius:27px}.affirmation{min-height:120px;padding:20px;border-radius:23px}
+.mood-grid{gap:11px}.mood-btn{min-height:76px;padding:10px 6px;border-radius:19px;font-size:1.9rem}
+.emoji-panel{margin:20px 0;padding:19px;border-radius:27px}.emoji-row{gap:10px}.emoji-btn{width:48px;height:48px;border-radius:16px;font-size:1.55rem}
+.prompt-grid{gap:19px}.prompt-card{padding:19px;border-radius:27px}.prompt-card label{margin-bottom:11px;font-size:1.03rem}.prompt-icon{width:40px;height:40px;border-radius:14px}
+textarea{min-height:145px;border-radius:20px;padding:15px;line-height:1.65;font-size:1rem}#diary{min-height:230px}
+.bottom-row{gap:15px;margin-top:20px}.bottom-row>div:first-child{display:flex;gap:9px;flex-wrap:wrap}.bottom-row button{min-height:50px}
+.entry-preview{margin-top:20px;padding:20px;border-radius:27px}.preview-content{line-height:1.7}.footer{margin-top:20px;line-height:1.55}
+@media(max-width:760px){
+ .app{width:min(100% - 14px,1100px);padding-top:10px}.hero{padding:30px 16px;border-radius:29px}
+ .toolbar{display:grid;grid-template-columns:1fr 1fr}.toolbar .pill{grid-column:1/-1}.toolbar button{width:100%}
+ .eiren-head{grid-template-columns:1fr;text-align:center}.eiren-mark{margin:auto}.eiren-controls{display:grid;grid-template-columns:1fr}.eiren-controls>*{width:100%}
+ .journal{padding:14px}.top-grid,.prompt-grid{gap:14px}.card,.prompt-card{padding:16px}
+ .mood-grid{grid-template-columns:repeat(2,1fr)}.mood-btn{min-height:72px}.emoji-btn{width:50px;height:50px}
+ .bottom-row>div:first-child{display:grid;grid-template-columns:1fr 1fr;width:100%}.bottom-row button{width:100%}.bottom-row #saveBtn{grid-column:1/-1}
+}
+@media print{.eiren-panel,.site-footer{display:none!important}}
+
 </style>
 </head>
 <body>
@@ -353,6 +389,28 @@ textarea:focus{
     <button id="newAffirmationBtn" class="secondary">🔄 New Affirmation</button>
     <button id="printBtn" class="secondary">🖨️ Print</button>
   </div>
+
+  <section class="eiren-panel" aria-labelledby="eirenTitle">
+    <div class="eiren-head">
+      <div class="eiren-mark" aria-hidden="true">🌸</div>
+      <div>
+        <h2 id="eirenTitle">Eiren · Your Bright Day Guide</h2>
+        <p>I can read the prompts and affirmation aloud, help you name what you feel, and give you plenty of quiet time to make this page your own.</p>
+      </div>
+    </div>
+    <div class="eiren-controls">
+      <select id="voiceSpeed" aria-label="Eiren reading speed">
+        <option value="slow">🐢 Slow and gentle</option>
+        <option value="normal">🙂 Just right</option>
+        <option value="lively">🐇 A little lively</option>
+      </select>
+      <button id="meetEirenBtn" class="secondary" type="button">🌸 Meet Eiren</button>
+      <button id="readPromptBtn" class="secondary" type="button">🔊 Read This Prompt</button>
+      <button id="readAffirmationBtn" class="secondary" type="button">✨ Read My Affirmation</button>
+      <button id="stopEirenBtn" class="secondary" type="button">⏹ Stop Eiren</button>
+    </div>
+    <p id="eirenStatus" class="eiren-status" aria-live="polite">Eiren is here when you want help.</p>
+  </section>
 
   <section class="journal">
     <div class="top-grid">
@@ -376,37 +434,37 @@ textarea:focus{
     <section class="prompt-grid">
       <div class="prompt-card">
         <label for="vision"><span class="prompt-icon">🌟</span>My Dream or Goal</label>
-        <textarea id="vision" placeholder="What would you like to create, learn, or experience?"></textarea>
+        <textarea id="vision" placeholder="What would you like to make, learn, try, or dream about?"></textarea>
       </div>
 
       <div class="prompt-card">
         <label for="feelings"><span class="prompt-icon">💗</span>My Feelings</label>
-        <textarea id="feelings" placeholder="What feelings visited you today?"></textarea>
+        <textarea id="feelings" placeholder="How are you feeling? You can write, draw with emojis, or tell about it."></textarea>
       </div>
 
       <div class="prompt-card">
         <label for="visuals"><span class="prompt-icon">👀</span>What I Noticed</label>
-        <textarea id="visuals" placeholder="What did you see, hear, smell, touch, or discover?"></textarea>
+        <textarea id="visuals" placeholder="What did you notice today? What did you see, hear, smell, touch, or discover?"></textarea>
       </div>
 
       <div class="prompt-card">
         <label for="actions"><span class="prompt-icon">🚀</span>One Brave Step</label>
-        <textarea id="actions" placeholder="What helpful or brave action can you take?"></textarea>
+        <textarea id="actions" placeholder="What is one kind, helpful, or brave thing you can try?"></textarea>
       </div>
 
       <div class="prompt-card">
         <label for="gratitude"><span class="prompt-icon">🙏</span>Three Thankful Things</label>
-        <textarea id="gratitude" placeholder="Write about people, places, moments, or things you appreciate."></textarea>
+        <textarea id="gratitude" placeholder="What are some people, places, moments, or things that made you thankful?"></textarea>
       </div>
 
       <div class="prompt-card">
         <label for="kindness"><span class="prompt-icon">🤝</span>Kindness I Shared</label>
-        <textarea id="kindness" placeholder="How did you help, encourage, or care for someone today?"></textarea>
+        <textarea id="kindness" placeholder="Did you help, share, encourage, or care for someone today?"></textarea>
       </div>
 
       <div class="prompt-card full">
         <label for="diary"><span class="prompt-icon">📖</span>My Daily Story</label>
-        <textarea id="diary" placeholder="Write your adventure, memory, idea, dream, drawing description, or anything important to you."></textarea>
+        <textarea id="diary" placeholder="Tell your story any way you like—words, ideas, memories, dreams, or emojis."></textarea>
       </div>
     </section>
 
@@ -476,9 +534,57 @@ textarea:focus{
     "My voice deserves to be heard."
   ];
 
+  const PROMPT_SPEECH={
+    vision:"My Dream or Goal. What would you like to make, learn, try, or dream about?",
+    feelings:"My Feelings. How are you feeling today? You can tell about it in your own way.",
+    visuals:"What I Noticed. What did you see, hear, smell, touch, or discover today?",
+    actions:"One Brave Step. What is one kind, helpful, or brave thing you can try?",
+    gratitude:"Three Thankful Things. What are some people, places, moments, or things that made you thankful?",
+    kindness:"Kindness I Shared. Did you help, share, encourage, or care for someone today?",
+    diary:"My Daily Story. Tell your story any way you like. Your ideas, memories, dreams, and little moments all belong here."
+  };
+  const EIREN={
+    preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
+    greeting:"Hello, bright one. I’m Eiren. This is your journal. I can read the questions with you, but your thoughts and feelings are yours to choose and share."
+  };
+  const VOICE_SPEEDS={slow:.90,normal:1,lively:1.08};
+
   const $=id=>document.getElementById(id);
   let activeField=null;
   let autosaveTimer=null;
+  let speechToken=0;
+  let voiceSpeed=localStorage.getItem("brightJournalVoiceSpeed")||"slow";
+
+  function chooseEirenVoice(){
+    if(!("speechSynthesis" in window))return null;
+    const voices=speechSynthesis.getVoices()||[];
+    const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+    const pool=english.length?english:voices;
+    return pool.find(v=>EIREN.preferred.test(v.name))
+      ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+      ||pool[0]||null;
+  }
+  function stopEiren(message="Eiren paused."){
+    speechToken++;
+    if("speechSynthesis" in window)speechSynthesis.cancel();
+    if($("eirenStatus"))$("eirenStatus").textContent=message;
+  }
+  function speakEiren(text,{greeting=false}={}){
+    if(!("speechSynthesis" in window))return;
+    stopEiren("");
+    const token=++speechToken;
+    const voice=chooseEirenVoice();
+    const u=new SpeechSynthesisUtterance(greeting?EIREN.greeting:text);
+    if(voice)u.voice=voice;
+    u.lang=(voice&&voice.lang)||"en-US";
+    u.rate=Math.max(.58,Math.min(1.04,.82*(VOICE_SPEEDS[voiceSpeed]||1)));
+    u.pitch=1.06;
+    u.onstart=()=>{$("eirenStatus").textContent="🌸 Eiren is reading.";};
+    u.onend=()=>{if(token===speechToken)$("eirenStatus").textContent="Eiren is here when you want help. 🌟";};
+    u.onerror=e=>{if(token===speechToken)$("eirenStatus").textContent=
+      e&&["interrupted","canceled"].includes(e.error)?"Eiren paused.":"Eiren’s voice had a little hiccup. Try again.";};
+    speechSynthesis.speak(u);
+  }
 
   function pad(n){return String(n).padStart(2,"0")}
   function localISO(date){
@@ -497,6 +603,7 @@ textarea:focus{
 
   function saveEntry(showCelebration=false){
     const date=$("entryDate").value;
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date))return;
     const data={
       date,
       mood:document.querySelector(".mood-btn.active")?.dataset.mood||"",
@@ -626,7 +733,9 @@ textarea:focus{
     for(let i=0;i<localStorage.length;i++){
       const k=localStorage.key(i);
       if(k?.startsWith("brightJournal:")){
-        dump.entries[k.replace("brightJournal:","")]=JSON.parse(localStorage.getItem(k)||"{}");
+        try{
+          dump.entries[k.replace("brightJournal:","")]=JSON.parse(localStorage.getItem(k)||"{}");
+        }catch(_err){}
       }
       if(k?.startsWith("brightJournalAffirmation:")){
         dump.affirmations[k.replace("brightJournalAffirmation:","")]=localStorage.getItem(k);
@@ -646,11 +755,16 @@ textarea:focus{
     reader.onload=()=>{
       try{
         const dump=JSON.parse(reader.result);
+        if(!dump || typeof dump!=="object") throw new Error("Invalid journal file");
         Object.entries(dump.entries||{}).forEach(([date,data])=>{
-          localStorage.setItem(key(date),JSON.stringify(data));
+          if(/^\d{4}-\d{2}-\d{2}$/.test(date) && data && typeof data==="object" && !Array.isArray(data)){
+            localStorage.setItem(key(date),JSON.stringify(data));
+          }
         });
         Object.entries(dump.affirmations||{}).forEach(([date,text])=>{
-          localStorage.setItem(affirmationKey(date),text);
+          if(/^\d{4}-\d{2}-\d{2}$/.test(date) && typeof text==="string"){
+            localStorage.setItem(affirmationKey(date),text);
+          }
         });
         loadEntry($("entryDate").value);
         $("saveStatus").innerHTML="<strong>Import complete.</strong>";
@@ -672,6 +786,34 @@ textarea:focus{
   buildMoods();
   buildEmojis();
 
+  $("voiceSpeed").value=voiceSpeed;
+  $("voiceSpeed").onchange=e=>{
+    voiceSpeed=e.target.value;
+    localStorage.setItem("brightJournalVoiceSpeed",voiceSpeed);
+    $("eirenStatus").textContent="Eiren’s reading speed is saved.";
+  };
+  $("meetEirenBtn").onclick=()=>speakEiren("",{greeting:true});
+  $("stopEirenBtn").onclick=()=>stopEiren("Eiren paused.");
+  $("readAffirmationBtn").onclick=()=>speakEiren($("affirmation").textContent);
+  $("readPromptBtn").onclick=()=>{
+    const id=$("readPromptBtn").dataset.field||"diary";
+    speakEiren(PROMPT_SPEECH[id]||PROMPT_SPEECH.diary);
+  };
+
+  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  async function connectEirenBoundary(){
+    try{
+      const mod=await import(EIREN_PUBLIC_ADAPTER);
+      if(mod?.EirenAdapter?.prepare){
+        const prepared=mod.EirenAdapter.prepare({
+          mode:"reading",
+          message:"Preschool Bright Day Journal prompt reading and gentle language support."
+        });
+        if(prepared?.specialist==="eiren")$("eirenStatus").textContent="🌸 Eiren’s public reading boundary is connected.";
+      }
+    }catch(_err){}
+  }
+
   $("entryDate").value=localISO(new Date());
   loadEntry($("entryDate").value);
 
@@ -681,6 +823,7 @@ textarea:focus{
       activeField=el;
       const label=document.querySelector(`label[for="${id}"]`)?.textContent.trim()||"journal box";
       $("activeFieldNote").textContent=`Emoji will be added to: ${label}`;
+      $("readPromptBtn").dataset.field=id;
     });
     el.addEventListener("input",()=>{
       scheduleSave();
@@ -688,7 +831,7 @@ textarea:focus{
     });
   });
 
-  $("entryDate").onchange=()=>loadEntry($("entryDate").value);
+  $("entryDate").onchange=()=>{stopEiren("");loadEntry($("entryDate").value);};
   $("todayBtn").onclick=()=>{
     $("entryDate").value=localISO(new Date());
     loadEntry($("entryDate").value);
@@ -704,6 +847,8 @@ textarea:focus{
   };
   $("deleteBtn").onclick=deleteDay;
   $("printBtn").onclick=()=>window.print();
+  connectEirenBoundary();
+  window.addEventListener("beforeunload",()=>stopEiren(""));
 })();
 </script>
 <script src="/assets/vnv-beta-link.js" defer></script>
