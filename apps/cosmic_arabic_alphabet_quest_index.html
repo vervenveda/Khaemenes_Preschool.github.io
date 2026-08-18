@@ -261,6 +261,25 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
   background:linear-gradient(145deg,#251d59,#5d45ae);
   box-shadow:0 14px 28px rgba(44,35,104,.18);
 }
+  function traceAccuracy(canvas,points){
+    if(!canvas || !Array.isArray(points) || !points.length) return 0;
+    const ctx=canvas.getContext("2d",{willReadFrequently:true});
+    let nearGuide=0;
+    for(const pt of points){
+      const x=Math.max(0,Math.min(canvas.width-1,Math.round(pt.x)));
+      const y=Math.max(0,Math.min(canvas.height-1,Math.round(pt.y)));
+      const radius=18;
+      const data=ctx.getImageData(Math.max(0,x-radius),Math.max(0,y-radius),Math.min(radius*2+1,canvas.width-Math.max(0,x-radius)),Math.min(radius*2+1,canvas.height-Math.max(0,y-radius))).data;
+      let found=false;
+      for(let i=0;i<data.length;i+=4){
+        const a=data[i+3], r=data[i], g=data[i+1], b=data[i+2];
+        if(a>25 && Math.abs(r-g)<55 && Math.abs(g-b)<55 && r<235){found=true;break}
+      }
+      if(found)nearGuide++;
+    }
+    return Math.round(nearGuide/points.length*100);
+  }
+
 #tracingCanvas{
   display:block;
   width:100%;
@@ -631,6 +650,36 @@ body.hide-transliteration .example strong{display:none!important}
   .certificate-sheet{box-shadow:none;width:100%;max-height:none}
 }
 
+
+/* Cosmic Arabic Quest — Eiren deep-audit preschool edition */
+.app{width:min(1180px,calc(100% - 28px));padding:38px 0 64px}
+.hero{padding:42px 24px 37px;border-radius:40px;border:3px solid rgba(255,255,255,.22)}
+.hero p{max-width:760px;line-height:1.8}
+.language-panel{max-width:940px;margin:22px auto;padding:22px;border-radius:30px}
+.eiren-guide{display:grid;grid-template-columns:auto 1fr;gap:17px;align-items:center;max-width:760px;margin:17px auto 4px;padding:17px;border-radius:24px;background:linear-gradient(145deg,#fff9fc,#f1edff,#effcff);border:2px solid rgba(109,75,195,.12)}
+.eiren-orb{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdce9,#e5e0ff);font-size:2.1rem}
+.eiren-guide strong{color:var(--violet);font-size:1.08rem}.eiren-guide p{margin:5px 0 0;color:var(--muted);line-height:1.6}
+.language-actions{gap:10px;margin-top:17px}.language-actions button{min-height:50px}
+.creche-tools{gap:10px;margin:18px 0}.creche-tools button{min-height:49px}
+.toolbar{gap:11px;margin:20px 0}.toolbar button,.toolbar .pill{min-height:50px}
+.week-strip{gap:9px;padding:12px 5px 18px}.week-btn{min-width:60px;min-height:48px;border-radius:17px}
+.dashboard{gap:14px;margin-bottom:20px}.stat{padding:16px;border-radius:22px}
+.constellation-panel{padding:19px;border-radius:28px;margin-bottom:22px}.constellation-row{gap:10px}.constellation-star{min-height:68px;border-radius:18px}
+.layout{gap:22px}.panel{padding:22px;border-radius:32px}.lesson-card{padding:24px;gap:22px;border-radius:30px;margin-bottom:20px}.lesson-letter{min-height:205px;border-radius:30px}
+.forms{gap:11px;margin-top:15px}.form-box{padding:12px 8px;border-radius:17px}.example{padding:14px;border-radius:20px}
+.canvas-shell{padding:16px;border-radius:30px}#tracingCanvas{height:500px;border-radius:22px}.trace-tools{gap:10px;margin-top:14px}.trace-tools button,.trace-tools label{min-height:48px}
+.activity-grid{gap:18px}.activity{padding:19px;border-radius:27px}.tiles,.cards{gap:11px}.tile,.match-card{min-width:86px;min-height:62px;border-radius:19px}
+.bottom-nav{gap:12px;margin-top:20px}.bottom-nav button{min-height:52px}.progress-track{height:15px}
+@media(max-width:760px){
+ .app{width:min(100% - 14px,1180px);padding-top:12px}.hero{padding:30px 16px;border-radius:29px}
+ .eiren-guide{grid-template-columns:1fr;text-align:center}.eiren-orb{margin:auto}.language-actions{display:grid;grid-template-columns:1fr}.language-actions button{width:100%}
+ .creche-tools{display:grid;grid-template-columns:1fr 1fr}.creche-tools button{width:100%}
+ .toolbar{display:grid;grid-template-columns:1fr}.toolbar>*{width:100%}
+ .dashboard{gap:9px}.constellation-row{grid-template-columns:repeat(3,1fr)}
+ .panel{padding:15px}.lesson-card{padding:18px}.lesson-letter{min-height:150px}.activity{padding:16px}
+ #tracingCanvas{height:400px}
+}
+
 </style>
 </head>
 <body>
@@ -685,29 +734,19 @@ body.hide-transliteration .example strong{display:none!important}
       </label>
     </div>
 
-    <div class="voice-friends" id="voiceFriends">
-      <button type="button" class="voice-friend" data-voice="fairy">
-        <span class="emoji">🧚</span><span class="name">Fairy Lily</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="bear">
-        <span class="emoji">🐻</span><span class="name">Benny Bear</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="owl">
-        <span class="emoji">🦉</span><span class="name">Professor Owl</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="robot">
-        <span class="emoji">🤖</span><span class="name">Robo Reader</span>
-      </button>
-      <button type="button" class="voice-friend" data-voice="rainbow">
-        <span class="emoji">🌈</span><span class="name">Rainbow Friend</span>
-      </button>
+    <div class="eiren-guide">
+      <div class="eiren-orb" aria-hidden="true">🌸</div>
+      <div>
+        <strong>Eiren · Your Cosmic Arabic Guide</strong>
+        <p>Eiren can guide the lesson gently while an Arabic-capable device voice models the Arabic words and sounds.</p>
+      </div>
     </div>
 
     <div class="language-actions">
-      <button id="previewVoiceBtn" type="button">👋 Meet My Voice</button>
+      <button id="previewVoiceBtn" type="button">🌸 Meet Eiren</button>
       <button id="hearMeaningBtn" type="button" class="secondary">🏠 Hear Meaning</button>
       <button id="repeatBtn" type="button" class="secondary">🗣 Repeat After Me</button>
-      <button id="stopVoiceBtn" type="button" class="secondary">⏹ Stop Voice</button>
+      <button id="stopVoiceBtn" type="button" class="secondary">⏹ Stop Eiren</button>
     </div>
 
     <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
@@ -951,7 +990,7 @@ window.ARABIC_ALPHABET = [
     exampleArabic: "رُمَّان",
     exampleTransliteration: "Rummān",
     exampleEnglish: "Pomegranate",
-    emoji: "🍎",
+    emoji: "🔴",
     isolated: "ر",
     beginning: "ر",
     middle: "ـر",
@@ -1414,6 +1453,20 @@ window.ARABIC_ALPHABET_META = {
     localStorage.setItem("cosmicArabicShowTransliteration", String(state.showTransliteration));
   }
 
+  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  let eirenBoundaryReady=false;
+  async function connectEirenBoundary(){
+    try{
+      const mod=await import(EIREN_PUBLIC_ADAPTER);
+      if(mod?.EirenAdapter?.prepare){
+        const p=mod.EirenAdapter.prepare({mode:"reading",message:"Preschool Cosmic Arabic Alphabet Quest language guidance."});
+        eirenBoundaryReady=p?.specialist==="eiren";
+      }
+    }catch(_){eirenBoundaryReady=false}
+    const s=document.getElementById("voiceStatus");
+    if(s)s.textContent=eirenBoundaryReady?"🌸 Eiren’s public language boundary is connected.":"🌸 Eiren is ready to explore.";
+  }
+
   function applyTheme() {
     const t = themes[state.theme % themes.length];
     root.style.setProperty("--night", t.night);
@@ -1423,6 +1476,23 @@ window.ARABIC_ALPHABET_META = {
     root.style.setProperty("--turquoise", t.turquoise);
   }
 
+  const REVIEW_READING_STEPS={
+    29:{symbol:"َ",name:"Fatḥah",note:"A tiny mark that helps us hear a short a sound."},
+    30:{symbol:"ِ",name:"Kasrah",note:"A tiny mark that helps us hear a short i sound."},
+    31:{symbol:"ُ",name:"Ḍammah",note:"A tiny mark that helps us hear a short u sound."},
+    32:{symbol:"ْ",name:"Sukūn",note:"This mark tells us the letter has no short vowel after it."},
+    33:{symbol:"ّ",name:"Shaddah",note:"This mark makes a consonant sound stronger or doubled."},
+    34:{symbol:"ا",name:"Long ā",note:"Listen for a longer aa sound."},
+    35:{symbol:"ي",name:"Long ī",note:"Listen for a longer ee sound."},
+    36:{symbol:"و",name:"Long ū",note:"Listen for a longer oo sound."},
+    37:{symbol:"↔",name:"Joining",note:"Watch how friendly letters join together."},
+    38:{symbol:"👂",name:"Listen & Find",note:"Listen for a sound and find its letter."},
+    39:{symbol:"🔤",name:"Tiny Syllables",note:"Blend a letter with one short vowel."},
+    40:{symbol:"📖",name:"Tiny Reading",note:"Read very small sound combinations together."},
+    41:{symbol:"🌌",name:"Grand Review",note:"Mix letters, forms, sounds, and simple vowel marks."},
+    42:{symbol:"🏆",name:"Celebration",note:"Celebrate the alphabet and your first Arabic reading steps."}
+  };
+
   const UI = {
     en:{
       panelTitle:"🌍 Choose Your Home Language",
@@ -1431,7 +1501,7 @@ window.ARABIC_ALPHABET_META = {
       slow:"🐢 Slow and gentle",normal:"🙂 Just right",lively:"🐇 A little lively",
       hearLesson:"🔊 Hear Lesson",theme:"🎨 Choose My Adventure",reset:"↺ Reset Progress",
       hearArabic:"Hear Arabic",hearEnglish:"Hear English",hearMeaning:"🏠 Hear Meaning",
-      repeat:"🗣 Repeat After Me",stop:"⏹ Stop Voice",meet:"👋 Meet My Voice",
+      repeat:"🗣 Repeat After Me",stop:"⏹ Stop Eiren",meet:"🌸 Meet Eiren",
       traceTitle:"✏️ Large Tracing Studio",traceNote:"Trace over the pale guide letters. Use Clear to practice again.",
       listenMove:"🔊 Listen & Move",tiles:"🔤 Letter Tiles",match:"🧩 Matching Game",
       progress:"Week Progress",complete:"🏆 Complete Week",previous:"◀ Previous Week",next:"Next Week ▶",
@@ -1513,19 +1583,11 @@ window.ARABIC_ALPHABET_META = {
     fa:{speech:"fa-IR",rtl:true}
   };
 
-  const VOICE_FRIENDS = {
-    fairy:{name:"Fairy Lily",emoji:"🧚",rate:.84,pitch:1.2,preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i},
-    bear:{name:"Benny Bear",emoji:"🐻",rate:.78,pitch:.9,preferred:/daniel|david|alex|fred|george|male|tom/i},
-    owl:{name:"Professor Owl",emoji:"🦉",rate:.74,pitch:1,preferred:/daniel|samantha|alex|serena|moira/i},
-    robot:{name:"Robo Reader",emoji:"🤖",rate:.86,pitch:.72,preferred:/fred|ralph|alex|david|google us english/i},
-    rainbow:{name:"Rainbow Friend",emoji:"🌈",rate:.86,pitch:1.08,preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i}
+  const EIREN={
+    name:"Eiren",emoji:"🌸",rate:.82,pitch:1.06,
+    preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
+    greeting:"Hello, little explorer. I’m Eiren. Let’s discover Arabic letters together, one gentle sound and one bright star at a time."
   };
-
-  const SPEEDS = {slow:.88,normal:1,lively:1.1};
-  let voices = [];
-  let speechToken = 0;
-  let lastSpoken = "";
-
   function refreshVoices(){
     if(!("speechSynthesis" in window)) return;
     voices = speechSynthesis.getVoices() || [];
@@ -1650,13 +1712,12 @@ window.ARABIC_ALPHABET_META = {
     });
   }
 
+  const VOCAB_TRANSLATIONS={"Lion": {"es": "León", "fr": "Lion", "pt": "Leão", "ur": "شیر", "fa": "شیر"}, "Duck": {"es": "Pato", "fr": "Canard", "pt": "Pato", "ur": "بطخ", "fa": "اردک"}, "Apples": {"es": "Manzanas", "fr": "Pommes", "pt": "Maçãs", "ur": "سیب", "fa": "سیب‌ها"}, "Fox": {"es": "Zorro", "fr": "Renard", "pt": "Raposa", "ur": "لومڑی", "fa": "روباه"}, "Camel": {"es": "Camello", "fr": "Chameau", "pt": "Camelo", "ur": "اونٹ", "fa": "شتر"}, "Horse": {"es": "Caballo", "fr": "Cheval", "pt": "Cavalo", "ur": "گھوڑا", "fa": "اسب"}, "Bread": {"es": "Pan", "fr": "Pain", "pt": "Pão", "ur": "روٹی", "fa": "نان"}, "Bear": {"es": "Oso", "fr": "Ours", "pt": "Urso", "ur": "ریچھ", "fa": "خرس"}, "Wolf": {"es": "Lobo", "fr": "Loup", "pt": "Lobo", "ur": "بھیڑیا", "fa": "گرگ"}, "Pomegranate": {"es": "Granada", "fr": "Grenade", "pt": "Romã", "ur": "انار", "fa": "انار"}, "Flower": {"es": "Flor", "fr": "Fleur", "pt": "Flor", "ur": "پھول", "fa": "گل"}, "Fish": {"es": "Pez", "fr": "Poisson", "pt": "Peixe", "ur": "مچھلی", "fa": "ماهی"}, "Sun": {"es": "Sol", "fr": "Soleil", "pt": "Sol", "ur": "سورج", "fa": "خورشید"}, "Frog": {"es": "Rana", "fr": "Grenouille", "pt": "Sapo", "ur": "مینڈک", "fa": "قورباغه"}, "Bird": {"es": "Pájaro", "fr": "Oiseau", "pt": "Pássaro", "ur": "پرندہ", "fa": "پرنده"}, "Eye": {"es": "Ojo", "fr": "Œil", "pt": "Olho", "ur": "آنکھ", "fa": "چشم"}, "Elephant": {"es": "Elefante", "fr": "Éléphant", "pt": "Elefante", "ur": "ہاتھی", "fa": "فیل"}, "Moon": {"es": "Luna", "fr": "Lune", "pt": "Lua", "ur": "چاند", "fa": "ماه"}, "Book": {"es": "Libro", "fr": "Livre", "pt": "Livro", "ur": "کتاب", "fa": "کتاب"}, "Lemon": {"es": "Limón", "fr": "Citron", "pt": "Limão", "ur": "لیموں", "fa": "لیمو"}, "Banana": {"es": "Plátano", "fr": "Banane", "pt": "Banana", "ur": "کیلا", "fa": "موز"}, "Star": {"es": "Estrella", "fr": "Étoile", "pt": "Estrela", "ur": "ستارہ", "fa": "ستاره"}, "Rose": {"es": "Rosa", "fr": "Rose", "pt": "Rosa", "ur": "گلاب", "fa": "گل سرخ"}, "Hand": {"es": "Mano", "fr": "Main", "pt": "Mão", "ur": "ہاتھ", "fa": "دست"}};
   function currentMeaningText(){
-    const data = CURRICULUM[state.currentWeek - 1];
-    const letters = getLessonLetters(data);
-    if(data.type === "letter"){
-      return `${data.letter.exampleTransliteration}. ${data.letter.exampleEnglish}.`;
-    }
-    return letters.map(l => `${l.transliteration}. ${l.exampleEnglish}.`).join(" ");
+    const item=currentLesson?.letter||currentLetter?.()||current()?.letter||current();
+    const english=item?.exampleEnglish||"";
+    if(state.homeLanguage==="en") return english;
+    return VOCAB_TRANSLATIONS[english]?.[state.homeLanguage] || `${english}. ${UI[state.homeLanguage]?.noTranslation||UI.en.noTranslation}`;
   }
 
   function currentArabicRepeatText(){
@@ -1685,6 +1746,16 @@ window.ARABIC_ALPHABET_META = {
     if(trans) trans.textContent = state.showTransliteration ? "Aa Transliteration On" : "Aa Transliteration Off";
   }
 
+  function maxUnlockedWeek(){
+    let unlocked=1;
+    for(let w=1;w<42;w++){
+      if(state.completed.has(w)) unlocked=w+1;
+      else break;
+    }
+    return unlocked;
+  }
+  function isWeekUnlocked(w){ return w<=maxUnlockedWeek() || state.completed.has(w); }
+
   function renderConstellation(){
     const row = document.getElementById("constellationRow");
     if(!row) return;
@@ -1703,18 +1774,19 @@ window.ARABIC_ALPHABET_META = {
       {week:42,icon:"🏆",label:"Celebration"}
     ];
     row.innerHTML = milestones.map(m => {
-      const on = state.completed.size >= m.week || state.completed.has(m.week);
+      const on = Array.from({length:m.week},(_,i)=>i+1).every(w=>state.completed.has(w));
       return `<div class="constellation-star ${on ? "on" : ""}"><span>${on ? m.icon : "☆"}</span><small>${m.label}</small></div>`;
     }).join("");
     document.getElementById("constellationNote").textContent =
-      state.completed.size >= 42
+      Array.from({length:42},(_,i)=>i+1).every(w=>state.completed.has(w))
         ? "Every constellation is shining. The certificate is ready!"
         : `${state.completed.size} of 42 weeks complete.`;
   }
 
   function openCertificate(){
-    if(state.completed.size < 42){
-      const remaining = 42 - state.completed.size;
+    if(!Array.from({length:42},(_,i)=>i+1).every(w=>state.completed.has(w))){
+      const validDone=Array.from({length:42},(_,i)=>i+1).filter(w=>state.completed.has(w)).length;
+      const remaining = 42 - validDone;
       alert(`Complete ${remaining} more week${remaining === 1 ? "" : "s"} to unlock the final certificate.`);
       return;
     }
@@ -2194,16 +2266,7 @@ window.ARABIC_ALPHABET_META = {
     if(status) status.textContent = "Reading speed saved.";
   };
 
-  document.getElementById("voiceFriends").onclick = event => {
-    const button = event.target.closest("[data-voice]");
-    if(!button) return;
-    state.voiceFriend = button.dataset.voice;
-    updateVoiceFriendButtons();
-    save();
-    const friend = VOICE_FRIENDS[state.voiceFriend];
-    document.getElementById("voiceStatus").textContent =
-      `${friend.emoji} ${friend.name} selected. Tap Meet My Voice to listen.`;
-  };
+  
 
   document.getElementById("previewVoiceBtn").onclick = () => {
     const meta = LANGUAGE_META[state.homeLanguage] || LANGUAGE_META.en;
@@ -2294,6 +2357,7 @@ window.ARABIC_ALPHABET_META = {
     if(event.key === "Escape") closeCertificate();
   });
 
+  connectEirenBoundary();
   applyTheme();
   applyCrecheSettings();
   renderConstellation();
