@@ -181,6 +181,261 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   body{background:#fff!important;color:#111!important}.sparkles,.child-controls,.clusters,.selection-row,.adult-panel,.story-actions,.filter-row,.footer,.status,.illustration{display:none!important}.app{width:100%;padding:0}.hero,.card,.story-card,.nest-item{box-shadow:none!important;border:0!important;background:#fff!important;color:#111!important}.hero{display:block}.hero h1,.hero .subtitle,.story-title,.story-text,.meta,.nest-title,.nest-text,.nest-meta{color:#111!important;text-shadow:none!important}.main-layout{display:block}.side{margin-top:18px}
   body.print-story .side{display:none!important}body.print-nest .grove{display:none!important}
 }
+
+/* =========================================================
+   Storybird Grove — Preschool Breathing Room Edition
+   Visual-only enhancement: story logic remains unchanged.
+   ========================================================= */
+:root{
+  --radius:30px;
+  --touch:54px;
+}
+.app{
+  width:min(1180px,calc(100% - 32px));
+  padding:22px 0 52px;
+}
+.hero{
+  padding:28px 30px;
+  border-radius:36px;
+  gap:24px;
+}
+.logo{
+  width:76px;height:76px;border-radius:24px;font-size:38px;
+}
+.subtitle{
+  margin-top:8px;
+  max-width:720px;
+  line-height:1.55;
+}
+.mascot-banner{
+  margin-top:22px;
+  padding:22px 26px;
+  border-radius:28px;
+  gap:18px;
+}
+.mascot-face{font-size:3.7rem}
+.mascot-banner h3{font-size:1.18rem}
+.mascot-banner p{margin-top:6px;font-size:.95rem;line-height:1.6}
+
+.eiren-companion{
+  margin:22px 0 0;
+  padding:22px 24px;
+  border-radius:28px;
+}
+.eiren-companion-row{gap:16px}
+.eiren-mark{width:64px;height:64px;font-size:2rem}
+.eiren-companion h3{font-size:1.12rem}
+.eiren-companion p{font-size:.9rem;line-height:1.55}
+.eiren-actions{gap:12px;margin-top:16px}
+.eiren-actions .btn{min-height:52px}
+
+.voice-studio{
+  margin-top:22px;
+  padding:22px 24px;
+  border-radius:28px;
+}
+.voice-studio h3{margin-bottom:14px;font-size:1.1rem}
+.voice-friends{gap:12px}
+.voice-friend{
+  min-height:78px;
+  border-radius:20px;
+  padding:12px 8px;
+}
+.voice-friend .emoji{font-size:1.75rem}
+.voice-friend .name{font-size:.76rem}
+.voice-options{margin-top:14px;gap:12px}
+.voice-options .btn{min-height:50px}
+
+.child-controls{
+  margin-top:22px;
+  padding:20px 22px;
+  border-radius:28px;
+  gap:16px;
+}
+.control-group{gap:12px}
+.field label{margin-bottom:7px;font-size:.82rem}
+select,input[type="text"]{min-height:54px;border-radius:18px;padding:10px 13px}
+.btn{
+  min-height:52px;
+  padding:11px 18px;
+}
+.main-layout{
+  grid-template-columns:minmax(0,1fr) minmax(300px,350px);
+  gap:24px;
+  margin-top:24px;
+}
+.card{
+  border-radius:30px;
+  padding:22px;
+}
+.story-card{
+  border-radius:28px;
+  padding:26px;
+}
+.story-title{margin-bottom:12px}
+.story-text{
+  line-height:1.72;
+  max-width:72ch;
+}
+.meta{margin-top:14px;line-height:1.55}
+.illustration{
+  min-height:220px;
+  margin-top:20px;
+  border-radius:24px;
+}
+.story-actions{
+  gap:11px;
+  margin-top:18px;
+}
+.story-actions .btn{
+  min-height:50px;
+  padding:10px 14px;
+  font-size:.88rem;
+}
+.status{
+  min-height:50px;
+  margin-top:18px;
+  padding:13px 15px;
+  border-radius:18px;
+  line-height:1.55;
+}
+.theme-banner{
+  margin-top:22px;
+  padding:15px 17px;
+  border-radius:20px;
+  line-height:1.55;
+}
+.guide-note{
+  margin:15px 4px 20px;
+  line-height:1.6;
+}
+.clusters{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.cluster{
+  border-radius:24px;
+  padding:16px;
+  border-top-width:6px;
+}
+.cluster-title{
+  margin-bottom:13px;
+  align-items:center;
+}
+.spirit-grid{
+  grid-template-columns:repeat(auto-fit,minmax(136px,1fr));
+  gap:11px;
+}
+.spirit{
+  min-height:70px;
+  border-radius:19px;
+  padding:11px;
+  gap:10px;
+  line-height:1.25;
+}
+.spirit-dot{
+  width:42px;height:42px;border-radius:15px;font-size:22px;
+}
+.vocab-garden{
+  margin-top:24px;
+  padding:18px 20px;
+  border-radius:24px;
+}
+.vocab-garden h3{margin-bottom:7px;font-size:1.08rem}
+.vocab-garden p{line-height:1.55}
+.vocab-chips{gap:10px;margin-top:13px}
+.vocab-chip{padding:8px 12px;font-size:.82rem}
+
+.passport{
+  margin-top:24px;
+  padding:20px;
+  border-radius:26px;
+}
+.passport h3{margin-bottom:14px}
+.stamp-row{gap:12px}
+.passport-stamp{
+  padding:13px 8px;
+  border-radius:19px;
+}
+.passport-stamp span{font-size:1.65rem}
+.passport-stamp small{font-size:.72rem}
+
+.selection-row{
+  gap:12px;
+  margin-top:22px;
+}
+.slot{
+  min-height:58px;
+  border-radius:18px;
+  padding:10px;
+  line-height:1.35;
+}
+.side-title{font-size:1.45rem}
+.side-sub{margin:7px 0 15px;line-height:1.55}
+.stats{gap:10px;margin:15px 0}
+.stat{padding:12px 8px;border-radius:18px}
+.filter-row{gap:10px}
+.nest-list{
+  margin-top:16px;
+  gap:13px;
+}
+.nest-item{
+  border-radius:21px;
+  padding:14px;
+}
+.nest-text{margin-top:7px;line-height:1.55}
+.nest-meta{margin-top:8px}
+.nest-actions{gap:9px;margin-top:12px}
+
+details.adult-panel{
+  margin-top:24px;
+  border-radius:26px;
+}
+details.adult-panel summary{
+  padding:17px 20px;
+}
+.adult-inner{padding:0 20px 20px}
+.adult-grid{gap:13px;margin-top:16px}
+.check-card,.range-box{border-radius:18px}
+.adult-actions{gap:11px;margin-top:16px}
+
+.footer{
+  margin-top:24px;
+  padding:18px;
+  border-radius:22px;
+  line-height:1.65;
+}
+
+@media(max-width:960px){
+  .main-layout{gap:20px}
+  .clusters{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .app{width:min(100% - 22px,1180px)}
+  .hero{padding:22px}
+  .clusters{grid-template-columns:1fr}
+  .story-card{padding:21px}
+  .illustration{min-height:185px}
+  .spirit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:540px){
+  .app{width:min(100% - 14px,1180px);padding-top:10px}
+  .hero{padding:18px;border-radius:28px}
+  .brand{align-items:flex-start}
+  .logo{width:58px;height:58px;border-radius:19px;font-size:29px}
+  .mascot-banner,.eiren-companion,.voice-studio,.child-controls,.card{padding:17px}
+  .mascot-banner,.eiren-companion,.voice-studio,.child-controls{margin-top:16px}
+  .main-layout{margin-top:16px}
+  .control-group{grid-template-columns:1fr!important}
+  .child-controls>.control-group:last-child{grid-template-columns:1fr 1fr!important}
+  .story-actions{display:grid;grid-template-columns:1fr 1fr}
+  .story-actions .btn{width:100%}
+  .spirit-grid{grid-template-columns:1fr 1fr;gap:9px}
+  .spirit{min-height:68px;padding:9px}
+  .stamp-row{grid-template-columns:1fr 1fr}
+  .selection-row,.selection-row.growing{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
