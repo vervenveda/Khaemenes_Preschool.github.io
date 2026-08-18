@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Storybird Grove — a private, offline-first preschool story garden with curated characters, settings, actions, feelings, narration, printable stories, and local-only saving.">
-<title>Storybird Grove™ — Crechè Story Garden</title>
+<title>Storybird Grove™ — Crechè Story Garden v2.2 · Eiren Story Friend</title>
 <style>
 :root{
   --ink:#302a42;
@@ -158,6 +158,14 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
 .passport-stamp span{display:block;font-size:1.45rem}.passport-stamp small{font-size:.68rem;color:var(--muted);font-weight:900}
 .sparkle-burst{position:fixed;pointer-events:none;z-index:12000;font-size:1.6rem;animation:burstFly 1s ease forwards}
 @keyframes burstFly{to{transform:translateY(-80px) scale(1.35) rotate(18deg);opacity:0}}
+
+.vocab-garden{margin-top:12px;padding:12px;border-radius:18px;background:linear-gradient(145deg,#fffdf5,#f4fff9,#f8f2ff);border:1px solid var(--line)}
+.vocab-garden h3{margin:0 0 4px;color:var(--violet-dark);font-size:1rem}
+.vocab-garden p{margin:0;color:var(--muted);font-size:.84rem;line-height:1.4}
+.vocab-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.vocab-chip{border:1px solid #e2d7e9;border-radius:999px;background:#fff;padding:6px 9px;color:#533c73;font-size:.78rem;font-weight:900}
+
+.eiren-companion{margin:12px 0;padding:12px 14px;border-radius:20px;background:linear-gradient(145deg,#fff7fb,#f7f2ff,#f5fffb);border:1px solid #e6d9ec}.eiren-companion-row{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:center}.eiren-mark{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdce9,#e6e0ff);font-size:1.7rem}.eiren-companion h3{margin:0 0 2px;color:var(--violet-dark);font-size:1rem}.eiren-companion p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.42}.eiren-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.eiren-actions button{flex:1 1 145px}.eiren-status{margin-top:7px;min-height:1.2em;color:#765c8c;font-size:.77rem;font-weight:900}
 @media(max-width:700px){
   .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
   .voice-friend:last-child{grid-column:1/-1}
@@ -188,6 +196,7 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
     <div><h3>Pip Storybird is your story guide</h3><p>“Hello, little storyteller! Choose a friend, a place, and an action. We will grow your idea into a magical story together.”</p></div>
   </section>
 
+  <section class="eiren-companion" aria-labelledby="eirenTitle"><div class="eiren-companion-row"><div class="eiren-mark" aria-hidden="true">🌸</div><div><h3 id="eirenTitle">Eiren · Story Friend</h3><p>Pip helps grow the story. Eiren reads the finished story with you. She never changes your choices or the Storybird story engine.</p></div></div><div class="eiren-actions"><button class="btn secondary" type="button" id="eirenHello">🌸 Meet Eiren</button><button class="btn secondary" type="button" id="eirenRead">📖 Eiren, Read My Story</button><button class="btn secondary" type="button" id="eirenStop">⏹ Stop Eiren</button></div><div class="eiren-status" id="eirenStatus" aria-live="polite">Eiren is getting the storybook ready…</div></section>
   <section class="voice-studio" aria-labelledby="voiceTitle">
     <h3 id="voiceTitle">Choose Your Reading Friend</h3>
     <div class="voice-friends" id="voiceFriends">
@@ -248,6 +257,13 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
         <div class="cluster extra hidden" id="endingCluster"><div class="cluster-title"><span>🌈 Ending</span><small>pick 1</small></div><div class="spirit-grid" id="endingsList"></div></div>
       </section>
 
+
+
+      <section class="vocab-garden" aria-labelledby="wordGardenTitle">
+        <h3 id="wordGardenTitle">🌱 Little Word Garden</h3>
+        <p>Story words to notice together. Grown-ups can say the word, use it in a sentence, and ask the child what it might mean.</p>
+        <div class="vocab-chips" id="vocabChips" aria-live="polite"></div>
+      </section>
 
       <section class="passport">
         <h3>🌎 My Storybird Discovery Passport</h3>
@@ -412,7 +428,31 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   "velvet mole",
   "clover hedgehog",
   "willow deer",
-  "honeysuckle hummingbird"
+  "honeysuckle hummingbird",
+  "button-nose bunny",
+  "poppyseed puppy",
+  "teacup tortoise",
+  "sunny salamander",
+  "bluebell bunny",
+  "daisy duckling",
+  "pocket-sized pony",
+  "feather-soft gosling",
+  "tulip snail",
+  "little luna moth",
+  "rainbow trout",
+  "garden ladybug",
+  "sleepy sloth",
+  "puffin chick",
+  "seashell seahorse",
+  "cocoa capybara",
+  "woolly caterpillar",
+  "breezy bumblebee",
+  "water-lily frog",
+  "tiny field mouse",
+  "plum-colored finch",
+  "cherry-cheeked chipmunk",
+  "moon-petal moth",
+  "sunflower fawn"
 ];
 
   const SETTINGS = [
@@ -517,7 +557,27 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   "the Twinkling Forest",
   "the Sunlit Clearing",
   "the Secret Cove",
-  "the Gentle River"
+  "the Gentle River",
+  "the Poppy Patch",
+  "the Daisy Lane",
+  "the Sunflower Hill",
+  "the Pebble Beach",
+  "the Seashell Lagoon",
+  "the Quiet Lagoon",
+  "the Storybook Garden",
+  "the Berry Patch",
+  "the Little Footbridge",
+  "the Winding Garden Path",
+  "the Dandelion Hill",
+  "the Puddle Path",
+  "the Cozy Treehouse",
+  "the Toadstool Village",
+  "the Morning Dew Meadow",
+  "the Firefly Lane",
+  "the Cloudberry Hill",
+  "the Starflower Garden",
+  "the Seashell Beach",
+  "the Whispering Reed Pond"
 ];
 
   const VERBS = [
@@ -621,7 +681,47 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   "befriend a woodland creature",
   "solve a forest mystery",
   "celebrate together",
-  "return home"
+  "return home",
+  "notice a tiny detail",
+  "name the colors",
+  "sort smooth pebbles",
+  "match fallen leaves",
+  "compare two footprints",
+  "describe a cloud",
+  "tell a tiny joke",
+  "ask a kind question",
+  "answer a friend's question",
+  "take turns",
+  "invite a friend",
+  "thank a helper",
+  "practice a new skill",
+  "try one more time",
+  "choose a safe path",
+  "tidy a tiny nest",
+  "carry a little basket",
+  "roll down a hill",
+  "march to a rhythm",
+  "tap a gentle beat",
+  "make up a song",
+  "tell a story",
+  "look for shapes",
+  "count flower petals",
+  "sort colorful shells",
+  "listen for birds",
+  "smell the flowers",
+  "feel the soft moss",
+  "look under a leaf",
+  "wave to a neighbor",
+  "share a snack",
+  "offer a hug",
+  "build a blanket fort",
+  "make a leaf picture",
+  "press flowers",
+  "make a nature pattern",
+  "find something round",
+  "find something blue",
+  "follow a map",
+  "draw a treasure map"
 ];
 
   const ADJECTIVES = [
@@ -725,7 +825,41 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   "graceful",
   "lively",
   "quiet",
-  "sleepy"
+  "sleepy",
+  "bright-eyed",
+  "soft-spoken",
+  "warm-hearted",
+  "big-hearted",
+  "wide-eyed",
+  "sunny",
+  "snuggly",
+  "bouncy",
+  "wobbly",
+  "ticklish",
+  "dappled",
+  "speckled",
+  "striped",
+  "polka-dotted",
+  "peachy",
+  "minty",
+  "sky-blue",
+  "sunflower-yellow",
+  "puddle-splashed",
+  "dew-kissed",
+  "star-speckled",
+  "petal-soft",
+  "feather-light",
+  "pocket-sized",
+  "button-bright",
+  "wondering",
+  "inventive",
+  "observant",
+  "generous",
+  "neighborly",
+  "trusty",
+  "determined",
+  "careful",
+  "creative"
 ];
 
   const PRONOUNS = [
@@ -763,7 +897,7 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
     (c,s,v)=>`Every flower in ${s} seemed to bloom a little brighter whenever the ${c} went ${verbToGerundPhrase(v)}.`,
     (c,s,v)=>`The ${c} smiled softly while ${verbToGerundPhrase(v)} through ${s}, leaving tiny happy footprints behind.`,
     (c,s,v)=>`In the peaceful heart of ${s}, the ${c} found joy in ${verbToGerundPhrase(v)}.`,
-    (c,s,v)=>`The day felt wonderfully calm as the ${c} explored ${s} by ${verbToGerundPhrase(v)}.`
+    (c,s,v)=>`The day felt wonderfully calm as the ${c} explored ${s} while ${verbToGerundPhrase(v)}.`
   ],
 
   adventure: [
@@ -929,10 +1063,12 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   const WEEK_COUNT = 84;
   const IMPORT_LIMIT = 3 * 1024 * 1024;
 
-  const FEELINGS = ["happy","curious","brave","kind","calm","excited","hopeful","proud"];
+  const FEELINGS = ["happy","curious","brave","kind","calm","excited","hopeful","proud","surprised","shy","worried","peaceful","silly","grateful"];
   const ENDINGS = [
     "made a new friend","helped someone nearby","found a cozy way home","shared a wonderful discovery",
-    "learned to try again","celebrated with everyone","planted a new beginning","ended the day with a smile"
+    "learned to try again","celebrated with everyone","planted a new beginning","ended the day with a smile",
+    "shared what they learned","thanked a helpful friend","made room for one more friend","left a kind note",
+    "promised to care for the garden","tucked the memory safely away"
   ];
   const WEEK_TOPICS = [
     {name:"Kindness",icon:"💛",focus:"A small act of kindness can help a friend."},
@@ -948,12 +1084,19 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
     {name:"Courage",icon:"⭐",focus:"Being brave can mean asking for help or trying again."},
     {name:"Home",icon:"🏡",focus:"Describe what makes a place feel safe and cozy."},
     {name:"Sharing",icon:"🎁",focus:"A shared treasure, idea, or smile can brighten the ending."},
-    {name:"Wonder",icon:"🌙",focus:"Ask a question and let curiosity guide the story."}
+    {name:"Wonder",icon:"🌙",focus:"Ask a question and let curiosity guide the story."},
+    {name:"Describing",icon:"🖍️",focus:"Use a describing word for a character, place, sound, color, or texture."},
+    {name:"Sequence",icon:"1️⃣",focus:"Tell what happened first, next, and last."},
+    {name:"Questions",icon:"❓",focus:"Let a character ask a simple who, what, where, why, or how question."},
+    {name:"Listening",icon:"👂",focus:"Notice what a friend says and let the next part of the story respond."},
+    {name:"Gratitude",icon:"💖",focus:"Notice something helpful, beautiful, or kind and say thank you."},
+    {name:"Patterns",icon:"🔷",focus:"Look for repeating colors, sounds, shapes, movements, or ideas."},
+    {name:"Senses",icon:"🌼",focus:"Describe something a character can see, hear, smell, touch, or taste."}
   ];
   const WEEK_LEVELS = ["Seedling","Sprout","Bloom","Songbird","Lantern","Starlight"];
 
   const els = {};
-  ["voiceFriends","previewVoice","stopVoiceFriend","voiceStatus","passportStamps","modeSelect","toneSelect","randomBtn","magicBtn","weaveBtn","newChoicesBtn","storyTitle","storyText","storyMeta","illustrationArea","readBtn","pauseBtn","resumeBtn","stopBtn","copyBtn","printStoryBtn","saveBtn","clearBtn","statusBox","themeBanner","guideNote","charsList","setsList","verbsList","feelingsList","endingsList","feelingCluster","endingCluster","selectionRow","selChar","selSet","selVerb","selFeeling","selEnding","storyCount","favoriteCount","pathCount","showAllBtn","favoritesBtn","nestList","adultPanel","weekSelect","pronounSelect","runsRange","runsOut","rateRange","rateOut","animationToggle","simpleToggle","largeToggle","contrastToggle","exportNest","importNest","printNest","clearNest","importFile","modalOverlay","modalTitle","modalMessage","modalActions","toast"].forEach(id=>els[id]=document.getElementById(id));
+  ["eirenHello","eirenRead","eirenStop","eirenStatus","vocabChips","voiceFriends","previewVoice","stopVoiceFriend","voiceStatus","passportStamps","modeSelect","toneSelect","randomBtn","magicBtn","weaveBtn","newChoicesBtn","storyTitle","storyText","storyMeta","illustrationArea","readBtn","pauseBtn","resumeBtn","stopBtn","copyBtn","printStoryBtn","saveBtn","clearBtn","statusBox","themeBanner","guideNote","charsList","setsList","verbsList","feelingsList","endingsList","feelingCluster","endingCluster","selectionRow","selChar","selSet","selVerb","selFeeling","selEnding","storyCount","favoriteCount","pathCount","showAllBtn","favoritesBtn","nestList","adultPanel","weekSelect","pronounSelect","runsRange","runsOut","rateRange","rateOut","animationToggle","simpleToggle","largeToggle","contrastToggle","exportNest","importNest","printNest","clearNest","importFile","modalOverlay","modalTitle","modalMessage","modalActions","toast"].forEach(id=>els[id]=document.getElementById(id));
 
   let state = loadState();
   let currentWeek = clampInt(state.lastWeek || 1,1,WEEK_COUNT);
@@ -982,7 +1125,7 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   function verbToPlainPhrase(verb){return String(verb||"wonder").replace(/-/g," ").replace(/\s+/g," ").trim()}
   function verbToGerundPhrase(verb){const phrase=verbToPlainPhrase(verb);if(!phrase)return"wondering";if(phrase.includes(" and "))return phrase.split(/\s+and\s+/).map(verbToGerundPhrase).join(" and ");const words=phrase.split(/\s+/);words[0]=toGerundWord(words[0]);return words.join(" ")}
 
-  function weekTopic(week){const topic=WEEK_TOPICS[(week-1)%WEEK_TOPICS.length];const level=WEEK_LEVELS[Math.floor((week-1)/WEEK_TOPICS.length)]||"Starlight";return {...topic,level,label:`${level} ${topic.name}`}}
+  function weekTopic(week){const topic=WEEK_TOPICS[(week-1)%WEEK_TOPICS.length];const level=WEEK_LEVELS[Math.floor((week-1)/WEEK_TOPICS.length)]||WEEK_LEVELS[WEEK_LEVELS.length-1];return {...topic,level,label:`${level} ${topic.name}`}}
   function getWeek(week,round){const r=clampInt(round??state.weekRounds[String(week)]??0,0,999999);return{week,characters:shuffleSeeded(CHARACTERS,`characters:${week}:${r}`).slice(0,7),settings:shuffleSeeded(SETTINGS,`settings:${week}:${r}`).slice(0,7),verbs:shuffleSeeded(VERBS,`verbs:${week}:${r}`).slice(0,7)}}
   function isGrowing(){return state.settings.mode==="growing"}
   function isComplete(sel=selection){return !!(sel.character&&sel.setting&&sel.verb&&(!isGrowing()||(sel.feeling&&sel.ending)))}
@@ -996,14 +1139,14 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
 
   function applySettings(){document.body.classList.toggle("animations-off",!state.settings.animations);document.body.classList.toggle("simple-layout",state.settings.simple);document.body.classList.toggle("large-text",state.settings.large);document.body.classList.toggle("high-contrast",state.settings.contrast);els.modeSelect.value=state.settings.mode;els.toneSelect.value=state.settings.tone;els.pronounSelect.value=state.settings.pronoun;els.runsRange.value=String(state.settings.runs);els.runsOut.textContent=String(state.settings.runs);els.rateRange.value=String(Math.round(state.settings.rate*100));els.rateOut.textContent=state.settings.rate.toFixed(2);els.animationToggle.checked=state.settings.animations;els.simpleToggle.checked=state.settings.simple;els.largeToggle.checked=state.settings.large;els.contrastToggle.checked=state.settings.contrast;updateModeUI()}
   function renderWeeks(){els.weekSelect.innerHTML="";for(let i=1;i<=WEEK_COUNT;i++){const t=weekTopic(i);const o=document.createElement("option");o.value=String(i);o.textContent=`Path ${i} • ${t.label}`;els.weekSelect.appendChild(o)}els.weekSelect.value=String(currentWeek)}
-  function updateThemeBanner(){const t=weekTopic(currentWeek);els.themeBanner.textContent=`${t.icon} Garden Path ${currentWeek}: ${t.label} — ${t.focus}`}
+  function updateThemeBanner(){const t=weekTopic(currentWeek);els.themeBanner.textContent=`${t.icon} Garden Path ${currentWeek}: ${t.label} — ${t.focus}`;renderWordGarden()}
 
   function iconFor(type,label){const pool=ICONS[type]||["✨"];return pool[hashString(label)%pool.length]}
   function emojiForWord(str,kind){const s=String(str||"").toLowerCase();const sets={character:[[/owl/,"🦉"],[/fox/,"🦊"],[/dragon|dinosaur/,"🐉"],[/rabbit|hare|bunny/,"🐇"],[/mouse|mole|chipmunk/,"🐭"],[/kitten|cat|lynx/,"🐱"],[/wolf|dog/,"🐺"],[/moth|butterfly/,"🦋"],[/turtle/,"🐢"],[/deer|fawn|elk|doe/,"🦌"],[/bear/,"🐻"],[/otter/,"🦦"],[/bird|jay|crow|sparrow|goose|hawk|robin|finch/,"🐦"],[/seal/,"🦭"],[/dolphin/,"🐬"],[/frog/,"🐸"],[/snail/,"🐌"],[/unicorn/,"🦄"]],setting:[[/grove|forest|woods|orchard/,"🌳"],[/pond|lake|spring|brook|river|shore|coast|cove|marsh|waterfall/,"💧"],[/hill|ridge|summit|plateau|cliff|canyon|mountain/,"⛰️"],[/meadow|field|garden|glade|clearing/,"🌼"],[/moon|star|sky|cloud|sun/,"🌙"],[/bridge|arch/,"🌉"],[/cave|hollow|palace|gate|burrow/,"🏡"]],verb:[[/sing|hum|whistle/,"🎵"],[/dance|spin|twirl|glide|float/,"💃"],[/discover|explore|search|find|listen|watch/,"🔍"],[/paint|draw/,"🖌️"],[/dream|wish/,"💫"],[/gather|collect|pick/,"🧺"],[/help|share|comfort|friend/,"🤝"],[/follow|wander|walk|tiptoe|climb/,"🧭"]]};for(const [p,e] of sets[kind]||[])if(p.test(s))return e;return kind==="setting"?"🌿":kind==="verb"?"✨":"🕊️"}
 
   function renderClusters(options={}){const keepStory=!!options.keepStory;const w=getWeek(currentWeek);renderSpiritList(els.charsList,w.characters,"character");renderSpiritList(els.setsList,w.settings,"setting");renderSpiritList(els.verbsList,w.verbs,"verb");renderSpiritList(els.feelingsList,FEELINGS,"feeling");renderSpiritList(els.endingsList,ENDINGS,"ending");if(!options.keepSelection)selection=blankSelection();if(!keepStory)currentStory=null;refreshSelectionVisuals();updateSlots();if(!keepStory)clearStory(false);updateThemeBanner();saveState()}
-  function renderSpiritList(container,items,type){container.innerHTML="";items.forEach(label=>{const b=document.createElement("button");b.type="button";b.className="spirit";b.dataset.type=type;b.dataset.value=label;b.setAttribute("aria-pressed",selection[type]===label?"true":"false");const dot=document.createElement("span");dot.className="spirit-dot";dot.textContent=type==="feeling"?({happy:"😊",curious:"🤔",brave:"⭐",kind:"💛",calm:"🌿",excited:"🎉",hopeful:"🌈",proud:"🌟"}[label]||"💗"):type==="ending"?"🌈":iconFor(type,label);const name=document.createElement("span");name.textContent=label;b.append(dot,name);b.addEventListener("click",()=>pickSpirit(type,label));container.appendChild(b)})}
-  function pickSpirit(type,value){selection[type]=selection[type]===value?null:value;currentStory=null;refreshSelectionVisuals();updateSlots();saveState();if(isComplete())setStatus("All your story choices are ready. Press Make My Story!")}
+  function renderSpiritList(container,items,type){container.innerHTML="";items.forEach(label=>{const b=document.createElement("button");b.type="button";b.className="spirit";b.dataset.type=type;b.dataset.value=label;b.setAttribute("aria-pressed",selection[type]===label?"true":"false");const dot=document.createElement("span");dot.className="spirit-dot";dot.textContent=type==="feeling"?({happy:"😊",curious:"🤔",brave:"⭐",kind:"💛",calm:"🌿",excited:"🎉",hopeful:"🌈",proud:"🌟",surprised:"😮",shy:"🌷",worried:"💭",peaceful:"🕊️",silly:"😄",grateful:"💖"}[label]||"💗"):type==="ending"?"🌈":iconFor(type,label);const name=document.createElement("span");name.textContent=label;b.append(dot,name);b.addEventListener("click",()=>pickSpirit(type,label));container.appendChild(b)})}
+  function pickSpirit(type,value){selection[type]=selection[type]===value?null:value;currentStory=null;refreshSelectionVisuals();updateSlots();renderWordGarden();saveState();if(isComplete())setStatus("All your story choices are ready. Press Make My Story!")}
   function refreshSelectionVisuals(){document.querySelectorAll(".spirit").forEach(b=>b.setAttribute("aria-pressed",selection[b.dataset.type]===b.dataset.value?"true":"false"))}
   function updateSlots(){els.selChar.textContent=selection.character||"— character —";els.selSet.textContent=selection.setting||"— place —";els.selVerb.textContent=selection.verb||"— action —";els.selFeeling.textContent=selection.feeling||"— feeling —";els.selEnding.textContent=selection.ending||"— ending —"}
   function updateModeUI(){const growing=isGrowing();els.feelingCluster.classList.toggle("hidden",!growing);els.endingCluster.classList.toggle("hidden",!growing);els.selFeeling.classList.toggle("hidden",!growing);els.selEnding.classList.toggle("hidden",!growing);els.selectionRow.classList.toggle("growing",growing);els.guideNote.textContent=growing?"Pick five cards to grow a beginning, middle, and ending.":"Pick one character, one place, and one action to make a little story.";if(!growing){selection.feeling=null;selection.ending=null}refreshSelectionVisuals();updateSlots()}
@@ -1013,7 +1156,7 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   function pronoun(){return PRONOUNS.find(p=>p.subject===state.settings.pronoun)||PRONOUNS[2]}
   function polishText(text){return String(text).replace(/wandered (the [A-Z])/g,"wandered through $1").replace(/\s+/g," ").trim()}
   function littleText(sel,tone){const bank=TEMPLATES[tone]||TEMPLATES.gentle;return polishText(choose(bank)(sel.character,sel.setting,sel.verb))}
-  function growingText(sel,tone){const p=pronoun();const t=weekTopic(currentWeek);const first=littleText(sel,tone);const middles=[`At first, ${p.subject} felt ${sel.feeling}, but ${p.subject} remembered that ${t.focus.toLowerCase()}`,`Along the way, ${p.subject} felt ${sel.feeling} and noticed a small clue that made ${p.object} pause and think.`,`Soon, ${p.subject} met someone who listened carefully, and together they found a gentle way forward.`];const endings={"made a new friend":`By sunset, ${p.subject} had made a new friend, and they promised to visit again.`,"helped someone nearby":`Before the day ended, ${p.subject} helped someone nearby and felt warm inside.`,"found a cozy way home":`When the sky grew soft, ${p.subject} found a cozy way home and carried the memory along.`,"shared a wonderful discovery":`At the end, ${p.subject} shared the wonderful discovery so everyone could enjoy it.`,"learned to try again":`The adventure taught ${p.object} that trying again can open a brand-new path.`,"celebrated with everyone":`Soon everyone gathered to celebrate with music, laughter, and bright little lights.`,"planted a new beginning":`Together they planted a tiny seed, beginning a new story for another day.`,"ended the day with a smile":`The day ended with a smile, a gentle yawn, and one more wish for tomorrow.`};return `${first}\n\n${choose(middles)}\n\n${endings[sel.ending]||endings[ENDINGS[0]]}`}
+  function growingText(sel,tone){const p=pronoun();const t=weekTopic(currentWeek);const first=littleText(sel,tone);const middles=[`At first, ${p.subject} felt ${sel.feeling}, but ${p.subject} remembered that ${t.focus.toLowerCase()}`,`Along the way, ${p.subject} felt ${sel.feeling} and noticed a small clue that made ${p.object} pause and think.`,`Soon, ${p.subject} met someone who listened carefully, and together they found a gentle way forward.`];const endings={"made a new friend":`By sunset, ${p.subject} had made a new friend, and they promised to visit again.`,"helped someone nearby":`Before the day ended, ${p.subject} helped someone nearby and felt warm inside.`,"found a cozy way home":`When the sky grew soft, ${p.subject} found a cozy way home and carried the memory along.`,"shared a wonderful discovery":`At the end, ${p.subject} shared the wonderful discovery so everyone could enjoy it.`,"learned to try again":`The adventure taught ${p.object} that trying again can open a brand-new path.`,"celebrated with everyone":`Soon everyone gathered to celebrate with music, laughter, and bright little lights.`,"planted a new beginning":`Together they planted a tiny seed, beginning a new story for another day.`,"ended the day with a smile":`The day ended with a smile, a gentle yawn, and one more wish for tomorrow.`,"shared what they learned":`Before heading home, ${p.subject} shared what ${p.subject} had learned so a friend could try it too.`,"thanked a helpful friend":`${p.subject.charAt(0).toUpperCase()+p.subject.slice(1)} thanked a helpful friend, and both of them carried a warm feeling home.`,"made room for one more friend":`Just before sunset, ${p.subject} made room for one more friend, and the circle of smiles grew wider.`,"left a kind note":`${p.subject.charAt(0).toUpperCase()+p.subject.slice(1)} left a tiny kind note for the next traveler to find.`,"promised to care for the garden":`Before leaving, ${p.subject} promised to care for the garden and all the little lives that called it home.`,"tucked the memory safely away":`As evening arrived, ${p.subject} tucked the happy memory safely away to remember on another day.`};return `${first}\n\n${choose(middles)}\n\n${endings[sel.ending]||endings[ENDINGS[0]]}`}
   function storyTitleFor(sel){const c=titleCase(sel.character.replace(/^(tiny|gentle|glowing|baby|little)\s+/i,""));const s=titleCase(sel.setting.replace(/^the\s+/i,""));return `${c} in ${s}`.slice(0,110)}
   function makeRecord(sel,tone,score=null){const mode=state.settings.mode;return{id:`sbg-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,title:storyTitleFor(sel),text:mode==="growing"?growingText(sel,tone):littleText(sel,tone),meta:{week:currentWeek,tone,mode,selection:{...sel},score},ts:Date.now(),favorite:false}}
   function weaveStory(){if(!isComplete()){setStatus(isGrowing()?"Pick a character, place, action, feeling, and ending first — or press Surprise Me.":"Pick a character, place, and action first — or press Surprise Me.",true);return}currentStory=makeRecord(selection,els.toneSelect.value);showStory(currentStory);state.weekRounds[String(currentWeek)]=clampInt((state.weekRounds[String(currentWeek)]||0)+1,0,999999);saveState();renderClusters({keepStory:true});updatePassport();sparkleBurst(8);setStatus("Your story is ready. New choices are waiting below.")}
@@ -1051,6 +1194,16 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   function refreshVoices(){if(!("speechSynthesis" in window))return;availableVoices=speechSynthesis.getVoices()||[];const f=VOICE_FRIENDS[state.settings.voiceFriend]||VOICE_FRIENDS.fairy;if(els.voiceStatus)els.voiceStatus.textContent=availableVoices.length?`${f.emoji} ${f.name} is ready.`:"Loading a friendly voice…"}
   function chooseFriendlyVoice(){if(!availableVoices.length)refreshVoices();const f=VOICE_FRIENDS[state.settings.voiceFriend]||VOICE_FRIENDS.fairy;const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));const pool=english.length?english:availableVoices;if(state.settings.voiceFriend==="rainbow"&&pool.length){const friendly=pool.filter(v=>/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));const choices=friendly.length?friendly:pool;return choices[Math.floor(Math.random()*choices.length)]||null}return pool.find(v=>f.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null}
   function updateVoiceButtons(){document.querySelectorAll("[data-voice]").forEach(b=>{const active=b.dataset.voice===state.settings.voiceFriend;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))})}
+  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  const EIREN_VOICE_PROFILE={pitch:1.08,rateFactor:.96,preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i};
+  let eirenBoundaryReady=false,eirenSpeechToken=0;
+  async function connectEirenBoundary(){try{const mod=await import(EIREN_PUBLIC_ADAPTER);if(mod?.EirenAdapter?.prepare){const p=mod.EirenAdapter.prepare({mode:"story",message:"Preschool Storybird Grove story companionship and gentle narration."});eirenBoundaryReady=p?.specialist==="eiren"}}catch(_err){eirenBoundaryReady=false}if(els.eirenStatus)els.eirenStatus.textContent=eirenBoundaryReady?"🌸 Eiren’s public story boundary is connected.":"🌸 Eiren is your Story Friend. Gentle device narration is ready."}
+  function chooseEirenVoice(){if(!("speechSynthesis" in window))return null;const all=speechSynthesis.getVoices()||[],en=all.filter(v=>/^en([-_]|$)/i.test(v.lang||"")),pool=en.length?en:all;return pool.find(v=>EIREN_VOICE_PROFILE.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null}
+  function stopEiren(){eirenSpeechToken++;if("speechSynthesis" in window)speechSynthesis.cancel();if(els.eirenStatus)els.eirenStatus.textContent="Eiren paused the storybook."}
+  function eirenSpeak(text){if(!text)return;if(!("speechSynthesis" in window)){els.eirenStatus.textContent="Narration is not available on this device.";return}stopSpeech();const token=++eirenSpeechToken,u=new SpeechSynthesisUtterance(text),voice=chooseEirenVoice();if(voice)u.voice=voice;u.lang=(voice&&voice.lang)||"en-US";u.rate=Math.max(.58,Math.min(1.02,state.settings.rate*EIREN_VOICE_PROFILE.rateFactor));u.pitch=EIREN_VOICE_PROFILE.pitch;u.onstart=()=>els.eirenStatus.textContent="🌸 Eiren is reading…";u.onend=()=>{if(token===eirenSpeechToken)els.eirenStatus.textContent="What a lovely story you grew. 🌱"};u.onerror=e=>{if(token===eirenSpeechToken)els.eirenStatus.textContent=e&&["interrupted","canceled"].includes(e.error)?"Eiren paused the storybook.":"The reading voice had a little hiccup. Try again."};speechSynthesis.speak(u)}
+  function meetEiren(){eirenSpeak("Hello, little storyteller. I am Eiren, your Story Friend. Pip will help you grow your story, and when it is ready, I would love to read it with you.")}
+  function eirenReadCurrentStory(){if(!currentStory){els.eirenStatus.textContent="Grow a story with Pip first, then Eiren can read it with you.";return}eirenSpeak(`Shall we read your story together? ${currentStory.title}. ${currentStory.text}`)}
+
   function speakText(text,{preview=false}={}){if(!("speechSynthesis" in window)){setStatus("Read aloud is not available in this browser.",true);return}speechToken++;speechSynthesis.cancel();const f=VOICE_FRIENDS[state.settings.voiceFriend]||VOICE_FRIENDS.fairy;const phrase=preview?`${f.greeting} Let us grow a wonderful story together.`:text;const u=new SpeechSynthesisUtterance(phrase);const voice=chooseFriendlyVoice();if(voice)u.voice=voice;u.lang=(voice&&voice.lang)||"en-US";u.rate=Math.max(.55,Math.min(1.15,state.settings.rate*f.rateFactor));u.pitch=f.pitch;u.onstart=()=>{setStatus(`${f.emoji} ${f.name} is reading the story aloud…`);els.storyTitle.classList.add("speaking");els.storyText.classList.add("speaking");if(els.voiceStatus)els.voiceStatus.textContent=`${f.emoji} ${f.name} is reading.`};u.onend=()=>{setStatus("Reading finished.");els.storyTitle.classList.remove("speaking");els.storyText.classList.remove("speaking");if(els.voiceStatus)els.voiceStatus.textContent="Wonderful listening! 🌟"};u.onerror=e=>{setStatus("Read aloud stopped.",true);els.storyTitle.classList.remove("speaking");els.storyText.classList.remove("speaking");if(els.voiceStatus)els.voiceStatus.textContent=e&&["interrupted","canceled"].includes(e.error)?"Voice stopped.":"The voice had a little hiccup. Try again."};activeUtterance=u;speechSynthesis.speak(u)}
   function pauseSpeech(){if("speechSynthesis" in window&&speechSynthesis.speaking&&!speechSynthesis.paused){speechSynthesis.pause();setStatus("Reading paused.")}}
   function resumeSpeech(){if("speechSynthesis" in window&&speechSynthesis.paused){speechSynthesis.resume();setStatus("Reading resumed.")}}
@@ -1062,6 +1215,30 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   function askConfirm(message,label="Continue"){return askChoice("Grown-Up Check",message,[{label:"Cancel",value:false},{label,value:true,kind:"danger"}])}
   async function importNestFile(file){if(file.size>IMPORT_LIMIT){setStatus("That backup is too large to open safely.",true);return}try{const parsed=JSON.parse(await file.text());if(!parsed||typeof parsed!=="object"||parsed.app!=="Storybird Grove"||!Array.isArray(parsed.nest))throw new Error("Not a nest backup");const incoming=sanitizeState(parsed);const choice=await askChoice("Import Story Nest","Would you like to add these stories to the current Nest or replace the current Nest?",[{label:"Cancel",value:"cancel"},{label:"Merge",value:"merge",kind:"good"},{label:"Replace",value:"replace",kind:"danger"}]);if(choice==="cancel")return;if(choice==="replace")state=incoming;else{const map=new Map(state.nest.map(n=>[n.text,n]));incoming.nest.forEach(n=>{if(!map.has(n.text))map.set(n.text,n)});state.nest=[...map.values()].sort((a,b)=>b.ts-a.ts).slice(0,MAX_NEST);state.visitedWeeks=[...new Set([...state.visitedWeeks,...incoming.visitedWeeks])]}currentWeek=state.lastWeek;applySettings();renderWeeks();renderClusters();saveState();renderNest();setStatus("Story Nest imported safely.")}catch(e){setStatus("Import failed. Choose a Storybird Grove backup file.",true)}}
 
+
+
+  const WORD_GARDEN = {
+    gentle:["gentle","peaceful","cozy","patient","caring"],
+    adventure:["brave","explore","journey","path","discover"],
+    mystery:["clue","notice","hidden","wonder","search"],
+    funny:["silly","giggle","surprise","wobbly","playful"],
+    poetic:["shimmer","glow","whisper","drift","bloom"],
+    magical:["sparkle","enchanted","glowing","wish","wonder"],
+    discovery:["observe","compare","notice","detail","discover"],
+    friendship:["share","listen","invite","kind","together"],
+    cozy:["warm","snuggly","quiet","comfort","rest"],
+    challenge:["practice","try","careful","determined","courage"]
+  };
+  function renderWordGarden(){
+    if(!els.vocabChips)return;
+    const topic=weekTopic(currentWeek);
+    const words=[...(WORD_GARDEN[state.settings.tone]||WORD_GARDEN.gentle)];
+    if(selection.feeling)words.unshift(selection.feeling);
+    if(topic?.name)words.unshift(topic.name.toLowerCase());
+    const unique=[...new Set(words)].slice(0,6);
+    els.vocabChips.innerHTML="";
+    unique.forEach(word=>{const chip=document.createElement("span");chip.className="vocab-chip";chip.textContent=word;els.vocabChips.appendChild(chip)});
+  }
 
   function updatePassport(){
     const tones=new Set(state.nest.map(n=>n.meta?.tone).filter(Boolean));
@@ -1082,11 +1259,14 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
   }
 
   function bindEvents(){
+    if(els.eirenHello)els.eirenHello.addEventListener("click",meetEiren);
+    if(els.eirenRead)els.eirenRead.addEventListener("click",eirenReadCurrentStory);
+    if(els.eirenStop)els.eirenStop.addEventListener("click",stopEiren);
     if(els.voiceFriends)els.voiceFriends.addEventListener("click",e=>{const b=e.target.closest("[data-voice]");if(!b)return;state.settings.voiceFriend=b.dataset.voice;saveState();updateVoiceButtons();const f=VOICE_FRIENDS[state.settings.voiceFriend];els.voiceStatus.textContent=`${f.emoji} ${f.name} selected. Tap Meet My Voice to listen.`});
     if(els.previewVoice)els.previewVoice.addEventListener("click",()=>speakText("",{preview:true}));
     if(els.stopVoiceFriend)els.stopVoiceFriend.addEventListener("click",stopSpeech);
     els.modeSelect.addEventListener("change",()=>{state.settings.mode=els.modeSelect.value;updateModeUI();saveState();setStatus("Story size changed.")});
-    els.toneSelect.addEventListener("change",()=>{state.settings.tone=els.toneSelect.value;saveState();setStatus("Story feeling changed.")});
+    els.toneSelect.addEventListener("change",()=>{state.settings.tone=els.toneSelect.value;renderWordGarden();saveState();setStatus("Story feeling changed.")});
     els.randomBtn.addEventListener("click",randomizeSelection);els.magicBtn.addEventListener("click",magicStory);els.weaveBtn.addEventListener("click",weaveStory);els.newChoicesBtn.addEventListener("click",newChoices);
     els.readBtn.addEventListener("click",()=>currentStory?speakText(`${currentStory.title}. ${currentStory.text}`):setStatus("Make a story first.",true));els.pauseBtn.addEventListener("click",pauseSpeech);els.resumeBtn.addEventListener("click",resumeSpeech);els.stopBtn.addEventListener("click",stopSpeech);els.copyBtn.addEventListener("click",copyCurrent);els.printStoryBtn.addEventListener("click",()=>currentStory?printMode("story"):setStatus("Make a story before printing.",true));els.saveBtn.addEventListener("click",saveCurrentStory);els.clearBtn.addEventListener("click",clearAll);
     els.showAllBtn.addEventListener("click",()=>{nestFilter="all";renderNest()});els.favoritesBtn.addEventListener("click",()=>{nestFilter="favorites";renderNest()});
@@ -1100,7 +1280,7 @@ details.adult-panel{margin-top:14px;border-radius:22px;padding:0;overflow:hidden
     window.addEventListener("beforeunload",saveState);
   }
 
-  function init(){renderWeeks();applySettings();bindEvents();
+  function init(){renderWeeks();applySettings();bindEvents();connectEirenBoundary();
     if("speechSynthesis" in window){refreshVoices();speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);speechSynthesis.onvoiceschanged=refreshVoices;setTimeout(refreshVoices,250);setTimeout(refreshVoices,900)}else{if(els.previewVoice)els.previewVoice.disabled=true;if(els.stopVoiceFriend)els.stopVoiceFriend.disabled=true;if(els.readBtn)els.readBtn.disabled=true;if(els.voiceStatus)els.voiceStatus.textContent="Read-aloud voices are not available in this browser."}
     updateVoiceButtons();if(!state.visitedWeeks.includes(currentWeek))state.visitedWeeks.push(currentWeek);renderClusters({keepStory:true,keepSelection:true});if(currentStory){showStory(currentStory)}else{clearStory(false)}renderNest();updateThemeBanner();updatePassport();saveState()}
   init();
