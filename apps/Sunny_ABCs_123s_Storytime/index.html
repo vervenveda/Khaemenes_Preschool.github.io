@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Sunny ABCs & 123s Storytime — a private, offline-first preschool storybook with letters, numbers, tracing, spelling, matching, movement, narration, favorites, and local progress.">
-<title>Sunny ABCs &amp; 123s — Storytime</title>
+<meta name="description" content="Sunny ABCs & 123s with Eiren — a playful preschool storybook with letters, numbers, tracing, spelling, matching, movement, gentle narration, favorites, and local progress.">
+<title>Sunny ABCs &amp; 123s with Eiren</title>
 <style>
 :root{
   --sun:#ffe596;--coral:#ffb4a7;--berry:#f4a4c8;--mint:#b5ecd7;--sky:#b8eaff;
@@ -124,6 +124,18 @@ body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .pr
 .sparkle{position:fixed;pointer-events:none;z-index:50;font-size:1.6rem;animation:sparkleFly 1s ease forwards}
 @keyframes sparkleFly{to{transform:translateY(-80px) scale(1.35) rotate(18deg);opacity:0}}
 
+
+.eiren-studio{position:relative;overflow:hidden}
+.eiren-studio::before,.eiren-studio::after{position:absolute;pointer-events:none;opacity:.18;font-size:3rem}
+.eiren-studio::before{content:"✿";left:18px;bottom:-8px;transform:rotate(-12deg)}
+.eiren-studio::after{content:"✨";right:18px;top:4px}
+.eiren-reader{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;max-width:650px;margin:auto}
+.eiren-reader-mark{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:2rem;background:linear-gradient(145deg,#ffdce9,#e7e0ff);box-shadow:0 7px 18px rgba(74,52,91,.12)}
+.eiren-reader h3{text-align:left;margin:0 0 3px!important}
+.eiren-reader p{margin:0;color:var(--muted);font-size:.85rem;line-height:1.45}
+.book-page::after{content:"";position:absolute;width:85px;height:85px;border-radius:50%;right:-38px;bottom:-38px;background:color-mix(in srgb,var(--accent2) 18%,transparent);pointer-events:none}
+@media(max-width:560px){.eiren-reader{grid-template-columns:1fr;text-align:center}.eiren-reader-mark{margin:auto}.eiren-reader h3{text-align:center!important}}
+
 @media(max-width:700px){
   .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}
   .voice-friend:last-child{grid-column:1/-1}
@@ -143,9 +155,9 @@ body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .pr
 <div id="ariaLive" aria-live="polite"></div>
 <main class="page-wrap">
   <header class="hero">
-    <div class="hero-badge">☀️ Crechè Preschool Storytime · Local &amp; private</div>
-    <h1>Sunny Storytime</h1>
-    <p>Explore letters and numbers with cheerful rhymes, movement, tracing, spelling, counting, gentle narration, and colorful page turns.</p>
+    <div class="hero-badge">☀️ Crechè Preschool · Sunny Learning Garden</div>
+    <h1>Sunny ABCs &amp; 123s</h1>
+    <p>Read, count, trace, move, spell, and play through a garden of letters and numbers—with Eiren beside you for storytime.</p>
   </header>
 
   <section class="app-shell" aria-label="Sunny ABCs and 123s interactive storybook">
@@ -153,22 +165,21 @@ body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .pr
     <div class="mascot-banner">
       <div class="mascot-face" aria-hidden="true">☀️</div>
       <div>
-        <h3>Sunny is your alphabet-and-number guide</h3>
-        <p>“Hello, little learner! We will read, count, trace, move, spell, and celebrate every brave try.”</p>
+        <h3>Sunny is your learning guide · Eiren is your Story Friend 🌸</h3>
+        <p>“Hello, little learner. Sunny and I will read, count, trace, move, spell, and celebrate every brave try.” — Eiren</p>
       </div>
     </div>
 
-    <section class="voice-studio" aria-labelledby="voiceTitle">
-      <h3 id="voiceTitle">Choose Your Reading Friend</h3>
-      <div class="voice-friends" id="voiceFriends">
-        <button type="button" class="voice-friend" data-voice="fairy"><span class="emoji">🧚</span><span class="name">Fairy Lily</span></button>
-        <button type="button" class="voice-friend" data-voice="bear"><span class="emoji">🐻</span><span class="name">Benny Bear</span></button>
-        <button type="button" class="voice-friend" data-voice="owl"><span class="emoji">🦉</span><span class="name">Professor Owl</span></button>
-        <button type="button" class="voice-friend" data-voice="robot"><span class="emoji">🤖</span><span class="name">Robo Reader</span></button>
-        <button type="button" class="voice-friend" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Friend</span></button>
+    <section class="voice-studio eiren-studio" aria-labelledby="voiceTitle">
+      <div class="eiren-reader">
+        <div class="eiren-reader-mark" aria-hidden="true">🌸</div>
+        <div>
+          <h3 id="voiceTitle">Story Time with Eiren</h3>
+          <p>Sunny leads the activities. Eiren gently reads the words, rhymes, counting prompts, and encouragement.</p>
+        </div>
       </div>
       <div class="voice-options">
-        <button type="button" id="previewVoice" class="action-btn">👋 Meet My Voice</button>
+        <button type="button" id="previewVoice" class="action-btn">🌸 Hear Eiren</button>
         <button type="button" id="stopVoiceFriend" class="action-btn">⏹ Stop Voice</button>
       </div>
       <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
@@ -202,7 +213,7 @@ body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .pr
 
     <section class="narration-strip" aria-label="Narration controls">
       <div class="narration-controls">
-        <button class="action-btn" id="playRhymeBtn" type="button">▶ Read Rhyme</button>
+        <button class="action-btn" id="playRhymeBtn" type="button">🌸 Eiren, Read Rhyme</button>
         <button class="action-btn" id="pauseBtn" type="button">⏸ Pause</button>
         <button class="action-btn" id="stopBtn" type="button">⏹ Stop</button>
         <label>Speed
@@ -277,7 +288,7 @@ body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .pr
     <div class="badge-shelf" id="badgeShelf" aria-label="Milestone badges"></div>
 
     <p class="instructions">Use the arrows, page dots, keyboard arrows, or a gentle swipe to turn pages. Tap a rhyme line to hear it. Practice activities never take stars away.</p>
-    <p class="footer-note"><strong>Private by design:</strong> no accounts, advertising, analytics, trackers, or outside game services. Progress stays in this browser.</p>
+    <p class="footer-note"><strong>Private by design:</strong> no accounts, advertising, analytics, or trackers. Learning progress stays in this browser; Eiren is reached only through her public story boundary.</p>
   </section>
 
   <footer class="site-footer"><strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>Crechè Preschool Edition · All Rights Reserved.</footer>
@@ -423,7 +434,7 @@ const alphabetPages = [
           'H is for honeybee busy all day,',
           'Buzzing through blossoms along the way.',
           'Gathering nectar with gentle care,',
-          'Making sweet honey with wonderful care.'
+          'Making sweet honey to gather and share.'
         ]
       },
       {
@@ -525,7 +536,7 @@ const alphabetPages = [
         subtitle: 'Tap to read about “Pancake.”',
         rhyme: [
           'P is for pancake, fluffy and round,',
-          'Golden and warm when it lands on your plate.',
+          'Golden and warm, such a tasty delight.',
           'Drizzle a little syrup on top,',
           'Stack them up high and never let them drop!'
         ]
@@ -605,7 +616,7 @@ const alphabetPages = [
           'V is for violin singing so clear,',
           'Music like stories you can almost hear.',
           'Slow flowing notes or a quick, happy dance,',
-          'Strings full of magic whenever we dance.'
+          'Strings full of music that shimmer and dance.'
         ]
       },
       {
@@ -807,6 +818,20 @@ numberPages.push(
 );
 
 const emojiMap={Apple:'🍎',Balloon:'🎈',Cat:'🐱',Duck:'🦆',Elephant:'🐘',Firefly:'✨',Garden:'🌻',Honeybee:'🐝',Igloo:'🧊',Jellyfish:'🪼',Kite:'🪁',Ladybug:'🐞',Moon:'🌙',Nest:'🪺',Ocean:'🌊',Pancake:'🥞',Queen:'👑',Rainbow:'🌈',Star:'⭐',Turtle:'🐢',Umbrella:'☂️',Violin:'🎻',Wind:'🌬️',Xylophone:'🎶',Yawn:'🥱',Zoo:'🦁',One:'☀️',Two:'👟',Three:'🌳',Four:'🐸',Five:'⭐',Six:'🪙',Seven:'💧',Eight:'🐜',Nine:'🎈',Ten:'💛',Eleven:'🏮',Twelve:'🕰️'};
+
+const phonicsMap={
+A:'A can say /ă/, as in apple.',B:'B says /b/, as in balloon.',C:'C can say /k/, as in cat.',
+D:'D says /d/, as in duck.',E:'E can say /ĕ/, as in elephant.',F:'F says /f/, as in firefly.',
+G:'G can say /g/, as in garden.',H:'H says /h/, as in honeybee.',I:'I can say /ĭ/, as in igloo.',
+J:'J says /j/, as in jellyfish.',K:'K says /k/, as in kite.',L:'L says /l/, as in ladybug.',
+M:'M says /m/, as in moon.',N:'N says /n/, as in nest.',O:'O can say /ŏ/, as in octopus.',
+P:'P says /p/, as in pancake.',Q:'Q usually works with U to say /kw/, as in queen.',
+R:'R says /r/, as in rainbow.',S:'S says /s/, as in star.',T:'T says /t/, as in turtle.',
+U:'U can say /ŭ/, as in umbrella.',V:'V says /v/, as in violin.',W:'W says /w/, as in wind.',
+X:'X often says /ks/, as in fox. Xylophone begins with a /z/ sound.',
+Y:'Y says /y/, as in yawn.',Z:'Z says /z/, as in zoo.'
+};
+
 const quantityEmoji={1:'☀️',2:'👟',3:'🌳',4:'🐸',5:'⭐',6:'🪙',7:'💧',8:'🐜',9:'🎈',10:'💛',11:'🏮',12:'🟠'};
 const themes=[['Sunny','theme-sunny'],['Sky','theme-sky'],['Berry','theme-berry'],['Mint','theme-mint']];
 const badgeDefs=[
@@ -824,7 +849,7 @@ const $=id=>document.getElementById(id);
 function safeJSON(value,fallback){try{const v=JSON.parse(value);return v??fallback}catch{return fallback}}
 function oldVisited(){return safeJSON(localStorage.getItem('sunny-visited')||'[]',[])}
 const defaults={
-  book:localStorage.getItem('sunny-book')||'alphabet',index:Number(localStorage.getItem('sunny-index')||0),theme:Number(localStorage.getItem('sunny-theme')||0),sound:localStorage.getItem('sunny-sound')!=='false',song:false,caseMode:'both',speed:.86,autoAdvance:false,stars:Number(localStorage.getItem('sunny-stars')||0),visited:oldVisited(),favorites:[],awards:[],progress:{rhymes:0,words:0,movements:0,traces:0,spells:0,matches:0,counting:0},settings:{rewards:true,motion:true,simple:false,largeText:false,contrast:false,rememberName:false},learnerName:'',favoritesOnly:false,voiceFriend:localStorage.getItem('sunny-voice-friend')||'fairy'};
+  book:localStorage.getItem('sunny-book')||'alphabet',index:Number(localStorage.getItem('sunny-index')||0),theme:Number(localStorage.getItem('sunny-theme')||0),sound:localStorage.getItem('sunny-sound')!=='false',song:false,caseMode:'both',speed:.86,autoAdvance:false,stars:Number(localStorage.getItem('sunny-stars')||0),visited:oldVisited(),favorites:[],awards:[],progress:{rhymes:0,words:0,movements:0,traces:0,spells:0,matches:0,counting:0},settings:{rewards:true,motion:true,simple:false,largeText:false,contrast:false,rememberName:false},learnerName:'',favoritesOnly:false,voiceFriend:'eiren'};
 const loaded=safeJSON(localStorage.getItem(STORE)||'null',null);
 const state={...defaults,...(loaded||{}),progress:{...defaults.progress,...(loaded?.progress||{})},settings:{...defaults.settings,...(loaded?.settings||{})}};
 state.visited=new Set(Array.isArray(state.visited)?state.visited:[]);state.favorites=new Set(Array.isArray(state.favorites)?state.favorites:[]);state.awards=new Set(Array.isArray(state.awards)?state.awards:[]);
@@ -844,45 +869,74 @@ function saveState(){
 function toast(message){const t=$('toast');t.textContent=message;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400)}
 function announce(message){$('ariaLive').textContent='';setTimeout(()=>$('ariaLive').textContent=message,20)}
 const VOICE_FRIENDS={
-fairy:{name:'Fairy Lily',emoji:'🧚',pitch:1.2,rateFactor:.95,preferred:/samantha|aria|jenny|zira|ava|victoria|female|karen/i,greeting:'Hello, little learner. Fairy Lily is ready for sunny storytime.'},
-bear:{name:'Benny Bear',emoji:'🐻',pitch:.9,rateFactor:.9,preferred:/daniel|david|alex|fred|george|male|tom/i,greeting:'Hello, friend. Benny Bear will read nice and gently.'},
-owl:{name:'Professor Owl',emoji:'🦉',pitch:1,rateFactor:.86,preferred:/daniel|samantha|alex|serena|moira/i,greeting:'Welcome, young learner. Professor Owl is ready to read and count.'},
-robot:{name:'Robo Reader',emoji:'🤖',pitch:.72,rateFactor:1,preferred:/fred|ralph|alex|david|google us english/i,greeting:'Beep boop. Robo Reader is ready for the alphabet mission.'},
-rainbow:{name:'Rainbow Friend',emoji:'🌈',pitch:1.08,rateFactor:.98,preferred:/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i,greeting:'Hello, sunshine. Rainbow Friend is happy to learn with you.'}
+  eiren:{
+    name:'Eiren',emoji:'🌸',pitch:1.08,rateFactor:.96,
+    preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
+    greeting:'Hello, little learner. Eiren is here for sunny storytime.'
+  }
 };
-let voices=[],speechToken=0,selectedVoice=null;
-function refreshVoices(){if(!('speechSynthesis'in window))return;voices=speechSynthesis.getVoices()||[];const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;$('voiceStatus').textContent=voices.length?`${f.emoji} ${f.name} is ready.`:'Loading a friendly voice…'}
-function chooseVoice(){if(!voices.length)refreshVoices();const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||''));const pool=english.length?english:voices;if(state.voiceFriend==='rainbow'&&pool.length){const friendly=pool.filter(v=>/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));const choices=friendly.length?friendly:pool;return choices[Math.floor(Math.random()*choices.length)]||null}return pool.find(v=>f.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null}
+const EIREN_PUBLIC_ADAPTER='https://artist1970.github.io/Eiren.github.io/eiren-adapter.js';
+let voices=[],speechToken=0,selectedVoice=null,eirenBoundaryReady=false;
+
+async function connectEirenBoundary(){
+  try{
+    const mod=await import(EIREN_PUBLIC_ADAPTER);
+    if(mod?.EirenAdapter?.prepare){
+      const prepared=mod.EirenAdapter.prepare({
+        mode:'story',
+        message:'Preschool alphabet and number story companionship with gentle narration.'
+      });
+      eirenBoundaryReady=prepared?.specialist==='eiren';
+    }
+  }catch(_err){eirenBoundaryReady=false}
+  $('voiceStatus').textContent=eirenBoundaryReady
+    ? '🌸 Eiren’s public story boundary is connected. Ready for storytime.'
+    : '🌸 Eiren is your Story Friend. Gentle on-device narration is ready.';
+}
+
+function refreshVoices(){
+  if(!('speechSynthesis'in window))return;
+  voices=speechSynthesis.getVoices()||[];
+  if(!eirenBoundaryReady)$('voiceStatus').textContent=voices.length?'🌸 Eiren is ready to read.':'Loading a gentle reading voice…';
+}
+function chooseVoice(){
+  if(!voices.length)refreshVoices();
+  const f=VOICE_FRIENDS.eiren;
+  const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||''));
+  const pool=english.length?english:voices;
+  return pool.find(v=>f.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null;
+}
 function speak(text,onEnd,{countRhyme=false,status='Speaking…',preview=false}={}){
   if(!state.sound||!('speechSynthesis'in window)){if(onEnd)setTimeout(onEnd,500);return}
-  speechToken++;
-  speechSynthesis.cancel();
-  const f=VOICE_FRIENDS[state.voiceFriend]||VOICE_FRIENDS.fairy;
-  const phrase=preview?`${f.greeting} Let us read, move, trace, and count together.`:text;
+  speechToken++; speechSynthesis.cancel();
+  const f=VOICE_FRIENDS.eiren;
+  const phrase=preview?`${f.greeting} Let us read, move, trace, spell, and count together.`:text;
   const u=new SpeechSynthesisUtterance(phrase);
   selectedVoice=chooseVoice();
   if(selectedVoice)u.voice=selectedVoice;
   u.lang=(selectedVoice&&selectedVoice.lang)||'en-US';
-  u.rate=Math.max(.55,Math.min(1.15,(Number(state.speed)||.86)*f.rateFactor));
-  u.pitch=f.pitch;
-  u.volume=1;
+  u.rate=Math.max(.55,Math.min(1.12,(Number(state.speed)||.86)*f.rateFactor));
+  u.pitch=f.pitch; u.volume=1;
   $('narrationStatus').textContent=status;
-  $('voiceStatus').textContent=`${f.emoji} ${f.name} is reading.`;
-  u.onend=()=>{$('narrationStatus').textContent='Ready to read.';$('voiceStatus').textContent='Wonderful listening! 🌟';if(countRhyme){state.progress.rhymes++;saveState();updateRewards()}onEnd&&onEnd()};
-  u.onerror=e=>{$('narrationStatus').textContent='Narration stopped.';$('voiceStatus').textContent=e&&['interrupted','canceled'].includes(e.error)?'Voice stopped.':'The voice had a little hiccup. Try again.';onEnd&&onEnd()};
-  speechSynthesis.speak(u)
+  $('voiceStatus').textContent='🌸 Eiren is reading.';
+  u.onend=()=>{
+    $('narrationStatus').textContent='Ready to read.';
+    $('voiceStatus').textContent='Wonderful listening! 🌟';
+    if(countRhyme){state.progress.rhymes++;saveState();updateRewards()}
+    onEnd&&onEnd();
+  };
+  u.onerror=e=>{
+    $('narrationStatus').textContent='Narration stopped.';
+    $('voiceStatus').textContent=e&&['interrupted','canceled'].includes(e.error)?'Voice stopped.':'The reading voice had a little hiccup. Try again.';
+    onEnd&&onEnd();
+  };
+  speechSynthesis.speak(u);
 }
 function stopNarration(){songToken++;document.querySelectorAll('.rhyme-line').forEach(x=>x.classList.remove('active'));if('speechSynthesis'in window)speechSynthesis.cancel();$('pauseBtn').textContent='⏸ Pause';$('narrationStatus').textContent='Narration stopped.';$('voiceStatus').textContent='Voice stopped.'}
 function pauseNarration(){if(!('speechSynthesis'in window))return;if(speechSynthesis.paused){speechSynthesis.resume();$('pauseBtn').textContent='⏸ Pause';$('narrationStatus').textContent='Reading…'}else if(speechSynthesis.speaking){speechSynthesis.pause();$('pauseBtn').textContent='▶ Resume';$('narrationStatus').textContent='Paused.'}}
-function startRhyme(){stopNarration();const token=songToken;const lines=[...document.querySelectorAll('.rhyme-line')];let i=0;state.song=true;updateToggleButtons();const next=()=>{if(token!==songToken||!state.song)return;lines.forEach(x=>x.classList.remove('active'));if(i>=lines.length){state.song=false;updateToggleButtons();state.progress.rhymes++;award(`rhyme:${pageKey()}`);saveState();updateRewards();$('narrationStatus').textContent='Rhyme complete!';if(state.autoAdvance)setTimeout(()=>go(1),700);return}const line=lines[i++];line.classList.add('active');speak(line.textContent,()=>setTimeout(next,220),{status:`Reading line ${i} of ${lines.length}…`})};next()}
+function startRhyme(){stopNarration();const token=songToken;const lines=[...document.querySelectorAll('.rhyme-line')];let i=0;state.song=true;updateToggleButtons();const next=()=>{if(token!==songToken||!state.song)return;lines.forEach(x=>x.classList.remove('active'));if(i>=lines.length){state.song=false;updateToggleButtons();state.progress.rhymes++;award(`rhyme:${pageKey()}`);saveState();updateRewards();$('narrationStatus').textContent='Rhyme complete!';if(state.autoAdvance)setTimeout(()=>go(1),700);return}const line=lines[i++];line.classList.add('active');speak(line.textContent,()=>setTimeout(next,220),{status:`Eiren is reading line ${i} of ${lines.length}…`})};next()}
 
-function updateVoiceButtons(){
-  document.querySelectorAll('[data-voice]').forEach(b=>{
-    const active=b.dataset.voice===state.voiceFriend;
-    b.classList.toggle('active',active);
-    b.setAttribute('aria-pressed',String(active));
-  });
-}
+function updateVoiceButtons(){ /* Eiren is the single Story Friend. */ }
 function updatePassport(){
   const earned={
     alphabet:countVisited('alphabet')>=8,
@@ -895,22 +949,12 @@ function updatePassport(){
 }
 function sparkleBurst(count=12){
   for(let i=0;i<count;i++){
-    const s=document.createElement('span');s.className='sparkle';s.textContent=['✨','⭐','☀️','🌈'][i%4];
+    const s=document.createElement('span');s.className='sparkle';s.textContent=['✨','⭐','☀️','🌸'][i%4];
     s.style.left=(20+Math.random()*60)+'vw';s.style.top=(45+Math.random()*25)+'vh';
     document.body.appendChild(s);setTimeout(()=>s.remove(),1100);
   }
 }
-$('voiceFriends').addEventListener('click',e=>{
-  const b=e.target.closest('[data-voice]');
-  if(!b)return;
-  state.voiceFriend=b.dataset.voice;
-  try{localStorage.setItem('sunny-voice-friend',state.voiceFriend)}catch{}
-  saveState();
-  updateVoiceButtons();
-  const f=VOICE_FRIENDS[state.voiceFriend];
-  $('voiceStatus').textContent=`${f.emoji} ${f.name} selected. Tap Meet My Voice to listen.`;
-});
-$('previewVoice').onclick=()=>speak('',null,{preview:true,status:'Meeting your reading friend…'});
+$('previewVoice').onclick=()=>speak('',null,{preview:true,status:'Meeting Eiren…'});
 $('stopVoiceFriend').onclick=()=>{stopNarration();$('voiceStatus').textContent='Voice stopped.'};
 
 function celebrate(){if(!state.settings.rewards||!state.settings.motion)return;const holder=$('celebration'),bits=['⭐','🌈','✨','🎈','💛'];for(let i=0;i<18;i++){const el=document.createElement('span');el.className='confetti';el.textContent=bits[i%bits.length];el.style.left=Math.random()*100+'vw';el.style.top='-40px';el.style.setProperty('--dx',(Math.random()*180-90)+'px');el.style.animationDelay=Math.random()*.35+'s';holder.appendChild(el);setTimeout(()=>el.remove(),2200)}}
@@ -927,7 +971,7 @@ function renderDots(){const row=$('dotRow'),list=pages();row.innerHTML='';list.f
 function render(flip=false){
   const list=pages();if(!list.length){state.favoritesOnly=false;toast('No favorites are saved in this book yet.');return render(false)}state.index=Math.max(0,Math.min(state.index,list.length-1));const p=current();stopNarration();if(flip&&state.settings.motion){$('bookCard').classList.remove('flip');void $('bookCard').offsetWidth;$('bookCard').classList.add('flip')}markVisited();
   const emoji=emojiMap[p.word]||'✨',symbol=displaySymbol(p),isNumber=state.book==='numbers';
-  $('leftPage').innerHTML=`<span class="page-sparkle" style="right:18px;top:12px">✦</span><div class="page-label">${isNumber?'Number':'Letter'} ${state.index+1} of ${list.length}</div><div class="symbol-wrap"><div class="page-emoji" id="pageEmoji" aria-hidden="true">${emoji}</div><div class="page-main-symbol">${symbol}</div></div><div class="page-word">${p.word.toUpperCase()}</div>${isNumber?`<div class="quantity-grid" id="quantityGrid" aria-label="${p.number} objects">${quantityHTML(p.number,p.word)}</div>`:''}<div class="letter-prompt">${p.prompt}</div><div class="action-row"><button class="action-btn" id="sayWord" type="button">🔊 Say ${p.word}</button><button class="action-btn" id="doPrompt" type="button">🤸 Move With Me</button>${isNumber?'<button class="action-btn" id="countObjects" type="button">🔢 Count</button>':''}</div>`;
+  $('leftPage').innerHTML=`<span class="page-sparkle" style="right:18px;top:12px">✦</span><div class="page-label">${isNumber?'Number':'Letter'} ${state.index+1} of ${list.length}</div><div class="symbol-wrap"><div class="page-emoji" id="pageEmoji" aria-hidden="true">${emoji}</div><div class="page-main-symbol">${symbol}</div></div><div class="page-word">${p.word.toUpperCase()}</div>${!isNumber?`<div class="letter-prompt" style="margin-top:9px">${phonicsMap[p.letter]||''}</div>`:''}${isNumber?`<div class="quantity-grid" id="quantityGrid" aria-label="${p.number} objects">${quantityHTML(p.number,p.word)}</div>`:''}<div class="letter-prompt">${p.prompt}</div><div class="action-row"><button class="action-btn" id="sayWord" type="button">🔊 Say ${p.word}</button><button class="action-btn" id="doPrompt" type="button">🤸 Move With Me</button>${isNumber?'<button class="action-btn" id="countObjects" type="button">🔢 Count</button>':''}</div>`;
   $('rightPage').innerHTML=`<span class="page-sparkle" style="left:16px;bottom:14px">✿</span><div class="page-label">Story Rhyme</div><div class="story-title">${p.title}</div><div class="story-subtitle">Tap a line to hear it read aloud.</div><ul class="rhyme-lines">${p.rhyme.map((line,i)=>`<li class="rhyme-line" tabindex="0" role="button" data-line="${i}">${line}</li>`).join('')}</ul><div class="nav-row"><button class="nav-btn" id="prevBtn" type="button" ${state.index===0?'disabled':''}>◀ Back</button><div class="page-indicator">${isNumber?`Number ${p.number}`:`Letter ${p.letter}`} · Page ${state.index+1} of ${list.length}</div><button class="nav-btn" id="nextBtn" type="button" ${state.index===list.length-1?'disabled':''}>Next ▶</button></div>`;
   $('sayWord').onclick=()=>{state.progress.words++;award(`word:${pageKey()}`);saveState();updateRewards();animateEmoji();speak(isNumber?`${p.number}. ${p.word}.`:`${p.letter}. ${p.letter} is for ${p.word}.`,null,{status:`Saying ${p.word}…`})};
   $('doPrompt').onclick=()=>{state.progress.movements++;award(`move:${pageKey()}`);saveState();updateRewards();speak(p.prompt,null,{status:'Movement prompt…'})};
@@ -972,7 +1016,7 @@ function downloadJSON(){const payload={exportedAt:new Date().toISOString(),app:'
 function makePrint(mode){const name=$('learnerName').value.trim()||'________________________',date=new Date().toLocaleDateString();if(mode==='certificate'){$('printArea').innerHTML=`<div class="print-card"><div style="font-size:4rem">☀️ 🌈 ⭐</div><h1>Sunny Storytime Certificate</h1><p>This certificate celebrates</p><div class="name">${escapeHTML(name)}</div><h2>for joyful learning in Sunny ABCs &amp; 123s</h2><p>Alphabet pages explored: ${countVisited('alphabet')} of 26<br>Number pages explored: ${countVisited('numbers')} of 12<br>Stars earned: ${state.stars}<br>Practice activities: ${totalActivities()}</p><p>Presented ${date}</p><h3>Khaemenes Academy · Verve N Veda</h3><p>Jennifer Kay Pearl</p></div>`}else{$('printArea').innerHTML=`<div class="print-card"><h1>Sunny Storytime Progress</h1><h2>${escapeHTML(name)}</h2><div class="print-summary"><strong>Date:</strong> ${date}<br><strong>Alphabet pages:</strong> ${countVisited('alphabet')} / 26<br><strong>Number pages:</strong> ${countVisited('numbers')} / 12<br><strong>Stars:</strong> ${state.stars}<br><strong>Favorites:</strong> ${state.favorites.size}<br><strong>Rhymes heard:</strong> ${state.progress.rhymes}<br><strong>Words spoken:</strong> ${state.progress.words}<br><strong>Movement prompts:</strong> ${state.progress.movements}<br><strong>Tracing activities:</strong> ${state.progress.traces}<br><strong>Words spelled:</strong> ${state.progress.spells}<br><strong>Matching activities:</strong> ${state.progress.matches}<br><strong>Counting activities:</strong> ${state.progress.counting}</div><h3>Khaemenes Academy · Verve N Veda</h3></div>`}setTimeout(()=>window.print(),80)}
 function escapeHTML(v){return String(v).replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]))}
 function confirmReset(){closeAdult();$('confirmText').textContent='This will clear all Sunny Storytime stars, favorites, visited pages, and activity progress from this browser.';$('confirmModal').hidden=false;$('confirmNo').focus()}
-function resetProgress(){localStorage.removeItem(STORE);['sunny-book','sunny-index','sunny-theme','sunny-sound','sunny-song','sunny-stars','sunny-visited'].forEach(k=>localStorage.removeItem(k));location.reload()}
+function resetProgress(){localStorage.removeItem(STORE);['sunny-book','sunny-index','sunny-theme','sunny-sound','sunny-song','sunny-stars','sunny-visited','sunny-voice-friend'].forEach(k=>localStorage.removeItem(k));location.reload()}
 
 $('alphabetModeBtn').onclick=()=>setBook('alphabet');$('numberModeBtn').onclick=()=>setBook('numbers');$('caseModeBtn').onclick=cycleCase;
 $('songModeBtn').onclick=()=>{state.song=!state.song;saveState();state.song?startRhyme():stopNarration();updateToggleButtons()};
@@ -987,7 +1031,7 @@ $('favoritesOnlyBtn').onclick=()=>{state.favoritesOnly=true;state.index=0;closeA
 document.addEventListener('keydown',e=>{if(!$('adultModal').hidden||!$('confirmModal').hidden)return;if(currentPractice==='spell'&&e.key==='Enter'){e.preventDefault();revealLetter();return}if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
 $('bookCard').addEventListener('pointerdown',e=>{if(e.target.closest('button,.rhyme-line'))return;swipeStart={x:e.clientX,y:e.clientY}});$('bookCard').addEventListener('pointerup',e=>{if(!swipeStart)return;const dx=e.clientX-swipeStart.x,dy=e.clientY-swipeStart.y;swipeStart=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx<0?1:-1)});$('bookCard').addEventListener('pointercancel',()=>swipeStart=null);
 
-function init(){state.index=Number.isFinite(state.index)?state.index:0;state.voiceFriend=state.voiceFriend||'fairy';state.theme=Math.max(0,Math.min(themes.length-1,Number(state.theme)||0));applySettings();$('speedSelect').value=String(state.speed);$('autoAdvance').checked=state.autoAdvance;$('caseModeBtn').textContent={both:'Aa Both',upper:'A Upper',lower:'a Lower'}[state.caseMode]||'Aa Both';$('caseModeBtn').style.display=state.book==='alphabet'?'':'none';$('alphabetModeBtn').classList.toggle('active',state.book==='alphabet');$('numberModeBtn').classList.toggle('active',state.book==='numbers');$('alphabetModeBtn').setAttribute('aria-pressed',String(state.book==='alphabet'));$('numberModeBtn').setAttribute('aria-pressed',String(state.book==='numbers'));if('speechSynthesis'in window){
+function init(){state.index=Number.isFinite(state.index)?state.index:0;state.voiceFriend='eiren';state.theme=Math.max(0,Math.min(themes.length-1,Number(state.theme)||0));applySettings();$('speedSelect').value=String(state.speed);$('autoAdvance').checked=state.autoAdvance;$('caseModeBtn').textContent={both:'Aa Both',upper:'A Upper',lower:'a Lower'}[state.caseMode]||'Aa Both';$('caseModeBtn').style.display=state.book==='alphabet'?'':'none';$('alphabetModeBtn').classList.toggle('active',state.book==='alphabet');$('numberModeBtn').classList.toggle('active',state.book==='numbers');$('alphabetModeBtn').setAttribute('aria-pressed',String(state.book==='alphabet'));$('numberModeBtn').setAttribute('aria-pressed',String(state.book==='numbers'));if('speechSynthesis'in window){
   refreshVoices();
   speechSynthesis.addEventListener?.('voiceschanged',refreshVoices);
   speechSynthesis.onvoiceschanged=refreshVoices;
@@ -999,7 +1043,7 @@ function init(){state.index=Number.isFinite(state.index)?state.index:0;state.voi
   $('playRhymeBtn').disabled=true;
   $('voiceStatus').textContent='Read-aloud voices are not available in this browser.';
 }
-updateVoiceButtons();updateToggleButtons();render(false);showPractice('trace');updatePassport()}
+updateVoiceButtons();updateToggleButtons();render(false);showPractice('trace');updatePassport();connectEirenBoundary()}
 init();
 window.addEventListener('beforeunload',()=>{if('speechSynthesis'in window)speechSynthesis.cancel()});
 </script>
