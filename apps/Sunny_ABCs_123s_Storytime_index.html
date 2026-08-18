@@ -226,6 +226,33 @@ body.focus-mode .book-card{max-width:860px}
   .creche-mark{margin:auto}.creche-links{grid-column:auto}
 }
 
+
+/* Sunny Storytime — Eiren preschool spacious edition */
+.page-wrap{max-width:1180px;padding:34px 18px 68px}
+.hero{margin-bottom:26px}.hero h1{margin-top:16px}.hero p{max-width:720px;line-height:1.8}
+.app-shell{padding:26px;border-radius:36px}
+.voice-studio{max-width:900px;margin:0 auto 24px;padding:21px;border-radius:29px}
+.eiren-intro{max-width:680px;margin:12px auto 0;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:16px;text-align:left}
+.eiren-intro p{margin:0;color:var(--muted);line-height:1.65}.eiren-orb{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffe1eb,#e9e1ff);font-size:2rem}
+.voice-controls{gap:11px;margin-top:17px}.voice-controls>*{min-height:49px}
+.simple-row{gap:11px;margin:17px 0 23px}.simple-row button{min-height:49px}
+.top-controls{gap:11px;margin-top:17px}.top-controls button{min-height:48px}
+.progress-wrap{margin:22px auto 8px}.progress-track{height:14px}
+.book-row{margin-top:26px}.book-card{max-width:900px;gap:20px;padding:20px;border-radius:34px}
+.book-page{min-height:470px;padding:25px;border-radius:27px}.page-emoji{font-size:88px}.page-main-symbol{font-size:94px}
+.page-word{margin-top:13px;font-size:21px}.letter-prompt{margin-top:23px;padding:17px;border-radius:21px;font-size:15px;line-height:1.55}
+.action-row{gap:11px;margin-top:18px}.action-btn{min-height:50px;padding:11px 15px;border-radius:17px}
+.story-title{font-size:21px;margin-top:18px}.story-subtitle{margin:7px 0 15px}.rhyme-lines{gap:11px}.rhyme-line{padding:13px 14px;border-radius:17px;font-size:15px;line-height:1.55}
+.nav-row{margin-top:20px;gap:11px}.nav-btn{min-height:48px;padding:10px 15px;border-radius:17px}
+.dot-row{gap:8px;margin-top:21px;padding:7px}.dot-row button{width:14px;height:14px}
+.reward-row{gap:13px;margin-top:21px}.reward{padding:10px 14px}.story-garden{margin-top:21px;padding:18px;border-radius:24px}.garden-row{gap:18px;min-height:82px}.garden-step{font-size:2.35rem}
+.kind-note{margin-top:18px;padding:14px;border-radius:19px;line-height:1.55}.instructions,.footer-note{margin-top:20px;line-height:1.6}
+@media(max-width:760px){
+ .page-wrap{padding:18px 8px 50px}.app-shell{padding:14px;border-radius:27px}.voice-studio{padding:16px}
+ .eiren-intro{grid-template-columns:1fr;text-align:center}.eiren-orb{margin:auto}.voice-controls{display:grid;grid-template-columns:1fr}.voice-controls>*{width:100%}
+ .simple-row{display:grid;grid-template-columns:1fr}.simple-row button{width:100%}.book-card{gap:14px;padding:14px}.book-page{padding:19px;min-height:0}
+}
+
 </style>
 </head>
 <body class="theme-sunny">
@@ -254,23 +281,20 @@ body.focus-mode .book-card{max-width:860px}
   <section class="app-shell" aria-label="Sunny ABCs and 123s storybook">
 
     <section class="voice-studio" aria-labelledby="voiceTitle">
-      <h2 id="voiceTitle">Choose a Storytime Friend</h2>
-      <div class="voice-guides" id="voiceGuides">
-        <button type="button" class="voice-guide" data-voice="sunny"><span class="emoji">☀️</span><span class="name">Sunny</span></button>
-        <button type="button" class="voice-guide" data-voice="bunny"><span class="emoji">🐰</span><span class="name">Benny Bunny</span></button>
-        <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Story Owl</span></button>
-        <button type="button" class="voice-guide" data-voice="robot"><span class="emoji">🤖</span><span class="name">Rhyme-Bot</span></button>
-        <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+      <h2 id="voiceTitle">🌸 Storytime with Eiren</h2>
+      <div class="eiren-intro">
+        <span class="eiren-orb" aria-hidden="true">🌸</span>
+        <p>Eiren can read each letter, number, movement prompt, and rhyme with you. You can listen, move, point, sing, or read along.</p>
       </div>
       <div class="voice-controls">
-        <select id="voiceSpeed" aria-label="Reading speed">
+        <select id="voiceSpeed" aria-label="Eiren reading speed">
           <option value="slow">🐢 Slow and clear</option>
           <option value="normal">🙂 Just right</option>
           <option value="lively">🎵 A little lively</option>
         </select>
-        <button type="button" id="meetGuideBtn" class="pill-btn">👋 Meet My Friend</button>
-        <button type="button" id="repeatVoiceBtn" class="pill-btn">🔁 Repeat Last</button>
-        <button type="button" id="stopVoiceBtn" class="pill-btn">⏹ Stop Voice</button>
+        <button type="button" id="meetGuideBtn" class="pill-btn">🌸 Meet Eiren</button>
+        <button type="button" id="repeatVoiceBtn" class="pill-btn">🔁 Eiren, Repeat</button>
+        <button type="button" id="stopVoiceBtn" class="pill-btn">⏹ Stop Eiren</button>
       </div>
       <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
     </section>
@@ -817,17 +841,27 @@ const emojiMap = {
   Nine:'🎈',Ten:'🌙'
 };
 
+const safeJSON=(key,fallback)=>{
+  try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}
+  catch(_err){return fallback}
+};
+const safeNum=(key,fallback=0)=>{
+  const n=Number(localStorage.getItem(key));
+  return Number.isFinite(n)?n:fallback;
+};
 const state = {
-  book: localStorage.getItem('sunny-book') || 'alphabet',
-  index: Number(localStorage.getItem('sunny-index') || 0),
+  book: ['alphabet','numbers'].includes(localStorage.getItem('sunny-book')) ? localStorage.getItem('sunny-book') : 'alphabet',
+  index: Math.max(0,safeNum('sunny-index',0)),
   song: localStorage.getItem('sunny-song') === 'true',
   sound: localStorage.getItem('sunny-sound') !== 'false',
-  theme: Number(localStorage.getItem('sunny-theme') || 0),
-  stars: Number(localStorage.getItem('sunny-stars') || 0),
-  visited: new Set(JSON.parse(localStorage.getItem('sunny-visited') || '[]')),
+  theme: Math.max(0,Math.min(3,safeNum('sunny-theme',0))),
+  stars: Math.max(0,safeNum('sunny-stars',0)),
+  visited: new Set((()=>{
+    const saved=safeJSON('sunny-visited',[]);
+    return Array.isArray(saved)?saved.filter(x=>/^(alphabet|numbers):\d+$/.test(String(x))):[];
+  })()),
   speaking:false,
-  voiceFriend:localStorage.getItem('sunny-voice-friend')||'sunny',
-  voiceSpeed:localStorage.getItem('sunny-voice-speed')||'slow',
+  voiceSpeed:['slow','normal','lively'].includes(localStorage.getItem('sunny-voice-speed')) ? localStorage.getItem('sunny-voice-speed') : 'slow',
   autoRead:localStorage.getItem('sunny-auto-read')!=='false',
   largeType:localStorage.getItem('sunny-large-type')==='true',
   focusMode:localStorage.getItem('sunny-focus-mode')==='true'
@@ -844,36 +878,33 @@ let speechToken = 0;
 let lastSpoken = "";
 const $ = id => document.getElementById(id);
 
-const GUIDE_VOICES={
-  sunny:{name:"Sunny",rate:.82,pitch:1.1,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, storytime friend. Sunny is ready to explore letters, numbers, rhymes, and movement with you."},
-  bunny:{name:"Benny Bunny",rate:.85,pitch:1.15,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello, little reader. Benny Bunny is ready to hop through a sunny storybook."},
-  owl:{name:"Story Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful listener. Story Owl is ready for letters, numbers, and cheerful rhymes."},
-  robot:{name:"Rhyme-Bot",rate:.8,pitch:.96,match:/daniel|david|alex|fred|george/i,greeting:"Beep boop. Rhyme-Bot is ready for a storytime mission."},
-  rainbow:{name:"Rainbow Rae",rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright learner. Rainbow Rae is ready for a colorful alphabet and number adventure."}
+const EIREN={
+  name:"Eiren",
+  rate:.82,
+  pitch:1.06,
+  match:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
+  greeting:"Hello, bright one. I’m Eiren. Welcome to Sunny Storytime. We can explore letters, numbers, rhymes, and little movements together."
 };
-const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
-
+const VOICE_SPEEDS={slow:.88,normal:1,lively:1.08};
 
 function refreshVoices(){
   if(!('speechSynthesis' in window))return;
   availableVoices=speechSynthesis.getVoices()||[];
-  const g=GUIDE_VOICES[state.voiceFriend]||GUIDE_VOICES.sunny;
-  $('voiceStatus').textContent=availableVoices.length?`${g.name} is ready.`:'Loading a friendly voice…'
+  $('voiceStatus').textContent=availableVoices.length?'Eiren is ready.':'Loading Eiren’s voice…';
 }
 function chooseVoice(){
   refreshVoices();
-  const g=GUIDE_VOICES[state.voiceFriend]||GUIDE_VOICES.sunny;
   const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||''));
   const pool=english.length?english:availableVoices;
-  selectedVoice=pool.find(v=>g.match.test(v.name))
+  selectedVoice=pool.find(v=>EIREN.match.test(v.name))
     ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
-    ||pool[0]||null
+    ||pool[0]||null;
 }
 if('speechSynthesis' in window){
   refreshVoices();
   chooseVoice();
   speechSynthesis.addEventListener?.('voiceschanged',()=>{refreshVoices();chooseVoice()});
-  speechSynthesis.onvoiceschanged=()=>{refreshVoices();chooseVoice()}
+  speechSynthesis.onvoiceschanged=()=>{refreshVoices();chooseVoice()};
 }
 
 function speak(text,onEnd,preview=false){
@@ -881,8 +912,7 @@ function speak(text,onEnd,preview=false){
     if(onEnd)setTimeout(onEnd,900);
     return;
   }
-  const g=GUIDE_VOICES[state.voiceFriend]||GUIDE_VOICES.sunny;
-  const phrase=preview?g.greeting:String(text||'').trim();
+  const phrase=preview?EIREN.greeting:String(text||'').trim();
   if(!phrase)return;
   speechToken++;
   speechSynthesis.cancel();
@@ -892,11 +922,11 @@ function speak(text,onEnd,preview=false){
   chooseVoice();
   if(selectedVoice)u.voice=selectedVoice;
   u.lang=selectedVoice?.lang||'en-US';
-  u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
-  u.pitch=g.pitch;u.volume=1;
-  u.onstart=()=>{$('bookCard')?.classList.add('speaking');$('voiceStatus').textContent=`${g.name} is reading.`};
-  u.onend=()=>{if(token!==speechToken)return;$('bookCard')?.classList.remove('speaking');$('voiceStatus').textContent='Ready for another page!';onEnd&&onEnd()};
-  u.onerror=()=>{if(token!==speechToken)return;$('bookCard')?.classList.remove('speaking');$('voiceStatus').textContent='The voice had a little hiccup.';onEnd&&onEnd()};
+  u.rate=Math.max(.55,Math.min(1.08,EIREN.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+  u.pitch=EIREN.pitch;u.volume=1;
+  u.onstart=()=>{$('bookCard')?.classList.add('speaking');$('voiceStatus').textContent='🌸 Eiren is reading.'};
+  u.onend=()=>{if(token!==speechToken)return;$('bookCard')?.classList.remove('speaking');$('voiceStatus').textContent='Eiren is ready for another page!';onEnd&&onEnd()};
+  u.onerror=e=>{if(token!==speechToken)return;$('bookCard')?.classList.remove('speaking');$('voiceStatus').textContent=e&&['interrupted','canceled'].includes(e.error)?'Eiren paused.':'Eiren’s voice had a little hiccup.';onEnd&&onEnd()};
   speechSynthesis.speak(u);
 }
 
@@ -924,8 +954,7 @@ function startSong(){
 
 
 function updateVoiceButtons(){
-  document.querySelectorAll('[data-voice]').forEach(b=>b.classList.toggle('active',b.dataset.voice===state.voiceFriend));
-  $('voiceSpeed').value=state.voiceSpeed
+  $('voiceSpeed').value=state.voiceSpeed;
 }
 function applyCrecheSettings(){
   document.body.classList.toggle('large-type',state.largeType);
@@ -951,6 +980,20 @@ function updateGarden(){
   $('gardenLabel').textContent=explored>=total
     ?'Every alphabet and number story has been explored!'
     :`${explored} of ${total} story pages explored.`
+}
+
+function saveState(){
+  localStorage.setItem('sunny-book',state.book);
+  localStorage.setItem('sunny-index',String(state.index));
+  localStorage.setItem('sunny-song',String(state.song));
+  localStorage.setItem('sunny-sound',String(state.sound));
+  localStorage.setItem('sunny-theme',String(state.theme));
+  localStorage.setItem('sunny-stars',String(state.stars));
+  localStorage.setItem('sunny-visited',JSON.stringify([...state.visited]));
+  localStorage.setItem('sunny-voice-speed',state.voiceSpeed);
+  localStorage.setItem('sunny-auto-read',String(state.autoRead));
+  localStorage.setItem('sunny-large-type',String(state.largeType));
+  localStorage.setItem('sunny-focus-mode',String(state.focusMode));
 }
 
 function celebrate(){
@@ -1067,17 +1110,10 @@ function setBook(book){
 }
 
 
-$('voiceGuides').onclick=e=>{
-  const b=e.target.closest('[data-voice]');
-  if(!b)return;
-  state.voiceFriend=b.dataset.voice;
-  saveState();updateVoiceButtons();
-  $('voiceStatus').textContent=`${GUIDE_VOICES[state.voiceFriend].name} selected.`
-};
 $('voiceSpeed').onchange=e=>{state.voiceSpeed=e.target.value;saveState();$('voiceStatus').textContent='Reading speed saved.'};
 $('meetGuideBtn').onclick=()=>speak('',null,true);
 $('repeatVoiceBtn').onclick=()=>lastSpoken?speak(lastSpoken):speak(currentPageNarration());
-$('stopVoiceBtn').onclick=()=>{speechToken++;stopSong();$('bookCard')?.classList.remove('speaking');$('voiceStatus').textContent='Voice stopped.'};
+$('stopVoiceBtn').onclick=()=>{speechToken++;stopSong();if('speechSynthesis' in window)speechSynthesis.cancel();$('bookCard')?.classList.remove('speaking');$('voiceStatus').textContent='Eiren paused.'};
 $('largeTypeBtn').onclick=()=>{state.largeType=!state.largeType;saveState();applyCrecheSettings()};
 $('focusModeBtn').onclick=()=>{state.focusMode=!state.focusMode;saveState();applyCrecheSettings()};
 $('autoReadBtn').onclick=()=>{state.autoRead=!state.autoRead;saveState();applyCrecheSettings()};
@@ -1100,10 +1136,26 @@ $('soundModeBtn').onclick=()=>{
 };
 $('colorDayBtn').onclick=()=>{
   state.theme=(state.theme+1)%themes.length;
-  document.body.className=themes[state.theme][1];
+  themes.forEach(([,cls])=>document.body.classList.remove(cls));
+  document.body.classList.add(themes[state.theme][1]);
   $('colorDayLabel').textContent=themes[state.theme][0];
   saveState();
+  applyCrecheSettings();
 };
+
+const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+async function connectEirenBoundary(){
+  try{
+    const mod=await import(EIREN_PUBLIC_ADAPTER);
+    if(mod?.EirenAdapter?.prepare){
+      const prepared=mod.EirenAdapter.prepare({
+        mode:"reading",
+        message:"Preschool Sunny ABCs and 123s Storytime narration and gentle language support."
+      });
+      if(prepared?.specialist==="eiren")$('voiceStatus').textContent="🌸 Eiren’s public reading boundary is connected.";
+    }
+  }catch(_err){}
+}
 
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight') go(1);
@@ -1123,7 +1175,8 @@ if(!('speechSynthesis' in window)){
   $('stopVoiceBtn').disabled=true;
   $('voiceStatus').textContent='Read-aloud voices are not available in this browser.'
 }
-document.body.className=themes[state.theme]?.[1]||'theme-sunny';
+themes.forEach(([,cls])=>document.body.classList.remove(cls));
+document.body.classList.add(themes[state.theme]?.[1]||'theme-sunny');
 $('colorDayLabel').textContent=themes[state.theme]?.[0]||'Sunny';
 $('songModeState').textContent=state.song?'On':'Off';
 $('soundModeState').textContent=state.sound?'On':'Off';
@@ -1133,6 +1186,7 @@ $('alphabetModeBtn').classList.toggle('active',state.book==='alphabet');
 $('numberModeBtn').classList.toggle('active',state.book==='numbers');
 updateVoiceButtons();
 applyCrecheSettings();
+connectEirenBoundary();
 render(false);
 window.addEventListener('beforeunload',()=>{speechToken++;stopSong()});
 </script>
