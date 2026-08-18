@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alphabet Adventure Book — Story Garden</title>
+<title>Alphabet Adventure Book — Story Garden · Eiren Edition</title>
 <meta name="description" content="A private alphabet reading game for young readers. Local storage only, no ads, no trackers.">
 <style>
   :root{
@@ -231,6 +231,16 @@
   .sparkle{position:fixed;pointer-events:none;font-size:26px;animation:floatUp 1.7s ease-out forwards;z-index:10;}
   @keyframes floatUp{to{transform:translateY(-130px) rotate(180deg);opacity:0;}}
 
+
+  .topbar{position:relative;overflow:hidden}
+  .topbar::after{content:"☁️  ✨  🌸  ⭐  ☁️";position:absolute;right:14%;top:4px;opacity:.22;font-size:1.15rem;letter-spacing:.55rem;pointer-events:none}
+  .letter-card{background:linear-gradient(155deg,#fffdf8,#fff1f7 45%,#effcff)}
+  .choice-group:nth-child(1){background:#fff5f8}.choice-group:nth-child(2){background:#fffbea}.choice-group:nth-child(3){background:#f1fff5}.choice-group:nth-child(4){background:#f1f7ff}
+  .eiren-card{border-radius:18px;padding:10px 12px;background:linear-gradient(135deg,#fff4fa,#f5f0ff,#f0fffa);border:1px solid rgba(126,87,194,.15);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .eiren-face{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ffd9e8,#e7ddff);font-size:1.45rem;flex:0 0 auto}
+  .eiren-copy{flex:1 1 220px}.eiren-copy strong{display:block;color:#6d3f86}.eiren-copy span{font-size:.8rem;color:var(--muted);line-height:1.3}
+  .eiren-actions{display:flex;gap:6px;flex-wrap:wrap}.eiren-status{width:100%;font-size:.76rem;color:#765c8c;font-weight:900}
+
   @media(max-width:980px){
     body{overflow:auto;}
     .app{height:auto;min-height:100dvh;overflow:visible;}
@@ -276,6 +286,38 @@
 .site-footer strong {
   color: #503a76;
 }
+
+/* Preschool breathing-room pass — layout only */
+body{overflow:auto}
+.app{width:min(1240px,calc(100% - 24px));height:auto;min-height:100dvh;padding:clamp(14px,2.5vw,30px);gap:clamp(14px,2vw,22px)}
+.topbar{padding:clamp(16px,2vw,24px);border-radius:28px;border:2px solid rgba(255,255,255,.9);box-shadow:0 12px 30px rgba(15,23,42,.10)}
+.brand{gap:15px}.logo{width:64px;height:64px;border-radius:22px;font-size:32px}.subtitle{margin-top:6px;line-height:1.45}
+.control-panel{grid-template-columns:minmax(120px,160px) minmax(155px,190px) minmax(250px,1fr) auto;gap:14px;padding:16px;border-radius:24px;border:2px solid rgba(255,255,255,.9)}
+.field label{margin-bottom:7px}.mode-tabs{gap:9px}select{min-height:48px;border-radius:16px;border:2px solid rgba(23,32,51,.10)}
+.btn{min-height:48px;padding:10px 16px}.btn.small{min-height:44px;padding:9px 14px}
+.main{grid-template-columns:minmax(0,1fr) minmax(300px,350px);gap:18px;align-items:start}
+.stage,.side{border-radius:26px;border:2px solid rgba(255,255,255,.92);box-shadow:0 14px 34px rgba(15,23,42,.11)}
+.stage{gap:16px;padding:18px;overflow:visible}
+.reader-card{min-height:142px;padding:18px;gap:18px;border-radius:24px}.big-letter{width:104px;height:104px;border-radius:28px;font-size:68px}
+.reader-kicker{margin-bottom:7px}.sentence{line-height:1.3}.reader-help{margin-top:8px;line-height:1.45}.reader-emoji{font-size:66px}
+.book-area{grid-template-columns:minmax(235px,320px) minmax(0,1fr);gap:16px}
+.letter-card,.choice-card{border-radius:22px;border:2px solid rgba(23,32,51,.09);padding:18px}.letter-card{min-height:320px}
+.letter-title{margin:10px 0 5px;line-height:1.25}.word-row{gap:9px;margin-top:12px}.word-pill{padding:8px 12px}.fact{margin-top:13px;line-height:1.55}
+.choice-card{gap:13px}.choice-head{gap:12px;padding:2px 2px 4px}.choice-columns{gap:13px;padding:2px 5px 4px 2px}
+.choice-group{border-radius:18px;border:2px solid rgba(23,32,51,.08);padding:12px}.choice-group h3{margin-bottom:9px}.choice-list{gap:9px}
+.choice{min-height:52px;border-radius:16px;padding:9px 10px;gap:9px}.choice .dot{width:38px;height:38px;border-radius:13px;font-size:1.15rem}
+.eiren-card{margin:2px 0;padding:16px;gap:13px;border-radius:22px;border:2px solid rgba(126,87,194,.12)}.eiren-face{width:54px;height:54px;font-size:1.65rem}
+.eiren-copy span{display:block;margin-top:3px;line-height:1.45}.eiren-actions{gap:9px}
+.action-bar{gap:10px;padding-top:2px}.action-bar .btn{flex:1 1 130px}.status{flex:1 0 100%;min-height:38px;padding:8px 4px 0;line-height:1.4}
+.side{padding:16px;gap:14px;grid-template-rows:auto auto minmax(210px,1fr)}.side-title{margin-bottom:8px}
+.progress-card{padding:13px;border-radius:19px;border:2px solid rgba(23,32,51,.08)}.progress-row{margin-bottom:10px;line-height:1.4}.bar{height:13px}
+.letter-grid{gap:8px}.letter-btn{min-height:46px;border-radius:14px;border:2px solid rgba(23,32,51,.09);font-size:1rem}
+.nest{padding:12px;border-radius:19px;border:2px solid rgba(23,32,51,.08)}.nest-item{padding:11px 3px}.nest-text{line-height:1.45}
+.footer{padding:3px 8px 8px;line-height:1.5}.site-footer{margin:20px auto;max-width:1216px;padding:18px 14px}
+@media(max-width:980px){.app{width:min(100% - 16px,900px);padding:14px}.control-panel{grid-template-columns:1fr 1fr}.control-panel .mode-field{grid-column:1/-1}.main{grid-template-columns:1fr;gap:16px}.side{min-height:0}.reader-card{position:static}}
+@media(max-width:720px){.topbar{padding:15px}.logo{width:56px;height:56px}.stage{padding:14px}.reader-card{padding:14px;min-height:126px}.book-area{grid-template-columns:1fr;gap:14px}.letter-card{min-height:250px}.choice-columns{grid-template-columns:1fr 1fr;max-height:none;overflow:visible}.big-letter{width:78px;height:78px;font-size:52px}.eiren-card{padding:14px}}
+@media(max-width:560px){.app{width:100%;padding:9px;gap:11px}.topbar{border-radius:22px}.control-panel{grid-template-columns:1fr;padding:12px;gap:11px}.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.stage{gap:12px;padding:11px;border-radius:22px}.reader-card{grid-template-columns:auto 1fr;gap:11px;border-radius:20px}.choice-columns{grid-template-columns:1fr;gap:10px}.choice-group{padding:10px}.choice{min-height:56px}.eiren-actions{display:grid;grid-template-columns:1fr;width:100%}.action-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px}.action-bar .btn{width:100%}.status{grid-column:1/-1}.side{padding:12px}.letter-grid{grid-template-columns:repeat(6,1fr)}.letter-btn{min-height:48px}}
+
 </style>
 </head>
 <body>
@@ -350,6 +392,17 @@
         </article>
       </div>
 
+      <section class="eiren-card" aria-label="Eiren Story Friend">
+        <div class="eiren-face" aria-hidden="true">🌸</div>
+        <div class="eiren-copy"><strong>Eiren · Reading Friend</strong><span>I can say the letter sound, read your page slowly, and celebrate the words you build.</span></div>
+        <div class="eiren-actions">
+          <button class="btn secondary small" id="eirenSound" type="button">👂 Hear Sound</button>
+          <button class="btn pink small" id="eirenRead" type="button">📖 Read With Eiren</button>
+          <button class="btn secondary small" id="eirenStop" type="button">⏹ Stop</button>
+        </div>
+        <div class="eiren-status" id="eirenStatus" aria-live="polite">Eiren is ready when you are.</div>
+      </section>
+
       <div class="action-bar">
         <button class="btn secondary small" id="backBtn" type="button">⬅ Back</button>
         <button class="btn pink small" id="makeBtn" type="button">Make Sentence</button>
@@ -413,10 +466,10 @@
     {letter:"R", sound:"/r/ like rabbit", emoji:"🐇", main:"Rabbit", facts:"Rabbits can hop very quickly.", chars:["rabbit","raccoon","robin","reindeer"], objects:["rainbow","ring","ribbon","rocket"], settings:["Rainbow Garden","River Road","Rose Ridge","Robin Nest"]},
     {letter:"S", sound:"/s/ like squirrel", emoji:"🐿️", main:"Squirrel", facts:"Squirrels save food for later.", chars:["squirrel","seal","skunk","sparrow"], objects:["star","shell","sunflower","sock"], settings:["Secret Grove","Starry Shore","Sunflower Street","Silver Stream"]},
     {letter:"T", sound:"/t/ like turtle", emoji:"🐢", main:"Turtle", facts:"Turtles carry protective shells.", chars:["turtle","tiger","toucan","toad"], objects:["tree","train","teacup","tulip"], settings:["Tiny Island","Tulip Trail","Turtle Bay","Twinkle Town"]},
-    {letter:"U", sound:"/ŭ/ like umbrella", emoji:"🦄", main:"Unicorn", facts:"Unicorns are magical story creatures.", chars:["unicorn","urchin","umbrella bird","upland owl"], objects:["umbrella","ukulele","uniform","up arrow"], settings:["Unicorn Valley","Umbrella Hill","Uplift Meadow","Undersea Garden"]},
-    {letter:"V", sound:"/v/ like vine", emoji:"🦅", main:"Vulture", facts:"Vultures help clean nature.", chars:["vulture","vole","velvet moth","violet bird"], objects:["vine","violin","vase","vest"], settings:["Violet Valley","Velvet Grove","Vineyard Path","Village Garden"]},
+    {letter:"U", sound:"/ŭ/ like umbrella", emoji:"☂️", main:"Umbrella", facts:"Unicorns are magical story creatures.", chars:["urchin","umbrella bird","upland owl","unicorn"], objects:["umbrella","ukulele","uniform","up arrow"], settings:["Unicorn Valley","Umbrella Hill","Uplift Meadow","Undersea Garden"]},
+    {letter:"V", sound:"/v/ like vulture", emoji:"🦅", main:"Vulture", facts:"Vultures help clean nature.", chars:["vulture","vole","velvet moth","violet bird"], objects:["vine","violin","vase","vest"], settings:["Violet Valley","Velvet Grove","Vineyard Path","Village Garden"]},
     {letter:"W", sound:"/w/ like wolf", emoji:"🐺", main:"Wolf", facts:"Wolves are social animals.", chars:["wolf","whale","wombat","woodpecker"], objects:["wing","wagon","watermelon","wand"], settings:["Whispering Woods","Waterfall Way","Willow Walk","Winter Meadow"]},
-    {letter:"X", sound:"/ks/ like fox or x-ray", emoji:"🐟", main:"X-Ray Fish", facts:"X-ray fish have see-through bodies.", chars:["x-ray fish","xenops bird","xantic fish","xolo puppy"], objects:["xylophone","x-ray picture","x mark","xenon star"], settings:["Xenon Ocean","Xylophone Hall","X Marks Cove","X-Ray Reef"]},
+    {letter:"X", sound:"X often says /ks/ as in fox. At the start of x-ray, X says its letter name.", emoji:"🐟", main:"X-Ray Fish", facts:"X-ray fish have see-through bodies.", chars:["x-ray fish","xenops bird","xantic fish","xolo puppy"], objects:["x-ray picture","x mark","xylophone","xenon star"], settings:["Xenon Ocean","Xylophone Hall","X Marks Cove","X-Ray Reef"]},
     {letter:"Y", sound:"/y/ like yak", emoji:"🐂", main:"Yak", facts:"Yaks have thick warm fur.", chars:["yak","yellow bird","yabby","yorkie pup"], objects:["yarn","yo-yo","yacht","yellow flower"], settings:["Yellow Valley","Yarn Yard","Yonder Hill","Yucca Garden"]},
     {letter:"Z", sound:"/z/ like zebra", emoji:"🦓", main:"Zebra", facts:"Every zebra has unique stripes.", chars:["zebra","zebu","zippy bee","zebra finch"], objects:["zinnia","zipper","zero","zigzag path"], settings:["Zebra Plains","Zinnia Garden","Zigzag Trail","Zooming Hills"]}
   ];
@@ -450,7 +503,11 @@
     visitedCount:document.getElementById("visitedCount"),
     starCount:document.getElementById("starCount"),
     progressBar:document.getElementById("progressBar"),
-    pageNest:document.getElementById("pageNest")
+    pageNest:document.getElementById("pageNest"),
+    eirenSound:document.getElementById("eirenSound"),
+    eirenRead:document.getElementById("eirenRead"),
+    eirenStop:document.getElementById("eirenStop"),
+    eirenStatus:document.getElementById("eirenStatus")
   };
 
   function loadState(){
@@ -687,7 +744,8 @@
     const templates = [
       `${x.letter} is for ${cap(sel.character)}. The ${sel.adjective} ${sel.character} ${sel.action} ${article(sel.object)} ${sel.object} in ${sel.setting}.`,
       `In ${sel.setting}, ${article(sel.adjective)} ${sel.adjective} ${sel.character} ${sel.action} ${article(sel.object)} ${sel.object}. ${x.letter} begins ${cap(sel.character)}!`,
-      `${cap(sel.character)} starts with ${x.letter}. Today, the ${sel.character} ${sel.action} ${article(sel.object)} ${sel.object} beside ${sel.setting}.`
+      `${cap(sel.character)} starts with ${x.letter}. Today, the ${sel.character} ${sel.action} ${article(sel.object)} ${sel.object} beside ${sel.setting}.`,
+      `Look! ${cap(sel.character)} begins with ${x.letter}. The ${sel.adjective} ${sel.character} ${sel.action} ${article(sel.object)} ${sel.object} in ${sel.setting}.`
     ];
     const text = choose(templates);
     currentPage = {text, letter:x.letter, mode:"adventure", ts:Date.now(), selection:{...selected}};
@@ -712,6 +770,69 @@
 
   function nextLetter(){goTo(currentIndex >= 25 ? 0 : currentIndex + 1);}
   function previousLetter(){goTo(currentIndex <= 0 ? 25 : currentIndex - 1);}
+
+  const EIREN_PUBLIC_ADAPTER = "https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  let eirenConnected = false;
+  let eirenToken = 0;
+
+  async function connectEiren(){
+    try{
+      const mod = await import(EIREN_PUBLIC_ADAPTER);
+      if(mod?.EirenAdapter?.prepare){
+        const prepared = mod.EirenAdapter.prepare({mode:"reading",message:"Preschool Alphabet Adventure reading companionship."});
+        eirenConnected = prepared?.specialist === "eiren";
+      }
+    }catch(_e){ eirenConnected = false; }
+    els.eirenStatus.textContent = eirenConnected
+      ? "🌸 Eiren’s public reading boundary is connected."
+      : "🌸 Eiren is ready with a gentle on-device reading voice.";
+  }
+
+  function eirenVoice(){
+    if(!("speechSynthesis" in window)) return null;
+    const voices = speechSynthesis.getVoices() || [];
+    const english = voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+    const pool = english.length ? english : voices;
+    return pool.find(v=>/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i.test(v.name))
+      || pool[0] || null;
+  }
+
+  function stopEiren(){
+    eirenToken++;
+    if("speechSynthesis" in window) speechSynthesis.cancel();
+    els.eirenStatus.textContent = "Eiren paused.";
+  }
+
+  function eirenSpeak(text, rate=.76){
+    if(!text) return;
+    if(!("speechSynthesis" in window)){els.eirenStatus.textContent="Reading aloud is not available on this device.";return;}
+    const token=++eirenToken;
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    const v=eirenVoice();
+    if(v) u.voice=v;
+    u.lang=(v&&v.lang)||"en-US";
+    u.rate=rate;
+    u.pitch=1.08;
+    u.onstart=()=>els.eirenStatus.textContent="🌸 Eiren is reading with you…";
+    u.onend=()=>{if(token===eirenToken)els.eirenStatus.textContent="Beautiful reading! Choose another letter when you are ready. ⭐";};
+    u.onerror=e=>{if(token===eirenToken && !["canceled","interrupted"].includes(e.error))els.eirenStatus.textContent="The reading voice had a little hiccup. Try once more.";};
+    speechSynthesis.speak(u);
+  }
+
+  function eirenReadPage(){
+    const x=item();
+    const text=currentPage?.text || els.sentenceText.textContent || "";
+    eirenSpeak(`Letter ${x.letter}. ${text}`, els.levelSelect.value==="little"?.70:els.levelSelect.value==="growing"?.80:.88);
+  }
+
+  function eirenSaySound(){
+    const x=item();
+    const phrase = x.letter==="X"
+      ? "Letter X. X often says ks, as in fox. At the start of x-ray, we say the letter name X."
+      : `Letter ${x.letter}. ${x.sound}. ${x.letter} is for ${x.main}.`;
+    eirenSpeak(phrase,.68);
+  }
 
   function readCurrent(){
     const text = currentPage?.text || els.sentenceText.textContent || "";
@@ -797,6 +918,9 @@
   }
 
   function bind(){
+    els.eirenSound.addEventListener("click",eirenSaySound);
+    els.eirenRead.addEventListener("click",eirenReadPage);
+    els.eirenStop.addEventListener("click",stopEiren);
     els.letterSelect.addEventListener("change",()=>goTo(Number(els.letterSelect.value)));
     document.getElementById("learnMode").addEventListener("click",()=>setMode("learn"));
     document.getElementById("buildMode").addEventListener("click",()=>setMode("build"));
@@ -819,6 +943,7 @@
     shuffleChoices();
     setMode(mode);
     renderNest();
+    connectEiren();
   }
 
   init();
