@@ -502,6 +502,35 @@ body.simple-mode .pantry{display:none!important}
   .pantry-grid{grid-template-columns:repeat(2,1fr)}
 }
 
+
+/* Eiren Spelling Soup — expanded preschool sight-word edition */
+.app{width:min(1160px,calc(100% - 26px));padding:28px 0 60px}
+.hero{padding:38px 22px 34px;border-radius:38px}
+.hero p{max-width:760px}
+.voice-studio{padding:20px;border-radius:28px;margin:20px 0}
+.eiren-guide{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:16px;max-width:720px;margin:10px auto 15px;padding:16px;border:2px solid #e5daeb;border-radius:23px;background:linear-gradient(145deg,#fff9fc,#f1edff,#effcf7)}
+.eiren-orb{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdce9,#e5e0ff);font-size:2rem}
+.eiren-guide strong{color:var(--plum)}.eiren-guide p{margin:4px 0 0;color:var(--muted);line-height:1.55;font-size:.84rem}
+.toolbar{gap:11px;margin:20px 0}.toolbar button,.toolbar .pill{min-height:50px}
+.accessibility-row{gap:11px;margin:16px 0}.accessibility-row button{min-height:48px}
+.stats{gap:12px;margin:18px 0}.stat{padding:15px;border-radius:22px}
+.game-grid{gap:22px}.panel{padding:22px;border-radius:34px}
+.kitchen-card{min-height:560px;padding:28px;border-radius:31px}
+.soup-bowl{margin:24px auto 18px;padding:29px 18px 35px}
+.letters{gap:12px}.letter-tile{width:clamp(56px,7vw,74px)}
+.side-stack{gap:18px}.activity{padding:19px;border-radius:27px}
+.level-map{gap:10px}.level-card{padding:13px;border-radius:20px;min-height:68px}
+.level-card:disabled{opacity:.48;cursor:not-allowed;filter:grayscale(.35)}
+.pantry{margin-top:22px;padding:19px;border-radius:27px}.pantry-grid{gap:10px}.pantry-card{min-height:82px;border-radius:17px}
+@media(max-width:600px){
+ .app{width:min(100% - 14px,1160px);padding-top:14px}.hero{padding:30px 16px;border-radius:29px}
+ .eiren-guide{grid-template-columns:1fr;text-align:center}.eiren-orb{margin:auto}
+ .voice-controls{display:grid;grid-template-columns:1fr}.voice-controls>*{width:100%}
+ .toolbar{display:grid;grid-template-columns:1fr 1fr}.toolbar>*{width:100%}.toolbar .pill{grid-column:1/-1}
+ .accessibility-row{display:grid;grid-template-columns:1fr}.accessibility-row button{width:100%}
+ .kitchen-card{min-height:0;padding:20px 12px}.panel{padding:13px}.soup-bowl{border-width:5px}
+}
+
 </style>
 </head>
 <body>
@@ -529,13 +558,12 @@ body.simple-mode .pantry{display:none!important}
 
   
 <section class="voice-studio" aria-labelledby="voiceTitle">
-  <h2 id="voiceTitle">Choose a Kitchen Reading Friend</h2>
-  <div class="voice-guides" id="voiceGuides">
-    <button type="button" class="voice-guide" data-voice="chef"><span class="emoji">👩‍🍳</span><span class="name">Chef Cherry</span></button>
-    <button type="button" class="voice-guide" data-voice="carrot"><span class="emoji">🥕</span><span class="name">Cora Carrot</span></button>
-    <button type="button" class="voice-guide" data-voice="mouse"><span class="emoji">🐭</span><span class="name">Milo Mouse</span></button>
-    <button type="button" class="voice-guide" data-voice="owl"><span class="emoji">🦉</span><span class="name">Reader Owl</span></button>
-    <button type="button" class="voice-guide" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Rae</span></button>
+  <h2 id="voiceTitle">🌸 Storytime with Eiren</h2>
+  <div class="eiren-guide">
+    <span class="eiren-orb" aria-hidden="true">🌸</span>
+    <div><strong>Eiren · Your Sight-Word Kitchen Guide</strong>
+      <p>Hear the word, build it in the soup bowl, and read it again together.</p>
+    </div>
   </div>
   <div class="voice-controls">
     <select id="voiceSpeed" aria-label="Reading speed">
@@ -543,9 +571,9 @@ body.simple-mode .pantry{display:none!important}
       <option value="normal">🙂 Just right</option>
       <option value="lively">🥄 A little lively</option>
     </select>
-    <button type="button" id="meetGuideBtn" class="secondary">👋 Meet My Friend</button>
-    <button type="button" id="repeatVoiceBtn" class="secondary">🔁 Repeat Last</button>
-    <button type="button" id="stopVoiceBtn" class="secondary">⏹ Stop Voice</button>
+    <button type="button" id="meetGuideBtn" class="secondary">🌸 Meet Eiren</button>
+    <button type="button" id="repeatVoiceBtn" class="secondary">🔁 Eiren, Repeat</button>
+    <button type="button" id="stopVoiceBtn" class="secondary">⏹ Stop Eiren</button>
   </div>
   <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
 </section>
@@ -645,6 +673,17 @@ body.simple-mode .pantry{display:none!important}
 (() => {
   "use strict";
 
+  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  async function connectEirenBoundary(){
+    try{
+      const mod=await import(EIREN_PUBLIC_ADAPTER);
+      if(mod?.EirenAdapter?.prepare){
+        const p=mod.EirenAdapter.prepare({mode:"reading",message:"Preschool sight-word Spelling Soup guidance."});
+        if(p?.specialist==="eiren") $("voiceStatus").textContent="🌸 Eiren’s public reading boundary is connected.";
+      }
+    }catch(_){}
+  }
+
   const LEVELS = [
     {
       name:"Tiny Tastes",
@@ -652,11 +691,11 @@ body.simple-mode .pantry{display:none!important}
       description:"1–2 letter words",
       words:[
         ["a","🅰️","The word a points to one thing."],
-        ["I","👤","The word I means myself."],
+        ["I","👤","The word a speaker uses to talk about themself."],
         ["in","📦","Inside something."],
         ["is","✅","A word that tells what something is."],
         ["it","🐛","A word for a thing."],
-        ["me","🙋","A word that means myself."],
+        ["me","🙋","A word for yourself in sentences like: Help me."],
         ["my","🎒","A word that shows something belongs to me."],
         ["to","➡️","A word that shows direction."],
         ["up","⬆️","Toward a higher place."],
@@ -674,7 +713,7 @@ body.simple-mode .pantry{display:none!important}
         ["big","🦁","Large in size."],
         ["can","🥫","Able to do something, or a metal container."],
         ["for","🎁","Made or meant for someone."],
-        ["not","🚫","A word that means no."],
+        ["not","🚫","A word that makes an idea negative, as in: not wet."],
         ["one","1️⃣","The number one."],
         ["red","🔴","A bright color."],
         ["run","🏃","Move quickly on your feet."],
@@ -721,7 +760,86 @@ body.simple-mode .pantry{display:none!important}
         ["school","🏫","A place for learning."],
         ["family","👨‍👩‍👧‍👦","People who care for one another."]
       ]
+    },
+
+    {
+      name:"Cozy Cups",
+      icon:"☕",
+      description:"More everyday sight words",
+      words:[
+        ["am","😊","A being word we use with I, as in: I am happy."],
+        ["are","👥","A being word we use with you, we, or they."],
+        ["be","🌱","A word about being, as in: Be kind."],
+        ["do","✅","To take action or complete a task."],
+        ["he","👦","A word used for a boy or man being talked about."],
+        ["she","👧","A word used for a girl or woman being talked about."],
+        ["on","🔛","Resting on top of or touching a surface."],
+        ["at","📍","A word that can tell a place or time."],
+        ["an","1️⃣","A word used before one thing when the next word begins with a vowel sound."],
+        ["all","🌟","Every one or the whole amount."],
+        ["but","↔️","A joining word that shows a difference or change."],
+        ["get","🙌","To receive, reach, or obtain something."]
+      ]
+    },
+    {
+      name:"Rainbow Recipes",
+      icon:"🌈",
+      description:"Useful reading words",
+      words:[
+        ["this","👇","A word for something close by."],
+        ["that","👉","A word for something being pointed out."],
+        ["with","🤝","Together or alongside someone or something."],
+        ["have","🎒","To own, hold, or experience something."],
+        ["like","❤️","To enjoy something, or to say two things are similar."],
+        ["want","🙌","To wish for or would like something."],
+        ["good","👍","Pleasant, helpful, or done well."],
+        ["yes","✅","A word that means you agree."],
+        ["into","📥","Moving from outside to inside."],
+        ["out","📤","Away from the inside."],
+        ["too","➕","Also, or more than needed."],
+        ["will","🌤️","A word that can tell about something expected to happen."]
+      ]
+    },
+    {
+      name:"Garden Stew",
+      icon:"🥕",
+      description:"Words for little sentences",
+      words:[
+        ["what","❓","A question word used to ask about a thing or idea."],
+        ["who","👤","A question word used to ask about a person."],
+        ["when","🕒","A question word used to ask about time."],
+        ["why","🤔","A question word used to ask for a reason."],
+        ["how","🧩","A question word used to ask the way something happens or is done."],
+        ["then","➡️","At that time, or what happens next."],
+        ["them","👥","A word for people or things receiving an action."],
+        ["they","👥","A word for people, animals, or things being talked about."],
+        ["your","🎒","A word showing that something belongs to you."],
+        ["our","🏡","A word showing that something belongs to us."],
+        ["from","↩️","A word that can tell where something starts."],
+        ["very","✨","A word that makes a description stronger."]
+      ]
+    },
+    {
+      name:"Reading Feast",
+      icon:"📚",
+      description:"Kindergarten-ready sight words",
+      words:[
+        ["could","💭","A word for something that is possible or was possible."],
+        ["would","💭","A word used to talk about a choice, wish, or imagined action."],
+        ["should","💡","A word used for something that is a good idea to do."],
+        ["because","🔗","A word that gives a reason."],
+        ["before","⏮️","Earlier than something else."],
+        ["after","⏭️","Later than something else."],
+        ["every","🌟","Each one in a group."],
+        ["many","🔢","A large number of people or things."],
+        ["some","🧺","An amount or number, but not all."],
+        ["know","🧠","To understand or have learned something."],
+        ["read","📖","To look at written words and understand them."],
+        ["write","✏️","To make letters or words."]
+      ]
     }
+
+
   ].map((level,li)=>({
     ...level,
     words:level.words.map(([word,img,prompt],wi)=>({
@@ -745,16 +863,25 @@ body.simple-mode .pantry{display:none!important}
     streak:Number(localStorage.getItem("soupStreak")||0),
     stars:Number(localStorage.getItem("soupStars")||0),
     sound:localStorage.getItem("soupSound")!=="false",
-    voice:localStorage.getItem("soupVoice")||"chef",
+    voice:"eiren",
     voiceSpeed:localStorage.getItem("soupVoiceSpeed")||"slow",
     autoSpeak:localStorage.getItem("soupAutoSpeak")!=="false",
     largeType:localStorage.getItem("soupLargeType")==="true",
     simpleMode:localStorage.getItem("soupSimpleMode")==="true",
-    completed:new Set(JSON.parse(localStorage.getItem("soupCompleted")||"[]")),
+    completed:new Set((()=>{try{
+      const x=JSON.parse(localStorage.getItem("soupCompleted")||"[]");
+      return Array.isArray(x)?x.filter(id=>/^\d+-\d+$/.test(String(id))):[];
+    }catch(_){return []}})()),
     placed:[],
     finished:false,
     quizWrong:0
   };
+
+  state.level=Math.max(0,Math.min(LEVELS.length-1,Number.isFinite(state.level)?state.level:0));
+  state.index=Math.max(0,Number.isFinite(state.index)?state.index:0);
+  state.score=Math.max(0,Number.isFinite(state.score)?state.score:0);
+  state.streak=Math.max(0,Number.isFinite(state.streak)?state.streak:0);
+  state.stars=Math.max(0,Number.isFinite(state.stars)?state.stars:0);
 
   const $=id=>document.getElementById(id);
 
@@ -773,15 +900,25 @@ body.simple-mode .pantry{display:none!important}
     localStorage.setItem("soupSimpleMode",String(state.simpleMode));
   }
 
+  function levelComplete(i){
+    return LEVELS[i].words.every(w=>state.completed.has(w.id));
+  }
+  function maxUnlockedLevel(){
+    let unlocked=0;
+    for(let i=0;i<LEVELS.length-1;i++){
+      if(levelComplete(i)) unlocked=i+1;
+      else break;
+    }
+    return unlocked;
+  }
+  function levelUnlocked(i){return i<=maxUnlockedLevel();}
+
   function currentLevel(){return LEVELS[state.level]}
   function currentWord(){return currentLevel().words[state.index]}
 
   const GUIDE_VOICES={
-    chef:{name:"Chef Cherry",rate:.82,pitch:1.08,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, little reader. Chef Cherry is ready to stir letters into a bowl of sight words."},
-    carrot:{name:"Cora Carrot",rate:.86,pitch:1.15,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello, word cook. Cora Carrot is ready to find the letters in order."},
-    mouse:{name:"Milo Mouse",rate:.79,pitch:1.04,match:/daniel|alex|david|fred|george/i,greeting:"Hello, reading friend. Milo Mouse is ready for a tiny bowl of spelling practice."},
-    owl:{name:"Reader Owl",rate:.74,pitch:1,match:/daniel|samantha|alex|serena|moira/i,greeting:"Welcome, careful reader. Reader Owl is ready to listen to every sound and letter."},
-    rainbow:{name:"Rainbow Rae",rate:.84,pitch:1.1,match:/natural|enhanced|premium|samantha|aria|jenny|ava/i,greeting:"Hello, bright reader. Rainbow Rae is ready for a colorful spelling soup adventure."}
+    eiren:{name:"Eiren",rate:.82,pitch:1.06,match:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|natural|enhanced|premium/i,
+      greeting:"Hello, little reader. I’m Eiren. Let’s stir letters into our sight-word soup together."}
   };
   const VOICE_SPEEDS={slow:.88,normal:1,lively:1.1};
   let availableVoices=[],speechToken=0,lastSpoken="";
@@ -789,13 +926,13 @@ body.simple-mode .pantry{display:none!important}
   function refreshVoices(){
     if(!("speechSynthesis" in window)) return;
     availableVoices=speechSynthesis.getVoices()||[];
-    const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.chef;
+    const g=GUIDE_VOICES.eiren;
     $("voiceStatus").textContent=availableVoices.length?`${g.name} is ready.`:"Loading a friendly voice…";
   }
 
   function chooseVoice(){
     refreshVoices();
-    const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.chef;
+    const g=GUIDE_VOICES.eiren;
     const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
     const pool=english.length?english:availableVoices;
     return pool.find(v=>g.match.test(v.name))
@@ -813,7 +950,7 @@ body.simple-mode .pantry{display:none!important}
 
   function speak(text,{preview=false,target=null,spell=false}={}){
     if(!state.sound || !("speechSynthesis" in window)) return;
-    const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.chef;
+    const g=GUIDE_VOICES.eiren;
     let phrase=preview?g.greeting:String(text||"").trim();
     if(spell) phrase=String(text||"").split("").join(", ");
     if(!phrase) return;
@@ -836,11 +973,7 @@ body.simple-mode .pantry{display:none!important}
 
 
   function updateVoiceButtons(){
-    document.querySelectorAll("[data-voice]").forEach(b=>{
-      const active=b.dataset.voice===state.voice;
-      b.classList.toggle("active",active);
-      b.setAttribute("aria-pressed",String(active));
-    });
+    state.voice="eiren";
     $("voiceSpeed").value=state.voiceSpeed;
   }
 
@@ -949,14 +1082,17 @@ body.simple-mode .pantry{display:none!important}
     LEVELS.forEach((level,i)=>{
       const option=document.createElement("option");
       option.value=i;
-      option.textContent=`Level ${i+1} — ${level.name}`;
+      option.textContent=`Level ${i+1} — ${level.name}${levelUnlocked(i)?"":" 🔒"}`;
+      option.disabled=!levelUnlocked(i);
       $("levelSelect").appendChild(option);
 
       const done=level.words.filter(w=>state.completed.has(w.id)).length;
       const b=document.createElement("button");
       b.className="level-card"+(i===state.level?" active":"");
+      b.disabled=!levelUnlocked(i);
       b.innerHTML=`<strong>${level.icon} Level ${i+1}: ${level.name}</strong><span>${level.description} • ${done}/${level.words.length}</span>`;
       b.onclick=()=>{
+        if(!levelUnlocked(i))return;
         state.level=i;
         state.index=0;
         render();
@@ -970,11 +1106,13 @@ body.simple-mode .pantry{display:none!important}
   function renderBadges(){
     const badges=[];
     if(state.completed.size>=5) badges.push("🥄 First Five");
-    if(state.completed.size>=12) badges.push("🥣 Tiny Tastes Complete");
+    if(levelComplete(0)) badges.push("🥣 Tiny Tastes Complete");
     if(state.stars>=40) badges.push("⭐ Star Chef");
     if(state.streak>=5) badges.push("🔥 Five-Word Streak");
     if(state.completed.size>=24) badges.push("🍲 Sight-Word Cook");
     if(state.completed.size>=48) badges.push("👩‍🍳 Super Soup Scholar");
+    if(state.completed.size>=72) badges.push("🌈 Rainbow Reader");
+    if(state.completed.size>=96) badges.push("📚 Reading Feast Champion");
     $("badgeRow").innerHTML=badges.length
       ?badges.map(x=>`<span class="badge">${x}</span>`).join("")
       :'<span class="badge">Complete words to earn badges.</span>';
@@ -1155,20 +1293,10 @@ body.simple-mode .pantry{display:none!important}
     state.index++;
     if(state.index>=currentLevel().words.length){
       state.index=0;
-      if(state.level<LEVELS.length-1) state.level++;
+      if(state.level<LEVELS.length-1 && levelComplete(state.level)) state.level++;
     }
     render();
   }
-
-
-  $("voiceGuides").onclick=e=>{
-    const b=e.target.closest("[data-voice]");
-    if(!b)return;
-    state.voice=b.dataset.voice;
-    save();
-    updateVoiceButtons();
-    $("voiceStatus").textContent=`${GUIDE_VOICES[state.voice].name} selected.`;
-  };
 
   $("voiceSpeed").onchange=e=>{
     state.voiceSpeed=e.target.value;
@@ -1278,6 +1406,7 @@ body.simple-mode .pantry{display:none!important}
     $("voiceStatus").textContent="Read-aloud voices are not available in this browser.";
   }
 
+  connectEirenBoundary();
   updateVoiceButtons();
   updateAccessibility();
   renderPantry();
