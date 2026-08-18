@@ -342,6 +342,55 @@ button.good{
 }
 
 }
+
+/* =========================================================
+   Eiren Preschool Spelling Garden — breathing-room edition
+   ========================================================= */
+.site-footer{
+  margin-top:20px;padding:18px 12px;text-align:center;border-radius:22px;
+  background:rgba(255,255,255,.80);border:1px solid rgba(90,60,120,.12);
+  color:#665b72;font-size:.84rem;line-height:1.5
+}
+.site-footer strong{color:#503a76}
+.app{width:min(1120px,calc(100% - 28px));padding:36px 0 62px}
+.hero{padding:40px 24px 34px;border-radius:40px;border:3px solid rgba(255,255,255,.45)}
+.hero p{max-width:650px;line-height:1.75}
+.hero-icons{gap:15px;margin-top:21px}.hero-icons span{width:56px;height:56px;border-radius:19px}
+.toolbar{gap:11px;margin:22px 0}.toolbar button{min-height:52px;padding:11px 18px}
+.eiren-panel{
+  max-width:900px;margin:0 auto 22px;padding:21px 23px;border-radius:30px;
+  background:linear-gradient(145deg,#fff9fc,#f6f2ff,#effdf8);
+  border:2px solid rgba(139,109,232,.14);box-shadow:0 10px 28px rgba(64,41,78,.08)
+}
+.eiren-head{display:grid;grid-template-columns:auto 1fr;gap:17px;align-items:center;max-width:760px;margin:auto}
+.eiren-mark{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffdce9,#e5e0ff);font-size:2.1rem}
+.eiren-head h2{margin:0 0 6px;color:var(--plum);font-size:1.18rem}.eiren-head p{margin:0;color:var(--muted);line-height:1.62}
+.eiren-controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.eiren-controls select,.eiren-controls button{min-height:50px}
+.eiren-controls select{border:1px solid #e2d9e8;border-radius:999px;padding:9px 13px;background:white;color:var(--plum);font-weight:800}
+.eiren-status{min-height:1.3em;text-align:center;color:var(--muted);margin:10px 0 0;font-size:.86rem}
+.stats{gap:13px;margin-bottom:22px}.stat{padding:15px;border-radius:22px;border:2px solid rgba(255,255,255,.85)}
+.game{grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:22px}
+.panel{padding:22px;border-radius:32px;border:2px solid rgba(255,255,255,.96)}
+.word-card{min-height:540px;padding:30px 24px;border-radius:31px}
+.picture{font-size:clamp(5.5rem,13vw,9rem)}.prompt{margin-top:14px}.hint{margin-top:10px;line-height:1.55}
+.blanks{gap:12px;margin:27px 0 18px}.blank{width:clamp(60px,8vw,78px);border-radius:22px}
+.letters{gap:13px}.letter{width:56px;min-width:56px;height:56px;aspect-ratio:auto;font-size:1.55rem}
+.message{min-height:40px;margin-top:17px;line-height:1.45}
+.side-stack{gap:18px}.activity{padding:19px;border-radius:26px;border:2px solid #eee5ef}.activity h2{margin-bottom:9px}
+.word-list{gap:9px;max-height:310px}.word-chip{min-height:48px;padding:9px 7px;border-radius:16px}
+.progress{height:15px;margin-top:13px}.footer{margin-top:23px;line-height:1.6}
+@media(max-width:860px){.game{grid-template-columns:1fr;gap:18px}.word-card{min-height:500px}}
+@media(max-width:600px){
+ .app{width:min(100% - 14px,1120px);padding-top:10px}.hero{padding:30px 16px;border-radius:29px}
+ .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:9px}.toolbar button{width:100%}.toolbar #hearWordBtn{grid-column:1/-1}
+ .eiren-head{grid-template-columns:1fr;text-align:center}.eiren-mark{margin:auto}
+ .eiren-controls{display:grid;grid-template-columns:1fr}.eiren-controls>*{width:100%}
+ .stats{grid-template-columns:repeat(2,1fr);gap:9px}.panel{padding:14px}.word-card{min-height:470px;padding:23px 14px}
+ .blanks{gap:8px}.blank{width:clamp(52px,15vw,68px)}.letters{gap:10px}.letter{width:54px;min-width:54px;height:54px}
+ .word-list{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 <body>
@@ -357,12 +406,32 @@ button.good{
   </header>
 
   <div class="toolbar">
-    <button id="hearWordBtn">🔊 Hear Word</button>
+    <button id="hearWordBtn">🌸 Eiren, Say My Word</button>
     <button id="hintBtn" class="secondary">💡 Show Hint</button>
     <button id="clearBtn" class="secondary">🧽 Clear Word</button>
     <button id="nextBtn" class="good">Next Word ▶</button>
     <button id="resetBtn" class="secondary">↺ Reset Progress</button>
   </div>
+
+  <section class="eiren-panel" aria-labelledby="eirenTitle">
+    <div class="eiren-head">
+      <div class="eiren-mark" aria-hidden="true">🌸</div>
+      <div>
+        <h2 id="eirenTitle">Eiren · Your Spelling Garden Guide</h2>
+        <p>I’ll say the word, give you a gentle hint, celebrate each letter, and help your spelling garden bloom.</p>
+      </div>
+    </div>
+    <div class="eiren-controls">
+      <select id="voiceSpeed" aria-label="Eiren reading speed">
+        <option value="slow">🐢 Slow and gentle</option>
+        <option value="normal">🙂 Just right</option>
+        <option value="lively">🐇 A little lively</option>
+      </select>
+      <button id="meetEirenBtn" class="secondary" type="button">🌸 Meet Eiren</button>
+      <button id="stopEirenBtn" class="secondary" type="button">⏹ Stop Eiren</button>
+    </div>
+    <p id="eirenStatus" class="eiren-status" aria-live="polite">Eiren is ready to grow some words.</p>
+  </section>
 
   <section class="stats">
     <div class="stat"><strong id="scoreStat">0</strong>Score</div>
@@ -403,7 +472,7 @@ button.good{
     </aside>
   </div>
 
-  <p class="footer">Archaemenes Academy • Local-only preschool spelling • No tracking or outside services</p>
+  <p class="footer">Khaemenes Academy • Preschool spelling • Local progress</p>
 </main>
 
   <footer class="site-footer">
@@ -444,12 +513,20 @@ button.good{
   ];
 
   const state = {
-    index:Number(localStorage.getItem("spellingGardenIndex")||0),
-    score:Number(localStorage.getItem("spellingGardenScore")||0),
-    streak:Number(localStorage.getItem("spellingGardenStreak")||0),
-    completed:new Set(JSON.parse(localStorage.getItem("spellingGardenCompleted")||"[]")),
+    index:Math.max(0,Math.min(WORDS.length-1,Number(localStorage.getItem("spellingGardenIndex")||0)||0)),
+    score:Math.max(0,Number(localStorage.getItem("spellingGardenScore")||0)||0),
+    streak:Math.max(0,Number(localStorage.getItem("spellingGardenStreak")||0)||0),
+    completed:new Set((()=>{
+      try{
+        const saved=JSON.parse(localStorage.getItem("spellingGardenCompleted")||"[]");
+        return Array.isArray(saved)
+          ? saved.filter(i=>Number.isInteger(i)&&i>=0&&i<WORDS.length)
+          : [];
+      }catch(_err){ return []; }
+    })()),
     placed:[],
-    finished:false
+    finished:false,
+    voiceSpeed:localStorage.getItem("spellingGardenVoiceSpeed")||"slow"
   };
 
   const $=id=>document.getElementById(id);
@@ -463,6 +540,7 @@ button.good{
     localStorage.setItem("spellingGardenScore",String(state.score));
     localStorage.setItem("spellingGardenStreak",String(state.streak));
     localStorage.setItem("spellingGardenCompleted",JSON.stringify([...state.completed]));
+    localStorage.setItem("spellingGardenVoiceSpeed",state.voiceSpeed);
   }
 
   function shuffle(array){
@@ -474,17 +552,49 @@ button.good{
     return copy;
   }
 
-  function speak(text){
+  const EIREN={
+    name:"Eiren",
+    preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
+    greeting:"Hello, little gardener. I’m Eiren. Let’s listen to a word, choose its letters, and grow our spelling garden together."
+  };
+  const VOICE_SPEEDS={slow:.90,normal:1,lively:1.08};
+  let speechToken=0;
+
+  function chooseEirenVoice(){
+    if(!("speechSynthesis" in window)) return null;
+    const voices=speechSynthesis.getVoices()||[];
+    const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
+    const pool=english.length?english:voices;
+    return pool.find(v=>EIREN.preferred.test(v.name))
+      ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
+      ||pool[0]||null;
+  }
+
+  function stopEiren(message="Eiren paused."){
+    speechToken++;
+    if("speechSynthesis" in window) speechSynthesis.cancel();
+    const status=$("eirenStatus");
+    if(status) status.textContent=message;
+  }
+
+  function speak(text,{greeting=false}={}){
     if(!("speechSynthesis" in window)) return;
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    const voices=speechSynthesis.getVoices();
-    u.voice=voices.find(v=>/child|kid|jenny|samantha|aria|female/i.test(v.name)&&/^en/i.test(v.lang))
-      ||voices.find(v=>/^en/i.test(v.lang))
-      ||voices[0]
-      ||null;
-    u.rate=.84;
-    u.pitch=1.12;
+    stopEiren("");
+    const token=++speechToken;
+    const voice=chooseEirenVoice();
+    const u=new SpeechSynthesisUtterance(greeting?EIREN.greeting:text);
+    if(voice)u.voice=voice;
+    u.lang=(voice&&voice.lang)||"en-US";
+    u.rate=Math.max(.58,Math.min(1.04,.82*(VOICE_SPEEDS[state.voiceSpeed]||1)));
+    u.pitch=1.06;
+    u.onstart=()=>{$("eirenStatus").textContent="🌸 Eiren is speaking.";};
+    u.onend=()=>{if(token===speechToken)$("eirenStatus").textContent="Eiren is ready for the next word. 🌟";};
+    u.onerror=e=>{
+      if(token!==speechToken)return;
+      $("eirenStatus").textContent=e&&["interrupted","canceled"].includes(e.error)
+        ?"Eiren paused."
+        :"Eiren’s voice had a little hiccup. Try again.";
+    };
     speechSynthesis.speak(u);
   }
 
@@ -495,7 +605,7 @@ button.good{
     const extras=[];
     while(extras.length<count){
       const ch=alphabet[Math.floor(Math.random()*alphabet.length)];
-      if(!extras.includes(ch) || word.includes(ch)) extras.push(ch);
+      if(!extras.includes(ch) && !word.includes(ch)) extras.push(ch);
     }
     return extras;
   }
@@ -587,6 +697,7 @@ button.good{
   }
 
   function render(){
+    stopEiren("");
     const item=current();
     state.placed=[];
     state.finished=false;
@@ -648,13 +759,13 @@ button.good{
 
     if(letter===item.word[index]){
       blank.classList.add("correct");
-      speak(letter);
-      $("message").textContent="Good choice!";
+      speak(`${letter}.`);
+      $("message").textContent="That letter fits!";
     }else{
       blank.classList.add("wrong");
       state.streak=0;
-      $("message").textContent="That letter does not belong there. Try again.";
-      speak("Try again");
+      $("message").textContent="Good try. Let’s choose a different letter for this spot.";
+      speak("Good try. Let’s choose a different letter.");
       setTimeout(()=>removePlaced(index),650);
       updateStats();
       save();
@@ -691,7 +802,8 @@ button.good{
   function finishWord(){
     const item=current();
     state.finished=true;
-    state.score+=10;
+    const firstCompletion=!state.completed.has(state.index);
+    if(firstCompletion) state.score+=10;
     state.streak++;
     state.completed.add(state.index);
     $("message").textContent=`Wonderful! You spelled ${item.word.toUpperCase()}!`;
@@ -703,11 +815,36 @@ button.good{
     renderWordList();
   }
 
+  $("voiceSpeed").value=state.voiceSpeed;
+  $("voiceSpeed").onchange=e=>{
+    state.voiceSpeed=e.target.value;
+    save();
+    $("eirenStatus").textContent="Eiren’s reading speed is saved.";
+  };
+  $("meetEirenBtn").onclick=()=>speak("",{greeting:true});
+  $("stopEirenBtn").onclick=()=>stopEiren("Eiren paused.");
+
+  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  async function connectEirenBoundary(){
+    try{
+      const mod=await import(EIREN_PUBLIC_ADAPTER);
+      if(mod?.EirenAdapter?.prepare){
+        const prepared=mod.EirenAdapter.prepare({
+          mode:"reading",
+          message:"Preschool Colorful Spelling Garden word and spelling guidance."
+        });
+        if(prepared?.specialist==="eiren"){
+          $("eirenStatus").textContent="🌸 Eiren’s public reading boundary is connected.";
+        }
+      }
+    }catch(_err){}
+  }
+
   $("hearWordBtn").onclick=()=>speak(current().word);
   $("hintBtn").onclick=()=>{
     const item=current();
     $("hintText").textContent=`Hint: ${item.hint} The word begins with ${item.word[0].toUpperCase()}.`;
-    speak(item.hint);
+    speak(`${item.hint} The word begins with ${item.word[0]}.`);
   };
   $("clearBtn").onclick=()=>{
     state.placed.forEach(entry=>entry.tile.classList.remove("used"));
@@ -734,7 +871,9 @@ button.good{
     render();
   };
 
+  connectEirenBoundary();
   render();
+  window.addEventListener("beforeunload",()=>stopEiren(""));
 })();
 </script>
 <script src="/assets/vnv-beta-link.js" defer></script>
