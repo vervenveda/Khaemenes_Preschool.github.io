@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "sourceId": "khaemenes.preschool",
   "name": "Khaemenes Preschool · Crechè",
   "classification": "educational",
@@ -18,11 +18,14 @@
   "accessPolicy": {
     "gamesAppsStoriesTools": "open-no-registration",
     "browserLocalFavorites": "open-no-registration",
-    "parentFamilyEntrance": "creche-root-family-entry",
-    "personalizedPreschoolMentor": "active-linked-preschool-learner-required",
+    "parentFamilyEntrance": "academy-family-profile",
+    "mentorAuthority": "archaemenes-single-academy-mentor",
+    "mentorUrl": "https://vervenveda.com/Khaemenes_Academy.github.io/mentor/",
+    "mentorIdentitySource": "academy-family-registry-active-learner",
     "formalCurriculumRecords": "active-linked-learner-required",
     "parentAdministration": "academy-family-profile",
     "legacyPreschoolProfile": "compatibility-migration-only",
+    "legacyPreschoolMentor": "redirect-only",
     "guestMentor": "not-supported"
   },
   "resources": [
@@ -60,7 +63,7 @@
     {
       "id": "preschool-family-mentor-entry",
       "title": "Parent / Family Mentor Account",
-      "description": "Family entry on the Crechè home page. Once a Preschool learner is linked, the page reveals that child's personalized Mentor button.",
+      "description": "Family entry on the Crechè home page. Without an active family session it opens the Academy Family Profile. With an active family session, a learner can continue directly to Archaemenes.",
       "url": "https://vervenveda.com/Khaemenes_Preschool.github.io/#familyMentorEntry",
       "audiences": [
         "parent"
@@ -84,12 +87,13 @@
       "requiresLinkedLearner": false
     },
     {
-      "id": "preschool-personalized-mentor",
-      "title": "Khaemenes Preschool Personalized Mentor",
-      "description": "Child-only personalized Mentor using the active linked Preschool learner, the shared Crechè catalog, bounded help prompts, feelings check-in, adaptive learning path, learning garden, gentle read-aloud, breaks, and learner-scoped exploration progress.",
-      "url": "https://vervenveda.com/Khaemenes_Preschool.github.io/mentor/",
+      "id": "academy-archaemenes-mentor",
+      "title": "Archaemenes · Khaemenes Academy Mentor",
+      "description": "The single Academy Mentor surface. Archaemenes reads the active learner from the Academy Family Registry and adapts one continuous Mentor identity to the learner's registered stage. Early learners receive bounded Wise Owl prompts rather than unrestricted private text chat.",
+      "url": "https://vervenveda.com/Khaemenes_Academy.github.io/mentor/",
       "audiences": [
-        "preschool"
+        "preschool",
+        "student"
       ],
       "roles": [
         "student"
@@ -100,15 +104,15 @@
       ],
       "skills": [],
       "tags": [
+        "archaemenes",
         "mentor",
+        "family-registry",
         "personalized-learning",
-        "bounded-interaction",
         "linked-learner"
       ],
       "mentorEligible": true,
       "featured": true,
-      "requiresLinkedLearner": true,
-      "requiredStage": "preschool"
+      "requiresLinkedLearner": true
     },
     {
       "id": "academy-family-profile",
@@ -137,5 +141,5 @@
       "requiresLinkedLearner": false
     }
   ],
-  "mentorNotes": "Crechè games/apps remain public. The Preschool Mentor is personalized rather than Guest Mode: it requires an active linked Preschool learner selected through the Family Registry. mentor/index.html is child-only and contains no parent dashboard or profile-creation workflow. Adult administration lives in the Academy Family Profile. Child interaction is bounded; there is no unrestricted private chat."
+  "mentorNotes": "Khaemenes Preschool does not maintain a separate Mentor program. Archaemenes is the single Academy Mentor and uses the Academy Family Registry as learner authority. The legacy Preschool /mentor/ path is redirect-only. Crechè games/apps remain public. For Preschool and Kindergarten learners Archaemenes uses bounded Wise Owl controls rather than unrestricted private child chat. Adult administration remains in the Academy Family Profile."
 }
