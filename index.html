@@ -1716,7 +1716,7 @@ function isPreschoolAppHref(href){
   try{
     const target=new URL(href,location.href);
     const base=new URL("./apps/",location.href);
-    return target.href.startsWith(base.href);
+    return target.origin===base.origin&&target.pathname.startsWith(base.pathname)&&!target.username&&!target.password;
   }catch{return false}
 }
 function appFromHref(href){
