@@ -863,6 +863,7 @@ function renderLetterGrid(){
     b.textContent=l.letter;
     b.title=l.transliteration;
     b.onclick=()=>{
+      cancelPendingRoundAdvance();
       state.index=i;
       newRound();
       renderAll();
@@ -887,13 +888,19 @@ function makeRound(){
   return {answer,choices,solved:false};
 }
 
+let pendingRoundAdvance=null;
+function cancelPendingRoundAdvance(){
+  if(pendingRoundAdvance!==null){clearTimeout(pendingRoundAdvance);pendingRoundAdvance=null;}
+}
 function newRound(){
+  cancelPendingRoundAdvance();
   state.currentRound=makeRound();
   renderRound();
 }
 
 function renderRound(){
   const round=state.currentRound||makeRound();
+  const answerIndex=state.index;
   state.currentRound=round;
   $("question").innerHTML=`
     <div style="text-align:center">
@@ -919,7 +926,11 @@ function renderRound(){
         save();
         reward(b,"🌟");
         updateStats();
-        setTimeout(newRound,900);
+        cancelPendingRoundAdvance();
+        pendingRoundAdvance=setTimeout(()=>{
+          pendingRoundAdvance=null;
+          if(state.index===answerIndex && state.currentRound===round) newRound();
+        },900);
       }else{
         b.classList.add("wrong");
         $("message").textContent="Great try! Choose another cosmic image.";
@@ -999,7 +1010,9 @@ $("themeBtn").onclick=()=>{
 };
 $("resetBtn").onclick=()=>{
   if(!confirm("Reset all Cosmic Alphabet stars and explored letters?")) return;
-  state.stars=0;
+  cancelPendingRoundAdvance();
+    state.currentRound=null;
+    state.stars=0;
   state.correct=0;
   state.explored.clear();
   state.index=0;
