@@ -2122,12 +2122,19 @@ document.addEventListener("click",event=>{
   const link=event.target.closest("[data-enter-child-mentor]");
   if(!link)return;
   const registry=window.KhaemenesFamilyRegistry;
-  const family=registry?.getFamily?.();
   const learnerId=link.dataset.enterChildMentor;
-  if(!registry||!family||!learnerId)return;
+  if(!registry||!learnerId)return;
   event.preventDefault();
-  registry.setActive?.({familyId:family.familyId,learnerId});
-  location.href=link.href;
+  try{
+    const family=registry.getFamily?.();
+    if(!family?.familyId)throw new Error("Family account unavailable");
+    const selected=registry.setActive?.({familyId:family.familyId,learnerId});
+    if(selected===false)throw new Error("Learner selection declined");
+    location.href=link.href;
+  }catch{
+    const status=$("familyAccountStatus");
+    if(status)status.textContent="Unable to switch to this learner right now. Please try again; public adventures remain available.";
+  }
 });
 
 $("heroKidCount").textContent=KID_APPS.length;
