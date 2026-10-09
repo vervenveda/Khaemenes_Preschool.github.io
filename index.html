@@ -2116,7 +2116,7 @@ function renderFamilyMentorEntry(){
     return;
   }
 
-  const learners=Array.isArray(family.learners)?family.learners:[];
+  const learners=Array.isArray(family.learners)?family.learners.filter(learner=>learner&&typeof learner==="object"):[];
   if(!learners.length){
     box.innerHTML="";
     status.textContent="Family account found. Add a child learner account to reveal that child’s bright Mentor button.";
