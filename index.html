@@ -1527,7 +1527,9 @@ function renderPinnedGames(){
   $("pinnedList").innerHTML=apps.length?apps.slice(0,12).map(app=>`<a class="pinned-app" href="${appUrl(app)}" data-open-app="${app.id}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>${escapeHtml(catLabel(app.category))}</small></span></a>`).join(""):`<div class="pinned-empty">No pinned adventures yet. Tap a ♡ heart in the complete Adventure Garden to add one to the active child profile.</div>`;
   document.querySelectorAll("#pinnedList [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
 }
+let profileRestoreFocus=null;
 function openProfileDialog(){
+  profileRestoreFocus=document.activeElement;
   $("childNickname").value=profile?.nickname||"";
   $("childAgeBand").value=profile?.ageBand||"";
   $("childPersonality").value=profile?.personality||"playful";
@@ -1543,6 +1545,8 @@ function closeProfileDialog(){
   $("profileOverlay").classList.remove("open");
   $("profileOverlay").setAttribute("aria-hidden","true");
   document.body.classList.remove("menu-open");
+  if(profileRestoreFocus?.isConnected)profileRestoreFocus.focus();
+  profileRestoreFocus=null;
 }
 function saveProfile(){
   const nickname=$("childNickname").value.trim();
