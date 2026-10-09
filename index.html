@@ -2190,7 +2190,8 @@ $("profileOverlay").addEventListener("click",event=>{if(event.target===$("profil
 $("profileOverlay").addEventListener("keydown",event=>{if($("profileOverlay").classList.contains("open"))trapFocus(event,$("profileOverlay"))});
 $("showProfileFavorites").addEventListener("click",showPinnedInGarden);$("managePinnedGames").addEventListener("click",()=>goToSection("#activities",{history:false,behavior:calm?"auto":"smooth"}));
 $("exportFamilyData").addEventListener("click",exportFamilyRecord);$("eraseFamilyData").addEventListener("click",eraseFamilyRecord);
-document.addEventListener("keydown",event=>{if(event.key==="Escape"){if(!$("appModal").hidden){closeAppModal();return}if($("categoryOverlay").classList.contains("open")){closeCategoryPopup(true);return}if($("menuOverlay").classList.contains("open")){closeMenu(true);return}closeProfileDialog()}if(event.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"){if(!$("appModal").hidden){closeAppModal();return}if($("categoryOverlay").classList.contains("open")){closeCategoryPopup(true);return}if($("menuOverlay").classList.contains("open")){closeMenu(true);return}closeProfileDialog()}if(event.key==="/"&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&!$("appModal").hidden&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){return}
+  if(event.key==="/"&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&$("appModal").hidden&&!$("menuOverlay").classList.contains("open")&&!$("categoryOverlay").classList.contains("open")&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
 
 
 window.addEventListener("khaemenes-family-changed",renderFamilyMentorEntry);
