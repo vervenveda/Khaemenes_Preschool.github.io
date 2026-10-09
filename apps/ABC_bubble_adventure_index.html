@@ -700,7 +700,7 @@ button:hover{transform:translateY(-2px)}
         bubble.remove();
         state.bubbles.delete(item);
         if(bubbleLetter===state.target){
-          state.streak=0;
+          // A missed bubble does not erase earned progress.
           setMessage("That letter floated away. Try again with",state.target);
           beep("bad");
           updateStats();
@@ -739,8 +739,7 @@ button:hover{transform:translateY(-2px)}
       }else{
         bubble.classList.add("pop");
         beep("bad");
-        state.score=Math.max(0,state.score-2);
-        state.streak=0;
+        // No score or streak penalty for a preschool retry.
         setMessage("Almost! Look again for",state.target);
         setTimeout(()=>{
           bubble.remove();
