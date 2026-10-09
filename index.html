@@ -2071,7 +2071,12 @@ function renderFamilyMentorEntry(){
     return;
   }
 
-  const family=registry.getFamily?.();
+  let family=null;
+  try{family=registry.getFamily?.()||null}catch(error){
+    box.innerHTML="";
+    status.textContent="Family profiles are temporarily unavailable. All public games and adventures remain open.";
+    return;
+  }
   if(!family){
     box.innerHTML="";
     status.textContent="No family account is active on this browser yet. Games and apps remain open to everyone.";
