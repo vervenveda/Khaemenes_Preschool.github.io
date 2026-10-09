@@ -1975,8 +1975,8 @@ function trapFocus(event,root){
   const items=focusableWithin(root);
   if(!items.length)return;
   const first=items[0],last=items[items.length-1];
-  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
-  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+  if(event.shiftKey&&(document.activeElement===first||!root.contains(document.activeElement))){event.preventDefault();last.focus()}
+  else if(!event.shiftKey&&(document.activeElement===last||!root.contains(document.activeElement))){event.preventDefault();first.focus()}
 }
 
 let menuRestoreFocus=null;
