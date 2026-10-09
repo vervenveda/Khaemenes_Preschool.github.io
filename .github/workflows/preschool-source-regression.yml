@@ -1,0 +1,53 @@
+name: Preschool source regression
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate preschool catalog and portal references
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root = Path('.')
+          portal = (root/'index.html').read_text(encoding='utf-8')
+          primary = (root/'assets/preschool-catalog.js').read_bytes()
+          mirror = (root/'preschool-catalog.js').read_bytes()
+          problems = []
+          if primary != mirror:
+              problems.append('Catalog copies differ')
+          catalog = primary.decode('utf-8')
+          files = re.findall(r'"file"\s*:\s*"([^"]+)"', catalog)
+          if not files:
+              problems.append('Catalog has no file entries')
+          for name in files:
+              path = root/'apps'/name
+              if not path.is_file():
+                  problems.append('Missing app: '+name)
+          ids = re.findall(r'\bid="([^"]+)"', portal)
+          duplicate_ids = sorted({x for x in ids if ids.count(x)>1})
+          if duplicate_ids:
+              problems.append('Duplicate HTML IDs: '+', '.join(duplicate_ids))
+          known = set(ids)
+          for anchor in re.findall(r'href="#([^"]+)"', portal):
+              if anchor and anchor not in known:
+                  problems.append('Unresolved anchor: #'+anchor)
+          for ref in re.findall(r'\$\("([A-Za-z][A-Za-z0-9_-]*)"\)', portal):
+              if ref not in known:
+                  problems.append('Missing DOM ID referenced by JS: '+ref)
+          print(f'Catalog paths checked: {len(files)}')
+          print(f'HTML IDs checked: {len(ids)}')
+          print(f'Portal DOM references checked: {len(re.findall(chr(36)+r"\\(\\\"[A-Za-z][A-Za-z0-9_-]*\\\"\\)", portal))}')
+          if problems:
+              for issue in problems: print('FAIL:',issue)
+              raise SystemExit(1)
+          print('PASS: catalog parity, app paths, HTML IDs, anchors, DOM references')
+          PY
