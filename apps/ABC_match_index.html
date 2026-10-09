@@ -860,7 +860,7 @@ button:hover{transform:translateY(-2px)}
     }else{
       source?.classList.add("wrong");
       $("dropzone").textContent="Great try! Choose another letter.";
-      state.streak=0;
+      // A retry does not erase earned progress.
       setTimeout(()=>source?.classList.remove("wrong"),650);
     }
     save();
@@ -897,7 +897,7 @@ button:hover{transform:translateY(-2px)}
           b.classList.add("wrong");
           b.disabled=true;
           $("message").textContent="Great try! Choose another answer.";
-          state.streak=0;
+          // A retry does not erase earned progress.
         }
         save();
         updateStats();
