@@ -906,7 +906,7 @@
   {
     "id": "piano",
     "title": "Little Composer Piano",
-    "file": "music_piano_index.html",
+    "file": "Music_piano_index.html",
     "category": "music",
     "icon": "🎹",
     "desc": "Play rainbow keys, record melodies, and explore sound.",
