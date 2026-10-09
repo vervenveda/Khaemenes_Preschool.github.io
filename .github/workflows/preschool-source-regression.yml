@@ -45,7 +45,7 @@ jobs:
                   problems.append('Missing DOM ID referenced by JS: '+ref)
           print(f'Catalog paths checked: {len(files)}')
           print(f'HTML IDs checked: {len(ids)}')
-          print(f'Portal DOM references checked: {len(re.findall(chr(36)+r"\\(\\\"[A-Za-z][A-Za-z0-9_-]*\\\"\\)", portal))}')
+          print('Portal DOM references checked:', len(re.findall(r'\$\("([A-Za-z][A-Za-z0-9_-]*)"\)', portal)))
           if problems:
               for issue in problems: print('FAIL:',issue)
               raise SystemExit(1)
