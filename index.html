@@ -1471,7 +1471,20 @@ function updateFavorites(){$("favoriteCount").textContent=favorites.size;$("favo
 function updateProgress(){const count=KID_APPS.filter(app=>visited.has(app.id)).length;$("visitCount").textContent=`${count}/${KID_APPS.length}`;$("progressFill").style.width=`${Math.round(count/KID_APPS.length*100)}%`;document.querySelectorAll(".activity").forEach(card=>card.classList.toggle("visited",visited.has(card.dataset.id)))}
 function filterActivities(){const q=$("search").value.trim().toLowerCase(),category=$("category").value;let count=0;[...$("activityGrid").children].forEach(card=>{const visible=(category==="all"||card.dataset.category===category)&&(!q||card.dataset.search.includes(q))&&(!favoritesOnly||favorites.has(card.dataset.id));card.hidden=!visible;if(visible)count++});$("results").textContent=`${count} of ${KID_APPS.length} child adventures shown${favoritesOnly?" · favorites only":""}.`;$("empty").classList.toggle("show",count===0)}
 function chooseRandom(category){let pool=KID_APPS.filter(app=>!category||category==="all"||app.category===category);if(favoritesOnly)pool=pool.filter(app=>favorites.has(app.id));const app=pool[Math.floor(Math.random()*pool.length)];if(app){markVisited(app.id);toast("Opening a surprise adventure!");openAppModal(appUrl(app),displayTitle(app),app.icon,app.id)}else toast("No adventures are available in that selection.")}
-function setDaily(){const now=new Date(),day=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000),app=KID_APPS[day%KID_APPS.length];$("dailyTitle").textContent=app.icon+" "+app.title;$("dailyDesc").textContent=app.desc;$("dailyLink").href=appUrl(app);$("dailyLink").dataset.openApp=app.id;$("dailyLink").addEventListener("click",()=>markVisited(app.id))}
+function setDaily(){
+  if(!KID_APPS.length){
+    $("dailyTitle").textContent="More adventures coming soon";
+    $("dailyDesc").textContent="Explore the learning rooms while we prepare today’s adventure.";
+    $("dailyLink").hidden=true;
+    return;
+  }
+  $("dailyLink").hidden=false;
+  const now=new Date(),day=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000),app=KID_APPS[day%KID_APPS.length];
+  $("dailyTitle").textContent=app.icon+" "+app.title;
+  $("dailyDesc").textContent=app.desc;
+  $("dailyLink").href=appUrl(app);
+  $("dailyLink").dataset.openApp=app.id;
+}
 function renderSites(){$("siteGrid").innerHTML=SITES.map(site=>`<a class="site-card ${site.status}" href="${site.url}"><div class="site-top"><span class="site-icon">${site.icon}</span><span class="status live">Open</span></div><h3>${escapeHtml(site.title)}</h3><p>${escapeHtml(site.desc)}</p><small>Open public landing page ↗</small></a>`).join("")}
 function buildMenu(query=""){
   const q=query.trim().toLowerCase();
