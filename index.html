@@ -1576,21 +1576,36 @@ function exportFamilyRecord(){
   toast("Full preschool learning record exported.");
 }
 function eraseFamilyRecord(){
-  let storageEraseFailed=false;
   if(!confirm("Erase the active child profile, pinned games, visits, continuity record, Guided Preschool progress, daily plan, mentor settings, and mentor memory from this browser?"))return;
   const id=learnerKey();
-  if(profile){
-    delete favoriteProfiles[id];
-    delete visitProfiles[id];
-    writeJSON(PROFILE_FAVORITES_KEY,favoriteProfiles);
-    writeJSON(PROFILE_VISITS_KEY,visitProfiles);
-    try{localStorage.removeItem(`creche_mentor_memory_${id}`)}catch{}
-  }
-  [
+  const nextFavorites={...favoriteProfiles},nextVisits={...visitProfiles};
+  if(profile){delete nextFavorites[id];delete nextVisits[id]}
+  const removals=[
     PROFILE_KEY,CONTINUITY_KEY,LAST_OPEN_KEY,
     MENTOR_PROGRESS_KEY,MENTOR_SETTINGS_KEY,MENTOR_PLAN_KEY
-  ].forEach(key=>{try{localStorage.removeItem(key)}catch{storageEraseFailed=true}});
-  if(storageEraseFailed){toast("Some records could not be erased. Check browser storage permissions and retry.");return}
+  ];
+  if(profile)removals.push(`creche_mentor_memory_${id}`);
+  const updates=profile?[
+    [PROFILE_FAVORITES_KEY,JSON.stringify(nextFavorites)],
+    [PROFILE_VISITS_KEY,JSON.stringify(nextVisits)]
+  ]:[];
+  const keys=[...new Set([...removals,...updates.map(([key])=>key)])];
+  const previous=new Map();
+  try{
+    for(const key of keys)previous.set(key,localStorage.getItem(key));
+    for(const [key,value] of updates)localStorage.setItem(key,value);
+    for(const key of removals)localStorage.removeItem(key);
+  }catch(error){
+    let restored=true;
+    for(const [key,value] of previous){
+      try{if(value===null)localStorage.removeItem(key);else localStorage.setItem(key,value)}
+      catch{restored=false}
+    }
+    toast(restored?"Erase was interrupted; prior records were restored. Please retry.":"Erase was interrupted and some records could not be restored. Check browser storage permissions.");
+    return;
+  }
+  favoriteProfiles=nextFavorites;
+  visitProfiles=nextVisits;
   profile=null;
   favorites=readSet(FAVORITES_KEY);
   visited=readSet(VISITS_KEY);
@@ -1602,7 +1617,6 @@ function eraseFamilyRecord(){
   buildMenu();
   toast("Active child and Guided Preschool records erased from this browser.");
 }
-
 
 const OFFSCREEN_PROMPTS={
   letters:[
