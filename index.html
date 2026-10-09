@@ -1576,6 +1576,7 @@ function exportFamilyRecord(){
   toast("Full preschool learning record exported.");
 }
 function eraseFamilyRecord(){
+  let storageEraseFailed=false;
   if(!confirm("Erase the active child profile, pinned games, visits, continuity record, Guided Preschool progress, daily plan, mentor settings, and mentor memory from this browser?"))return;
   const id=learnerKey();
   if(profile){
@@ -1588,7 +1589,8 @@ function eraseFamilyRecord(){
   [
     PROFILE_KEY,CONTINUITY_KEY,LAST_OPEN_KEY,
     MENTOR_PROGRESS_KEY,MENTOR_SETTINGS_KEY,MENTOR_PLAN_KEY
-  ].forEach(key=>localStorage.removeItem(key));
+  ].forEach(key=>{try{localStorage.removeItem(key)}catch{storageEraseFailed=true}});
+  if(storageEraseFailed){toast("Some records could not be erased. Check browser storage permissions and retry.");return}
   profile=null;
   favorites=readSet(FAVORITES_KEY);
   visited=readSet(VISITS_KEY);
