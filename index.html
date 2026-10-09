@@ -1803,7 +1803,9 @@ function mentorPlanData(){
   return {plan,items,completed};
 }
 function renderMentorPlanPreview(){
-  const titleEl=titleEl,introEl=introEl,previewEl=previewEl;
+  const titleEl=document.getElementById("mentorPlanTitle");
+  const introEl=document.getElementById("mentorPlanIntro");
+  const previewEl=document.getElementById("mentorPlanPreview");
   if(!titleEl||!introEl||!previewEl)return;
   const data=mentorPlanData();
   if(!profile){
