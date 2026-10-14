@@ -2271,6 +2271,46 @@ window.addEventListener("load",()=>{
 </script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-school-bridge.js" data-khaemenes-stage="preschool"></script>
 
+<script>
+/* Preschool entry language preference: curated public navigation only.
+ * Deliberately never traverses student profiles, answers, games, or activities. */
+(()=>{"use strict";
+const names={en:"English",es:"Español",fr:"Français",ar:"العربية",zh:"中文",de:"Deutsch",ru:"Русский",pt:"Português",hi:"हिन्दी",ja:"日本語",ko:"한국어",it:"Italiano",bn:"বাংলা"};
+const text={
+ Mentor:{es:"Mentoría",fr:"Mentorat",de:"Begleitung",pt:"Mentoria",ar:"الإرشاد"},
+ Profiles:{es:"Perfiles",fr:"Profils",de:"Profile",pt:"Perfis",ar:"الملفات"},
+ Rooms:{es:"Salas",fr:"Salles",de:"Räume",pt:"Salas",ar:"الغرف"},
+ Today:{es:"Hoy",fr:"Aujourd’hui",de:"Heute",pt:"Hoje",ar:"اليوم"},
+ Adventures:{es:"Aventuras",fr:"Aventures",de:"Abenteuer",pt:"Aventuras",ar:"مغامرات"}
+};
+const keys=["Mentor","Profiles","Rooms","Today","Adventures"],allowed=Object.keys(names);let chosen="en";
+try{const incoming=new URL(location.href).searchParams.get("lang"),stored=localStorage.getItem("vnv_language_v1");chosen=allowed.includes(incoming)?incoming:allowed.includes(stored)?stored:"en"}catch{}
+function apply(){
+ document.documentElement.lang=chosen;
+ document.querySelectorAll(".navlinks a").forEach((a,i)=>{const key=keys[i];if(key)a.textContent=text[key]?.[chosen]||key});
+}
+function init(){
+ const holder=document.createElement("div");holder.setAttribute("data-preschool-language-control","");
+ holder.style.cssText="display:flex;justify-content:center;padding:7px;background:#faf6ef;";
+ const select=document.createElement("select");select.id="preschool-language-choice";select.setAttribute("aria-label","Interface language");
+ select.style.cssText="border-radius:7px;padding:7px;color:#17211d;background:#fff;border:1px solid #b49c70;max-width:190px;";
+ for(const [code,label] of Object.entries(names)){const o=document.createElement("option");o.value=code;o.textContent=label;select.append(o)}
+ select.value=chosen;select.addEventListener("change",()=>{chosen=select.value;try{localStorage.setItem("vnv_language_v1",chosen)}catch{}apply()});
+ holder.append(select);document.querySelector("header.header")?.after(holder);
+ apply();
+ document.addEventListener("click",event=>{
+  if(chosen==="en"||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+  const a=event.target.closest?.("a[href]");if(!a||a.hasAttribute("download"))return;
+  let u;try{u=new URL(a.href,location.href)}catch{return}
+  if(u.protocol!=="https:"||!["vervenveda.com","www.vervenveda.com","vervenveda.github.io","khaemenesacademy.github.io","artist1970.github.io"].includes(u.hostname))return;
+  u.searchParams.set("lang",chosen);a.href=u.href;
+ },true);
+ window.PreschoolLanguage=Object.freeze({getLanguage:()=>chosen,availableLanguages:()=>allowed.slice(),coverage:()=>({status:"curated-public-navigation-only",fullyTranslated:false})});
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
+</script>
+
 <!-- Verve N Veda Beta Program -->
 <script src="https://vervenveda.com/assets/vnv-beta-link.js" defer></script>
 </body>
