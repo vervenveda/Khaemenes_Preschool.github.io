@@ -1360,6 +1360,7 @@ function safeProfile(){
 function syncContinuity(){
   const pinned=[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean).map(app=>({id:app.id,title:app.title,icon:app.icon,category:app.category,file:app.file,url:new URL(appUrl(app),location.href).href}));
   writeJSON(CONTINUITY_KEY,{version:1,source:"Khaemenes Preschool · Crechè",origin:location.origin,learner:safeProfile(),favoriteIds:[...favorites],favorites:pinned,visitedIds:[...visited],updatedAt:new Date().toISOString(),formalGradeEligible:false});
+  window.dispatchEvent(new CustomEvent("khaemenes-preschool-continuity-changed",{detail:{learnerId:profile?.learnerId||null,visited:visited.size,favorites:favorites.size}}));
 }
 const appUrl=app=>"./apps/"+app.file.split("/").map(encodeURIComponent).join("/");
 const catLabel=key=>CATEGORIES[key]?.label||key;
@@ -2270,6 +2271,7 @@ window.addEventListener("load",()=>{
 
 </script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-school-bridge.js" data-khaemenes-stage="preschool"></script>
+<script src="./assets/khaemenes-preschool-continuation.js"></script>
 
 <script>
 /* Preschool entry language preference: curated public navigation only.
