@@ -1,5 +1,5 @@
 /*
- * Khaemenes Preschool Shared Catalog v1.0.0
+ * Khaemenes Preschool Shared Catalog v1.1.0
  * ------------------------------------------------------------
  * One source of truth for:
  *   - Crechè Adventure Garden activity metadata
@@ -17,7 +17,7 @@
 (function attachKhaemenesPreschoolCatalog(global) {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.1.0";
 
   const CATEGORIES = {
   "all": {
@@ -126,6 +126,51 @@
     "b": "#42c7dc"
   }
 };
+
+  /*
+   * Preschool developmental evidence is intentionally observational.
+   * These are prompts for a caring adult, not grades, diagnoses, mastery
+   * claims, or readiness labels. Each mentor-eligible activity inherits
+   * the observation language for its learning domain.
+   */
+  const OBSERVATIONS_BY_DOMAIN = {
+    letters: {
+      skills: ["notices letter shapes or sounds", "connects spoken words with early print"],
+      observe: "Can the child notice a letter, sound, rhyme, or story detail without being rushed?",
+      parentPrompt: "Ask the child to point out one letter, sound, picture, or word they noticed.",
+      nextStep: "Keep the next literacy experience short and playful, then revisit a familiar sound or story."
+    },
+    numbers: {
+      skills: ["counts with one-to-one attention", "compares small quantities, shapes, or patterns"],
+      observe: "Can the child count, match, sort, compare, or notice a simple pattern using real objects or pictures?",
+      parentPrompt: "Invite the child to show a small quantity, match two things, or explain which group has more.",
+      nextStep: "Use a small concrete quantity or simple shape challenge before increasing complexity."
+    },
+    feelings: {
+      skills: ["names feelings and social cues", "practices kindness, self-awareness, and simple regulation"],
+      observe: "Can the child name a feeling, notice how someone else might feel, or choose a kind response?",
+      parentPrompt: "Ask, “How did that character feel, and what might help?”",
+      nextStep: "Revisit the feeling through a story, drawing, role-play, or calm real-world conversation."
+    },
+    creative: {
+      skills: ["makes expressive choices", "experiments with color, sound, rhythm, drawing, or imagination"],
+      observe: "Does the child make an independent creative choice and describe, repeat, or change it?",
+      parentPrompt: "Ask the child to show one choice they made and tell what they like about it.",
+      nextStep: "Offer another open-ended creative invitation with fewer instructions and room to experiment."
+    },
+    movement: {
+      skills: ["coordinates simple movement or routines", "practices healthy and everyday-life sequences"],
+      observe: "Can the child follow or remember one or two safe movement or life-skill steps?",
+      parentPrompt: "Ask the child to show the next step, then celebrate careful effort rather than speed.",
+      nextStep: "Repeat the routine slowly, then let the child lead one familiar step independently."
+    },
+    wonder: {
+      skills: ["observes nature and everyday phenomena", "asks questions and describes what changes"],
+      observe: "Can the child notice, compare, or describe something about weather, nature, space, or the world nearby?",
+      parentPrompt: "Ask, “What do you notice? What changed? What are you wondering?”",
+      nextStep: "Carry the idea away from the screen with one tiny observation outdoors or around the room."
+    }
+  };
 
   const ACTIVITIES = [
   {
@@ -1269,6 +1314,23 @@
     ) || null;
   }
 
+  function observationFor(activityOrId) {
+    const activity = typeof activityOrId === "string"
+      ? (byId(activityOrId) || byMentorId(activityOrId))
+      : activityOrId;
+    if (!activity?.mentor?.eligible) return null;
+    const observation = OBSERVATIONS_BY_DOMAIN[activity.mentor.domain];
+    if (!observation) return null;
+    return {
+      domain: activity.mentor.domain,
+      domainLabel: MENTOR_DOMAINS[activity.mentor.domain]?.label || activity.mentor.domain,
+      skills: [...observation.skills],
+      observe: observation.observe,
+      parentPrompt: observation.parentPrompt,
+      nextStep: observation.nextStep
+    };
+  }
+
   function childActivities() {
     return ACTIVITIES.filter(activity => activity.category !== "grownup");
   }
@@ -1292,6 +1354,7 @@
         minutes: activity.mentor.minutes,
         energy: activity.mentor.energy,
         interests: [...activity.mentor.interests],
+        observation: observationFor(activity),
         desc: activity.mentor.desc || activity.desc,
         tags: activity.tags
       }));
@@ -1330,6 +1393,9 @@
 
         if (!MENTOR_DOMAINS[mentor.domain]) {
           errors.push(`${activity.id} uses unknown mentor domain: ${mentor.domain}`);
+        }
+        if (!OBSERVATIONS_BY_DOMAIN[mentor.domain]) {
+          errors.push(`${activity.id} has no developmental observation guide for mentor domain: ${mentor.domain}`);
         }
 
         if (!Array.isArray(mentor.ages) || !mentor.ages.length) {
@@ -1374,16 +1440,19 @@
 
   deepFreeze(CATEGORIES);
   deepFreeze(MENTOR_DOMAINS);
+  deepFreeze(OBSERVATIONS_BY_DOMAIN);
   deepFreeze(ACTIVITIES);
 
   const API = {
     version: VERSION,
     categories: CATEGORIES,
     mentorDomains: MENTOR_DOMAINS,
+    observations: OBSERVATIONS_BY_DOMAIN,
     activities: ACTIVITIES,
     byId,
     byFile,
     byMentorId,
+    observationFor,
     childActivities,
     grownupActivities,
     mentorActivities,
