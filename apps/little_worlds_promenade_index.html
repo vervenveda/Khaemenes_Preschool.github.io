@@ -688,7 +688,7 @@ button{font:inherit;cursor:pointer}
     <div class="tools">
       <button id="hearBtn">🔊 Hear Message</button>
       <button id="factBtn">💡 New Fact</button>
-      <button id="resetBtn">↺ Start This World Again</button>
+      <button id="worldResetBtn">↺ Start This World Again</button>
     </div>
   </section>
 </div>
@@ -767,7 +767,7 @@ button{font:inherit;cursor:pointer}
     speak(W.facts[factIndex]);
     post("WORLD_DISCOVERY",{facts:factIndex,discoveries:1});
   };
-  $("resetBtn").onclick=()=>{
+  $("worldResetBtn").onclick=()=>{
     done.clear();factIndex=0;lastMessage="This little world is ready for your care.";
     $("prompt").textContent=lastMessage;$("fact").textContent=W.facts[0];render();
     post("WORLD_RESET",{actions:0,facts:0});

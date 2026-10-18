@@ -1,4 +1,4 @@
-{
+window.PRESCHOOL_DICTIONARY_DATA = {
   "dictionary": [
     {
       "theme": "Animals",
@@ -58,4 +58,4 @@
       ]
     }
   ]
-}
+};

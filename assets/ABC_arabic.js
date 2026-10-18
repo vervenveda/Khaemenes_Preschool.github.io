@@ -1,6 +1,4 @@
-from pathlib import Path
-
-js = r'''/**
+/**
  * Sunny Arabic Alphabet Data
  * Sovereign, dependency-free JavaScript data file.
  *
@@ -553,8 +551,3 @@ window.ARABIC_ALPHABET_META = {
   educationalNote:
     "Transliteration gives only an approximate guide. Native-speaker audio is recommended for accurate pronunciation."
 };
-'''
-
-path = Path("/mnt/data/arabic_alphabet.js")
-path.write_text(js, encoding="utf-8")
-print(f"Created {path}")

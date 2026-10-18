@@ -994,7 +994,7 @@ const defaults={
 const loaded=safeJSON(localStorage.getItem(STORE)||'null',null);
 const state={...defaults,...(loaded||{}),progress:{...defaults.progress,...(loaded?.progress||{})},settings:{...defaults.settings,...(loaded?.settings||{})}};
 state.visited=new Set(Array.isArray(state.visited)?state.visited:[]);state.favorites=new Set(Array.isArray(state.favorites)?state.favorites:[]);state.awards=new Set(Array.isArray(state.awards)?state.awards:[]);
-let songToken=0,selectedVoice=null,spellIndex=0,currentMatch=null,currentPractice='trace',swipeStart=null,traceDrawing=false,tracePointer=null,toastTimer=null;
+let songToken=0,spellIndex=0,currentMatch=null,currentPractice='trace',swipeStart=null,traceDrawing=false,tracePointer=null,toastTimer=null;
 const traceGuide=$('traceGuide'),traceDraw=$('traceDraw'),guideCtx=traceGuide.getContext('2d'),drawCtx=traceDraw.getContext('2d');
 
 function pages(){const all=state.book==='alphabet'?alphabetPages:numberPages;if(!state.favoritesOnly)return all;return all.filter((_,i)=>state.favorites.has(`${state.book}:${i}`))}

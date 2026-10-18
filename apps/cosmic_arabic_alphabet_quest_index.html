@@ -693,7 +693,7 @@ body.hide-transliteration .example strong{display:none!important}
   </div>
   <nav class="creche-links" aria-label="Preschool language navigation">
     <a class="creche-link" href="../index.html">🏡 Crèche Home</a>
-    <a class="creche-link" href="../languages/index.html">🌍 Languages</a>
+    <a class="creche-link" href="../index.html#rooms">🌍 Languages</a>
     <a class="creche-link current" href="#" aria-current="page">🌙 Arabic Quest</a>
   </nav>
 </header>
@@ -803,7 +803,7 @@ body.hide-transliteration .example strong{display:none!important}
  *
  * Usage:
  *   1. Include this file before your main app script:
- *      <script src="arabic_alphabet.js"><\/script>
+ *      <script src="../assets/ABC_arabic.js"><\/script>
  *
  *   2. Access the lessons with:
  *      window.ARABIC_ALPHABET
@@ -1421,7 +1421,7 @@ window.ARABIC_ALPHABET_META = {
     matchDone: false,
     homeLanguage: localStorage.getItem("cosmicArabicHomeLanguage") || "en",
     readingSpeed: localStorage.getItem("cosmicArabicReadingSpeed") || "slow",
-    voiceFriend: localStorage.getItem("cosmicArabicVoiceFriend") || "fairy",
+    voiceFriend: localStorage.getItem("cosmicArabicVoiceFriend") || "eiren",
     autoRead: localStorage.getItem("cosmicArabicAutoRead") !== "false",
     largeType: localStorage.getItem("cosmicArabicLargeType") === "true",
     focusMode: localStorage.getItem("cosmicArabicFocusMode") === "true",
@@ -1589,6 +1589,11 @@ window.ARABIC_ALPHABET_META = {
     preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i,
     greeting:"Hello, little explorer. I’m Eiren. Let’s discover Arabic letters together, one gentle sound and one bright star at a time."
   };
+  const VOICE_FRIENDS={eiren:EIREN,fairy:EIREN};
+  const SPEEDS={slow:.88,normal:1,lively:1.1};
+  let voices=[];
+  let speechToken=0;
+  let lastSpoken="";
   function refreshVoices(){
     if(!("speechSynthesis" in window)) return;
     voices = speechSynthesis.getVoices() || [];

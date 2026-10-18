@@ -1,4 +1,4 @@
-{
+window.PRESCHOOL_ABC_DATA = {
   "letters": [
     {
       "letter": "A",
@@ -261,4 +261,4 @@
       "imagePrompt": "A happy zebra exploring a colorful flower garden."
     }
   ]
-}
+};
