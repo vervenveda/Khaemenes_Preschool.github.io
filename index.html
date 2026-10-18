@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Khaemenes Preschool — the public Crechè activity garden with 52 open child adventures, a public Khaemenes Mentor, optional family profiles for curriculum continuity, and pathways to Kinder Garden and Elementary School.">
+<meta name="description" content="Khaemenes Preschool — the public Crechè activity garden with 52 open child adventures, family-linked Archaemenes mentorship, gentle parent observations, and pathways to Kinder Garden and Elementary School.">
 <meta name="theme-color" content="#3eb8ed">
 <meta name="color-scheme" content="light">
 <meta name="application-name" content="Khaemenes Preschool · Crechè Family Home">
@@ -832,6 +832,41 @@ body.category-directory-open{overflow:hidden}
 }
 @media print{.category-overlay,.room-directory-actions{display:none!important}}
 
+
+/* Archaemenes daily pathway + family learning snapshot */
+.mentor-day{
+  margin:20px 0 24px;padding:24px;border:1px solid rgba(54,67,113,.14);border-radius:28px;
+  background:linear-gradient(145deg,#fffdf7,#f4f8ff 58%,#fff6dc);box-shadow:var(--soft)
+}
+.mentor-day-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.mentor-day-id{display:flex;align-items:center;gap:14px}
+.mentor-owl{width:64px;height:64px;display:grid;place-items:center;border-radius:22px;background:linear-gradient(145deg,#fff2b6,#dff5ff);font-size:2rem;box-shadow:var(--soft)}
+.mentor-day h3{margin:0;color:#3d3a70;font-family:var(--serif);font-size:1.75rem}
+.mentor-day p{margin:.35rem 0 0;color:var(--muted)}
+.mentor-day-controls{display:flex;gap:8px;flex-wrap:wrap}
+.mentor-day-controls label{display:grid;gap:4px;color:#59657a;font-size:.7rem;font-weight:850}
+.mentor-day-controls select{min-height:42px;padding:.45rem .65rem;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink)}
+.mentor-stations{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+.mentor-station{min-height:135px;display:flex;flex-direction:column;padding:15px;border:1px solid var(--line);border-radius:18px;color:#3f4561;background:#fff;text-decoration:none}
+.mentor-station.done{background:#eaf8f1;border-color:#b9e7d4}
+.mentor-station i{font-style:normal;font-size:1.65rem}.mentor-station strong{margin-top:7px;color:#413c72;line-height:1.2}.mentor-station small{margin-top:auto;padding-top:8px;color:#768095}
+.mentor-day-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.mentor-day-btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:.65rem .85rem;border:1px solid var(--line);border-radius:12px;color:#504778;background:#fff;text-decoration:none;font-size:.8rem;font-weight:900}
+.mentor-day-btn.primary{color:#fff;background:linear-gradient(135deg,#5d52b7,#8067d7);border-color:transparent}
+.weekly-snapshot{margin-top:18px;padding:21px;border:1px solid rgba(255,255,255,.15);border-radius:22px;background:rgba(255,255,255,.075)}
+.weekly-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.weekly-head h4{margin:0;color:#fff;font-family:var(--serif);font-size:1.45rem}.weekly-head p{margin:5px 0 0;color:rgba(255,255,255,.74);font-size:.82rem}
+.weekly-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:16px}
+.weekly-metric{padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:15px;background:rgba(255,255,255,.07)}
+.weekly-metric strong{display:block;color:#fff;font-size:.98rem}.weekly-metric span{display:block;margin-top:4px;color:rgba(255,255,255,.65);font-size:.7rem}
+.observation-box{margin-top:14px;padding:15px;border-radius:16px;color:#34465a;background:#f7fbff}
+.observation-box strong{display:block;color:#314a68}.observation-box p{margin:5px 0 10px;color:#647284;font-size:.8rem}
+.observation-actions{display:flex;flex-wrap:wrap;gap:7px}.observation-actions button{min-height:40px;padding:.55rem .7rem;border:1px solid #d5dfea;border-radius:10px;color:#40526a;background:#fff;font-weight:850}
+.observation-actions button:hover{border-color:#7c6dcc}
+.weekly-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.weekly-actions a,.weekly-actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:.6rem .8rem;border:1px solid rgba(255,255,255,.2);border-radius:11px;color:#fff;background:rgba(255,255,255,.08);text-decoration:none;font-weight:850}
+@media(max-width:900px){.mentor-stations,.weekly-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.mentor-stations,.weekly-grid{grid-template-columns:1fr}.mentor-day{padding:18px}.mentor-day-controls{width:100%}.mentor-day-controls label{flex:1}.mentor-day-controls select{width:100%}}
+
 </style>
 <link rel="stylesheet" href="assets/khaemenes-sacred-layout.css" data-khaemenes-sacred-layout>
 <link rel="stylesheet" href="assets/preschool-playful-theme.css" data-preschool-playful-theme>
@@ -956,6 +991,35 @@ body.category-directory-open{overflow:hidden}
       <div class="family-account-status" id="familyAccountStatus">Checking for linked child learner accounts…</div>
     </article>
 
+    <section class="mentor-day" id="mentorDay" aria-labelledby="mentorDayTitle">
+      <div class="mentor-day-head">
+        <div class="mentor-day-id">
+          <span class="mentor-owl" aria-hidden="true">🦉</span>
+          <div>
+            <span class="home-label">Today with Archaemenes</span>
+            <h3 id="mentorDayTitle">A small, balanced learning path</h3>
+            <p id="mentorDayIntro">Link a child learner through the Academy Family Profile to unlock a personalized Wise Owl path.</p>
+          </div>
+        </div>
+        <div class="mentor-day-controls" aria-label="Today’s learning preferences">
+          <label>Time today
+            <select id="mentorMinutes"><option value="15">15 minutes</option><option value="25" selected>25 minutes</option><option value="40">40 minutes</option></select>
+          </label>
+          <label>Energy today
+            <select id="mentorEnergy"><option value="gentle">Gentle</option><option value="steady" selected>Ready</option><option value="wiggly">Wiggly</option></select>
+          </label>
+        </div>
+      </div>
+      <div class="mentor-stations" id="mentorJourneyStations" aria-live="polite"></div>
+      <div class="mentor-day-actions">
+        <a class="mentor-day-btn primary" id="openArchaemenes" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Link Family Learner →</a>
+        <button class="mentor-day-btn" id="newMentorPath" type="button">Make Today’s Path</button>
+        <button class="mentor-day-btn" id="mentorDifferent" type="button">Something Different</button>
+        <button class="mentor-day-btn" id="mentorBreak" type="button">I Need a Break</button>
+        <button class="mentor-day-btn" id="mentorDayDone" type="button">All Done for Today</button>
+      </div>
+    </section>
+
     <div class="home-grid">
       <article class="home-card continue-card">
         <span class="home-label">Continue My Adventure</span>
@@ -1022,14 +1086,14 @@ body.category-directory-open{overflow:hidden}
           <p id="dashboardIntro">Create a child profile to see a simple family-controlled learning summary.</p>
         </div>
         <div class="dashboard-actions">
-          <button class="family-action" id="dashboardEditProfile" type="button">Edit Child Profile</button>
+          <button class="family-action" id="dashboardEditProfile" type="button">Edit Local Preferences</button>
           <button class="family-action light" id="dashboardExport" type="button">Export Full Preschool Record</button>
           <button class="family-action light" id="dashboardCalm" type="button">🌤️ Calm Colors</button>
           <button class="family-action light" id="dashboardMotion" type="button">🫧 Reduce Movement</button>
         </div>
       </div>
       <div class="dashboard-grid">
-        <div class="metric-card"><span class="metric-icon" id="dashMentorIcon">✨</span><strong id="dashMentor">No mentor yet</strong><small>Mentor match</small></div>
+        <div class="metric-card"><span class="metric-icon" id="dashMentorIcon">✨</span><strong id="dashMentor">No linked Mentor yet</strong><small>Academy Mentor</small></div>
         <div class="metric-card"><span class="metric-icon">🧭</span><strong id="dashStage">Not set</strong><small>Learning stage</small></div>
         <div class="metric-card"><span class="metric-icon">⭐</span><strong id="dashExplored">0 of 52</strong><small>Adventures explored</small></div>
         <div class="metric-card"><span class="metric-icon">♥</span><strong id="dashFavorites">0</strong><small>Pinned favorites</small></div>
@@ -1037,27 +1101,52 @@ body.category-directory-open{overflow:hidden}
         <div class="metric-card"><span class="metric-icon">🗓️</span><strong id="dashToday">No mentor path yet</strong><small>Today’s guided path</small></div>
       </div>
       <div class="family-idea"><strong>Try together:</strong> <span id="familyIdea">Choose one favorite adventure and ask the child to show you one thing they noticed.</span></div>
+
+      <section class="weekly-snapshot" id="weeklySnapshot" aria-labelledby="weeklySnapshotTitle">
+        <div class="weekly-head">
+          <div><h4 id="weeklySnapshotTitle">This Week</h4><p id="weeklySnapshotIntro">A gentle seven-day view of exploration—not a grade or a race.</p></div>
+        </div>
+        <div class="weekly-grid">
+          <div class="weekly-metric"><strong id="weekExplored">0 adventures</strong><span>Explored this week</span></div>
+          <div class="weekly-metric"><strong id="weekCuriosity">Waiting for exploration</strong><span>Curiosity leaned toward</span></div>
+          <div class="weekly-metric"><strong id="weekConfidence">No observation yet</strong><span>What a grown-up noticed</span></div>
+          <div class="weekly-metric"><strong id="weekNext">Follow the child’s curiosity</strong><span>Gentle next step</span></div>
+        </div>
+        <div class="observation-box">
+          <strong>What did you notice?</strong>
+          <p id="observationPrompt">Open an adventure, then return here to add one optional observation.</p>
+          <div class="observation-actions">
+            <button type="button" data-observation-level="exploring">Just exploring</button>
+            <button type="button" data-observation-level="growing">Getting the idea</button>
+            <button type="button" data-observation-level="confident">Doing this confidently</button>
+          </div>
+        </div>
+        <div class="weekly-actions">
+          <a id="snapshotMentorLink" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Ask Archaemenes about this week →</a>
+          <button id="snapshotPrint" type="button">Print Snapshot</button>
+        </div>
+      </section>
     </section>
 
     <div class="family-grid">
       <article class="family-card featured" style="--family-glow:rgba(66,199,220,.18)">
         <span class="family-icon" aria-hidden="true">✨</span>
-        <h3>Personalized Khaemenes Preschool Mentor</h3>
-        <p>After a family creates a child learner account, that child receives a named Mentor button and a personalized daily path through Crechè activities.</p>
-        <div class="family-meta"><span>Family learner account</span><span>Personalized Mentor</span><span>Balanced learning day</span></div>
+        <h3>Archaemenes · Wise Owl</h3>
+        <p>After a family links a child learner, Archaemenes becomes that child’s continuous Academy Mentor. In Preschool he appears as Wise Owl and guides a short, age-aware path through Crechè activities.</p>
+        <div class="family-meta"><span>Family-linked learner</span><span>One Academy Mentor</span><span>Balanced learning day</span></div>
         <div class="family-actions"><a class="family-action" href="#familyMentorEntry">Enter the Learning Hub →</a></div>
       </article>
 
       <article class="family-card" style="--family-soft:#fff2c8;--family-glow:rgba(255,214,61,.16)">
         <span class="family-icon" aria-hidden="true">🧒</span>
-        <h3>Optional Learner Profile</h3>
-        <p>Games, favorites, and the Mentor work without this profile. Use a learner profile only when a family wants persistent curriculum records and continuity across Khaemenes schools.</p>
+        <h3>Optional Local Play Preferences</h3>
+        <p>Games and favorites work without a profile. This small browser-local preference record can personalize the Preschool display, but Archaemenes uses the Academy Family Profile as the learner authority.</p>
         <div class="profile-summary">
           <span class="profile-avatar" id="profileAvatar" aria-hidden="true">🌟</span>
-          <span><strong id="profileName">No learner profile needed for play</strong><small id="profileStatus">Favorites and the Mentor are already available without registration.</small></span>
+          <span><strong id="profileName">No local preferences needed for play</strong><small id="profileStatus">Public adventures and favorites remain open without registration.</small></span>
         </div>
         <div class="family-actions">
-          <button class="family-action" id="openChildProfile" type="button">Optional Learner Profile</button>
+          <button class="family-action" id="openChildProfile" type="button">Local Play Preferences</button>
           <button class="family-action light" id="showProfileFavorites" type="button">Show Pinned Games</button>
         </div>
       </article>
@@ -1065,7 +1154,7 @@ body.category-directory-open{overflow:hidden}
       <article class="family-card" style="--family-soft:#e6f7ef;--family-glow:rgba(0,174,136,.14)">
         <span class="family-icon" aria-hidden="true">🧑‍🧒</span>
         <h3>Family &amp; Parent Controls</h3>
-        <p>Review browser-local activity data here. The Academy-wide Family Profile is only needed when formal curriculum records must follow a learner from Pre-K through Grade 12.</p>
+        <p>Review browser-local exploration, observations, and comfort preferences here. Use the Academy Family Profile for the child’s Archaemenes Mentor and formal continuity across Khaemenes schools.</p>
         <div class="family-meta"><span id="profileFavoriteCount">0 pinned</span><span id="profileVisitCount">0 visited</span><span>No parent account required</span></div>
         <div class="family-actions">
           <button class="family-action" id="editProfileFromParent" type="button">Review Profile</button>
@@ -1106,7 +1195,7 @@ body.category-directory-open{overflow:hidden}
         <button class="tool-btn" id="managePinnedGames" type="button">Manage in Adventure Garden</button>
       </div>
       <div class="pinned-list" id="pinnedList"></div>
-      <div class="continuity-note"><strong>Registration boundary:</strong> open games, apps, favorites, and the Mentor do not require registration. A non-sensitive learner continuity record is created only when a family intentionally creates a learner profile for formal curriculum continuity.</div>
+      <div class="continuity-note"><strong>Registration boundary:</strong> open games, apps, and browser-local favorites do not require registration. Personalized Archaemenes mentorship and formal curriculum continuity require an intentionally linked Academy Family learner.</div>
     </div>
   </div>
 </section>
@@ -1179,8 +1268,8 @@ body.category-directory-open{overflow:hidden}
     <div class="heading"><p class="kicker">Parents, caregivers & teachers</p><h2>The grown-up corner</h2><p>Support gentle routines, adjust the visual experience, and continue into the wider family of public educational resources.</p></div>
     <div class="parent-tools">
       <button class="parent-card" id="parentProfileCard" type="button"><span class="parent-icon">🧑‍🧒</span><h3>Parent Dashboard</h3><p>Review the active child, local learning summary, privacy controls, export, and reset tools.</p><span>Open Parent Dashboard ↑</span></button>
-      <button class="parent-card" id="childProfileCard" type="button"><span class="parent-icon">🧒</span><h3>Child Profile</h3><p>Create or edit the child’s nickname, broad learning stage, mentor style, and pathway.</p><span>Open Child Profile →</span></button>
-      <a class="parent-card" href="#familyMentorEntry"><span class="parent-icon">✨</span><h3>Guided Preschool</h3><p>Meet the personal mentor and begin a balanced, age-aligned daily learning path.</p><span>Enter Learning Hub →</span></a>
+      <button class="parent-card" id="childProfileCard" type="button"><span class="parent-icon">🧒</span><h3>Local Play Preferences</h3><p>Set a nickname, broad learning stage, and preferred encouragement style for this browser. Academy learner identity remains in the Family Profile.</p><span>Open Preferences →</span></button>
+      <a class="parent-card" href="#familyMentorEntry"><span class="parent-icon">🦉</span><h3>Archaemenes · Wise Owl</h3><p>Link the active learner and begin a short, balanced, age-aware path with the Academy Mentor.</p><span>Enter Mentor Hub →</span></a>
       <button class="parent-card" id="parentAccessibilityCard" type="button"><span class="parent-icon">🌤️</span><h3>Comfort &amp; Accessibility</h3><p>Choose bright or calm colors, reduce movement, and use read-aloud support.</p><span>Adjust this page ↑</span></button>
       <a class="parent-card" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><span class="parent-icon">🌻</span><h3>Kinder Garden</h3><p>Continue into kindness, curiosity, early literacy, number sense, nature, and school readiness.</p><span>Enter Kinder Garden →</span></a>
       <a class="parent-card" href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><span class="parent-icon">🏫</span><h3>Elementary School</h3><p>Continue toward Kinder Garden through Grade 5 learning and family resources.</p><span>Enter Elementary →</span></a>
@@ -1226,21 +1315,21 @@ body.category-directory-open{overflow:hidden}
 <div class="profile-overlay" id="profileOverlay" aria-hidden="true">
   <section class="profile-dialog" role="dialog" aria-modal="true" aria-labelledby="profileDialogTitle">
     <header class="profile-head">
-      <div><h2 id="profileDialogTitle">Child Learning Profile</h2><p>A grown-up creates this small local profile. No surname, exact birthday, email, photograph, or account is requested.</p></div>
+      <div><h2 id="profileDialogTitle">Local Preschool Preferences</h2><p>A grown-up may save a small browser-local preference record. This does not create an Academy learner account, and no surname, exact birthday, email, photograph, or account is requested.</p></div>
       <button class="profile-close" id="closeProfile" type="button" aria-label="Close child profile">×</button>
     </header>
     <div class="profile-body">
       <div class="profile-fields">
         <div class="profile-field"><label for="childNickname">First name or nickname</label><input id="childNickname" type="text" maxlength="20" autocomplete="off" placeholder="Example: Sam"></div>
         <div class="profile-field"><label for="childAgeBand">Broad learning stage</label><select id="childAgeBand"><option value="">Choose a stage</option><option value="2-3">Ages 2–3</option><option value="3-4">Ages 3–4</option><option value="4-5">Ages 4–5</option><option value="5-6">Ages 5–6</option></select></div>
-        <div class="profile-field"><label for="childPersonality">Mentor communication match</label><select id="childPersonality"><option value="playful">Playful and social · Pip</option><option value="curious">Quiet and curious · Miri</option><option value="imaginative">Imaginative and expressive · Nova</option><option value="steady">Steady and determined · Sage</option></select></div>
+        <div class="profile-field"><label for="childPersonality">How does this learner enjoy encouragement?</label><select id="childPersonality"><option value="playful">Playful and social</option><option value="curious">Quiet and curious</option><option value="imaginative">Imaginative and expressive</option><option value="steady">Steady and determined</option></select></div>
         <div class="profile-field"><label for="childStage">Current pathway</label><select id="childStage"><option value="preschool">Crechè Preschool</option><option value="kindergarten">Kinder Garden transition</option><option value="elementary">Elementary transition</option></select></div>
       </div>
       <label class="profile-guardian"><input id="profileGuardianConfirm" type="checkbox"><span>I am a parent, guardian, caregiver, or educator helping this child create or update the profile.</span></label>
-      <p class="profile-privacy">The profile and pinned games stay in this browser. The same custom-domain origin allows future Khaemenes school portals to read the continuity record after compatible profile adapters are installed.</p>
+      <p class="profile-privacy">These local preferences and pinned games stay in this browser. Personalized Archaemenes mentorship uses the separate Academy Family Registry; this local record remains compatibility data and can be migrated intentionally.</p>
       <div class="profile-error" id="profileError" role="alert"></div>
     </div>
-    <footer class="profile-foot"><button class="profile-cancel" id="cancelProfile" type="button">Cancel</button><button class="profile-save" id="saveChildProfile" type="button">Save Child Profile</button></footer>
+    <footer class="profile-foot"><button class="profile-cancel" id="cancelProfile" type="button">Cancel</button><button class="profile-save" id="saveChildProfile" type="button">Save Preferences</button></footer>
   </section>
 </div>
 
@@ -1314,6 +1403,10 @@ const MOTION_KEY="khaemenes_preschool_reduce_motion_v1";
 const MENTOR_PROGRESS_KEY="khaemenes_preschool_progress_v1";
 const MENTOR_SETTINGS_KEY="khaemenes_preschool_settings_v1";
 const MENTOR_PLAN_KEY="khaemenes_preschool_daily_plan_v1";
+const VISIT_LOG_KEY="khaemenes_preschool_visit_log_v1";
+const OBSERVATION_KEY="khaemenes_preschool_observations_v1";
+const MENTOR_CONTEXT_KEY="khaemenes_preschool_mentor_context_v1";
+const JOURNEY_PREFS_KEY="khaemenes_preschool_today_preferences_v1";
 const $=id=>document.getElementById(id);
 function readJSON(key,fallback){try{const value=localStorage.getItem(key);return value?JSON.parse(value):fallback}catch{return fallback}}
 function writeJSON(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}}
@@ -1322,7 +1415,21 @@ function writeSet(key,set){writeJSON(key,[...set])}
 function readBool(key){try{return localStorage.getItem(key)==="true"}catch{return false}}
 function writeBool(key,value){try{localStorage.setItem(key,String(value))}catch{}}
 function makeLocalId(){return globalThis.crypto?.randomUUID?.()||`local-${Date.now()}-${Math.random().toString(16).slice(2)}`}
-const MENTOR_MATCHES={playful:{name:"Pip",avatar:"🌞"},curious:{name:"Miri",avatar:"🦉"},imaginative:{name:"Nova",avatar:"🚀"},steady:{name:"Sage",avatar:"🌿"}};
+function readArray(key){const value=readJSON(key,[]);return Array.isArray(value)?value:[]}
+function activeAcademyLearner(){
+  try{return window.KhaemenesFamilyRegistry?.getLearner?.()||null}catch{return null}
+}
+function activeAcademyFamily(){
+  try{return window.KhaemenesFamilyRegistry?.getFamily?.()||null}catch{return null}
+}
+function effectiveLearnerId(){return activeAcademyLearner()?.learnerId||profile?.learnerId||null}
+function effectiveAgeBand(){return activeAcademyLearner()?.ageBand||profile?.ageBand||"4-5"}
+function currentCommunicationStyle(){
+  const academyStyle=activeAcademyLearner()?.mentorIdentity?.communicationStyle;
+  const candidate=academyStyle||profile?.communicationStyle||profile?.personality||"playful";
+  return COMMUNICATION_STYLES[candidate]?candidate:"playful";
+}
+const COMMUNICATION_STYLES={playful:{label:"Playful and social"},curious:{label:"Quiet and curious"},imaginative:{label:"Imaginative and expressive"},steady:{label:"Steady and determined"}};
 let profile=readJSON(PROFILE_KEY,null);
 let favoriteProfiles=readJSON(PROFILE_FAVORITES_KEY,{});
 let visitProfiles=readJSON(PROFILE_VISITS_KEY,{});
@@ -1356,7 +1463,7 @@ function persistVisits(){
 }
 function safeProfile(){
   if(!profile)return null;
-  return {learnerId:profile.learnerId,nickname:profile.nickname,ageBand:profile.ageBand,personality:profile.personality,mentorId:profile.mentorId||null,interests:Array.isArray(profile.interests)?profile.interests:[],pace:profile.pace||"balanced",minutes:Number(profile.minutes)||30,pathway:profile.pathway||"preschool"};
+  return {learnerId:profile.learnerId,nickname:profile.nickname,ageBand:profile.ageBand,personality:profile.personality,communicationStyle:profile.communicationStyle||profile.personality||"playful",mentorId:"archaemenes",mentorMode:"Wise Owl",interests:Array.isArray(profile.interests)?profile.interests:[],pace:profile.pace||"balanced",minutes:Number(profile.minutes)||30,pathway:profile.pathway||"preschool"};
 }
 function syncContinuity(){
   const pinned=[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean).map(app=>({id:app.id,title:app.title,icon:app.icon,category:app.category,file:app.file,url:new URL(appUrl(app),location.href).href}));
@@ -1460,15 +1567,33 @@ function toggleFavorite(id,button){
   updateFavorites();filterActivities();renderProfileCenter();
   if(!wasSaved)toast(profile?`Pinned to ${profile.nickname}’s learner profile.`:"Saved on this device. No registration required.");
 }
+function appendVisitEvent(id){
+  const log=readArray(VISIT_LOG_KEY).filter(item=>item&&item.id&&item.at).slice(-399);
+  log.push({id,at:new Date().toISOString()});
+  writeJSON(VISIT_LOG_KEY,log);
+}
+function markMentorStationComplete(id){
+  const data=mentorPlanData();
+  if(!data||!data.items.some(item=>item.app.id===id))return;
+  const progress=readJSON(MENTOR_PROGRESS_KEY,{version:2,days:{}});
+  progress.days=progress.days&&typeof progress.days==="object"?progress.days:{};
+  const day=todayLocalKey(),done=new Set(Array.isArray(progress.days[day])?progress.days[day]:[]);
+  done.add(id);progress.days[day]=[...done];progress.updatedAt=new Date().toISOString();
+  writeJSON(MENTOR_PROGRESS_KEY,progress);
+}
 function markVisited(id){
   visited.add(id);
-  writeJSON(LAST_OPEN_KEY,{id,at:new Date().toISOString()});
+  const at=new Date().toISOString();
+  writeJSON(LAST_OPEN_KEY,{id,at});
+  appendVisitEvent(id);
   persistVisits();
+  markMentorStationComplete(id);
   updateProgress();
   renderProfileCenter();
   renderLearnerHome();
   renderAdventureTrail();
   renderParentDashboard();
+  syncMentorContext();
 }
 function updateFavorites(){$("favoriteCount").textContent=favorites.size;$("favoritesBtn").setAttribute("aria-pressed",String(favoritesOnly));$("starMeter").innerHTML=favorites.size?Array.from({length:Math.min(favorites.size,14)},()=>'<span class="saved-star">♥</span>').join(""):`<span class="empty-stars">No favorite adventures yet. Tap a heart below!</span>`}
 function updateProgress(){const count=KID_APPS.filter(app=>visited.has(app.id)).length;$("visitCount").textContent=`${count}/${KID_APPS.length}`;$("progressFill").style.width=`${Math.round(count/KID_APPS.length*100)}%`;document.querySelectorAll(".activity").forEach(card=>card.classList.toggle("visited",visited.has(card.dataset.id)))}
@@ -1500,22 +1625,22 @@ function buildMenu(query=""){
   const childSection=q
     ? `<p class="menu-group">Matching Child Adventures · ${appMatches.length}</p><div class="menu-list">${appMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(displayTitle(app))}</strong><small>${escapeHtml(catLabel(app.category))}</small></span><span>→</span></a>`).join("")||"<small>No adventures matched.</small>"}</div>`
     : `<p class="menu-group">Adventure Rooms · ${KID_APPS.length} child apps</p><div class="menu-room-grid"><button class="menu-room-button all-apps" type="button" data-menu-category="all"><i>✨</i><span><strong>Complete App Directory</strong><small>All ${APPS.length} validated catalog entries</small></span></button>${roomButtons}</div>`;
-  $("menuContent").innerHTML=`${childSection}<p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+familyFixed}</p><div class="menu-list"><a class="menu-link" data-close-menu href="#familyMentorEntry"><i>✨</i><span><strong>Open Preschool Mentor</strong><small>Guest learning path · no registration</small></span><span>→</span></a><button class="menu-link menu-action" type="button" data-menu-action="child-profile"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="parent-dashboard"><i>🧑‍🧒</i><span><strong>Parent Dashboard &amp; Controls</strong><small>Summary, export, edit, and erase</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="comfort"><i>🌤️</i><span><strong>Comfort &amp; Accessibility</strong><small>Calm colors, motion, and read-aloud</small></span><span>→</span></button><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_donate_index.html"><i>💝</i><span><strong>Support Crechè</strong><small>Support free early learning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" data-close-menu href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No public destinations matched.</small>"}</div>`;
+  $("menuContent").innerHTML=`${childSection}<p class="menu-group">Family Pathway &amp; Grown-Up Tools · ${grownMatches.length+familyFixed}</p><div class="menu-list"><a class="menu-link" data-close-menu href="#familyMentorEntry"><i>🦉</i><span><strong>Archaemenes · Wise Owl</strong><small>Family-linked Preschool mentorship</small></span><span>→</span></a><button class="menu-link menu-action" type="button" data-menu-action="child-profile"><i>🧒</i><span><strong>Child Profile &amp; Pinned Games</strong><small>Local learner continuity</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="parent-dashboard"><i>🧑‍🧒</i><span><strong>Parent Dashboard &amp; Controls</strong><small>Summary, export, edit, and erase</small></span><span>→</span></button><button class="menu-link menu-action" type="button" data-menu-action="comfort"><i>🌤️</i><span><strong>Comfort &amp; Accessibility</strong><small>Calm colors, motion, and read-aloud</small></span><span>→</span></button><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/"><i>🌻</i><span><strong>Khaemenes Kinder Garden</strong><small>Next early-learning stage</small></span><span>→</span></a><a class="menu-link" data-close-menu href="https://vervenveda.com/Khaemenes_Elementary.github.io/"><i>🏫</i><span><strong>Khaemenes Elementary</strong><small>Kinder Garden through Grade 5</small></span><span>→</span></a><a class="menu-link" data-close-menu href="#grownups"><i>🧑‍🏫</i><span><strong>Grown-Up Corner</strong><small>Parents, caregivers, and teachers</small></span><span>↓</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_organizer_index.html"><i>🗓️</i><span><strong>Little Organizer</strong><small>Routines and daily planning</small></span><span>→</span></a><a class="menu-link" data-close-menu href="./apps/Life_skills_donate_index.html"><i>💝</i><span><strong>Support Crechè</strong><small>Support free early learning</small></span><span>→</span></a>${grownMatches.map(app=>`<a class="menu-link" data-close-menu href="${appUrl(app)}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>Grown-up resource</small></span><span>→</span></a>`).join("")}</div><p class="menu-group">Connected Public Halls · ${siteMatches.length}</p><div class="menu-list">${siteMatches.map(site=>`<a class="menu-link" data-close-menu href="${site.url}"><i>${site.icon}</i><span><strong>${escapeHtml(site.title)}</strong><small>Connected public learning destination</small></span><span>↗</span></a>`).join("")||"<small>No public destinations matched.</small>"}</div>`;
 }
 
-function mentorMatch(){return MENTOR_MATCHES[profile?.personality]||MENTOR_MATCHES.playful}
+function mentorMatch(){const key=currentCommunicationStyle();const style=COMMUNICATION_STYLES[key]||COMMUNICATION_STYLES.playful;return {name:"Archaemenes",avatar:"🦉",mode:"Wise Owl",style:style.label,key}}
 function renderProfileCenter(){
   const mentor=mentorMatch();
   if(profile){
     $("profileAvatar").textContent=mentor.avatar;
     $("profileName").textContent=profile.nickname||"Young learner";
-    $("profileStatus").textContent=`Ages ${profile.ageBand||"not set"} · ${mentor.name} mentor · ${favorites.size} pinned adventure${favorites.size===1?"":"s"}`;
-    $("openChildProfile").textContent="Edit Child Profile";
+    $("profileStatus").textContent=`Ages ${profile.ageBand||"not set"} · Archaemenes · Wise Owl · ${mentor.style}`;
+    $("openChildProfile").textContent="Edit Local Preferences";
   }else{
     $("profileAvatar").textContent="🌟";
-    $("profileName").textContent="No learner profile needed for play";
-    $("profileStatus").textContent="Favorites and the Mentor work without registration. A profile is optional for curriculum continuity.";
-    $("openChildProfile").textContent="Create Child Profile";
+    $("profileName").textContent="No local preferences needed for play";
+    $("profileStatus").textContent="Public adventures and favorites work without registration. Link an Academy Family learner for Archaemenes.";
+    $("openChildProfile").textContent="Create Local Preferences";
   }
   $("profileFavoriteCount").textContent=`${favorites.size} pinned`;
   $("profileVisitCount").textContent=`${visited.size} visited`;
@@ -1558,18 +1683,94 @@ function saveProfile(){
   if(!ageBand){$("profileError").textContent="Please choose a broad learning stage.";return}
   if(!$("profileGuardianConfirm").checked){$("profileError").textContent="A grown-up must confirm that they are helping with this profile.";return}
   const personality=$("childPersonality").value;
-  const mentor=MENTOR_MATCHES[personality];
-  profile={...profile,nickname:nickname.slice(0,20),ageBand,personality,mentorId:mentor.name.toLowerCase(),pathway:$("childStage").value,learnerId:profile?.learnerId||makeLocalId(),interests:Array.isArray(profile?.interests)?profile.interests:[],pace:profile?.pace||"balanced",minutes:Number(profile?.minutes)||30,createdAt:profile?.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};
+  profile={...profile,nickname:nickname.slice(0,20),ageBand,personality,communicationStyle:personality,mentorId:"archaemenes",mentorMode:"Wise Owl",pathway:$("childStage").value,learnerId:profile?.learnerId||makeLocalId(),interests:Array.isArray(profile?.interests)?profile.interests:[],pace:profile?.pace||"balanced",minutes:Number(profile?.minutes)||30,createdAt:profile?.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};
   writeJSON(PROFILE_KEY,profile);
   migrateLegacyProfileData();
   favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
   visited=loadScopedSet(visitProfiles,VISITS_KEY);
   syncContinuity();
   closeProfileDialog();renderActivities();updateFavorites();updateProgress();filterActivities();renderProfileCenter();buildMenu();
-  toast(`${profile.nickname}’s child profile is ready. Favorites now pin to this profile.`);
+  toast(`${profile.nickname}’s local Preschool preferences are ready. Academy Mentor identity remains Archaemenes.`);
 }
 function showPinnedInGarden(){
   favoritesOnly=true;$("category").value="all";$("search").value="";updateFavorites();filterActivities();goToSection("#activities",{history:false,behavior:calm?"auto":"smooth"});
+}
+function observationGuideFor(id){
+  const app=KID_APPS.find(item=>item.id===id);
+  return app?PRESCHOOL_CATALOG.observationFor?.(app)||null:null;
+}
+function recordObservation(level){
+  const allowed=new Set(["exploring","growing","confident"]);
+  if(!allowed.has(level))return;
+  const last=readJSON(LAST_OPEN_KEY,null),app=last?.id?KID_APPS.find(item=>item.id===last.id):null;
+  if(!app){toast("Open an adventure first, then add an observation.");return}
+  const guide=observationGuideFor(app.id);
+  const log=readArray(OBSERVATION_KEY).filter(item=>item&&item.id&&item.at).slice(-199);
+  log.push({id:app.id,domain:app.mentor?.domain||null,level,at:new Date().toISOString()});
+  writeJSON(OBSERVATION_KEY,log);
+  renderParentDashboard();
+  syncMentorContext();
+  toast(level==="exploring"?"Saved: just exploring.":level==="growing"?"Saved: getting the idea.":"Saved: doing this confidently.");
+}
+function weeklySnapshotData(){
+  const cutoff=Date.now()-7*86400000;
+  const events=readArray(VISIT_LOG_KEY).filter(item=>Date.parse(item.at)>=cutoff);
+  const observations=readArray(OBSERVATION_KEY).filter(item=>Date.parse(item.at)>=cutoff);
+  const counts={};
+  for(const event of events){
+    const app=KID_APPS.find(item=>item.id===event.id);
+    const domain=app?.mentor?.domain;
+    if(domain)counts[domain]=(counts[domain]||0)+1;
+  }
+  const ordered=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  const top=ordered[0]?.[0]||null;
+  const domains=Object.keys(PRESCHOOL_CATALOG.mentorDomains||{});
+  const next=domains.length?domains.slice().sort((a,b)=>(counts[a]||0)-(counts[b]||0))[0]:null;
+  const latestObs=observations[observations.length-1]||null;
+  return {events,observations,counts,top,next,latestObs};
+}
+function renderWeeklySnapshot(){
+  if(!$("weeklySnapshot"))return;
+  const data=weeklySnapshotData();
+  const unique=new Set(data.events.map(item=>item.id)).size;
+  $("weekExplored").textContent=`${unique} adventure${unique===1?"":"s"}`;
+  $("weekCuriosity").textContent=data.top?(PRESCHOOL_CATALOG.mentorDomains?.[data.top]?.label||data.top):"Waiting for exploration";
+  const levelLabel={exploring:"Just exploring",growing:"Getting the idea",confident:"Doing this confidently"};
+  if(data.latestObs){
+    const app=KID_APPS.find(item=>item.id===data.latestObs.id);
+    $("weekConfidence").textContent=`${levelLabel[data.latestObs.level]||"Observed"} · ${app?displayTitle(app):"recent activity"}`;
+  }else $("weekConfidence").textContent="No observation yet";
+  $("weekNext").textContent=data.next?(PRESCHOOL_CATALOG.mentorDomains?.[data.next]?.label||data.next):"Follow the child’s curiosity";
+  const last=readJSON(LAST_OPEN_KEY,null),guide=last?.id?observationGuideFor(last.id):null;
+  const app=last?.id?KID_APPS.find(item=>item.id===last.id):null;
+  $("observationPrompt").textContent=guide&&app?`${displayTitle(app)} · ${guide.observe}`:"Open an adventure, then return here to add one optional observation.";
+  const learner=activeAcademyLearner();
+  $("snapshotMentorLink").href=learner?"https://vervenveda.com/Khaemenes_Academy.github.io/mentor/":"https://vervenveda.com/Khaemenes_Academy.github.io/family/";
+  $("snapshotMentorLink").textContent=learner?"Ask Archaemenes about this week →":"Link Family Learner for Archaemenes →";
+}
+function syncMentorContext(forcedLearnerId=null){
+  const learner=activeAcademyLearner();
+  const learnerId=forcedLearnerId||learner?.learnerId||profile?.learnerId||null;
+  if(!learnerId)return;
+  const week=weeklySnapshotData();
+  const plan=readJSON(MENTOR_PLAN_KEY,null);
+  const recentVisits=readArray(VISIT_LOG_KEY).slice(-20);
+  const recentObservations=readArray(OBSERVATION_KEY).slice(-12);
+  const context={
+    version:2,
+    source:"Khaemenes Preschool · Crechè",
+    learnerId,
+    ageBand:learner?.ageBand||profile?.ageBand||null,
+    communicationStyle:currentCommunicationStyle(),
+    favoriteIds:[...favorites].slice(-20),
+    visitedIds:[...visited].slice(-40),
+    recentVisits,
+    weeklyDomains:week.counts,
+    observations:recentObservations,
+    dailyPlan:plan&&plan.learnerId===learnerId&&plan.date===todayLocalKey()?plan:null,
+    updatedAt:new Date().toISOString()
+  };
+  writeJSON(MENTOR_CONTEXT_KEY,context);
 }
 function exportFamilyRecord(){
   const mentorProgress=readJSON(MENTOR_PROGRESS_KEY,null);
@@ -1585,7 +1786,10 @@ function exportFamilyRecord(){
     lastOpened:readJSON(LAST_OPEN_KEY,null),
     continuity:readJSON(CONTINUITY_KEY,null),
     guidedPreschool:{progress:mentorProgress,settings:mentorSettings,dailyPlan:mentorPlan},
-    note:"Family-controlled local educational continuity record. Not a formal grade."
+    visitLog:readArray(VISIT_LOG_KEY),
+    observations:readArray(OBSERVATION_KEY),
+    mentorContext:readJSON(MENTOR_CONTEXT_KEY,null),
+    note:"Family-controlled local educational continuity record with gentle observations. Not a formal grade or developmental diagnosis."
   };
   const blob=new Blob([JSON.stringify(record,null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob),link=document.createElement("a");
@@ -1602,7 +1806,7 @@ function eraseFamilyRecord(){
   if(profile){delete nextFavorites[id];delete nextVisits[id]}
   const removals=[
     PROFILE_KEY,CONTINUITY_KEY,LAST_OPEN_KEY,
-    MENTOR_PROGRESS_KEY,MENTOR_SETTINGS_KEY,MENTOR_PLAN_KEY
+    MENTOR_PROGRESS_KEY,MENTOR_SETTINGS_KEY,MENTOR_PLAN_KEY,VISIT_LOG_KEY,OBSERVATION_KEY,MENTOR_CONTEXT_KEY,JOURNEY_PREFS_KEY
   ];
   if(profile)removals.push(`creche_mentor_memory_${id}`);
   const updates=profile?[
@@ -1829,37 +2033,113 @@ function chooseOffscreenPrompt(){
 function mentorPlanData(){
   const plan=readJSON(MENTOR_PLAN_KEY,null);
   const progress=readJSON(MENTOR_PROGRESS_KEY,{days:{}});
-  if(!profile||!plan||plan.learnerId!==profile.learnerId||plan.date!==todayLocalKey()||!Array.isArray(plan.ids))return null;
+  const learnerId=effectiveLearnerId();
+  if(!learnerId||!plan||plan.learnerId!==learnerId||plan.date!==todayLocalKey()||!Array.isArray(plan.ids))return null;
   const completed=new Set(progress?.days?.[todayLocalKey()]||[]);
   const items=plan.ids.map(id=>{
     const app=PRESCHOOL_CATALOG.byMentorId(id)||PRESCHOOL_CATALOG.byId(id);
     if(!app)return null;
-    return {id,app,done:completed.has(id)};
+    return {id,app,done:completed.has(app.id)||completed.has(id)};
   }).filter(Boolean);
   return {plan,items,completed};
+}
+function deterministicHash(text){
+  let h=2166136261;
+  for(const ch of String(text)){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}
+  return Math.abs(h>>>0);
+}
+function buildMentorPlan({fresh=false}={}){
+  const learner=activeAcademyLearner(),learnerId=learner?.learnerId||null;
+  if(!learnerId){
+    toast("Link a child learner in the Academy Family Profile to create an Archaemenes path.");
+    renderMentorJourney();
+    return null;
+  }
+  const minutes=Number($("mentorMinutes")?.value)||25;
+  const energy=$("mentorEnergy")?.value||"steady";
+  writeJSON(JOURNEY_PREFS_KEY,{minutes,energy});
+  const age=learner.ageBand||profile?.ageBand||"4-5";
+  const recent=new Set(readArray(VISIT_LOG_KEY).slice(-12).map(item=>item.id));
+  const pool=PRESCHOOL_CATALOG.mentorActivities({preserveLegacyIds:false})
+    .filter(item=>item.ages.includes(age));
+  const domains=Object.keys(PRESCHOOL_CATALOG.mentorDomains||{});
+  const seed=deterministicHash(`${todayLocalKey()}|${learnerId}|${fresh?Date.now():"daily"}`);
+  const scored=pool.map((item,index)=>({
+    ...item,
+    score:(item.energy===energy?5:0)+(recent.has(item.catalogId)?-3:2)+((seed+index*17)%7)/10
+  }));
+  const target=minutes<=15?2:minutes<=25?3:4;
+  const selected=[];
+  const domainOrder=domains.slice().sort((a,b)=>{
+    const av=scored.filter(x=>x.domain===a&&!recent.has(x.catalogId)).length;
+    const bv=scored.filter(x=>x.domain===b&&!recent.has(x.catalogId)).length;
+    return bv-av;
+  });
+  for(const domain of domainOrder){
+    if(selected.length>=target)break;
+    const options=scored.filter(item=>item.domain===domain&&!selected.some(x=>x.catalogId===item.catalogId)).sort((a,b)=>b.score-a.score);
+    if(options[0])selected.push(options[0]);
+  }
+  for(const item of scored.sort((a,b)=>b.score-a.score)){
+    if(selected.length>=target)break;
+    if(!selected.some(x=>x.catalogId===item.catalogId))selected.push(item);
+  }
+  const plan={version:2,learnerId,date:todayLocalKey(),mentorId:"archaemenes",mentorMode:"Wise Owl",ageBand:age,minutes,energy,ids:selected.map(item=>item.catalogId),generatedAt:new Date().toISOString()};
+  writeJSON(MENTOR_PLAN_KEY,plan);
+  const progress=readJSON(MENTOR_PROGRESS_KEY,{version:2,days:{}});
+  progress.days=progress.days&&typeof progress.days==="object"?progress.days:{};
+  if(!Array.isArray(progress.days[plan.date]))progress.days[plan.date]=[];
+  writeJSON(MENTOR_PROGRESS_KEY,progress);
+  syncMentorContext(learnerId);
+  renderMentorJourney();
+  renderParentDashboard();
+  return plan;
+}
+function renderMentorJourney(){
+  if(!$("mentorJourneyStations"))return;
+  const learner=activeAcademyLearner();
+  const prefs=readJSON(JOURNEY_PREFS_KEY,{minutes:25,energy:"steady"});
+  if($("mentorMinutes"))$("mentorMinutes").value=String(prefs.minutes||25);
+  if($("mentorEnergy"))$("mentorEnergy").value=prefs.energy||"steady";
+  if(!learner){
+    $("mentorDayTitle").textContent="A small, balanced learning path";
+    $("mentorDayIntro").textContent="Link a child learner through the Academy Family Profile to unlock a personalized Wise Owl path.";
+    $("mentorJourneyStations").innerHTML='<div class="mini-plan-empty" style="grid-column:1/-1">Public Crechè adventures remain open. Archaemenes becomes personalized only after a family learner is linked.</div>';
+    $("openArchaemenes").href="https://vervenveda.com/Khaemenes_Academy.github.io/family/";
+    $("openArchaemenes").textContent="Link Family Learner →";
+    return;
+  }
+  let data=mentorPlanData();
+  if(!data){buildMentorPlan();data=mentorPlanData()}
+  const done=data?data.items.filter(item=>item.done).length:0;
+  $("mentorDayTitle").textContent=`${learner.nickname||"Learner"} + Archaemenes · Wise Owl`;
+  $("mentorDayIntro").textContent=data?`${done} of ${data.items.length} stations explored · ${data.plan.minutes} minute plan · ${data.plan.energy==="steady"?"ready":data.plan.energy} energy`:"Choose Make Today’s Path when you are ready.";
+  $("openArchaemenes").href="https://vervenveda.com/Khaemenes_Academy.github.io/mentor/";
+  $("openArchaemenes").textContent="Open Archaemenes →";
+  $("mentorJourneyStations").innerHTML=data&&data.items.length?data.items.map((item,index)=>`<a class="mentor-station ${item.done?"done":""}" href="${appUrl(item.app)}" data-mentor-station="${item.app.id}"><i>${item.app.icon}</i><strong>${escapeHtml(displayTitle(item.app))}</strong><small>${item.done?"Explored ✓":`Station ${index+1} · ${item.app.mentor?.minutes||"short"} min`}</small></a>`).join(""):'<div class="mini-plan-empty" style="grid-column:1/-1">No plan is ready yet.</div>';
+  document.querySelectorAll("[data-mentor-station]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.mentorStation)));
 }
 function renderMentorPlanPreview(){
   const titleEl=document.getElementById("mentorPlanTitle");
   const introEl=document.getElementById("mentorPlanIntro");
   const previewEl=document.getElementById("mentorPlanPreview");
   if(!titleEl||!introEl||!previewEl)return;
-  const data=mentorPlanData();
-  if(!profile){
-    titleEl.textContent="A balanced little day";
-    introEl.textContent="Open the public Guest Mentor to prepare today’s short learning path. No registration required.";
-    previewEl.innerHTML='<div class="mini-plan-empty">No learner profile yet.</div>';
+  const learner=activeAcademyLearner(),data=mentorPlanData();
+  if(!learner){
+    titleEl.textContent="Archaemenes · Wise Owl";
+    introEl.textContent="Link a child in the Academy Family Profile for a personalized Preschool path.";
+    previewEl.innerHTML='<div class="mini-plan-empty">Public Crechè adventures remain open without registration.</div>';
     return;
   }
-  const mentor=mentorMatch();
   if(!data||!data.items.length){
-    titleEl.textContent=`${mentor.name} can plan today with ${profile.nickname}`;
-    introEl.textContent="Open the Guest Mentor once to create today’s balanced, age-aware learning path.";
+    titleEl.textContent=`Archaemenes can plan today with ${learner.nickname||"this learner"}`;
+    introEl.textContent="Use Today with Archaemenes to create a short, balanced path.";
     previewEl.innerHTML='<div class="mini-plan-empty">Today’s guided path has not been created yet.</div>';
     return;
   }
   const done=data.items.filter(item=>item.done).length;
-  titleEl.textContent=`${profile.nickname} + ${mentor.name} · ${done} of ${data.items.length} complete`;
-  introEl.textContent=`Today’s ${data.plan.energy||"ready"}-energy path is shared directly from the Guided Preschool Mentor.`;
+  titleEl.textContent=`${learner.nickname||"Learner"} + Archaemenes · ${done} of ${data.items.length} explored`;
+  introEl.textContent=`Today’s ${data.plan.energy==="steady"?"ready":data.plan.energy}-energy path is stored locally for this linked learner.`;
   previewEl.innerHTML=data.items.map((item,index)=>`<div class="mini-station ${item.done?"done":""}"><span>${item.done?"✓":index+1}</span><i>${item.app.icon}</i><strong>${escapeHtml(displayTitle(item.app))}</strong></div>`).join("");
 }
 function renderLearnerHome(){
@@ -1869,9 +2149,9 @@ function renderLearnerHome(){
     const greeting=hour<12?"Good morning":hour<17?"Good afternoon":"Hello";
     $("homeKicker").textContent=`${greeting}, ${profile.nickname}`;
     $("myHomeTitle").textContent=`${profile.nickname}’s Crechè home`;
-    $("myHomeIntro").textContent=`Favorites, explored adventures, and ${mentor.name}’s guided learning path stay connected to this local child profile.`;
-    $("heroEyebrow").textContent=`${mentor.avatar} ${greeting}, ${profile.nickname} · ${mentor.name} is here too`;
-    $("heroLead").textContent=`Welcome back to a joyful preschool world built around ${profile.nickname}’s curiosity. Continue an adventure, visit a favorite, or let ${mentor.name} guide today’s learning path.`;
+    $("myHomeIntro").textContent=`Favorites and explored adventures stay connected to these local preferences; a linked Academy learner unlocks Archaemenes · Wise Owl.`;
+    $("heroEyebrow").textContent=`${mentor.avatar} ${greeting}, ${profile.nickname} · Archaemenes is the Academy Mentor`;
+    $("heroLead").textContent=`Welcome back to a joyful preschool world built around ${profile.nickname}’s curiosity. Continue an adventure, visit a favorite, or link the family learner for Archaemenes’ guided path.`;
   }else{
     $("homeKicker").textContent="My Crechè Home";
     $("myHomeTitle").textContent="A little home base for today.";
@@ -1879,6 +2159,7 @@ function renderLearnerHome(){
     $("heroEyebrow").textContent="🌟 A colorful first doorway to learning";
     $("heroLead").textContent="A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.";
   }
+  renderMentorJourney();
   const last=readJSON(LAST_OPEN_KEY,null);
   const lastApp=last?.id?KID_APPS.find(app=>app.id===last.id):null;
   if(lastApp){
@@ -1944,12 +2225,12 @@ function renderParentDashboard(){
   if(profile){
     $("dashboardIntro").textContent=`A local snapshot for ${profile.nickname}. This summary stays in this browser unless a grown-up exports it.`;
     $("dashMentorIcon").textContent=mentor.avatar;
-    $("dashMentor").textContent=mentor.name;
+    $("dashMentor").textContent="Archaemenes · Wise Owl";
     $("dashStage").textContent=`Ages ${profile.ageBand}`;
   }else{
     $("dashboardIntro").textContent="Create a child profile to see a simple family-controlled learning summary.";
     $("dashMentorIcon").textContent="✨";
-    $("dashMentor").textContent="No mentor yet";
+    $("dashMentor").textContent="No linked Mentor yet";
     $("dashStage").textContent="Not set";
   }
   $("dashExplored").textContent=`${explored} of ${KID_APPS.length}`;
@@ -1962,6 +2243,7 @@ function renderParentDashboard(){
   $("dashboardMotion").setAttribute("aria-pressed",String(reduceMotion));
   const day=Math.floor(Date.now()/86400000);
   $("familyIdea").textContent=FAMILY_IDEAS[day%FAMILY_IDEAS.length];
+  renderWeeklySnapshot();
 }
 function scrollToParentDashboard(){
   setView("grownup",{scroll:false});
@@ -2129,13 +2411,13 @@ function renderFamilyMentorEntry(){
   box.innerHTML=learners.map(learner=>{
     const nickname=escapeHtml(learner.nickname||"My Child");
     const learnerId=escapeHtml(learner.learnerId||"");
-    return `<a class="child-mentor-button" href="./mentor/index.html" data-enter-child-mentor="${learnerId}">
+    return `<a class="child-mentor-button" href="https://vervenveda.com/Khaemenes_Academy.github.io/mentor/" data-enter-child-mentor="${learnerId}">
       <span class="child-star" aria-hidden="true">🌟</span>
       <span>Enter ${nickname}’s Mentor</span>
     </a>`;
   }).join("");
 
-  status.textContent=`${learners.length} child learner account${learners.length===1?" is":"s are"} ready. Each button opens that child’s own Mentor space.`;
+  status.textContent=`${learners.length} child learner account${learners.length===1?" is":"s are"} ready. Each button selects that learner and opens Archaemenes · Wise Owl.`;
 }
 
 document.addEventListener("click",event=>{
@@ -2150,6 +2432,7 @@ document.addEventListener("click",event=>{
     if(!family?.familyId)throw new Error("Family account unavailable");
     const selected=registry.setActive?.({familyId:family.familyId,learnerId});
     if(selected===false)throw new Error("Learner selection declined");
+    syncMentorContext(learnerId);
     location.href=link.href;
   }catch{
     const status=$("familyAccountStatus");
@@ -2161,6 +2444,7 @@ $("heroKidCount").textContent=KID_APPS.length;
 migrateLegacyProfileData();
 syncContinuity();
 renderFamilyMentorEntry();
+syncMentorContext();
 renderFeaturedGame();
 renderTicker();
 renderNew();
@@ -2205,6 +2489,14 @@ $("parentProfileCard").addEventListener("click",scrollToParentDashboard);
 $("parentAccessibilityCard").addEventListener("click",scrollToParentDashboard);
 $("dashboardCalm").addEventListener("click",()=>setCalm(!calm));
 $("dashboardMotion").addEventListener("click",()=>setReducedMotion(!reduceMotion));
+$("mentorMinutes").addEventListener("change",()=>buildMentorPlan({fresh:true}));
+$("mentorEnergy").addEventListener("change",()=>buildMentorPlan({fresh:true}));
+$("newMentorPath").addEventListener("click",()=>buildMentorPlan({fresh:false}));
+$("mentorDifferent").addEventListener("click",()=>buildMentorPlan({fresh:true}));
+$("mentorBreak").addEventListener("click",()=>{chooseOffscreenPrompt();$("mentorDayIntro").textContent=`Wise Owl break: ${$("awayPrompt").textContent}`;toast("A gentle off-screen break is ready.")});
+$("mentorDayDone").addEventListener("click",()=>{const plan=readJSON(MENTOR_PLAN_KEY,null);if(plan){plan.completedAt=new Date().toISOString();writeJSON(MENTOR_PLAN_KEY,plan);syncMentorContext()}toast("Today’s path can rest here. Curiosity can continue tomorrow.")});
+document.querySelectorAll("[data-observation-level]").forEach(button=>button.addEventListener("click",()=>recordObservation(button.dataset.observationLevel)));
+$("snapshotPrint").addEventListener("click",()=>window.print());
 $("menuOverlay").addEventListener("click",event=>{
   if(event.target===$("menuOverlay")){closeMenu(true);return}
   const room=event.target.closest("[data-menu-category]");
@@ -2246,14 +2538,14 @@ document.addEventListener("keydown",event=>{
   if(event.key==="/"&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&$("appModal").hidden&&!$("menuOverlay").classList.contains("open")&&!$("categoryOverlay").classList.contains("open")&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
 
 
-window.addEventListener("khaemenes-family-changed",renderFamilyMentorEntry);
+window.addEventListener("khaemenes-family-changed",()=>{renderFamilyMentorEntry();renderMentorJourney();renderParentDashboard();syncMentorContext()});
 window.addEventListener("storage",event=>{
   if([
     "khaemenes_family_registry_v1",
     "khaemenes_active_learner_v1",
     "khaemenes_active_family_v1"
   ].includes(event.key)){
-    renderFamilyMentorEntry();
+    renderFamilyMentorEntry();renderMentorJourney();renderParentDashboard();syncMentorContext();
   }
 });
 
