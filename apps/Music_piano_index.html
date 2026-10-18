@@ -43,6 +43,8 @@
     transition: transform 0.1s, box-shadow 0.2s;
     position: relative;
     overflow: hidden;
+    color: #251a42;
+    font-family: inherit;
   }
   .key:active { transform: scale(0.95); }
   .glow { box-shadow: 0 0 25px 10px yellow !important; }
@@ -109,7 +111,7 @@
 <body>
 
 <h1>🎶 Pre-K Piano Deluxe 🎶</h1>
-<p>Click the rainbow keys! Record and playback your tune.</p>
+<p>Tap the rainbow keys or use 1–8 on a keyboard. Record and play back your tune.</p>
 
 <select id="instrumentSelect">
   <option value="piano">🎹 Piano</option>
@@ -121,13 +123,13 @@
 <div class="piano" id="piano"></div>
 
 <div class="controls">
-  <button class="record" onclick="startRecording()">⏺️ Record</button>
-  <button class="stop" onclick="stopRecording()">⏹️ Stop</button>
-  <button class="play" onclick="playRecording()">▶️ Play</button>
-  <button class="beatToggle" onclick="toggleBeat()">🥁 Beat</button>
+  <button type="button" class="record" onclick="startRecording()">⏺️ Record</button>
+  <button type="button" class="stop" onclick="stopRecording()">⏹️ Stop</button>
+  <button type="button" class="play" onclick="playRecording()">▶️ Play</button>
+  <button type="button" class="beatToggle" id="beatButton" aria-pressed="false" onclick="toggleBeat()">🥁 Beat Off</button>
 </div>
 
-<div id="message"></div>
+<div id="message" role="status" aria-live="polite"></div>
 
 <script>
 const NOTES = ["C4","D4","E4","F4","G4","A4","B4","C5"];
@@ -184,13 +186,21 @@ function playNote(note, keyEl){
 }
 
 NOTES.forEach(note => {
-  const key = document.createElement("div");
+  const key = document.createElement("button");
   const label = note.replace(/[0-9]/g,"");
+  const keyNumber = NOTES.indexOf(note)+1;
+  key.type = "button";
   key.className = "key " + label + (note==="C5"?" C5":"");
-  key.innerText = label;
+  key.innerText = `${label} ${keyNumber}`;
+  key.setAttribute("aria-label",`${note}, keyboard key ${keyNumber}`);
   key.dataset.note = note;
-  key.onmousedown = () => playNote(note, key); // allow holding
+  key.addEventListener("click", () => playNote(note,key));
   piano.appendChild(key);
+});
+document.addEventListener("keydown",e=>{
+  if(e.repeat||e.altKey||e.ctrlKey||e.metaKey||e.target.matches("select,button,input"))return;
+  const index=Number(e.key)-1;
+  if(index>=0&&index<NOTES.length){e.preventDefault();const key=piano.querySelector(`[data-note="${NOTES[index]}"]`);playNote(NOTES[index],key)}
 });
 
 // Recording functions
@@ -208,6 +218,9 @@ function playRecording(){
 // Beat toggle
 function toggleBeat(){
   beatPlaying = !beatPlaying;
+  const beatButton=document.getElementById("beatButton");
+  beatButton.setAttribute("aria-pressed",String(beatPlaying));
+  beatButton.textContent=beatPlaying?"🥁 Beat On":"🥁 Beat Off";
   clearInterval(beatTimer);
   if(beatPlaying) {
     const tick=()=>{const ctx=audio(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=beatStep++%4===0?"sine":"triangle";osc.frequency.setValueAtTime(beatStep%4===1?110:220,ctx.currentTime);gain.gain.setValueAtTime(.22,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.11);osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.12)};

@@ -65,7 +65,7 @@ footer{margin-top:15px;text-align:center;color:var(--muted);font-size:.82rem;lin
 <div class="control"><label for="volume">Volume</label><input id="volume" type="range" min="0" max=".7" step=".01" value=".32"></div>
 </div>
 
-<div class="notice"><strong>How to use:</strong> Choose a symbol, then tap a line or space. Notes snap into place. Press Play to hear the score from left to right. Everything saves only on this device.</div>
+<div class="notice"><strong>How to use:</strong> Choose a symbol, then tap a line or space. Keyboard learners can focus the staff, use ↑/↓ to choose pitch, ←/→ to choose position, and press Enter to place. Everything saves only on this device.</div>
 
 <div class="layout">
 <aside class="palette">
@@ -77,7 +77,7 @@ footer{margin-top:15px;text-align:center;color:var(--muted);font-size:.82rem;lin
 
 <section class="workspace">
 <h2>Your Staff</h2>
-<div class="staff-wrap"><svg id="staff" viewBox="0 0 820 390" aria-label="Interactive music staff"></svg></div>
+<div class="staff-wrap"><svg id="staff" viewBox="0 0 820 390" role="application" tabindex="0" aria-describedby="message" aria-label="Interactive music staff. Arrow keys choose a position; Enter places the selected symbol."></svg></div>
 <div class="message" id="message" aria-live="polite">Choose a note value, then tap the staff.</div>
 <div class="actions">
 <button class="btn primary" id="playBtn">▶ Play Score</button>
@@ -115,7 +115,7 @@ const SYMBOLS=[
 ['restQuarter','𝄽','Quarter Rest'],['restHalf','𝄼','Half Rest'],['sharp','♯','Sharp'],['flat','♭','Flat'],
 ['natural','♮','Natural'],['bar','|','Bar Line'],['staccato','•','Staccato'],['eraser','⌫','Eraser']
 ];
-let selected='quarter',score=[],lessonIndex=0,audioCtx=null,master=null,playing=[];
+let selected='quarter',score=[],lessonIndex=0,audioCtx=null,master=null,playing=[],keyboardStep=4,keyboardX=180;
 function fresh(){return{theme:'ivory',clef:'treble',instrument:'piano',tempo:92,volume:.32,labels:true,score:[]}}
 function load(){try{return Object.assign(fresh(),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch{return fresh()}}
 let state=load();score=Array.isArray(state.score)?state.score:[];
@@ -162,13 +162,43 @@ $('staff').addEventListener('pointerdown',e=>{
  else{const step=Math.round((258-y)/13),sy=staffY(step),p=pitchFromStep(step,0),it={type:'note',kind:selected,x,y:sy,step,name:p.name,midi:p.midi,acc:0,staccato:false};score.push(it);playTone(it.midi,.45);$('message').textContent=`Placed ${p.name}.`}
  drawStaff();save()
 });
+function placeFromKeyboard(){
+ const selectedSymbol=SYMBOLS.find(x=>x[0]===selected),x=keyboardX,y=staffY(keyboardStep);
+ if(selected==='eraser'){const i=nearest(x,y,52);if(i>=0)score.splice(i,1)}
+ else if(selected==='bar')score.push({type:'bar',x})
+ else if(selected==='restQuarter'||selected==='restHalf')score.push({type:'rest',kind:selected,x})
+ else if(['sharp','flat','natural','staccato'].includes(selected)){const i=nearest(x,y,52);if(i>=0&&score[i].type==='note'){if(selected==='staccato')score[i].staccato=!score[i].staccato;else{score[i].acc=selected==='sharp'?1:selected==='flat'?-1:0;const p=pitchFromStep(score[i].step,score[i].acc);score[i].midi=p.midi;score[i].name=p.name}}else return $('message').textContent='Move close to a note before adding that marking.'}
+ else{const p=pitchFromStep(keyboardStep,0),it={type:'note',kind:selected,x,y,step:keyboardStep,name:p.name,midi:p.midi,acc:0,staccato:false};score.push(it);playTone(it.midi,.45)}
+ keyboardX=Math.min(770,keyboardX+38);drawStaff();save();$('message').textContent=`${selectedSymbol?.[2]||'Symbol'} placed. Keyboard position ${Math.round(keyboardX)}.`
+}
+$('staff').addEventListener('keydown',e=>{
+ if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Enter',' '].includes(e.key))return;e.preventDefault();
+ if(e.key==='ArrowUp')keyboardStep=Math.min(10,keyboardStep+1);
+ else if(e.key==='ArrowDown')keyboardStep=Math.max(-4,keyboardStep-1);
+ else if(e.key==='ArrowLeft')keyboardX=Math.max(130,keyboardX-38);
+ else if(e.key==='ArrowRight')keyboardX=Math.min(770,keyboardX+38);
+ else return placeFromKeyboard();
+ const p=pitchFromStep(keyboardStep,0);$('message').textContent=`Keyboard position: ${p.name}, horizontal position ${Math.round(keyboardX)}. Press Enter to place.`
+});
 function updateStats(){const notes=score.filter(x=>x.type==='note'),beats=score.reduce((a,x)=>a+(x.type==='note'?duration(x.kind):x.type==='rest'?restBeats(x.kind):0),0);$('symbolStat').textContent=score.length;$('noteStat').textContent=notes.length;$('beatStat').textContent=beats}
 function stop(){playing.forEach(clearTimeout);playing=[];$('message').textContent='Stopped.'}
 $('playBtn').onclick=()=>{if(!score.some(x=>x.type==='note'||x.type==='rest'))return $('message').textContent='Place notes or rests first.';stop();const ctx=ensureAudio(),beat=60/Number($('tempo').value);let t=ctx.currentTime+.05;score.slice().sort((a,b)=>(a.x||0)-(b.x||0)).forEach(it=>{if(it.type==='note'){let d=duration(it.kind)*beat*.9;if(it.staccato)d*=.35;playTone(it.midi,d,t);t+=duration(it.kind)*beat}else if(it.type==='rest')t+=restBeats(it.kind)*beat});$('message').textContent='Playing your score.'}
 $('stopBtn').onclick=stop;$('undoBtn').onclick=()=>{score.pop();drawStaff();save()};$('clearBtn').onclick=()=>{if(confirm('Clear the entire score?')){score=[];drawStaff();save()}};
 $('speakBtn').onclick=()=>{if('speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance('Choose a music symbol, then tap a line or space on the staff. Notes placed higher sound higher. Press play to hear your score.');u.rate=.9;speechSynthesis.speak(u)}}
 $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='harmony_haven_score.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
-$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);score=Array.isArray(x.score)?x.score:[];if(x.clef)$('clef').value=x.clef;if(x.instrument)$('instrument').value=x.instrument;drawStaff();save();$('message').textContent='Score imported.'}catch{$('message').textContent='That score file could not be imported.'}};r.readAsText(f)};
+function safeScore(raw){
+ if(!Array.isArray(raw)||raw.length>333)throw new Error('Score must contain 333 symbols or fewer.');
+ return raw.map(it=>{
+  if(!it||typeof it!=='object'||!['note','rest','bar'].includes(it.type))throw new Error('Unknown score symbol.');
+  const x=Number(it.x);if(!Number.isFinite(x)||x<70||x>790)throw new Error('Symbol position is outside the staff.');
+  if(it.type==='bar')return{type:'bar',x};
+  if(it.type==='rest'){if(!['restQuarter','restHalf'].includes(it.kind))throw new Error('Unknown rest.');return{type:'rest',kind:it.kind,x}}
+  if(!['quarter','half','whole','eighth'].includes(it.kind))throw new Error('Unknown note value.');
+  const step=Number(it.step),acc=Number(it.acc||0);if(!Number.isInteger(step)||step< -4||step>10||![-1,0,1].includes(acc))throw new Error('Invalid note.');
+  const p=pitchFromStep(step,acc);return{type:'note',kind:it.kind,x,y:staffY(step),step,name:p.name,midi:p.midi,acc,staccato:Boolean(it.staccato)}
+ });
+}
+$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;if(f.size>333000){$('message').textContent='That file is too large. Choose a score under 333 KB.';e.target.value='';return}const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);score=safeScore(x.score);if(['treble','bass'].includes(x.clef))$('clef').value=x.clef;if(['piano','guitar','bells'].includes(x.instrument))$('instrument').value=x.instrument;drawStaff();save();$('message').textContent=`Score imported safely: ${score.length} symbols.`}catch(error){$('message').textContent=`Could not import: ${error.message}`}finally{e.target.value=''}};r.onerror=()=>{$('message').textContent='That score file could not be read.';e.target.value=''};r.readAsText(f)};
 function lesson(){const l=LESSONS[lessonIndex];$('lessonTitle').textContent=l.title;$('lessonText').textContent=l.text}
 $('lessonPrev').onclick=()=>{lessonIndex=(lessonIndex-1+LESSONS.length)%LESSONS.length;lesson()};$('lessonNext').onclick=()=>{lessonIndex=(lessonIndex+1)%LESSONS.length;lesson()};
 $('theme').innerHTML=Object.entries(THEMES).map(([k,t])=>`<option value="${k}">${t.emoji} ${t.name}</option>`).join('');

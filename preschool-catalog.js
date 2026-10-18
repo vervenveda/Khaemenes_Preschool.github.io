@@ -385,12 +385,12 @@
   },
   {
     "id": "abc-cosmic",
-    "title": "Cosmic Alphabet",
+    "title": "Cosmic Arabic Alphabet Explorer",
     "file": "ABC_cosmic_alphabet_index.html",
     "category": "letters",
     "icon": "🚀",
-    "desc": "Practice letters among stars and planets.",
-    "tags": "alphabet cosmic space",
+    "desc": "Explore all 28 Arabic letters in a free-play world, or continue into the guided 42-week quest.",
+    "tags": "arabic alphabet cosmic space free play",
     "mentor": {
       "eligible": false
     }

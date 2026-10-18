@@ -126,6 +126,21 @@ if (!/Bilingual ABC Garden/.test(bilingualSource) || /Cosmic Arabic Alphabet Que
   problems.push("Bilingual ABC catalog identity has drifted from its actual lesson content.");
 }
 
+const pianoSource = fs.readFileSync(path.join(root, "apps", "Music_piano_index.html"), "utf8");
+if (/createElement\(["']div["']\)[\s\S]{0,500}className\s*=\s*["']key/.test(pianoSource)) {
+  problems.push("Piano keys have regressed to non-semantic div controls.");
+}
+
+const colorsSource = fs.readFileSync(path.join(root, "apps", "Art_match_colors_index.html"), "utf8");
+if (!/Color Match Studio/.test(colorsSource) || !/document\.createElement\(['"]button['"]\)/.test(colorsSource) || !/aria-pressed/.test(colorsSource)) {
+  problems.push("Color Match Studio is missing its semantic learning-loop controls.");
+}
+
+const cosmicSource = fs.readFileSync(path.join(root, "apps", "ABC_cosmic_alphabet_index.html"), "utf8");
+if (!/Cosmic Arabic Alphabet Explorer/.test(cosmicSource) || !/cosmic_arabic_alphabet_quest_index\.html/.test(cosmicSource) || !/28 Arabic letters/.test(catalogSource)) {
+  problems.push("Cosmic Arabic Explorer identity or guided-pathway link has drifted.");
+}
+
 notes.push(`HTML pages: ${htmlFiles.length}`);
 notes.push(`JavaScript files parsed: ${jsFiles.length}`);
 notes.push(`Inline scripts parsed: ${inlineScriptCount}`);
