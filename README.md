@@ -164,6 +164,93 @@ The early-learning Mentor surface does not provide unrestricted private child te
 
 ---
 
+## Mentorship & Family Experience Hardening
+
+The current Preschool family experience now follows the one-Mentor architecture end to end.
+
+### Archaemenes is the only Mentor identity
+
+Legacy Preschool presentation names are no longer used as independent Mentor identities on the Crechè home page.
+
+For early learners:
+
+```text
+Archaemenes
+└── Wise Owl expression
+    └── communication preference
+        ├── playful and social
+        ├── quiet and curious
+        ├── imaginative and expressive
+        └── steady and determined
+```
+
+The communication preference changes presentation only. It does not create another Mentor.
+
+### Today with Archaemenes
+
+A linked Preschool learner can receive a short browser-local daily path built from the shared Preschool catalog.
+
+The family can choose:
+
+- 15, 25, or 40 minutes;
+- gentle, ready, or wiggly energy.
+
+The planner uses age band, energy, recent exploration, and learning-domain balance while preserving the child's ability to stop, switch, or take a break.
+
+### Gentle developmental observations
+
+The shared catalog now includes observation guides for:
+
+- language and early literacy;
+- numbers and early reasoning;
+- feelings, friendship, and self-knowledge;
+- art, music, and imagination;
+- movement, health, and life skills;
+- nature, weather, and wonder.
+
+A grown-up may optionally record:
+
+- Just exploring
+- Getting the idea
+- Doing this confidently
+
+These observations are not grades, diagnoses, mastery claims, or readiness labels.
+
+### Parent weekly snapshot
+
+The Grown-Up view can summarize the most recent seven days of browser-local activity, including:
+
+- unique adventures explored;
+- the learning domain receiving the most attention;
+- the latest optional grown-up observation;
+- a gentle underrepresented domain to consider next.
+
+The snapshot can be printed and can hand the family back to Archaemenes.
+
+### Preschool Mentor context bridge
+
+Crechè writes a sanitized browser-local context record:
+
+```text
+khaemenes_preschool_mentor_context_v1
+```
+
+The record may include:
+
+- active learner ID;
+- broad age band;
+- communication preference;
+- favorites and recent exploration IDs;
+- seven-day domain counts;
+- recent optional observations;
+- today's local path.
+
+The Academy Mentor accepts this context only when the stored learner ID matches the active learner in the Academy Family Registry.
+
+Archaemenes can then use the current Crechè path and recent learning context when responding through bounded Wise Owl prompts.
+
+---
+
 ## Parent Boundary
 
 Parent administration belongs in the Academy Family Profile, not inside a child Mentor page.
