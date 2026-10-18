@@ -438,6 +438,7 @@ details.adult-panel summary{
 
 </style>
 <link rel="stylesheet" href="../../assets/preschool-playful-theme.css" data-preschool-playful-theme>
+<script src="../../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
 </head>
 <body>
 <div class="sparkles" aria-hidden="true"><span>✨</span><span>🌸</span><span>🦋</span><span>⭐</span><span>🍃</span><span>💫</span><span>🌼</span><span>🕊️</span></div>
@@ -1450,7 +1451,7 @@ details.adult-panel summary{
   function refreshVoices(){if(!("speechSynthesis" in window))return;availableVoices=speechSynthesis.getVoices()||[];const f=VOICE_FRIENDS[state.settings.voiceFriend]||VOICE_FRIENDS.fairy;if(els.voiceStatus)els.voiceStatus.textContent=availableVoices.length?`${f.emoji} ${f.name} is ready.`:"Loading a friendly voice…"}
   function chooseFriendlyVoice(){if(!availableVoices.length)refreshVoices();const f=VOICE_FRIENDS[state.settings.voiceFriend]||VOICE_FRIENDS.fairy;const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));const pool=english.length?english:availableVoices;if(state.settings.voiceFriend==="rainbow"&&pool.length){const friendly=pool.filter(v=>/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));const choices=friendly.length?friendly:pool;return choices[Math.floor(Math.random()*choices.length)]||null}return pool.find(v=>f.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null}
   function updateVoiceButtons(){document.querySelectorAll("[data-voice]").forEach(b=>{const active=b.dataset.voice===state.settings.voiceFriend;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))})}
-  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  const EIREN_PUBLIC_ADAPTER="../../assets/eiren-adapter.js";
   const EIREN_VOICE_PROFILE={pitch:1.08,rateFactor:.96,preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i};
   let eirenBoundaryReady=false,eirenSpeechToken=0;
   async function connectEirenBoundary(){try{const mod=await import(EIREN_PUBLIC_ADAPTER);if(mod?.EirenAdapter?.prepare){const p=mod.EirenAdapter.prepare({mode:"story",message:"Preschool Storybird Grove story companionship and gentle narration."});eirenBoundaryReady=p?.specialist==="eiren"}}catch(_err){eirenBoundaryReady=false}if(els.eirenStatus)els.eirenStatus.textContent=eirenBoundaryReady?"🌸 Eiren’s public story boundary is connected.":"🌸 Eiren is your Story Friend. Gentle device narration is ready."}

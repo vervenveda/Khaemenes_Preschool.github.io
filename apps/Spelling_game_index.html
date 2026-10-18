@@ -393,6 +393,7 @@ button.good{
 
 </style>
 <link rel="stylesheet" href="../assets/preschool-playful-theme.css" data-preschool-playful-theme>
+<script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
 </head>
 <body>
 <canvas id="confetti"></canvas>
@@ -825,7 +826,7 @@ button.good{
   $("meetEirenBtn").onclick=()=>speak("",{greeting:true});
   $("stopEirenBtn").onclick=()=>stopEiren("Eiren paused.");
 
-  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  const EIREN_PUBLIC_ADAPTER="../assets/eiren-adapter.js";
   async function connectEirenBoundary(){
     try{
       const mod=await import(EIREN_PUBLIC_ADAPTER);

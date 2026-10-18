@@ -289,6 +289,7 @@ body.simple-mode .dot-row,body.simple-mode .narration-strip,body.simple-mode .pr
 
 </style>
 <link rel="stylesheet" href="../../assets/preschool-playful-theme.css" data-preschool-playful-theme>
+<script src="../../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
 </head>
 <body class="theme-sunny">
 <div class="decor" aria-hidden="true"><span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="cloud c1">☁️</span><span class="cloud c2">☁️</span></div>
@@ -1016,7 +1017,7 @@ const VOICE_FRIENDS={
     greeting:'Hello, little learner. Eiren is here for sunny storytime.'
   }
 };
-const EIREN_PUBLIC_ADAPTER='https://artist1970.github.io/Eiren.github.io/eiren-adapter.js';
+const EIREN_PUBLIC_ADAPTER='../../assets/eiren-adapter.js';
 let voices=[],speechToken=0,selectedVoice=null,eirenBoundaryReady=false;
 
 async function connectEirenBoundary(){

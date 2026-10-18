@@ -731,6 +731,7 @@ body.simple-mode #synonymsWrap,body.simple-mode .word-friends-label{display:none
 
 </style>
 <link rel="stylesheet" href="../assets/preschool-playful-theme.css" data-preschool-playful-theme>
+<script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
 </head>
 <body>
 
@@ -2256,7 +2257,7 @@ const EIREN_WORD_GARDEN_VOICE={
   name:"Eiren",emoji:"🌸",pitch:1.06,rateFactor:.96,
   preferred:/samantha|aria|jenny|zira|ava|victoria|karen|moira|serena|female|natural|enhanced|premium/i
 };
-const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+const EIREN_PUBLIC_ADAPTER="../assets/eiren-adapter.js";
 async function connectEirenBoundary(){
   try{
     const mod=await import(EIREN_PUBLIC_ADAPTER);

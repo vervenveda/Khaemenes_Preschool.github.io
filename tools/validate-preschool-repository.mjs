@@ -31,7 +31,13 @@ let inlineScriptCount = 0;
 
 for (const file of jsFiles) {
   try {
-    new vm.Script(fs.readFileSync(file, "utf8"), { filename: relative(file) });
+    const source = fs.readFileSync(file, "utf8");
+    const parseable = /^\s*export\s/m.test(source)
+      ? source
+          .replace(/^\s*export\s+default\s+/gm, "")
+          .replace(/^\s*export\s+(?=(?:const|let|var|function|class)\b)/gm, "")
+      : source;
+    new vm.Script(parseable, { filename: relative(file) });
   } catch (error) {
     problems.push(`${relative(file)}: JavaScript syntax error: ${error.message}`);
   }
@@ -89,6 +95,14 @@ for (const file of htmlFiles) {
   if (!source.includes("preschool-playful-theme.css")) {
     problems.push(`${fileName}: playful Preschool theme is not loaded.`);
   }
+
+  if (fileName.startsWith("apps/") && !source.includes("preschool-learner-storage.js")) {
+    problems.push(`${fileName}: learner-scoped storage boundary is not loaded.`);
+  }
+
+  if (/actions\.google\.com\/sounds|artist1970\.github\.io\/Eiren\.github\.io\/eiren-adapter\.js/.test(source)) {
+    problems.push(`${fileName}: forbidden remote runtime dependency remains.`);
+  }
 }
 
 const primaryCatalog = path.join(root, "assets", "preschool-catalog.js");
@@ -105,6 +119,11 @@ for (const appFile of catalogFiles) {
   if (!fs.existsSync(appPath) || !fs.statSync(appPath).isFile()) {
     problems.push(`Catalog entry is missing its app: ${appFile}.`);
   }
+}
+
+const bilingualSource = fs.readFileSync(path.join(root, "apps", "ABC_bilingual_index.html"), "utf8");
+if (!/Bilingual ABC Garden/.test(bilingualSource) || /Cosmic Arabic Alphabet Quest/.test(bilingualSource)) {
+  problems.push("Bilingual ABC catalog identity has drifted from its actual lesson content.");
 }
 
 notes.push(`HTML pages: ${htmlFiles.length}`);

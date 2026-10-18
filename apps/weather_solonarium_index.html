@@ -167,6 +167,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;line-height:1.5;mar
 
 </style>
 <link rel="stylesheet" href="../assets/preschool-playful-theme.css" data-preschool-playful-theme>
+<script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
 </head>
 <body>
 
@@ -257,12 +258,15 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;line-height:1.5;mar
 <script>
 (()=>{"use strict";
 const $=id=>document.getElementById(id);
+const WEATHER_CACHE_KEY='solanarWeatherCacheV1';
+function readJSON(key,fallback=null){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch{return fallback}}
 const state={
   unit:localStorage.getItem('solanarUnit')||'fahrenheit',
-  location:JSON.parse(localStorage.getItem('solanarLocation')||'null'),
+  location:readJSON('solanarLocation',null),
   voiceFriend:localStorage.getItem('solanarVoiceFriend')||'sunny',
   voiceSpeed:localStorage.getItem('solanarVoiceSpeed')||'slow',
-  last:null
+  last:null,
+  cache:readJSON(WEATHER_CACHE_KEY,null)
 };
 const facts=['Clouds are made of tiny water droplets or ice crystals.','Fog is a cloud close to the ground.','Thunder is caused by air expanding very quickly after lightning heats it.','Wind is moving air.','Rainbows appear opposite the Sun.','The Moon reflects sunlight.','Snowflakes commonly have six-sided symmetry.','Weather and climate are not the same thing. Weather changes day to day; climate describes long patterns.'];
 const WMO={0:'Clear',1:'Mostly clear',2:'Partly cloudy',3:'Cloudy',45:'Fog',48:'Icy fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',56:'Freezing drizzle',57:'Heavy freezing drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',66:'Freezing rain',67:'Heavy freezing rain',71:'Light snow',73:'Snow',75:'Heavy snow',77:'Snow grains',80:'Rain showers',81:'Heavy rain showers',82:'Violent rain showers',85:'Snow showers',86:'Heavy snow showers',95:'Thunderstorm',96:'Thunderstorm with hail',99:'Severe thunderstorm with hail'};
@@ -366,8 +370,12 @@ async function geocode(q){const url=`https://geocoding-api.open-meteo.com/v1/sea
 function params(){return state.unit==='fahrenheit'?'temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch':'temperature_unit=celsius&wind_speed_unit=kmh&precipitation_unit=millimeter'}
 async function weather(loc){$('app').classList.add('loading');setStatus('Loading real forecast data…');try{
 const url=`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_gusts_10m,is_day&hourly=temperature_2m,apparent_temperature,precipitation_probability,weather_code,is_day,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max,wind_speed_10m_max&timezone=auto&forecast_days=7&${params()}`;
-const d=await fetchJSON(url);if(!d.current||!d.hourly||!d.daily)throw Error('The forecast response was incomplete. Please try again.');state.location=loc;state.last=d;localStorage.setItem('solanarLocation',JSON.stringify(loc));render(d,loc);setStatus(`Forecast loaded for ${loc.label}.`);
-}catch(e){setStatus(e.message||'Weather could not be loaded.',true)}finally{$('app').classList.remove('loading')}}
+const d=await fetchJSON(url);if(!d.current||!d.hourly||!d.daily)throw Error('The forecast response was incomplete. Please try again.');state.location=loc;state.last=d;state.cache={location:loc,unit:state.unit,data:d,savedAt:new Date().toISOString()};localStorage.setItem('solanarLocation',JSON.stringify(loc));localStorage.setItem(WEATHER_CACHE_KEY,JSON.stringify(state.cache));render(d,loc);setStatus(`Forecast loaded for ${loc.label}.`);
+}catch(e){
+  const cached=state.cache;
+  if(cached?.data&&cached?.location&&cached.unit===state.unit){state.location=cached.location;state.last=cached.data;render(cached.data,cached.location);const when=cached.savedAt?new Date(cached.savedAt).toLocaleString():'an earlier visit';setStatus(`Offline learning view · showing the last saved forecast from ${when}.`,true)}
+  else setStatus(`${e.message||'Live weather could not be loaded.'} The weather facts and safety games below still work offline.`,true)
+}finally{$('app').classList.remove('loading')}}
 function fmtTime(t){
   if(!t)return'—';
   const match=String(t).match(/T(\d{2}):(\d{2})/);
@@ -478,8 +486,9 @@ if('speechSynthesis'in window){
 }
 updateVoiceButtons();
 
-if(state.location)weather(state.location);
-else geocode('Holiday, Florida').then(weather).catch(e=>setStatus(e.message,true));
+if(!navigator.onLine&&state.cache?.data&&state.cache?.location){state.location=state.cache.location;state.last=state.cache.data;render(state.cache.data,state.cache.location);setStatus('Offline learning view · showing the last forecast saved on this device.',true)}
+else if(state.location)weather(state.location);
+else geocode('Holiday, Florida').then(weather).catch(e=>setStatus(`${e.message} Weather facts and safety games remain available offline.`,true));
 
 window.addEventListener('offline',()=>setStatus('This device is offline. Saved location remains available, but live weather cannot refresh.',true));
 window.addEventListener('online',()=>setStatus('Internet connection restored. Search or refresh the saved location.'));

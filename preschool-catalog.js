@@ -335,11 +335,11 @@
   },
   {
     "id": "abc-bilingual",
-    "title": "Bilingual ABC",
+    "title": "Bilingual ABC Garden",
     "file": "ABC_bilingual_index.html",
     "category": "letters",
     "icon": "🌎",
-    "desc": "Explore alphabet words across languages.",
+    "desc": "Explore English A–Z words alongside Spanish, French, or German through listening and randomized matching checks.",
     "tags": "alphabet bilingual language",
     "mentor": {
       "eligible": true,

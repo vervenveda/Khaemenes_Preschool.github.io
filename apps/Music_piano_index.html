@@ -104,6 +104,7 @@
   }
 </style>
 <link rel="stylesheet" href="../assets/preschool-playful-theme.css" data-preschool-playful-theme>
+<script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
 </head>
 <body>
 
@@ -128,9 +129,6 @@
 
 <div id="message"></div>
 
-<!-- Optional Beat -->
-<audio id="beatAudio" src="https://actions.google.com/sounds/v1/drums/drum_loop.ogg" loop preload="auto"></audio>
-
 <script>
 const NOTES = ["C4","D4","E4","F4","G4","A4","B4","C5"];
 const piano = document.getElementById("piano");
@@ -152,10 +150,15 @@ const freqMap = {"C4":261.63,"D4":293.66,"E4":329.63,"F4":349.23,"G4":392.0,"A4"
 
 let isRecording=false, recording=[], startTime=null;
 let beatPlaying=false;
-const beatAudio = document.getElementById("beatAudio");
+let beatTimer=0,beatStep=0,audioContext=null;
+function audio(){
+  if(!audioContext)audioContext=new (window.AudioContext||window.webkitAudioContext)();
+  if(audioContext.state==="suspended")audioContext.resume();
+  return audioContext;
+}
 
 function playNote(note, keyEl){
-  const ctx = new (window.AudioContext||window.webkitAudioContext)();
+  const ctx = audio();
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
 
@@ -205,8 +208,12 @@ function playRecording(){
 // Beat toggle
 function toggleBeat(){
   beatPlaying = !beatPlaying;
-  if(beatPlaying) { beatAudio.play().catch(()=>{}); message.textContent="🥁 Beat On!"; }
-  else { beatAudio.pause(); beatAudio.currentTime=0; message.textContent="🥁 Beat Off!"; }
+  clearInterval(beatTimer);
+  if(beatPlaying) {
+    const tick=()=>{const ctx=audio(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=beatStep++%4===0?"sine":"triangle";osc.frequency.setValueAtTime(beatStep%4===1?110:220,ctx.currentTime);gain.gain.setValueAtTime(.22,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.11);osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.12)};
+    tick();beatTimer=setInterval(tick,500);message.textContent="🥁 Beat On!";
+  }
+  else { message.textContent="🥁 Beat Off!"; }
 }
 </script>
 <script src="/assets/vnv-beta-link.js" defer></script>

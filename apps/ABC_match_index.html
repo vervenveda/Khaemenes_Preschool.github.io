@@ -495,6 +495,7 @@ button:hover{transform:translateY(-2px)}
 
 </style>
 <link rel="stylesheet" href="../assets/preschool-playful-theme.css" data-preschool-playful-theme>
+<script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
 </head>
 <body>
 <main class="app">
@@ -765,7 +766,7 @@ button:hover{transform:translateY(-2px)}
     speakText(`${item.letter}. ${item.letter} is for ${item.word}. The sound is ${item.sound}.`);
   }
 
-  const EIREN_PUBLIC_ADAPTER="https://artist1970.github.io/Eiren.github.io/eiren-adapter.js";
+  const EIREN_PUBLIC_ADAPTER="../assets/eiren-adapter.js";
   let eirenBoundaryReady=false;
   async function connectEirenBoundary(){
     try{
