@@ -1,0 +1,149 @@
+/* Khaemenes Preschool · Playful Light Theme
+   Local, dependency-free presentation layer shared across the Preschool portal. */
+:root {
+  --prek-title-font: "Marker Felt", "Chalkboard SE", "Comic Sans MS", "Comic Sans", cursive;
+  --prek-body-font: "Comic Sans MS", "Comic Sans", "Chalkboard SE", ui-rounded, cursive;
+  --prek-pink: #ff4fa3;
+  --prek-purple: #7957ff;
+  --prek-blue: #20bde8;
+  --prek-green: #24c98b;
+  --prek-yellow: #ffd83d;
+  --prek-orange: #ff8f3d;
+  --prek-ink: #34345e;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--prek-body-font) !important;
+  font-weight: 333 !important;
+}
+
+body {
+  color: var(--prek-ink);
+  background-color: #fffaf0;
+  background-image:
+    radial-gradient(circle at 8% 8%, rgba(255, 216, 61, .25), transparent 22rem),
+    radial-gradient(circle at 92% 13%, rgba(32, 189, 232, .20), transparent 24rem),
+    radial-gradient(circle at 78% 88%, rgba(255, 79, 163, .16), transparent 25rem),
+    radial-gradient(circle at 18% 84%, rgba(36, 201, 139, .16), transparent 23rem);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title,
+.brand,
+.logo,
+[class*="title"] {
+  font-family: var(--prek-title-font) !important;
+  letter-spacing: .015em !important;
+}
+
+h1,
+h2,
+.hero-title,
+.page-title {
+  text-shadow: 0 3px 0 rgba(255, 255, 255, .85), 0 8px 20px rgba(121, 87, 255, .13);
+  animation: prek-title-float 6s ease-in-out infinite;
+}
+
+p,
+li,
+label,
+small,
+span,
+a,
+strong,
+b,
+.btn,
+button {
+  font-weight: 333 !important;
+}
+
+button,
+.btn,
+[class*="button"],
+[class*="-btn"],
+a[class*="btn"],
+a[class*="open"] {
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease !important;
+}
+
+button:hover,
+.btn:hover,
+[class*="button"]:hover,
+[class*="-btn"]:hover,
+a[class*="btn"]:hover,
+a[class*="open"]:hover {
+  filter: saturate(1.14) brightness(1.035);
+  transform: translateY(-2px) rotate(-.25deg);
+  box-shadow: 0 10px 23px rgba(87, 73, 170, .18);
+}
+
+button:active,
+.btn:active,
+[class*="button"]:active,
+[class*="-btn"]:active {
+  transform: translateY(0) scale(.98);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--prek-yellow) !important;
+  outline-offset: 3px !important;
+}
+
+.card,
+.activity,
+.panel,
+article {
+  border-color: rgba(121, 87, 255, .18) !important;
+}
+
+.card:hover,
+.activity:hover,
+article:hover {
+  border-color: rgba(255, 79, 163, .28) !important;
+}
+
+.emoji,
+.icon,
+[class*="-icon"],
+[class*="Icon"] {
+  transform-origin: 50% 80%;
+  animation: prek-icon-bob 4.8s ease-in-out infinite;
+}
+
+::selection {
+  color: #2f285e;
+  background: #ffe67a;
+}
+
+@keyframes prek-title-float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-3px) rotate(-.2deg); }
+}
+
+@keyframes prek-icon-bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-3px) rotate(1.5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+}
