@@ -1,7 +1,8 @@
 # Pre-K PE Hardening Notes
 
 **Surface:** `apps/PE_move_n_groove_index.html`  
-**Latest code commit:** `9579faf8ada0643b8f32a2f08e24ef7f9a67079c`
+**Latest PE app commit:** `45721dd9dfa386366a583fd9c7bd5bb8f7af5b34`  
+**Teacher guide commit:** `84765a8d48f4fd8fcca2d254e6cb9529fdab56fa`
 
 ## Repairs and instructional upgrades applied
 
@@ -12,6 +13,7 @@
 - All 42 lessons now have individualized adult observation cues and accessible alternatives.
 - Each lesson has a three-question pool: 126 total items across 42 lessons. One question is selected when the learning-check phase opens, and its choices are shuffled.
 - Question-pool source validation confirms each lesson has three unique prompts, three distinct options per prompt, valid correct-choice indices, and no empty question text.
+- Added `apps/PE_move_n_groove_teacher_guide.html`, a print-friendly 42-lesson map, observation scale, core PE domains, adaptations/safety guidance, and reusable observation record; linked it from the learner portal.
 - Existing seated/standing/supported participation options, reduced-motion support, read-aloud controls, and local activity records remain in place.
 
 ## Validation boundary
