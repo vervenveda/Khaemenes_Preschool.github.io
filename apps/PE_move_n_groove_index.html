@@ -335,7 +335,7 @@ function loadState(){try{
     }catch{
       return{completed:{},seconds:0,favorites:[],voice:'boppi',voiceSpeed:'slow',autoRead:true,largeType:false,simpleMode:false}
     }}
-let state=loadState(),current=null,phase=0,remaining=30,timerId=null,running=false;
+let state=loadState(),current=null,phase=0,remaining=30,timerId=null,running=false,checkResolved=false;
 const phases=['warm','move','cool','check'];
 const phaseNames=['Warm-Up','Move & Play','Cool-Down','Learning Check'];
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
@@ -426,7 +426,7 @@ function renderLessons(){
   const g=$('lessonGrid');g.innerHTML='';
   filtered().forEach(l=>{const b=document.createElement('button');b.className='lesson-card'+(state.completed[l.id]?' done':'');b.innerHTML=`<div class="lesson-top"><span class="lesson-icon">${l.icon}</span><span class="lesson-num">Lesson ${l.id}</span></div><div class="lesson-title">${l.title}</div><div class="lesson-unit">${l.unit}${state.completed[l.id]?' · ✓ Completed':''}</div>`;b.onclick=()=>openLesson(l);g.appendChild(b)})
 }
-function openLesson(l){stopTimer();current=l;phase=0;$('homeScreen').classList.add('hidden');$('sessionScreen').classList.remove('hidden');renderPhase();updateFavoriteButton()}
+function openLesson(l){stopTimer();current=l;phase=0;checkResolved=false;$('homeScreen').classList.add('hidden');$('sessionScreen').classList.remove('hidden');renderPhase();updateFavoriteButton()}
 function renderPhase(){
   stopTimer();remaining=Number($('duration').value);$('timer').textContent=remaining;$('timerLabel').textContent='Ready when you are.';
   $('lessonMeta').textContent=`Lesson ${current.id} · ${current.unit}`;$('lessonTitle').textContent=current.title;$('mascot').textContent=current.icon;
@@ -436,9 +436,11 @@ function renderPhase(){
   else{renderCheck();$('instruction').textContent='One quick question about safe movement.';$('timer').style.display='none';$('timerLabel').style.display='none';$('startTimerBtn').style.display='none';$('pauseBtn').style.display='none';$('nextPhaseBtn').textContent='Finish Lesson ✓'}
   if(state.autoRead)setTimeout(()=>speak(currentNarration(),{target:document.querySelector('.activity-panel')}),220)
 }
-function startTimer(){if(running)return;running=true;$('startTimerBtn').disabled=true;$('pauseBtn').disabled=false;$('timerLabel').textContent='Keep moving safely.';timerId=setInterval(()=>{remaining--;$('timer').textContent=remaining;state.seconds++;if(remaining<=0){stopTimer();$('timerLabel').textContent='Movement complete! Take a breath.';speak('Movement complete. Take a breath.',{target:document.querySelector('.activity-panel')})}if(state.seconds%10===0){save();updateStats()}},1000)}
+function startTimer(){if(running||remaining<=0)return;running=true;$('startTimerBtn').disabled=true;$('pauseBtn').disabled=false;$('timerLabel').textContent='Keep moving safely.';timerId=setInterval(()=>{remaining--;$('timer').textContent=remaining;state.seconds++;if(remaining<=0){stopTimer();$('timer').textContent='0';$('startTimerBtn').disabled=true;$('timerLabel').textContent='Movement complete! Take a breath.';speak('Movement complete. Take a breath.',{target:document.querySelector('.activity-panel')})}if(state.seconds%10===0){save();updateStats()}},1000)}
 function stopTimer(){if(timerId)clearInterval(timerId);timerId=null;running=false;if($('startTimerBtn'))$('startTimerBtn').disabled=false;if($('pauseBtn'))$('pauseBtn').disabled=true;save();updateStats()}
 function renderCheck(){
+  checkResolved=false;
+  $("nextPhaseBtn").disabled=true;
   $("checkPanel").classList.remove("hidden");
   $("checkQuestion").textContent=current.check.q;
   $("checkOptions").innerHTML="";
@@ -452,6 +454,8 @@ function renderCheck(){
     b.onclick=()=>{
       if(b.disabled)return;
       if(p.correct){
+        checkResolved=true;
+        $("nextPhaseBtn").disabled=false;
         [...$("checkOptions").children].forEach(x=>x.disabled=true);
         b.classList.add("correct");
         $("checkFeedback").textContent="That fits! Safe movement is the goal.";
@@ -467,6 +471,8 @@ function renderCheck(){
           return
         }
         [...$("checkOptions").children].forEach(x=>x.disabled=true);
+        checkResolved=true;
+        $("nextPhaseBtn").disabled=false;
         const right=[...$("checkOptions").children].find((_,i)=>pairs[i].correct);
         right?.classList.add("correct","hint");
         $("checkFeedback").textContent="The safest choice is highlighted.";
@@ -476,7 +482,7 @@ function renderCheck(){
     $("checkOptions").appendChild(b)
   })
 }
-function nextPhase(){if(phase<3){phase++;renderPhase()}else finishLesson()}
+function nextPhase(){if(phase<3){phase++;renderPhase()}else if(!checkResolved){$('checkFeedback').textContent='Choose an answer first. Boppi will help you learn from your choice.';speak('Choose an answer first. Boppi will help you learn from your choice.',{target:document.querySelector('.activity-panel')})}else finishLesson()}
 function finishLesson(){stopTimer();state.completed[current.id]={date:new Date().toISOString()};save();updateStats();renderLessons();speak(`Great moving! You finished ${current.title}.`,{target:document.querySelector('.activity-panel')});$('sessionScreen').classList.add('hidden');$('homeScreen').classList.remove('hidden')}
 function updateStats(){const ids=Object.keys(state.completed).map(Number);$('completeStat').textContent=ids.length;$('minutesStat').textContent=Math.floor(state.seconds/60);$('unitStat').textContent=new Set(ids.map(id=>LESSONS.find(l=>l.id===id)?.unit).filter(Boolean)).size;$('favoriteStat').textContent=state.favorites.length;updateGarden()}
 function updateFavoriteButton(){if(!current)return;$('favoriteBtn').textContent=state.favorites.includes(current.id)?'★ Favorited':'☆ Favorite Current Lesson'}
@@ -499,10 +505,10 @@ $("largeTypeBtn").onclick=()=>{state.largeType=!state.largeType;save();applyAcce
 $("simpleModeBtn").onclick=()=>{state.simpleMode=!state.simpleMode;save();applyAccessibility()};
 $("autoReadBtn").onclick=()=>{state.autoRead=!state.autoRead;save();applyAccessibility()};
 
-$('unitFilter').onchange=renderLessons;$('search').oninput=renderLessons;$('backBtn').onclick=()=>{stopTimer();$('sessionScreen').classList.add('hidden');$('homeScreen').classList.remove('hidden')};$('hearBtn').onclick=()=>speak(currentNarration(),{target:document.querySelector('.activity-panel')});$('startTimerBtn').onclick=startTimer;$('pauseBtn').onclick=()=>{stopTimer();$('timerLabel').textContent='Paused. Rest or restart when ready.'};$('nextPhaseBtn').onclick=nextPhase;$('duration').onchange=()=>{if(current&&!running){remaining=Number($('duration').value);$('timer').textContent=remaining}};
+$('unitFilter').onchange=renderLessons;$('search').oninput=renderLessons;$('backBtn').onclick=()=>{stopTimer();$('sessionScreen').classList.add('hidden');$('homeScreen').classList.remove('hidden')};$('hearBtn').onclick=()=>speak(currentNarration(),{target:document.querySelector('.activity-panel')});$('startTimerBtn').onclick=startTimer;$('pauseBtn').onclick=()=>{stopTimer();$('timerLabel').textContent='Paused. Rest or restart when ready.'};$('nextPhaseBtn').onclick=nextPhase;$('duration').onchange=()=>{if(current&&!running){remaining=Number($('duration').value);$('timer').textContent=remaining;$('startTimerBtn').disabled=false}};
 $('favoriteBtn').onclick=()=>{if(!current)return;const i=state.favorites.indexOf(current.id);if(i>=0)state.favorites.splice(i,1);else state.favorites.push(current.id);save();updateFavoriteButton();updateStats()};
 $('resetBtn').onclick=()=>{if(confirm('Reset completed lessons, movement time, and favorites on this device?')){state={completed:{},seconds:0,favorites:[],voice:state.voice,voiceSpeed:state.voiceSpeed,autoRead:state.autoRead,largeType:state.largeType,simpleMode:state.simpleMode};save();renderLessons();updateStats()}};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')$('backBtn').click();if(e.key===' '&&current){e.preventDefault();running?$('pauseBtn').click():$('startTimerBtn').click()}});
+document.addEventListener('keydown',e=>{const tag=(e.target&&e.target.tagName||'').toUpperCase();const editable=/^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(tag)||(e.target&&e.target.isContentEditable);if(e.key==='Escape'&&!$('sessionScreen').classList.contains('hidden'))$('backBtn').click();if(e.key===' '&&current&&!editable){e.preventDefault();running?$('pauseBtn').click():$('startTimerBtn').click()}});
 if("speechSynthesis"in window){
   refreshVoices();
   speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);
