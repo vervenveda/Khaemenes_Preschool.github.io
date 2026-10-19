@@ -1,7 +1,7 @@
 # Pre-K PE Hardening Notes
 
 **Surface:** `apps/PE_move_n_groove_index.html`  
-**Commit:** `43d09329c54ff2f9699d4b61e28bfae3cbc382a6`
+**Code commits:** `43d09329c54ff2f9699d4b61e28bfae3cbc382a6` (learning check, timer and randomization) and `07132659c86c9948db42f72b5de5b82c900d85af` (keyboard shortcut scope).
 
 ## Repairs applied
 
