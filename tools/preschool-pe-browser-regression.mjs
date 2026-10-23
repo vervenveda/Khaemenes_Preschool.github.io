@@ -49,6 +49,26 @@ try{
   assert.ok(parseFloat(dimensions.animation)<=0.001,JSON.stringify(dimensions));
   pass("255px narrow viewport and reduced motion",JSON.stringify(dimensions));
 
+  // Exercise the shared ecosystem hamburger while the viewport is narrow.
+  await page.waitForSelector("#vnvEcosystemMenuButton",{timeout:10000});
+  const menuButton=page.locator("#vnvEcosystemMenuButton");
+  await menuButton.click();
+  const menuDrawer=page.locator("#vnvEcosystemMenuDrawer");
+  await menuDrawer.waitFor({state:"visible",timeout:5000});
+  const menuMetrics=await page.evaluate(()=>({
+    viewport:innerWidth,
+    drawerRight:Math.round(document.querySelector("#vnvEcosystemMenuDrawer").getBoundingClientRect().right),
+    linkCount:document.querySelectorAll("#vnvEcosystemMenuDrawer a").length,
+    overflowingLinks:[...document.querySelectorAll("#vnvEcosystemMenuDrawer a")].map(a=>({text:(a.innerText||"").trim(),right:Math.round(a.getBoundingClientRect().right),width:Math.round(a.getBoundingClientRect().width),parent:Math.round(a.parentElement.getBoundingClientRect().width)})).filter(a=>a.right>innerWidth+1||a.width>a.parent+1)
+  }));
+  assert.ok(menuMetrics.drawerRight<=255,JSON.stringify(menuMetrics));
+  assert.ok(menuMetrics.linkCount>0,JSON.stringify(menuMetrics));
+  assert.equal(menuMetrics.overflowingLinks.length,0,JSON.stringify(menuMetrics));
+  await page.keyboard.press("Escape");
+  pass("Shared ecosystem menu at 255px",JSON.stringify(menuMetrics));
+  // Return to the PE page before the remaining viewport checks.
+  if(await menuDrawer.isVisible())await menuButton.click();
+
   // Verify the second required narrow-screen target separately.
   await page.setViewportSize({width:320,height:850});
   const dimensions320=await page.evaluate(()=>({width:innerWidth,documentWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth}));
