@@ -88,7 +88,37 @@ h1{margin:12px auto 8px;max-width:980px;padding:0 .08em;font-size:clamp(2.45rem,
 footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;line-height:1.55}footer strong{color:var(--plum)}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 @media(max-width:860px){.toolbar{grid-template-columns:repeat(2,1fr)}.session{grid-template-columns:1fr}.mascot-panel,.activity-panel{min-height:0}}
-@media(max-width:540px){.toolbar{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){
+  .toolbar{grid-template-columns:minmax(0,1fr)}
+  .home-grid{grid-template-columns:minmax(0,1fr)}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat{min-width:0;overflow-wrap:anywhere}
+  /* Keep the injected shared ecosystem drawer usable without letting its
+     off-canvas links expand the document on narrow phone screens. */
+  #vnvEcosystemMenuOverlay,
+  #vnvEcosystemMenuDrawer,
+  #vnvEcosystemMenuContent,
+  #vnvEcosystemMenuContent section,
+  #vnvEcosystemMenuContent .vnv-eco-list{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:calc(100vw - 28px)!important;
+    min-width:0!important;
+    overflow-x:hidden!important
+  }
+  #vnvEcosystemMenuDrawer{width:calc(100vw - 28px)!important}
+  #vnvEcosystemMenuContent .vnv-eco-link,
+  #vnvEcosystemMenuDrawer .vnv-eco-link,
+  .vnv-eco-list .vnv-eco-link{
+    box-sizing:border-box!important;
+    display:flex!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important
+  }
+}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 
 /* =========================================================
