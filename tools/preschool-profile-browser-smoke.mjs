@@ -34,7 +34,7 @@ try{
  console.log("PASS guest boundary: no automatic account or phantom studio");
  const first=await page.evaluate(()=>{
   const R=window.KhaemenesFamilyRegistry;
-  assert(R,"registry should load");
+  if(!R)throw new Error("Academy family registry should load");
   const fam=R.createFamily({displayName:"Browser QA",adultName:"QA Parent"});
   const a=R.registerLearner({familyId:fam.familyId,nickname:"QA Sunshine",stage:"preschool",grade:"pre-k"});
   const b=R.registerLearner({familyId:fam.familyId,nickname:"QA Moonbeam",stage:"preschool",grade:"pre-k"});
