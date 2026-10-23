@@ -13,3 +13,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate every Preschool source surface
         run: node tools/validate-preschool-repository.mjs
+      - name: Test learner-scoped storage migration and isolation
+        run: node tools/preschool-learner-storage-regression.mjs
