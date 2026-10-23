@@ -161,20 +161,38 @@ try{
     pass("Music piano instrument and beat controls","Instrument selection and rhythm toggle respond without uncaught errors.");
     await musicPage.close();
 
-    // Production-shaped Preschool route: verify the updated brand/header and
-    // ensure learner toolbar labels wrap instead of being clipped.
+    // Exercise the production-shaped home route with the actual shared Academy
+    // header CSS and root-site toolbar JavaScript, not the hidden duplicate logo
+    // or the older convenience copy bundled with this repository.
     const homeContext=await browser.newContext({viewport:{width:1123,height:820},reducedMotion:"reduce"});
     const homePage=await homeContext.newPage();
+    const sharedHeaderCss=fs.readFileSync(path.join(root,"shared-academy","assets","khaemenes-global-header.css"),"utf8");
+    const sharedToolbarJs=fs.readFileSync(path.join(root,"shared-verve","assets","vnv-beta-link.js"),"utf8");
+    await homePage.route("https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-global-header.css",route=>route.fulfill({status:200,contentType:"text/css",body:sharedHeaderCss}));
+    await homePage.route(base+"/assets/vnv-beta-link.js",route=>route.fulfill({status:200,contentType:"application/javascript",body:sharedToolbarJs}));
     await homePage.route("https://vervenveda.com/assets/vnv-ecosystem-menu.js",route=>route.abort());
+    await homePage.route("https://vervenveda.com/assets/vnv-ecosystem-menu.css",route=>route.abort());
     const homeErrors=[];homePage.on("pageerror",e=>homeErrors.push(e.message));
     await homePage.goto(base+"/Khaemenes_Preschool.github.io/",{waitUntil:"domcontentloaded"});
-    await homePage.waitForTimeout(250);
-    const logoMetrics=await homePage.evaluate(()=>{
-      const el=document.querySelector(".brand-bubble"),cs=el?getComputedStyle(el):null,parent=el?.parentElement,ps=parent?getComputedStyle(parent):null;
-      return {count:document.querySelectorAll(".brand-bubble").length,tag:el?.tagName,html:el?.outerHTML,width:el?.getBoundingClientRect().width,height:el?.getBoundingClientRect().height,computed:cs?{display:cs.display,width:cs.width,height:cs.height,flex:cs.flex,visibility:cs.visibility,position:cs.position}:null,parent:parent?{tag:parent.tagName,cls:parent.className,width:parent.getBoundingClientRect().width,height:parent.getBoundingClientRect().height,display:ps.display,visibility:ps.visibility}:null,headerHeight:document.querySelector(".header").getBoundingClientRect().height,navLinksDisplay:getComputedStyle(document.querySelector(".navlinks")).display,viewport:innerWidth};
+    await homePage.waitForTimeout(300);
+    const sharedHeader=homePage.locator("[data-khae-header]");
+    await sharedHeader.waitFor({state:"visible",timeout:5000});
+    const brandMetrics=await homePage.evaluate(()=>{
+      const header=document.querySelector("[data-khae-header]");
+      const mark=header?.querySelector("[data-khae-brand-mark]");
+      const actions=header?.querySelector("[data-khae-actions]");
+      return {
+        viewport:innerWidth,
+        headerHeight:header?Math.round(header.getBoundingClientRect().height):0,
+        brandMark:mark?{width:Math.round(mark.getBoundingClientRect().width),height:Math.round(mark.getBoundingClientRect().height),fontSize:getComputedStyle(mark).fontSize}:null,
+        actionCount:actions?[...actions.children].filter(el=>getComputedStyle(el).display!=="none").length:0,
+        primaryNavDisplay:header?getComputedStyle(header.querySelector("[data-khae-nav]")).display:"missing"
+      };
     });
-    assert.ok(logoMetrics.width>=67&&logoMetrics.height>=67,"brand logo should be visibly larger; measured: "+JSON.stringify(logoMetrics));
-    assert.equal(logoMetrics.navLinksDisplay,"none","busy inline nav links should collapse into the menu at the screenshot viewport");
+    assert.ok(brandMetrics.brandMark&&brandMetrics.brandMark.width>=51&&brandMetrics.brandMark.height>=51,"shared Academy logo should be visibly larger: "+JSON.stringify(brandMetrics));
+    assert.ok(brandMetrics.headerHeight>=88,"global header should provide more vertical breathing room: "+JSON.stringify(brandMetrics));
+    assert.equal(brandMetrics.primaryNavDisplay,"none","at the screenshot viewport, secondary links should use the menu instead of crowding the brand");
+    assert.ok(brandMetrics.actionCount<=3,"medium-width header should keep only the primary actions visible");
     const rail=homePage.locator("#khaemenesLearnerUtilityToolbar");
     await rail.waitFor({state:"visible",timeout:5000});
     const inspectToolbar=()=>homePage.evaluate(()=>{
@@ -184,19 +202,19 @@ try{
     });
     let dockMetrics=await inspectToolbar();
     assert.ok(dockMetrics.buttons.length>=3,"learner toolbar should include its profile, beta, and grown-up links");
-    assert.ok(dockMetrics.dock.right<=1123,"toolbar must stay inside the viewport");
-    assert.ok(dockMetrics.buttons.every(b=>b.height>=44),JSON.stringify(dockMetrics));
+    assert.ok(dockMetrics.dock.left>=0&&dockMetrics.dock.right<=1123,"toolbar must stay inside desktop viewport: "+JSON.stringify(dockMetrics));
+    assert.ok(dockMetrics.buttons.every(b=>b.height>=44&&b.whiteSpace==="normal"&&b.overflow!=="hidden"),"desktop toolbar labels must wrap instead of clipping: "+JSON.stringify(dockMetrics));
     await homePage.setViewportSize({width:255,height:850});
-    await homePage.waitForTimeout(100);
+    await homePage.waitForTimeout(120);
     dockMetrics=await inspectToolbar();
-    assert.ok(dockMetrics.dock.left>=0&&dockMetrics.dock.right<=255,JSON.stringify(dockMetrics));
-    assert.ok(dockMetrics.dock.scrollWidth<=dockMetrics.dock.clientWidth+1,JSON.stringify(dockMetrics));
-    assert.ok(dockMetrics.buttons.every(b=>b.height>=42),JSON.stringify(dockMetrics));
-    assert.ok((await homePage.evaluate(()=>document.documentElement.scrollWidth))<=256,"page overflows horizontally at a 255px viewport");
+    assert.ok(dockMetrics.dock.left>=0&&dockMetrics.dock.right<=255,"mobile toolbar must stay inside 255px viewport: "+JSON.stringify(dockMetrics));
+    assert.ok(dockMetrics.dock.scrollWidth<=dockMetrics.dock.clientWidth+1,"toolbar must not overflow horizontally: "+JSON.stringify(dockMetrics));
+    assert.ok(dockMetrics.buttons.every(b=>b.height>=42&&b.whiteSpace==="normal"&&b.overflow!=="hidden"),"mobile toolbar labels must remain readable: "+JSON.stringify(dockMetrics));
+    assert.ok((await homePage.evaluate(()=>document.documentElement.scrollWidth))<=256,"home page overflows horizontally at a 255px viewport");
     assert.deepEqual(homeErrors,[]);
-    pass("Preschool header and learner toolbar layout","Logo is larger, inline links collapse at the target width, toolbar labels wrap without clipping, and dock fits 255px.");
+    pass("Shared header and learner toolbar responsive layout","Production Academy masthead uses a larger logo and roomier row; redundant links collapse, toolbar labels wrap, and the dock fits 255px.");
     await homePage.close();
-    await homeContext.close();
+        await homeContext.close();
     await context.close();
   }finally{await browser.close()}
 }finally{
