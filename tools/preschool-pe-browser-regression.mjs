@@ -117,7 +117,13 @@ try{
   // Switch to learner B; A's progress/evidence must not leak across the learner scope.
   await page.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"browser-test-learner-B"})));
   await page.reload({waitUntil:"domcontentloaded"});
-  assert.equal(await page.locator("#completeStat").innerText(),"0");
+  const learnerBDiagnostic=await page.evaluate(()=>({
+    learner:window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.(),
+    profile:localStorage.getItem("khaemenes_preschool_profile_v1"),
+    storedKeys:Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).filter(k=>k&&(/boppi-prek-pe-garden|khaemenes.preschool.learner|legacy_migrated/.test(k))),
+    visibleState:localStorage.getItem("boppi-prek-pe-garden-v2")
+  }));
+  assert.equal(await page.locator("#completeStat").innerText(),"0",JSON.stringify(learnerBDiagnostic));
   assert.equal(await page.locator("#evidenceRecordSelect option").count(),1);
   assert.match(await page.locator("#evidenceRecordSelect option").first().innerText(),/Complete a lesson first/);
   pass("Switch to learner B","Learner A's completion and observation records are not shown to learner B.");
