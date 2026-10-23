@@ -543,6 +543,7 @@ function renderCheck(){
           return
         }
         [...$("checkOptions").children].forEach(x=>x.disabled=true);
+        lastCheckCorrect=false;
         checkResolved=true;
         $("nextPhaseBtn").disabled=false;
         const right=[...$("checkOptions").children].find((_,i)=>pairs[i].correct);
