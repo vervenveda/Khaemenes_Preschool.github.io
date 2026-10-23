@@ -1,8 +1,8 @@
 # Preschool PE — Browser and Device Regression Matrix
 
-Status: **Automated Chromium regression passed (18 checks); physical-device runs remain NOT TESTED.**
+Status: **Automated Chromium regression passed (22 checks); physical-device runs remain NOT TESTED.**
 
-Automated run: [Preschool PE browser regression — GitHub Actions](https://github.com/vervenveda/Khaemenes_Preschool.github.io/actions/runs/39907870537). The test exercised a 255 px viewport and `prefers-reduced-motion: reduce` in headless Chromium. This does not substitute for manual physical-device or assistive-technology testing.
+Automated run: [Preschool PE browser regression — GitHub Actions](https://github.com/vervenveda/Khaemenes_Preschool.github.io/actions/runs/39966673852). The test exercised a 255 px viewport and `prefers-reduced-motion: reduce` in headless Chromium. This does not substitute for manual physical-device or assistive-technology testing.
 Target: `apps/PE_move_n_groove_index.html` plus the linked teacher guide and learner-storage helper.
 
 ## Required environments
@@ -27,7 +27,7 @@ Target: `apps/PE_move_n_groove_index.html` plus the linked teacher guide and lea
 | PE-05 | Export PE backup | Valid JSON downloads with schema, learner ID, completion records, and evidence | PASS — browser download payload inspected |
 | PE-06 | Restore into the same learner | Preview/confirmation appears; records restore and totals update | PASS — correct-learner restore accepted after confirmation |
 | PE-07 | Attempt restore with a different learner ID | Restore is rejected; current records remain unchanged | PASS — cross-learner restore rejected and B remains empty |
-| PE-08 | Restore malformed, unknown-schema, or oversized JSON | Restore is rejected with a useful message; no state is replaced | PASS — invalid schema and file over 2 MB rejected without replacement |
+| PE-08 | Restore malformed, unknown-schema, or oversized JSON | Restore is rejected with a useful message; no state is replaced | PASS — invalid schema, invalid completion timestamp, duplicate evidence ID, and file over 2 MB rejected without replacement |
 | PE-09 | Switch between two learner profiles | Neither learner sees the other's scoped progress or observations | PASS — Chromium verified A→B isolation; also exposed and validated the beforeunload-save owner guard |
 | PE-10 | Reset one learner's progress | That learner's PE records clear; the other learner's records remain | NOT TESTED |
 | PE-11 | Use keyboard-only controls | All controls can be reached and activated; focus remains visible | PARTIAL — Enter activation and representative control focus verified; complete keyboard-only and focus-visibility sweep still needed |
@@ -36,6 +36,9 @@ Target: `apps/PE_move_n_groove_index.html` plus the linked teacher guide and lea
 | PE-14 | Print or save the teacher guide | Tables, prompts, and observation fields remain legible | NOT TESTED |
 | PE-15 | Open shared ecosystem hamburger at 255 px | Drawer and links remain inside viewport | PASS — Chromium opened menu; drawer right edge 241 px, 130 links inspected, no link overflow |
 | PE-16 | Reload while PE timer is running | No false completion or adult evidence is created | PASS — interrupted-session Chromium test preserved incomplete lesson boundary |
+| PE-17 | Change active learner in another tab | Original session stops and cannot write state under the new learner | PASS — storage event showed accessible overlay, stopped timer, inert app, and no cross-learner write |
+| PE-18 | Resume an interrupted lesson | Resume returns to same lesson/phase without creating a false completion record | PASS — checkpoint resumed the expected lesson; explicit restart is also available |
+| PE-19 | Validate completion/evidence backup fields | Malformed timestamps, unknown lesson references, duplicate IDs, and inconsistent evidence are rejected before replacement | PASS — malformed completion timestamp and duplicate evidence ID fixtures rejected; existing progress preserved |
 
 ## Run procedure
 1. Start with a fresh browser profile and record environment/version.
