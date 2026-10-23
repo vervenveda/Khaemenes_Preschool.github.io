@@ -1,8 +1,8 @@
 # Pre-K PE Hardening Notes
 
 **Surface:** `apps/PE_move_n_groove_index.html`  
-**Latest PE app commit:** `45721dd9dfa386366a583fd9c7bd5bb8f7af5b34`  
-**Teacher guide commit:** `84765a8d48f4fd8fcca2d254e6cb9529fdab56fa`
+**Latest PE app commit:** `5206283fd835c175c9f802744399b7e978700d89`  
+**Teacher guide commit:** `c1c01178641232aeff690385441133e36f8161d1`
 
 ## Repairs and instructional upgrades applied
 
