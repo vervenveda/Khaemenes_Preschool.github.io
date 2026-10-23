@@ -101,6 +101,14 @@ try{
   assert.match(await page.locator("#evidenceList").innerText(),/Visual cue/);
   pass("Save adult observation","Observation, adaptation, and next step appear in the record.");
 
+  // Reload under the same learner to verify persistence in browser storage.
+  await page.reload({waitUntil:"domcontentloaded"});
+  assert.equal(await page.locator("#completeStat").innerText(),"1");
+  assert.match(await page.locator("#evidenceList").innerText(),/Adult observation: observed/);
+  assert.match(await page.locator("#evidenceList").innerText(),/Visual cue/);
+  assert.match(await page.locator("#evidenceList").innerText(),/Repeat with a clear path/);
+  pass("Observation survives reload","Completion and adult observation details persist after reloading as the same learner.");
+
   // Export a genuine browser download and validate its payload.
   const downloadPromise=page.waitForEvent("download");
   await page.locator("#exportEvidenceBtn").click();
