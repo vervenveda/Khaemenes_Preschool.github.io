@@ -28,6 +28,18 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      - name: Checkout shared Academy header styles
+        uses: actions/checkout@v4
+        with:
+          repository: verveNveda/Khaemenes_Academy.github.io
+          ref: main
+          path: shared-academy
+      - name: Checkout live Verve toolbar asset
+        uses: actions/checkout@v4
+        with:
+          repository: verveNveda/vervenveda.github.io
+          ref: main
+          path: shared-verve
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
