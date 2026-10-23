@@ -838,7 +838,7 @@ function restorePEBackup(file){
         throw new Error("Learner IDs do not match. Select the learner that created this backup before restoring it.");
       }
       if(!incoming.completed||typeof incoming.completed!=="object"||Array.isArray(incoming.completed))throw new Error("The backup has an invalid completion record.");
-      const isIsoTimestamp=value=>typeof value==="string"&&/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString()===value;
+      const isIsoTimestamp=value=>typeof value==="string"&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString()===value;
       const completed=Object.create(null);
       for(const [key,record] of Object.entries(incoming.completed)){
         if(!/^([1-9]|[1-3]\\d|4[0-2])$/.test(key))throw new Error("The backup contains an unknown lesson identifier.");
