@@ -161,6 +161,42 @@ try{
     pass("Music piano instrument and beat controls","Instrument selection and rhythm toggle respond without uncaught errors.");
     await musicPage.close();
 
+    // Graduation Garden end-to-end: play all three games, unlock/print
+    // certificate, verify Kinder Garden link, and confirm learner isolation.
+    const gradContext=await browser.newContext({viewport:{width:390,height:844},acceptDownloads:true,reducedMotion:"reduce"});
+    const gradPage=await gradContext.newPage();
+    const gradErrors=[];gradPage.on("pageerror",e=>gradErrors.push(e.message));
+    await gradPage.goto(base+"/graduation/index.html",{waitUntil:"domcontentloaded"});
+    await gradPage.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"graduation-browser-A",nickname:"Avery",ageBand:"4-5",pathway:"preschool"})));
+    await gradPage.reload({waitUntil:"domcontentloaded"});
+    await gradPage.locator('[data-item="book"]').click();
+    await gradPage.locator('[data-item="water"]').click();
+    await gradPage.locator('[data-item="crayons"]').click();
+    await gradPage.locator("#checkBackpack").click();
+    assert.match(await gradPage.locator("#backpackStatus").innerText(),/star is saved/);
+    await gradPage.locator('#patternChoices [data-answer="rainbow"]').click();
+    assert.match(await gradPage.locator("#patternStatus").innerText(),/Pattern star collected/);
+    await gradPage.locator('#kindnessChoices [data-answer="hello"]').click();
+    assert.match(await gradPage.locator("#kindnessStatus").innerText(),/Kindness star collected/);
+    assert.equal(await gradPage.locator("#progressCount").innerText(),"3 of 3 stars ⭐");
+    await gradPage.locator("#certificateName").fill("Avery");
+    await gradPage.locator("#makeCertificate").click();
+    assert.equal(await gradPage.locator("#certificateOutput").isVisible(),true);
+    assert.equal(await gradPage.locator("#recipientName").innerText(),"Avery");
+    assert.equal(await gradPage.locator("#printCertificate").isEnabled(),true);
+    assert.equal(await gradPage.getByRole("link",{name:/Enter Khaemenes Kinder Garden/}).getAttribute("href"),"https://vervenveda.com/Khaemenes_KinderGarden.github.io/");
+    await gradPage.reload({waitUntil:"domcontentloaded"});
+    assert.equal(await gradPage.locator("#progressCount").innerText(),"3 of 3 stars ⭐","graduation completion should persist for the same learner");
+    assert.equal(await gradPage.locator("#makeCertificate").isEnabled(),false,"the existing completion record must remain completed");
+    await gradPage.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"graduation-browser-B",nickname:"Blake",ageBand:"4-5",pathway:"preschool"})));
+    await gradPage.reload({waitUntil:"domcontentloaded"});
+    assert.equal(await gradPage.locator("#progressCount").innerText(),"0 of 3 stars ⭐","a second learner must not inherit the first learner's celebration progress");
+    const graduationKeys=await gradPage.evaluate(()=>JSON.parse(localStorage.getItem("creche-preschool-graduation-v1")||'{"records":{}}'));
+    assert.ok(graduationKeys.records["graduation-browser-A"]&&graduationKeys.records["graduation-browser-B"],"graduation state should be kept under explicit learner IDs");
+    assert.deepEqual(gradErrors,[]);
+    pass("Preschool graduation and Kindergarten handoff","Three games unlock a printable certificate; same-learner progress persists; a second learner starts separately; Kindergarten link is correct.");
+    await gradContext.close();
+
     // Exercise the production-shaped home route with the actual shared Academy
     // header CSS and root-site toolbar JavaScript, not the hidden duplicate logo
     // or the older convenience copy bundled with this repository.
