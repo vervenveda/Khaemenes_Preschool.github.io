@@ -55,6 +55,8 @@ for(let i=0;i<42;i++){
  assert.equal(seq.title,lesson.title,"scope sequence title must match the portal");
  assert.ok(seq.primaryFocus&&seq.intendedOutcome&&seq.setupAndSafety&&seq.adaptationOptions,"scope sequence entries need focus, outcomes, safety, and adaptations");
  assert.equal(seq.evidenceToNotice.length,3,"each lesson must distinguish three evidence types");
+ const runtimePoolSize=[lesson.check,...(variants[String(lesson.id)]||[])].length;
+ assert.equal(seq.questionPoolSize,runtimePoolSize,`lesson ${lesson.id} questionPoolSize must match the runtime bank`);
 }
 assert.ok(guide.includes("../curriculum/pe/prek-movement-scope-sequence.json"),"teacher guide must link the scope-and-sequence map");
 assert.match(guide,/42-lesson observation map/,"printable guide observation map should remain present");
