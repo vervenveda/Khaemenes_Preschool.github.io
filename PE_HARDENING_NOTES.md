@@ -1,7 +1,7 @@
 # Pre-K PE Hardening Notes
 
 **Surface:** `apps/PE_move_n_groove_index.html`  
-**Latest PE app commit:** `5206283fd835c175c9f802744399b7e978700d89`  
+**Latest PE app commit:** `9649b6c0046f65ae8aa344c5616ea5843ebf9b4c`  
 **Teacher guide commit:** `c1c01178641232aeff690385441133e36f8161d1`
 
 ## Repairs and instructional upgrades applied
@@ -41,3 +41,33 @@ The next step is to build a teacher-facing printable observation rubric and map 
 ### Verification boundary
 
 The latest GitHub source-regression workflow passed, including both new automated test scripts. This confirms the automated source contracts only. The manual browser/device scenarios in `tests/PE_DEVICE_TEST_MATRIX.md` remain **NOT TESTED** until they are performed on the listed environments. GitHub Pages deployment is tracked separately from source-regression success.
+
+## Real-browser learner-journey verification — October 23, 2026
+
+**Automated Chromium regression: PASS — 12 checks.** [GitHub Actions run](https://github.com/vervenveda/Khaemenes_Preschool.github.io/actions/runs/39906690716)
+
+The real-browser suite exercised:
+- Page startup with a distinct learner profile.
+- 255 px viewport width with document and body widths constrained to 255 px.
+- Reduced-motion preference.
+- Keyboard focus and Enter activation.
+- Timer start, pause, and stable countdown after pausing.
+- Lesson completion and saved evidence distinguishing the learning-check response.
+- Adult observation, adaptation, and next-step persistence in the evidence list.
+- Downloaded backup schema and learner identity.
+- Switching from Learner A to Learner B without exposing A's work.
+- Rejection of a backup belonging to a different learner.
+- Restore for the matching learner after confirmation.
+- Rejection of invalid-schema and oversized backups without replacing progress.
+
+### Bugs exposed and repaired by the browser run
+
+1. The first browser pass found that a completed lesson could be recorded with `learningCheck: "not-recorded"` after the learner used both attempts. The second-incorrect-answer branch now records `lastCheckCorrect = false`, so the evidence distinguishes a correct response from a completed check after help.
+2. The 255 px pass found horizontal overflow from the 210 px minimum lesson-card track and over-wide links in the injected shared ecosystem menu. Narrow-screen CSS now constrains lesson/stat tracks and menu link sizing without removing the menu.
+3. The two-learner flow found that the PE portal's `beforeunload` handler calls `stopTimer()`, which saves. If the shared active learner changed before unload, that final save could be assigned to the newly selected learner. The page now binds its in-memory state to the learner ID active at load time; saves, adult observations, exports, and restores are blocked when the active learner no longer matches that session owner.
+
+### Verification boundary
+
+GitHub source regression, Beta index coverage, Beta rollout, Pages build/deployment, and the Chromium browser regression all passed for commit `9649b6c0046f65ae8aa344c5616ea5843ebf9b4c).
+
+This is a real headless Chromium run with a 255 px viewport, not a physical phone/tablet certification. The separately maintained `tests/PE_DEVICE_TEST_MATRIX.md` still requires manual checks on physical iOS/Android devices, desktop Safari/Firefox, and with real keyboard/assistive-technology setups before the beta can be described as fully device-certified.
