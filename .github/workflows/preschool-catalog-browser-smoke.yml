@@ -12,6 +12,9 @@ on:
       - ".github/workflows/preschool-catalog-browser-smoke.yml"
   pull_request:
     paths:
+      - "index.html"
+      - "assets/vnv-beta-link.js"
+      - "assets/preschool-playful-theme.css"
       - "assets/preschool-catalog.js"
       - "apps/**"
       - "tools/preschool-catalog-browser-smoke.mjs"
