@@ -417,6 +417,10 @@ let activeCheck=null;
 let lastCheckCorrect=null;
 const $=id=>document.getElementById(id);
 const KEY='boppi-prek-pe-garden-v2';
+/* Bind this in-memory PE session to the learner who opened it. A shared
+   profile can change in another tab; an unload save must never be attributed
+   to the newly active learner. */
+const STATE_OWNER_ID=String(window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.()||"");
 function loadState(){try{
       const x=JSON.parse(localStorage.getItem(KEY)||'{}');
       return{
@@ -436,7 +440,13 @@ function loadState(){try{
 let state=loadState(),current=null,phase=0,remaining=30,timerId=null,running=false,checkResolved=false;
 const phases=['warm','move','cool','check'];
 const phaseNames=['Warm-Up','Move & Play','Cool-Down','Learning Check'];
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
+function save(){
+  try{
+    const activeId=String(window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.()||"");
+    if(activeId!==STATE_OWNER_ID)return;
+    localStorage.setItem(KEY,JSON.stringify(state))
+  }catch{}
+}
 const GUIDE_VOICES={
 boppi:{name:"Boppi",rate:.84,pitch:1.1,match:/samantha|aria|jenny|ava|karen|victoria/i,greeting:"Hello, movement friend. Boppi is ready to warm up, move safely, cool down, and celebrate your effort."},
 bunny:{name:"Benny Bunny",rate:.86,pitch:1.15,match:/samantha|aria|jenny|zira|ava|karen/i,greeting:"Hello, active friend. Benny Bunny is ready to hop into a safe movement lesson."},
@@ -651,6 +661,7 @@ fillUnits();
 function activeLearnerId(){
   try{return String(window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.()||"")}catch{return ""}
 }
+function stateOwnerMatchesActive(){return activeLearnerId()===STATE_OWNER_ID}
 function escapeEvidenceText(value){
   return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
 }
@@ -675,9 +686,11 @@ function renderEvidence(){
   $("evidenceAdaptation").disabled=!active;
   $("evidenceNextStep").disabled=!active;
   $("saveEvidenceBtn").disabled=!active;
-  $("evidenceIdentity").textContent=activeLearnerId()
-    ?`Records are saved locally for the selected learner (${activeLearnerId()}).`
-    :"Guest mode: records are saved locally in this browser without a named learner profile.";
+  $("evidenceIdentity").textContent=!stateOwnerMatchesActive()
+    ?"The active learner changed in another tab. Reload this page before viewing, saving, exporting, or restoring PE records."
+    :STATE_OWNER_ID
+      ?`Records are saved locally for the selected learner (${STATE_OWNER_ID}).`
+      :"Guest mode: records are saved locally in this browser without a named learner profile.";
   list.innerHTML="";
   records.slice(0,12).forEach(record=>{
     const item=document.createElement("div");item.className="evidence-item";
@@ -699,6 +712,7 @@ function loadSelectedEvidence(){
   $("evidenceNextStep").value=record?.nextStep||"";
 }
 function saveAdultObservation(){
+  if(!stateOwnerMatchesActive()){$("evidenceStatus").textContent="The active learner changed. Reload this page before saving observations.";return}
   const record=state.evidence?.find(r=>r.id===$("evidenceRecordSelect").value);
   if(!record){$("evidenceStatus").textContent="Complete a PE lesson before adding an observation.";return}
   record.adultObservation=$("evidenceObservation").value;
@@ -708,7 +722,8 @@ function saveAdultObservation(){
   save();renderEvidence();$("evidenceStatus").textContent="Observation saved locally for this lesson record.";
 }
 function downloadPEBackup(){
-  const learnerId=activeLearnerId();
+  if(!stateOwnerMatchesActive()){$("evidenceStatus").textContent="The active learner changed. Reload this page before exporting records.";return}
+  const learnerId=STATE_OWNER_ID;
   const payload={
     schema:"khaemenes-preschool-pe-backup-v1",
     exportedAt:new Date().toISOString(),
@@ -734,7 +749,8 @@ function restorePEBackup(file){
     try{
       const payload=JSON.parse(String(reader.result||""));
       if(payload.schema!=="khaemenes-preschool-pe-backup-v1"||!payload.state||typeof payload.state!=="object")throw new Error("This is not a recognized PE backup.");
-      const incoming=payload.state, sourceId=String(payload.learnerId||""), currentId=activeLearnerId();
+      if(!stateOwnerMatchesActive())throw new Error("The active learner changed. Reload this page before restoring records.");
+      const incoming=payload.state, sourceId=String(payload.learnerId||""), currentId=STATE_OWNER_ID;
       if(sourceId!==currentId){
         throw new Error("Learner IDs do not match. Select the learner that created this backup before restoring it.");
       }
