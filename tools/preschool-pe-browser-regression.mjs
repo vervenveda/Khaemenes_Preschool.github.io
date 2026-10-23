@@ -195,6 +195,26 @@ try{
   assert.equal(await page.locator("#completeStat").innerText(),"1");
   pass("Reject invalid backup","Invalid schema is rejected and existing progress is retained.");
 
+  // Malformed completion records must be rejected before the confirmation step.
+  const malformedCompletion=JSON.parse(fs.readFileSync(backupPath,"utf8"));
+  malformedCompletion.state.completed["1"]={date:"not-a-timestamp"};
+  const malformedCompletionPath=path.join(temp,"malformed-completion.json");
+  fs.writeFileSync(malformedCompletionPath,JSON.stringify(malformedCompletion));
+  await page.locator("#importEvidenceFile").setInputFiles(malformedCompletionPath);
+  await page.waitForFunction(()=>/completed lesson record has an invalid shape or timestamp/.test(document.querySelector("#evidenceStatus").textContent));
+  assert.equal(await page.locator("#completeStat").innerText(),"1");
+  pass("Reject malformed completion record","Invalid completion timestamp is rejected without replacing saved progress.");
+
+  // Duplicate evidence IDs must be rejected as well.
+  const duplicateEvidence=JSON.parse(fs.readFileSync(backupPath,"utf8"));
+  duplicateEvidence.state.evidence.push({...duplicateEvidence.state.evidence[0]});
+  const duplicateEvidencePath=path.join(temp,"duplicate-evidence.json");
+  fs.writeFileSync(duplicateEvidencePath,JSON.stringify(duplicateEvidence));
+  await page.locator("#importEvidenceFile").setInputFiles(duplicateEvidencePath);
+  await page.waitForFunction(()=>/Evidence record IDs must be unique/.test(document.querySelector("#evidenceStatus").textContent));
+  assert.equal(await page.locator("#completeStat").innerText(),"1");
+  pass("Reject duplicate evidence IDs","Duplicate evidence identifiers are rejected before restore.");
+
   // Oversized backup must be rejected before parsing.
   const oversized=path.join(temp,"oversized.json");
   fs.writeFileSync(oversized,Buffer.alloc(2*1024*1024+1,32));
@@ -281,7 +301,35 @@ try{
   assert.equal(await interruptionPage.locator("#evidenceRecordSelect option").count(),1);
   assert.match(await interruptionPage.locator("#evidenceRecordSelect option").first().innerText(),/Complete a lesson first/);
   pass("Reload interruption preserves lesson boundary","Reloading mid-timer does not falsely mark a PE lesson completed or create adult evidence.");
+  assert.equal(await interruptionPage.locator("#resumeCheckpointCard").isVisible(),true,"interrupted lesson should offer resume");
+  assert.match(await interruptionPage.locator("#resumeCheckpointDescription").innerText(),/Walking Feet/);
+  await interruptionPage.locator("#resumeLessonBtn").click();
+  assert.equal(await interruptionPage.locator("#sessionScreen").isVisible(),true);
+  assert.equal(await interruptionPage.locator("#lessonTitle").innerText(),"Walking Feet");
+  assert.equal(await interruptionPage.locator("#completeStat").innerText(),"0");
+  pass("Resume interrupted lesson","A saved checkpoint resumes the same lesson and phase without falsely creating completion evidence.");
   await interruptionContext.close();
+
+  // Verify a profile change in a second tab invalidates the original active session.
+  const staleContext=await browser.newContext({viewport:{width:800,height:900}});
+  const staleA=await staleContext.newPage();
+  await staleA.goto(url,{waitUntil:"domcontentloaded"});
+  await staleA.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"browser-test-stale-A"})));
+  await staleA.reload({waitUntil:"domcontentloaded"});
+  const staleB=await staleContext.newPage();
+  await staleB.goto(url,{waitUntil:"domcontentloaded"});
+  await staleA.locator(".lesson-card").first().click();
+  await staleA.locator("#startTimerBtn").click();
+  await staleA.waitForTimeout(1100);
+  await staleB.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"browser-test-stale-B"})));
+  await staleA.waitForSelector("#staleLearnerOverlay",{timeout:5000});
+  assert.ok(await staleA.locator("main").getAttribute("inert")!==null,"stale page content should be inert");
+  assert.equal(await staleA.locator("#pauseBtn").isDisabled(),true);
+  await staleA.close();
+  const leaked=await staleB.evaluate(()=>Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).some(k=>k&&k.includes("browser-test-stale-B")&&k.includes("boppi-prek-pe-garden-v2")));
+  assert.equal(leaked,false,"the stale session wrote A's active state into learner B's storage");
+  pass("Cross-tab learner change invalidates stale session","Storage event overlays and disables old page; unload does not write A's state under B.");
+  await staleContext.close();
 
   await context.close();
 }finally{
