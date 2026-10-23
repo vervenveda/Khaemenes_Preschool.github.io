@@ -169,7 +169,7 @@ try{
     await homePage.goto(base+"/Khaemenes_Preschool.github.io/",{waitUntil:"domcontentloaded"});
     await homePage.waitForTimeout(250);
     const logoMetrics=await homePage.locator(".brand-bubble").evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height,headerHeight:document.querySelector(".header").getBoundingClientRect().height,navLinksDisplay:getComputedStyle(document.querySelector(".navlinks")).display}));
-    assert.ok(logoMetrics.width>=67&&logoMetrics.height>=67,"brand logo should be visibly larger");
+    assert.ok(logoMetrics.width>=67&&logoMetrics.height>=67,"brand logo should be visibly larger; measured: "+JSON.stringify(logoMetrics));
     assert.equal(logoMetrics.navLinksDisplay,"none","busy inline nav links should collapse into the menu at the screenshot viewport");
     const rail=homePage.locator("#khaemenesLearnerUtilityToolbar");
     await rail.waitFor({state:"visible",timeout:5000});
