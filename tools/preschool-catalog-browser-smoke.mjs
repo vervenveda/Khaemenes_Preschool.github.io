@@ -34,8 +34,16 @@ try{
   const categories=[...new Set(catalog.childActivities().map(x=>x.category))].filter(x=>x&&x!=="grownup");
   const samples=[];
   for(const category of categories){
-    const activity=catalog.childActivities().find(item=>item.category===category&&typeof item.file==="string"&&fs.existsSync(path.resolve(root,item.file.replace(/^\//,""))));
-    if(activity)samples.push({category,file:activity.file.replace(/^\//,""),title:activity.title||activity.name||activity.id});
+    const activity=catalog.childActivities().find(item=>{
+      if(item.category!==category||typeof item.file!=="string")return false;
+      const relative=item.file.replace(/^\//,"");
+      const localPath=relative.startsWith("apps/")?relative:"apps/"+relative;
+      return fs.existsSync(path.resolve(root,localPath));
+    });
+    if(activity){
+      const relative=activity.file.replace(/^\//,"");
+      samples.push({category,file:relative.startsWith("apps/")?relative:"apps/"+relative,title:activity.title||activity.name||activity.id});
+    }
   }
   assert.ok(samples.length>=6,"expected representative activities across at least six Preschool categories; found "+samples.length);
   const browser=await chromium.launch({headless:true});
