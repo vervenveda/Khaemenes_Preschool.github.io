@@ -74,6 +74,12 @@ h1{margin:12px auto 8px;max-width:980px;padding:0 .08em;font-size:clamp(2.45rem,
 .parent{margin-top:14px;padding:15px;border-radius:22px;background:#fff;border:1px solid rgba(91,61,135,.09)}
 .parent h2{margin:0 0 8px;color:var(--plum);font-size:1.1rem}
 .evidence-panel{border-top:5px solid var(--mint)}
+.resume-card{margin:14px 0;padding:16px;border-radius:18px;border:2px solid var(--mint);background:#fffbe6;box-shadow:0 6px 16px rgba(60,40,80,.08)}
+.resume-card[hidden]{display:none!important}
+.resume-card h2{margin:0 0 6px;color:var(--plum);font-size:1.15rem}
+.resume-card p{margin:4px 0 12px;color:var(--ink);line-height:1.45}
+.resume-card .actions{display:flex;gap:8px;flex-wrap:wrap}
+.resume-card .btn{flex:1 1 140px}
 .evidence-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
 .evidence-field label{display:block;margin:7px 0 4px;color:var(--muted);font-size:.8rem;font-weight:800}
 .evidence-field select,.evidence-field textarea{width:100%;box-sizing:border-box;border:1px solid #dfd4e9;border-radius:12px;padding:10px;background:#fff;color:var(--ink);font:inherit}
@@ -299,6 +305,14 @@ body.simple-mode .mascot-panel{min-height:220px}
   <div class="safety"><strong>Before moving:</strong> Ask an adult to help clear the floor. Wear secure footwear or move barefoot only on a safe surface. Keep water nearby, use supports when needed, and stop immediately if anything hurts, feels dizzy, or feels unsafe. Every movement may be adapted for seated, standing, or supported participation.</div>
 
   <section id="homeScreen" class="screen">
+    <section id="resumeCheckpointCard" class="resume-card" hidden aria-labelledby="resumeCheckpointTitle">
+      <h2 id="resumeCheckpointTitle">Continue your movement adventure</h2>
+      <p id="resumeCheckpointDescription"></p>
+      <div class="actions">
+        <button type="button" class="btn primary" id="resumeLessonBtn">Resume Lesson</button>
+        <button type="button" class="btn" id="restartLessonBtn">Start This Lesson Again</button>
+      </div>
+    </section>
     <div class="home-grid" id="lessonGrid"></div>
   </section>
 
@@ -430,6 +444,7 @@ function loadState(){try{
         seconds:Number(x.seconds)||0,
         favorites:Array.isArray(x.favorites)?x.favorites:[],
         evidence:Array.isArray(x.evidence)?x.evidence:[],
+        checkpoint:x.checkpoint&&typeof x.checkpoint==="object"?x.checkpoint:null,
         voice:x.voice||'boppi',
         voiceSpeed:x.voiceSpeed||'slow',
         autoRead:x.autoRead!==false,
@@ -437,7 +452,7 @@ function loadState(){try{
         simpleMode:!!x.simpleMode
       }
     }catch{
-      return{completed:{},seconds:0,favorites:[],evidence:[],voice:'boppi',voiceSpeed:'slow',autoRead:true,largeType:false,simpleMode:false}
+      return{completed:{},seconds:0,favorites:[],evidence:[],checkpoint:null,voice:'boppi',voiceSpeed:'slow',autoRead:true,largeType:false,simpleMode:false}
     }}
 let state=loadState(),current=null,phase=0,remaining=30,timerId=null,running=false,checkResolved=false;
 const phases=['warm','move','cool','check'];
@@ -537,18 +552,52 @@ function renderLessons(){
   filtered().forEach(l=>{const b=document.createElement('button');b.className='lesson-card'+(state.completed[l.id]?' done':'');b.innerHTML=`<div class="lesson-top"><span class="lesson-icon">${l.icon}</span><span class="lesson-num">Lesson ${l.id}</span></div><div class="lesson-title">${l.title}</div><div class="lesson-unit">${l.unit}${state.completed[l.id]?' · ✓ Completed':''}</div>`;b.onclick=()=>openLesson(l);g.appendChild(b)})
 }
 function openLesson(l){if(!stateOwnerMatchesActive()){invalidateStaleSession();return}stopTimer();current=l;phase=0;checkResolved=false;$('homeScreen').classList.add('hidden');$('sessionScreen').classList.remove('hidden');renderPhase();updateFavoriteButton()}
-function renderPhase(){
-  stopTimer();remaining=Number($('duration').value);$('timer').textContent=remaining;$('timerLabel').textContent='Ready when you are.';
+function checkpointCurrentLesson(){
+  if(!current||!stateOwnerMatchesActive())return;
+  state.checkpoint={lessonId:current.id,phase,remaining:Math.max(0,Math.min(3600,Number(remaining)||0)),savedAt:new Date().toISOString()};
+}
+function renderCheckpointCard(){
+  const card=$("resumeCheckpointCard");
+  if(!card)return;
+  const cp=state.checkpoint;
+  const lesson=cp&&LESSONS.find(item=>item.id===Number(cp.lessonId));
+  if(!lesson||state.completed[lesson.id]||!Number.isInteger(cp.phase)||cp.phase<0||cp.phase>3||!Number.isFinite(cp.remaining)||cp.remaining<0||cp.remaining>3600){
+    card.hidden=true;return;
+  }
+  $("resumeCheckpointDescription").textContent=`You paused “${lesson.title}” during ${phaseNames[cp.phase]}. You can continue from that step or begin the lesson again.`;
+  card.hidden=false;
+}
+function resumeSavedLesson(restart=false){
+  if(!stateOwnerMatchesActive()){invalidateStaleSession();return}
+  const cp=state.checkpoint;
+  const lesson=cp&&LESSONS.find(item=>item.id===Number(cp.lessonId));
+  if(!lesson||state.completed[lesson.id]){state.checkpoint=null;save();renderCheckpointCard();return}
+  current=lesson;
+  phase=restart?0:Math.max(0,Math.min(3,Number(cp.phase)||0));
+  remaining=restart?Number($("duration").value):Math.max(0,Math.min(3600,Number(cp.remaining)||0));
+  state.checkpoint=null;
+  save();
+  $("homeScreen").classList.add("hidden");
+  $("sessionScreen").classList.remove("hidden");
+  renderPhase(true);
+  updateFavoriteButton();
+}
+function renderPhase(resume=false){
+  stopTimer();if(!resume)remaining=Number($('duration').value);$('timer').textContent=remaining;$('timerLabel').textContent=remaining<=0?'Movement timer finished. Continue when ready.':'Ready when you are.';
+  $('startTimerBtn').disabled=remaining<=0;
   $('lessonMeta').textContent=`Lesson ${current.id} · ${current.unit}`;$('lessonTitle').textContent=current.title;$('mascot').textContent=current.icon;
   $('adultCue').querySelector('span').textContent=current.adultCue||'Praise comfortable movement and safe choices.';$('adaptCue').querySelector('span').textContent=current.adaptation||'Try a smaller, seated, or supported version whenever helpful.';
   $('phasePill').textContent=phaseNames[phase];$('progressBar').style.width=`${((phase+1)/4)*100}%`;
   $('checkPanel').classList.add('hidden');$('timer').style.display='block';$('timerLabel').style.display='block';$('startTimerBtn').style.display='inline-block';$('pauseBtn').style.display='inline-block';
   if(phase<3){$('instruction').textContent=current[phases[phase]];$('nextPhaseBtn').textContent=phase===2?'Learning Check →':'Next Step →';$('mascotNote').textContent=phase===0?'Boppi says: Start gently and notice your space.':phase===1?'Boppi says: Choose a seated, standing, or supported version.':'Boppi says: Slow down and let your body recover.'}
   else{renderCheck();$('instruction').textContent='One quick question about safe movement.';$('timer').style.display='none';$('timerLabel').style.display='none';$('startTimerBtn').style.display='none';$('pauseBtn').style.display='none';$('nextPhaseBtn').textContent='Finish Lesson ✓'}
+  checkpointCurrentLesson();
+  save();
+  renderCheckpointCard();
   if(state.autoRead)setTimeout(()=>speak(currentNarration(),{target:document.querySelector('.activity-panel')}),220)
 }
-function startTimer(){if(!stateOwnerMatchesActive()){invalidateStaleSession();return}if(running||remaining<=0)return;running=true;$('startTimerBtn').disabled=true;$('pauseBtn').disabled=false;$('timerLabel').textContent='Keep moving safely.';timerId=setInterval(()=>{remaining--;$('timer').textContent=remaining;state.seconds++;if(remaining<=0){stopTimer();$('timer').textContent='0';$('startTimerBtn').disabled=true;$('timerLabel').textContent='Movement complete! Take a breath.';speak('Movement complete. Take a breath.',{target:document.querySelector('.activity-panel')})}if(state.seconds%10===0){save();updateStats()}},1000)}
-function stopTimer(){if(timerId)clearInterval(timerId);timerId=null;running=false;if($('startTimerBtn'))$('startTimerBtn').disabled=false;if($('pauseBtn'))$('pauseBtn').disabled=true;save();updateStats()}
+function startTimer(){if(!stateOwnerMatchesActive()){invalidateStaleSession();return}if(running||remaining<=0)return;running=true;$('startTimerBtn').disabled=true;$('pauseBtn').disabled=false;$('timerLabel').textContent='Keep moving safely.';timerId=setInterval(()=>{remaining=Math.max(0,remaining-1);$('timer').textContent=remaining;state.seconds++;checkpointCurrentLesson();if(remaining<=0){stopTimer();$('timer').textContent='0';$('startTimerBtn').disabled=true;$('timerLabel').textContent='Movement complete! Take a breath.';speak('Movement complete. Take a breath.',{target:document.querySelector('.activity-panel')})}if(state.seconds%5===0){save();updateStats()}},1000)}
+function stopTimer(){if(timerId)clearInterval(timerId);timerId=null;running=false;checkpointCurrentLesson();if($('startTimerBtn'))$('startTimerBtn').disabled=Number(remaining)<=0;if($('pauseBtn'))$('pauseBtn').disabled=true;save();updateStats()}
 function renderCheck(){
   checkResolved=false;
   lastCheckCorrect=null;
@@ -602,6 +651,7 @@ function finishLesson(){
   stopTimer();
   const completedAt=new Date().toISOString();
   state.completed[current.id]={date:completedAt};
+  state.checkpoint=null;
   if(!Array.isArray(state.evidence))state.evidence=[];
   state.evidence.push({
     id:"pe-"+current.id+"-"+Date.now(),
@@ -836,6 +886,7 @@ function restorePEBackup(file){
         seconds:incoming.seconds,
         favorites:[...new Set(incoming.favorites)],
         evidence:safeEvidence,
+        checkpoint:null,
         voice:["boppi","bunny","owl","robot","rainbow"].includes(incoming.voice)?incoming.voice:"boppi",
         voiceSpeed:["slow","normal","lively"].includes(incoming.voiceSpeed)?incoming.voiceSpeed:"slow",
         autoRead:incoming.autoRead!==false,
@@ -850,6 +901,8 @@ function restorePEBackup(file){
   reader.onerror=()=>{$("evidenceStatus").textContent="Could not read that file.";};
   reader.readAsText(file);
 }
+$("resumeLessonBtn").addEventListener("click",()=>resumeSavedLesson(false));
+$("restartLessonBtn").addEventListener("click",()=>resumeSavedLesson(true));
 $("evidenceRecordSelect").addEventListener("change",loadSelectedEvidence);
 $("saveEvidenceBtn").addEventListener("click",saveAdultObservation);
 $("exportEvidenceBtn").addEventListener("click",downloadPEBackup);
@@ -859,7 +912,8 @@ $("importEvidenceFile").addEventListener("change",event=>restorePEBackup(event.t
 renderLessons();
 updateStats();
 renderEvidence();
-window.addEventListener("beforeunload",()=>{stopTimer();stopSpeaking("")});
+renderCheckpointCard();
+window.addEventListener("beforeunload",()=>{stopTimer();checkpointCurrentLesson();save();stopSpeaking("")});
 </script>
 <script src="/assets/vnv-beta-link.js" defer></script>
 </body>
