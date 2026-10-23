@@ -1,0 +1,960 @@
+{
+  "schemaVersion": "1.0.0",
+  "curriculumId": "khaemenes.preschool.pe.move-groove",
+  "title": "Khaemenes Academy Preschool Physical Education — Movement Scope and Sequence",
+  "stage": "Pre-K / Preschool",
+  "sourcePortal": "apps/PE_move_n_groove_index.html",
+  "teacherGuide": "apps/PE_move_n_groove_teacher_guide.html",
+  "status": "instructional-planning-map",
+  "note": "This map supports lesson planning and observation. It is not a medical or developmental diagnostic tool and does not make a child demonstrate a movement that feels unsafe or uncomfortable.",
+  "learningStrands": [
+    {
+      "id": "locomotor-spatial-awareness",
+      "label": "Locomotor movement and spatial awareness"
+    },
+    {
+      "id": "balance-body-awareness",
+      "label": "Balance, body awareness, and comfortable mobility"
+    },
+    {
+      "id": "object-control",
+      "label": "Gentle object control and visual tracking"
+    },
+    {
+      "id": "cooperation-communication",
+      "label": "Cooperation, turn-taking, boundaries, and communication"
+    },
+    {
+      "id": "wellness-self-regulation",
+      "label": "Warm-up, cool-down, hydration, rest, and safe choices"
+    }
+  ],
+  "evidenceRules": [
+    "Participation record confirms that the learner completed or explored the activity.",
+    "Learning-check record documents the learner's response to a brief safety or movement question.",
+    "Adult observation records what was observed during this activity; it is not inferred from lesson completion or a quiz answer.",
+    "A different participation pathway, pause, or decline is valid context and must not automatically be treated as failure."
+  ],
+  "sequence": [
+    {
+      "lessonId": 1,
+      "unit": "Moving Our Bodies",
+      "title": "Walking Feet",
+      "primaryFocus": "Locomotor movement",
+      "intendedOutcome": "Notices clear space; chooses a comfortable walking or tracing path.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Watch for relaxed steps and awareness of nearby objects; praise noticing space rather than speed.",
+      "adaptationOptions": "Try seated arm swings, tracing a route with a finger, or moving wheels along a clear path.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Notices clear space; chooses a comfortable walking or tracing path.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 2,
+        "title": "Running Fun",
+        "unit": "Moving Our Bodies"
+      }
+    },
+    {
+      "lessonId": 2,
+      "unit": "Moving Our Bodies",
+      "title": "Running Fun",
+      "primaryFocus": "Stop/go response",
+      "intendedOutcome": "Responds to a signal using a safe movement or pause.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Practice responding to stop/go with enough space; make stopping a game, not a test of speed.",
+      "adaptationOptions": "March or tap hands while seated; use a visual stop card if sound cues are difficult.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Responds to a signal using a safe movement or pause.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 3,
+        "title": "Hopping Like a Bunny",
+        "unit": "Moving Our Bodies"
+      }
+    },
+    {
+      "lessonId": 3,
+      "unit": "Moving Our Bodies",
+      "title": "Hopping Like a Bunny",
+      "primaryFocus": "Landing and alternatives",
+      "intendedOutcome": "Chooses a comfortable hop, heel lift, or supported movement.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Look for a controlled landing and a willingness to choose a smaller movement; never require single-foot hopping.",
+      "adaptationOptions": "Use heel raises, gentle knee bends, or a seated leg lift instead of jumping.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Chooses a comfortable hop, heel lift, or supported movement.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 4,
+        "title": "Skipping Steps",
+        "unit": "Moving Our Bodies"
+      }
+    },
+    {
+      "lessonId": 4,
+      "unit": "Moving Our Bodies",
+      "title": "Skipping Steps",
+      "primaryFocus": "Sequencing and rhythm",
+      "intendedOutcome": "Explores step-hop order or an adapted rhythm pattern.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Notice whether the child can repeat a simple step-hop rhythm at their own pace.",
+      "adaptationOptions": "Use a hand clap, fingertip tap, or seated foot pattern instead of hopping.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Explores step-hop order or an adapted rhythm pattern.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 5,
+        "title": "Marching Parade",
+        "unit": "Moving Our Bodies"
+      }
+    },
+    {
+      "lessonId": 5,
+      "unit": "Moving Our Bodies",
+      "title": "Marching Parade",
+      "primaryFocus": "Rhythm and coordination",
+      "intendedOutcome": "Matches a beat through steps, taps, sway, or gestures.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Invite the child to match movement to a steady beat and slow down with the adult.",
+      "adaptationOptions": "Tap knees or hands, sway, or move one arm to the rhythm while seated.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Matches a beat through steps, taps, sway, or gestures.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 6,
+        "title": "Crawling Critters",
+        "unit": "Moving Our Bodies"
+      }
+    },
+    {
+      "lessonId": 6,
+      "unit": "Moving Our Bodies",
+      "title": "Crawling Critters",
+      "primaryFocus": "Body movement and space",
+      "intendedOutcome": "Checks the surface and chooses a comfortable way to reach or travel.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Check the surface and space first; keep crawling brief and voluntary, with no pressure to bear weight.",
+      "adaptationOptions": "Try seated reaches forward and back or moving a soft toy across a table.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Checks the surface and chooses a comfortable way to reach or travel.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 7,
+        "title": "Balance Trail",
+        "unit": "Moving Our Bodies"
+      }
+    },
+    {
+      "lessonId": 7,
+      "unit": "Moving Our Bodies",
+      "title": "Balance Trail",
+      "primaryFocus": "Balance and spatial awareness",
+      "intendedOutcome": "Uses support or chooses a low-risk path.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Keep a stable support close; praise careful focus and stopping when balance feels uncertain.",
+      "adaptationOptions": "Trace a line with a finger or wheels, or practice weight shifts while securely seated.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Uses support or chooses a low-risk path.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 8,
+        "title": "Reach for the Sky",
+        "unit": "Stretch & Grow"
+      }
+    },
+    {
+      "lessonId": 8,
+      "unit": "Stretch & Grow",
+      "title": "Reach for the Sky",
+      "primaryFocus": "Reach and mobility",
+      "intendedOutcome": "Finds a comfortable reach without forcing range.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Model a comfortable reach without pulling on the arms or leaning beyond a natural range.",
+      "adaptationOptions": "Reach forward or sideways within a comfortable range, or move just the hands.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Finds a comfortable reach without forcing range.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 9,
+        "title": "Wiggle Legs",
+        "unit": "Stretch & Grow"
+      }
+    },
+    {
+      "lessonId": 9,
+      "unit": "Stretch & Grow",
+      "title": "Wiggle Legs",
+      "primaryFocus": "Lower-body awareness",
+      "intendedOutcome": "Explores small movements and communicates discomfort.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Use small, controlled movements and ask whether the movement feels comfortable; stop if it hurts.",
+      "adaptationOptions": "Try gentle ankle circles or foot taps while seated; avoid forcing a range of motion.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Explores small movements and communicates discomfort.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 10,
+        "title": "Neck & Shoulders",
+        "unit": "Stretch & Grow"
+      }
+    },
+    {
+      "lessonId": 10,
+      "unit": "Stretch & Grow",
+      "title": "Neck & Shoulders",
+      "primaryFocus": "Gentle mobility",
+      "intendedOutcome": "Uses small, comfortable shoulder/head movements.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Keep neck motion very small and unforced; do not use circles or fast turns of the head.",
+      "adaptationOptions": "Move shoulders up and down or turn the whole upper body gently instead.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Uses small, comfortable shoulder/head movements.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 11,
+        "title": "Breathe & Move",
+        "unit": "Stretch & Grow"
+      }
+    },
+    {
+      "lessonId": 11,
+      "unit": "Stretch & Grow",
+      "title": "Breathe & Move",
+      "primaryFocus": "Body awareness",
+      "intendedOutcome": "Follows a gentle movement cue while breathing naturally.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Model easy breathing without breath-holding or timed competition; allow the child to breathe naturally.",
+      "adaptationOptions": "Lower and raise hands, or quietly notice ordinary breathing without changing it.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Follows a gentle movement cue while breathing naturally.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 12,
+        "title": "Yoga Animals",
+        "unit": "Stretch & Grow"
+      }
+    },
+    {
+      "lessonId": 12,
+      "unit": "Stretch & Grow",
+      "title": "Yoga Animals",
+      "primaryFocus": "Body shapes and support",
+      "intendedOutcome": "Selects a comfortable supported or seated shape.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Offer only comfortable, supported animal shapes; avoid requiring hands-and-knees or single-leg balance.",
+      "adaptationOptions": "Choose a seated cat-like back movement, an arm reach, or a supported standing shape.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Selects a comfortable supported or seated shape.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 13,
+        "title": "Dance Warm-Up",
+        "unit": "Stretch & Grow"
+      }
+    },
+    {
+      "lessonId": 13,
+      "unit": "Stretch & Grow",
+      "title": "Dance Warm-Up",
+      "primaryFocus": "Rhythm and stop cue",
+      "intendedOutcome": "Responds to a music, clap, or visual signal.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Use clear start/stop cues and ensure the dance space is free of hard edges and tripping hazards.",
+      "adaptationOptions": "Clap, tap, sway, or move arms to a beat; use visual cards rather than music if needed.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Responds to a music, clap, or visual signal.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 14,
+        "title": "Rainbow Stretch",
+        "unit": "Stretch & Grow"
+      }
+    },
+    {
+      "lessonId": 14,
+      "unit": "Stretch & Grow",
+      "title": "Rainbow Stretch",
+      "primaryFocus": "Direction and reach",
+      "intendedOutcome": "Creates an arc with a comfortable range.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Keep each reach within comfort and teach that different ranges are equally valid.",
+      "adaptationOptions": "Trace a small rainbow with a finger, hand, or forearm while seated.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Creates an arc with a comfortable range.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 15,
+        "title": "Throw & Catch",
+        "unit": "Sports Basics"
+      }
+    },
+    {
+      "lessonId": 15,
+      "unit": "Sports Basics",
+      "title": "Throw & Catch",
+      "primaryFocus": "Object control",
+      "intendedOutcome": "Chooses soft equipment and directs it into open space.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Use only soft, light objects and create a clear throwing lane; never throw toward faces.",
+      "adaptationOptions": "Roll a soft object or pass it hand-to-hand rather than tossing.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Chooses soft equipment and directs it into open space.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 16,
+        "title": "Roll It",
+        "unit": "Sports Basics"
+      }
+    },
+    {
+      "lessonId": 16,
+      "unit": "Sports Basics",
+      "title": "Roll It",
+      "primaryFocus": "Rolling and aiming",
+      "intendedOutcome": "Uses a gentle roll toward a safe target.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Make sure the target area is clear and use a soft ball; encourage gentle accuracy rather than force.",
+      "adaptationOptions": "Roll a soft ball along a tabletop or toward a nearby wide target from a seated position.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Uses a gentle roll toward a safe target.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 17,
+        "title": "Kick It",
+        "unit": "Sports Basics"
+      }
+    },
+    {
+      "lessonId": 17,
+      "unit": "Sports Basics",
+      "title": "Kick It",
+      "primaryFocus": "Foot-object control",
+      "intendedOutcome": "Checks the ball path and uses a gentle tap or alternative.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Provide a clear, wide kicking lane and keep everyone outside the ball path.",
+      "adaptationOptions": "Tap a soft ball from a stable seated position or roll it toward the target with hands.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Checks the ball path and uses a gentle tap or alternative.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 18,
+        "title": "Bounce Time",
+        "unit": "Sports Basics"
+      }
+    },
+    {
+      "lessonId": 18,
+      "unit": "Sports Basics",
+      "title": "Bounce Time",
+      "primaryFocus": "Tracking an object",
+      "intendedOutcome": "Looks toward the moving object and notices available space.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Use a soft ball or balloon and enough overhead clearance; keep eyes on the object and nearby space.",
+      "adaptationOptions": "Use a scarf or slowly roll a ball along a surface instead of bouncing.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Looks toward the moving object and notices available space.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 19,
+        "title": "Jumping Fun",
+        "unit": "Sports Basics"
+      }
+    },
+    {
+      "lessonId": 19,
+      "unit": "Sports Basics",
+      "title": "Jumping Fun",
+      "primaryFocus": "Landing and crossing space",
+      "intendedOutcome": "Chooses a step, reach, or soft landing.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Prioritize a soft landing and clear floor; jumping is optional and never the only way to participate.",
+      "adaptationOptions": "Step across an imaginary line, reach across it, or make a small seated knee lift.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Chooses a step, reach, or soft landing.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 20,
+        "title": "Tap & Strike",
+        "unit": "Sports Basics"
+      }
+    },
+    {
+      "lessonId": 20,
+      "unit": "Sports Basics",
+      "title": "Tap & Strike",
+      "primaryFocus": "Gentle object contact",
+      "intendedOutcome": "Uses light contact with appropriate soft equipment.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Use soft equipment and enough distance from other people and furniture; avoid hard paddles near faces.",
+      "adaptationOptions": "Tap a balloon with fingertips or move a scarf gently through the air.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Uses light contact with appropriate soft equipment.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 21,
+        "title": "Mini Sports Day",
+        "unit": "Sports Basics"
+      }
+    },
+    {
+      "lessonId": 21,
+      "unit": "Sports Basics",
+      "title": "Mini Sports Day",
+      "primaryFocus": "Choice and transfer",
+      "intendedOutcome": "Selects a station or adaptation and participates at a comfortable pace.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Offer short stations with clear boundaries and rest breaks; praise trying and cooperation instead of winning.",
+      "adaptationOptions": "Choose one station, do a seated version, or act out the movement without equipment.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Selects a station or adaptation and participates at a comfortable pace.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 22,
+        "title": "Taking Turns",
+        "unit": "Teamwork Time"
+      }
+    },
+    {
+      "lessonId": 22,
+      "unit": "Teamwork Time",
+      "title": "Taking Turns",
+      "primaryFocus": "Waiting and turn-taking",
+      "intendedOutcome": "Uses a turn cue without pressure for touch or eye contact.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Model waiting with a clear cue and respect if a child prefers parallel play rather than partner contact.",
+      "adaptationOptions": "Take turns with a stuffed animal or pass an object to an adult rather than a peer.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Uses a turn cue without pressure for touch or eye contact.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 23,
+        "title": "Helping Hands",
+        "unit": "Teamwork Time"
+      }
+    },
+    {
+      "lessonId": 23,
+      "unit": "Teamwork Time",
+      "title": "Helping Hands",
+      "primaryFocus": "Safe responsibility",
+      "intendedOutcome": "Selects a light safe task or directs where an item belongs.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Keep carried items light, cool, blunt, and stable; adult handles heavy or breakable equipment.",
+      "adaptationOptions": "Point to the item's home, slide a light object along a surface, or help by giving directions.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Selects a light safe task or directs where an item belongs.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 24,
+        "title": "Following Signals",
+        "unit": "Teamwork Time"
+      }
+    },
+    {
+      "lessonId": 24,
+      "unit": "Teamwork Time",
+      "title": "Following Signals",
+      "primaryFocus": "Self-regulation",
+      "intendedOutcome": "Responds to stop/go/slow with enough processing time.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Keep signals consistent and give processing time between stop, go, and slow; don't demand sudden unsafe freezing.",
+      "adaptationOptions": "Use visual cards or a simple hand signal, with small seated movements.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Responds to stop/go/slow with enough processing time.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 25,
+        "title": "Cheering Others",
+        "unit": "Teamwork Time"
+      }
+    },
+    {
+      "lessonId": 25,
+      "unit": "Teamwork Time",
+      "title": "Cheering Others",
+      "primaryFocus": "Encouragement",
+      "intendedOutcome": "Uses a kind phrase, quiet gesture, or supportive action.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Model kind, specific encouragement and avoid comparing performance or requiring a public turn.",
+      "adaptationOptions": "Offer a thumbs-up, wave, or quiet supportive phrase instead of speaking to a group.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Uses a kind phrase, quiet gesture, or supportive action.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 26,
+        "title": "Sharing Equipment",
+        "unit": "Teamwork Time"
+      }
+    },
+    {
+      "lessonId": 26,
+      "unit": "Teamwork Time",
+      "title": "Sharing Equipment",
+      "primaryFocus": "Fair participation",
+      "intendedOutcome": "Waits, trades turns, or chooses another activity safely.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Set a predictable turn-taking pattern; check that the equipment is age-appropriate and shared fairly.",
+      "adaptationOptions": "Use two objects at home or take turns choosing movements without exchanging equipment.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Waits, trades turns, or chooses another activity safely.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 27,
+        "title": "Listening Bodies",
+        "unit": "Teamwork Time"
+      }
+    },
+    {
+      "lessonId": 27,
+      "unit": "Teamwork Time",
+      "title": "Listening Bodies",
+      "primaryFocus": "Listening and sequence",
+      "intendedOutcome": "Follows a short verbal, visual, or modeled instruction.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Give one or two directions at a time and accept listening without eye contact or stillness.",
+      "adaptationOptions": "Follow a visual picture sequence or copy a single hand/foot movement while seated.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Follows a short verbal, visual, or modeled instruction.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 28,
+        "title": "Celebration Circle",
+        "unit": "Teamwork Time"
+      }
+    },
+    {
+      "lessonId": 28,
+      "unit": "Teamwork Time",
+      "title": "Celebration Circle",
+      "primaryFocus": "Leadership and inclusion",
+      "intendedOutcome": "Leads, chooses, or represents a movement in a comfortable way.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Offer multiple ways to lead, including gestures, a visual choice, or choosing the next song/move.",
+      "adaptationOptions": "Invite the child to choose a movement for an adult to demonstrate rather than performing it.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Leads, chooses, or represents a movement in a comfortable way.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 29,
+        "title": "Food Gives Us Energy",
+        "unit": "Healthy Habits"
+      }
+    },
+    {
+      "lessonId": 29,
+      "unit": "Healthy Habits",
+      "title": "Food Gives Us Energy",
+      "primaryFocus": "Neutral wellness language",
+      "intendedOutcome": "Discusses food without shame or perfection claims.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Use neutral, non-shaming language about food; avoid classifying foods or bodies as good/bad.",
+      "adaptationOptions": "Name a food, point to a picture, or choose a movement theme without acting out running.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Discusses food without shame or perfection claims.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 30,
+        "title": "Water Break",
+        "unit": "Healthy Habits"
+      }
+    },
+    {
+      "lessonId": 30,
+      "unit": "Healthy Habits",
+      "title": "Water Break",
+      "primaryFocus": "Hydration and rest",
+      "intendedOutcome": "Recognizes or communicates a need to pause or drink.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Offer rest and water as needed; do not require children to wait for a scheduled break when thirsty.",
+      "adaptationOptions": "Take a rest, make a gentle seated movement, or name a signal that means 'I need a break.'",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Recognizes or communicates a need to pause or drink.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 31,
+        "title": "Rest & Recharge",
+        "unit": "Healthy Habits"
+      }
+    },
+    {
+      "lessonId": 31,
+      "unit": "Healthy Habits",
+      "title": "Rest & Recharge",
+      "primaryFocus": "Recovery",
+      "intendedOutcome": "Practices choosing rest as a normal part of activity.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Show that rest is a normal part of movement; let the child choose comfortable pacing and position.",
+      "adaptationOptions": "Alternate a hand/foot movement with quiet rest or simply practice choosing a pause.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Practices choosing rest as a normal part of activity.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 32,
+        "title": "Joyful Movement",
+        "unit": "Healthy Habits"
+      }
+    },
+    {
+      "lessonId": 32,
+      "unit": "Healthy Habits",
+      "title": "Joyful Movement",
+      "primaryFocus": "Movement preference",
+      "intendedOutcome": "Identifies a personally enjoyable movement choice.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Ask which movement felt enjoyable, without praising calories burned or comparing effort.",
+      "adaptationOptions": "Sway, wheel, gesture, or choose a favorite movement to describe rather than perform.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Identifies a personally enjoyable movement choice.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 33,
+        "title": "Clean & Ready",
+        "unit": "Healthy Habits"
+      }
+    },
+    {
+      "lessonId": 33,
+      "unit": "Healthy Habits",
+      "title": "Clean & Ready",
+      "primaryFocus": "Preparation and hygiene",
+      "intendedOutcome": "Recognizes an equipment or space preparation step.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Keep hygiene supplies adult-approved; footwear, tying laces, and equipment handling should match the child's abilities.",
+      "adaptationOptions": "Point to a preparation step, use adaptive fasteners, or tell an adult what to check.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Recognizes an equipment or space preparation step.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 34,
+        "title": "Kindness in Motion",
+        "unit": "Healthy Habits"
+      }
+    },
+    {
+      "lessonId": 34,
+      "unit": "Healthy Habits",
+      "title": "Kindness in Motion",
+      "primaryFocus": "Boundaries and consent",
+      "intendedOutcome": "Asks, accepts “no,” and uses non-contact options.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Ask before touch and model honoring 'no' or nonverbal boundaries; participation does not require contact.",
+      "adaptationOptions": "Play side-by-side, wave, or use a verbal/visual greeting instead of partner movement.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Asks, accepts “no,” and uses non-contact options.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 35,
+        "title": "Healthy Heroes",
+        "unit": "Healthy Habits"
+      }
+    },
+    {
+      "lessonId": 35,
+      "unit": "Healthy Habits",
+      "title": "Healthy Heroes",
+      "primaryFocus": "Safe choices and self-care",
+      "intendedOutcome": "Chooses a safe move and recognizes when rest or adaptation is needed.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Celebrate safety, effort, and caring choices; do not equate being a hero with strength or endurance.",
+      "adaptationOptions": "Choose one comfortable move or explain a safe choice instead of completing a circuit.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Chooses a safe move and recognizes when rest or adaptation is needed.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 36,
+        "title": "Freeze Dance",
+        "unit": "Fun Fitness"
+      }
+    },
+    {
+      "lessonId": 36,
+      "unit": "Fun Fitness",
+      "title": "Freeze Dance",
+      "primaryFocus": "Stop/start control",
+      "intendedOutcome": "Pauses safely using a whole-body or small-movement option.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Use a clear freeze cue and non-slip, uncluttered space; freezing can be a small controlled pause.",
+      "adaptationOptions": "Freeze a hand, facial expression, or seated arm movement rather than the whole body.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Pauses safely using a whole-body or small-movement option.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 37,
+        "title": "Animal Moves",
+        "unit": "Fun Fitness"
+      }
+    },
+    {
+      "lessonId": 37,
+      "unit": "Fun Fitness",
+      "title": "Animal Moves",
+      "primaryFocus": "Creative movement",
+      "intendedOutcome": "Creates an animal-inspired motion that suits them.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Invite animal-inspired creativity without requiring floor positions or imitation that feels uncomfortable.",
+      "adaptationOptions": "Choose a small animal gesture with hands, eyes, or shoulders while seated.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Creates an animal-inspired motion that suits them.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 38,
+        "title": "Obstacle Adventure",
+        "unit": "Fun Fitness"
+      }
+    },
+    {
+      "lessonId": 38,
+      "unit": "Fun Fitness",
+      "title": "Obstacle Adventure",
+      "primaryFocus": "Path planning and risk awareness",
+      "intendedOutcome": "Uses a wide, low, stable route or traces/directs the path.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "An adult should set up low, stable, broad obstacles; never use furniture to climb over or under.",
+      "adaptationOptions": "Use flat floor markers to step around, trace a path, or direct a toy through the course.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Uses a wide, low, stable route or traces/directs the path.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 39,
+        "title": "Balloon Games",
+        "unit": "Fun Fitness"
+      }
+    },
+    {
+      "lessonId": 39,
+      "unit": "Fun Fitness",
+      "title": "Balloon Games",
+      "primaryFocus": "Tracking and equipment safety",
+      "intendedOutcome": "Uses gentle taps and knows to stop if a balloon pops.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "An adult should immediately collect popped balloon pieces; never let a child handle or mouth fragments.",
+      "adaptationOptions": "Use a scarf or soft cloth instead of a balloon if popping or latex is a concern.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Uses gentle taps and knows to stop if a balloon pops.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 40,
+        "title": "Shadow Play",
+        "unit": "Fun Fitness"
+      }
+    },
+    {
+      "lessonId": 40,
+      "unit": "Fun Fitness",
+      "title": "Shadow Play",
+      "primaryFocus": "Observation and movement",
+      "intendedOutcome": "Explores a shadow from a supervised, safe location.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Use outdoor supervision and safe footing; never ask a child to look directly at the sun.",
+      "adaptationOptions": "Make a hand shadow, trace a shadow from a safe spot, or use a flashlight with adult supervision.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Explores a shadow from a supervised, safe location.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 41,
+        "title": "Parachute Play",
+        "unit": "Fun Fitness"
+      }
+    },
+    {
+      "lessonId": 41,
+      "unit": "Fun Fitness",
+      "title": "Parachute Play",
+      "primaryFocus": "Cooperation and shared space",
+      "intendedOutcome": "Uses gentle, coordinated actions with adult-controlled fabric.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Adults control the sheet edges; keep fabric away from faces, necks, wheels, and mobility equipment.",
+      "adaptationOptions": "Wave a small lightweight scarf individually or imitate the motion using arms.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Uses gentle, coordinated actions with adult-controlled fabric.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": {
+        "lessonId": 42,
+        "title": "Move & Groove Celebration",
+        "unit": "Fun Fitness"
+      }
+    },
+    {
+      "lessonId": 42,
+      "unit": "Fun Fitness",
+      "title": "Move & Groove Celebration",
+      "primaryFocus": "Reflection and celebration",
+      "intendedOutcome": "Chooses favorite moves and celebrates learning, rest, and safe effort.",
+      "prerequisite": "No scored prerequisite. A grown-up can model or describe the movement and offer a smaller, supported, seated, gesture-based, or observational alternative.",
+      "setupAndSafety": "Let the child choose familiar favorite movements and include rest; celebrate expression, not perfect recall.",
+      "adaptationOptions": "Make a three-move routine with gestures, seated movement, or adult-assisted choices.",
+      "evidenceToNotice": [
+        "Participation or selected alternative",
+        "Response to this lesson's learning check",
+        "Optional adult observation of the stated learning focus"
+      ],
+      "adultObservationPrompt": "Chooses favorite moves and celebrates learning, rest, and safe effort.",
+      "questionPoolSize": 1,
+      "nextLearningOpportunity": null
+    }
+  ]
+}
