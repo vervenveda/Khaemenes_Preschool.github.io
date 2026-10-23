@@ -420,7 +420,9 @@ const KEY='boppi-prek-pe-garden-v2';
 /* Bind this in-memory PE session to the learner who opened it. A shared
    profile can change in another tab; an unload save must never be attributed
    to the newly active learner. */
+const PROFILE_STORAGE_KEY="khaemenes_preschool_profile_v1";
 const STATE_OWNER_ID=String(window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.()||"");
+let sessionInvalidated=false;
 function loadState(){try{
       const x=JSON.parse(localStorage.getItem(KEY)||'{}');
       return{
@@ -443,7 +445,7 @@ const phaseNames=['Warm-Up','Move & Play','Cool-Down','Learning Check'];
 function save(){
   try{
     const activeId=String(window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.()||"");
-    if(activeId!==STATE_OWNER_ID)return;
+    if(sessionInvalidated||activeId!==STATE_OWNER_ID)return;
     localStorage.setItem(KEY,JSON.stringify(state))
   }catch{}
 }
@@ -534,7 +536,7 @@ function renderLessons(){
   const g=$('lessonGrid');g.innerHTML='';
   filtered().forEach(l=>{const b=document.createElement('button');b.className='lesson-card'+(state.completed[l.id]?' done':'');b.innerHTML=`<div class="lesson-top"><span class="lesson-icon">${l.icon}</span><span class="lesson-num">Lesson ${l.id}</span></div><div class="lesson-title">${l.title}</div><div class="lesson-unit">${l.unit}${state.completed[l.id]?' · ✓ Completed':''}</div>`;b.onclick=()=>openLesson(l);g.appendChild(b)})
 }
-function openLesson(l){stopTimer();current=l;phase=0;checkResolved=false;$('homeScreen').classList.add('hidden');$('sessionScreen').classList.remove('hidden');renderPhase();updateFavoriteButton()}
+function openLesson(l){if(!stateOwnerMatchesActive()){invalidateStaleSession();return}stopTimer();current=l;phase=0;checkResolved=false;$('homeScreen').classList.add('hidden');$('sessionScreen').classList.remove('hidden');renderPhase();updateFavoriteButton()}
 function renderPhase(){
   stopTimer();remaining=Number($('duration').value);$('timer').textContent=remaining;$('timerLabel').textContent='Ready when you are.';
   $('lessonMeta').textContent=`Lesson ${current.id} · ${current.unit}`;$('lessonTitle').textContent=current.title;$('mascot').textContent=current.icon;
@@ -545,7 +547,7 @@ function renderPhase(){
   else{renderCheck();$('instruction').textContent='One quick question about safe movement.';$('timer').style.display='none';$('timerLabel').style.display='none';$('startTimerBtn').style.display='none';$('pauseBtn').style.display='none';$('nextPhaseBtn').textContent='Finish Lesson ✓'}
   if(state.autoRead)setTimeout(()=>speak(currentNarration(),{target:document.querySelector('.activity-panel')}),220)
 }
-function startTimer(){if(running||remaining<=0)return;running=true;$('startTimerBtn').disabled=true;$('pauseBtn').disabled=false;$('timerLabel').textContent='Keep moving safely.';timerId=setInterval(()=>{remaining--;$('timer').textContent=remaining;state.seconds++;if(remaining<=0){stopTimer();$('timer').textContent='0';$('startTimerBtn').disabled=true;$('timerLabel').textContent='Movement complete! Take a breath.';speak('Movement complete. Take a breath.',{target:document.querySelector('.activity-panel')})}if(state.seconds%10===0){save();updateStats()}},1000)}
+function startTimer(){if(!stateOwnerMatchesActive()){invalidateStaleSession();return}if(running||remaining<=0)return;running=true;$('startTimerBtn').disabled=true;$('pauseBtn').disabled=false;$('timerLabel').textContent='Keep moving safely.';timerId=setInterval(()=>{remaining--;$('timer').textContent=remaining;state.seconds++;if(remaining<=0){stopTimer();$('timer').textContent='0';$('startTimerBtn').disabled=true;$('timerLabel').textContent='Movement complete! Take a breath.';speak('Movement complete. Take a breath.',{target:document.querySelector('.activity-panel')})}if(state.seconds%10===0){save();updateStats()}},1000)}
 function stopTimer(){if(timerId)clearInterval(timerId);timerId=null;running=false;if($('startTimerBtn'))$('startTimerBtn').disabled=false;if($('pauseBtn'))$('pauseBtn').disabled=true;save();updateStats()}
 function renderCheck(){
   checkResolved=false;
@@ -595,7 +597,7 @@ function renderCheck(){
     $("checkOptions").appendChild(b)
   })
 }
-function nextPhase(){if(phase<3){phase++;renderPhase()}else if(!checkResolved){$('checkFeedback').textContent='Choose an answer first. Boppi will help you learn from your choice.';speak('Choose an answer first. Boppi will help you learn from your choice.',{target:document.querySelector('.activity-panel')})}else finishLesson()}
+function nextPhase(){if(!stateOwnerMatchesActive()){invalidateStaleSession();return}if(phase<3){phase++;renderPhase()}else if(!checkResolved){$('checkFeedback').textContent='Choose an answer first. Boppi will help you learn from your choice.';speak('Choose an answer first. Boppi will help you learn from your choice.',{target:document.querySelector('.activity-panel')})}else finishLesson()}
 function finishLesson(){
   stopTimer();
   const completedAt=new Date().toISOString();
@@ -661,7 +663,38 @@ fillUnits();
 function activeLearnerId(){
   try{return String(window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.()||"")}catch{return ""}
 }
-function stateOwnerMatchesActive(){return activeLearnerId()===STATE_OWNER_ID}
+function stateOwnerMatchesActive(){return !sessionInvalidated&&activeLearnerId()===STATE_OWNER_ID}
+function invalidateStaleSession(){
+  if(sessionInvalidated||stateOwnerMatchesActive())return;
+  sessionInvalidated=true;
+  stopTimer();
+  stopSpeaking("Learner profile changed. Reload this page to continue safely.");
+  const appRoot=document.querySelector("main")||document.querySelector(".app")||document.body.firstElementChild;
+  if(appRoot)appRoot.setAttribute("inert","");
+  let overlay=document.getElementById("staleLearnerOverlay");
+  if(!overlay){
+    overlay=document.createElement("div");
+    overlay.id="staleLearnerOverlay";
+    overlay.setAttribute("role","alertdialog");
+    overlay.setAttribute("aria-modal","true");
+    overlay.setAttribute("aria-labelledby","staleLearnerTitle");
+    overlay.style.cssText="position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;padding:18px;box-sizing:border-box;background:rgba(30,20,48,.88);";
+    const card=document.createElement("section");
+    card.style.cssText="width:min(100%,360px);box-sizing:border-box;padding:22px;border-radius:18px;background:#fff;color:#302443;box-shadow:0 16px 48px #0005;font:16px/1.5 system-ui,sans-serif;";
+    const title=document.createElement("h2");title.id="staleLearnerTitle";title.textContent="Learner profile changed";
+    const message=document.createElement("p");message.textContent="This page was opened for a different learner. To protect saved work, this lesson has been paused and edits are disabled. Reload the page to open the currently selected learner.";
+    const button=document.createElement("button");button.type="button";button.textContent="Reload PE";button.style.cssText="padding:10px 16px;border:0;border-radius:10px;background:#63428c;color:white;font:inherit;cursor:pointer;";
+    button.addEventListener("click",()=>location.reload());
+    card.append(title,message,button);overlay.appendChild(card);document.body.appendChild(overlay);
+    button.focus();
+  }
+}
+function checkLearnerSession(){if(!stateOwnerMatchesActive())invalidateStaleSession()}
+window.addEventListener("storage",event=>{
+  if(event.key===PROFILE_STORAGE_KEY)checkLearnerSession();
+});
+window.addEventListener("focus",checkLearnerSession);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkLearnerSession()});
 function escapeEvidenceText(value){
   return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
 }
