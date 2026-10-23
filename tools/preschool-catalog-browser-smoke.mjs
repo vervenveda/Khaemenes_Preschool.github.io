@@ -12,7 +12,12 @@ const staticMime={".html":"text/html; charset=utf-8",".js":"text/javascript; cha
 const server=http.createServer((req,res)=>{
   let pathname;
   try{pathname=decodeURIComponent(new URL(req.url,"http://127.0.0.1").pathname)}catch{res.writeHead(400);res.end("Bad URL");return}
-  const target=path.resolve(root,"."+pathname);
+  // Mirror the repository's production route so the shared learner toolbar
+  // can identify the Preschool surface during this local browser test.
+  const localPath=pathname.startsWith("/Khaemenes_Preschool.github.io/")
+    ?pathname.slice("/Khaemenes_Preschool.github.io".length)||"/"
+    :pathname;
+  const target=path.resolve(root,"."+localPath);
   if(!target.startsWith(root+path.sep)&&target!==root){res.writeHead(403);res.end("Forbidden");return}
   let file=target;
   try{if(fs.statSync(file).isDirectory())file=path.join(file,"index.html")}catch{}
@@ -155,6 +160,38 @@ try{
     assert.deepEqual(musicErrors,[]);
     pass("Music piano instrument and beat controls","Instrument selection and rhythm toggle respond without uncaught errors.");
     await musicPage.close();
+
+    // Production-shaped Preschool route: verify the updated brand/header and
+    // ensure learner toolbar labels wrap instead of being clipped.
+    const homePage=await context.newPage({viewport:{width:1123,height:820}});
+    await homePage.route("https://vervenveda.com/assets/vnv-ecosystem-menu.js",route=>route.abort());
+    const homeErrors=[];homePage.on("pageerror",e=>homeErrors.push(e.message));
+    await homePage.goto(base+"/Khaemenes_Preschool.github.io/",{waitUntil:"domcontentloaded"});
+    await homePage.waitForTimeout(250);
+    const logoMetrics=await homePage.locator(".brand-bubble").evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height,headerHeight:document.querySelector(".header").getBoundingClientRect().height,navLinksDisplay:getComputedStyle(document.querySelector(".navlinks")).display}));
+    assert.ok(logoMetrics.width>=67&&logoMetrics.height>=67,"brand logo should be visibly larger");
+    assert.equal(logoMetrics.navLinksDisplay,"none","busy inline nav links should collapse into the menu at the screenshot viewport");
+    const rail=homePage.locator("#khaemenesLearnerUtilityToolbar");
+    await rail.waitFor({state:"visible",timeout:5000});
+    const inspectToolbar=()=>homePage.evaluate(()=>{
+      const dock=document.querySelector("#khaemenesLearnerUtilityToolbar");
+      return {viewport:innerWidth,dock:dock?{left:Math.round(dock.getBoundingClientRect().left),right:Math.round(dock.getBoundingClientRect().right),width:Math.round(dock.getBoundingClientRect().width),scrollWidth:dock.scrollWidth,clientWidth:dock.clientWidth}:null,
+        buttons:dock?[...dock.querySelectorAll("button,a")].map(el=>({label:(el.innerText||el.getAttribute("aria-label")||"").trim(),width:Math.round(el.getBoundingClientRect().width),height:Math.round(el.getBoundingClientRect().height),scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,whiteSpace:getComputedStyle(el).whiteSpace,overflow:getComputedStyle(el).overflow})):[]};
+    });
+    let dockMetrics=await inspectToolbar();
+    assert.ok(dockMetrics.buttons.length>=3,"learner toolbar should include its profile, beta, and grown-up links");
+    assert.ok(dockMetrics.dock.right<=1123,"toolbar must stay inside the viewport");
+    assert.ok(dockMetrics.buttons.every(b=>b.height>=44),JSON.stringify(dockMetrics));
+    await homePage.setViewportSize({width:255,height:850});
+    await homePage.waitForTimeout(100);
+    dockMetrics=await inspectToolbar();
+    assert.ok(dockMetrics.dock.left>=0&&dockMetrics.dock.right<=255,JSON.stringify(dockMetrics));
+    assert.ok(dockMetrics.dock.scrollWidth<=dockMetrics.dock.clientWidth+1,JSON.stringify(dockMetrics));
+    assert.ok(dockMetrics.buttons.every(b=>b.height>=42),JSON.stringify(dockMetrics));
+    assert.ok((await homePage.evaluate(()=>document.documentElement.scrollWidth))<=256,"page overflows horizontally at a 255px viewport");
+    assert.deepEqual(homeErrors,[]);
+    pass("Preschool header and learner toolbar layout","Logo is larger, inline links collapse at the target width, toolbar labels wrap without clipping, and dock fits 255px.");
+    await homePage.close();
     await context.close();
   }finally{await browser.close()}
 }finally{
