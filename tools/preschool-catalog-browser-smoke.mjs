@@ -187,10 +187,11 @@ try{
     assert.equal(await gradPage.getByRole("link",{name:/Enter Khaemenes Kinder Garden/}).getAttribute("href"),"https://vervenveda.com/Khaemenes_KinderGarden.github.io/");
     await gradPage.reload({waitUntil:"domcontentloaded"});
     assert.equal(await gradPage.locator("#progressCount").innerText(),"3 of 3 stars ⭐","graduation completion should persist for the same learner");
-    assert.equal(await gradPage.locator("#makeCertificate").isEnabled(),false,"the existing completion record must remain completed");
+    assert.equal(await gradPage.locator("#certificateOutput").isVisible(),true,"certificate unlock should persist for the same learner");
     await gradPage.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"graduation-browser-B",nickname:"Blake",ageBand:"4-5",pathway:"preschool"})));
     await gradPage.reload({waitUntil:"domcontentloaded"});
     assert.equal(await gradPage.locator("#progressCount").innerText(),"0 of 3 stars ⭐","a second learner must not inherit the first learner's celebration progress");
+    assert.equal(await gradPage.locator("#certificateName").inputValue(),"Blake","second learner must receive their own name, not the previous learner's certificate name");
     const graduationKeys=await gradPage.evaluate(()=>JSON.parse(localStorage.getItem("creche-preschool-graduation-v1")||'{"records":{}}'));
     assert.ok(graduationKeys.records["graduation-browser-A"]&&graduationKeys.records["graduation-browser-B"],"graduation state should be kept under explicit learner IDs");
     assert.deepEqual(gradErrors,[]);
