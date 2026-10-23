@@ -267,6 +267,26 @@ The Academy family layer owns:
 
 Preschool should not duplicate those controls.
 
+
+---
+
+## Preschool Physical Education — Move & Groove Garden
+
+The Pre-K movement portal is:
+
+- Learner portal: `apps/PE_move_n_groove_index.html`
+- Printable teacher/caregiver guide: `apps/PE_move_n_groove_teacher_guide.html`
+- Curriculum map: `curriculum/pe/prek-movement-scope-sequence.json`
+- Test matrix: `tests/PE_DEVICE_TEST_MATRIX.md`
+
+The portal includes 42 lessons, 3 learning-check prompts per lesson, adult cues, adaptations, local activity records, and a separate adult-observation pathway. Participation, learning-check results, and adult observations remain distinct forms of evidence.
+
+PE progress can be exported as a local JSON backup and restored after explicit confirmation. Restores require the same learner ID and reject malformed or oversized files. Backups contain student learning records and should be stored privately; they are not encrypted by the app.
+
+Learner-scoped storage performs non-destructive, one-time migration of old unscoped progress. A migration receipt prevents the same legacy progress key from being offered to later learners. The automated isolation test is `tools/preschool-learner-storage-regression.mjs`.
+
+The repository source-regression workflow validates general source contracts plus PE curriculum and storage tests. Browser/device checks are listed in the test matrix and must be marked PASS only after being run on the specified environments.
+
 ---
 
 ## Repository Structure
