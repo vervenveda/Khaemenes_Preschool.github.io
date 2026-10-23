@@ -73,6 +73,18 @@ h1{margin:12px auto 8px;max-width:980px;padding:0 .08em;font-size:clamp(2.45rem,
 .stat strong{display:block;font-size:1.3rem;color:var(--plum)}
 .parent{margin-top:14px;padding:15px;border-radius:22px;background:#fff;border:1px solid rgba(91,61,135,.09)}
 .parent h2{margin:0 0 8px;color:var(--plum);font-size:1.1rem}
+.evidence-panel{border-top:5px solid var(--mint)}
+.evidence-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.evidence-field label{display:block;margin:7px 0 4px;color:var(--muted);font-size:.8rem;font-weight:800}
+.evidence-field select,.evidence-field textarea{width:100%;box-sizing:border-box;border:1px solid #dfd4e9;border-radius:12px;padding:10px;background:#fff;color:var(--ink);font:inherit}
+.evidence-field textarea{min-height:68px;resize:vertical}
+.evidence-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.evidence-actions .btn{min-height:42px}
+.evidence-status{min-height:1.5em;margin:7px 0;color:var(--plum);font-size:.88rem}
+.evidence-list{display:grid;gap:8px;margin-top:12px}
+.evidence-item{padding:10px;border:1px solid #dfd4e9;border-radius:12px;background:#fcfaff;font-size:.88rem}
+.evidence-item strong{color:var(--plum)}
+@media(max-width:540px){.evidence-grid{grid-template-columns:1fr}}
 footer{margin-top:16px;text-align:center;color:var(--muted);font-size:.82rem;line-height:1.55}footer strong{color:var(--plum)}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 @media(max-width:860px){.toolbar{grid-template-columns:repeat(2,1fr)}.session{grid-template-columns:1fr}.mascot-panel,.activity-panel{min-height:0}}
@@ -321,6 +333,46 @@ body.simple-mode .mascot-panel{min-height:220px}
     <p>Each lesson includes a gentle warm-up, a movement activity, a cool-down, and one optional learning check. Repeat, shorten, skip, or adapt any activity. Participation and safe effort matter more than speed, score, flexibility, or comparison.</p>
     <div class="actions"><button class="btn" id="favoriteBtn">☆ Favorite Current Lesson</button><button class="btn" id="resetBtn">↺ Reset Local Progress</button></div>
   </section>
+
+<section class="parent evidence-panel" aria-labelledby="evidenceTitle">
+  <h2 id="evidenceTitle">📘 My PE Learning Evidence</h2>
+  <p>Lesson completion records participation; a correct learning check records a knowledge response. A grown-up can separately document an observation. These records are learning supports, not a diagnosis or a stand-alone claim of physical-skill mastery.</p>
+  <div class="evidence-actions">
+    <button type="button" class="btn primary" id="exportEvidenceBtn">Download PE Backup</button>
+    <label class="btn" for="importEvidenceFile" style="display:inline-flex;align-items:center;cursor:pointer">Restore PE Backup</label>
+    <input id="importEvidenceFile" type="file" accept="application/json,.json" hidden>
+    <button type="button" class="btn" id="printEvidenceBtn">Print Evidence</button>
+  </div>
+  <p class="small" id="evidenceIdentity"></p>
+  <div class="evidence-grid">
+    <div class="evidence-field">
+      <label for="evidenceRecordSelect">Completed lesson record</label>
+      <select id="evidenceRecordSelect"><option value="">Complete a lesson first</option></select>
+    </div>
+    <div class="evidence-field">
+      <label for="evidenceObservation">Adult observation</label>
+      <select id="evidenceObservation">
+        <option value="not-observed">Not observed yet</option>
+        <option value="exploring">Exploring / trying with support</option>
+        <option value="developing">Developing with prompts or adaptations</option>
+        <option value="observed">Observed in this activity</option>
+        <option value="different-pathway">Different participation pathway used</option>
+      </select>
+    </div>
+    <div class="evidence-field">
+      <label for="evidenceAdaptation">Adaptation or support used (optional)</label>
+      <textarea id="evidenceAdaptation" maxlength="1200" placeholder="e.g., seated version, visual cue, stable support"></textarea>
+    </div>
+    <div class="evidence-field">
+      <label for="evidenceNextStep">Possible next step (optional)</label>
+      <textarea id="evidenceNextStep" maxlength="1200" placeholder="A small next learning opportunity"></textarea>
+    </div>
+  </div>
+  <div class="evidence-actions"><button type="button" class="btn sunny" id="saveEvidenceBtn">Save Adult Observation</button></div>
+  <div id="evidenceStatus" class="evidence-status" role="status" aria-live="polite"></div>
+  <div id="evidenceList" class="evidence-list" aria-label="Saved PE evidence records"></div>
+</section>
+
 </section>
 
 <footer><strong>© 2026 Verve N Veda · Khaemenes Academy · Jennifer Kay Pearl</strong><br>All Rights Reserved. · Local, private, and child-friendly.</footer>
@@ -332,14 +384,16 @@ const PREK_GUIDES={"1":["Watch for relaxed steps and awareness of nearby objects
 const PREK_CHECK_VARIANTS={"1":[["What helps you walk safely in a room?",["A clear path","Running around a corner","Walking with eyes closed"],0],["If the path is blocked, what can you do?",["Ask a grown-up to clear it or choose another path","Climb over furniture","Keep going without looking"],0]],"2":[["What is a safe way to practice stopping?",["Stop in your own clear space","Bump into a friend","Keep moving when you feel unsafe"],0],["How can you join if running is not comfortable?",["March or step in place","Skip the activity completely every time","Run faster"],0]],"3":[["Which landing choice is gentlest?",["Bend your knees a little","Keep knees locked","Land on a person"],0],["If hopping feels wobbly, what is a good choice?",["Hold stable support or try a heel lift","Close your eyes","Hop higher"],0]],"4":[["What comes after the step in a step-hop pattern?",["A hop or a chosen gentle alternative","A push","A sudden fall"],0],["Can you practice the pattern while seated?",["Yes, with hands, feet, or taps","No, only jumping counts","Only if you go fastest"],0]],"5":[["What can help movements match a beat?",["Listening or watching for a steady signal","Pushing ahead of everyone","Moving with eyes closed"],0],["If a fast beat feels too quick, what can you do?",["Choose a slower pace","Force yourself to match it","Stop breathing"],0]],"6":[["Before crawling, what should a grown-up check?",["The floor and nearby space are clear","The floor is slippery","The path has sharp objects"],0],["What can you do instead of crawling?",["Reach forward while seated","Crawl over unstable furniture","Force your knees onto a hard surface"],0]],"7":[["What is a safe way to try a balance trail?",["Use a clear path and stable support if needed","Stand on a rolling chair","Close your eyes"],0],["If balance feels uncertain, what should you do?",["Pause and use support or choose a seated version","Keep going faster","Let go of support suddenly"],0]],"8":[["How far should you reach in a stretch?",["Only as far as feels comfortable","As far as possible even if it hurts","Until someone pulls your arm"],0],["What could you do if reaching overhead is uncomfortable?",["Make a smaller reach or move your hands forward","Force the stretch","Hold your breath"],0]],"9":[["What is a signal to stop a movement?",["Pain or feeling unsafe","Wanting to rest","A grown-up offering a change"],0],["How can you move your legs gently?",["Small comfortable taps or circles","Force a large circle","Kick near someone"],0]],"10":[["How should you move your neck?",["Gently in a comfortable range","Fast and hard","In big forced circles"],0],["What can you move instead if your neck feels stiff?",["Your shoulders gently","Your head with force","Your whole body while running"],0]],"11":[["What should you do with your breathing during this activity?",["Breathe naturally and comfortably","Hold your breath for a long time","Race to breathe fastest"],0],["If a breathing activity feels uncomfortable, what is a safe choice?",["Return to normal breathing and tell an adult if needed","Keep forcing deep breaths","Hold your breath longer"],0]],"12":[["What matters most when trying a yoga animal shape?",["Comfort and safe support","Copying the biggest shape","Holding a painful stretch"],0],["Which is a way to take part without getting on the floor?",["Try a seated reach or gentle back movement","Force yourself to kneel","Balance on one foot without support"],0]],"13":[["When should you freeze during freeze-dance?",["When you hear or see the stop cue","When you bump into someone","Whenever you feel unsteady without stopping safely"],0],["How can you dance without music?",["Follow a clap or visual cue","Run around the room","Move close to furniture"],0]],"14":[["Do all people need to reach the same distance?",["No, a comfortable range is different for each body","Yes, every reach must match","Only adults may stop"],0],["What is a small way to make a rainbow shape?",["Trace an arc with a finger","Pull someone else's arm","Force your shoulder back"],0]],"15":[["What should you use for beginner tossing?",["A soft, lightweight object","A stone","A sharp toy"],0],["Where should a toss go?",["Into a clear space away from faces","At someone's head","Toward a window"],0]],"16":[["What helps a ball roll safely toward a target?",["A clear lane and gentle push","A crowded lane","Aiming at breakable things"],0],["If standing is not comfortable, how can you play?",["Roll from a stable seated position","Throw the ball high","Kick near others"],0]],"17":[["Before kicking, what should you check?",["The ball path is clear","Someone is standing in the way","There is glass nearby"],0],["What is an alternative to standing kicks?",["A seated gentle foot tap or hand-roll","A hard kick toward a person","Kicking heavy furniture"],0]],"18":[["What should you check before bouncing or tapping a ball?",["The space above and around you","Only the screen","Whether someone is close enough to hit"],0],["What could replace a bouncing ball?",["A scarf or soft object moved gently","A hard object thrown high","A sharp item"],0]],"19":[["How can you cross an imaginary line without jumping?",["Step or reach across it","Run into furniture","Land on a friend"],0],["If you choose to hop, what helps a gentle landing?",["Soft knees and clear space","Locked knees","Eyes closed"],0]],"20":[["Which object is a good choice for gentle tapping?",["A balloon or soft ball","A heavy tool","Furniture"],0],["How can you make tapping safer?",["Use open space and gentle contact","Swing hard near faces","Stand close to glass"],0]],"21":[["What makes a mini sports day successful?",["Trying safely and having fun","Winning every round","Making another person lose"],0],["What can you do if one station does not suit you?",["Choose an adapted station or rest","Force yourself to continue","Hide how you feel"],0]],"22":[["What can you do while another person takes a turn?",["Wait in a safe place","Grab the object","Push in front"],0],["Do partners have to touch during a turn-taking game?",["No, turns can happen side by side","Yes, always","Only if someone says no"],0]],"23":[["Which item is okay to move with grown-up guidance?",["A light, safe object","A heavy box that blocks your view","A sharp tool"],0],["If an item is too heavy, what should you do?",["Ask an adult or point to where it belongs","Lift it anyway","Carry it above your head"],0]],"24":[["What does a stop signal mean?",["Pause movement safely","Move faster","Ignore the signal"],0],["If you need more time to understand a signal, what can help?",["A repeat or visual cue","A surprise push","A faster signal"],0]],"25":[["Which phrase encourages a teammate kindly?",["You kept trying!","You are bad at this","Move faster or else"],0],["What if you do not want to cheer out loud?",["Wave, clap softly, or use a kind gesture","Mock someone","Refuse all kindness"],0]],"26":[["What helps everyone have a fair turn?",["A clear turn-taking plan","Hiding the equipment","Grabbing first"],0],["If someone is using the equipment, what can you do?",["Wait or choose another movement","Take it away","Push them aside"],0]],"27":[["Must someone look directly at you to be listening?",["No, listening can look different for different people","Yes, always","Only adults can listen"],0],["How many directions are helpful to start with?",["One or two clear directions","Ten fast directions","None explained"],0]],"28":[["How can a child lead if moving in front of others is uncomfortable?",["Choose a move or show a picture for others","They cannot lead","They must perform the hardest move"],0],["What makes a movement circle welcoming?",["Everyone gets a way to join or choose","Only loud people lead","Everyone must do identical moves"],0]],"29":[["What is a kind way to talk about food?",["Different foods help our bodies in different ways","Some people are bad because of food","Only one food is perfect"],0],["If a child cannot act out a food movement, what can they do?",["Name or point to a food picture","Force a run","Skip learning"],0]],"30":[["When should you take a water or rest break?",["When you need one or a grown-up offers it","Only after everyone else","Never during play"],0],["What can you do if you feel thirsty or uncomfortable?",["Pause and tell a grown-up","Keep going without saying anything","Run faster"],0]],"31":[["Why is resting part of moving?",["It helps the body recover","It means movement is bad","It is always a punishment"],0],["How can you join the move-and-rest pattern?",["Move gently, then pause comfortably","Keep moving without a break","Hold your breath"],0]],"32":[["Which movements count as joyful movement?",["Dancing, swaying, wheeling, or gestures","Only fast running","Only one sport"],0],["What can you share after moving?",["A movement you enjoyed","A ranking of classmates","Who burned the most energy"],0]],"33":[["Who should help with tricky equipment or laces when needed?",["A grown-up","A stranger online","No one, even if unsafe"],0],["What helps you get ready for movement?",["A clear space and suitable equipment","Running before checking the floor","Using broken equipment"],0]],"34":[["What should you do before a high five or touch?",["Ask and respect the other person's choice","Touch anyway","Keep asking after they say no"],0],["Can you join teamwork without touching someone?",["Yes, through waving, words, or side-by-side play","No, touching is required","Only by pushing"],0]],"35":[["What could a movement hero do after a tiring activity?",["Rest, breathe, and choose what feels comfortable","Keep going no matter what","Tell others to stop resting"],0],["What should you do if a move feels wrong for your body?",["Choose a safer version or stop","Force it to finish the list","Hide pain"],0]],"36":[["What is a safe freeze?",["Pause in a steady position","Fall to the floor","Run into someone"],0],["If freezing on both feet feels hard, what can you freeze?",["Your hands or seated arms","Yourself in the middle of a run","Someone else"],0]],"37":[["Do animal moves have to be performed on the floor?",["No, hands or shoulders can make animal shapes","Yes, every time","Only the biggest move counts"],0],["What if an animal move feels uncomfortable?",["Choose another small gesture","Force the pose","Ask another child to push you into it"],0]],"38":[["What belongs in a safe obstacle route?",["Flat, soft, stable markers","Tall unstable furniture","Sharp tools"],0],["Who should set up obstacles?",["A grown-up","A child climbing furniture alone","No one needs to check"],0]],"39":[["What should happen if a balloon pops?",["Stop and let an adult collect the pieces","Put pieces in your mouth","Keep playing around fragments"],0],["What could you use instead of a balloon?",["A soft scarf","A sharp object","A glass item"],0]],"40":[["What makes a shadow?",["Light blocked by an object","Music playing","A cup of water"],0],["What is a safe way to explore a shadow outside?",["Stay with a grown-up on safe footing","Look directly at the sun","Run into an unknown area"],0]],"41":[["What helps a group make gentle parachute waves?",["Working together with light, controlled movements","Pulling as hard as possible","Letting the sheet wrap around a person"],0],["What is a simple alternative to group parachute play?",["Wave a small lightweight scarf","Wrap fabric around your neck","Pull a heavy sheet alone"],0]],"42":[["What should we celebrate at the end?",["Effort, learning, and safe movement","Only perfect moves","Only first place"],0],["How can someone join the final routine?",["Choose comfortable moves, gestures, or a seated version","Copy every move even if unsafe","Keep going when they need rest"],0]]};
 LESSONS.forEach(lesson=>{const extra=PREK_CHECK_VARIANTS[lesson.id]||[];lesson.checkBank=[lesson.check,...extra.map(([q,options,correct])=>({q,options,correct}))];const guide=PREK_GUIDES[lesson.id]||["Model a comfortable movement and praise safe choices.","Choose a smaller, supported, seated, or observational version as needed."];lesson.adultCue=guide[0];lesson.adaptation=guide[1]});
 let activeCheck=null;
+let lastCheckCorrect=null;
 const $=id=>document.getElementById(id);
 const KEY='boppi-prek-pe-garden-v2';
 function loadState(){try{
       const x=JSON.parse(localStorage.getItem(KEY)||'{}');
       return{
-        completed:x.completed||{},
+        completed:x.completed&&typeof x.completed==="object"?x.completed:{},
         seconds:Number(x.seconds)||0,
         favorites:Array.isArray(x.favorites)?x.favorites:[],
+        evidence:Array.isArray(x.evidence)?x.evidence:[],
         voice:x.voice||'boppi',
         voiceSpeed:x.voiceSpeed||'slow',
         autoRead:x.autoRead!==false,
@@ -347,7 +401,7 @@ function loadState(){try{
         simpleMode:!!x.simpleMode
       }
     }catch{
-      return{completed:{},seconds:0,favorites:[],voice:'boppi',voiceSpeed:'slow',autoRead:true,largeType:false,simpleMode:false}
+      return{completed:{},seconds:0,favorites:[],evidence:[],voice:'boppi',voiceSpeed:'slow',autoRead:true,largeType:false,simpleMode:false}
     }}
 let state=loadState(),current=null,phase=0,remaining=30,timerId=null,running=false,checkResolved=false;
 const phases=['warm','move','cool','check'];
@@ -455,6 +509,7 @@ function startTimer(){if(running||remaining<=0)return;running=true;$('startTimer
 function stopTimer(){if(timerId)clearInterval(timerId);timerId=null;running=false;if($('startTimerBtn'))$('startTimerBtn').disabled=false;if($('pauseBtn'))$('pauseBtn').disabled=true;save();updateStats()}
 function renderCheck(){
   checkResolved=false;
+  lastCheckCorrect=null;
   $("nextPhaseBtn").disabled=true;
   $("checkPanel").classList.remove("hidden");
   const bank=current.checkBank&&current.checkBank.length?current.checkBank:[current.check];activeCheck=bank[Math.floor(Math.random()*bank.length)];
@@ -470,6 +525,7 @@ function renderCheck(){
     b.onclick=()=>{
       if(b.disabled)return;
       if(p.correct){
+        lastCheckCorrect=true;
         checkResolved=true;
         $("nextPhaseBtn").disabled=false;
         [...$("checkOptions").children].forEach(x=>x.disabled=true);
@@ -499,7 +555,26 @@ function renderCheck(){
   })
 }
 function nextPhase(){if(phase<3){phase++;renderPhase()}else if(!checkResolved){$('checkFeedback').textContent='Choose an answer first. Boppi will help you learn from your choice.';speak('Choose an answer first. Boppi will help you learn from your choice.',{target:document.querySelector('.activity-panel')})}else finishLesson()}
-function finishLesson(){stopTimer();state.completed[current.id]={date:new Date().toISOString()};save();updateStats();renderLessons();speak(`Great moving! You finished ${current.title}.`,{target:document.querySelector('.activity-panel')});$('sessionScreen').classList.add('hidden');$('homeScreen').classList.remove('hidden')}
+function finishLesson(){
+  stopTimer();
+  const completedAt=new Date().toISOString();
+  state.completed[current.id]={date:completedAt};
+  if(!Array.isArray(state.evidence))state.evidence=[];
+  state.evidence.push({
+    id:"pe-"+current.id+"-"+Date.now(),
+    lessonId:current.id,
+    title:current.title,
+    completedAt,
+    participation:"completed",
+    learningCheck:lastCheckCorrect===true?"correct":lastCheckCorrect===false?"reviewed-after-help":"not-recorded",
+    adultObservation:"not-observed",
+    adaptation:"",
+    nextStep:""
+  });
+  save();updateStats();renderLessons();renderEvidence();
+  speak(`Great moving! You finished ${current.title}. A learning-evidence record was added.`,{target:document.querySelector('.activity-panel')});
+  $('sessionScreen').classList.add('hidden');$('homeScreen').classList.remove('hidden')
+}
 function updateStats(){const ids=Object.keys(state.completed).map(Number);$('completeStat').textContent=ids.length;$('minutesStat').textContent=Math.floor(state.seconds/60);$('unitStat').textContent=new Set(ids.map(id=>LESSONS.find(l=>l.id===id)?.unit).filter(Boolean)).size;$('favoriteStat').textContent=state.favorites.length;updateGarden()}
 function updateFavoriteButton(){if(!current)return;$('favoriteBtn').textContent=state.favorites.includes(current.id)?'★ Favorited':'☆ Favorite Current Lesson'}
 function fillUnits(){const u=['All',...new Set(LESSONS.map(l=>l.unit))];$('unitFilter').innerHTML=u.map(x=>`<option value="${x}">${x}</option>`).join('')}
@@ -541,8 +616,147 @@ if("speechSynthesis"in window){
 updateVoiceButtons();
 applyAccessibility();
 fillUnits();
+
+function activeLearnerId(){
+  try{return String(window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.()||"")}catch{return ""}
+}
+function escapeEvidenceText(value){
+  return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+}
+function renderEvidence(){
+  if(!Array.isArray(state.evidence))state.evidence=[];
+  const select=$("evidenceRecordSelect"), list=$("evidenceList");
+  const previous=select.value;
+  select.innerHTML="";
+  const records=[...state.evidence].sort((a,b)=>String(b.completedAt).localeCompare(String(a.completedAt)));
+  if(!records.length){
+    const o=document.createElement("option");o.value="";o.textContent="Complete a lesson first";select.appendChild(o);
+  }else{
+    records.forEach(record=>{
+      const o=document.createElement("option");o.value=record.id;
+      o.textContent=`Lesson ${record.lessonId} — ${record.title} · ${new Date(record.completedAt).toLocaleDateString()}`;
+      select.appendChild(o);
+    });
+    select.value=records.some(r=>r.id===previous)?previous:records[0].id;
+  }
+  const active=records.find(r=>r.id===select.value);
+  $("evidenceObservation").disabled=!active;
+  $("evidenceAdaptation").disabled=!active;
+  $("evidenceNextStep").disabled=!active;
+  $("saveEvidenceBtn").disabled=!active;
+  $("evidenceIdentity").textContent=activeLearnerId()
+    ?`Records are saved locally for the selected learner (${activeLearnerId()}).`
+    :"Guest mode: records are saved locally in this browser without a named learner profile.";
+  list.innerHTML="";
+  records.slice(0,12).forEach(record=>{
+    const item=document.createElement("div");item.className="evidence-item";
+    const title=document.createElement("strong");
+    title.textContent=`Lesson ${record.lessonId}: ${record.title}`;
+    const details=document.createElement("div");
+    details.textContent=`Participation: completed · Learning check: ${record.learningCheck||"not-recorded"} · Adult observation: ${record.adultObservation||"not-observed"} · ${new Date(record.completedAt).toLocaleString()}`;
+    item.append(title,details);
+    if(record.adaptation){const a=document.createElement("div");a.textContent="Adaptation: "+record.adaptation;item.appendChild(a)}
+    if(record.nextStep){const n=document.createElement("div");n.textContent="Next step: "+record.nextStep;item.appendChild(n)}
+    list.appendChild(item);
+  });
+  loadSelectedEvidence();
+}
+function loadSelectedEvidence(){
+  const record=state.evidence?.find(r=>r.id===$("evidenceRecordSelect").value);
+  $("evidenceObservation").value=record?.adultObservation||"not-observed";
+  $("evidenceAdaptation").value=record?.adaptation||"";
+  $("evidenceNextStep").value=record?.nextStep||"";
+}
+function saveAdultObservation(){
+  const record=state.evidence?.find(r=>r.id===$("evidenceRecordSelect").value);
+  if(!record){$("evidenceStatus").textContent="Complete a PE lesson before adding an observation.";return}
+  record.adultObservation=$("evidenceObservation").value;
+  record.adaptation=$("evidenceAdaptation").value.trim().slice(0,1200);
+  record.nextStep=$("evidenceNextStep").value.trim().slice(0,1200);
+  record.observedAt=new Date().toISOString();
+  save();renderEvidence();$("evidenceStatus").textContent="Observation saved locally for this lesson record.";
+}
+function downloadPEBackup(){
+  const learnerId=activeLearnerId();
+  const payload={
+    schema:"khaemenes-preschool-pe-backup-v1",
+    exportedAt:new Date().toISOString(),
+    learnerId,
+    program:"Boppi's Move & Groove Garden",
+    state:{
+      completed:state.completed,seconds:state.seconds,favorites:state.favorites,evidence:state.evidence,
+      voice:state.voice,voiceSpeed:state.voiceSpeed,autoRead:state.autoRead,
+      largeType:state.largeType,simpleMode:state.simpleMode
+    }
+  };
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="khaemenes-preschool-pe-backup.json";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  $("evidenceStatus").textContent="PE backup downloaded. Keep it somewhere private and safe.";
+}
+function restorePEBackup(file){
+  if(!file)return;
+  if(file.size>2*1024*1024){$("evidenceStatus").textContent="That backup is too large. Choose a file under 2 MB.";return}
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const payload=JSON.parse(String(reader.result||""));
+      if(payload.schema!=="khaemenes-preschool-pe-backup-v1"||!payload.state||typeof payload.state!=="object")throw new Error("This is not a recognized PE backup.");
+      const incoming=payload.state, sourceId=String(payload.learnerId||""), currentId=activeLearnerId();
+      if(sourceId!==currentId){
+        throw new Error("Learner IDs do not match. Select the learner that created this backup before restoring it.");
+      }
+      if(!incoming.completed||typeof incoming.completed!=="object"||Array.isArray(incoming.completed))throw new Error("The backup has an invalid completion record.");
+      for(const key of Object.keys(incoming.completed)){
+        if(!/^([1-9]|[1-3][0-9]|4[0-2])$/.test(key))throw new Error("The backup contains an unknown lesson identifier.");
+      }
+      if(!Array.isArray(incoming.favorites)||incoming.favorites.some(id=>!Number.isInteger(id)||id<1||id>42))throw new Error("The backup has invalid favorites.");
+      if(!Array.isArray(incoming.evidence)||incoming.evidence.length>1000)throw new Error("The backup has invalid evidence records.");
+      const safeEvidence=incoming.evidence.map(r=>{
+        if(!r||typeof r!=="object"||!Number.isInteger(Number(r.lessonId))||Number(r.lessonId)<1||Number(r.lessonId)>42)throw new Error("An evidence record has an invalid lesson identifier.");
+        return {
+          id:String(r.id||("restored-"+r.lessonId+"-"+Date.now())).slice(0,100),
+          lessonId:Number(r.lessonId),
+          title:String(r.title||"PE lesson").slice(0,120),
+          completedAt:String(r.completedAt||payload.exportedAt||new Date().toISOString()).slice(0,40),
+          participation:"completed",
+          learningCheck:["correct","reviewed-after-help","not-recorded"].includes(r.learningCheck)?r.learningCheck:"not-recorded",
+          adultObservation:["not-observed","exploring","developing","observed","different-pathway"].includes(r.adultObservation)?r.adultObservation:"not-observed",
+          adaptation:String(r.adaptation||"").slice(0,1200),
+          nextStep:String(r.nextStep||"").slice(0,1200),
+          observedAt:String(r.observedAt||"").slice(0,40)
+        };
+      });
+      if(!confirm(`Restore ${Object.keys(incoming.completed).length} completed lesson records and ${safeEvidence.length} evidence records for this learner? Current PE progress will be replaced.`))return;
+      state={
+        completed:incoming.completed,
+        seconds:Math.max(0,Math.min(100000000,Number(incoming.seconds)||0)),
+        favorites:[...new Set(incoming.favorites)],
+        evidence:safeEvidence,
+        voice:["boppi","bunny","owl","robot","rainbow"].includes(incoming.voice)?incoming.voice:"boppi",
+        voiceSpeed:["slow","normal","lively"].includes(incoming.voiceSpeed)?incoming.voiceSpeed:"slow",
+        autoRead:incoming.autoRead!==false,
+        largeType:!!incoming.largeType,
+        simpleMode:!!incoming.simpleMode
+      };
+      save();renderLessons();updateStats();renderEvidence();
+      $("evidenceStatus").textContent="Backup restored. Review the evidence list to confirm the records.";
+    }catch(error){$("evidenceStatus").textContent=error?.message||"Could not restore this backup."}
+    $("importEvidenceFile").value="";
+  };
+  reader.onerror=()=>{$("evidenceStatus").textContent="Could not read that file.";};
+  reader.readAsText(file);
+}
+$("evidenceRecordSelect").addEventListener("change",loadSelectedEvidence);
+$("saveEvidenceBtn").addEventListener("click",saveAdultObservation);
+$("exportEvidenceBtn").addEventListener("click",downloadPEBackup);
+$("printEvidenceBtn").addEventListener("click",()=>window.print());
+$("importEvidenceFile").addEventListener("change",event=>restorePEBackup(event.target.files?.[0]));
+
 renderLessons();
 updateStats();
+renderEvidence();
 window.addEventListener("beforeunload",()=>{stopTimer();stopSpeaking("")});
 </script>
 <script src="/assets/vnv-beta-link.js" defer></script>
