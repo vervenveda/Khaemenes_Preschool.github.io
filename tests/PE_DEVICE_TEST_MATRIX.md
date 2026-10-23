@@ -1,6 +1,8 @@
 # Preschool PE — Browser and Device Regression Matrix
 
-Status: **Prepared; manual device runs are not yet certified.**
+Status: **Automated Chromium regression passed (12 checks); physical-device runs remain NOT TESTED.**
+
+Automated run: [Preschool PE browser regression — GitHub Actions](https://github.com/vervenveda/Khaemenes_Preschool.github.io/actions/runs/39906690716). The test exercised a 255 px viewport and `prefers-reduced-motion: reduce` in headless Chromium. This does not substitute for manual physical-device or assistive-technology testing.
 Target: `apps/PE_move_n_groove_index.html` plus the linked teacher guide and learner-storage helper.
 
 ## Required environments
