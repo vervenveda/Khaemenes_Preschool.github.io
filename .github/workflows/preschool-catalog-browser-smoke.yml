@@ -8,6 +8,7 @@ on:
       - "assets/preschool-catalog.js"
       - "assets/preschool-playful-theme.css"
       - "apps/**"
+      - "graduation/**"
       - "tools/preschool-catalog-browser-smoke.mjs"
       - ".github/workflows/preschool-catalog-browser-smoke.yml"
   pull_request:
