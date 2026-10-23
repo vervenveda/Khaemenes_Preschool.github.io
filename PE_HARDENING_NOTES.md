@@ -26,3 +26,18 @@
 ## Next curriculum-quality pass
 
 The next step is to build a teacher-facing printable observation rubric and map these lesson outcomes against age-appropriate locomotor skills, object control, balance, body awareness, cooperation, and healthy habits. After that, return to high school PE to expand Grade 9 Weeks 9–36 assessment banks and then author the corresponding grade-specific instruction and question banks for Grades 10–12.
+
+## October 23, 2026 — forensic audit follow-through
+
+- Fixed learner-scoped legacy migration: each unscoped legacy progress key can be claimed by only the first active learner, with a persistent migration receipt. The legacy source is preserved; subsequent learners do not inherit it through the fallback path.
+- Added `tools/preschool-learner-storage-regression.mjs` and placed it in the Preschool source-regression workflow. The automated test covers one-time legacy migration, two-learner isolation, learner-scoped removal, and guest compatibility.
+- The Move & Groove portal now records a separate evidence item when a lesson finishes. The record distinguishes participation from a correct learning check or a check completed after help. It does not claim that lesson completion proves motor-skill mastery.
+- Added an adult observation workflow with optional adaptation and next-step notes.
+- Added JSON PE backup export and restore. Restore requires the same learner ID, validates the schema and lesson identifiers, limits uploads to 2 MB, sanitizes imported evidence fields, and asks for confirmation before replacing current progress.
+- Added `curriculum/pe/prek-movement-scope-sequence.json`, mapping all 42 lessons to focus, intended outcome, safety setup, adaptation options, evidence types, and a next learning opportunity. The printable teacher guide now links to this map.
+- Added `tools/preschool-pe-regression.mjs` and included it in CI. It checks all 42 lessons, all 42 adult-cue/adaptation records, the three-question banks, map parity, evidence controls, restore safeguards, and inline-script syntax.
+- Added `tests/PE_DEVICE_TEST_MATRIX.md` for repeatable browser, mobile, narrow-viewport, keyboard, reduced-motion, and speech-unavailable checks.
+
+### Verification boundary
+
+The latest GitHub source-regression workflow passed, including both new automated test scripts. This confirms the automated source contracts only. The manual browser/device scenarios in `tests/PE_DEVICE_TEST_MATRIX.md` remain **NOT TESTED** until they are performed on the listed environments. GitHub Pages deployment is tracked separately from source-regression success.
