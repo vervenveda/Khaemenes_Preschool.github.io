@@ -236,6 +236,37 @@ try{
   pass("Two incorrect answers record reviewed-after-help","Chromium exercised the help path and verified it was not recorded as a correct response.");
   await assessmentContext.close();
 
+  // Independently force the correct-answer outcome by trying randomized options
+  // across fresh lessons until a selected option resolves as correct.
+  const correctContext=await browser.newContext({viewport:{width:800,height:900}});
+  const correctPage=await correctContext.newPage();
+  await correctPage.goto(url,{waitUntil:"domcontentloaded"});
+  await correctPage.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"browser-test-correct-branch"})));
+  await correctPage.reload({waitUntil:"domcontentloaded"});
+  let observedCorrectBranch=false;
+  const correctLessonCards=correctPage.locator(".lesson-card");
+  const correctLessonCount=await correctLessonCards.count();
+  for(let lessonIndex=0;lessonIndex<correctLessonCount&&!observedCorrectBranch;lessonIndex++){
+    await correctPage.locator(".lesson-card").nth(lessonIndex).click();
+    await correctPage.locator("#nextPhaseBtn").click();
+    await correctPage.locator("#nextPhaseBtn").click();
+    await correctPage.locator("#nextPhaseBtn").click();
+    let attempts=0;
+    while(!(await correctPage.locator("#nextPhaseBtn").isEnabled())&&attempts<2){
+      const options=correctPage.locator("#checkOptions .option:not([disabled])");
+      const count=await options.count();
+      assert.ok(count>0,"correct-branch assessment has no available option");
+      await options.nth(Math.floor(Math.random()*count)).click();
+      attempts++;
+    }
+    assert.equal(await correctPage.locator("#nextPhaseBtn").isEnabled(),true,"correct-branch learning check failed to resolve");
+    await correctPage.locator("#nextPhaseBtn").click();
+    observedCorrectBranch=/Learning check: correct/.test(await correctPage.locator("#evidenceList").innerText());
+  }
+  assert.ok(observedCorrectBranch,"randomized test did not observe a correct answer across "+correctLessonCount+" lesson checks");
+  pass("Correct answer records correct","Chromium independently verified the correct-answer evidence outcome.");
+  await correctContext.close();
+
   // Test a mid-timer page interruption in a separate learner profile.
   const interruptionContext=await browser.newContext({viewport:{width:800,height:900}});
   const interruptionPage=await interruptionContext.newPage();
