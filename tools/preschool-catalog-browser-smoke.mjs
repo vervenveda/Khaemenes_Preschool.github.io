@@ -163,7 +163,8 @@ try{
 
     // Production-shaped Preschool route: verify the updated brand/header and
     // ensure learner toolbar labels wrap instead of being clipped.
-    const homePage=await context.newPage({viewport:{width:1123,height:820}});
+    const homeContext=await browser.newContext({viewport:{width:1123,height:820},reducedMotion:"reduce"});
+    const homePage=await homeContext.newPage();
     await homePage.route("https://vervenveda.com/assets/vnv-ecosystem-menu.js",route=>route.abort());
     const homeErrors=[];homePage.on("pageerror",e=>homeErrors.push(e.message));
     await homePage.goto(base+"/Khaemenes_Preschool.github.io/",{waitUntil:"domcontentloaded"});
@@ -192,6 +193,7 @@ try{
     assert.deepEqual(homeErrors,[]);
     pass("Preschool header and learner toolbar layout","Logo is larger, inline links collapse at the target width, toolbar labels wrap without clipping, and dock fits 255px.");
     await homePage.close();
+    await homeContext.close();
     await context.close();
   }finally{await browser.close()}
 }finally{
