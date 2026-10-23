@@ -44,7 +44,7 @@ The latest GitHub source-regression workflow passed, including both new automate
 
 ## Real-browser learner-journey verification — October 23, 2026
 
-**Automated Chromium regression: PASS — 12 checks.** [GitHub Actions run](https://github.com/vervenveda/Khaemenes_Preschool.github.io/actions/runs/39906690716)
+**Automated Chromium regression: PASS — 13 checks.** [GitHub Actions run](https://github.com/vervenveda/Khaemenes_Preschool.github.io/actions/runs/39906897706)
 
 The real-browser suite exercised:
 - Page startup with a distinct learner profile.
@@ -53,7 +53,7 @@ The real-browser suite exercised:
 - Keyboard focus and Enter activation.
 - Timer start, pause, and stable countdown after pausing.
 - Lesson completion and saved evidence distinguishing the learning-check response.
-- Adult observation, adaptation, and next-step persistence in the evidence list.
+- Adult observation, adaptation, and next-step persistence in the evidence list, including after reloading as the same learner.
 - Downloaded backup schema and learner identity.
 - Switching from Learner A to Learner B without exposing A's work.
 - Rejection of a backup belonging to a different learner.
