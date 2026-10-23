@@ -51,7 +51,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Notices clear space; chooses a comfortable walking or tracing path.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 2,
         "title": "Running Fun",
@@ -73,7 +73,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Responds to a signal using a safe movement or pause.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 3,
         "title": "Hopping Like a Bunny",
@@ -95,7 +95,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Chooses a comfortable hop, heel lift, or supported movement.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 4,
         "title": "Skipping Steps",
@@ -117,7 +117,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Explores step-hop order or an adapted rhythm pattern.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 5,
         "title": "Marching Parade",
@@ -139,7 +139,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Matches a beat through steps, taps, sway, or gestures.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 6,
         "title": "Crawling Critters",
@@ -161,7 +161,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Checks the surface and chooses a comfortable way to reach or travel.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 7,
         "title": "Balance Trail",
@@ -183,7 +183,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Uses support or chooses a low-risk path.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 8,
         "title": "Reach for the Sky",
@@ -205,7 +205,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Finds a comfortable reach without forcing range.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 9,
         "title": "Wiggle Legs",
@@ -227,7 +227,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Explores small movements and communicates discomfort.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 10,
         "title": "Neck & Shoulders",
@@ -249,7 +249,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Uses small, comfortable shoulder/head movements.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 11,
         "title": "Breathe & Move",
@@ -271,7 +271,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Follows a gentle movement cue while breathing naturally.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 12,
         "title": "Yoga Animals",
@@ -293,7 +293,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Selects a comfortable supported or seated shape.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 13,
         "title": "Dance Warm-Up",
@@ -315,7 +315,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Responds to a music, clap, or visual signal.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 14,
         "title": "Rainbow Stretch",
@@ -337,7 +337,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Creates an arc with a comfortable range.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 15,
         "title": "Throw & Catch",
@@ -359,7 +359,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Chooses soft equipment and directs it into open space.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 16,
         "title": "Roll It",
@@ -381,7 +381,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Uses a gentle roll toward a safe target.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 17,
         "title": "Kick It",
@@ -403,7 +403,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Checks the ball path and uses a gentle tap or alternative.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 18,
         "title": "Bounce Time",
@@ -425,7 +425,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Looks toward the moving object and notices available space.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 19,
         "title": "Jumping Fun",
@@ -447,7 +447,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Chooses a step, reach, or soft landing.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 20,
         "title": "Tap & Strike",
@@ -469,7 +469,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Uses light contact with appropriate soft equipment.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 21,
         "title": "Mini Sports Day",
@@ -491,7 +491,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Selects a station or adaptation and participates at a comfortable pace.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 22,
         "title": "Taking Turns",
@@ -513,7 +513,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Uses a turn cue without pressure for touch or eye contact.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 23,
         "title": "Helping Hands",
@@ -535,7 +535,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Selects a light safe task or directs where an item belongs.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 24,
         "title": "Following Signals",
@@ -557,7 +557,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Responds to stop/go/slow with enough processing time.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 25,
         "title": "Cheering Others",
@@ -579,7 +579,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Uses a kind phrase, quiet gesture, or supportive action.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 26,
         "title": "Sharing Equipment",
@@ -601,7 +601,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Waits, trades turns, or chooses another activity safely.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 27,
         "title": "Listening Bodies",
@@ -623,7 +623,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Follows a short verbal, visual, or modeled instruction.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 28,
         "title": "Celebration Circle",
@@ -645,7 +645,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Leads, chooses, or represents a movement in a comfortable way.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 29,
         "title": "Food Gives Us Energy",
@@ -667,7 +667,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Discusses food without shame or perfection claims.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 30,
         "title": "Water Break",
@@ -689,7 +689,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Recognizes or communicates a need to pause or drink.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 31,
         "title": "Rest & Recharge",
@@ -711,7 +711,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Practices choosing rest as a normal part of activity.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 32,
         "title": "Joyful Movement",
@@ -733,7 +733,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Identifies a personally enjoyable movement choice.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 33,
         "title": "Clean & Ready",
@@ -755,7 +755,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Recognizes an equipment or space preparation step.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 34,
         "title": "Kindness in Motion",
@@ -777,7 +777,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Asks, accepts “no,” and uses non-contact options.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 35,
         "title": "Healthy Heroes",
@@ -799,7 +799,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Chooses a safe move and recognizes when rest or adaptation is needed.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 36,
         "title": "Freeze Dance",
@@ -821,7 +821,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Pauses safely using a whole-body or small-movement option.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 37,
         "title": "Animal Moves",
@@ -843,7 +843,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Creates an animal-inspired motion that suits them.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 38,
         "title": "Obstacle Adventure",
@@ -865,7 +865,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Uses a wide, low, stable route or traces/directs the path.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 39,
         "title": "Balloon Games",
@@ -887,7 +887,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Uses gentle taps and knows to stop if a balloon pops.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 40,
         "title": "Shadow Play",
@@ -909,7 +909,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Explores a shadow from a supervised, safe location.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 41,
         "title": "Parachute Play",
@@ -931,7 +931,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Uses gentle, coordinated actions with adult-controlled fabric.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": {
         "lessonId": 42,
         "title": "Move & Groove Celebration",
@@ -953,7 +953,7 @@
         "Optional adult observation of the stated learning focus"
       ],
       "adultObservationPrompt": "Chooses favorite moves and celebrates learning, rest, and safe effort.",
-      "questionPoolSize": 1,
+      "questionPoolSize": 3,
       "nextLearningOpportunity": null
     }
   ]
