@@ -788,30 +788,52 @@ function restorePEBackup(file){
         throw new Error("Learner IDs do not match. Select the learner that created this backup before restoring it.");
       }
       if(!incoming.completed||typeof incoming.completed!=="object"||Array.isArray(incoming.completed))throw new Error("The backup has an invalid completion record.");
-      for(const key of Object.keys(incoming.completed)){
-        if(!/^([1-9]|[1-3][0-9]|4[0-2])$/.test(key))throw new Error("The backup contains an unknown lesson identifier.");
+      const isIsoTimestamp=value=>typeof value==="string"&&/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString()===value;
+      const completed=Object.create(null);
+      for(const [key,record] of Object.entries(incoming.completed)){
+        if(!/^([1-9]|[1-3]\\d|4[0-2])$/.test(key))throw new Error("The backup contains an unknown lesson identifier.");
+        const lesson=LESSONS.find(item=>item.id===Number(key));
+        if(!lesson||!record||typeof record!=="object"||Array.isArray(record)||!isIsoTimestamp(record.date))throw new Error("A completed lesson record has an invalid shape or timestamp.");
+        completed[key]={date:record.date};
       }
-      if(!Array.isArray(incoming.favorites)||incoming.favorites.some(id=>!Number.isInteger(id)||id<1||id>42))throw new Error("The backup has invalid favorites.");
+      if(!Array.isArray(incoming.favorites)||incoming.favorites.some(id=>!Number.isInteger(id)||id<1||id>42)||new Set(incoming.favorites).size!==incoming.favorites.length)throw new Error("The backup has invalid or duplicate favorites.");
       if(!Array.isArray(incoming.evidence)||incoming.evidence.length>1000)throw new Error("The backup has invalid evidence records.");
+      const allowedChecks=["correct","reviewed-after-help","not-recorded"];
+      const allowedObservations=["not-observed","exploring","developing","observed","different-pathway"];
+      const evidenceIds=new Set();
       const safeEvidence=incoming.evidence.map(r=>{
-        if(!r||typeof r!=="object"||!Number.isInteger(Number(r.lessonId))||Number(r.lessonId)<1||Number(r.lessonId)>42)throw new Error("An evidence record has an invalid lesson identifier.");
+        if(!r||typeof r!=="object"||Array.isArray(r)||!Number.isInteger(r.lessonId)||r.lessonId<1||r.lessonId>42)throw new Error("An evidence record has an invalid lesson identifier.");
+        const lesson=LESSONS.find(item=>item.id===r.lessonId);
+        if(!lesson||!completed[String(r.lessonId)])throw new Error("An evidence record must refer to a completed lesson.");
+        if(typeof r.id!=="string"||!r.id.trim()||r.id.length>100||evidenceIds.has(r.id))throw new Error("Evidence record IDs must be unique non-empty strings under 100 characters.");
+        evidenceIds.add(r.id);
+        if(r.title!==lesson.title)throw new Error("An evidence title does not match its lesson.");
+        if(!isIsoTimestamp(r.completedAt))throw new Error("An evidence completion timestamp is invalid.");
+        if(!allowedChecks.includes(r.learningCheck))throw new Error("An evidence learning-check outcome is invalid.");
+        if(!allowedObservations.includes(r.adultObservation))throw new Error("An adult-observation value is invalid.");
+        if(typeof r.adaptation!=="string"||r.adaptation.length>1200||typeof r.nextStep!=="string"||r.nextStep.length>1200)throw new Error("An adaptation or next-step note is invalid.");
+        if(r.observedAt!==""&&r.observedAt!==undefined&&!isIsoTimestamp(r.observedAt))throw new Error("An adult-observation timestamp is invalid.");
         return {
-          id:String(r.id||("restored-"+r.lessonId+"-"+Date.now())).slice(0,100),
-          lessonId:Number(r.lessonId),
-          title:String(r.title||"PE lesson").slice(0,120),
-          completedAt:String(r.completedAt||payload.exportedAt||new Date().toISOString()).slice(0,40),
+          id:r.id,
+          lessonId:r.lessonId,
+          title:lesson.title,
+          completedAt:r.completedAt,
           participation:"completed",
-          learningCheck:["correct","reviewed-after-help","not-recorded"].includes(r.learningCheck)?r.learningCheck:"not-recorded",
-          adultObservation:["not-observed","exploring","developing","observed","different-pathway"].includes(r.adultObservation)?r.adultObservation:"not-observed",
-          adaptation:String(r.adaptation||"").slice(0,1200),
-          nextStep:String(r.nextStep||"").slice(0,1200),
-          observedAt:String(r.observedAt||"").slice(0,40)
+          learningCheck:r.learningCheck,
+          adultObservation:r.adultObservation,
+          adaptation:r.adaptation,
+          nextStep:r.nextStep,
+          observedAt:r.observedAt||""
         };
       });
+      if(!Number.isFinite(incoming.seconds)||incoming.seconds<0||incoming.seconds>100000000)throw new Error("The saved movement-time total is invalid.");
+      if(!["boppi","bunny","owl","robot","rainbow"].includes(incoming.voice))throw new Error("The saved voice selection is invalid.");
+      if(!["slow","normal","lively"].includes(incoming.voiceSpeed))throw new Error("The saved voice speed is invalid.");
+      if(typeof incoming.autoRead!=="boolean"||typeof incoming.largeType!=="boolean"||typeof incoming.simpleMode!=="boolean")throw new Error("The saved accessibility settings are invalid.");
       if(!confirm(`Restore ${Object.keys(incoming.completed).length} completed lesson records and ${safeEvidence.length} evidence records for this learner? Current PE progress will be replaced.`))return;
       state={
-        completed:incoming.completed,
-        seconds:Math.max(0,Math.min(100000000,Number(incoming.seconds)||0)),
+        completed,
+        seconds:incoming.seconds,
         favorites:[...new Set(incoming.favorites)],
         evidence:safeEvidence,
         voice:["boppi","bunny","owl","robot","rainbow"].includes(incoming.voice)?incoming.voice:"boppi",
