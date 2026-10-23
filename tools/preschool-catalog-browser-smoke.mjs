@@ -268,9 +268,11 @@ try{
     await familyPage.locator("#grade").selectOption("pre-k");
     await familyPage.locator("#addLearner").click();
     await familyPage.locator("#learnerAddedNotice").getByRole("button",{name:"Add Another Learner"}).click();
+    await familyPage.evaluate(()=>sessionStorage.setItem("khaemenes_kindergarten_pin_handoff_v1",JSON.stringify({destination:"https://vervenveda.com/Khaemenes_KinderGarden.github.io/?pinClass=kindergarten",intent:"pin-kindergarten",createdAt:new Date().toISOString()})));
     await familyPage.locator("#nickname").fill("Theo Kinder");
     await familyPage.locator("#grade").selectOption("k");
     await familyPage.locator("#addLearner").click();
+    assert.equal(await familyPage.locator("#learnerAddedNotice").getByRole("button",{name:/Continue to Kinder Garden & Pin Class/}).count(),1,"a pending handoff should become an explicit finish action for a Kindergarten learner");
     const existingChildren=await familyPage.locator("#existing").innerText();
     assert.ok(existingChildren.includes("Mia PreK"));
     assert.ok(existingChildren.includes("Theo Kinder"));
