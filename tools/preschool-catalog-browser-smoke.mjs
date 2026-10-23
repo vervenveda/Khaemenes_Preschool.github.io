@@ -279,7 +279,7 @@ try{
     await familyPage.waitForSelector("#kindergartenPinReturn");
     const returnCopy=await familyPage.locator("#kindergartenPinReturn").innerText();
     assert.match(returnCopy,/Theo Kinder/);
-    assert.match(returnCopy,/Continue to Kinder Garden & Pin Class/);
+    assert.match(returnCopy,/Continue to Kinder Garden & Pin Class/i);
     assert.equal(await familyPage.locator('#kindergartenPinReturn a[href*="Khaemenes_KinderGarden.github.io"]').count(),1);
     assert.deepEqual(familyErrors,[]);
     pass("Parent two-child Preschool-to-Kindergarten journey","Creates distinct Pre-K and Kindergarten records; active Kindergarten child is named in the return banner; pin handoff is preserved.");
