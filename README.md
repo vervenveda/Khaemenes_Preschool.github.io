@@ -279,13 +279,21 @@ The Pre-K movement portal is:
 - Curriculum map: `curriculum/pe/prek-movement-scope-sequence.json`
 - Test matrix: `tests/PE_DEVICE_TEST_MATRIX.md`
 
-The portal includes 42 lessons, 3 learning-check prompts per lesson, adult cues, adaptations, local activity records, and a separate adult-observation pathway. Participation, learning-check results, and adult observations remain distinct forms of evidence.
+The portal includes 42 lessons, three learning-check prompts per lesson, adult cues, adaptations, local activity records, and a separate adult-observation pathway. The curriculum map now records the matching question-pool count and is checked against the runtime bank. Participation, learning-check results, and adult observations remain distinct forms of evidence.
 
-PE progress can be exported as a local JSON backup and restored after explicit confirmation. Restores require the same learner ID and reject malformed or oversized files. Backups contain student learning records and should be stored privately; they are not encrypted by the app.
+PE progress can be exported as a local JSON backup and restored after explicit confirmation. Restores require the same learner ID and validate completion timestamps, lesson references, evidence titles and IDs, observation values, notes, totals, and accessibility settings before replacing current progress. Backups contain student learning records and should be stored privately; they are not encrypted by the app.
 
-Learner-scoped storage performs non-destructive, one-time migration of old unscoped progress. A migration receipt prevents the same legacy progress key from being offered to later learners. The automated isolation test is `tools/preschool-learner-storage-regression.mjs`.
+Learner-scoped storage performs non-destructive, one-time migration of old unscoped progress. A migration receipt prevents the same legacy progress key from being offered to later learners. The PE page binds each open session to its learner identity; a profile change in another tab pauses activity, disables the stale page, and prevents saves from being attributed to a different learner.
 
-The repository source-regression workflow validates general source contracts plus PE curriculum and storage tests. Browser/device checks are listed in the test matrix and must be marked PASS only after being run on the specified environments.
+Interrupted PE lessons create a local learner-scoped checkpoint with lesson, phase, and remaining time. Learners can resume the checkpoint or restart the lesson. Checkpoints are cleared at completion and do not create false completion or evidence records.
+
+Automated checks include:
+- `tools/preschool-learner-storage-regression.mjs` — one-time migration and learner isolation.
+- `tools/preschool-pe-regression.mjs` — 42 lesson records, three-question pool parity, map alignment, and evidence contracts.
+- `tools/preschool-pe-browser-regression.mjs` — real Chromium tests for learner switching, backup validation, checkpoint recovery, keyboard activation, and narrow layouts.
+- `tools/preschool-catalog-browser-smoke.mjs` — 13 browser checks across nine catalog categories, including language switching, art drawing/undo/redo/export, a feelings quiz, and music controls.
+
+The source regression and catalog browser smoke have separate GitHub Actions workflows. See `tests/PE_DEVICE_TEST_MATRIX.md` for remaining physical-device and assistive-technology checks; a headless Chromium pass is not a substitute for testing on actual iOS/Android devices or with desktop Safari/Firefox.
 
 ---
 
