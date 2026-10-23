@@ -169,7 +169,10 @@ try{
     const homeErrors=[];homePage.on("pageerror",e=>homeErrors.push(e.message));
     await homePage.goto(base+"/Khaemenes_Preschool.github.io/",{waitUntil:"domcontentloaded"});
     await homePage.waitForTimeout(250);
-    const logoMetrics=await homePage.locator(".brand-bubble").evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height,headerHeight:document.querySelector(".header").getBoundingClientRect().height,navLinksDisplay:getComputedStyle(document.querySelector(".navlinks")).display}));
+    const logoMetrics=await homePage.evaluate(()=>{
+      const el=document.querySelector(".brand-bubble"),cs=el?getComputedStyle(el):null,parent=el?.parentElement,ps=parent?getComputedStyle(parent):null;
+      return {count:document.querySelectorAll(".brand-bubble").length,tag:el?.tagName,html:el?.outerHTML,width:el?.getBoundingClientRect().width,height:el?.getBoundingClientRect().height,computed:cs?{display:cs.display,width:cs.width,height:cs.height,flex:cs.flex,visibility:cs.visibility,position:cs.position}:null,parent:parent?{tag:parent.tagName,cls:parent.className,width:parent.getBoundingClientRect().width,height:parent.getBoundingClientRect().height,display:ps.display,visibility:ps.visibility}:null,headerHeight:document.querySelector(".header").getBoundingClientRect().height,navLinksDisplay:getComputedStyle(document.querySelector(".navlinks")).display,viewport:innerWidth};
+    });
     assert.ok(logoMetrics.width>=67&&logoMetrics.height>=67,"brand logo should be visibly larger; measured: "+JSON.stringify(logoMetrics));
     assert.equal(logoMetrics.navLinksDisplay,"none","busy inline nav links should collapse into the menu at the screenshot viewport");
     const rail=homePage.locator("#khaemenesLearnerUtilityToolbar");
