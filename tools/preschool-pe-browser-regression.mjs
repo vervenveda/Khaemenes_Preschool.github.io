@@ -42,7 +42,7 @@ try{
   // Test 255px viewport and reduced-motion preference.
   await page.setViewportSize({width:255,height:850});
   await page.waitForTimeout(150);
-  const dimensions=await page.evaluate(()=>({width:innerWidth,documentWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth,reduced:matchMedia("(prefers-reduced-motion: reduce)").matches,animation:getComputedStyle(document.querySelector(".mascot")).animationDuration}));
+  const dimensions=await page.evaluate(()=>({width:innerWidth,documentWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth,reduced:matchMedia("(prefers-reduced-motion: reduce)").matches,animation:getComputedStyle(document.querySelector(".mascot")).animationDuration,overflowNodes:[...document.querySelectorAll("body *")].map(el=>({tag:el.tagName,id:el.id,cls:typeof el.className==="string"?el.className:"",left:Math.round(el.getBoundingClientRect().left),right:Math.round(el.getBoundingClientRect().right),width:Math.round(el.getBoundingClientRect().width),scrollWidth:el.scrollWidth,clientWidth:el.clientWidth})).filter(el=>el.right>innerWidth+1||el.left< -1||el.scrollWidth>el.clientWidth+4).sort((a,b)=>b.right-a.right).slice(0,18)}));
   assert.ok(dimensions.documentWidth<=dimensions.width+1,JSON.stringify(dimensions));
   assert.ok(dimensions.bodyWidth<=dimensions.width+1,JSON.stringify(dimensions));
   assert.equal(dimensions.reduced,true);
