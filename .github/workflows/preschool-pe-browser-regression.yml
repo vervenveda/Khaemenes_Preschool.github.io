@@ -29,6 +29,6 @@ jobs:
       - name: Install Playwright
         run: npm install --no-save --no-package-lock playwright
       - name: Install Chromium and system dependencies
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install chromium
       - name: Run real-browser learner, backup, and accessibility tests
         run: node tools/preschool-pe-browser-regression.mjs
