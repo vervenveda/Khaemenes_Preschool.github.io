@@ -1,0 +1,34 @@
+name: Preschool PE browser regression
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/PE_move_n_groove_index.html"
+      - "assets/preschool-learner-storage.js"
+      - "tools/preschool-pe-browser-regression.mjs"
+      - ".github/workflows/preschool-pe-browser-regression.yml"
+  pull_request:
+    paths:
+      - "apps/PE_move_n_groove_index.html"
+      - "assets/preschool-learner-storage.js"
+      - "tools/preschool-pe-browser-regression.mjs"
+      - ".github/workflows/preschool-pe-browser-regression.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium-learner-journey:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: npm install --no-save --no-package-lock playwright
+      - name: Install Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Run real-browser learner, backup, and accessibility tests
+        run: node tools/preschool-pe-browser-regression.mjs
