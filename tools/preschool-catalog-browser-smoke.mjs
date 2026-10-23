@@ -239,6 +239,21 @@ try{
     pass("Kindergarten pin prompt and learner-scoped profile save","Graduation handoff opens the prompt; saving adds a Student Profile course pin; a second learner gets an independent pin.");
     await pinContext.close();
 
+    // A direct first visit without any active learner should still offer the
+    // pin path, but Not now must leave the public Kindergarten entrance usable.
+    const directContext=await browser.newContext({viewport:{width:390,height:844},reducedMotion:"reduce"});
+    const directPage=await directContext.newPage();
+    const directErrors=[];directPage.on("pageerror",e=>directErrors.push(e.message));
+    await directPage.goto(base+"/Khaemenes_KinderGarden.github.io/",{waitUntil:"domcontentloaded"});
+    await directPage.waitForSelector("#kinderPinPrompt:not([hidden])",{timeout:5000});
+    assert.match(await directPage.locator("#kpTitle").innerText(),/right learner profile/);
+    await directPage.locator("#kpLater").click();
+    assert.equal(await directPage.locator("#kinderPinPrompt").isHidden(),true);
+    assert.ok((await directPage.locator("body").innerText()).length>100,"Kindergarten page should remain usable after dismissing the pin prompt");
+    assert.deepEqual(directErrors,[]);
+    pass("Direct Kindergarten arrival remains accessible","A first-time visitor with no active learner sees the class-pin option and can dismiss it to explore the public platform.");
+    await directContext.close();
+
     // Parent journey: register a Pre-K child and a Kindergarten child, then
     // return from Kindergarten profile selection and confirm the intent banner.
     const familyContext=await browser.newContext({viewport:{width:1200,height:900},reducedMotion:"reduce"});
@@ -265,7 +280,7 @@ try{
     const returnCopy=await familyPage.locator("#kindergartenPinReturn").innerText();
     assert.match(returnCopy,/Theo Kinder/);
     assert.match(returnCopy,/Continue to Kinder Garden & Pin Class/);
-    assert.equal(await familyPage.locator('#kindergartenPinReturn a[href*="Khaemenes_KinderGarden.github.io"]').count(),2);
+    assert.equal(await familyPage.locator('#kindergartenPinReturn a[href*="Khaemenes_KinderGarden.github.io"]').count(),1);
     assert.deepEqual(familyErrors,[]);
     pass("Parent two-child Preschool-to-Kindergarten journey","Creates distinct Pre-K and Kindergarten records; active Kindergarten child is named in the return banner; pin handoff is preserved.");
     await familyContext.close();
