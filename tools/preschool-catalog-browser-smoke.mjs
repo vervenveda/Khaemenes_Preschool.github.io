@@ -100,6 +100,7 @@ try{
     await artPage.goto(base+"/apps/Art_color_studio/index.html",{waitUntil:"domcontentloaded"});
     const canvas=artPage.locator("#canvas");
     assert.ok(await canvas.count(),"Color Studio canvas missing");
+    await canvas.scrollIntoViewIfNeeded();
     const box=await canvas.boundingBox();assert.ok(box&&box.width>20&&box.height>20,"Color Studio canvas is not visible");
     await artPage.mouse.move(box.x+box.width*.35,box.y+box.height*.35);
     await artPage.mouse.down();await artPage.mouse.move(box.x+box.width*.55,box.y+box.height*.48,{steps:5});await artPage.mouse.up();
