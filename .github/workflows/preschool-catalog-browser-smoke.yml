@@ -18,6 +18,7 @@ on:
       - "assets/preschool-playful-theme.css"
       - "assets/preschool-catalog.js"
       - "apps/**"
+      - "graduation/**"
       - "tools/preschool-catalog-browser-smoke.mjs"
       - ".github/workflows/preschool-catalog-browser-smoke.yml"
   workflow_dispatch:
