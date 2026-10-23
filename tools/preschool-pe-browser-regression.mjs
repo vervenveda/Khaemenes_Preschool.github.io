@@ -182,7 +182,9 @@ try{
   await page.reload({waitUntil:"domcontentloaded"});
   page.once("dialog",dialog=>dialog.accept());
   await page.locator("#importEvidenceFile").setInputFiles(backupPath);
-  await page.waitForFunction(()=>/Backup restored/.test(document.querySelector("#evidenceStatus").textContent));
+  await page.waitForFunction(()=>document.querySelector("#evidenceStatus").textContent.length>0);
+  const restoreStatus=await page.locator("#evidenceStatus").innerText();
+  assert.match(restoreStatus,/Backup restored/,`valid matching-learner backup was rejected: ${restoreStatus}`);
   assert.equal(await page.locator("#completeStat").innerText(),"1");
   assert.match(await page.locator("#evidenceList").innerText(),/Adult observation: observed/);
   pass("Restore matching learner backup","Restore requires confirmation and returns A's completion and observation.");
