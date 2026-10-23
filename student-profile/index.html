@@ -64,6 +64,7 @@ footer{padding:24px 0;text-align:center;font-size:13px;color:var(--muted)}
 <div class="grid">
 <section class="card span7" aria-labelledby="nextTitle"><h2 id="nextTitle">Today · Next</h2><div id="nextStep" class="activity-list" aria-live="polite"><a class="activity" href="../#today">Open Preschool’s family-guided activities →</a></div></section>
 <section class="card span5" aria-labelledby="pinsTitle"><h2 id="pinsTitle">📌 My pinned adventures</h2><div id="pinnedActivities" class="activity-list"><p class="muted">Pin your favorite games in the Preschool Adventure Garden.</p></div>
+<div class="actions appearance-controls"><button type="button" id="pinPreschoolPath" class="secondary">📌 Pin Preschool pathway</button><button type="button" id="unpinPreschoolPath" class="secondary">Remove pathway pin</button></div>
 <div class="appearance-controls" id="pinControls">
   <label for="adventureSelect">Choose a favorite Pre-K adventure</label>
   <select id="adventureSelect"><option value="">Choose a Preschool game</option></select>
@@ -102,7 +103,7 @@ footer{padding:24px 0;text-align:center;font-size:13px;color:var(--muted)}
     </div>
     <p class="notice">A parent or guardian chooses when to move into Kindergarten using the Academy Family Portal. Keeping the same learner ID allows an eligible Kindergarten profile to recognize a matching Pre-K visual record on this browser. No curriculum grades, portfolio approvals, or Kindergarten enrollment are changed here.</p>
     <div class="actions">
-      <a class="button secondary" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/student-profile/">Explore Kindergarten Profile →</a>
+      <a class="button secondary" href="../graduation/">🎓 Open Preschool Graduation Garden →</a><a class="button secondary" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/student-profile/">Explore Kindergarten Profile →</a>
       <a class="button secondary" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Family Portal →</a>
     </div>
   </div>
@@ -128,6 +129,7 @@ footer{padding:24px 0;text-align:center;font-size:13px;color:var(--muted)}
 const BASE="https://vervenveda.com/Khaemenes_Preschool.github.io/";
 const KEY="khaemenes_preschool_visual_profile_v1:";
 const FAVORITES_KEY="khaemenes_profile_favorites_v1";
+const COURSE_KEY="khaemenes_course_pins_v1";
 const THEMES=["sky","forest","ocean","sunset","night"];
 const AVATARS=["🌈","🦊","🦋","🦉","🚀","🌻","🐝","🐢"];
 const $=id=>document.getElementById(id);
@@ -213,15 +215,33 @@ function updateFavorite(id,add){
   $("pinStatus").textContent=add?"Adventure pinned for this learner.":"Adventure removed from this learner's favorites.";
  }catch{$("pinStatus").textContent="Could not save this change. Browser storage may be full."}
 }
+function preschoolPathPinned(){
+ const data=read(COURSE_KEY,null);
+ const items=data?.learners?.[activeId];
+ return Array.isArray(items)&&items.some(x=>x?.id==="khaemenes-preschool"||x?.courseId==="khaemenes-preschool");
+}
+function updatePreschoolPath(pin){
+ if(!consent())return;
+ const prior=read(COURSE_KEY,{version:1,learners:{},updatedAt:null});
+ if(prior?.version!==1||!prior.learners||typeof prior.learners!=="object"||Array.isArray(prior.learners)){announce("Existing Academy class pins use an unfamiliar format. No changes made.",true);return}
+ const before=prior.learners[activeId];
+ if(before!==undefined&&!Array.isArray(before)){announce("Existing learner class pins need review. No changes made.",true);return}
+ const entries=Array.isArray(before)?before:[];
+ const filtered=entries.filter(x=>x?.id!=="khaemenes-preschool"&&x?.courseId!=="khaemenes-preschool");
+ prior.learners[activeId]=pin?[...filtered,{id:"khaemenes-preschool",courseId:"khaemenes-preschool",title:"Khaemenes Preschool",subtitle:"Family-guided Pre-K learning",href:BASE,source:"preschool-profile",pinnedAt:new Date().toISOString()}]:filtered;
+ prior.updatedAt=new Date().toISOString();
+ try{localStorage.setItem(COURSE_KEY,JSON.stringify(prior));renderLearning();announce(pin?"Preschool pathway pinned for this child.":"Preschool pathway removed from this child's pins.")}catch{announce("Could not save the pathway pin. Nothing changed.",true)}
+}
 function renderLearning(){
  $("nextStep").replaceChildren();$("pinnedActivities").replaceChildren();
  const items=catalog?.childActivities?.()||[];
  const favoriteIds=selectedFavorites();
  const byId=id=>items.find(item=>String(item.id)===String(id));
  const pinned=favoriteIds.map(byId).filter(Boolean).slice(0,12);
- $("favoritePill").textContent=String(pinned.length)+" pinned adventures";
+ if(preschoolPathPinned())linkItem($("pinnedActivities"),"🌈 My Preschool Pathway",BASE+"#today","Family-guided learning; not a graded class");
+ $("favoritePill").textContent=String(pinned.length+(preschoolPathPinned()?1:0))+" pinned favorites";
  for(const item of pinned)linkItem($("pinnedActivities"),(item.icon||"🌟")+" "+(item.title||"Adventure"),safeActivityUrl(item),"Pinned in Preschool");
- if(!pinned.length){const p=document.createElement("p");p.className="muted";p.textContent="No pinned adventures yet. Choose a favorite below or tap a heart in the Preschool Garden.";$("pinnedActivities").append(p)}
+ if(!pinned.length&&!preschoolPathPinned()){const p=document.createElement("p");p.className="muted";p.textContent="No pinned adventures yet. Choose a favorite below or tap a heart in the Preschool Garden.";$("pinnedActivities").append(p)}
  const select=$("adventureSelect"),previous=select.value;
  select.replaceChildren();
  const empty=document.createElement("option");empty.value="";empty.textContent="Choose a Preschool game";select.append(empty);
@@ -314,6 +334,8 @@ $("childPhoto").addEventListener("change",async event=>{
 });
 $("removePhoto").addEventListener("click",()=>{if(!consent())return;look.photo="";saveLook()});
 $("pinAdventure").addEventListener("click",()=>updateFavorite($("adventureSelect").value,true));
+$("pinPreschoolPath").addEventListener("click",()=>updatePreschoolPath(true));
+$("unpinPreschoolPath").addEventListener("click",()=>updatePreschoolPath(false));
 $("unpinAdventure").addEventListener("click",()=>updateFavorite($("adventureSelect").value,false));
 $("printProfile").addEventListener("click",()=>{if(!consent())return;window.print()});
 $("showHandoff").addEventListener("click",()=>{
@@ -344,7 +366,7 @@ $("learnerSelect").addEventListener("change",event=>{
  if(found&&found.familyId===family.familyId)R.setActive?.({familyId:family.familyId,learnerId:id});
 });
 window.addEventListener("khaemenes-family-changed",refresh);
-window.addEventListener("storage",event=>{if(["khaemenes_active_learner_v1","khaemenes_family_registry_v1"].includes(event.key))refresh();else if(event.key===FAVORITES_KEY&&activeId)renderLearning()});
+window.addEventListener("storage",event=>{if(["khaemenes_active_learner_v1","khaemenes_family_registry_v1"].includes(event.key))refresh();else if([FAVORITES_KEY,COURSE_KEY].includes(event.key)&&activeId)renderLearning()});
 refresh();
 })();
 </script>
