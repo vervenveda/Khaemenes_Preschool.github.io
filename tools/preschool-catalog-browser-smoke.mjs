@@ -239,6 +239,70 @@ try{
     pass("Kindergarten pin prompt and learner-scoped profile save","Graduation handoff opens the prompt; saving adds a Student Profile course pin; a second learner gets an independent pin.");
     await pinContext.close();
 
+    // Parent journey: register a Pre-K child and a Kindergarten child, then
+    // return from Kindergarten profile selection and confirm the intent banner.
+    const familyContext=await browser.newContext({viewport:{width:1200,height:900},reducedMotion:"reduce"});
+    const familyPage=await familyContext.newPage();
+    const familyErrors=[];familyPage.on("pageerror",e=>familyErrors.push(e.message));
+    await familyPage.goto(base+"/Khaemenes_Academy.github.io/family/enroll/",{waitUntil:"domcontentloaded"});
+    await familyPage.locator("#familyName").fill("Two Child Test Family");
+    await familyPage.locator("#adultName").fill("Parent Test");
+    await familyPage.locator("#adultRole").selectOption("parent");
+    await familyPage.locator("#createFamily").click();
+    await familyPage.locator("#nickname").fill("Mia PreK");
+    await familyPage.locator("#grade").selectOption("pre-k");
+    await familyPage.locator("#addLearner").click();
+    await familyPage.locator("#learnerAddedNotice").getByRole("button",{name:"Add Another Learner"}).click();
+    await familyPage.locator("#nickname").fill("Theo Kinder");
+    await familyPage.locator("#grade").selectOption("k");
+    await familyPage.locator("#addLearner").click();
+    const existingChildren=await familyPage.locator("#existing").innerText();
+    assert.ok(existingChildren.includes("Mia PreK"));
+    assert.ok(existingChildren.includes("Theo Kinder"));
+    await familyPage.evaluate(()=>sessionStorage.setItem("khaemenes_kindergarten_pin_handoff_v1",JSON.stringify({destination:"https://vervenveda.com/Khaemenes_KinderGarden.github.io/?pinClass=kindergarten",intent:"pin-kindergarten",createdAt:new Date().toISOString()})));
+    await familyPage.goto(base+"/Khaemenes_Academy.github.io/family/",{waitUntil:"domcontentloaded"});
+    await familyPage.waitForSelector("#kindergartenPinReturn");
+    const returnCopy=await familyPage.locator("#kindergartenPinReturn").innerText();
+    assert.match(returnCopy,/Theo Kinder/);
+    assert.match(returnCopy,/Continue to Kinder Garden & Pin Class/);
+    assert.equal(await familyPage.locator('#kindergartenPinReturn a[href*="Khaemenes_KinderGarden.github.io"]').count(),2);
+    assert.deepEqual(familyErrors,[]);
+    pass("Parent two-child Preschool-to-Kindergarten journey","Creates distinct Pre-K and Kindergarten records; active Kindergarten child is named in the return banner; pin handoff is preserved.");
+    await familyContext.close();
+
+    // Homeschool teacher journey: add five learners without blocking confirm
+    // dialogs, then verify all five stay visible in the same family workspace.
+    const teacherContext=await browser.newContext({viewport:{width:1200,height:900},reducedMotion:"reduce"});
+    const teacherPage=await teacherContext.newPage();
+    const teacherErrors=[];teacherPage.on("pageerror",e=>teacherErrors.push(e.message));
+    await teacherPage.goto(base+"/Khaemenes_Academy.github.io/family/enroll/",{waitUntil:"domcontentloaded"});
+    await teacherPage.locator("#familyName").fill("Five Learner Homeschool");
+    await teacherPage.locator("#adultName").fill("Educator Test");
+    await teacherPage.locator("#adultRole").selectOption("educator");
+    await teacherPage.locator("#createFamily").click();
+    const learnerFixtures=[
+      {name:"Learner PreK",grade:"pre-k"},
+      {name:"Learner Kinder",grade:"k"},
+      {name:"Learner One",grade:"01"},
+      {name:"Learner Two",grade:"02"},
+      {name:"Learner Three",grade:"03"}
+    ];
+    for(let i=0;i<learnerFixtures.length;i++){
+      const learner=learnerFixtures[i];
+      await teacherPage.locator("#nickname").fill(learner.name);
+      await teacherPage.locator("#grade").selectOption(learner.grade);
+      await teacherPage.locator("#addLearner").click();
+      if(i<learnerFixtures.length-1)await teacherPage.locator("#learnerAddedNotice").getByRole("button",{name:"Add Another Learner"}).click();
+    }
+    const learnerList=await teacherPage.locator("#existing").innerText();
+    for(const learner of learnerFixtures)assert.ok(learnerList.includes(learner.name),"missing in enrollment list: "+learner.name);
+    await teacherPage.goto(base+"/Khaemenes_Academy.github.io/family/",{waitUntil:"domcontentloaded"});
+    await teacherPage.waitForSelector(".learner");
+    assert.equal(await teacherPage.locator(".learner").count(),5,"Family Hub should render five individual learner cards");
+    assert.deepEqual(teacherErrors,[]);
+    pass("Homeschool educator five-learner journey","Educator creates one family, adds five learners consecutively without a blocking dialog, and sees all five cards in Family Hub.");
+    await teacherContext.close();
+
     // Exercise the production-shaped home route with the actual shared Academy
     // header CSS and root-site toolbar JavaScript, not the hidden duplicate logo
     // or the older convenience copy bundled with this repository.
