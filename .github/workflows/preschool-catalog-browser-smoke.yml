@@ -3,7 +3,10 @@ on:
   push:
     branches: [main]
     paths:
+      - "index.html"
+      - "assets/vnv-beta-link.js"
       - "assets/preschool-catalog.js"
+      - "assets/preschool-playful-theme.css"
       - "apps/**"
       - "tools/preschool-catalog-browser-smoke.mjs"
       - ".github/workflows/preschool-catalog-browser-smoke.yml"
