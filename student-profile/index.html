@@ -49,6 +49,7 @@ footer{padding:24px 0;text-align:center;font-size:13px;color:var(--muted)}
 <h1>My Pre-K Learning Profile</h1>
 <p class="muted">Your child’s picture and next adventure come first. Below are the same learning-profile tools available across the Academy, presented in a family-assisted Pre-K format.</p>
 <div id="accountNote" class="notice" role="status">Looking for an existing Pre-K learner on this browser…</div>
+<div id="learnerSwitch" class="card" hidden><label for="learnerSelect">Choose an existing Pre-K learner in this family</label><select id="learnerSelect"></select><p class="muted">Each learner has separate pictures, colors, goals, pinned adventures, and evidence.</p></div>
 <section class="card profile-hero" aria-labelledby="childTitle">
 <div id="photoPreview" class="photo" aria-label="Child avatar">🌈</div>
 <div>
@@ -174,7 +175,19 @@ function renderLearning(){
  }
  $("progressPill").textContent=preschoolRows.length?"Learning continuation available":"Family-guided learning";
 }
+function renderLearnerChoices(){
+ const select=$("learnerSelect"),area=$("learnerSwitch");
+ const active=R?.getLearner?.()||null;
+ const familyId=active?.familyId||R?.activeIds?.().familyId;
+ const family=familyId?R?.getFamily?.(familyId):null;
+ const candidates=Array.isArray(family?.learners)?family.learners.filter(x=>x?.learnerId&&x.stage==="preschool"):[];
+ select.replaceChildren();
+ for(const child of candidates){const option=document.createElement("option");option.value=child.learnerId;option.textContent=child.nickname||"Pre-K learner";select.append(option)}
+ if(active?.learnerId&&candidates.some(x=>x.learnerId===active.learnerId))select.value=active.learnerId;
+ area.hidden=candidates.length<2;
+}
 function refresh(){
+ renderLearnerChoices();
  const l=learner();
  const box=$("accountNote");
  activeId=l?.learnerId||"";
@@ -234,6 +247,11 @@ $("importLook").addEventListener("change",async event=>{
  try{const value=JSON.parse(await file.text());if(id!==activeId||value?.schema!=="khaemenes.prek-visual.v1"||value?.learnerId!==activeId){announce("Backup belongs to another learner or has the wrong format. No changes made.",true);return}
   const prior=look;look=normalize(value);if(!saveLook()){look=prior;renderLook()}
  }catch{announce("Could not read the visual backup. No changes made.",true)}
+});
+$("learnerSelect").addEventListener("change",event=>{
+ const id=event.target.value, family=R?.getFamily?.();
+ const found=family?.learners?.find?.(x=>x.learnerId===id&&x.stage==="preschool");
+ if(found&&found.familyId===family.familyId)R.setActive?.({familyId:family.familyId,learnerId:id});
 });
 window.addEventListener("khaemenes-family-changed",refresh);
 window.addEventListener("storage",event=>{if(["khaemenes_active_learner_v1","khaemenes_family_registry_v1"].includes(event.key))refresh()});
