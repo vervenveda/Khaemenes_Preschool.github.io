@@ -14,10 +14,17 @@ const server=http.createServer((req,res)=>{
   try{pathname=decodeURIComponent(new URL(req.url,"http://127.0.0.1").pathname)}catch{res.writeHead(400);res.end("Bad URL");return}
   // Mirror the repository's production route so the shared learner toolbar
   // can identify the Preschool surface during this local browser test.
-  const localPath=pathname.startsWith("/Khaemenes_Preschool.github.io/")
-    ?pathname.slice("/Khaemenes_Preschool.github.io".length)||"/"
-    :pathname;
-  const target=path.resolve(root,"."+localPath);
+  let routeRoot=root,localPath=pathname;
+  if(pathname.startsWith("/Khaemenes_Preschool.github.io/")){
+    localPath=pathname.slice("/Khaemenes_Preschool.github.io".length)||"/";
+  }else if(pathname.startsWith("/Khaemenes_Academy.github.io/")){
+    routeRoot=path.join(root,"shared-academy");
+    localPath=pathname.slice("/Khaemenes_Academy.github.io".length)||"/";
+  }else if(pathname.startsWith("/Khaemenes_KinderGarden.github.io/")){
+    routeRoot=path.join(root,"shared-kindergarten");
+    localPath=pathname.slice("/Khaemenes_KinderGarden.github.io".length)||"/";
+  }
+  const target=path.resolve(routeRoot,"."+localPath);
   if(!target.startsWith(root+path.sep)&&target!==root){res.writeHead(403);res.end("Forbidden");return}
   let file=target;
   try{if(fs.statSync(file).isDirectory())file=path.join(file,"index.html")}catch{}
