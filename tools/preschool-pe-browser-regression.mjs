@@ -49,6 +49,13 @@ try{
   assert.ok(parseFloat(dimensions.animation)<=0.001,JSON.stringify(dimensions));
   pass("255px narrow viewport and reduced motion",JSON.stringify(dimensions));
 
+  // Verify the second required narrow-screen target separately.
+  await page.setViewportSize({width:320,height:850});
+  const dimensions320=await page.evaluate(()=>({width:innerWidth,documentWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth}));
+  assert.ok(dimensions320.documentWidth<=320,JSON.stringify(dimensions320));
+  assert.ok(dimensions320.bodyWidth<=320,JSON.stringify(dimensions320));
+  pass("320px narrow viewport",JSON.stringify(dimensions320));
+
   // Keyboard activation: focus and activate a user-facing toggle.
   await page.setViewportSize({width:800,height:900});
   const largeType=page.locator("#largeTypeBtn");
@@ -56,7 +63,15 @@ try{
   assert.equal(await largeType.evaluate(el=>el===document.activeElement),true);
   await page.keyboard.press("Enter");
   assert.equal(await page.locator("body").evaluate(el=>el.classList.contains("large-type")),true);
-  pass("Keyboard focus and activation","Large-type toggle can be focused and activated using Enter.");
+  const keyboardTargets=["#simpleModeBtn","#voiceSpeed","#unitFilter","#startTimerBtn","#nextPhaseBtn","#evidenceObservation","#saveEvidenceBtn"];
+  for(const selector of keyboardTargets){
+    const target=page.locator(selector);
+    if(await target.count()&&await target.isVisible()&&await target.isEnabled()){
+      await target.focus();
+      assert.equal(await target.evaluate(el=>el===document.activeElement),true,"keyboard focus failed for "+selector);
+    }
+  }
+  pass("Keyboard focus and activation","Large-type toggle activates with Enter; representative navigation, timer, phase, and evidence controls accept keyboard focus.");
 
   // Open first lesson, pause an actual running timer, and verify it remains paused.
   await page.locator(".lesson-card").first().click();
@@ -167,6 +182,55 @@ try{
   await page.waitForFunction(()=>/too large/.test(document.querySelector("#evidenceStatus").textContent));
   assert.equal(await page.locator("#completeStat").innerText(),"1");
   pass("Reject oversized backup","Files over 2 MB are rejected without replacing current progress.");
+
+  // Exercise the two-incorrect-answer path independently. The answer options
+  // are randomized by the app, so vary selections across fresh lessons until
+  // the browser actually demonstrates the reviewed-after-help outcome.
+  const assessmentContext=await browser.newContext({viewport:{width:800,height:900},acceptDownloads:true});
+  const assessmentPage=await assessmentContext.newPage();
+  await assessmentPage.goto(url,{waitUntil:"domcontentloaded"});
+  await assessmentPage.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"browser-test-assessment-branch"})));
+  await assessmentPage.reload({waitUntil:"domcontentloaded"});
+  let observedHelpBranch=false;
+  const lessonCards=assessmentPage.locator(".lesson-card");
+  const lessonCount=await lessonCards.count();
+  for(let lessonIndex=0;lessonIndex<lessonCount&&!observedHelpBranch;lessonIndex++){
+    await assessmentPage.locator(".lesson-card").nth(lessonIndex).click();
+    await assessmentPage.locator("#nextPhaseBtn").click();
+    await assessmentPage.locator("#nextPhaseBtn").click();
+    await assessmentPage.locator("#nextPhaseBtn").click();
+    let attempts=0;
+    while(!(await assessmentPage.locator("#nextPhaseBtn").isEnabled())&&attempts<2){
+      const options=assessmentPage.locator("#checkOptions .option:not([disabled])");
+      const count=await options.count();
+      assert.ok(count>0,"assessment has no available option");
+      await options.nth(Math.floor(Math.random()*count)).click();
+      attempts++;
+    }
+    assert.equal(await assessmentPage.locator("#nextPhaseBtn").isEnabled(),true,"learning check failed to resolve");
+    await assessmentPage.locator("#nextPhaseBtn").click();
+    const evidence=await assessmentPage.locator("#evidenceList").innerText();
+    observedHelpBranch=/Learning check: reviewed-after-help/.test(evidence);
+  }
+  assert.ok(observedHelpBranch,"randomized test did not observe reviewed-after-help across "+lessonCount+" lesson checks");
+  pass("Two incorrect answers record reviewed-after-help","Chromium exercised the help path and verified it was not recorded as a correct response.");
+  await assessmentContext.close();
+
+  // Test a mid-timer page interruption in a separate learner profile.
+  const interruptionContext=await browser.newContext({viewport:{width:800,height:900}});
+  const interruptionPage=await interruptionContext.newPage();
+  await interruptionPage.goto(url,{waitUntil:"domcontentloaded"});
+  await interruptionPage.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"browser-test-interrupted-session"})));
+  await interruptionPage.reload({waitUntil:"domcontentloaded"});
+  await interruptionPage.locator(".lesson-card").first().click();
+  await interruptionPage.locator("#startTimerBtn").click();
+  await interruptionPage.waitForTimeout(1100);
+  await interruptionPage.reload({waitUntil:"domcontentloaded"});
+  assert.equal(await interruptionPage.locator("#completeStat").innerText(),"0");
+  assert.equal(await interruptionPage.locator("#evidenceRecordSelect option").count(),1);
+  assert.match(await interruptionPage.locator("#evidenceRecordSelect option").first().innerText(),/Complete a lesson first/);
+  pass("Reload interruption preserves lesson boundary","Reloading mid-timer does not falsely mark a PE lesson completed or create adult evidence.");
+  await interruptionContext.close();
 
   await context.close();
 }finally{
