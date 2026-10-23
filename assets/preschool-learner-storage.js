@@ -9,6 +9,8 @@
   const VERSION="1.0.0";
   const PROFILE_KEY="khaemenes_preschool_profile_v1";
   const PREFIX="khaemenes.preschool.learner.v1::";
+  const MIGRATION_PREFIX="khaemenes_preschool_legacy_migrated_v1::";
+  const migrationMarker=key=>MIGRATION_PREFIX+encodeURIComponent(String(key));
   const nativeGet=Storage.prototype.getItem;
   const nativeSet=Storage.prototype.setItem;
   const nativeRemove=Storage.prototype.removeItem;
@@ -43,10 +45,21 @@
     if(nativeGet.call(this,removed)!==null)return null;
     const saved=nativeGet.call(this,scoped);
     if(saved!==null)return saved;
-    // Read legacy device progress once as a non-destructive migration source.
+    // A legacy unscoped record belongs to the first active learner who
+    // claims it. Never offer the same legacy record to every later learner.
+    const marker=migrationMarker(key);
+    if(nativeGet.call(global.localStorage,marker)!==null)return null;
     const legacy=nativeGet.call(this,String(key));
-    if(legacy!==null)nativeSet.call(this,scoped,legacy);
-    return legacy;
+    if(legacy!==null){
+      nativeSet.call(this,scoped,legacy);
+      nativeSet.call(global.localStorage,marker,JSON.stringify({
+        version:VERSION,
+        migratedAt:new Date().toISOString(),
+        learnerId:id
+      }));
+      return legacy;
+    }
+    return null;
   };
   Storage.prototype.setItem=function(key,value){
     if(!isLocal(this)||!learnerId()||isSystemKey(key))return nativeSet.call(this,key,String(value));
@@ -63,6 +76,7 @@
     activeLearnerId:learnerId,
     activeProfile:profile,
     scopedKey,
+    migrationMarker,
     mode:()=>learnerId()?"learner":"guest"
   });
 })(window);
