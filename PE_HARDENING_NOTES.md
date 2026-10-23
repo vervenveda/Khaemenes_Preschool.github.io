@@ -44,13 +44,17 @@ The latest GitHub source-regression workflow passed, including both new automate
 
 ## Real-browser learner-journey verification — October 23, 2026
 
-**Automated Chromium regression: PASS — 13 checks.** [GitHub Actions run](https://github.com/vervenveda/Khaemenes_Preschool.github.io/actions/runs/39906897706)
+**Automated Chromium regression: PASS — 18 checks.** [GitHub Actions run](https://github.com/vervenveda/Khaemenes_Preschool.github.io/actions/runs/39907870537)
 
 The real-browser suite exercised:
 - Page startup with a distinct learner profile.
 - 255 px viewport width with document and body widths constrained to 255 px.
+- Shared ecosystem hamburger opened at 255 px; drawer ended at 241 px, with 130 links checked and no viewport overflow.
+- A separate 320 px viewport check, with document/body width exactly 320 px.
+- Independent `correct` and `reviewed-after-help` learning-check evidence outcomes.
+- Mid-timer reload without false lesson completion or fabricated adult evidence.
 - Reduced-motion preference.
-- Keyboard focus and Enter activation.
+- Keyboard focus and Enter activation for the large-type button plus representative navigation, timer, phase, and evidence controls.
 - Timer start, pause, and stable countdown after pausing.
 - Lesson completion and saved evidence distinguishing the learning-check response.
 - Adult observation, adaptation, and next-step persistence in the evidence list, including after reloading as the same learner.
@@ -68,6 +72,6 @@ The real-browser suite exercised:
 
 ### Verification boundary
 
-GitHub source regression, Beta index coverage, Beta rollout, Pages build/deployment, and the Chromium browser regression all passed for commit `9649b6c0046f65ae8aa344c5616ea5843ebf9b4c).
+GitHub source regression, Beta index coverage, and the Chromium browser regression passed for test commit `21d378f0e3f16062d6d54824a570fd2eb43a6aed`. Pages build/deployment was still running at the time this note was refreshed.
 
-This is a real headless Chromium run with a 255 px viewport, not a physical phone/tablet certification. The separately maintained `tests/PE_DEVICE_TEST_MATRIX.md` still requires manual checks on physical iOS/Android devices, desktop Safari/Firefox, and with real keyboard/assistive-technology setups before the beta can be described as fully device-certified.
+This is a real headless Chromium run with 255 px and 320 px viewport checks, not a physical phone/tablet certification. The separately maintained `tests/PE_DEVICE_TEST_MATRIX.md` still requires manual checks on physical iOS/Android devices, desktop Safari/Firefox, and with real keyboard/assistive-technology setups before the beta can be described as fully device-certified.
