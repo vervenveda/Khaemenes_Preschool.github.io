@@ -168,6 +168,7 @@ function renderLook(){
  else box.textContent=look.avatar;
  for(const b of $("avatarChoices").querySelectorAll("button"))b.setAttribute("aria-pressed",String(b.dataset.avatar===look.avatar&&!look.photo));
  for(const b of $("backgroundChoices").querySelectorAll("button"))b.setAttribute("aria-pressed",String(b.dataset.theme===look.theme));
+ if(!$("handoffPreview").hidden)renderHandoff();
 }
 function safeActivityUrl(item){
  if(!item||typeof item.file!=="string")return BASE+"#activities";
@@ -195,7 +196,7 @@ function selectedFavorites(){
 }
 function updateFavorite(id,add){
  if(!consent())return;
- const activity=catalog?.childActivities?.().find(item=>item?.id===id);
+ const activity=(catalog?.childActivities?.()||[]).find(item=>item?.id===id);
  if(!activity){$("pinStatus").textContent="Choose a Preschool game first.";return}
  const map=favoritesMap();
  if(!map||map[activeId]!==undefined&&!Array.isArray(map[activeId])){
