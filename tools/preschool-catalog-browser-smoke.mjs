@@ -184,7 +184,7 @@ try{
     assert.equal(await gradPage.locator("#certificateOutput").isVisible(),true);
     assert.equal(await gradPage.locator("#recipientName").innerText(),"Avery");
     assert.equal(await gradPage.locator("#printCertificate").isEnabled(),true);
-    assert.equal(await gradPage.getByRole("link",{name:/Enter Khaemenes Kinder Garden/}).getAttribute("href"),"https://vervenveda.com/Khaemenes_KinderGarden.github.io/");
+    assert.equal(await gradPage.getByRole("link",{name:/Enter Khaemenes Kinder Garden/}).getAttribute("href"),"https://vervenveda.com/Khaemenes_KinderGarden.github.io/?from=preschool-graduation&pinClass=kindergarten");
     await gradPage.reload({waitUntil:"domcontentloaded"});
     assert.equal(await gradPage.locator("#progressCount").innerText(),"3 of 3 stars ⭐","graduation completion should persist for the same learner");
     assert.equal(await gradPage.locator("#certificateOutput").isVisible(),true,"certificate unlock should persist for the same learner");
@@ -195,8 +195,42 @@ try{
     const graduationKeys=await gradPage.evaluate(()=>JSON.parse(localStorage.getItem("creche-preschool-graduation-v1")||'{"records":{}}'));
     assert.ok(graduationKeys.records["graduation-browser-A"]&&graduationKeys.records["graduation-browser-B"],"graduation state should be kept under explicit learner IDs");
     assert.deepEqual(gradErrors,[]);
-    pass("Preschool graduation and Kindergarten handoff","Three games unlock a printable certificate; same-learner progress persists; a second learner starts separately; Kindergarten link is correct.");
+    pass("Preschool graduation and Kindergarten handoff","Three games unlock a printable certificate; same-learner progress persists; a second learner starts separately; Kindergarten link requests the pin prompt.");
     await gradContext.close();
+
+    // Verify the actual Kindergarten pin-prompt asset with Academy-style learner
+    // APIs: each learner receives an independent course pin in Student Profile.
+    const pinContext=await browser.newContext({viewport:{width:390,height:844},reducedMotion:"reduce"});
+    await pinContext.addInitScript(()=>{
+      const id=()=>localStorage.getItem("test-kindergarten-learner")||"kindergarten-pin-A";
+      window.KhaemenesKinderContinuity={getLearnerSummary:()=>({learnerId:id(),nickname:id()==="kindergarten-pin-A"?"Avery":"Blake",stage:"kindergarten",pathway:"kindergarten",hasProfile:true,hasLinkedLearner:true})};
+      window.KhaemenesFamilyRegistry={getLearner:()=>({learnerId:id(),nickname:id()==="kindergarten-pin-A"?"Avery":"Blake",stage:"kindergarten"})};
+    });
+    const pinPage=await pinContext.newPage();
+    await pinPage.goto(base+"/graduation/?from=preschool-graduation&pinClass=kindergarten",{waitUntil:"domcontentloaded"});
+    await pinPage.addScriptTag({path:path.join(root,"shared-kindergarten","assets","khaemenes-kindergarten-pin-prompt.js")});
+    await pinPage.waitForSelector("#kinderPinPrompt:not([hidden])");
+    assert.match(await pinPage.locator("#kpTitle").innerText(),/Save Kinder Garden to your profile/);
+    await pinPage.locator("#kpSave").click();
+    assert.match(await pinPage.locator("#kpTitle").innerText(),/Kinder Garden is pinned/);
+    let classPins=await pinPage.evaluate(()=>JSON.parse(localStorage.getItem("khaemenes_course_pins_v1")||'{"learners":{}}'));
+    assert.equal(classPins.learners["kindergarten-pin-A"].length,1);
+    assert.equal(classPins.learners["kindergarten-pin-A"][0].id,"khaemenes-kindergarten");
+    assert.equal(classPins.learners["kindergarten-pin-A"][0].href,"https://vervenveda.com/Khaemenes_KinderGarden.github.io/");
+    // Switch the simulated active learner and confirm the prompt creates an
+    // independent pin list rather than inheriting Avery's class pin.
+    await pinPage.evaluate(()=>localStorage.setItem("test-kindergarten-learner","kindergarten-pin-B"));
+    await pinPage.goto(base+"/graduation/?from=preschool-graduation&pinClass=kindergarten",{waitUntil:"domcontentloaded"});
+    await pinPage.addScriptTag({path:path.join(root,"shared-kindergarten","assets","khaemenes-kindergarten-pin-prompt.js")});
+    await pinPage.waitForSelector("#kinderPinPrompt:not([hidden])");
+    assert.match(await pinPage.locator("#kpTitle").innerText(),/Save Kinder Garden to your profile/);
+    await pinPage.locator("#kpSave").click();
+    classPins=await pinPage.evaluate(()=>JSON.parse(localStorage.getItem("khaemenes_course_pins_v1")||'{"learners":{}}'));
+    assert.equal(classPins.learners["kindergarten-pin-A"].length,1);
+    assert.equal(classPins.learners["kindergarten-pin-B"].length,1);
+    assert.equal(classPins.learners["kindergarten-pin-B"][0].courseId,"khaemenes-kindergarten");
+    pass("Kindergarten pin prompt and learner-scoped profile save","Graduation handoff opens the prompt; saving adds a Student Profile course pin; a second learner gets an independent pin.");
+    await pinContext.close();
 
     // Exercise the production-shaped home route with the actual shared Academy
     // header CSS and root-site toolbar JavaScript, not the hidden duplicate logo
