@@ -42,6 +42,12 @@ jobs:
           repository: verveNveda/vervenveda.github.io
           ref: main
           path: shared-verve
+      - name: Checkout Kindergarten pin prompt
+        uses: actions/checkout@v4
+        with:
+          repository: verveNveda/Khaemenes_KinderGarden.github.io
+          ref: main
+          path: shared-kindergarten
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
