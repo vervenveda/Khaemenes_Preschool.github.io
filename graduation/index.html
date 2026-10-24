@@ -175,7 +175,8 @@ function load(){
  $("certificateOutput").classList.remove("show");$("printCertificate").disabled=true;
  document.querySelectorAll("#backpackChoices .choice, #patternChoices .choice, #kindnessChoices .choice").forEach(b=>{b.setAttribute("aria-pressed","false");b.classList.remove("correct")});
  $("backpackStatus").textContent="";$("patternStatus").textContent="";$("kindnessStatus").textContent="";
- $("certificateName").value=typeof record?.nickname==="string"?record.nickname:(id!=="guest"&&profile?.learnerId===id&&typeof profile.nickname==="string"?profile.nickname:"");
+ const academy=window.KhaemenesFamilyRegistry?.getLearner?.(id)||null;
+ $("certificateName").value=typeof record?.nickname==="string"&&record.nickname?record.nickname:(academy?.learnerId===id&&typeof academy.nickname==="string"?academy.nickname:(id!=="guest"&&profile?.learnerId===id&&typeof profile.nickname==="string"?profile.nickname:""));
  if(record&&typeof record==="object"){
   for(const gameId of ["backpack","pattern","kindness"])if(record.completed?.[gameId]===true)completed.add(gameId);
   certificateUnlocked=completed.size===3&&record.certificateUnlocked===true;
