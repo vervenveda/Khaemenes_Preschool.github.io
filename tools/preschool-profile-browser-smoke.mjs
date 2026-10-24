@@ -91,6 +91,7 @@ try{
  await page.locator("#pv2Goal").fill("Sing the ABC song");
  await page.locator("#pv2SaveCompass").click();
  await page.locator("#learnerSelect").selectOption(first.b);
+ assert.equal(await page.locator("#adultConfirm").isChecked(),false,"new child must require new adult confirmation");
  assert.equal(await page.locator("#childTitle").innerText(),"QA Moonbeam");
  assert.equal(await page.locator("#photoPreview img").count(),0);
  assert.equal(await page.locator("body").getAttribute("data-prek-background"),"sky");
@@ -146,5 +147,40 @@ try{
  console.log("PASS mobile Pre-K profile layout");
 
  assert.deepEqual(errors,[],"uncaught JavaScript errors: "+JSON.stringify(errors));
+ await page.evaluate(()=>{
+  const R=window.KhaemenesFamilyRegistry;
+  const f=R.createFamily({displayName:"Mixed Stage QA",adultName:"QA Adult"});
+  const p=R.registerLearner({familyId:f.familyId,nickname:"Only Preschool Child",stage:"preschool",grade:"pre-k"});
+  const k=R.registerLearner({familyId:f.familyId,nickname:"Older Kindergarten Child",stage:"kindergarten",grade:"k"});
+  R.setActive({familyId:f.familyId,learnerId:k.learnerId});
+ });
+ assert.equal(await page.locator("#learnerSwitch").isVisible(),true,"one Pre-K child must be selectable while Kindergarten sibling is active");
+ await page.locator("#learnerSelect option").first().evaluate(x=>{x.selected=true});
+ await page.locator("#learnerSelect").selectOption({index:0});
+ assert.equal(await page.locator("#childTitle").innerText(),"Only Preschool Child");
+ console.log("PASS one Pre-K learner can be reached while another grade is active");
+ await page.goto("https://vervenveda.com/Khaemenes_Preschool.github.io/graduation/",{waitUntil:"domcontentloaded"});
+ const ids=await page.evaluate(()=>{
+  const R=window.KhaemenesFamilyRegistry,f=R.getFamily();
+  const a=f.learners.find(x=>x.nickname==="Only Preschool Child");
+  const b=R.registerLearner({familyId:f.familyId,nickname:"Second Preschool Child",stage:"preschool",grade:"pre-k"});
+  const key="creche-preschool-graduation-v1",root={version:1,records:{}};
+  root.records[a.learnerId]={completed:{backpack:true,pattern:true,kindness:true},certificateUnlocked:true,nickname:"Only Preschool Child"};
+  localStorage.setItem(key,JSON.stringify(root));
+  R.setActive({familyId:f.familyId,learnerId:a.learnerId});
+  return {a:a.learnerId,b:b.learnerId};
+ });
+ await page.reload({waitUntil:"domcontentloaded"});
+ assert.match(await page.locator("#progressCount").innerText(),/3 of 3/);
+ assert.equal(await page.locator("#certificateOutput").evaluate(n=>n.classList.contains("show")),true);
+ await page.evaluate(ids=>{
+  const R=window.KhaemenesFamilyRegistry,f=R.getFamily();R.setActive({familyId:f.familyId,learnerId:ids.b});
+ },ids);
+ assert.match(await page.locator("#progressCount").innerText(),/0 of 3/,"sibling must not inherit celebration stars");
+ assert.equal(await page.locator("#certificateOutput").evaluate(n=>n.classList.contains("show")),false);
+ assert.equal(await page.locator("#printCertificate").isDisabled(),true);
+ const firstRecord=await page.evaluate(ids=>JSON.parse(localStorage.getItem("creche-preschool-graduation-v1")).records[ids.a],ids);
+ assert.equal(firstRecord.certificateUnlocked,true);
+ console.log("PASS Preschool graduation stars and certificate remain isolated between siblings");
  console.log("PASS complete Pre-K profile browser smoke");
 }finally{await context.close();await browser.close()}
