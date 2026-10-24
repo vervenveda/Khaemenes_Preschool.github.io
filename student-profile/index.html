@@ -378,7 +378,12 @@ $("learnerSelect").addEventListener("change",event=>{
  if(found&&found.familyId===family.familyId)R.setActive?.({familyId:family.familyId,learnerId:id});
 });
 window.addEventListener("khaemenes-family-changed",refresh);
-window.addEventListener("storage",event=>{if(["khaemenes_active_learner_v1","khaemenes_family_registry_v1"].includes(event.key))refresh();else if([FAVORITES_KEY,COURSE_KEY].includes(event.key)&&activeId)renderLearning()});
+window.addEventListener("storage",event=>{
+ if(["khaemenes_active_learner_v1","khaemenes_family_registry_v1"].includes(event.key)){refresh();return}
+ if(!activeId)return;
+ if([FAVORITES_KEY,COURSE_KEY].includes(event.key))renderLearning();
+ if(event.key===profileKey()){look=normalize(read(profileKey(),{}));renderLook()}
+});
 refresh();
 })();
 </script>
