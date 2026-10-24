@@ -291,7 +291,9 @@ function refresh(){
  $("handoffPreview").hidden=true;
  $("showHandoff").setAttribute("aria-expanded","false");
  $("pinStatus").textContent="";
+ const priorId=activeId;
  activeId=l?.learnerId||"";
+ if(priorId!==activeId)$("adultConfirm").checked=false;
  if(!l){
   box.hidden=false;
   box.replaceChildren();
