@@ -63,7 +63,7 @@ try{
  let favoriteSnapshot=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes_profile_favorites_v1")),first.a);
  assert.deepEqual(favoriteSnapshot[first.a],[favoriteId],"pin must reuse the existing learner-scoped Preschool favorites record");
  await page.reload({waitUntil:"domcontentloaded"});
- assert.equal(await page.locator("#favoritePill").innerText(),"1 pinned adventures");
+ assert.equal(await page.locator("#favoritePill").innerText(),"1 pinned favorites");
  console.log("PASS full Pre-K adventure pin is stored under existing Preschool favorites identity");
  await page.locator("#adultConfirm").check();
  await page.evaluate(()=>{window.__printCalls=0;window.print=()=>{window.__printCalls++}});
@@ -95,7 +95,7 @@ try{
  assert.equal(await page.locator("#photoPreview img").count(),0);
  assert.equal(await page.locator("body").getAttribute("data-prek-background"),"sky");
  assert.notEqual(await page.locator("#pv2Goal").inputValue(),"Sing the ABC song");
- assert.notEqual(await page.locator("#favoritePill").innerText(),"1 pinned adventures","other child must have independent favorites");
+ assert.notEqual(await page.locator("#favoritePill").innerText(),"1 pinned favorites","other child must have independent favorites");
  let map=await page.evaluate(()=>JSON.parse(localStorage.getItem("khaemenes_profile_favorites_v1")));
  assert.equal(map[first.b],undefined,"switching children must not manufacture another child's favorites");
 
@@ -106,15 +106,29 @@ try{
  assert.equal(await page.locator("#photoPreview img").count(),1);
  assert.equal(await page.locator("#pv2Goal").inputValue(),"Sing the ABC song");
  console.log("PASS same-family learner switch isolates photos, themes, and Academy goals");
- assert.equal(await page.locator("#favoritePill").innerText(),"1 pinned adventures");
+ assert.equal(await page.locator("#favoritePill").innerText(),"1 pinned favorites");
  await page.locator("#adultConfirm").check();
  await page.locator("#adventureSelect").selectOption(favoriteId);
  await page.locator("#unpinAdventure").click();
- assert.equal(await page.locator("#favoritePill").innerText(),"0 pinned adventures");
+ assert.equal(await page.locator("#favoritePill").innerText(),"0 pinned favorites");
  const clean=await page.evaluate(()=>JSON.parse(localStorage.getItem("khaemenes_profile_favorites_v1")));
  assert.deepEqual(clean[first.a],[],"unpin must update original favorites record without affecting siblings");
  assert.equal(clean[first.b],undefined);
  console.log("PASS Pre-K unpin removes only the selected learner's existing favorite");
+
+ await page.locator("#pinPreschoolPath").click();
+ assert.match(await page.locator("#pinnedActivities").innerText(),/My Preschool Pathway/);
+ assert.equal(await page.locator("#favoritePill").innerText(),"1 pinned favorites");
+ const pathPins=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes_course_pins_v1")).learners[id],first.a);
+ assert.equal(pathPins.filter(x=>x.id==="khaemenes-preschool").length,1);
+ await page.locator("#learnerSelect").selectOption(first.b);
+ assert.doesNotMatch(await page.locator("#pinnedActivities").innerText(),/My Preschool Pathway/);
+ await page.locator("#learnerSelect").selectOption(first.a);
+ await page.locator("#adultConfirm").check();
+ await page.locator("#unpinPreschoolPath").click();
+ assert.doesNotMatch(await page.locator("#pinnedActivities").innerText(),/My Preschool Pathway/);
+ assert.equal(await page.evaluate(()=>window.KhaemenesFamilyRegistry.getLearner().stage),"preschool");
+ console.log("PASS Pre-K pathway pin and unpin preserve sibling isolation and placement");
  const download=page.waitForEvent("download");
  await page.locator("#exportLook").click();
  const exported=await download;
