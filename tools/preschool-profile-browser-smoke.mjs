@@ -52,6 +52,28 @@ try{
  assert.equal(await page.locator("body").getAttribute("data-prek-background"),"forest");
  assert.equal(await page.locator("#childTitle").innerText(),"QA Sunshine");
  console.log("PASS profile appearance persists on reload");
+ await page.evaluate(id=>{
+  const C=window.KhaemenesLearningContinuation;
+  C.publish({learnerId:id,courseId:"qa-wrong-route",stage:"preschool",courseTitle:"Wrong cross-stage route",nextTitle:"Wrong cross-stage route",nextHref:"https://vervenveda.com/Khaemenes_KinderGarden.github.io/graduation/"});
+  window.dispatchEvent(new Event("khaemenes-learning-continuation-changed"));
+ },first.a);
+ await page.locator("#firstStepLink").waitFor({state:"visible"});
+ assert.doesNotMatch(await page.locator("#nextStep").innerText(),/Wrong cross-stage route/);
+ assert.match(await page.locator("#firstStepLink").getAttribute("href"),/Khaemenes_Preschool\.github\.io/);
+ await page.evaluate(id=>window.KhaemenesLearningContinuation.removeCourse(id,"qa-wrong-route"),first.a);
+ console.log("PASS Pre-K rejects unrelated ecosystem continuation links"); 
+ const lookKey="khaemenes_preschool_visual_profile_v1:"+encodeURIComponent(first.a);
+ await page.evaluate(key=>{
+  const v=JSON.parse(localStorage.getItem(key));v.theme="ocean";localStorage.setItem(key,JSON.stringify(v));
+  window.dispatchEvent(new StorageEvent("storage",{key}));
+ },lookKey);
+ assert.equal(await page.locator("body").getAttribute("data-prek-background"),"ocean");
+ await page.evaluate(key=>{
+  const v=JSON.parse(localStorage.getItem(key));v.theme="forest";localStorage.setItem(key,JSON.stringify(v));
+  window.dispatchEvent(new StorageEvent("storage",{key}));
+ },lookKey);
+ assert.equal(await page.locator("body").getAttribute("data-prek-background"),"forest");
+ console.log("PASS Pre-K visual changes from another tab refresh selected learner");
  assert.equal(await page.locator("#avatarChoices button").count(),8,"Pre-K should have eight supported avatars");
  assert.equal(await page.locator("#avatarChoices button[data-avatar='🐝']").count(),1);
  assert.equal(await page.locator("#avatarChoices button[data-avatar='🐢']").count(),1);
