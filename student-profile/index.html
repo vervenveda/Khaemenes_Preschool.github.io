@@ -250,9 +250,19 @@ function renderLearning(){
  let rows=[];
  try{rows=C?.readLearner?.(activeId)||[]}catch{}
  if(!Array.isArray(rows))rows=[];
- const preschoolRows=rows.filter(row=>row&&row.stage==="preschool"&&row.nextHref).slice(0,5);
+ const preschoolRows=rows.filter(row=>{
+  if(!row||row.stage!=="preschool"||!row.nextHref)return false;
+  try{
+   const target=new URL(row.nextHref,BASE);
+   return target.protocol==="https:"&&target.origin==="https://vervenveda.com"&&
+    target.pathname.startsWith("/Khaemenes_Preschool.github.io/");
+  }catch{return false}
+ }).slice(0,5);
  if(preschoolRows.length){
-  preschoolRows.forEach(row=>{let url;try{url=new URL(row.nextHref,BASE);if(url.protocol!=="https:"||!["vervenveda.com","vervenveda.github.io"].includes(url.hostname))return}catch{return}linkItem($("nextStep"),row.nextTitle||row.courseTitle||"Continue learning",url.href,row.summary||"")});
+  preschoolRows.forEach(row=>{
+   const url=new URL(row.nextHref,BASE);
+   linkItem($("nextStep"),row.nextTitle||row.courseTitle||"Continue learning",url.href,row.summary||"");
+  });
   const first=$("nextStep").querySelector("a");if(first)$("firstStepLink").href=first.href;
  }else{
   const first=pinned[0],dest=first?safeActivityUrl(first):BASE+"#today";
