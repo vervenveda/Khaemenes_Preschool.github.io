@@ -157,7 +157,7 @@ let journeyId="";
 function readJSON(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch{return fallback}}
 function learnerIdentity(){
   const academy=window.KhaemenesFamilyRegistry?.getLearner?.()||null;
-  if(academy?.learnerId)return academy.stage==="preschool"?String(academy.learnerId):"guest";
+  if(academy?.learnerId)return String(academy.learnerId); // Preserve historical Pre-K keepsakes when this learner advances into Kindergarten or Elementary.
   try{
     const active=window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.();
     if(active)return String(active);
