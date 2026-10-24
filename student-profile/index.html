@@ -282,7 +282,7 @@ function renderLearnerChoices(){
  select.replaceChildren();
  for(const child of candidates){const option=document.createElement("option");option.value=child.learnerId;option.textContent=child.nickname||"Pre-K learner";select.append(option)}
  if(active?.learnerId&&candidates.some(x=>x.learnerId===active.learnerId))select.value=active.learnerId;
- area.hidden=candidates.length<2;
+ area.hidden=candidates.length===0||(candidates.length===1&&candidates[0].learnerId===active?.learnerId);
 }
 function refresh(){
  renderLearnerChoices();
