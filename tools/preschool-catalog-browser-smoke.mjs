@@ -174,7 +174,14 @@ try{
     const gradPage=await gradContext.newPage();
     const gradErrors=[];gradPage.on("pageerror",e=>gradErrors.push(e.message));
     await gradPage.goto(base+"/graduation/index.html",{waitUntil:"domcontentloaded"});
-    await gradPage.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"graduation-browser-A",nickname:"Avery",ageBand:"4-5",pathway:"preschool"})));
+    await gradPage.evaluate(()=>{
+      const R=window.KhaemenesFamilyRegistry;
+      if(!R)throw new Error("Academy family registry not available at Preschool graduation");
+      const family=R.createFamily({displayName:"Preschool Catalog QA",adultName:"QA Guardian"});
+      R.registerLearner({familyId:family.familyId,existingLearnerId:"graduation-browser-A",nickname:"Avery",stage:"preschool",grade:"pre-k"});
+      R.registerLearner({familyId:family.familyId,existingLearnerId:"graduation-browser-B",nickname:"Blake",stage:"preschool",grade:"pre-k"});
+      R.setActive({familyId:family.familyId,learnerId:"graduation-browser-A"});
+    });
     await gradPage.reload({waitUntil:"domcontentloaded"});
     await gradPage.locator('[data-item="book"]').click();
     await gradPage.locator('[data-item="water"]').click();
@@ -196,12 +203,13 @@ try{
     await gradPage.reload({waitUntil:"domcontentloaded"});
     assert.equal(await gradPage.locator("#progressCount").innerText(),"3 of 3 stars ⭐","graduation completion should persist for the same learner");
     assert.equal(await gradPage.locator("#certificateOutput").isVisible(),true,"certificate unlock should persist for the same learner");
-    await gradPage.evaluate(()=>localStorage.setItem("khaemenes_preschool_profile_v1",JSON.stringify({learnerId:"graduation-browser-B",nickname:"Blake",ageBand:"4-5",pathway:"preschool"})));
+    await gradPage.evaluate(()=>window.KhaemenesFamilyRegistry.setActive({learnerId:"graduation-browser-B"}));
     await gradPage.reload({waitUntil:"domcontentloaded"});
     assert.equal(await gradPage.locator("#progressCount").innerText(),"0 of 3 stars ⭐","a second learner must not inherit the first learner's celebration progress");
     assert.equal(await gradPage.locator("#certificateName").inputValue(),"Blake","second learner must receive their own name, not the previous learner's certificate name");
     const graduationKeys=await gradPage.evaluate(()=>JSON.parse(localStorage.getItem("creche-preschool-graduation-v1")||'{"records":{}}'));
-    assert.ok(graduationKeys.records["graduation-browser-A"]&&graduationKeys.records["graduation-browser-B"],"graduation state should be kept under explicit learner IDs");
+    assert.ok(graduationKeys.records["graduation-browser-A"],"first learner ceremony must remain saved");
+    assert.equal(graduationKeys.records["graduation-browser-B"],undefined,"unplayed sibling must not inherit or receive a fabricated graduation record");
     assert.deepEqual(gradErrors,[]);
     pass("Preschool graduation and Kindergarten handoff","Three games unlock a printable certificate; same-learner progress persists; a second learner starts separately; Kindergarten handoff routes through existing-learner placement and profile exploration.");
     await gradContext.close();
