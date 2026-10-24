@@ -191,7 +191,8 @@ try{
     assert.equal(await gradPage.locator("#certificateOutput").isVisible(),true);
     assert.equal(await gradPage.locator("#recipientName").innerText(),"Avery");
     assert.equal(await gradPage.locator("#printCertificate").isEnabled(),true);
-    assert.equal(await gradPage.getByRole("link",{name:/Enter Khaemenes Kinder Garden/}).getAttribute("href"),"https://vervenveda.com/Khaemenes_KinderGarden.github.io/?from=preschool-graduation&pinClass=kindergarten");
+    assert.equal(await gradPage.getByRole("link",{name:/Explore my Kindergarten profile/}).getAttribute("href"),"https://vervenveda.com/Khaemenes_KinderGarden.github.io/student-profile/");
+    assert.equal(await gradPage.getByRole("link",{name:/Place my existing learner in Kindergarten/}).getAttribute("href"),"https://vervenveda.com/Khaemenes_Academy.github.io/family/enroll/");
     await gradPage.reload({waitUntil:"domcontentloaded"});
     assert.equal(await gradPage.locator("#progressCount").innerText(),"3 of 3 stars ⭐","graduation completion should persist for the same learner");
     assert.equal(await gradPage.locator("#certificateOutput").isVisible(),true,"certificate unlock should persist for the same learner");
@@ -202,7 +203,7 @@ try{
     const graduationKeys=await gradPage.evaluate(()=>JSON.parse(localStorage.getItem("creche-preschool-graduation-v1")||'{"records":{}}'));
     assert.ok(graduationKeys.records["graduation-browser-A"]&&graduationKeys.records["graduation-browser-B"],"graduation state should be kept under explicit learner IDs");
     assert.deepEqual(gradErrors,[]);
-    pass("Preschool graduation and Kindergarten handoff","Three games unlock a printable certificate; same-learner progress persists; a second learner starts separately; Kindergarten link requests the pin prompt.");
+    pass("Preschool graduation and Kindergarten handoff","Three games unlock a printable certificate; same-learner progress persists; a second learner starts separately; Kindergarten handoff routes through existing-learner placement and profile exploration.");
     await gradContext.close();
 
     // Verify the actual Kindergarten pin-prompt asset with Academy-style learner
