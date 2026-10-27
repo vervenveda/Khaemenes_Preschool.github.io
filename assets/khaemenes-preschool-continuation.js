@@ -40,7 +40,9 @@ function publish(){
  const favorites=read(FAVORITES_KEY,{})?.[learner.learnerId]||[];
  const visitedIds=Array.isArray(visits)?visits:[];
  const favoriteIds=Array.isArray(favorites)?favorites:[];
- const last=read(LAST_KEY,null);
+ // The home dashboard writes one last-opened receipt per learner.
+ // Never substitute another child's unowned browser-wide last-opened record.
+ const last=read(LAST_KEY+"::"+encodeURIComponent(learner.learnerId),null);
  const lastApp=last?.id&&visitedIds.includes(last.id)?byId(last.id):null;
  const favoriteApp=favoriteIds.map(byId).find(Boolean)||null;
  const next=lastApp||favoriteApp||apps[0]||null;
