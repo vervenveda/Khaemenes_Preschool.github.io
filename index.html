@@ -1479,7 +1479,7 @@ function activeVisualProfile(){
   const learner=activePreschoolLearner();
   return learner&&String(profile?.learnerId||"")!==String(learner.learnerId)?null:profile;
 }
-function effectiveAgeBand(){return activeAcademyLearner()?.ageBand||profile?.ageBand||"4-5"}
+function effectiveAgeBand(){return activePreschoolLearner()?.ageBand||activeVisualProfile()?.ageBand||"4-5"}
 function currentCommunicationStyle(){
   const academyStyle=activeAcademyLearner()?.mentorIdentity?.communicationStyle;
   const ownProfile=activeVisualProfile();
@@ -1631,8 +1631,9 @@ function buildCategories(){
   document.querySelectorAll("[data-pick]").forEach(button=>button.addEventListener("click",()=>openCategoryPopup(button.dataset.pick)));
 }
 function stageBadge(app){
-  if(!profile||!app.mentor?.eligible)return "";
-  const fits=Array.isArray(app.mentor.ages)&&app.mentor.ages.includes(profile.ageBand);
+  const ownProfile=activeVisualProfile();
+  if(!ownProfile||!app.mentor?.eligible)return "";
+  const fits=Array.isArray(app.mentor.ages)&&app.mentor.ages.includes(ownProfile.ageBand);
   return fits
     ? '<span class="stage-badge fit">✓ Fits this learning stage</span>'
     : '<span class="stage-badge together">Try together with a grown-up</span>';
@@ -1656,7 +1657,10 @@ function toggleFavorite(id,button){
   button.textContent=favorites.has(id)?"♥":"♡";
   button.setAttribute("aria-pressed",String(favorites.has(id)));
   updateFavorites();filterActivities();renderProfileCenter();
-  if(!wasSaved)toast(profile?`Pinned to ${profile.nickname}’s learner profile.`:"Saved on this device. No registration required.");
+  const ownProfile=activeVisualProfile(),linked=activePreschoolLearner();
+  if(!wasSaved)toast(ownProfile?`Pinned to ${ownProfile.nickname}’s learner profile.`:linked?
+    "Pinned only for the selected Academy learner on this browser.":
+    "Saved on this device. No registration required.");
 }
 function appendVisitEvent(id){
   const log=readHomeArray(VISIT_LOG_KEY).filter(item=>item&&item.id&&item.at).slice(-399);
@@ -2130,9 +2134,10 @@ function setReducedMotion(value){
   renderParentDashboard();
 }
 function randomPromptCategory(){
-  if(profile){
+  const ownProfile=activeVisualProfile();
+  if(ownProfile){
     const interestToCategory={stories:"words",numbers:"numbers",art:"art",music:"music",nature:"wonder",movement:"movement",helping:"life",space:"wonder"};
-    const choices=(profile.interests||[]).map(i=>interestToCategory[i]).filter(Boolean);
+    const choices=(ownProfile.interests||[]).map(i=>interestToCategory[i]).filter(Boolean);
     if(choices.length)return choices[Math.floor(Math.random()*choices.length)];
   }
   const cats=Object.keys(OFFSCREEN_PROMPTS);
@@ -2175,7 +2180,7 @@ function buildMentorPlan({fresh=false}={}){
   const minutes=Number($("mentorMinutes")?.value)||25;
   const energy=$("mentorEnergy")?.value||"steady";
   writeHome(JOURNEY_PREFS_KEY,{minutes,energy});
-  const age=learner.ageBand||profile?.ageBand||"4-5";
+  const age=learner.ageBand||activeVisualProfile()?.ageBand||"4-5";
   const recent=new Set(readHomeArray(VISIT_LOG_KEY).slice(-12).map(item=>item.id));
   const pool=PRESCHOOL_CATALOG.mentorActivities({preserveLegacyIds:false})
     .filter(item=>item.ages.includes(age));
