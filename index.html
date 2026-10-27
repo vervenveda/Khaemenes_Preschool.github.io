@@ -1559,7 +1559,7 @@ function safeProfile(){
 function syncContinuity(){
   const pinned=[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean).map(app=>({id:app.id,title:app.title,icon:app.icon,category:app.category,file:app.file,url:new URL(appUrl(app),location.href).href}));
   writeJSON(CONTINUITY_KEY,{version:1,source:"Khaemenes Preschool · Crechè",origin:location.origin,learner:safeProfile(),favoriteIds:[...favorites],favorites:pinned,visitedIds:[...visited],updatedAt:new Date().toISOString(),formalGradeEligible:false});
-  window.dispatchEvent(new CustomEvent("khaemenes-preschool-continuity-changed",{detail:{learnerId:profile?.learnerId||null,visited:visited.size,favorites:favorites.size}}));
+  window.dispatchEvent(new CustomEvent("khaemenes-preschool-continuity-changed",{detail:{learnerId:activePreschoolLearner()?.learnerId||activeVisualProfile()?.learnerId||null,visited:visited.size,favorites:favorites.size}}));
 }
 const appUrl=app=>"./apps/"+app.file.split("/").map(encodeURIComponent).join("/");
 const catLabel=key=>CATEGORIES[key]?.label||key;
@@ -1886,6 +1886,7 @@ function exportFamilyRecord(){
   const mentorProgress=readHome(MENTOR_PROGRESS_KEY,null);
   const mentorSettings=readHome(MENTOR_SETTINGS_KEY,null);
   const mentorPlan=readHome(MENTOR_PLAN_KEY,null);
+  const ownContext=readJSON(MENTOR_CONTEXT_KEY,null),activeId=activePreschoolLearner()?.learnerId||null;
   const record={
     product:"Khaemenes Preschool · Crechè Family Home",
     version:"0.3.0",
@@ -1898,13 +1899,13 @@ function exportFamilyRecord(){
     guidedPreschool:{progress:mentorProgress,settings:mentorSettings,dailyPlan:mentorPlan},
     visitLog:readHomeArray(VISIT_LOG_KEY),
     observations:readHomeArray(OBSERVATION_KEY),
-    mentorContext:readJSON(MENTOR_CONTEXT_KEY,null),
+    mentorContext:activeId&&ownContext?.learnerId===activeId?ownContext:null,
     note:"Family-controlled local educational continuity record with gentle observations. Not a formal grade or developmental diagnosis."
   };
   const blob=new Blob([JSON.stringify(record,null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob),link=document.createElement("a");
   link.href=url;
-  link.download=`khaemenes-${profile?.nickname?.toLowerCase().replace(/[^a-z0-9]+/g,"-")||"preschool"}-profile.json`;
+  link.download=`khaemenes-${activeVisualProfile()?.nickname?.toLowerCase().replace(/[^a-z0-9]+/g,"-")||"preschool"}-profile.json`;
   link.click();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
   toast("Full preschool learning record exported.");
@@ -1917,13 +1918,15 @@ function eraseFamilyRecord(){
   if(!confirm("Erase the active child profile, pinned games, visits, continuity record, Guided Preschool progress, daily plan, mentor settings, and mentor memory from this browser?"))return;
   const id=learnerKey();
   const nextFavorites={...favoriteProfiles},nextVisits={...visitProfiles};
-  if(profile){delete nextFavorites[id];delete nextVisits[id]}
+  const scoped=id!=="anonymous";
+  if(scoped){delete nextFavorites[id];delete nextVisits[id]}
   const removals=[
-    PROFILE_KEY,CONTINUITY_KEY,MENTOR_CONTEXT_KEY,
+    CONTINUITY_KEY,MENTOR_CONTEXT_KEY,
     ...[...HOME_PERSONAL_KEYS].map(homeKey)
   ];
-  if(profile)removals.push(`creche_mentor_memory_${id}`);
-  const updates=profile?[
+  if(profile&&(!activePreschoolLearner()||activeVisualProfile()))removals.push(PROFILE_KEY);
+  if(scoped)removals.push(`creche_mentor_memory_${id}`);
+  const updates=scoped?[
     [PROFILE_FAVORITES_KEY,JSON.stringify(nextFavorites)],
     [PROFILE_VISITS_KEY,JSON.stringify(nextVisits)]
   ]:[];
@@ -1944,7 +1947,7 @@ function eraseFamilyRecord(){
   }
   favoriteProfiles=nextFavorites;
   visitProfiles=nextVisits;
-  profile=null;
+  if(removals.includes(PROFILE_KEY))profile=null;
   favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
   visited=loadScopedSet(visitProfiles,VISITS_KEY);
   renderActivities();
@@ -2343,10 +2346,13 @@ function renderParentDashboard(){
     $("dashMentor").textContent="Archaemenes · Wise Owl";
     $("dashStage").textContent=`Ages ${ownProfile.ageBand}`;
   }else{
-    $("dashboardIntro").textContent="Create a child profile to see a simple family-controlled learning summary.";
-    $("dashMentorIcon").textContent="✨";
-    $("dashMentor").textContent="No linked Mentor yet";
-    $("dashStage").textContent="Not set";
+    const linked=activePreschoolLearner();
+    $("dashboardIntro").textContent=linked?
+      "A learner-scoped adventure snapshot for "+(linked.nickname||"the selected child")+". Local preferences from another child are not included.":
+      "Create a child profile to see a simple family-controlled learning summary.";
+    $("dashMentorIcon").textContent=linked?"🦉":"✨";
+    $("dashMentor").textContent=linked?"Archaemenes · Wise Owl":"No linked Mentor yet";
+    $("dashStage").textContent=linked?.ageBand?"Ages "+linked.ageBand:"Not set";
   }
   $("dashExplored").textContent=`${explored} of ${KID_APPS.length}`;
   $("dashFavorites").textContent=String(favorites.size);
@@ -2673,6 +2679,12 @@ window.addEventListener("storage",event=>{
     "khaemenes_active_family_v1"
   ].includes(event.key)){
     refreshSelectedLearner();
+  }else if([PROFILE_FAVORITES_KEY,PROFILE_VISITS_KEY].includes(event.key)){
+    favoriteProfiles=readJSON(PROFILE_FAVORITES_KEY,{});
+    visitProfiles=readJSON(PROFILE_VISITS_KEY,{});
+    favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
+    visited=loadScopedSet(visitProfiles,VISITS_KEY);
+    renderActivities();updateFavorites();updateProgress();filterActivities();renderProfileCenter();syncMentorContext();
   }
 });
 
