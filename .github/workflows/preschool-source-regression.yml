@@ -15,5 +15,7 @@ jobs:
         run: node tools/validate-preschool-repository.mjs
       - name: Test learner-scoped storage migration and isolation
         run: node tools/preschool-learner-storage-regression.mjs
+      - name: Test Preschool learner-scoped home dashboard and Mentor context
+        run: node tools/preschool-home-ownership-regression.mjs
       - name: Test Preschool PE curriculum and evidence contracts
         run: node tools/preschool-pe-regression.mjs
