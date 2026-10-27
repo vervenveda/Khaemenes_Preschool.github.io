@@ -1469,11 +1469,21 @@ function activeAcademyLearner(){
 function activeAcademyFamily(){
   try{return window.KhaemenesFamilyRegistry?.getFamily?.()||null}catch{return null}
 }
-function effectiveLearnerId(){return activeAcademyLearner()?.learnerId||profile?.learnerId||null}
+function activePreschoolLearner(){
+  const learner=activeAcademyLearner();
+  const stage=String(learner?.stage||"").toLowerCase();
+  return learner?.learnerId&&(stage==="preschool"||stage==="pre-k")?learner:null;
+}
+function effectiveLearnerId(){return activePreschoolLearner()?.learnerId||profile?.learnerId||null}
+function activeVisualProfile(){
+  const learner=activePreschoolLearner();
+  return learner&&String(profile?.learnerId||"")!==String(learner.learnerId)?null:profile;
+}
 function effectiveAgeBand(){return activeAcademyLearner()?.ageBand||profile?.ageBand||"4-5"}
 function currentCommunicationStyle(){
   const academyStyle=activeAcademyLearner()?.mentorIdentity?.communicationStyle;
-  const candidate=academyStyle||profile?.communicationStyle||profile?.personality||"playful";
+  const ownProfile=activeVisualProfile();
+  const candidate=academyStyle||ownProfile?.communicationStyle||ownProfile?.personality||"playful";
   return COMMUNICATION_STYLES[candidate]?candidate:"playful";
 }
 const COMMUNICATION_STYLES={playful:{label:"Playful and social"},curious:{label:"Quiet and curious"},imaginative:{label:"Imaginative and expressive"},steady:{label:"Steady and determined"}};
@@ -1483,32 +1493,66 @@ let visitProfiles=readJSON(PROFILE_VISITS_KEY,{});
 let favoritesOnly=false,calm=readBool(CALM_KEY);
 let reduceMotion=readBool(MOTION_KEY);
 let currentView=readJSON(VIEW_KEY,"child")==="grownup"?"grownup":"child";
-function learnerKey(){return profile?.learnerId||"anonymous"}
+// One ownership rule for existing home UI, never a second profile authority.
+function learnerKey(){return String(activePreschoolLearner()?.learnerId||profile?.learnerId||"anonymous")}
+const HOME_PERSONAL_KEYS=new Set([
+  LAST_OPEN_KEY,VISIT_LOG_KEY,OBSERVATION_KEY,MENTOR_PLAN_KEY,
+  MENTOR_PROGRESS_KEY,MENTOR_SETTINGS_KEY,JOURNEY_PREFS_KEY
+]);
+function homeKey(key){
+  return learnerKey()==="anonymous"?key:key+"::"+encodeURIComponent(learnerKey());
+}
+function readHome(key,fallback=null){return readJSON(HOME_PERSONAL_KEYS.has(key)?homeKey(key):key,fallback)}
+function writeHome(key,value){return writeJSON(HOME_PERSONAL_KEYS.has(key)?homeKey(key):key,value)}
+function readHomeArray(key){const value=readHome(key,[]);return Array.isArray(value)?value:[]}
 function loadScopedSet(map,legacyKey){
-  if(!profile)return readSet(legacyKey);
+  if(learnerKey()==="anonymous")return readSet(legacyKey);
   const saved=map[learnerKey()];
   return new Set(Array.isArray(saved)?saved:[]);
 }
 let favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
 let visited=loadScopedSet(visitProfiles,VISITS_KEY);
-function migrateLegacyProfileData(){
-  if(!profile)return;
+let shownOwner=learnerKey();
+function migrateLegacyProfileData({adultConfirmed=false}={}){
+  // Unowned guest preferences stay quarantined unless the adult expressly
+  // chooses to attach them to the same child whose local profile is open.
+  if(!adultConfirmed||!activeVisualProfile()||learnerKey()==="anonymous")return;
   const id=learnerKey();
   const legacyFavorites=readSet(FAVORITES_KEY),legacyVisits=readSet(VISITS_KEY);
-  if(!Array.isArray(favoriteProfiles[id])&&legacyFavorites.size){favoriteProfiles[id]=[...legacyFavorites];writeJSON(PROFILE_FAVORITES_KEY,favoriteProfiles);localStorage.removeItem(FAVORITES_KEY)}
-  if(!Array.isArray(visitProfiles[id])&&legacyVisits.size){visitProfiles[id]=[...legacyVisits];writeJSON(PROFILE_VISITS_KEY,visitProfiles);localStorage.removeItem(VISITS_KEY)}
+  const needsFavorites=!Array.isArray(favoriteProfiles[id])&&legacyFavorites.size>0;
+  const needsVisits=!Array.isArray(visitProfiles[id])&&legacyVisits.size>0;
+  if(!(needsFavorites||needsVisits))return;
+  if(!window.confirm("This browser has unassigned guest adventure history. Attach those guest favorites and visits to this selected child? Cancel leaves them untouched."))return;
+  if(needsFavorites){
+    const next={...favoriteProfiles,[id]:[...legacyFavorites]};
+    if(writeJSON(PROFILE_FAVORITES_KEY,next))favoriteProfiles=next;
+  }
+  if(needsVisits){
+    const next={...visitProfiles,[id]:[...legacyVisits]};
+    if(writeJSON(PROFILE_VISITS_KEY,next))visitProfiles=next;
+  }
+  // Original guest records are deliberately retained for backup/review.
   favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
   visited=loadScopedSet(visitProfiles,VISITS_KEY);
 }
 function persistFavorites(){
-  if(profile){favoriteProfiles[learnerKey()]=[...favorites];writeJSON(PROFILE_FAVORITES_KEY,favoriteProfiles)}else writeSet(FAVORITES_KEY,favorites);
-  syncContinuity();
+  if(learnerKey()!=="anonymous"){
+    const next={...favoriteProfiles,[learnerKey()]:[...favorites]};
+    if(!writeJSON(PROFILE_FAVORITES_KEY,next))return false;
+    favoriteProfiles=next;
+  }else if(!writeJSON(FAVORITES_KEY,[...favorites]))return false;
+  syncContinuity();return true;
 }
 function persistVisits(){
-  if(profile){visitProfiles[learnerKey()]=[...visited];writeJSON(PROFILE_VISITS_KEY,visitProfiles)}else writeSet(VISITS_KEY,visited);
-  syncContinuity();
+  if(learnerKey()!=="anonymous"){
+    const next={...visitProfiles,[learnerKey()]:[...visited]};
+    if(!writeJSON(PROFILE_VISITS_KEY,next))return false;
+    visitProfiles=next;
+  }else if(!writeJSON(VISITS_KEY,[...visited]))return false;
+  syncContinuity();return true;
 }
 function safeProfile(){
+  const profile=activeVisualProfile();
   if(!profile)return null;
   return {learnerId:profile.learnerId,nickname:profile.nickname,ageBand:profile.ageBand,personality:profile.personality,communicationStyle:profile.communicationStyle||profile.personality||"playful",mentorId:"archaemenes",mentorMode:"Wise Owl",interests:Array.isArray(profile.interests)?profile.interests:[],pace:profile.pace||"balanced",minutes:Number(profile.minutes)||30,pathway:profile.pathway||"preschool"};
 }
@@ -1608,32 +1652,32 @@ function renderActivities(){
 function toggleFavorite(id,button){
   const wasSaved=favorites.has(id);
   wasSaved?favorites.delete(id):favorites.add(id);
-  persistFavorites();
+  if(!persistFavorites()){wasSaved?favorites.add(id):favorites.delete(id);toast("Favorite could not be saved on this browser.");return;}
   button.textContent=favorites.has(id)?"♥":"♡";
   button.setAttribute("aria-pressed",String(favorites.has(id)));
   updateFavorites();filterActivities();renderProfileCenter();
   if(!wasSaved)toast(profile?`Pinned to ${profile.nickname}’s learner profile.`:"Saved on this device. No registration required.");
 }
 function appendVisitEvent(id){
-  const log=readArray(VISIT_LOG_KEY).filter(item=>item&&item.id&&item.at).slice(-399);
-  log.push({id,at:new Date().toISOString()});
-  writeJSON(VISIT_LOG_KEY,log);
+  const log=readHomeArray(VISIT_LOG_KEY).filter(item=>item&&item.id&&item.at).slice(-399);
+  log.push({id,at:new Date().toISOString(),learnerId:learnerKey()});
+  return writeHome(VISIT_LOG_KEY,log);
 }
 function markMentorStationComplete(id){
   const data=mentorPlanData();
   if(!data||!data.items.some(item=>item.app.id===id))return;
-  const progress=readJSON(MENTOR_PROGRESS_KEY,{version:2,days:{}});
+  const progress=readHome(MENTOR_PROGRESS_KEY,{version:2,days:{}});
   progress.days=progress.days&&typeof progress.days==="object"?progress.days:{};
   const day=todayLocalKey(),done=new Set(Array.isArray(progress.days[day])?progress.days[day]:[]);
   done.add(id);progress.days[day]=[...done];progress.updatedAt=new Date().toISOString();
-  writeJSON(MENTOR_PROGRESS_KEY,progress);
+  writeHome(MENTOR_PROGRESS_KEY,progress);
 }
 function markVisited(id){
   visited.add(id);
   const at=new Date().toISOString();
-  writeJSON(LAST_OPEN_KEY,{id,at});
+  writeHome(LAST_OPEN_KEY,{id,at,learnerId:learnerKey()});
   appendVisitEvent(id);
-  persistVisits();
+  if(!persistVisits())toast("The adventure opened, but its visit could not be saved.");
   markMentorStationComplete(id);
   updateProgress();
   renderProfileCenter();
@@ -1677,21 +1721,24 @@ function buildMenu(query=""){
 
 function mentorMatch(){const key=currentCommunicationStyle();const style=COMMUNICATION_STYLES[key]||COMMUNICATION_STYLES.playful;return {name:"Archaemenes",avatar:"🦉",mode:"Wise Owl",style:style.label,key}}
 function renderProfileCenter(){
-  const mentor=mentorMatch();
-  if(profile){
+  const mentor=mentorMatch(),shown=activeVisualProfile();
+  if(shown){
     $("profileAvatar").textContent=mentor.avatar;
-    $("profileName").textContent=profile.nickname||"Young learner";
-    $("profileStatus").textContent=`Ages ${profile.ageBand||"not set"} · Archaemenes · Wise Owl · ${mentor.style}`;
+    $("profileName").textContent=shown.nickname||"Young learner";
+    $("profileStatus").textContent=`Ages ${shown.ageBand||"not set"} · Archaemenes · Wise Owl · ${mentor.style}`;
     $("openChildProfile").textContent="Edit Local Preferences";
   }else{
     $("profileAvatar").textContent="🌟";
     $("profileName").textContent="No local preferences needed for play";
-    $("profileStatus").textContent="Public adventures and favorites work without registration. Link an Academy Family learner for Archaemenes.";
+    $("profileStatus").textContent=activePreschoolLearner()&&profile&&!activeVisualProfile()?
+      "The stored local preferences belong to a different learner. These child's adventures are kept separate; use their Academy profile for visual preferences.":
+      "Public adventures and favorites work without registration. Link an Academy Family learner for Archaemenes.";
     $("openChildProfile").textContent="Create Local Preferences";
   }
   $("profileFavoriteCount").textContent=`${favorites.size} pinned`;
   $("profileVisitCount").textContent=`${visited.size} visited`;
-  $("pinnedIntro").textContent=profile?`${profile.nickname}’s favorite Crechè games and learning adventures.`:"Browser-local favorites are shown here with no registration required.";
+  $("pinnedIntro").textContent=shown?`${shown.nickname}’s favorite Crechè games and learning adventures.`:
+    "These favorites belong only to the current selected learner or guest session.";
   renderPinnedGames();
   renderLearnerHome();
   renderParentDashboard();
@@ -1704,6 +1751,10 @@ function renderPinnedGames(){
 }
 let profileRestoreFocus=null;
 function openProfileDialog(){
+  if(activePreschoolLearner()&&profile&&!activeVisualProfile()){
+    toast("These local preferences belong to another child. Use this child's Academy student profile; no records were changed.");
+    return;
+  }
   profileRestoreFocus=document.activeElement;
   $("childNickname").value=profile?.nickname||"";
   $("childAgeBand").value=profile?.ageBand||"";
@@ -1729,10 +1780,14 @@ function saveProfile(){
   if(!nickname){$("profileError").textContent="Please enter a first name or nickname.";return}
   if(!ageBand){$("profileError").textContent="Please choose a broad learning stage.";return}
   if(!$("profileGuardianConfirm").checked){$("profileError").textContent="A grown-up must confirm that they are helping with this profile.";return}
+  if(activePreschoolLearner()&&profile&&!activeVisualProfile()){
+    $("profileError").textContent="These local preferences belong to another child. Open the selected child's Academy student profile.";
+    return;
+  }
   const personality=$("childPersonality").value;
-  profile={...profile,nickname:nickname.slice(0,20),ageBand,personality,communicationStyle:personality,mentorId:"archaemenes",mentorMode:"Wise Owl",pathway:$("childStage").value,learnerId:profile?.learnerId||makeLocalId(),interests:Array.isArray(profile?.interests)?profile.interests:[],pace:profile?.pace||"balanced",minutes:Number(profile?.minutes)||30,createdAt:profile?.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};
+  profile={...profile,nickname:nickname.slice(0,20),ageBand,personality,communicationStyle:personality,mentorId:"archaemenes",mentorMode:"Wise Owl",pathway:$("childStage").value,learnerId:profile?.learnerId||activePreschoolLearner()?.learnerId||makeLocalId(),interests:Array.isArray(profile?.interests)?profile.interests:[],pace:profile?.pace||"balanced",minutes:Number(profile?.minutes)||30,createdAt:profile?.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};
   writeJSON(PROFILE_KEY,profile);
-  migrateLegacyProfileData();
+  migrateLegacyProfileData({adultConfirmed:true});
   favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
   visited=loadScopedSet(visitProfiles,VISITS_KEY);
   syncContinuity();
@@ -1749,20 +1804,20 @@ function observationGuideFor(id){
 function recordObservation(level){
   const allowed=new Set(["exploring","growing","confident"]);
   if(!allowed.has(level))return;
-  const last=readJSON(LAST_OPEN_KEY,null),app=last?.id?KID_APPS.find(item=>item.id===last.id):null;
+  const last=readHome(LAST_OPEN_KEY,null),app=last?.id?KID_APPS.find(item=>item.id===last.id):null;
   if(!app){toast("Open an adventure first, then add an observation.");return}
   const guide=observationGuideFor(app.id);
-  const log=readArray(OBSERVATION_KEY).filter(item=>item&&item.id&&item.at).slice(-199);
-  log.push({id:app.id,domain:app.mentor?.domain||null,level,at:new Date().toISOString()});
-  writeJSON(OBSERVATION_KEY,log);
+  const log=readHomeArray(OBSERVATION_KEY).filter(item=>item&&item.id&&item.at).slice(-199);
+  log.push({id:app.id,domain:app.mentor?.domain||null,level,at:new Date().toISOString(),learnerId:learnerKey()});
+  if(!writeHome(OBSERVATION_KEY,log)){toast("Observation was not saved. Please check this browser's storage.");return;}
   renderParentDashboard();
   syncMentorContext();
   toast(level==="exploring"?"Saved: just exploring.":level==="growing"?"Saved: getting the idea.":"Saved: doing this confidently.");
 }
 function weeklySnapshotData(){
   const cutoff=Date.now()-7*86400000;
-  const events=readArray(VISIT_LOG_KEY).filter(item=>Date.parse(item.at)>=cutoff);
-  const observations=readArray(OBSERVATION_KEY).filter(item=>Date.parse(item.at)>=cutoff);
+  const events=readHomeArray(VISIT_LOG_KEY).filter(item=>Date.parse(item.at)>=cutoff);
+  const observations=readHomeArray(OBSERVATION_KEY).filter(item=>Date.parse(item.at)>=cutoff);
   const counts={};
   for(const event of events){
     const app=KID_APPS.find(item=>item.id===event.id);
@@ -1788,7 +1843,7 @@ function renderWeeklySnapshot(){
     $("weekConfidence").textContent=`${levelLabel[data.latestObs.level]||"Observed"} · ${app?displayTitle(app):"recent activity"}`;
   }else $("weekConfidence").textContent="No observation yet";
   $("weekNext").textContent=data.next?(PRESCHOOL_CATALOG.mentorDomains?.[data.next]?.label||data.next):"Follow the child’s curiosity";
-  const last=readJSON(LAST_OPEN_KEY,null),guide=last?.id?observationGuideFor(last.id):null;
+  const last=readHome(LAST_OPEN_KEY,null),guide=last?.id?observationGuideFor(last.id):null;
   const app=last?.id?KID_APPS.find(item=>item.id===last.id):null;
   $("observationPrompt").textContent=guide&&app?`${displayTitle(app)} · ${guide.observe}`:"Open an adventure, then return here to add one optional observation.";
   const learner=activeAcademyLearner();
@@ -1796,18 +1851,26 @@ function renderWeeklySnapshot(){
   $("snapshotMentorLink").textContent=learner?"Ask Archaemenes about this week →":"Link Family Learner for Archaemenes →";
 }
 function syncMentorContext(forcedLearnerId=null){
-  const learner=activeAcademyLearner();
-  const learnerId=forcedLearnerId||learner?.learnerId||profile?.learnerId||null;
-  if(!learnerId)return;
+  const learner=activePreschoolLearner(),learnerId=learner?.learnerId||null;
+  const permitted=learnerId&&(!forcedLearnerId||String(forcedLearnerId)===String(learnerId));
+  if(!permitted){
+    // The mentor cache is a disposable snapshot; never preserve it after
+    // logout, placement change, or a mismatched manual learner handoff.
+    const old=readJSON(MENTOR_CONTEXT_KEY,null);
+    if(old?.source==="Khaemenes Preschool · Crechè"){
+      try{localStorage.removeItem(MENTOR_CONTEXT_KEY)}catch{}
+    }
+    return;
+  }
   const week=weeklySnapshotData();
-  const plan=readJSON(MENTOR_PLAN_KEY,null);
-  const recentVisits=readArray(VISIT_LOG_KEY).slice(-20);
-  const recentObservations=readArray(OBSERVATION_KEY).slice(-12);
+  const plan=readHome(MENTOR_PLAN_KEY,null);
+  const recentVisits=readHomeArray(VISIT_LOG_KEY).slice(-20);
+  const recentObservations=readHomeArray(OBSERVATION_KEY).slice(-12);
   const context={
     version:2,
     source:"Khaemenes Preschool · Crechè",
     learnerId,
-    ageBand:learner?.ageBand||profile?.ageBand||null,
+    ageBand:learner?.ageBand||activeVisualProfile()?.ageBand||null,
     communicationStyle:currentCommunicationStyle(),
     favoriteIds:[...favorites].slice(-20),
     visitedIds:[...visited].slice(-40),
@@ -1820,9 +1883,9 @@ function syncMentorContext(forcedLearnerId=null){
   writeJSON(MENTOR_CONTEXT_KEY,context);
 }
 function exportFamilyRecord(){
-  const mentorProgress=readJSON(MENTOR_PROGRESS_KEY,null);
-  const mentorSettings=readJSON(MENTOR_SETTINGS_KEY,null);
-  const mentorPlan=readJSON(MENTOR_PLAN_KEY,null);
+  const mentorProgress=readHome(MENTOR_PROGRESS_KEY,null);
+  const mentorSettings=readHome(MENTOR_SETTINGS_KEY,null);
+  const mentorPlan=readHome(MENTOR_PLAN_KEY,null);
   const record={
     product:"Khaemenes Preschool · Crechè Family Home",
     version:"0.3.0",
@@ -1830,11 +1893,11 @@ function exportFamilyRecord(){
     profile:safeProfile(),
     favorites:[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean),
     visited:[...visited],
-    lastOpened:readJSON(LAST_OPEN_KEY,null),
+    lastOpened:readHome(LAST_OPEN_KEY,null),
     continuity:readJSON(CONTINUITY_KEY,null),
     guidedPreschool:{progress:mentorProgress,settings:mentorSettings,dailyPlan:mentorPlan},
-    visitLog:readArray(VISIT_LOG_KEY),
-    observations:readArray(OBSERVATION_KEY),
+    visitLog:readHomeArray(VISIT_LOG_KEY),
+    observations:readHomeArray(OBSERVATION_KEY),
     mentorContext:readJSON(MENTOR_CONTEXT_KEY,null),
     note:"Family-controlled local educational continuity record with gentle observations. Not a formal grade or developmental diagnosis."
   };
@@ -1847,13 +1910,17 @@ function exportFamilyRecord(){
   toast("Full preschool learning record exported.");
 }
 function eraseFamilyRecord(){
+  if(activePreschoolLearner()&&profile&&!activeVisualProfile()){
+    toast("This local profile belongs to another child. No records were erased.");
+    return;
+  }
   if(!confirm("Erase the active child profile, pinned games, visits, continuity record, Guided Preschool progress, daily plan, mentor settings, and mentor memory from this browser?"))return;
   const id=learnerKey();
   const nextFavorites={...favoriteProfiles},nextVisits={...visitProfiles};
   if(profile){delete nextFavorites[id];delete nextVisits[id]}
   const removals=[
-    PROFILE_KEY,CONTINUITY_KEY,LAST_OPEN_KEY,
-    MENTOR_PROGRESS_KEY,MENTOR_SETTINGS_KEY,MENTOR_PLAN_KEY,VISIT_LOG_KEY,OBSERVATION_KEY,MENTOR_CONTEXT_KEY,JOURNEY_PREFS_KEY
+    PROFILE_KEY,CONTINUITY_KEY,MENTOR_CONTEXT_KEY,
+    ...[...HOME_PERSONAL_KEYS].map(homeKey)
   ];
   if(profile)removals.push(`creche_mentor_memory_${id}`);
   const updates=profile?[
@@ -1878,8 +1945,8 @@ function eraseFamilyRecord(){
   favoriteProfiles=nextFavorites;
   visitProfiles=nextVisits;
   profile=null;
-  favorites=readSet(FAVORITES_KEY);
-  visited=readSet(VISITS_KEY);
+  favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
+  visited=loadScopedSet(visitProfiles,VISITS_KEY);
   renderActivities();
   updateFavorites();
   updateProgress();
@@ -2078,9 +2145,9 @@ function chooseOffscreenPrompt(){
   return prompt;
 }
 function mentorPlanData(){
-  const plan=readJSON(MENTOR_PLAN_KEY,null);
-  const progress=readJSON(MENTOR_PROGRESS_KEY,{days:{}});
-  const learnerId=effectiveLearnerId();
+  const plan=readHome(MENTOR_PLAN_KEY,null);
+  const progress=readHome(MENTOR_PROGRESS_KEY,{days:{}});
+  const learnerId=activePreschoolLearner()?.learnerId||null;
   if(!learnerId||!plan||plan.learnerId!==learnerId||plan.date!==todayLocalKey()||!Array.isArray(plan.ids))return null;
   const completed=new Set(progress?.days?.[todayLocalKey()]||[]);
   const items=plan.ids.map(id=>{
@@ -2096,7 +2163,7 @@ function deterministicHash(text){
   return Math.abs(h>>>0);
 }
 function buildMentorPlan({fresh=false}={}){
-  const learner=activeAcademyLearner(),learnerId=learner?.learnerId||null;
+  const learner=activePreschoolLearner(),learnerId=learner?.learnerId||null;
   if(!learnerId){
     toast("Link a child learner in the Academy Family Profile to create an Archaemenes path.");
     renderMentorJourney();
@@ -2104,9 +2171,9 @@ function buildMentorPlan({fresh=false}={}){
   }
   const minutes=Number($("mentorMinutes")?.value)||25;
   const energy=$("mentorEnergy")?.value||"steady";
-  writeJSON(JOURNEY_PREFS_KEY,{minutes,energy});
+  writeHome(JOURNEY_PREFS_KEY,{minutes,energy});
   const age=learner.ageBand||profile?.ageBand||"4-5";
-  const recent=new Set(readArray(VISIT_LOG_KEY).slice(-12).map(item=>item.id));
+  const recent=new Set(readHomeArray(VISIT_LOG_KEY).slice(-12).map(item=>item.id));
   const pool=PRESCHOOL_CATALOG.mentorActivities({preserveLegacyIds:false})
     .filter(item=>item.ages.includes(age));
   const domains=Object.keys(PRESCHOOL_CATALOG.mentorDomains||{});
@@ -2132,11 +2199,11 @@ function buildMentorPlan({fresh=false}={}){
     if(!selected.some(x=>x.catalogId===item.catalogId))selected.push(item);
   }
   const plan={version:2,learnerId,date:todayLocalKey(),mentorId:"archaemenes",mentorMode:"Wise Owl",ageBand:age,minutes,energy,ids:selected.map(item=>item.catalogId),generatedAt:new Date().toISOString()};
-  writeJSON(MENTOR_PLAN_KEY,plan);
-  const progress=readJSON(MENTOR_PROGRESS_KEY,{version:2,days:{}});
+  if(!writeHome(MENTOR_PLAN_KEY,plan)){toast("Today's path was not saved. Please check browser storage.");return null;}
+  const progress=readHome(MENTOR_PROGRESS_KEY,{version:2,days:{}});
   progress.days=progress.days&&typeof progress.days==="object"?progress.days:{};
   if(!Array.isArray(progress.days[plan.date]))progress.days[plan.date]=[];
-  writeJSON(MENTOR_PROGRESS_KEY,progress);
+  if(!writeHome(MENTOR_PROGRESS_KEY,progress))toast("The path is ready, but station progress could not be saved.");
   syncMentorContext(learnerId);
   renderMentorJourney();
   renderParentDashboard();
@@ -2144,8 +2211,8 @@ function buildMentorPlan({fresh=false}={}){
 }
 function renderMentorJourney(){
   if(!$("mentorJourneyStations"))return;
-  const learner=activeAcademyLearner();
-  const prefs=readJSON(JOURNEY_PREFS_KEY,{minutes:25,energy:"steady"});
+  const learner=activePreschoolLearner();
+  const prefs=readHome(JOURNEY_PREFS_KEY,{minutes:25,energy:"steady"});
   if($("mentorMinutes"))$("mentorMinutes").value=String(prefs.minutes||25);
   if($("mentorEnergy"))$("mentorEnergy").value=prefs.energy||"steady";
   if(!learner){
@@ -2171,7 +2238,7 @@ function renderMentorPlanPreview(){
   const introEl=document.getElementById("mentorPlanIntro");
   const previewEl=document.getElementById("mentorPlanPreview");
   if(!titleEl||!introEl||!previewEl)return;
-  const learner=activeAcademyLearner(),data=mentorPlanData();
+  const learner=activePreschoolLearner(),data=mentorPlanData();
   if(!learner){
     titleEl.textContent="Archaemenes · Wise Owl";
     introEl.textContent="Link a child in the Academy Family Profile for a personalized Preschool path.";
@@ -2191,14 +2258,15 @@ function renderMentorPlanPreview(){
 }
 function renderLearnerHome(){
   const mentor=mentorMatch();
-  if(profile){
+  const ownProfile=activeVisualProfile();
+  if(ownProfile){
     const hour=new Date().getHours();
     const greeting=hour<12?"Good morning":hour<17?"Good afternoon":"Hello";
-    $("homeKicker").textContent=`${greeting}, ${profile.nickname}`;
-    $("myHomeTitle").textContent=`${profile.nickname}’s Crechè home`;
+    $("homeKicker").textContent=`${greeting}, ${ownProfile.nickname}`;
+    $("myHomeTitle").textContent=`${ownProfile.nickname}’s Crechè home`;
     $("myHomeIntro").textContent=`Favorites and explored adventures stay connected to these local preferences; a linked Academy learner unlocks Archaemenes · Wise Owl.`;
-    $("heroEyebrow").textContent=`${mentor.avatar} ${greeting}, ${profile.nickname} · Archaemenes is the Academy Mentor`;
-    $("heroLead").textContent=`Welcome back to a joyful preschool world built around ${profile.nickname}’s curiosity. Continue an adventure, visit a favorite, or link the family learner for Archaemenes’ guided path.`;
+    $("heroEyebrow").textContent=`${mentor.avatar} ${greeting}, ${ownProfile.nickname} · Archaemenes is the Academy Mentor`;
+    $("heroLead").textContent=`Welcome back to a joyful preschool world built around ${ownProfile.nickname}’s curiosity. Continue an adventure, visit a favorite, or link the family learner for Archaemenes’ guided path.`;
   }else{
     $("homeKicker").textContent="My Crechè Home";
     $("myHomeTitle").textContent="A little home base for today.";
@@ -2268,12 +2336,12 @@ function renderParentDashboard(){
   if(!$("parentDashboard"))return;
   const mentor=mentorMatch();
   const explored=KID_APPS.filter(app=>visited.has(app.id)).length;
-  const data=mentorPlanData();
-  if(profile){
-    $("dashboardIntro").textContent=`A local snapshot for ${profile.nickname}. This summary stays in this browser unless a grown-up exports it.`;
+  const data=mentorPlanData(),ownProfile=activeVisualProfile();
+  if(ownProfile){
+    $("dashboardIntro").textContent=`A local snapshot for ${ownProfile.nickname}. This summary stays in this browser unless a grown-up exports it.`;
     $("dashMentorIcon").textContent=mentor.avatar;
     $("dashMentor").textContent="Archaemenes · Wise Owl";
-    $("dashStage").textContent=`Ages ${profile.ageBand}`;
+    $("dashStage").textContent=`Ages ${ownProfile.ageBand}`;
   }else{
     $("dashboardIntro").textContent="Create a child profile to see a simple family-controlled learning summary.";
     $("dashMentorIcon").textContent="✨";
@@ -2541,7 +2609,7 @@ $("mentorEnergy").addEventListener("change",()=>buildMentorPlan({fresh:true}));
 $("newMentorPath").addEventListener("click",()=>buildMentorPlan({fresh:false}));
 $("mentorDifferent").addEventListener("click",()=>buildMentorPlan({fresh:true}));
 $("mentorBreak").addEventListener("click",()=>{chooseOffscreenPrompt();$("mentorDayIntro").textContent=`Wise Owl break: ${$("awayPrompt").textContent}`;toast("A gentle off-screen break is ready.")});
-$("mentorDayDone").addEventListener("click",()=>{const plan=readJSON(MENTOR_PLAN_KEY,null);if(plan){plan.completedAt=new Date().toISOString();writeJSON(MENTOR_PLAN_KEY,plan);syncMentorContext()}toast("Today’s path can rest here. Curiosity can continue tomorrow.")});
+$("mentorDayDone").addEventListener("click",()=>{const plan=readHome(MENTOR_PLAN_KEY,null);if(plan&&plan.learnerId===activePreschoolLearner()?.learnerId){plan.completedAt=new Date().toISOString();if(writeHome(MENTOR_PLAN_KEY,plan))syncMentorContext();else toast("The path could not be saved.");}toast("Today’s path can rest here. Curiosity can continue tomorrow.")});
 document.querySelectorAll("[data-observation-level]").forEach(button=>button.addEventListener("click",()=>recordObservation(button.dataset.observationLevel)));
 $("snapshotPrint").addEventListener("click",()=>window.print());
 $("menuOverlay").addEventListener("click",event=>{
@@ -2585,14 +2653,26 @@ document.addEventListener("keydown",event=>{
   if(event.key==="/"&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&$("appModal").hidden&&!$("menuOverlay").classList.contains("open")&&!$("categoryOverlay").classList.contains("open")&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){event.preventDefault();$("search").focus()}});
 
 
-window.addEventListener("khaemenes-family-changed",()=>{renderFamilyMentorEntry();renderMentorJourney();renderParentDashboard();syncMentorContext()});
+function refreshSelectedLearner(){
+  const next=learnerKey();
+  if(next!==shownOwner){
+    shownOwner=next;
+    favorites=loadScopedSet(favoriteProfiles,FAVORITES_KEY);
+    visited=loadScopedSet(visitProfiles,VISITS_KEY);
+    syncContinuity();
+    renderActivities();updateFavorites();updateProgress();filterActivities();
+    renderProfileCenter();
+  }
+  renderFamilyMentorEntry();renderMentorJourney();renderParentDashboard();syncMentorContext();
+}
+window.addEventListener("khaemenes-family-changed",refreshSelectedLearner);
 window.addEventListener("storage",event=>{
   if([
     "khaemenes_family_registry_v1",
     "khaemenes_active_learner_v1",
     "khaemenes_active_family_v1"
   ].includes(event.key)){
-    renderFamilyMentorEntry();renderMentorJourney();renderParentDashboard();syncMentorContext();
+    refreshSelectedLearner();
   }
 });
 
