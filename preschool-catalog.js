@@ -278,31 +278,6 @@
     }
   },
   {
-    "id": "feelings-explorer-folder",
-    "title": "Feelings Emotional Explorer",
-    "file": "Feelings_emotional_explorer/index.html",
-    "category": "feelings",
-    "icon": "🧭",
-    "desc": "Name feelings, notice body clues, and explore caring responses.",
-    "tags": "feelings emotional explorer sel folder",
-    "mentor": {
-      "eligible": true,
-      "legacyId": "feelings-explorer",
-      "domain": "feelings",
-      "ages": [
-        "3-4",
-        "4-5",
-        "5-6"
-      ],
-      "minutes": 8,
-      "energy": "gentle",
-      "interests": [
-        "helping"
-      ],
-      "desc": "Name feelings, notice body clues, and explore caring responses."
-    }
-  },
-  {
     "id": "brush-teeth-folder",
     "title": "How to Brush Your Teeth",
     "file": "Life_skills_little_Tikes_How_to_Brush_Your_Teeth/index.html",
@@ -554,18 +529,6 @@
         "stories"
       ],
       "desc": "Listen to a letter, its sound, and a simple word with gentle read-aloud support."
-    }
-  },
-  {
-    "id": "art-resources",
-    "title": "Little Artist Resources",
-    "file": "Art _resources_index.html",
-    "category": "art",
-    "icon": "🧰",
-    "desc": "Open a colorful collection of creative ideas and art resources.",
-    "tags": "art resources supplies",
-    "mentor": {
-      "eligible": false
     }
   },
   {
@@ -1628,9 +1591,9 @@
     const grownups = grownupActivities().length;
     const mentorCount = ACTIVITIES.filter(activity => activity.mentor?.eligible).length;
 
-    if (children !== 52) warnings.push(`Expected 52 child activities; found ${children}.`);
+    if (children !== 50) warnings.push(`Expected 50 child activities; found ${children}.`);
     if (grownups !== 1) warnings.push(`Expected 1 grown-up resource; found ${grownups}.`);
-    if (mentorCount !== 48) warnings.push(`Expected 48 mentor-eligible activities; found ${mentorCount}.`);
+    if (mentorCount !== 47) warnings.push(`Expected 47 mentor-eligible activities; found ${mentorCount}.`);
 
     return {
       ok: errors.length === 0,
