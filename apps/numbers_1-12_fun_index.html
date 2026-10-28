@@ -604,7 +604,6 @@ function chooseVoice(){
   const pool=english.length?english:availableVoices;
   return pool.find(v=>g.match.test(v.name))
     ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
-    ||pool[0]
     ||null;
 }
 function stopSpeaking(message="Voice stopped."){
@@ -622,8 +621,8 @@ function speak(text,{preview=false,target=null}={}){
   const token=++speechToken;
   lastSpoken=phrase;
   const u=new SpeechSynthesisUtterance(phrase);
-  const voice=chooseVoice();
-  if(voice)u.voice=voice;
+  const voice=chooseVoice();if(!voice)return;
+  u.voice=voice;
   u.lang=voice?.lang||"en-US";
   u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
   u.pitch=g.pitch;
