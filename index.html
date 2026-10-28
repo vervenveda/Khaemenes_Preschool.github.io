@@ -1069,6 +1069,62 @@ body .breadcrumbs a{color:#26324a!important}
  .hero-copy .lead{font-size:15px!important}
 }
 </style>
+<style id="creche-orbit-buttons-v2">
+/* Larger, livelier preschool section anchors; links and destinations unchanged. */
+.hero-playground .orbit-button{
+  width:138px!important;height:138px!important;
+  border:7px solid #fff!important;
+  font-size:3.45rem!important;
+  box-shadow:0 18px 38px rgba(45,62,103,.24),0 0 0 5px rgba(255,255,255,.28)!important;
+  transform-origin:center;
+  will-change:transform;
+}
+.hero-playground .orbit-button::after{
+  top:calc(100% + 10px)!important;
+  min-height:34px;display:flex;align-items:center;justify-content:center;
+  padding:7px 14px!important;
+  color:#26324a!important;background:#fffdf8!important;
+  border:2px solid rgba(38,50,74,.1);
+  font-family:Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif!important;
+  font-size:16px!important;font-weight:900!important;letter-spacing:.01em!important;
+  box-shadow:0 7px 18px rgba(45,62,103,.18)!important
+}
+.hero-playground .orbit-button:nth-of-type(1){animation:orbit-float-a 2.7s ease-in-out infinite alternate!important}
+.hero-playground .orbit-button:nth-of-type(2){animation:orbit-float-b 3.1s ease-in-out infinite alternate!important}
+.hero-playground .orbit-button:nth-of-type(3){animation:orbit-pulse 2.5s ease-in-out infinite alternate!important}
+.hero-playground .orbit-button:nth-of-type(4){animation:orbit-float-a 3.3s ease-in-out infinite alternate-reverse!important}
+.hero-playground .orbit-button:nth-of-type(5){animation:orbit-float-b 2.9s ease-in-out infinite alternate-reverse!important}
+.hero-playground .orbit-button:nth-of-type(6){animation:orbit-pulse 3.2s ease-in-out infinite alternate-reverse!important}
+.hero-playground .orbit-button:hover,
+.hero-playground .orbit-button:focus-visible{
+  animation-play-state:paused!important;
+  transform:scale(1.15) rotate(4deg)!important;
+  z-index:12
+}
+@keyframes orbit-float-a{
+ from{transform:translateY(4px) rotate(-4deg) scale(.98)}
+ to{transform:translateY(-17px) rotate(5deg) scale(1.055)}
+}
+@keyframes orbit-float-b{
+ from{transform:translate(-4px,3px) rotate(4deg) scale(.99)}
+ to{transform:translate(7px,-15px) rotate(-5deg) scale(1.06)}
+}
+@keyframes orbit-pulse{
+ from{transform:translateY(3px) scale(.96);filter:saturate(.98)}
+ to{transform:translateY(-12px) scale(1.09);filter:saturate(1.14)}
+}
+@media(max-width:900px){
+ .hero-playground .orbit-button{width:112px!important;height:112px!important;font-size:2.75rem!important}
+ .hero-playground .orbit-button::after{font-size:14px!important;min-height:30px;padding:6px 10px!important}
+}
+@media(max-width:580px){
+ .hero-playground .orbit-button{width:88px!important;height:88px!important;border-width:5px!important;font-size:2.15rem!important}
+ .hero-playground .orbit-button::after{font-size:14px!important;min-height:28px;padding:5px 8px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-playground .orbit-button{animation:none!important}
+}
+</style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-standard.css">
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.css">
 </head>
