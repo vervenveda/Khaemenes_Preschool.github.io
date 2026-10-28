@@ -715,7 +715,7 @@ function chooseVoice(){
   const g=GUIDE_VOICES[state.voice]||GUIDE_VOICES.pip;
   const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
   const pool=english.length?english:availableVoices;
-  return pool.find(v=>g.match.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null;
+  return pool.find(v=>g.match.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||null;
 }
 function stopSpeaking(message="Voice stopped."){
   speechToken++;
