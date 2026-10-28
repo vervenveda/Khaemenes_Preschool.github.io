@@ -1480,7 +1480,7 @@ body.creche-support-ready #vnv-support-section{display:none!important}
 
 .enrolled-prek-tools{margin:0 0 24px;padding:22px 24px;border:4px solid rgba(255,255,255,.9);border-radius:28px;background:linear-gradient(135deg,#fff0bd,#fff 48%,#dff9ff);box-shadow:0 14px 34px rgba(32,76,95,.12);color:#26364a}.enrolled-prek-tools[hidden]{display:none!important}.enrolled-prek-tools h3{margin:3px 0 7px;font-size:clamp(1.3rem,2.5vw,1.75rem)}.enrolled-prek-tools p{margin:0;line-height:1.5}.enrolled-prek-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.enrolled-prek-actions button{min-height:48px;padding:10px 16px;border:2px solid rgba(38,54,74,.14);border-radius:14px;background:#fff;color:#26364a;font:inherit;font-weight:800;cursor:pointer}.enrolled-prek-actions button:first-child{background:#ffd63d}.enrolled-prek-actions button:disabled{opacity:.7;cursor:default}.enrolled-prek-status{margin-top:10px!important;font-size:.92rem;color:#526174}
 </style>
-</head>
+<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#8fe6f9"></head>
 <body id="top" data-view="child">
 <header data-khae-header class="khae-global-campus-header">
   <div data-khae-header-inner>
@@ -3576,5 +3576,5 @@ document.addEventListener("DOMContentLoaded",function(){
   bind("life","dailyLifeTitle","dailyLifeDesc","dailyLifeLink");
 })();
 </script>
-</body>
+<script id="preschool-offline-shell">if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script></body>
 </html>
