@@ -256,6 +256,7 @@ body.focus-mode .book-card{max-width:860px}
 </style>
 <link rel="stylesheet" href="../assets/preschool-playful-theme.css" data-preschool-playful-theme>
 <script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
+<script src="../assets/preschool-voice.js"></script>
 </head>
 <body class="theme-sunny">
 
@@ -895,6 +896,8 @@ function refreshVoices(){
   $('voiceStatus').textContent=availableVoices.length?'Eiren is ready.':'Loading Eiren’s voice…';
 }
 function chooseVoice(){
+  const bridge=window.KhaemenesPreschoolVoice;
+  if(bridge?.supported()){selectedVoice=bridge.choose({role:"eiren",lang:"en-US",prefer:EIREN.match.source});return selectedVoice;}
   refreshVoices();
   const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||''));
   const pool=english.length?english:availableVoices;
