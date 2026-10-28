@@ -715,7 +715,7 @@ button:hover{transform:translateY(-2px)}
     const pool=english.length?english:voices;
     return pool.find(v=>EIREN.preferred.test(v.name))
       ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
-      ||pool[0]||null;
+      ||null;
   }
 
   function stopSpeaking(statusText="Eiren paused."){
