@@ -1165,6 +1165,38 @@ body .breadcrumbs a{color:#26324a!important}
 #grownups .network-directory,
 #grownups .parent-note{background:rgba(255,253,248,.92)}
 </style>
+<style id="creche-daily-school-v1">
+#myHome{
+  background:#8fe6f9!important;
+  border-top:10px solid #22cbe6;border-bottom:10px solid #ffd63d
+}
+#myHome .heading{max-width:900px;margin-inline:auto;padding:28px 34px;border-radius:30px;background:rgba(255,253,248,.92);box-shadow:0 14px 34px rgba(45,62,103,.13)}
+#myHome .heading .kicker{color:#d83f91}
+#myHome .heading h2{color:#33435d}
+#myHome .heading p{color:#40586b;font-size:16px}
+.daily-school-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:34px}
+.daily-school-card{
+  position:relative;overflow:hidden;min-height:330px;padding:34px;
+  display:flex;flex-direction:column;align-items:flex-start;
+  border:8px solid #fff;border-radius:42px;
+  box-shadow:0 0 0 7px #ffd63d,0 0 0 14px #ef5bb8,0 0 0 21px #22cbe6,0 20px 42px rgba(45,62,103,.17);
+  transition:transform .25s ease,box-shadow .25s ease
+}
+.daily-school-card:hover{transform:translateY(-7px) rotate(-.4deg);box-shadow:0 0 0 7px #ffd63d,0 0 0 14px #ef5bb8,0 0 0 21px #22cbe6,0 28px 48px rgba(45,62,103,.22)}
+.daily-school-card:nth-child(even):hover{transform:translateY(-7px) rotate(.4deg)}
+.abc-card{background:#fff0bd}.numbers-card{background:#f7d9f0}.pe-card{background:#dff9ff}.life-card{background:#e9f8d5}
+.daily-school-icon{font-size:4.4rem;line-height:1;animation:daily-icon-bob 3s ease-in-out infinite alternate}
+.daily-school-card:nth-child(2) .daily-school-icon{animation-delay:-.8s}.daily-school-card:nth-child(3) .daily-school-icon{animation-delay:-1.4s}.daily-school-card:nth-child(4) .daily-school-icon{animation-delay:-2s}
+.daily-school-kicker{margin:20px 0 7px;color:#d83f91;font:900 14px/1.2 Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.daily-school-card h3{margin:0;color:#33435d;font-family:"Comic Sans MS","Comic Sans",Nunito,"Trebuchet MS",cursive;font-size:clamp(2rem,3vw,2.8rem);line-height:1.05}
+.daily-school-card p:not(.daily-school-kicker){color:#40586b;font:600 16px/1.65 Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif}
+.daily-school-btn{margin-top:auto;min-height:58px;display:inline-flex;align-items:center;padding:12px 18px;border:3px solid #fff;border-radius:18px;color:#fff!important;background:#704fd0;font:900 16px/1.2 Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif;text-decoration:none;box-shadow:0 8px 18px rgba(45,62,103,.15)}
+.abc-card .daily-school-btn{background:#e94f87}.numbers-card .daily-school-btn{background:#704fd0}.pe-card .daily-school-btn{background:#087d88}.life-card .daily-school-btn{background:#477d22}
+#myHome .quick-comfort{margin-top:48px;background:rgba(255,253,248,.9);border:3px solid #fff;border-radius:24px;padding:16px}
+@keyframes daily-icon-bob{to{transform:translateY(-10px) rotate(5deg) scale(1.06)}}
+@media(max-width:760px){.daily-school-grid{grid-template-columns:1fr;gap:36px}.daily-school-card{min-height:300px}}
+@media(prefers-reduced-motion:reduce){.daily-school-icon,.daily-school-card{animation:none;transition:none}}
+</style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-standard.css">
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.css">
 </head>
@@ -1291,44 +1323,34 @@ body .breadcrumbs a{color:#26324a!important}
       <p id="myHomeIntro">Play, save favorites, and explore every Crechè adventure without registration. A family learner profile is used for the child’s personalized Mentor and formal curriculum continuity.</p>
     </div>
 
-    <div class="home-grid">
-      <article class="home-card continue-card">
-        <span class="home-label">Continue My Adventure</span>
-        <div class="continue-icon" id="continueIcon" aria-hidden="true">🎈</div>
-        <h3 id="continueTitle">Choose your first adventure</h3>
-        <p id="continueDesc">Every place you open becomes part of your local Adventure Trail.</p>
-        <div class="home-actions">
-          <a class="home-btn primary-home" id="continueLink" href="#rooms">Choose a Room →</a>
-          <button class="home-btn" id="homeSurprise" type="button">Surprise Me 🎉</button>
-        </div>
+    <div class="daily-school-grid" id="dailySchoolGrid" aria-label="Today's four preschool learning categories">
+      <article class="daily-school-card abc-card" data-daily-subject="abc">
+        <div class="daily-school-icon" aria-hidden="true">🔤</div>
+        <p class="daily-school-kicker">Daily ABC</p>
+        <h3 id="dailyAbcTitle">ABC Adventure</h3>
+        <p id="dailyAbcDesc">Letters, sounds, matching, and early reading play.</p>
+        <a class="daily-school-btn" id="dailyAbcLink" href="#activities">Play Today’s ABC Game →</a>
       </article>
-
-      <article class="home-card featured-game-card">
-        <div class="featured-game-head">
-          <div class="featured-game-title">
-            <span>🎮 Featured Crechè Game</span>
-            <h3 id="featuredGameTitle">Choosing a game…</h3>
-          </div>
-          <div class="featured-game-actions">
-            <button id="featuredAnother" type="button">Another Game 🎲</button>
-            <button id="featuredOpenLarge" type="button">Open Larger ↗</button>
-          </div>
-        </div>
-        <div class="featured-game-frame-wrap">
-          <iframe class="featured-game-frame" id="featuredGameFrame" title="Featured Crechè game preview" loading="lazy"></iframe>
-          <span class="featured-game-hint">Play here or open larger</span>
-        </div>
+      <article class="daily-school-card numbers-card" data-daily-subject="numbers">
+        <div class="daily-school-icon" aria-hidden="true">🔢</div>
+        <p class="daily-school-kicker">Daily 123</p>
+        <h3 id="dailyNumbersTitle">Number Adventure</h3>
+        <p id="dailyNumbersDesc">Counting, shapes, quantities, and early reasoning.</p>
+        <a class="daily-school-btn" id="dailyNumbersLink" href="#activities">Play Today’s 123 Game →</a>
       </article>
-
-      <article class="home-card away-card">
-        <span class="home-label">Away From the Screen</span>
-        <div class="away-icon" aria-hidden="true">🌿</div>
-        <h3 id="awayTitle">Tiny real-world adventure</h3>
-        <p id="awayPrompt">Look around the room and find something that makes you smile.</p>
-        <div class="home-actions">
-          <button class="home-btn primary-home" id="newAwayPrompt" type="button">Give Me Another 🎲</button>
-          <button class="home-btn" id="readAwayPrompt" type="button">🔊 Read It</button>
-        </div>
+      <article class="daily-school-card pe-card" data-daily-subject="pe">
+        <div class="daily-school-icon" aria-hidden="true">🤸</div>
+        <p class="daily-school-kicker">Daily PE</p>
+        <h3 id="dailyPeTitle">Move &amp; Groove</h3>
+        <p id="dailyPeDesc">Move, stretch, balance, dance, and build healthy-body confidence.</p>
+        <a class="daily-school-btn" id="dailyPeLink" href="./apps/PE_move_n_groove_index.html">Move &amp; Play →</a>
+      </article>
+      <article class="daily-school-card life-card" data-daily-subject="life">
+        <div class="daily-school-icon" aria-hidden="true">🧺</div>
+        <p class="daily-school-kicker">Daily Life Skills</p>
+        <h3 id="dailyLifeTitle">Little Life Skill</h3>
+        <p id="dailyLifeDesc">Practice a useful everyday routine with a caring grown-up nearby.</p>
+        <a class="daily-school-btn" id="dailyLifeLink" href="#activities">Try Today’s Life Skill →</a>
       </article>
     </div>
 
@@ -3049,5 +3071,48 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-global-header.js" defer></script>
 <script src="https://vervenveda.com/assets/vnv-ecosystem-menu.js" defer></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.js" defer></script>
+<script id="creche-daily-school-rotation">
+(function(){
+  const rotations={
+    abc:[
+      ["ABC Story Time","Stories, letter sounds, and friendly early-reading play.","./apps/ABC_Story_Time/index.html"],
+      ["Alphabet Adventure","Explore letters through a playful alphabet adventure.","./apps/ABC_Alphabet_Adventure_index.html"],
+      ["ABC Bubble Adventure","Pop, notice, and play with letters in a colorful bubble game.","./apps/ABC_bubble_adventure_index.html"],
+      ["ABC Match","Match letters and build visual alphabet recognition.","./apps/ABC_match_index.html"],
+      ["Bilingual ABC Garden","Meet letters through a bilingual early-language garden.","./apps/ABC_bilingual_index.html"],
+      ["ABC Adventure Hub","Choose another playful alphabet challenge.","./apps/ABC_adventure_hub_index.html"]
+    ],
+    numbers:[
+      ["Pre-K Math Cloud","Play with early number ideas in a gentle math world.","./apps/math_cloud_index.html"],
+      ["Numbers 1–12 Fun","Count, notice, and play with numbers from 1 through 12.","./apps/numbers_1-12_fun_index.html"],
+      ["Numbers Drag & Drop","Move numbers into place with hands-on matching practice.","./apps/numbers_drag_n_drop_index.html"],
+      ["Shapes Game","Explore shapes through a colorful interactive game.","./apps/shapes_game_index.html"],
+      ["Match the Shapes","Look closely and match familiar shapes.","./apps/shapes_match_index.html"],
+      ["Sunny ABCs & 123s","Mix cheerful number play with storytime.","./apps/Sunny_ABCs_123s_Storytime/index.html"]
+    ],
+    pe:[
+      ["Move & Groove","Move, stretch, balance, dance, and build healthy-body confidence.","./apps/PE_move_n_groove_index.html"]
+    ],
+    life:[
+      ["How to Brush Your Teeth","Practice a safe, child-friendly tooth-brushing routine.","./apps/Life_skills_little_Tikes_How_to_Brush_Your_Teeth/index.html"],
+      ["Little Kitchen Helper","Learn safe, simple ways to help in the kitchen.","./apps/Life_skills_kitchen_helper_index.html"],
+      ["Making Your Bed","Practice an everyday independence routine step by step.","./apps/Life_skills_make_bed_index.html"],
+      ["Mini Organizer","Practice putting things in order and understanding what comes next.","./apps/Life_skills_organizer_index.html"],
+      ["Walking With a Dog Safely","Learn caring, adult-guided dog-walking safety.","./apps/Life_skills_walk_dog_index.html"],
+      ["Life Skills Clubhouse","Explore another useful everyday-life skill.","./apps/Life_skills_index.html"]
+    ]
+  };
+  const day=Math.floor(new Date().setHours(0,0,0,0)/86400000);
+  const bind=(key,titleId,descId,linkId)=>{
+    const list=rotations[key], item=list[((day%list.length)+list.length)%list.length];
+    const t=document.getElementById(titleId),d=document.getElementById(descId),a=document.getElementById(linkId);
+    if(t)t.textContent=item[0]; if(d)d.textContent=item[1]; if(a)a.href=item[2];
+  };
+  bind("abc","dailyAbcTitle","dailyAbcDesc","dailyAbcLink");
+  bind("numbers","dailyNumbersTitle","dailyNumbersDesc","dailyNumbersLink");
+  bind("pe","dailyPeTitle","dailyPeDesc","dailyPeLink");
+  bind("life","dailyLifeTitle","dailyLifeDesc","dailyLifeLink");
+})();
+</script>
 </body>
 </html>
