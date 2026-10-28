@@ -320,7 +320,7 @@ body{overflow:auto}
 
 </style>
 <link rel="stylesheet" href="../assets/preschool-playful-theme.css" data-preschool-playful-theme>
-<script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
+<script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>\n<script src="../assets/preschool-voice.js"></script>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-global-header.css">
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.css">
 <style id="creche-app-certification-v1">
@@ -809,6 +809,8 @@ body [data-khae-header] a{color:#26364a!important}
   }
 
   function eirenVoice(){
+    const bridge=window.KhaemenesPreschoolVoice;
+    if(bridge?.supported()) return bridge.choose({role:"eiren",lang:"en-US"});
     if(!("speechSynthesis" in window)) return null;
     const voices = speechSynthesis.getVoices() || [];
     const english = voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
