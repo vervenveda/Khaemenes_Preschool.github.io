@@ -1360,6 +1360,110 @@ body.creche-support-ready #vnv-support-section{display:none!important}
 </style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-standard.css">
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.css">
+<style id="creche-final-design-pass-v1">
+/* FINAL DESIGN PASS — visual polish only; behavior, links and curriculum remain untouched. */
+
+/* 1. Explore & Play: remove excess vertical air while preserving its cheerful pause. */
+.explore-play{padding-top:54px!important;padding-bottom:54px!important}
+.explore-play .shell{max-width:1120px!important}
+.explore-play .explore-heading{margin-bottom:20px!important;padding:23px 30px!important}
+.explore-play .explore-actions{margin-bottom:24px!important}
+.explore-play .category-grid{gap:18px!important}
+.explore-play .fresh-adventures{margin-top:26px!important}
+
+/* 2. Learning Garden: give the educational heart of the page more presence and larger touch targets. */
+.learning-garden .shell{max-width:1180px!important}
+.learning-garden .garden-heading{max-width:960px!important;margin-bottom:34px!important}
+.learning-garden .subject-garden{gap:26px!important}
+.learning-garden .subject-tile{min-height:215px!important;padding:28px!important;border-width:7px!important;border-radius:38px!important}
+.learning-garden .subject-tile .subject-icon{font-size:4.6rem!important;margin-bottom:17px!important}
+.learning-garden .subject-tile strong{font-size:28px!important;line-height:1.05!important}
+.learning-garden .subject-tile small{font-size:15px!important;line-height:1.4!important;margin-top:10px!important}
+.learning-garden .garden-bottom-actions{margin:38px 0 30px!important}
+.learning-garden .garden-action{min-height:66px!important;padding:15px 24px!important;font-size:17px!important}
+
+/* 3. Family area: retain every tool but soften the dashboard density. */
+.family-pathway{padding-top:64px!important;padding-bottom:64px!important}
+.family-pathway>.shell{max-width:1080px!important}
+.family-pathway .family-grid{gap:20px!important}
+.family-pathway .family-card{min-height:250px!important;padding:22px!important}
+.family-pathway .family-card h3{font-size:1.28rem!important;line-height:1.15!important}
+.family-pathway .family-card p{line-height:1.55!important}
+.family-pathway .family-actions{margin-top:auto!important;gap:8px!important}
+.family-pathway .pinned-wrap{margin-top:24px!important}
+
+/* 4. Contribution: wider readable focal card without making the section taller. */
+.creche-support-closing{padding-block:62px!important}
+.creche-support-closing .shell{max-width:1240px!important}
+.creche-support-closing .creche-support-card{max-width:1160px!important;padding:40px 46px!important;gap:34px!important}
+.creche-support-closing .support-copy{max-width:680px!important}
+.creche-support-closing .support-copy p{font-size:16px!important;line-height:1.62!important}
+.creche-support-closing .support-cta{min-width:250px!important}
+
+/* 5. Shared Beta toolbar: equal cells plus a deliberate viewport safe zone. */
+#khaemenesLandingToolbar,
+.khaemenes-landing-toolbar,
+[data-khaemenes-toolbar]{
+  right:18px!important;
+  bottom:18px!important;
+  width:266px!important;
+  max-width:calc(100vw - 36px)!important;
+  box-sizing:border-box!important
+}
+#khaemenesLandingToolbar a,#khaemenesLandingToolbar button,
+.khaemenes-landing-toolbar a,.khaemenes-landing-toolbar button,
+[data-khaemenes-toolbar] a,[data-khaemenes-toolbar] button{
+  width:76px!important;min-width:76px!important;max-width:76px!important;
+  height:44px!important;min-height:44px!important;max-height:44px!important;
+  overflow:hidden!important;hyphens:none!important
+}
+
+/* 6. Footer: preserve the centered ribbon and improve rhythm at the page close. */
+.footer{padding-top:30px!important;padding-bottom:32px!important}
+.footer .footer-inner{max-width:980px!important;margin-inline:auto!important}
+.footer .footer-inner span:first-child{line-height:1.55!important}
+.footer .footer-inner span:last-child{display:flex!important;justify-content:center!important;gap:8px!important;flex-wrap:wrap!important}
+
+/* Tablet/mobile certification layer. */
+@media(max-width:900px){
+  .learning-garden .subject-tile{min-height:190px!important;padding:23px!important}
+  .learning-garden .subject-tile strong{font-size:24px!important}
+  .creche-support-closing .creche-support-card{padding:34px 28px!important}
+}
+@media(max-width:600px){
+  .explore-play{padding-top:42px!important;padding-bottom:42px!important}
+  .learning-garden .subject-garden{gap:18px!important}
+  .learning-garden .subject-tile{min-height:150px!important;padding:20px!important}
+  .learning-garden .subject-tile .subject-icon{font-size:3.8rem!important}
+  .learning-garden .subject-tile strong{font-size:23px!important}
+  .family-pathway{padding-top:48px!important;padding-bottom:48px!important}
+  .creche-support-closing{padding-block:50px!important}
+  #khaemenesLandingToolbar,
+  .khaemenes-landing-toolbar,
+  [data-khaemenes-toolbar]{
+    right:10px!important;bottom:10px!important;
+    width:244px!important;max-width:calc(100vw - 20px)!important;
+    padding:7px!important;gap:5px!important
+  }
+  #khaemenesLandingToolbar a,#khaemenesLandingToolbar button,
+  .khaemenes-landing-toolbar a,.khaemenes-landing-toolbar button,
+  [data-khaemenes-toolbar] a,[data-khaemenes-toolbar] button{
+    width:72px!important;min-width:72px!important;max-width:72px!important;
+    height:42px!important;min-height:42px!important;max-height:42px!important;
+    padding:5px 3px!important;font-size:10px!important
+  }
+}
+@media(max-width:300px){
+  #khaemenesLandingToolbar,
+  .khaemenes-landing-toolbar,
+  [data-khaemenes-toolbar]{width:235px!important;right:7px!important;bottom:7px!important}
+  #khaemenesLandingToolbar a,#khaemenesLandingToolbar button,
+  .khaemenes-landing-toolbar a,.khaemenes-landing-toolbar button,
+  [data-khaemenes-toolbar] a,[data-khaemenes-toolbar] button{
+    width:69px!important;min-width:69px!important;max-width:69px!important;font-size:9px!important
+  }
+}
+</style>
 </head>
 <body id="top" data-view="child">
 <header data-khae-header class="khae-global-campus-header">
