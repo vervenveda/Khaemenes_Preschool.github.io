@@ -17,7 +17,7 @@
 (function attachKhaemenesPreschoolCatalog(global) {
   "use strict";
 
-  const VERSION = "1.1.0";
+  const VERSION = "1.2.0";
 
   const CATEGORIES = {
   "all": {
@@ -437,7 +437,20 @@
     "desc": "Explore all 28 Arabic letters in a free-play world, or continue into the guided 42-week quest.",
     "tags": "arabic alphabet cosmic space free play",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "cosmic-arabic-explorer",
+      "domain": "letters",
+      "ages": [
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 8,
+      "energy": "steady",
+      "interests": [
+        "stories",
+        "space"
+      ],
+      "desc": "Explore Arabic letters through sound, pictures, and guided matching."
     }
   },
   {
@@ -474,7 +487,20 @@
     "desc": "Practice letters, sounds, and simple words.",
     "tags": "alphabet time phonics",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "abc-time",
+      "domain": "letters",
+      "ages": [
+        "2-3",
+        "3-4",
+        "4-5"
+      ],
+      "minutes": 6,
+      "energy": "gentle",
+      "interests": [
+        "stories"
+      ],
+      "desc": "Listen to a letter, its sound, and a simple word with gentle read-aloud support."
     }
   },
   {
@@ -549,7 +575,21 @@
     "desc": "Match and name colors through visual play.",
     "tags": "art colors matching",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "match-colors",
+      "domain": "creative",
+      "ages": [
+        "2-3",
+        "3-4",
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 6,
+      "energy": "steady",
+      "interests": [
+        "art"
+      ],
+      "desc": "Match colors, name them, and connect colors with familiar objects."
     }
   },
   {
@@ -561,7 +601,20 @@
     "desc": "Explore child-friendly recipes with adult help and kitchen safety.",
     "tags": "life skills kitchen recipes cooking",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "little-kitchen-recipes",
+      "domain": "movement",
+      "ages": [
+        "3-4",
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 10,
+      "energy": "steady",
+      "interests": [
+        "helping"
+      ],
+      "desc": "With a trusted grown-up, follow a simple recipe step and practice kitchen safety."
     }
   },
   {
@@ -573,7 +626,19 @@
     "desc": "Practice small, supportive steps for starting schoolwork.",
     "tags": "life skills schoolwork focus",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "schoolwork-helper",
+      "domain": "movement",
+      "ages": [
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 7,
+      "energy": "gentle",
+      "interests": [
+        "helping"
+      ],
+      "desc": "Practice preparing a learning space and choosing one small first step."
     }
   },
   {
@@ -708,7 +773,21 @@
     "desc": "Learn adult-guided dog-walking safety and care.",
     "tags": "life skills dog safety",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "walk-dog-safely",
+      "domain": "movement",
+      "ages": [
+        "3-4",
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 8,
+      "energy": "steady",
+      "interests": [
+        "nature",
+        "helping"
+      ],
+      "desc": "With a trusted grown-up, explore dog care, body language, and walking safety."
     }
   },
   {
@@ -771,7 +850,19 @@
     "desc": "Build words through playful spelling practice.",
     "tags": "spelling game",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "spelling-game",
+      "domain": "letters",
+      "ages": [
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 7,
+      "energy": "steady",
+      "interests": [
+        "stories"
+      ],
+      "desc": "Build short picture words by choosing letters in order."
     }
   },
   {
@@ -783,7 +874,19 @@
     "desc": "Record and practice new spelling words.",
     "tags": "spelling journal writing",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "bright-day-journal",
+      "domain": "feelings",
+      "ages": [
+        "5-6"
+      ],
+      "minutes": 10,
+      "energy": "gentle",
+      "interests": [
+        "stories",
+        "art"
+      ],
+      "desc": "Use drawing, words, and feelings prompts to reflect on the day with grown-up support as needed."
     }
   },
   {
@@ -909,7 +1012,20 @@
     "desc": "Explore emotions, thoughts, and inner experiences gently.",
     "tags": "feelings noetic emotions",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "noetic-emotions",
+      "domain": "feelings",
+      "ages": [
+        "3-4",
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 7,
+      "energy": "gentle",
+      "interests": [
+        "helping"
+      ],
+      "desc": "Name feelings, choose kind responses, and practice asking for help."
     }
   },
   {
@@ -921,7 +1037,19 @@
     "desc": "Open the jar for a child-friendly joke and giggle.",
     "tags": "jokes humor language",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "joke-jar",
+      "domain": "letters",
+      "ages": [
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 6,
+      "energy": "steady",
+      "interests": [
+        "stories"
+      ],
+      "desc": "Listen to a child-friendly joke, predict the punchline, and practice expressive storytelling."
     }
   },
   {
@@ -1034,7 +1162,20 @@
     "desc": "Discover one new word at a time.",
     "tags": "reading vocabulary",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "learn-new-word",
+      "domain": "letters",
+      "ages": [
+        "3-4",
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 7,
+      "energy": "gentle",
+      "interests": [
+        "stories"
+      ],
+      "desc": "Discover a new word, hear its meaning, and check understanding with a tiny quiz."
     }
   },
   {
@@ -1197,7 +1338,19 @@
     "desc": "See real current weather, hourly conditions, and a 7-day forecast.",
     "tags": "weather real forecast solanar",
     "mentor": {
-      "eligible": false
+      "eligible": true,
+      "legacyId": "solanar-kid-weather",
+      "domain": "wonder",
+      "ages": [
+        "4-5",
+        "5-6"
+      ],
+      "minutes": 8,
+      "energy": "steady",
+      "interests": [
+        "nature"
+      ],
+      "desc": "With a grown-up when live data is used, observe weather patterns and practice weather-learning games."
     }
   },
   {
@@ -1422,7 +1575,7 @@
 
     if (children !== 52) warnings.push(`Expected 52 child activities; found ${children}.`);
     if (grownups !== 1) warnings.push(`Expected 1 grown-up resource; found ${grownups}.`);
-    if (mentorCount !== 36) warnings.push(`Expected 36 mentor-eligible activities; found ${mentorCount}.`);
+    if (mentorCount !== 48) warnings.push(`Expected 48 mentor-eligible activities; found ${mentorCount}.`);
 
     return {
       ok: errors.length === 0,
