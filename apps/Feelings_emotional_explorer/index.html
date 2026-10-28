@@ -147,6 +147,7 @@ h1{margin:18px auto 10px;max-width:980px;font-size:clamp(2.5rem,6.5vw,5.1rem);li
 </style>
 <link rel="stylesheet" href="../../assets/preschool-playful-theme.css" data-preschool-playful-theme>
 <script src="../../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
+<script src="../../assets/preschool-voice.js"></script>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-global-header.css">
 <link rel="stylesheet" href="https://vervenveda.com/assets/vnv-ecosystem-menu.css">
 </head>
@@ -315,7 +316,7 @@ function chooseVoice(){
     const choices=friendly.length?friendly:pool;
     return choices[Math.floor(Math.random()*choices.length)]||null;
   }
-  return pool.find(v=>friend.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null;
+  const bridge=window.KhaemenesPreschoolVoice;\n  if(bridge?.supported())return bridge.choose({role:"gentle",lang:"en-US",prefer:friend.preferred.source});\n  return pool.find(v=>friend.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null;
 }
 function stopSpeaking(message='Voice stopped.'){
   speechToken++;
