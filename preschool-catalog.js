@@ -930,18 +930,6 @@
     }
   },
   {
-    "id": "sunny-abcs-file",
-    "title": "Sunny ABCs & 123s Storytime",
-    "file": "Sunny_ABCs_123s_Storytime_index.html",
-    "category": "letters",
-    "icon": "☀️",
-    "desc": "A single-file Sunny letters, numbers, and storytime adventure.",
-    "tags": "sunny abc 123 storytime",
-    "mentor": {
-      "eligible": false
-    }
-  },
-  {
     "id": "drawing-tool",
     "title": "Drawing Tool",
     "file": "art_drawing_tool_index.html",
@@ -1591,7 +1579,7 @@
     const grownups = grownupActivities().length;
     const mentorCount = ACTIVITIES.filter(activity => activity.mentor?.eligible).length;
 
-    if (children !== 50) warnings.push(`Expected 50 child activities; found ${children}.`);
+    if (children !== 49) warnings.push(`Expected 49 child activities; found ${children}.`);
     if (grownups !== 1) warnings.push(`Expected 1 grown-up resource; found ${grownups}.`);
     if (mentorCount !== 47) warnings.push(`Expected 47 mentor-eligible activities; found ${mentorCount}.`);
 
