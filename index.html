@@ -1125,6 +1125,46 @@ body .breadcrumbs a{color:#26324a!important}
  .hero-playground .orbit-button{animation:none!important}
 }
 </style>
+<style id="creche-grownup-closing-v1">
+/* Colorful closing zone for parent / teacher / mentor support. Controls and IDs unchanged. */
+#grownups{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 8% 12%,rgba(255,214,61,.72) 0 10%,transparent 10.5%),
+    radial-gradient(circle at 94% 18%,rgba(239,91,184,.5) 0 12%,transparent 12.5%),
+    linear-gradient(145deg,#8fe6f9 0 38%,#fff0bd 38% 70%,#f7d9f0 70% 100%)!important;
+  border-top:10px solid #22cbe6
+}
+#grownups .heading{padding:28px 34px;border-radius:32px;background:rgba(255,253,248,.9);box-shadow:0 14px 34px rgba(45,62,103,.13)}
+#grownups .heading .kicker{color:#d83f91}
+#grownups .heading h2{color:#33435d}
+#grownups .heading p{color:#40586b}
+.grownup-mentor-hub{
+  display:grid;gap:20px;margin:0 auto 30px;padding:24px;
+  border:4px solid rgba(255,255,255,.9);border-radius:34px;
+  background:linear-gradient(135deg,rgba(255,240,189,.94),rgba(223,249,255,.94) 48%,rgba(245,234,255,.94));
+  box-shadow:0 18px 42px rgba(45,62,103,.16)
+}
+.grownup-mentor-hub .family-mentor-entry,
+.grownup-mentor-hub .mentor-day{margin:0;background:rgba(255,253,248,.96)}
+#grownups .parent-card{
+  border:3px solid rgba(255,255,255,.9);
+  box-shadow:0 12px 28px rgba(45,62,103,.14)
+}
+#grownups .parent-card:nth-child(4n+1){background:#fff0bd}
+#grownups .parent-card:nth-child(4n+2){background:#dff9ff}
+#grownups .parent-card:nth-child(4n+3){background:#f7d9f0}
+#grownups .parent-card:nth-child(4n+4){background:#e9f8d5}
+#grownups .parent-card,
+#grownups .parent-card h3,
+#grownups .parent-card p{color:#33435d}
+#grownups .parent-card[href*="Life_skills_donate"]{
+  background:linear-gradient(135deg,#ff9fbb,#ffd63d)!important;
+  border-color:#fff!important
+}
+#grownups .network-directory,
+#grownups .parent-note{background:rgba(255,253,248,.92)}
+</style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-standard.css">
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.css">
 </head>
@@ -1250,50 +1290,6 @@ body .breadcrumbs a{color:#26324a!important}
       <h2 id="myHomeTitle">A little home base for today.</h2>
       <p id="myHomeIntro">Play, save favorites, and explore every Crechè adventure without registration. A family learner profile is used for the child’s personalized Mentor and formal curriculum continuity.</p>
     </div>
-
-    <article class="family-mentor-entry" id="familyMentorEntry" aria-label="Parent and Family Mentor Account">
-      <div class="family-mentor-entry-head">
-        <span class="family-mentor-entry-icon" aria-hidden="true">👨‍👩‍👧‍👦</span>
-        <div>
-          <h3>Parent / Family Mentor Account</h3>
-          <p>Crechè games and apps are always open. A family account creates each child’s personalized Mentor and carries that learner’s curriculum progress forward.</p>
-        </div>
-      </div>
-      <div class="family-mentor-actions">
-        <a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Parent / Family Account →</a>
-      </div>
-      <div class="child-mentor-buttons" id="childMentorButtons" aria-live="polite"></div>
-      <div class="family-account-status" id="familyAccountStatus">Checking for linked child learner accounts…</div>
-    </article>
-
-    <section class="mentor-day" id="mentorDay" aria-labelledby="mentorDayTitle">
-      <div class="mentor-day-head">
-        <div class="mentor-day-id">
-          <span class="mentor-owl" aria-hidden="true">🦉</span>
-          <div>
-            <span class="home-label">Today with Archaemenes</span>
-            <h3 id="mentorDayTitle">A small, balanced learning path</h3>
-            <p id="mentorDayIntro">Link a child learner through the Academy Family Profile to unlock a personalized Wise Owl path.</p>
-          </div>
-        </div>
-        <div class="mentor-day-controls" aria-label="Today’s learning preferences">
-          <label>Time today
-            <select id="mentorMinutes"><option value="15">15 minutes</option><option value="25" selected>25 minutes</option><option value="40">40 minutes</option></select>
-          </label>
-          <label>Energy today
-            <select id="mentorEnergy"><option value="gentle">Gentle</option><option value="steady" selected>Ready</option><option value="wiggly">Wiggly</option></select>
-          </label>
-        </div>
-      </div>
-      <div class="mentor-stations" id="mentorJourneyStations" aria-live="polite"></div>
-      <div class="mentor-day-actions">
-        <a class="mentor-day-btn primary" id="openArchaemenes" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Link Family Learner →</a>
-        <button class="mentor-day-btn" id="newMentorPath" type="button">Make Today’s Path</button>
-        <button class="mentor-day-btn" id="mentorDifferent" type="button">Something Different</button>
-        <button class="mentor-day-btn" id="mentorBreak" type="button">I Need a Break</button>
-        <button class="mentor-day-btn" id="mentorDayDone" type="button">All Done for Today</button>
-      </div>
-    </section>
 
     <div class="home-grid">
       <article class="home-card continue-card">
@@ -1564,6 +1560,52 @@ body .breadcrumbs a{color:#26324a!important}
 <section class="section grownup grownup-mode-only" id="grownups">
   <div class="shell">
     <div class="heading"><p class="kicker">Parents, caregivers & teachers</p><h2>The grown-up corner</h2><p>Support gentle routines, adjust the visual experience, and continue into the wider family of public educational resources.</p></div>
+    <div class="grownup-mentor-hub">
+<article class="family-mentor-entry" id="familyMentorEntry" aria-label="Parent and Family Mentor Account">
+      <div class="family-mentor-entry-head">
+        <span class="family-mentor-entry-icon" aria-hidden="true">👨‍👩‍👧‍👦</span>
+        <div>
+          <h3>Parent / Family Mentor Account</h3>
+          <p>Crechè games and apps are always open. A family account creates each child’s personalized Mentor and carries that learner’s curriculum progress forward.</p>
+        </div>
+      </div>
+      <div class="family-mentor-actions">
+        <a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Parent / Family Account →</a>
+      </div>
+      <div class="child-mentor-buttons" id="childMentorButtons" aria-live="polite"></div>
+      <div class="family-account-status" id="familyAccountStatus">Checking for linked child learner accounts…</div>
+    </article>
+
+    <section class="mentor-day" id="mentorDay" aria-labelledby="mentorDayTitle">
+      <div class="mentor-day-head">
+        <div class="mentor-day-id">
+          <span class="mentor-owl" aria-hidden="true">🦉</span>
+          <div>
+            <span class="home-label">Today with Archaemenes</span>
+            <h3 id="mentorDayTitle">A small, balanced learning path</h3>
+            <p id="mentorDayIntro">Link a child learner through the Academy Family Profile to unlock a personalized Wise Owl path.</p>
+          </div>
+        </div>
+        <div class="mentor-day-controls" aria-label="Today’s learning preferences">
+          <label>Time today
+            <select id="mentorMinutes"><option value="15">15 minutes</option><option value="25" selected>25 minutes</option><option value="40">40 minutes</option></select>
+          </label>
+          <label>Energy today
+            <select id="mentorEnergy"><option value="gentle">Gentle</option><option value="steady" selected>Ready</option><option value="wiggly">Wiggly</option></select>
+          </label>
+        </div>
+      </div>
+      <div class="mentor-stations" id="mentorJourneyStations" aria-live="polite"></div>
+      <div class="mentor-day-actions">
+        <a class="mentor-day-btn primary" id="openArchaemenes" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Link Family Learner →</a>
+        <button class="mentor-day-btn" id="newMentorPath" type="button">Make Today’s Path</button>
+        <button class="mentor-day-btn" id="mentorDifferent" type="button">Something Different</button>
+        <button class="mentor-day-btn" id="mentorBreak" type="button">I Need a Break</button>
+        <button class="mentor-day-btn" id="mentorDayDone" type="button">All Done for Today</button>
+      </div>
+    </section>
+    </div>
+
     <div class="parent-tools">
       <button class="parent-card" id="parentProfileCard" type="button"><span class="parent-icon">🧑‍🧒</span><h3>Parent Dashboard</h3><p>Review the active child, local learning summary, privacy controls, export, and reset tools.</p><span>Open Parent Dashboard ↑</span></button>
       <button class="parent-card" id="childProfileCard" type="button"><span class="parent-icon">🧒</span><h3>Local Play Preferences</h3><p>Set a nickname, broad learning stage, and preferred encouragement style for this browser. Academy learner identity remains in the Family Profile.</p><span>Open Preferences →</span></button>
