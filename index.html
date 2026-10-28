@@ -1474,6 +1474,9 @@ body.creche-support-ready #vnv-support-section{display:none!important}
 @media(max-width:900px){.reading-time-launch{bottom:-28px;min-width:230px;min-height:64px;padding:10px 22px}.hero-playground{margin-bottom:34px}}
 @media(max-width:600px){.reading-time-launch{position:absolute;bottom:-26px;min-width:210px;min-height:58px;font-size:1.05rem;padding:9px 18px;border-width:5px}.reading-modal .app-window{width:calc(100vw - 18px);height:calc(100vh - 18px);border-width:4px;box-shadow:0 0 0 4px #ef5bb8,0 0 0 8px #22cbe6,0 20px 60px rgba(0,0,0,.35)}}
 @media(prefers-reduced-motion:reduce){.reading-time-launch{animation:none}}
+
+/* v8 · returning learner first: child learning stays primary; administration is secondary. */
+.navlinks .nav-reading-link{appearance:none;border:0;background:transparent;color:inherit;font:inherit;font-weight:inherit;padding:0;cursor:pointer}.navlinks .learner-profile-link{background:#fff0bd;border-radius:999px;padding:8px 12px!important}.navlinks .grownup-entry-link{opacity:.86}.navlinks .nav-reading-link:hover,.navlinks .nav-reading-link:focus-visible{text-decoration:underline;text-underline-offset:4px}
 </style>
 </head>
 <body id="top" data-view="child">
@@ -1515,13 +1518,13 @@ body.creche-support-ready #vnv-support-section{display:none!important}
       </span>
     </a>
 
-    <nav class="navlinks" aria-label="Preschool sections">
-      <a href="#familyMentorEntry" aria-label="Parent and Family Mentor Account">Mentor</a>
-      <a href="#profiles">Profiles</a>
-      <a href="./student-profile/">Student Profile</a>
-      <a href="#rooms">Rooms</a>
+    <nav class="navlinks" aria-label="Preschool learning navigation">
+      <a href="./student-profile/" class="learner-profile-link">😊 My Profile</a>
       <a href="#today">Today</a>
+      <a href="#rooms">Rooms</a>
       <a href="#activities">Adventures</a>
+      <button type="button" class="nav-reading-link" id="navReadingTime">📚 Reading</button>
+      <a href="#familyMentorEntry" class="grownup-entry-link">🧑‍🧒 Grown-Up</a>
     </nav>
 
     <div class="view-switch" role="group" aria-label="Choose child or grown-up view">
@@ -1574,14 +1577,14 @@ body.creche-support-ready #vnv-support-section{display:none!important}
       <h1>Crechè<span>Khaemenes Preschool · Read · Count · Create · Feel · Move · Wonder</span></h1>
       <p class="lead" id="heroLead">A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.</p>
       <div class="actions">
-        <a class="btn primary" href="#familyMentorEntry">Grown-Up / Family →</a>
+        <a class="btn primary" href="./student-profile/">😊 My Profile / Continue Learning →</a>
         <a class="btn secondary" href="#rooms">Pick a Room</a>
         <button class="btn secondary" id="surpriseHero" type="button">Surprise Me!</button>
       </div>
-      <div class="hero-notes"><span class="hero-note"><strong id="heroKidCount">52</strong>&nbsp;child adventures</span><span class="hero-note">No account required</span><span class="hero-note">Personalized Mentor after family setup</span><span class="hero-note">Large, playful buttons</span></div>
+      <div class="hero-notes"><span class="hero-note"><strong id="heroKidCount">52</strong>&nbsp;child adventures</span><span class="hero-note">No account required</span><span class="hero-note">Returning learners go straight to My Profile</span><span class="hero-note">Large, playful buttons</span></div>
     </div>
     <div class="hero-playground" aria-label="Quick Preschool section buttons">
-      <a class="orbit-button" href="#profiles" title="My profile" data-label="My Profile">😊</a>
+      <a class="orbit-button" href="./student-profile/" title="Open my learning profile" data-label="My Profile">😊</a>
       <a class="orbit-button" href="#rooms" title="Choose an adventure room" data-label="Rooms">🔤</a>
       <a class="orbit-button" href="#today" title="See today's pick" data-label="Today">⭐</a>
       <a class="orbit-button" href="#new" title="See new adventures" data-label="New">🎈</a>
@@ -1730,14 +1733,14 @@ body.creche-support-ready #vnv-support-section{display:none!important}
 <section class="section family-pathway" id="profiles">
   <div class="shell">
     <div class="heading">
-      <p class="kicker">One child · one growing learning pathway</p>
-      <h2>Play freely. Use a family learner profile for the personalized Mentor and curriculum continuity.</h2>
-      <p>Crechè remains an open adventure garden. Family and learner profiles are used for a child’s personalized Mentor, formal curriculum progress, assessments, portfolio records, certification, and cross-grade continuity.</p>
+      <p class="kicker">Returning learner</p>
+      <h2>Your learning profile is your way back in.</h2>
+      <p>If this child already has a Pre-K Academy learner selected, My Profile opens that learner directly with today’s next step, pinned adventures, and learning continuity. Family administration is only needed when choosing or enrolling a different learner.</p>
     </div>
 
     <div class="actions" aria-label="Pre-K student profile entrances">
-      <a class="btn primary" href="./student-profile/">🧒 My Full Pre-K Profile →</a>
-      <a class="btn secondary" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Choose an Existing Child →</a>
+      <a class="btn primary" href="./student-profile/">😊 My Profile / Continue Learning →</a>
+      <a class="btn secondary grownup-mode-only" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">🧑‍🧒 Family · Change Learner / Enrollment →</a>
     </div>
 
     <section class="parent-dashboard grownup-mode-only" id="parentDashboard" aria-labelledby="parentDashboardTitle">
@@ -3045,6 +3048,7 @@ function setCalm(value){
 }
 
 $("readingTimeBtn").addEventListener("click",openReadingTime);
+$("navReadingTime")?.addEventListener("click",openReadingTime);
 $("readingClose").addEventListener("click",closeReadingTime);
 $("readingMaximize").addEventListener("click",toggleReadingMaximize);
 $("readingFrame").addEventListener("load",()=>$("readingLoading").classList.add("done"));
