@@ -1463,6 +1463,17 @@ body.creche-support-ready #vnv-support-section{display:none!important}
     width:69px!important;min-width:69px!important;max-width:69px!important;font-size:9px!important
   }
 }
+
+/* Shared household Reading Time — launches the live Kindergarten 72-book reader in a Crechè popup. */
+.reading-time-launch{position:absolute;left:50%;bottom:-34px;z-index:8;transform:translateX(-50%);min-width:260px;min-height:72px;padding:12px 30px;border:6px solid #fff;border-radius:999px;color:#293452;background:linear-gradient(135deg,#ffd63d 0 38%,#ff9fbb 38% 68%,#8fe6f9 68%);box-shadow:0 16px 34px rgba(45,58,92,.22);font-size:clamp(1.1rem,2.4vw,1.45rem);font-weight:900;letter-spacing:.01em;text-align:center;white-space:nowrap;animation:reading-bob 3.4s ease-in-out infinite alternate}
+.reading-time-launch span{display:block;font-size:.72rem;font-weight:800;line-height:1.15;color:#514d70}.reading-time-launch:hover{animation:none;transform:translateX(-50%) translateY(-4px) scale(1.04)}
+@keyframes reading-bob{to{transform:translateX(-50%) translateY(-8px)}}
+.reading-modal .app-window{width:min(94vw,1240px);height:min(90vh,900px);border:7px solid #ffd63d;box-shadow:0 0 0 7px #ef5bb8,0 0 0 14px #22cbe6,0 34px 100px rgba(0,0,0,.38)}
+.reading-modal .app-window-bar{background:linear-gradient(90deg,#7457ff,#ef5bb8 34%,#ff942b 66%,#087d88)}
+.reading-modal .app-window-title small{font-size:.7rem;color:#fff}.reading-modal .app-window-body{background:#fff8df}
+@media(max-width:900px){.reading-time-launch{bottom:-28px;min-width:230px;min-height:64px;padding:10px 22px}.hero-playground{margin-bottom:34px}}
+@media(max-width:600px){.reading-time-launch{position:absolute;bottom:-26px;min-width:210px;min-height:58px;font-size:1.05rem;padding:9px 18px;border-width:5px}.reading-modal .app-window{width:calc(100vw - 18px);height:calc(100vh - 18px);border-width:4px;box-shadow:0 0 0 4px #ef5bb8,0 0 0 8px #22cbe6,0 20px 60px rgba(0,0,0,.35)}}
+@media(prefers-reduced-motion:reduce){.reading-time-launch{animation:none}}
 </style>
 </head>
 <body id="top" data-view="child">
@@ -1576,6 +1587,7 @@ body.creche-support-ready #vnv-support-section{display:none!important}
       <a class="orbit-button" href="#new" title="See new adventures" data-label="New">🎈</a>
       <a class="orbit-button" href="#activities" title="Explore all activities" data-label="Adventures">🎨</a>
       <a class="orbit-button" href="#graduation-garden" title="Visit Graduation Garden" data-label="Graduation">🎓</a>
+      <button class="reading-time-launch" id="readingTimeBtn" type="button" aria-haspopup="dialog" aria-controls="readingModal">📚 Reading Time<span>72 shared family stories</span></button>
     </div>
   </div>
 </section>
@@ -1988,6 +2000,16 @@ body.creche-support-ready #vnv-support-section{display:none!important}
   </section>
 </div>
 
+
+<div class="app-modal reading-modal" id="readingModal" hidden aria-hidden="true">
+  <section class="app-window" id="readingWindow" role="dialog" aria-modal="true" aria-labelledby="readingWindowTitle">
+    <header class="app-window-bar">
+      <div class="app-window-title"><i>📚</i><span><strong id="readingWindowTitle">Reading Time</strong><small>The same shared story shelf used in Khaemenes Kinder Garden</small></span></div>
+      <div class="app-window-controls"><button id="readingMaximize" type="button" aria-label="Maximize Reading Time" title="Maximize / Restore">□</button><button class="app-close" id="readingClose" type="button" aria-label="Close Reading Time" title="Close">×</button></div>
+    </header>
+    <div class="app-window-body"><div class="app-window-loading" id="readingLoading">Opening the family story shelf…</div><iframe class="app-window-frame" id="readingFrame" title="Khaemenes Reading Time"></iframe><span class="app-resize-note">↘ drag this corner to resize</span></div>
+  </section>
+</div>
 
 <div class="app-modal" id="appModal" hidden aria-hidden="true">
   <section class="app-window" id="appWindow" role="dialog" aria-modal="true" aria-labelledby="appWindowTitle">
@@ -2665,6 +2687,16 @@ function appFromHref(href){
     return APPS.find(app=>new URL(appUrl(app),location.href).href===target)||null;
   }catch{return null}
 }
+const SHARED_READING_URL="https://vervenveda.com/Khaemenes_KinderGarden.github.io/reading/";
+let readingRestoreFocus=null;
+function openReadingTime(){
+  readingRestoreFocus=document.activeElement;
+  const modal=$("readingModal"),win=$("readingWindow"),frame=$("readingFrame"),loading=$("readingLoading");
+  loading.classList.remove("done");frame.src=SHARED_READING_URL;win.classList.remove("maximized");$("readingMaximize").textContent="□";
+  modal.hidden=false;modal.setAttribute("aria-hidden","false");document.body.classList.add("app-modal-open");setTimeout(()=>$("readingClose").focus(),20);
+}
+function closeReadingTime(){const modal=$("readingModal"),frame=$("readingFrame");modal.hidden=true;modal.setAttribute("aria-hidden","true");frame.src="about:blank";document.body.classList.remove("app-modal-open");$("readingWindow").classList.remove("maximized");$("readingMaximize").textContent="□";readingRestoreFocus?.focus?.()}
+function toggleReadingMaximize(){const max=$("readingWindow").classList.toggle("maximized");$("readingMaximize").textContent=max?"❐":"□";$("readingMaximize").setAttribute("aria-label",max?"Restore Reading Time":"Maximize Reading Time")}
 function openAppModal(href,title="Crechè Adventure",icon="🌈",appId=""){
   if(!isPreschoolAppHref(href))return;
   appModalRestoreFocus=document.activeElement;
@@ -3012,6 +3044,11 @@ function setCalm(value){
   renderParentDashboard();
 }
 
+$("readingTimeBtn").addEventListener("click",openReadingTime);
+$("readingClose").addEventListener("click",closeReadingTime);
+$("readingMaximize").addEventListener("click",toggleReadingMaximize);
+$("readingFrame").addEventListener("load",()=>$("readingLoading").classList.add("done"));
+$("readingModal").addEventListener("click",event=>{if(event.target===$("readingModal"))closeReadingTime()});
 $("appClose").addEventListener("click",closeAppModal);
 $("appMaximize").addEventListener("click",toggleAppMaximize);
 $("appWindowFrame").addEventListener("load",()=>$("appWindowLoading").classList.add("done"));
