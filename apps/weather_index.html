@@ -286,7 +286,7 @@ function chooseVoice(){
     const choices=natural.length?natural:pool;
     return choices[Math.floor(Math.random()*choices.length)]||null;
   }
-  return pool.find(v=>g.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||pool[0]||null;
+  return pool.find(v=>g.preferred.test(v.name))||pool.find(v=>/natural|enhanced|premium/i.test(v.name))||null;
 }
 function stopSpeaking(message='Voice stopped.'){
   speechToken++;
