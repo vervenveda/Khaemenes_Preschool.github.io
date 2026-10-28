@@ -1,0 +1,11 @@
+{
+  "name": "Khaemenes Preschool · The Crechè",
+  "short_name": "Khaemenes Pre-K",
+  "description": "Free, family-guided Preschool learning from Khaemenes Academy.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff0bd",
+  "theme_color": "#8fe6f9",
+  "icons": []
+}
