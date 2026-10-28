@@ -505,7 +505,7 @@ button.active{
     if(!("speechSynthesis" in window))return;
     stopEiren("");
     const token=++state.speechToken;
-    const voice=chooseVoice();
+    const voice=chooseVoice();if(!voice)return;
     const u=new SpeechSynthesisUtterance(greeting?EIREN.greeting:text);
     if(voice)u.voice=voice;
     u.lang=(voice&&voice.lang)||"en-US";
