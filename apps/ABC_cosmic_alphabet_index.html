@@ -736,12 +736,12 @@ function chooseVoice(lang){
   const languagePool=browserVoices.filter(v=>(v.lang||"").toLowerCase().startsWith(family));
   if(family==="ar"){
     return languagePool.find(v=>/natural|enhanced|premium/i.test(v.name))
-      ||languagePool[0]||null;
+      ||null;
   }
   const pool=languagePool.length?languagePool:browserVoices.filter(v=>/^en/i.test(v.lang||""));
   return pool.find(v=>EIREN.preferred.test(v.name))
     ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
-    ||pool[0]||browserVoices[0]||null;
+    ||null;
 }
 
 function stopSpeaking(statusText="Eiren paused."){
@@ -760,9 +760,9 @@ function speak(text,lang="ar-SA",{preview=false}={}){
   const token=++speechToken;
   const phrase=preview?EIREN.greeting:text;
   const u=new SpeechSynthesisUtterance(phrase);
-  const voice=chooseVoice(lang);
+  const voice=chooseVoice(lang);if(!voice)return;
 
-  if(voice)u.voice=voice;
+  u.voice=voice;
   u.lang=(voice&&voice.lang)||lang;
   u.rate=Math.max(.55,Math.min(1.15,EIREN.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
   u.pitch=lang.startsWith("ar")?1.01:EIREN.pitch;
