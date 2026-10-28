@@ -1477,6 +1477,8 @@ body.creche-support-ready #vnv-support-section{display:none!important}
 
 /* v8 · returning learner first: child learning stays primary; administration is secondary. */
 .navlinks .nav-reading-link{appearance:none;border:0;background:transparent;color:inherit;font:inherit;font-weight:inherit;padding:0;cursor:pointer}.navlinks .learner-profile-link{background:#fff0bd;border-radius:999px;padding:8px 12px!important}.navlinks .grownup-entry-link{opacity:.86}.navlinks .nav-reading-link:hover,.navlinks .nav-reading-link:focus-visible{text-decoration:underline;text-underline-offset:4px}
+
+.enrolled-prek-tools{margin:0 0 24px;padding:22px 24px;border:4px solid rgba(255,255,255,.9);border-radius:28px;background:linear-gradient(135deg,#fff0bd,#fff 48%,#dff9ff);box-shadow:0 14px 34px rgba(32,76,95,.12);color:#26364a}.enrolled-prek-tools[hidden]{display:none!important}.enrolled-prek-tools h3{margin:3px 0 7px;font-size:clamp(1.3rem,2.5vw,1.75rem)}.enrolled-prek-tools p{margin:0;line-height:1.5}.enrolled-prek-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.enrolled-prek-actions button{min-height:48px;padding:10px 16px;border:2px solid rgba(38,54,74,.14);border-radius:14px;background:#fff;color:#26364a;font:inherit;font-weight:800;cursor:pointer}.enrolled-prek-actions button:first-child{background:#ffd63d}.enrolled-prek-actions button:disabled{opacity:.7;cursor:default}.enrolled-prek-status{margin-top:10px!important;font-size:.92rem;color:#526174}
 </style>
 </head>
 <body id="top" data-view="child">
@@ -1884,6 +1886,12 @@ body.creche-support-ready #vnv-support-section{display:none!important}
       <div class="family-account-status" id="familyAccountStatus">Checking for linked child learner accounts…</div>
     </article>
 
+    <section class="enrolled-prek-tools" id="enrolledPrekTools" hidden aria-labelledby="enrolledPrekToolsTitle">
+      <div><p class="kicker">Enrolled Pre-K learner</p><h3 id="enrolledPrekToolsTitle">Keep Crechè one tap away</h3><p>Pin this Pre-K pathway to the active learner’s Academy profile, or save the Crechè front page to this device for quick family access.</p></div>
+      <div class="enrolled-prek-actions"><button type="button" id="frontPinPrek">📌 Pin Pre-K to My Profile</button><button type="button" id="frontSavePrek">⬇️ Save Pre-K to This Device</button></div>
+      <p class="enrolled-prek-status" id="enrolledPrekStatus" role="status" aria-live="polite"></p>
+    </section>
+
     <section class="mentor-day" id="mentorDay" aria-labelledby="mentorDayTitle">
       <div class="mentor-day-head">
         <div class="mentor-day-id">
@@ -2099,6 +2107,14 @@ function readArray(key){const value=readJSON(key,[]);return Array.isArray(value)
 function activeAcademyLearner(){
   try{return window.KhaemenesFamilyRegistry?.getLearner?.()||null}catch{return null}
 }
+const COURSE_PINS_KEY="khaemenes_course_pins_v1";
+function activeEnrolledPrekLearner(){const learner=activeAcademyLearner();return learner&&learner.learnerId&&String(learner.stage||"").toLowerCase()==="preschool"?learner:null}
+function frontPreschoolPinned(id){const data=readJSON(COURSE_PINS_KEY,null),items=data?.learners?.[id];return Array.isArray(items)&&items.some(item=>item?.id==="khaemenes-preschool"||item?.courseId==="khaemenes-preschool")}
+function renderEnrolledPrekTools(){const box=$("enrolledPrekTools"),learner=activeEnrolledPrekLearner();if(!box)return;box.hidden=!learner;if(!learner)return;const pinned=frontPreschoolPinned(learner.learnerId);$("frontPinPrek").textContent=pinned?"✓ Pre-K Pinned to My Profile":"📌 Pin Pre-K to My Profile";$("frontPinPrek").disabled=pinned;$("enrolledPrekStatus").textContent=pinned?"This learner already has the Preschool pathway pinned.":""}
+function pinPrekFromFront(){const learner=activeEnrolledPrekLearner(),status=$("enrolledPrekStatus");if(!learner){status.textContent="Choose an enrolled Pre-K learner in the Family area first.";return}const prior=readJSON(COURSE_PINS_KEY,{version:1,learners:{},updatedAt:null});if(prior?.version!==1||!prior.learners||typeof prior.learners!=="object"||Array.isArray(prior.learners)){status.textContent="Existing Academy class pins use an unfamiliar format. Nothing was changed.";return}const before=prior.learners[learner.learnerId];if(before!==undefined&&!Array.isArray(before)){status.textContent="This learner’s class pins need family review. Nothing was changed.";return}const entries=Array.isArray(before)?before:[],filtered=entries.filter(item=>item?.id!=="khaemenes-preschool"&&item?.courseId!=="khaemenes-preschool");prior.learners[learner.learnerId]=[...filtered,{id:"khaemenes-preschool",courseId:"khaemenes-preschool",title:"Khaemenes Preschool",subtitle:"Family-guided Pre-K learning",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/",source:"preschool-front-page",pinnedAt:new Date().toISOString()}];prior.updatedAt=new Date().toISOString();if(writeJSON(COURSE_PINS_KEY,prior)){status.textContent="Pre-K is pinned to this learner’s Academy profile.";renderEnrolledPrekTools()}else status.textContent="Could not save the pin on this browser."}
+let deferredPrekInstall=null;
+function savePrekToDevice(){const status=$("enrolledPrekStatus");if(!activeEnrolledPrekLearner()){status.textContent="Choose an enrolled Pre-K learner first.";return}if(deferredPrekInstall){deferredPrekInstall.prompt();deferredPrekInstall.userChoice.finally(()=>{deferredPrekInstall=null;status.textContent="Your browser finished the install prompt.";});return}const ua=navigator.userAgent||"";if(/iPad|iPhone|iPod/.test(ua))status.textContent="On iPhone or iPad: tap Share, then Add to Home Screen.";else if(/Android/i.test(ua))status.textContent="On Android: open the browser menu and choose Add to Home screen or Install app.";else if(/Macintosh|Mac OS X/.test(ua))status.textContent="On Mac: use your browser’s Add to Dock / Install option, or bookmark this page for one-click return.";else status.textContent="Use your browser’s Install, Add to Home Screen, or bookmark command to keep this Pre-K front page one tap away."}
+window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();deferredPrekInstall=event;renderEnrolledPrekTools()});
 function activeAcademyFamily(){
   try{return window.KhaemenesFamilyRegistry?.getFamily?.()||null}catch{return null}
 }
@@ -3047,6 +3063,8 @@ function setCalm(value){
   renderParentDashboard();
 }
 
+$("frontPinPrek")?.addEventListener("click",pinPrekFromFront);
+$("frontSavePrek")?.addEventListener("click",savePrekToDevice);
 $("readingTimeBtn").addEventListener("click",openReadingTime);
 $("navReadingTime")?.addEventListener("click",openReadingTime);
 $("readingClose").addEventListener("click",closeReadingTime);
@@ -3220,6 +3238,7 @@ $("heroKidCount").textContent=KID_APPS.length;
 migrateLegacyProfileData();
 syncContinuity();
 renderFamilyMentorEntry();
+renderEnrolledPrekTools();
 syncMentorContext();
 renderFeaturedGame();
 renderTicker();
@@ -3324,7 +3343,7 @@ function refreshSelectedLearner(){
     renderActivities();updateFavorites();updateProgress();filterActivities();
     renderProfileCenter();
   }
-  renderFamilyMentorEntry();renderMentorJourney();renderParentDashboard();syncMentorContext();
+  renderFamilyMentorEntry();renderMentorJourney();renderParentDashboard();renderEnrolledPrekTools();syncMentorContext();
 }
 window.addEventListener("khaemenes-family-changed",refreshSelectedLearner);
 window.addEventListener("storage",event=>{
