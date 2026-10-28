@@ -303,7 +303,7 @@ function speak(t,{preview=false,target=null}={}){
   const token=++speechToken;
   lastSpoken=phrase;
   const u=new SpeechSynthesisUtterance(phrase);
-  const voice=chooseVoice();
+  const voice=chooseVoice();if(!voice)return;
   if(voice)u.voice=voice;
   u.lang=(voice&&voice.lang)||'en-US';
   u.rate=Math.max(.55,Math.min(1.15,g.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
