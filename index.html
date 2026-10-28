@@ -1250,6 +1250,22 @@ body .breadcrumbs a{color:#26324a!important}
 .fresh-adventures .new-grid{padding:22px}
 @media(max-width:650px){.explore-actions{display:grid}.explore-actions button{width:100%}.explore-heading{padding:24px 20px}}
 </style>
+<style id="creche-learning-garden-v1">
+.learning-garden{position:relative;overflow:hidden;background:#8fe6f9!important;border-top:12px solid #ffd63d;border-bottom:12px solid #ef5bb8}
+.learning-garden::before,.learning-garden::after{content:"";position:absolute;border-radius:50%;pointer-events:none;opacity:.9}.learning-garden::before{width:380px;height:380px;left:-190px;top:240px;background:#ffd63d}.learning-garden::after{width:340px;height:340px;right:-180px;bottom:180px;background:#ef9ac8}
+.garden-heading{position:relative;z-index:1;max-width:900px;margin:0 auto 30px;padding:30px;border:6px solid #fff;border-radius:38px;background:#fffdf8;text-align:center;box-shadow:0 16px 36px rgba(45,62,103,.15)}
+.garden-heading h2{color:#33435d;font-family:"Comic Sans MS","Comic Sans",Nunito,"Trebuchet MS",cursive;font-size:clamp(2.6rem,5vw,4.4rem);line-height:1}.garden-heading p{font-size:16px;color:#40586b}
+.garden-quick-row{position:relative;z-index:1;display:grid;grid-template-columns:1.35fr .85fr;gap:22px;margin-bottom:30px}.garden-today,.garden-stars{padding:24px;border:5px solid #fff;border-radius:30px;box-shadow:0 12px 28px rgba(45,62,103,.14)}.garden-today{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;background:#fff0bd}.garden-stars{background:#f7d9f0}.garden-mini-icon{font-size:3.5rem}.garden-today h3{margin:.1em 0;color:#33435d;font-size:1.8rem}.garden-today p{color:#40586b;font-size:15px}.garden-today a{padding:13px 18px;border-radius:18px;background:#e94f87;color:#fff!important;font-weight:900;text-decoration:none}.garden-star-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.subject-garden{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.subject-tile{min-height:190px;padding:24px;border:6px solid #fff;border-radius:34px;color:#fff;text-align:left;cursor:pointer;box-shadow:0 12px 28px rgba(45,62,103,.17);transition:transform .22s ease,filter .22s ease}.subject-tile:hover,.subject-tile:focus-visible{transform:translateY(-7px) rotate(-1deg);filter:saturate(1.08)}.subject-tile:nth-child(even):hover{transform:translateY(-7px) rotate(1deg)}.subject-tile .subject-icon{display:block;font-size:4rem;line-height:1;margin-bottom:15px}.subject-tile strong{display:block;font:900 24px/1.05 "Comic Sans MS","Comic Sans",Nunito,cursive}.subject-tile small{display:block;margin-top:8px;font:700 14px/1.35 Nunito,"Brandon Grotesque","Trebuchet MS",sans-serif}
+.garden-bottom-actions{position:relative;z-index:1;display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:34px 0}.garden-action{min-height:62px;display:inline-flex;align-items:center;padding:14px 22px;border:4px solid #fff;border-radius:21px;color:#fff!important;font:900 17px/1.15 Nunito,"Brandon Grotesque","Trebuchet MS",sans-serif;text-decoration:none;box-shadow:0 9px 20px rgba(45,62,103,.16);cursor:pointer}.garden-action.surprise{background:#ef5bb8}.garden-action.all{background:#704fd0}.garden-action.graduate{background:#087d88}
+.garden-trail{position:relative;z-index:1;margin:0 0 28px;border:5px solid #fff;border-radius:28px;background:#e9f8d5;overflow:hidden}.garden-trail summary{padding:18px 24px;color:#33435d;font:900 19px/1.2 Nunito,sans-serif;text-align:center;cursor:pointer}.garden-trail>p{padding:0 22px;text-align:center;color:#40586b;font-size:15px}.garden-trail .trail-grid,.garden-trail .trail-celebration{padding:0 22px 22px}
+.garden-catalog{position:relative;z-index:1;padding:24px;border:5px solid #fff;border-radius:30px;background:rgba(255,253,248,.94)}.garden-catalog .activity-grid{display:none}.garden-catalog.catalog-open .activity-grid{display:grid}.garden-catalog .results:empty{display:none}
+.subject-popover-backdrop{position:fixed;inset:0;z-index:10000;padding:24px;background:rgba(35,48,72,.62);backdrop-filter:blur(5px);overflow:auto}.subject-popover-backdrop[hidden]{display:none}.subject-popover{position:relative;max-width:850px;margin:5vh auto;padding:34px;border:8px solid #fff;border-radius:42px;background:#fffdf8;box-shadow:0 24px 70px rgba(24,35,58,.35)}.subject-popover-close{position:absolute;right:18px;top:16px;width:52px;height:52px;border:0;border-radius:50%;background:#33435d;color:#fff;font-size:2rem;cursor:pointer}.subject-popover-icon{font-size:5rem;text-align:center}.subject-popover .kicker,.subject-popover h3{text-align:center}.subject-popover h3{margin:.15em 0 .7em;color:#33435d;font-family:"Comic Sans MS","Comic Sans",Nunito,cursive;font-size:clamp(2.2rem,5vw,3.6rem)}.subject-tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.subject-tool{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;min-height:84px;padding:14px 16px;border:4px solid #fff;border-radius:22px;color:#fff!important;text-decoration:none;box-shadow:0 7px 16px rgba(45,62,103,.14)}.subject-tool span{font-size:2rem}.subject-tool strong{font:900 16px/1.2 Nunito,"Brandon Grotesque","Trebuchet MS",sans-serif}
+@media(max-width:850px){.subject-garden{grid-template-columns:repeat(2,1fr)}.garden-quick-row{grid-template-columns:1fr}.garden-today{grid-template-columns:auto 1fr}.garden-today a{grid-column:1/-1;text-align:center}.subject-tool-grid{grid-template-columns:1fr}}
+@media(max-width:540px){.subject-garden{grid-template-columns:1fr}.subject-tile{min-height:150px}.subject-popover{padding:28px 18px}.garden-action{width:100%;justify-content:center}}
+@media(prefers-reduced-motion:reduce){.subject-tile{transition:none}}
+</style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-standard.css">
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.css">
 </head>
@@ -1441,64 +1457,65 @@ body .breadcrumbs a{color:#26324a!important}
   </div>
 </section>
 
-<section class="section" id="today">
+<section class="section learning-garden child-mode-only" id="today" aria-labelledby="learningGardenTitle">
+  <span id="trail" class="section-anchor-alias" aria-hidden="true"></span>
+  <span id="graduation-garden" class="section-anchor-alias" aria-hidden="true"></span>
+  <span id="activities" class="section-anchor-alias" aria-hidden="true"></span>
   <div class="shell">
-    <div class="heading"><p class="kicker">A fresh invitation every day</p><h2>Today’s little adventure</h2><p>Come back tomorrow and Crechè will offer another activity.</p></div>
-    <div class="daily-grid">
-      <article class="daily-card"><p class="kicker">Today’s pick</p><h3 id="dailyTitle"></h3><p id="dailyDesc"></p><a id="dailyLink" href="./">Open Today’s Adventure →</a></article>
-      <article class="stars-card">
-        <h3>My Adventure Stars</h3><p>Every adventure you open adds to your trail. Hearts save favorite places for later.</p>
+    <div class="heading garden-heading">
+      <p class="kicker">🌻 The Crechè Learning Garden</p>
+      <h2 id="learningGardenTitle">What would you like to learn today?</h2>
+      <p>Tap a colorful subject. A little menu will open with real Crechè games and learning tools.</p>
+    </div>
+
+    <div class="garden-quick-row">
+      <article class="garden-today">
+        <span class="garden-mini-icon" aria-hidden="true">☀️</span>
+        <div><p class="kicker">Today’s little adventure</p><h3 id="dailyTitle"></h3><p id="dailyDesc"></p></div>
+        <a id="dailyLink" href="./">Play Today →</a>
+      </article>
+      <article class="garden-stars">
+        <div><p class="kicker">My Adventure Stars</p><strong id="visitCount">0/52</strong></div>
         <div class="star-meter" id="starMeter"></div>
-        <div class="progress-row"><div class="progress-track" aria-label="Adventure progress"><div class="progress-fill" id="progressFill"></div></div><strong id="visitCount">0/52</strong></div>
-        <button class="tool-btn" id="calmBtn" type="button" aria-pressed="false" style="margin-top:18px">🌤️ Calm Visual Mode</button>
+        <div class="progress-row"><div class="progress-track" aria-label="Adventure progress"><div class="progress-fill" id="progressFill"></div></div></div>
+        <div class="garden-star-actions"><button class="tool-btn" id="favoritesBtn" type="button" aria-pressed="false">♥ Favorites <span id="favoriteCount">0</span></button><button class="tool-btn" id="calmBtn" type="button" aria-pressed="false">🌤️ Calm</button></div>
       </article>
     </div>
-  </div>
-</section>
 
-<section class="section trail-section child-mode-only" id="trail" aria-labelledby="trailTitle">
-  <div class="shell">
-    <div class="heading compact-heading">
-      <p class="kicker">My Adventure Trail</p>
-      <h2 id="trailTitle">Look where curiosity has taken you.</h2>
-      <p>This is not a grade or a race. Each room lights up as the child explores it.</p>
+    <div class="subject-garden" id="subjectGarden" aria-label="Preschool learning subjects"></div>
+
+    <div class="garden-bottom-actions">
+      <button class="garden-action surprise" id="randomBtn" type="button">🎈 Surprise Me!</button>
+      <button class="garden-action all" id="gardenAllBtn" type="button">✨ See Every Adventure</button>
+      <a class="garden-action graduate" href="./graduation/">🎓 Graduation Garden</a>
     </div>
-    <div class="trail-grid" id="trailGrid"></div>
-    <div class="trail-celebration" id="trailCelebration" aria-live="polite"></div>
-  </div>
-</section>
 
-<section class="section child-mode-only" id="graduation-garden" aria-labelledby="graduationGardenTitle">
-  <div class="shell">
-    <article style="display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:22px;padding:clamp(20px,4vw,34px);border:2px solid #fff;border-radius:26px;background:linear-gradient(125deg,#fff4cf,#fce4f2 54%,#dff8f7);box-shadow:0 14px 34px rgba(65,52,91,.12)">
-      <div>
-        <p class="kicker">A special milestone · Crechè → Kinder Garden</p>
-        <h2 id="graduationGardenTitle" style="margin:0;color:#36576c;font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);line-height:1.06">Ready for your next learning garden?</h2>
-        <p style="max-width:760px;color:#58677d">Celebrate the adventures you have explored, play three new graduation games, collect stars, print a keepsake certificate, and meet Khaemenes Kinder Garden. A grown-up can help guide the next step.</p>
-        <div class="actions" style="margin-top:15px">
-          <a class="btn primary" href="./graduation/">Open Graduation Garden 🎓</a>
-          <a class="btn secondary" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/">Visit Kinder Garden 🌻</a>
-        </div>
-      </div>
-      <div aria-hidden="true" style="font-size:clamp(3.5rem,8vw,6rem);text-align:center">🌱➡️🌻</div>
-    </article>
-  </div>
-</section>
+    <details class="garden-trail">
+      <summary>⭐ My Adventure Trail</summary>
+      <p>Every adventure explored can light up the trail. It is never a grade or a race.</p>
+      <div class="trail-grid" id="trailGrid"></div>
+      <div class="trail-celebration" id="trailCelebration" aria-live="polite"></div>
+    </details>
 
-<section class="section alt" id="activities">
-  <div class="shell">
-    <div class="heading"><p class="kicker">The complete adventure garden</p><h2>Keep clicking. Keep discovering.</h2><p>Search, choose a room, save favorites, or ask Crechè for a surprise.</p></div>
-    <div class="catalog">
+    <div class="catalog garden-catalog" id="gardenCatalog">
       <div class="toolbar">
-        <input class="field" id="search" type="search" placeholder="Search alphabet, piano, feelings, moon, art…" autocomplete="off">
-        <select class="field" id="category" aria-label="Filter learning room"></select>
-        <button class="tool-btn" id="favoritesBtn" type="button" aria-pressed="false">♥ Favorites <span id="favoriteCount">0</span></button>
-        <button class="tool-btn" id="randomBtn" type="button">Surprise Me 🎉</button>
+        <input class="field" id="search" type="search" placeholder="Find a Crechè adventure…" autocomplete="off">
+        <select class="field" id="category" aria-label="Filter learning subject"></select>
       </div>
       <p class="results" id="results" aria-live="polite"></p>
       <div class="activity-grid" id="activityGrid"></div>
-      <div class="empty" id="empty"><h3>No adventure matched that search.</h3><p>Try a simpler word or choose another room.</p></div>
+      <div class="empty" id="empty"><h3>No adventure matched that search.</h3><p>Try another word or tap a subject above.</p></div>
     </div>
+  </div>
+
+  <div class="subject-popover-backdrop" id="subjectPopover" hidden>
+    <section class="subject-popover" role="dialog" aria-modal="true" aria-labelledby="subjectPopoverTitle">
+      <button class="subject-popover-close" id="subjectPopoverClose" type="button" aria-label="Close subject menu">×</button>
+      <div class="subject-popover-icon" id="subjectPopoverIcon" aria-hidden="true">🌈</div>
+      <p class="kicker">Choose an adventure</p>
+      <h3 id="subjectPopoverTitle">Learning Room</h3>
+      <div class="subject-tool-grid" id="subjectToolGrid"></div>
+    </section>
   </div>
 </section>
 
@@ -3142,6 +3159,57 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-global-header.js" defer></script>
 <script src="https://vervenveda.com/assets/vnv-ecosystem-menu.js" defer></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.js" defer></script>
+<script id="creche-subject-garden-engine">
+document.addEventListener("DOMContentLoaded",function(){
+  var api=window.KhaemenesPreschoolCatalog;
+  if(!api) return;
+  var subjectGarden=document.getElementById("subjectGarden");
+  var pop=document.getElementById("subjectPopover");
+  var popTitle=document.getElementById("subjectPopoverTitle");
+  var popIcon=document.getElementById("subjectPopoverIcon");
+  var tools=document.getElementById("subjectToolGrid");
+  var close=document.getElementById("subjectPopoverClose");
+  var catalog=document.getElementById("gardenCatalog");
+  var search=document.getElementById("search");
+  var category=document.getElementById("category");
+  var subjectKeys=["letters","words","numbers","art","feelings","life","music","movement","wonder"];
+  var subjectNotes={
+    letters:"Letters, sounds & alphabet play",words:"Stories, words & early reading",numbers:"Counting, shapes & early math",
+    art:"Color, drawing & creativity",feelings:"Feelings, kindness & friendship",life:"Everyday independence & healthy routines",
+    music:"Piano, rhythm & musical play",movement:"PE, movement & healthy bodies",wonder:"Weather, nature & curious discovery"
+  };
+  function colorText(hex){
+    var h=hex.replace("#",""),r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);
+    return ((r*299+g*587+b*114)/1000)>160?"#26324a":"#fff";
+  }
+  function openSubject(key){
+    var meta=api.categories[key], list=api.childActivities().filter(function(x){return x.category===key});
+    if(!meta) return;
+    popTitle.textContent=meta.label; popIcon.textContent=meta.icon; tools.innerHTML="";
+    list.forEach(function(item,i){
+      var a=document.createElement("a"); a.className="subject-tool"; a.href="./apps/"+encodeURI(item.file);
+      var bg=i%2?meta.b:meta.a; a.style.background=bg; a.style.color=colorText(bg);
+      a.innerHTML="<span aria-hidden='true'>"+item.icon+"</span><strong>"+item.title+"</strong>"; tools.appendChild(a);
+    });
+    pop.hidden=false; document.body.style.overflow="hidden"; close.focus();
+  }
+  subjectKeys.forEach(function(key){
+    var meta=api.categories[key]; if(!meta) return;
+    var count=api.childActivities().filter(function(x){return x.category===key}).length;
+    var b=document.createElement("button"); b.type="button"; b.className="subject-tile"; b.dataset.subject=key;
+    b.style.background="linear-gradient(135deg,"+meta.a+","+meta.b+")";
+    b.innerHTML="<span class='subject-icon' aria-hidden='true'>"+meta.icon+"</span><strong>"+meta.label+"</strong><small>"+subjectNotes[key]+" · "+count+" adventures</small>";
+    b.addEventListener("click",function(){openSubject(key)}); subjectGarden.appendChild(b);
+  });
+  function shut(){pop.hidden=true;document.body.style.overflow=""}
+  close.addEventListener("click",shut); pop.addEventListener("click",function(e){if(e.target===pop)shut()});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden)shut()});
+  document.getElementById("gardenAllBtn").addEventListener("click",function(){
+    catalog.classList.add("catalog-open"); if(category) category.value="all"; if(search) search.value="";
+    if(category) category.dispatchEvent(new Event("change",{bubbles:true})); catalog.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+});
+</script>
 <script id="creche-explore-surprise-bridge">
 document.addEventListener("DOMContentLoaded",function(){
   var explore=document.getElementById("exploreSurpriseBtn");
