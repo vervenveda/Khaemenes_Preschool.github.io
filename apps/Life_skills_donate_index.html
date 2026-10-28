@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="../assets/preschool-playful-theme.css" data-preschool-playful-theme>
 <script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
+<script src="../assets/preschool-voice.js"></script>
 <!-- =========================================================
      LITTLE TIKES™ SUPPORT QUEST
      Parent-gated donation banner
@@ -642,6 +643,11 @@
 
       const character =
         supportVoices[state.voice] || supportVoices.fox;
+
+      const bridge = window.KhaemenesPreschoolVoice;
+      if (bridge?.supported()) {
+        return bridge.choose({role:"gentle", lang:"en-US", prefer:character.preferred.source});
+      }
 
       const englishVoices = browserVoices.filter((voice) =>
         /^en([-_]|$)/i.test(voice.lang || "")
