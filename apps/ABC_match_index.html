@@ -733,7 +733,7 @@ button:hover{transform:translateY(-2px)}
     const token=++speechToken;
     const phrase=preview?EIREN.greeting:text;
     const u=new SpeechSynthesisUtterance(phrase);
-    const voice=chooseVoice();
+    const voice=chooseVoice();if(!voice)return;
 
     if(voice)u.voice=voice;
     u.lang=(voice&&voice.lang)||"en-US";
