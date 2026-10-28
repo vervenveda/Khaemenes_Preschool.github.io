@@ -1283,6 +1283,19 @@ body .breadcrumbs a{color:#26324a!important}
 .creche-support-closing{background:#ef5bb8!important;border-top:10px solid #ffd63d;border-bottom:10px solid #25c7df}.creche-support-closing .creche-support-card{max-width:900px;margin:auto;padding:28px;border:6px solid #fff!important;border-radius:30px!important;background:#fff0bd!important;box-shadow:0 14px 32px rgba(45,62,103,.18)!important}.creche-support-closing .creche-support-card h2{font-family:"Comic Sans MS","Comic Sans",Nunito,cursive;color:#33435d}.creche-support-closing .creche-support-card p{font-size:14px;color:#40586b}.creche-support-closing .support-action{border:3px solid #fff;border-radius:16px;background:#704fd0!important;color:#fff!important;font-size:14px;font-weight:900}
 @media(max-width:850px){.grownup .parent-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.grownup .parent-tools{grid-template-columns:1fr}.family-pathway>.shell>.heading,.grownup>.shell>.heading{padding:20px}}
+
+.creche-support-closing{position:relative;overflow:hidden;padding-block:72px!important;background:linear-gradient(135deg,#ef5bb8 0 30%,#8d5ee8 30% 55%,#22cbe6 55% 78%,#ffd63d 78% 100%)!important}
+.creche-support-closing::before,.creche-support-closing::after{content:"";position:absolute;border-radius:50%;pointer-events:none}.creche-support-closing::before{width:220px;height:220px;left:-70px;top:-80px;background:#e9f8d5}.creche-support-closing::after{width:260px;height:260px;right:-90px;bottom:-120px;background:#ff9fbb}
+.creche-support-closing .creche-support-card{position:relative;z-index:1;max-width:1080px!important;margin:auto!important;display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;gap:30px!important;align-items:center!important;padding:42px!important;border:8px solid #fff!important;border-radius:42px!important;background:#fff0bd!important;box-shadow:0 0 0 7px #ffd63d,0 0 0 14px #ef5bb8,0 0 0 21px #22cbe6,0 24px 55px rgba(38,50,74,.28)!important}
+.creche-support-closing .support-heart{width:116px;height:116px;display:grid;place-items:center;border:6px solid #fff;border-radius:50%;background:#f7d9f0;font-size:4.8rem;box-shadow:0 10px 24px rgba(45,62,103,.16);animation:support-heart-bob 2.6s ease-in-out infinite alternate}
+.creche-support-closing .support-copy .kicker{margin:0 0 8px;color:#d83f91;font-size:14px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.creche-support-closing .support-copy h2{margin:.1em 0 .35em!important;color:#33435d!important;font-family:"Comic Sans MS","Comic Sans",Nunito,cursive!important;font-size:clamp(2.3rem,4vw,3.6rem)!important;line-height:1.02!important}
+.creche-support-closing .support-copy p{margin:.55em 0;color:#40586b!important;font:600 16px/1.6 Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif!important}
+.creche-support-closing .support-copy p strong{color:#33435d}
+.support-promises{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.support-promises span{padding:9px 12px;border:3px solid #fff;border-radius:999px;background:#dff9ff;color:#33435d;font:800 14px/1.15 Nunito,sans-serif}.support-promises span:nth-child(2){background:#f7d9f0}.support-promises span:nth-child(3){background:#e9f8d5}
+.support-cta{display:grid;gap:10px;justify-items:center;max-width:270px}.creche-support-closing .support-action{min-height:72px!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:16px 22px!important;border:5px solid #fff!important;border-radius:22px!important;background:linear-gradient(135deg,#704fd0,#d83f91)!important;color:#fff!important;font:900 17px/1.2 Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif!important;text-align:center!important;text-decoration:none!important;box-shadow:0 11px 24px rgba(45,62,103,.22)!important;transition:transform .2s ease}.creche-support-closing .support-action:hover,.creche-support-closing .support-action:focus-visible{transform:translateY(-4px) scale(1.025)}.support-cta small{color:#40586b;font:700 12px/1.4 Nunito,sans-serif;text-align:center}
+@media(max-width:900px){.creche-support-closing .creche-support-card{grid-template-columns:1fr!important;text-align:center}.creche-support-closing .support-heart{margin:auto}.support-promises{justify-content:center}.support-cta{max-width:420px;margin:auto}.creche-support-closing .support-action{width:100%}}
+@media(prefers-reduced-motion:reduce){.creche-support-closing .support-heart{animation:none}.creche-support-closing .support-action{transition:none}}
 </style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-standard.css">
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.css">
@@ -1744,12 +1757,21 @@ body .breadcrumbs a{color:#26324a!important}
   <div class="shell">
     <article class="creche-support-card">
       <div class="support-heart" aria-hidden="true">💝</div>
-      <div>
-        <p class="kicker">Keep Crechè free and growing</p>
-        <h2 id="contributeTitle">Contribute to the learning garden.</h2>
-        <p>Crechè adventures remain open to children and families. Grown-ups who wish to support the continued creation of free early-learning tools can visit the contribution page.</p>
+      <div class="support-copy">
+        <p class="kicker">Free for all · supported by those who choose to help</p>
+        <h2 id="contributeTitle">Help our learning garden keep growing.</h2>
+        <p><strong>Verve N Veda and Khaemenes Academy are free for everyone.</strong> There is no fee to learn here and a contribution is never required for access.</p>
+        <p>This educational ecosystem is being built and cared for by a family with the hope that free learning can reach children everywhere. If this work has value to your family and you are able to help, an optional contribution can support both the continued growth of these free resources and the family creating them.</p>
+        <div class="support-promises" aria-label="Our contribution promise">
+          <span>🌍 Free learning for all</span>
+          <span>💛 Giving is optional</span>
+          <span>🌱 Helps the project grow</span>
+        </div>
       </div>
-      <a class="support-action" href="./apps/Life_skills_donate_index.html">Contribute / Support Crechè →</a>
+      <div class="support-cta">
+        <a class="support-action" href="./apps/Life_skills_donate_index.html">💝 Contribute to Verve N Veda →</a>
+        <small>Learning remains free whether you contribute or not.</small>
+      </div>
     </article>
   </div>
 </section>
