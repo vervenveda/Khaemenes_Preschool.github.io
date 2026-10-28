@@ -3087,9 +3087,10 @@ function goToSection(hash,{history=true,behavior=null}={}){
 }
 
 function prepareViewForHash(hash){
-  if(["#grownups","#parentDashboard"].includes(hash)){
+  /* familyMentorEntry now lives inside the grown-up closing section. */
+  if(["#grownups","#parentDashboard","#familyMentorEntry"].includes(hash)){
     setView("grownup",{scroll:false});
-  }else if(["#myHome","#familyMentorEntry","#trail"].includes(hash)){
+  }else if(["#myHome","#trail","#today","#activities","#rooms","#new","#graduation-garden"].includes(hash)){
     setView("child",{scroll:false});
   }
 }
