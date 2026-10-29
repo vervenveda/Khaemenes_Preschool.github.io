@@ -2045,6 +2045,7 @@ body.creche-support-ready #vnv-support-section{display:none!important}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="./assets/preschool-catalog.js"></script>
+<script src="./assets/preschool-voice.js"></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
 <script>
 
@@ -2682,12 +2683,13 @@ function pickGentleVoice(){
 function speakText(text){
   if(!("speechSynthesis" in window)){toast("Read-aloud is not available in this browser.");return}
   speechSynthesis.cancel();
-  const utterance=new SpeechSynthesisUtterance(String(text||"").replace(/[“”]/g,""));
+  const phrase=String(text||"").replace(/[“”]/g,"");
+  const bridge=window.KhaemenesPreschoolVoice;
+  const utterance=bridge?.utterance?.(phrase,{role:"gentle",lang:"en-US",rate:.94,pitch:1.32,volume:.92})||new SpeechSynthesisUtterance(phrase);
   utterance.rate=.94;
   utterance.pitch=1.32;
   utterance.volume=.92;
-  const voice=pickGentleVoice();
-  if(voice)utterance.voice=voice;
+  if(!utterance.voice){const voice=pickGentleVoice();if(voice)utterance.voice=voice;}
   speechSynthesis.speak(utterance);
 }
 
