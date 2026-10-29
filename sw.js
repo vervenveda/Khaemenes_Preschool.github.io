@@ -1,4 +1,4 @@
-const CACHE="khaemenes-preschool-v2";
+const CACHE="khaemenes-preschool-v3";
 const SHELL=[
   "./",
   "./index.html",
@@ -10,6 +10,8 @@ const SHELL=[
   "./assets/preschool-playful-theme.css",
   "./assets/preschool-learner-storage.js",
   "./assets/preschool-voice.js",
+  "./curriculum/preschool-42-week-spine.json",
+  "./curriculum/preschool-42-week-spine.js",
   "./assets/khaemenes-preschool-continuation.js",
   "./assets/khaemenes-profile-bridge.js",
   "./apps/ABC_Story_Time/index.html",
