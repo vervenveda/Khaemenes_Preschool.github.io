@@ -876,6 +876,8 @@ body.category-directory-open{overflow:hidden}
 .weekly-garden-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:18px}.weekly-adventure{min-height:128px;display:flex;flex-direction:column;justify-content:space-between;padding:15px;border:2px solid rgba(116,87,255,.12);border-radius:7px;background:#fff;text-decoration:none;box-shadow:var(--soft);transition:.18s}.weekly-adventure:hover{transform:translateY(-3px);border-color:rgba(116,87,255,.35)}.weekly-adventure span{font-size:1.55rem}.weekly-adventure small{display:block;margin-top:7px;color:#087d88;font-weight:800}.weekly-adventure strong{display:block;margin-top:3px;color:#343067;font-size:.95rem;line-height:1.25}.weekly-adventure.explored{border-color:#9bd9c2;background:#f0fff8}.weekly-adventure .weekly-explored{margin-top:8px;color:#08795f;font-size:.72rem;font-weight:900}
 .weekly-family{margin:14px 0 0;padding:12px 14px;border-radius:7px;background:#e7f7ff;color:#36536b}.weekly-family strong{color:#25566f}
 @media(max-width:900px){.weekly-garden-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.weekly-garden{margin-top:-18px}.weekly-garden-card{padding:17px}.weekly-garden-grid{grid-template-columns:1fr 1fr;gap:8px}.weekly-adventure{min-height:116px;padding:12px}}
+
+.weekly-continue{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;margin-top:16px;padding:13px 15px;border:2px solid rgba(8,125,136,.16);border-radius:7px;background:#eafaff}.weekly-continue .continue-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:7px;background:#fff;font-size:1.8rem}.weekly-continue h3{margin:0;color:#343067;font-size:1rem}.weekly-continue p{margin:3px 0 0;color:#59677b;font-size:.78rem}.weekly-continue a{min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:7px;background:#087d88;color:#fff;font-weight:900;text-decoration:none}.weekly-graduation{display:none;margin-top:12px;padding:14px;border-radius:7px;background:linear-gradient(135deg,#fff0bd,#e7f7ff);text-align:center}.weekly-graduation.show{display:block}.weekly-graduation a{display:inline-flex;margin-top:7px;padding:10px 14px;border-radius:7px;background:#704fd0;color:#fff;font-weight:900;text-decoration:none}@media(max-width:650px){.weekly-continue{grid-template-columns:auto 1fr}.weekly-continue a{grid-column:1/-1;width:100%}}
 </style>
 <link rel="stylesheet" href="assets/khaemenes-sacred-layout.css" data-khaemenes-sacred-layout>
 <link rel="stylesheet" href="assets/preschool-playful-theme.css" data-preschool-playful-theme>
@@ -1608,7 +1610,9 @@ body.creche-support-ready #vnv-support-section{display:none!important}
 <section class="weekly-garden child-mode-only" id="weeklyGarden" aria-labelledby="weeklyGardenTitle">
   <div class="shell"><div class="weekly-garden-card">
     <div class="weekly-garden-head"><div><p class="kicker">🌱 This Week in Our Learning Garden</p><h2 id="weeklyGardenTitle">A gentle path for curious little learners.</h2><p class="weekly-garden-note" id="weeklyGardenNote">These are invitations, not assignments. Explore them in any order—or wander anywhere in the Adventure Garden.</p></div><div class="weekly-garden-controls"><button id="weeklyPrev" type="button" aria-label="Previous week">←</button><span class="weekly-garden-week" id="weeklyWeek">Week 1</span><button id="weeklyNext" type="button" aria-label="Next week">→</button></div></div>
+    <div class="weekly-continue" id="weeklyContinue" aria-label="Continue learning"><span class="continue-icon" id="continueIcon" aria-hidden="true">🌱</span><div><h3 id="continueTitle">Start this week</h3><p id="continueDesc">Choose one gentle adventure and begin wherever curiosity leads.</p></div><a id="continueLink" href="#weeklyGarden">Start This Week →</a></div>
     <div class="weekly-garden-grid" id="weeklyGardenGrid" aria-live="polite"></div>
+    <div class="weekly-graduation" id="weeklyGraduation"><strong>🎓 Ready for the Next Garden</strong><div>This final week can include a joyful Preschool celebration whenever your family feels ready.</div><a href="./graduation/">Visit Graduation Garden →</a></div>
     <p class="weekly-family" id="weeklyFamily"><strong>For families:</strong> Notice curiosity, conversation, movement, and joy—no grading needed.</p>
   </div></div>
 </section>
@@ -2073,7 +2077,7 @@ function initWeeklyGarden(){
   if(!spine||!grid)return;
   const labels={literacy:["📚","Literacy"],earlyMath:["🔢","Early Math"],wonderScience:["🔭","Wonder"],feelingsSEL:["💛","Feelings"],creativeArtsMusic:["🎨","Create"],movement:["🤸","Move"],lifeSkill:["🧺","Life Skill"],storyImagination:["✨","Story"]};
   let week=Math.max(1,Math.min(42,Number(localStorage.getItem("khaemenes.preschool.week")||1)));
-  function render(){const w=spine.weeks[week-1];if(!w)return;document.getElementById("weeklyWeek").textContent="Week "+week;document.getElementById("weeklyGardenTitle").textContent=w.theme;grid.innerHTML=Object.entries(w.recommended).map(([domain,id])=>{const app=PRESCHOOL_CATALOG.byId(id);if(!app)return"";const meta=labels[domain]||["🌟",domain];return '<a class="weekly-adventure" href="./apps/'+app.file+'" data-app-id="'+app.id+'"><span aria-hidden="true">'+meta[0]+'</span><small>'+meta[1]+'</small><strong>'+app.title+'</strong></a>'}).join("");document.getElementById("weeklyFamily").innerHTML="<strong>For families:</strong> "+w.familyObservation;localStorage.setItem("khaemenes.preschool.week",String(week));}
+  function render(){const w=spine.weeks[week-1];if(!w)return;document.getElementById("weeklyWeek").textContent="Week "+week;document.getElementById("weeklyGardenTitle").textContent=w.theme;grid.innerHTML=Object.entries(w.recommended).map(([domain,id])=>{const app=PRESCHOOL_CATALOG.byId(id);if(!app)return"";const meta=labels[domain]||["🌟",domain];return '<a class="weekly-adventure" href="./apps/'+app.file+'" data-app-id="'+app.id+'"><span aria-hidden="true">'+meta[0]+'</span><small>'+meta[1]+'</small><strong>'+app.title+'</strong></a>'}).join("");document.getElementById("weeklyFamily").innerHTML="<strong>For families:</strong> "+w.familyObservation;document.getElementById("weeklyGraduation")?.classList.toggle("show",week===42);localStorage.setItem("khaemenes.preschool.week",String(week));}
   document.getElementById("weeklyPrev").addEventListener("click",()=>{week=week<=1?42:week-1;render();syncDailySchoolToWeek();renderWeeklyGardenState();});document.getElementById("weeklyNext").addEventListener("click",()=>{week=week>=42?1:week+1;render();syncDailySchoolToWeek();renderWeeklyGardenState();});render();
 }
 
@@ -3012,12 +3016,13 @@ function renderLearnerHome(){
     $("continueLink").dataset.continueApp=lastApp.id;
     $("continueLink").textContent="Continue Adventure →";
   }else{
-    $("continueIcon").textContent="🎈";
-    $("continueTitle").textContent="Choose your first adventure";
-    $("continueDesc").textContent="Every place you open becomes part of your local Adventure Trail.";
-    $("continueLink").href="#rooms";
-    delete $("continueLink").dataset.continueApp;
-    $("continueLink").textContent="Choose a Room →";
+    const first=weeklyApp("literacy");
+    $("continueIcon").textContent=first?.icon||"🌱";
+    $("continueTitle").textContent="Start this week";
+    $("continueDesc").textContent=first?("Begin with "+displayTitle(first)+", or choose any invitation below."):"Choose any gentle invitation in this week’s Learning Garden.";
+    $("continueLink").href=first?appUrl(first):"#weeklyGarden";
+    if(first)$("continueLink").dataset.continueApp=first.id;else delete $("continueLink").dataset.continueApp;
+    $("continueLink").textContent="Start This Week →";
   }
   $("homeVisitedCount").textContent=KID_APPS.filter(app=>visited.has(app.id)).length;
   $("homeFavoriteCount").textContent=favorites.size;
