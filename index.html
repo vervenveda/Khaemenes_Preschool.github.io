@@ -873,7 +873,7 @@ body.category-directory-open{overflow:hidden}
 .weekly-garden-card{padding:24px;border:3px solid rgba(255,255,255,.96);border-radius:7px;background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(255,249,222,.98));box-shadow:0 20px 48px rgba(31,66,105,.18)}
 .weekly-garden-head{display:flex;align-items:end;justify-content:space-between;gap:18px;flex-wrap:wrap}.weekly-garden-head .kicker{margin:0;color:#087d88;font-weight:800}.weekly-garden-head h2{margin:3px 0 0;color:#343067;font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.6rem)}
 .weekly-garden-note{max-width:640px;margin:7px 0 0;color:#59677b}.weekly-garden-controls{display:flex;align-items:center;gap:8px}.weekly-garden-controls button{min-width:46px;min-height:46px;border:1px solid var(--line);border-radius:7px;background:#fff;color:#453b86;font-weight:800}.weekly-garden-week{min-width:92px;text-align:center;color:#59677b;font-weight:800}
-.weekly-garden-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:18px}.weekly-adventure{min-height:128px;display:flex;flex-direction:column;justify-content:space-between;padding:15px;border:2px solid rgba(116,87,255,.12);border-radius:7px;background:#fff;text-decoration:none;box-shadow:var(--soft);transition:.18s}.weekly-adventure:hover{transform:translateY(-3px);border-color:rgba(116,87,255,.35)}.weekly-adventure span{font-size:1.55rem}.weekly-adventure small{display:block;margin-top:7px;color:#087d88;font-weight:800}.weekly-adventure strong{display:block;margin-top:3px;color:#343067;font-size:.95rem;line-height:1.25}
+.weekly-garden-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:18px}.weekly-adventure{min-height:128px;display:flex;flex-direction:column;justify-content:space-between;padding:15px;border:2px solid rgba(116,87,255,.12);border-radius:7px;background:#fff;text-decoration:none;box-shadow:var(--soft);transition:.18s}.weekly-adventure:hover{transform:translateY(-3px);border-color:rgba(116,87,255,.35)}.weekly-adventure span{font-size:1.55rem}.weekly-adventure small{display:block;margin-top:7px;color:#087d88;font-weight:800}.weekly-adventure strong{display:block;margin-top:3px;color:#343067;font-size:.95rem;line-height:1.25}.weekly-adventure.explored{border-color:#9bd9c2;background:#f0fff8}.weekly-adventure .weekly-explored{margin-top:8px;color:#08795f;font-size:.72rem;font-weight:900}
 .weekly-family{margin:14px 0 0;padding:12px 14px;border-radius:7px;background:#e7f7ff;color:#36536b}.weekly-family strong{color:#25566f}
 @media(max-width:900px){.weekly-garden-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.weekly-garden{margin-top:-18px}.weekly-garden-card{padding:17px}.weekly-garden-grid{grid-template-columns:1fr 1fr;gap:8px}.weekly-adventure{min-height:116px;padding:12px}}
 </style>
@@ -2073,8 +2073,8 @@ function initWeeklyGarden(){
   if(!spine||!grid)return;
   const labels={literacy:["📚","Literacy"],earlyMath:["🔢","Early Math"],wonderScience:["🔭","Wonder"],feelingsSEL:["💛","Feelings"],creativeArtsMusic:["🎨","Create"],movement:["🤸","Move"],lifeSkill:["🧺","Life Skill"],storyImagination:["✨","Story"]};
   let week=Math.max(1,Math.min(42,Number(localStorage.getItem("khaemenes.preschool.week")||1)));
-  function render(){const w=spine.weeks[week-1];if(!w)return;document.getElementById("weeklyWeek").textContent="Week "+week;document.getElementById("weeklyGardenTitle").textContent=w.theme;grid.innerHTML=Object.entries(w.recommended).map(([domain,id])=>{const app=PRESCHOOL_CATALOG.byId(id);if(!app)return"";const meta=labels[domain]||["🌟",domain];return '<a class="weekly-adventure" href="./apps/'+app.file+'" data-app-id="'+app.id+'"><span aria-hidden="true">'+meta[0]+'</span><small>'+meta[1]+'</small><strong>'+app.title+'</strong></a>'}).join("");document.getElementById("weeklyFamily").innerHTML="<strong>For families:</strong> "+w.familyObservation;localStorage.setItem("khaemenes.preschool.week",String(week));if(typeof syncDailySchoolToWeek==="function")syncDailySchoolToWeek();}
-  document.getElementById("weeklyPrev").addEventListener("click",()=>{week=week<=1?42:week-1;render()});document.getElementById("weeklyNext").addEventListener("click",()=>{week=week>=42?1:week+1;render()});render();
+  function render(){const w=spine.weeks[week-1];if(!w)return;document.getElementById("weeklyWeek").textContent="Week "+week;document.getElementById("weeklyGardenTitle").textContent=w.theme;grid.innerHTML=Object.entries(w.recommended).map(([domain,id])=>{const app=PRESCHOOL_CATALOG.byId(id);if(!app)return"";const meta=labels[domain]||["🌟",domain];return '<a class="weekly-adventure" href="./apps/'+app.file+'" data-app-id="'+app.id+'"><span aria-hidden="true">'+meta[0]+'</span><small>'+meta[1]+'</small><strong>'+app.title+'</strong></a>'}).join("");document.getElementById("weeklyFamily").innerHTML="<strong>For families:</strong> "+w.familyObservation;localStorage.setItem("khaemenes.preschool.week",String(week));}
+  document.getElementById("weeklyPrev").addEventListener("click",()=>{week=week<=1?42:week-1;render();syncDailySchoolToWeek();renderWeeklyGardenState();});document.getElementById("weeklyNext").addEventListener("click",()=>{week=week>=42?1:week+1;render();syncDailySchoolToWeek();renderWeeklyGardenState();});render();
 }
 
 const PRESCHOOL_CATALOG=window.KhaemenesPreschoolCatalog;
@@ -2366,12 +2366,21 @@ function markVisited(id){
   renderLearnerHome();
   renderAdventureTrail();
   renderParentDashboard();
+  renderWeeklyGardenState();
   syncMentorContext();
 }
 function updateFavorites(){$("favoriteCount").textContent=favorites.size;$("favoritesBtn").setAttribute("aria-pressed",String(favoritesOnly));$("starMeter").innerHTML=favorites.size?Array.from({length:Math.min(favorites.size,14)},()=>'<span class="saved-star">♥</span>').join(""):`<span class="empty-stars">No favorite adventures yet. Tap a heart below!</span>`}
 function updateProgress(){const count=KID_APPS.filter(app=>visited.has(app.id)).length;$("visitCount").textContent=`${count}/${KID_APPS.length}`;$("progressFill").style.width=`${Math.round(count/KID_APPS.length*100)}%`;document.querySelectorAll(".activity").forEach(card=>card.classList.toggle("visited",visited.has(card.dataset.id)))}
 function filterActivities(){const q=$("search").value.trim().toLowerCase(),category=$("category").value;let count=0;[...$("activityGrid").children].forEach(card=>{const visible=(category==="all"||card.dataset.category===category)&&(!q||card.dataset.search.includes(q))&&(!favoritesOnly||favorites.has(card.dataset.id));card.hidden=!visible;if(visible)count++});$("results").textContent=`${count} of ${KID_APPS.length} child adventures shown${favoritesOnly?" · favorites only":""}.`;$("empty").classList.toggle("show",count===0)}
 function chooseRandom(category){let pool=KID_APPS.filter(app=>!category||category==="all"||app.category===category);if(favoritesOnly)pool=pool.filter(app=>favorites.has(app.id));const app=pool[Math.floor(Math.random()*pool.length)];if(app){markVisited(app.id);toast("Opening a surprise adventure!");openAppModal(appUrl(app),displayTitle(app),app.icon,app.id)}else toast("No adventures are available in that selection.")}
+function renderWeeklyGardenState(){
+  document.querySelectorAll("#weeklyGardenGrid .weekly-adventure[data-app-id]").forEach(card=>{
+    const done=visited?.has?.(card.dataset.appId)||false;card.classList.toggle("explored",done);
+    let badge=card.querySelector(".weekly-explored");
+    if(done&&!badge){badge=document.createElement("em");badge.className="weekly-explored";badge.textContent="✓ Explored";card.append(badge)}
+    if(!done&&badge)badge.remove();
+  });
+}
 function selectedPreschoolWeek(){
   const spine=window.KhaemenesPreschoolSpine;
   const number=Math.max(1,Math.min(42,Number(localStorage.getItem("khaemenes.preschool.week")||1)));
@@ -3584,48 +3593,6 @@ document.addEventListener("DOMContentLoaded",function(){
   if(explore&&existing) explore.addEventListener("click",function(){existing.click();});
 });
 </script>
-<script id="creche-daily-school-rotation">
-(function(){
-  const rotations={
-    abc:[
-      ["ABC Story Time","Stories, letter sounds, and friendly early-reading play.","./apps/ABC_Story_Time/index.html"],
-      ["Alphabet Adventure","Explore letters through a playful alphabet adventure.","./apps/ABC_Alphabet_Adventure_index.html"],
-      ["ABC Bubble Adventure","Pop, notice, and play with letters in a colorful bubble game.","./apps/ABC_bubble_adventure_index.html"],
-      ["ABC Match","Match letters and build visual alphabet recognition.","./apps/ABC_match_index.html"],
-      ["Bilingual ABC Garden","Meet letters through a bilingual early-language garden.","./apps/ABC_bilingual_index.html"],
-      ["ABC Adventure Hub","Choose another playful alphabet challenge.","./apps/ABC_adventure_hub_index.html"]
-    ],
-    numbers:[
-      ["Pre-K Math Cloud","Play with early number ideas in a gentle math world.","./apps/math_cloud_index.html"],
-      ["Numbers 1–12 Fun","Count, notice, and play with numbers from 1 through 12.","./apps/numbers_1-12_fun_index.html"],
-      ["Numbers Drag & Drop","Move numbers into place with hands-on matching practice.","./apps/numbers_drag_n_drop_index.html"],
-      ["Shapes Game","Explore shapes through a colorful interactive game.","./apps/shapes_game_index.html"],
-      ["Match the Shapes","Look closely and match familiar shapes.","./apps/shapes_match_index.html"],
-      ["Sunny ABCs & 123s","Mix cheerful number play with storytime.","./apps/Sunny_ABCs_123s_Storytime/index.html"]
-    ],
-    pe:[
-      ["Move & Groove","Move, stretch, balance, dance, and build healthy-body confidence.","./apps/PE_move_n_groove_index.html"]
-    ],
-    life:[
-      ["How to Brush Your Teeth","Practice a safe, child-friendly tooth-brushing routine.","./apps/Life_skills_little_Tikes_How_to_Brush_Your_Teeth/index.html"],
-      ["Little Kitchen Helper","Learn safe, simple ways to help in the kitchen.","./apps/Life_skills_kitchen_helper_index.html"],
-      ["Making Your Bed","Practice an everyday independence routine step by step.","./apps/Life_skills_make_bed_index.html"],
-      ["Mini Organizer","Practice putting things in order and understanding what comes next.","./apps/Life_skills_organizer_index.html"],
-      ["Walking With a Dog Safely","Learn caring, adult-guided dog-walking safety.","./apps/Life_skills_walk_dog_index.html"],
-      ["Life Skills Clubhouse","Explore another useful everyday-life skill.","./apps/Life_skills_index.html"]
-    ]
-  };
-  const day=Math.floor(new Date().setHours(0,0,0,0)/86400000);
-  const bind=(key,titleId,descId,linkId)=>{
-    const list=rotations[key], item=list[((day%list.length)+list.length)%list.length];
-    const t=document.getElementById(titleId),d=document.getElementById(descId),a=document.getElementById(linkId);
-    if(t)t.textContent=item[0]; if(d)d.textContent=item[1]; if(a)a.href=item[2];
-  };
-  bind("abc","dailyAbcTitle","dailyAbcDesc","dailyAbcLink");
-  bind("numbers","dailyNumbersTitle","dailyNumbersDesc","dailyNumbersLink");
-  bind("pe","dailyPeTitle","dailyPeDesc","dailyPeLink");
-  bind("life","dailyLifeTitle","dailyLifeDesc","dailyLifeLink");
-})();
-</script>
+<script id="creche-weekly-school-sync">document.addEventListener("DOMContentLoaded",()=>{syncDailySchoolToWeek();renderWeeklyGardenState();});</script>
 <script id="preschool-offline-shell">if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script></body>
 </html>
