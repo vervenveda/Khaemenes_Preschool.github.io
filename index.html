@@ -878,6 +878,8 @@ body.category-directory-open{overflow:hidden}
 @media(max-width:900px){.weekly-garden-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.weekly-garden{margin-top:-18px}.weekly-garden-card{padding:17px}.weekly-garden-grid{grid-template-columns:1fr 1fr;gap:8px}.weekly-adventure{min-height:116px;padding:12px}}
 
 .weekly-continue{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;margin-top:16px;padding:13px 15px;border:2px solid rgba(8,125,136,.16);border-radius:7px;background:#eafaff}.weekly-continue .continue-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:7px;background:#fff;font-size:1.8rem}.weekly-continue h3{margin:0;color:#343067;font-size:1rem}.weekly-continue p{margin:3px 0 0;color:#59677b;font-size:.78rem}.weekly-continue a{min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:7px;background:#087d88;color:#fff;font-weight:900;text-decoration:none}.weekly-graduation{display:none;margin-top:12px;padding:14px;border-radius:7px;background:linear-gradient(135deg,#fff0bd,#e7f7ff);text-align:center}.weekly-graduation.show{display:block}.weekly-graduation a{display:inline-flex;margin-top:7px;padding:10px 14px;border-radius:7px;background:#704fd0;color:#fff;font-weight:900;text-decoration:none}@media(max-width:650px){.weekly-continue{grid-template-columns:auto 1fr}.weekly-continue a{grid-column:1/-1;width:100%}}
+
+.quick-picks{margin-top:16px;border:2px solid rgba(112,79,208,.12);border-radius:7px;background:#fff}.quick-picks>summary{padding:14px 16px;color:#453b86;font-weight:900;cursor:pointer}.quick-picks-note{margin:0;padding:0 16px 4px;color:#667085;font-size:.8rem}.quick-picks .daily-school-grid{margin:10px 14px 14px}.learner-home{padding-top:38px;padding-bottom:42px}.explore-play{padding-top:44px;padding-bottom:48px}
 </style>
 <link rel="stylesheet" href="assets/khaemenes-sacred-layout.css" data-khaemenes-sacred-layout>
 <link rel="stylesheet" href="assets/preschool-playful-theme.css" data-preschool-playful-theme>
@@ -1625,7 +1627,7 @@ body.creche-support-ready #vnv-support-section{display:none!important}
       <p id="myHomeIntro">Play, save favorites, and explore every Crechè adventure without registration. A family learner profile is used for the child’s personalized Mentor and formal curriculum continuity.</p>
     </div>
 
-    <div class="daily-school-grid" id="dailySchoolGrid" aria-label="Today's four preschool learning categories">
+    <details class="quick-picks"><summary>🌼 Four quick picks from this week</summary><p class="quick-picks-note">Open this shelf when you want a shorter choice of literacy, numbers, movement, and life skills.</p><div class="daily-school-grid" id="dailySchoolGrid" aria-label="Four quick preschool learning choices from this week">
       <article class="daily-school-card abc-card" data-daily-subject="abc">
         <div class="daily-school-icon" aria-hidden="true">🔤</div>
         <p class="daily-school-kicker">Daily ABC</p>
@@ -1654,7 +1656,7 @@ body.creche-support-ready #vnv-support-section{display:none!important}
         <p id="dailyLifeDesc">Practice a useful everyday routine with a caring grown-up nearby.</p>
         <a class="daily-school-btn" id="dailyLifeLink" href="#activities">Try Today’s Life Skill →</a>
       </article>
-    </div>
+    </div></details>
 
     <div class="quick-comfort">
       <span><strong id="homeVisitedCount">0</strong> explored</span>
@@ -1702,7 +1704,7 @@ body.creche-support-ready #vnv-support-section{display:none!important}
     </div>
 
     <div class="garden-quick-row">
-      <article class="garden-today">
+      <article class="garden-today" hidden aria-hidden="true">
         <span class="garden-mini-icon" aria-hidden="true">☀️</span>
         <div><p class="kicker">Today’s little adventure</p><h3 id="dailyTitle"></h3><p id="dailyDesc"></p></div>
         <a id="dailyLink" href="./">Play Today →</a>
