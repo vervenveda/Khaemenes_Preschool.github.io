@@ -2073,17 +2073,17 @@ function initWeeklyGarden(){
   if(!spine||!grid)return;
   const labels={literacy:["📚","Literacy"],earlyMath:["🔢","Early Math"],wonderScience:["🔭","Wonder"],feelingsSEL:["💛","Feelings"],creativeArtsMusic:["🎨","Create"],movement:["🤸","Move"],lifeSkill:["🧺","Life Skill"],storyImagination:["✨","Story"]};
   let week=Math.max(1,Math.min(42,Number(localStorage.getItem("khaemenes.preschool.week")||1)));
-  function render(){const w=spine.weeks[week-1];if(!w)return;document.getElementById("weeklyWeek").textContent="Week "+week;document.getElementById("weeklyGardenTitle").textContent=w.theme;grid.innerHTML=Object.entries(w.recommended).map(([domain,id])=>{const app=PRESCHOOL_CATALOG.byId(id);if(!app)return"";const meta=labels[domain]||["🌟",domain];return '<a class="weekly-adventure" href="./apps/'+app.file+'" data-app-id="'+app.id+'"><span aria-hidden="true">'+meta[0]+'</span><small>'+meta[1]+'</small><strong>'+app.title+'</strong></a>'}).join("");document.getElementById("weeklyFamily").innerHTML="<strong>For families:</strong> "+w.familyObservation;localStorage.setItem("khaemenes.preschool.week",String(week));}
+  function render(){const w=spine.weeks[week-1];if(!w)return;document.getElementById("weeklyWeek").textContent="Week "+week;document.getElementById("weeklyGardenTitle").textContent=w.theme;grid.innerHTML=Object.entries(w.recommended).map(([domain,id])=>{const app=PRESCHOOL_CATALOG.byId(id);if(!app)return"";const meta=labels[domain]||["🌟",domain];return '<a class="weekly-adventure" href="./apps/'+app.file+'" data-app-id="'+app.id+'"><span aria-hidden="true">'+meta[0]+'</span><small>'+meta[1]+'</small><strong>'+app.title+'</strong></a>'}).join("");document.getElementById("weeklyFamily").innerHTML="<strong>For families:</strong> "+w.familyObservation;localStorage.setItem("khaemenes.preschool.week",String(week));if(typeof syncDailySchoolToWeek==="function")syncDailySchoolToWeek();}
   document.getElementById("weeklyPrev").addEventListener("click",()=>{week=week<=1?42:week-1;render()});document.getElementById("weeklyNext").addEventListener("click",()=>{week=week>=42?1:week+1;render()});render();
 }
 
 const PRESCHOOL_CATALOG=window.KhaemenesPreschoolCatalog;
-initWeeklyGarden();
 if(!PRESCHOOL_CATALOG){
   throw new Error("Khaemenes Preschool shared catalog failed to load.");
 }
 const APPS=PRESCHOOL_CATALOG.activities;
 const CATEGORIES=PRESCHOOL_CATALOG.categories;
+initWeeklyGarden();
 const NEW_IDS=[
   "abc-story-time-folder",
   "art-color-studio-folder",
@@ -2372,19 +2372,40 @@ function updateFavorites(){$("favoriteCount").textContent=favorites.size;$("favo
 function updateProgress(){const count=KID_APPS.filter(app=>visited.has(app.id)).length;$("visitCount").textContent=`${count}/${KID_APPS.length}`;$("progressFill").style.width=`${Math.round(count/KID_APPS.length*100)}%`;document.querySelectorAll(".activity").forEach(card=>card.classList.toggle("visited",visited.has(card.dataset.id)))}
 function filterActivities(){const q=$("search").value.trim().toLowerCase(),category=$("category").value;let count=0;[...$("activityGrid").children].forEach(card=>{const visible=(category==="all"||card.dataset.category===category)&&(!q||card.dataset.search.includes(q))&&(!favoritesOnly||favorites.has(card.dataset.id));card.hidden=!visible;if(visible)count++});$("results").textContent=`${count} of ${KID_APPS.length} child adventures shown${favoritesOnly?" · favorites only":""}.`;$("empty").classList.toggle("show",count===0)}
 function chooseRandom(category){let pool=KID_APPS.filter(app=>!category||category==="all"||app.category===category);if(favoritesOnly)pool=pool.filter(app=>favorites.has(app.id));const app=pool[Math.floor(Math.random()*pool.length)];if(app){markVisited(app.id);toast("Opening a surprise adventure!");openAppModal(appUrl(app),displayTitle(app),app.icon,app.id)}else toast("No adventures are available in that selection.")}
+function selectedPreschoolWeek(){
+  const spine=window.KhaemenesPreschoolSpine;
+  const number=Math.max(1,Math.min(42,Number(localStorage.getItem("khaemenes.preschool.week")||1)));
+  return spine?.weeks?.[number-1]||null;
+}
+function weeklyApp(domain){
+  const id=selectedPreschoolWeek()?.recommended?.[domain];
+  return id?PRESCHOOL_CATALOG.byId(id):null;
+}
 function setDaily(){
-  if(!KID_APPS.length){
+  const week=selectedPreschoolWeek(),app=weeklyApp("literacy")||KID_APPS[0];
+  if(!app){
     $("dailyTitle").textContent="More adventures coming soon";
     $("dailyDesc").textContent="Explore the learning rooms while we prepare today’s adventure.";
-    $("dailyLink").hidden=true;
-    return;
+    $("dailyLink").hidden=true;return;
   }
   $("dailyLink").hidden=false;
-  const now=new Date(),day=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000),app=KID_APPS[day%KID_APPS.length];
   $("dailyTitle").textContent=app.icon+" "+app.title;
-  $("dailyDesc").textContent=app.desc;
-  $("dailyLink").href=appUrl(app);
-  $("dailyLink").dataset.openApp=app.id;
+  $("dailyDesc").textContent=week?"A gentle pick from Week "+week.week+" · "+week.theme+". "+app.desc:app.desc;
+  $("dailyLink").href=appUrl(app);$("dailyLink").dataset.openApp=app.id;
+}
+function syncDailySchoolToWeek(){
+  const picks=[
+    ["literacy","dailyAbcTitle","dailyAbcDesc","dailyAbcLink","Play This Week’s ABC →"],
+    ["earlyMath","dailyNumbersTitle","dailyNumbersDesc","dailyNumbersLink","Play This Week’s 123 →"],
+    ["movement","dailyPeTitle","dailyPeDesc","dailyPeLink","Move & Play →"],
+    ["lifeSkill","dailyLifeTitle","dailyLifeDesc","dailyLifeLink","Try This Week’s Life Skill →"]
+  ];
+  for(const [domain,titleId,descId,linkId,label] of picks){
+    const app=weeklyApp(domain);if(!app)continue;
+    $(titleId).textContent=displayTitle(app);$(descId).textContent=app.desc;
+    $(linkId).href=appUrl(app);$(linkId).dataset.openApp=app.id;$(linkId).textContent=label;
+  }
+  setDaily();
 }
 function renderSites(){$("siteGrid").innerHTML=SITES.map(site=>`<a class="site-card ${site.status}" href="${site.url}"><div class="site-top"><span class="site-icon">${site.icon}</span><span class="status live">Open</span></div><h3>${escapeHtml(site.title)}</h3><p>${escapeHtml(site.desc)}</p><small>Open public landing page ↗</small></a>`).join("")}
 function buildMenu(query=""){
