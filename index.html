@@ -880,6 +880,12 @@ body.category-directory-open{overflow:hidden}
 .weekly-continue{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;margin-top:16px;padding:13px 15px;border:2px solid rgba(8,125,136,.16);border-radius:7px;background:#eafaff}.weekly-continue .continue-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:7px;background:#fff;font-size:1.8rem}.weekly-continue h3{margin:0;color:#343067;font-size:1rem}.weekly-continue p{margin:3px 0 0;color:#59677b;font-size:.78rem}.weekly-continue a{min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:7px;background:#087d88;color:#fff;font-weight:900;text-decoration:none}.weekly-graduation{display:none;margin-top:12px;padding:14px;border-radius:7px;background:linear-gradient(135deg,#fff0bd,#e7f7ff);text-align:center}.weekly-graduation.show{display:block}.weekly-graduation a{display:inline-flex;margin-top:7px;padding:10px 14px;border-radius:7px;background:#704fd0;color:#fff;font-weight:900;text-decoration:none}@media(max-width:650px){.weekly-continue{grid-template-columns:auto 1fr}.weekly-continue a{grid-column:1/-1;width:100%}}
 
 .quick-picks{margin-top:16px;border:2px solid rgba(112,79,208,.12);border-radius:7px;background:#fff}.quick-picks>summary{padding:14px 16px;color:#453b86;font-weight:900;cursor:pointer}.quick-picks-note{margin:0;padding:0 16px 4px;color:#667085;font-size:.8rem}.quick-picks .daily-school-grid{margin:10px 14px 14px}.learner-home{padding-top:38px;padding-bottom:42px}.explore-play{padding-top:44px;padding-bottom:48px}
+
+/* Academy Front Desk parity · lightweight geometry only; campus colors and functions are preserved. */
+:where(.card,.school,.campus-card,.path-card,.course-card,.feature-card){box-sizing:border-box;min-width:0}
+:where(.grid,.cards,.school-grid,.course-grid,.campus-grid){justify-content:center;align-items:stretch}
+:where(.card,.school,.campus-card,.path-card,.course-card,.feature-card) :where(a,button){border-radius:7px}
+:where(.card,.school,.campus-card,.path-card,.course-card,.feature-card) :where(.btn,.button,.card-action){box-sizing:border-box;min-height:42px;text-align:center;overflow-wrap:break-word}
 </style>
 <link rel="stylesheet" href="assets/khaemenes-sacred-layout.css" data-khaemenes-sacred-layout>
 <link rel="stylesheet" href="assets/preschool-playful-theme.css" data-preschool-playful-theme>
