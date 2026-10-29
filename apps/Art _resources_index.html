@@ -343,6 +343,7 @@ input[type="search"]{min-width:min(320px,90vw)}
 </style>
 <link rel="stylesheet" href="../assets/preschool-playful-theme.css" data-preschool-playful-theme>
 <script src="../assets/preschool-learner-storage.js" data-preschool-learner-storage></script>
+<script src="../assets/preschool-voice.js"></script>
 </head>
 <body>
 <div class="sky" aria-hidden="true">
@@ -630,10 +631,9 @@ function newPrompt(){
 function speak(text){
   if(!("speechSynthesis" in window))return;
   speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  const voices=speechSynthesis.getVoices();
-  u.voice=voices.find(v=>/child|kid|jenny|samantha|aria|female/i.test(v.name)&&/^en/i.test(v.lang))
-    ||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;
+  const bridge=window.KhaemenesPreschoolVoice;
+  const u=bridge?.utterance?.(text,{role:"gentle",lang:"en-US",prefer:"child|kid|jenny|samantha|aria|female",rate:.88,pitch:1.08})||new SpeechSynthesisUtterance(text);
+  if(!u.voice){const voices=speechSynthesis.getVoices();u.voice=voices.find(v=>/child|kid|jenny|samantha|aria|female/i.test(v.name)&&/^en/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;}
   u.rate=.88;u.pitch=1.08;
   speechSynthesis.speak(u);
 }
