@@ -1492,7 +1492,15 @@ body.creche-support-ready #vnv-support-section{display:none!important}
 
 .enrolled-prek-tools{margin:0 0 24px;padding:22px 24px;border:4px solid rgba(255,255,255,.9);border-radius:28px;background:linear-gradient(135deg,#fff0bd,#fff 48%,#dff9ff);box-shadow:0 14px 34px rgba(32,76,95,.12);color:#26364a}.enrolled-prek-tools[hidden]{display:none!important}.enrolled-prek-tools h3{margin:3px 0 7px;font-size:clamp(1.3rem,2.5vw,1.75rem)}.enrolled-prek-tools p{margin:0;line-height:1.5}.enrolled-prek-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.enrolled-prek-actions button{min-height:48px;padding:10px 16px;border:2px solid rgba(38,54,74,.14);border-radius:14px;background:#fff;color:#26364a;font:inherit;font-weight:800;cursor:pointer}.enrolled-prek-actions button:first-child{background:#ffd63d}.enrolled-prek-actions button:disabled{opacity:.7;cursor:default}.enrolled-prek-status{margin-top:10px!important;font-size:.92rem;color:#526174}
 </style>
-<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#8fe6f9"></head>
+<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#8fe6f9"><style id="creche-single-top-header-20261029">
+/* Remove redundant blue masthead; preserve preschool-specific controls within the hero. */
+body .hero .actions .view-switch{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;background:#fff8ee;border:2px solid #fff;border-radius:7px;padding:5px}
+body .hero .actions #menuBtn{width:auto;min-height:48px;border-radius:7px;position:static;box-shadow:none;font:inherit}
+body .hero .actions #navReadingTime{min-height:48px;border-radius:7px}
+body .hero .actions .view-choice{min-height:44px;border-radius:7px;padding:9px 13px}
+@media(max-width:580px){body .hero .actions .view-switch{width:100%}}
+</style>
+</head>
 <body id="top" data-view="child">
 <header data-khae-header class="khae-global-campus-header">
   <div data-khae-header-inner>
@@ -1520,48 +1528,7 @@ body.creche-support-ready #vnv-support-section{display:none!important}
   <button class="ticker-toggle" id="tickerToggle" type="button" aria-pressed="false" aria-label="Pause learning ticker">Ⅱ</button>
 </div>
 
-<header class="header">
-  <div class="shell nav">
-    <a class="brand"
-       href="https://vervenveda.com/Khaemenes_Academy.github.io/"
-       aria-label="Khaemenes Academy home">
-      <span class="brand-bubble" aria-hidden="true">🌈</span>
-      <span>
-        <strong>Khaemenes Preschool</strong>
-        <small>Crechè · Bright beginnings grow here</small>
-      </span>
-    </a>
 
-    <nav class="navlinks" aria-label="Preschool learning navigation">
-      <a href="./student-profile/" class="learner-profile-link">😊 My Profile</a>
-      <a href="#today">Today</a>
-      <a href="#rooms">Rooms</a>
-      <a href="#activities">Adventures</a>
-      <button type="button" class="nav-reading-link" id="navReadingTime">📚 Reading</button>
-      <a href="#familyMentorEntry" class="grownup-entry-link">🧑‍🧒 Grown-Up</a>
-    </nav>
-
-    <div class="view-switch" role="group" aria-label="Choose child or grown-up view">
-      <button class="view-choice"
-              id="childViewBtn"
-              type="button"
-              data-view-choice="child"
-              aria-pressed="true">🌈 Child</button>
-      <button class="view-choice"
-              id="grownupViewBtn"
-              type="button"
-              data-view-choice="grownup"
-              aria-pressed="false">🧑‍🧒 Grown-Up</button>
-    </div>
-
-    <button class="menu-btn"
-            id="menuBtn"
-            type="button"
-            aria-label="Open complete Preschool menu"
-            aria-controls="menuOverlay"
-            aria-expanded="false">☰</button>
-  </div>
-</header>
 
 <nav class="breadcrumbs" aria-label="Breadcrumb">
   <div class="shell">
@@ -1594,6 +1561,12 @@ body.creche-support-ready #vnv-support-section{display:none!important}
         <a class="btn primary" href="./student-profile/">😊 My Profile / Continue Learning →</a>
         <a class="btn secondary" href="#rooms">Pick a Room</a>
         <button class="btn secondary" id="surpriseHero" type="button">Surprise Me!</button>
+         <button type="button" class="btn secondary" id="navReadingTime">📚 Reading Time</button>
+         <button type="button" class="btn secondary" id="menuBtn" aria-label="Open complete Preschool directory" aria-controls="menuOverlay" aria-expanded="false">Preschool Directory</button>
+         <div class="view-switch" role="group" aria-label="Choose child or grown-up view">
+           <button class="view-choice" id="childViewBtn" type="button" data-view-choice="child" aria-pressed="true">🌈 Child</button>
+           <button class="view-choice" id="grownupViewBtn" type="button" data-view-choice="grownup" aria-pressed="false">🧑‍🧒 Grown-Up</button>
+         </div>
       </div>
       <div class="hero-notes"><span class="hero-note"><strong id="heroKidCount">52</strong>&nbsp;child adventures</span><span class="hero-note">No account required</span><span class="hero-note">Returning learners go straight to My Profile</span><span class="hero-note">Large, playful buttons</span></div>
     </div>
@@ -3166,7 +3139,7 @@ const CLEAN_ANCHOR_MAP={
 
 function measureStickyStack(){
   const ticker=$("learningTicker");
-  const header=document.querySelector(".header");
+  const header=document.querySelector("[data-khae-header]");
   const tickerHeight=Math.ceil(ticker?.getBoundingClientRect().height||0);
   const headerHeight=Math.ceil(header?.getBoundingClientRect().height||0);
 
@@ -3470,7 +3443,7 @@ function init(){
  select.style.cssText="border-radius:7px;padding:7px;color:#17211d;background:#fff;border:1px solid #b49c70;max-width:190px;";
  for(const [code,label] of Object.entries(names)){const o=document.createElement("option");o.value=code;o.textContent=label;select.append(o)}
  select.value=chosen;select.addEventListener("change",()=>{chosen=select.value;try{localStorage.setItem("vnv_language_v1",chosen)}catch{}apply()});
- holder.append(select);document.querySelector("header.header")?.after(holder);
+ holder.append(select);document.querySelector(".breadcrumbs")?.before(holder);
  apply();
  document.addEventListener("click",event=>{
   if(chosen==="en"||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
