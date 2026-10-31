@@ -207,6 +207,6 @@ $('theme').value=state.theme;$('clef').value=state.clef;$('instrument').value=st
 $('theme').onchange=e=>applyTheme(e.target.value);$('clef').onchange=()=>{score.forEach(it=>{if(it.type==='note'){const p=pitchFromStep(it.step,it.acc||0);it.name=p.name;it.midi=p.midi}});drawStaff();save()};$('instrument').onchange=save;$('tempo').onchange=save;$('volume').oninput=()=>{if(master)master.gain.value=Number($('volume').value);save()};$('labels').onchange=()=>{drawStaff();save()};
 applyTheme(state.theme);renderSymbols();drawStaff();lesson();
 </script>
-<script src="/assets/vnv-beta-link.js" defer></script>
+<script src="https://vervenveda.com/assets/vnv-ecosystem-toolbar.js"></script>
 <footer class="site-footer"><strong>© 2026 Verve N Veda · Khaemenes Academy · Khaemenes Preschool · Jennifer Kay Pearl</strong><br>Free learning · Child-friendly · Family guided</footer><script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.js" defer></script></body>
 </html>
