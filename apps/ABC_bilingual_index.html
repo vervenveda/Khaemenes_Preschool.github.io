@@ -48,6 +48,6 @@ function quiz(){questionIndex=Math.floor(Math.random()*DATA.length);const row=DA
 $("language").onchange=e=>{state.language=e.target.value;save();render();quiz()};$("hearEnglish").onclick=()=>speak(DATA[index][2],"en-US");$("hearPartner").onclick=()=>speak(word(),LANG[state.language].speech);$("hearBoth").onclick=speakBoth;$("stopVoice").onclick=()=>{if("speechSynthesis" in window)speechSynthesis.cancel()};$("previous").onclick=()=>{index=(index+25)%26;render()};$("next").onclick=()=>{index=(index+1)%26;render()};$("newQuestion").onclick=quiz;$("reset").onclick=()=>{if(confirm("Reset this learner’s Bilingual ABC Garden progress?")){localStorage.removeItem(KEY);state=read();render();quiz()}};render();quiz();
 })();
 </script>
-<script src="/assets/vnv-beta-link.js" defer></script>
+<script src="https://vervenveda.com/assets/vnv-ecosystem-toolbar.js"></script>
 <footer class="site-footer"><strong>© 2026 Verve N Veda · Khaemenes Academy · Khaemenes Preschool · Jennifer Kay Pearl</strong><br>Free learning · Child-friendly · Family guided</footer><script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.js" defer></script></body>
 </html>
