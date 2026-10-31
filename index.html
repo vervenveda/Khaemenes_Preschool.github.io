@@ -53,37 +53,6 @@ a{color:inherit}button,input,select{font:inherit}button{cursor:pointer}
 @keyframes drift{to{transform:translateY(-18px) rotate(8deg)}}
 
 
-/* Animated learning ticker */
-.learning-ticker{
-  position:sticky;top:0;z-index:170;
-  height:var(--ticker-height);min-height:var(--ticker-height);
-  display:grid;grid-template-columns:minmax(0,1fr) 42px;
-  overflow:hidden;color:#fff;
-  background:linear-gradient(90deg,#17224a,#493a87 38%,#087d88 72%,#17224a);
-  border-bottom:1px solid rgba(255,255,255,.2);
-  box-shadow:0 5px 16px rgba(31,39,78,.2)
-}
-.ticker-window{
-  min-width:0;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 30px,#000 calc(100% - 30px),transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 30px,#000 calc(100% - 30px),transparent)
-}
-.ticker-track{
-  width:max-content;height:100%;display:flex;align-items:center;white-space:nowrap;
-  animation:ticker-slide 54s linear infinite;will-change:transform
-}
-.learning-ticker:hover .ticker-track,
-.learning-ticker:focus-within .ticker-track,
-.learning-ticker[data-paused="true"] .ticker-track{animation-play-state:paused}
-.ticker-set{display:flex;align-items:center;gap:28px;padding-inline:28px}
-.ticker-title{color:#ffe69d;font-family:var(--serif);font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
-.ticker-link{min-height:var(--ticker-height);display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:.76rem;font-weight:800;letter-spacing:.065em}
-.ticker-link::before{content:"";width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--pink));box-shadow:0 0 0 3px rgba(255,255,255,.12)}
-.ticker-link:hover{text-decoration:underline;text-underline-offset:4px}
-.ticker-toggle{width:42px;height:var(--ticker-height);border:0;border-left:1px solid rgba(255,255,255,.16);color:#fff;background:rgba(0,0,0,.13);font-size:.85rem}
-.ticker-toggle:hover{background:rgba(255,255,255,.1)}
-@keyframes ticker-slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
 .header{position:sticky;top:var(--ticker-height);z-index:160;border-bottom:2px solid rgba(255,255,255,.94);background:rgba(143,230,249,.965);box-shadow:0 9px 26px rgba(44,55,87,.13);backdrop-filter:blur(15px)}
 .nav{min-height:var(--header-height);display:flex;align-items:center;justify-content:space-between;gap:clamp(12px,2vw,24px);padding-block:10px;box-sizing:border-box}
 .brand{min-width:0;display:flex;align-items:center;gap:16px;text-decoration:none;text-align:left;padding:6px 10px 6px 0;border-radius:18px}
@@ -886,9 +855,6 @@ body.category-directory-open{overflow:hidden}
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-global-header.css">
 <link rel="stylesheet" href="https://vervenveda.com/assets/vnv-ecosystem-menu.css">
 
-<style id="khae-single-master-header-v1">/* Retain local course navigation, remove duplicate masthead branding only. */
-body:has([data-khae-header]) .header .nav .brand{display:none!important}
-</style>
 <style id="creche-header-palette-v1">
 /* Crechè palette-only header treatment. No navigation, sizing, or behavior changes. */
 body [data-khae-header].khae-global-campus-header{
@@ -1521,15 +1487,6 @@ body .hero .actions .view-choice{min-height:44px;border-radius:7px;padding:9px 1
 <a class="skip" href="#activities">Skip to learning adventures</a>
 <div class="sky-decor" aria-hidden="true"><span class="float-shape">⭐</span><span class="float-shape">♥</span><span class="float-shape">●</span><span class="float-shape">▲</span></div>
 
-<div class="learning-ticker" id="learningTicker" data-paused="false" aria-label="New and updated Khaemenes Preschool adventures">
-  <div class="ticker-window">
-    <div class="ticker-track" id="tickerTrack"></div>
-  </div>
-  <button class="ticker-toggle" id="tickerToggle" type="button" aria-pressed="false" aria-label="Pause learning ticker">Ⅱ</button>
-</div>
-
-
-
 <nav class="breadcrumbs" aria-label="Breadcrumb">
   <div class="shell">
     <a href="https://vervenveda.com/">Verve N Veda</a>
@@ -1558,8 +1515,8 @@ body .hero .actions .view-choice{min-height:44px;border-radius:7px;padding:9px 1
       <h1>Crechè<span>Khaemenes Preschool · Read · Count · Create · Feel · Move · Wonder</span></h1>
       <p class="lead" id="heroLead">A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.</p>
       <div class="actions">
-        <a class="btn primary" href="./student-profile/">😊 My Profile / Continue Learning →</a>
-        <a class="btn secondary" href="#rooms">Pick a Room</a>
+        <a class="btn primary" href="./student-profile/" data-ticker data-ticker-label="My Profile">😊 My Profile / Continue Learning →</a>
+        <a class="btn secondary" href="#rooms" data-ticker data-ticker-label="Rooms">Pick a Room</a>
         <button class="btn secondary" id="surpriseHero" type="button">Surprise Me!</button>
          <button type="button" class="btn secondary" id="navReadingTime">📚 Reading Time</button>
          <button type="button" class="btn secondary" id="menuBtn" aria-label="Open complete Preschool directory" aria-controls="menuOverlay" aria-expanded="false">Preschool Directory</button>
@@ -1573,10 +1530,10 @@ body .hero .actions .view-choice{min-height:44px;border-radius:7px;padding:9px 1
     <div class="hero-playground" aria-label="Quick Preschool section buttons">
       <a class="orbit-button" href="./student-profile/" title="Open my learning profile" data-label="My Profile">😊</a>
       <a class="orbit-button" href="#rooms" title="Choose an adventure room" data-label="Rooms">🔤</a>
-      <a class="orbit-button" href="#today" title="See today's pick" data-label="Today">⭐</a>
-      <a class="orbit-button" href="#new" title="See new adventures" data-label="New">🎈</a>
-      <a class="orbit-button" href="#activities" title="Explore all activities" data-label="Adventures">🎨</a>
-      <a class="orbit-button" href="#graduation-garden" title="Visit Graduation Garden" data-label="Graduation">🎓</a>
+      <a class="orbit-button" href="#today" title="See today's pick" data-label="Today" data-ticker data-ticker-label="Today">⭐</a>
+      <a class="orbit-button" href="#new" title="See new adventures" data-label="New" data-ticker data-ticker-label="New Adventures">🎈</a>
+      <a class="orbit-button" href="#activities" title="Explore all activities" data-label="Adventures" data-ticker data-ticker-label="Adventures">🎨</a>
+      <a class="orbit-button" href="#graduation-garden" title="Visit Graduation Garden" data-label="Graduation" data-ticker data-ticker-label="Graduation Garden">🎓</a>
       <button class="reading-time-launch" id="readingTimeBtn" type="button" aria-haspopup="dialog" aria-controls="readingModal">📚 Reading Time<span>72 shared family stories</span></button>
     </div>
   </div>
@@ -2800,13 +2757,6 @@ function renderFeaturedGame(){
   $("featuredGameFrame").title=`Featured Crechè game: ${displayTitle(featuredGame)}`;
 }
 
-function renderTicker(){
-  const chosen=NEW_IDS.map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean);
-  const oneSet=()=>`<div class="ticker-set"><span class="ticker-title">Crechè Featured Adventures</span>${chosen.map(app=>`<a class="ticker-link" data-open-app="${app.id}" href="${appUrl(app)}">${escapeHtml(displayTitle(app))}</a>`).join("")}</div>`;
-  const twoSet=()=>`<div class="ticker-set" aria-hidden="true"><span class="ticker-title">Crechè Featured Adventures</span>${chosen.map(app=>`<a class="ticker-link" tabindex="-1" data-open-app="${app.id}" href="${appUrl(app)}">${escapeHtml(displayTitle(app))}</a>`).join("")}</div>`;
-  $("tickerTrack").innerHTML=oneSet()+twoSet();
-  document.querySelectorAll("#tickerTrack [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
-}
 function setView(view,{scroll=false}={}){
   currentView=view==="grownup"?"grownup":"child";
   document.body.dataset.view=currentView;
@@ -3138,7 +3088,7 @@ const CLEAN_ANCHOR_MAP={
 };
 
 function measureStickyStack(){
-  const ticker=$("learningTicker");
+  const ticker=$("#vnvTickerAutoPopulate");
   const header=document.querySelector("[data-khae-header]");
   const tickerHeight=Math.ceil(ticker?.getBoundingClientRect().height||0);
   const headerHeight=Math.ceil(header?.getBoundingClientRect().height||0);
@@ -3280,7 +3230,7 @@ renderFamilyMentorEntry();
 renderEnrolledPrekTools();
 syncMentorContext();
 renderFeaturedGame();
-renderTicker();
+
 renderNew();
 buildCategories();
 renderActivities();
@@ -3296,14 +3246,6 @@ setView(currentView);
 renderProfileCenter();
 chooseOffscreenPrompt();
 $("year").textContent=new Date().getFullYear();
-const ticker=$("learningTicker"),tickerToggle=$("tickerToggle");
-tickerToggle.addEventListener("click",()=>{
-  const paused=ticker.dataset.paused!=="true";
-  ticker.dataset.paused=String(paused);
-  tickerToggle.setAttribute("aria-pressed",String(paused));
-  tickerToggle.setAttribute("aria-label",paused?"Resume learning ticker":"Pause learning ticker");
-  tickerToggle.textContent=paused?"▶":"Ⅱ";
-});
 $("search").addEventListener("input",filterActivities);$("category").addEventListener("change",filterActivities);
 $("favoritesBtn").addEventListener("click",()=>{favoritesOnly=!favoritesOnly;updateFavorites();filterActivities()});
 $("randomBtn").addEventListener("click",()=>chooseRandom($("category").value));$("surpriseHero").addEventListener("click",()=>chooseRandom());$("orbitRandom").addEventListener("click",()=>chooseRandom());
@@ -3573,6 +3515,11 @@ document.addEventListener("DOMContentLoaded",function(){
 });
 </script>
 <script id="creche-weekly-school-sync">document.addEventListener("DOMContentLoaded",()=>{syncDailySchoolToWeek();renderWeeklyGardenState();});</script>
-<script id="preschool-offline-shell">if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script><script src="https://vervenveda.com/assets/vnv-ecosystem-toolbar.js" defer data-vnv-ecosystem-toolbar="1"></script>
+<script id="preschool-offline-shell">if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script><script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
+<script>
+  VNV_TICKER.autoPopulate({label:"Preschool Quick Links",max:10});
+  window.dispatchEvent(new Event("resize"));
+</script>
+<script src="https://vervenveda.com/assets/vnv-ecosystem-toolbar.js" defer data-vnv-ecosystem-toolbar="1"></script>
 </body>
 </html>
