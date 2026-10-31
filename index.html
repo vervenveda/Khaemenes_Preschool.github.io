@@ -1554,6 +1554,33 @@ body #myHome .quick-comfort button{
 body #myHome :is(a,button,summary):focus-visible{outline:3px solid #203c65!important;outline-offset:3px!important}
 @media(max-width:620px){body #myHome.learner-home{padding-block:40px!important}body #myHome .compact-heading{padding:20px 14px!important}}
 </style>
+<style id="creche-reading-title-separation-20261031">
+/* Reading Time is now in the oval's natural document flow, not over the title. */
+body .hero .hero-copy #readingTimeBtn{
+ position:relative!important;left:auto!important;right:auto!important;
+ top:auto!important;bottom:auto!important;transform:none!important;
+ display:block!important;align-self:center!important;flex-shrink:0!important;
+ width:max-content!important;max-width:90%!important;min-width:0!important;
+ margin:14px auto 24px!important;padding:10px 25px!important;
+ min-height:62px!important;box-sizing:border-box!important;
+ white-space:normal!important;animation:none!important;
+ font-size:clamp(17px,2vw,22px)!important;line-height:1.2!important;
+}
+body .hero .hero-copy #readingTimeBtn:hover{transform:translateY(-2px)!important}
+body .hero .hero-copy h1{margin-top:4px!important}
+body .hero{padding-bottom:195px!important}
+body #weeklyGarden.weekly-garden{padding-top:62px!important}
+@media(max-width:900px){
+ body .hero{padding-bottom:180px!important}
+ body .hero .hero-copy #readingTimeBtn{margin:12px auto 20px!important;padding:9px 18px!important}
+ body #weeklyGarden.weekly-garden{padding-top:52px!important}
+}
+@media(max-width:580px){
+ body .hero{padding-bottom:190px!important}
+ body .hero .hero-copy #readingTimeBtn{width:90%!important;min-height:56px!important;margin:10px auto 17px!important;padding:8px 12px!important}
+ body #weeklyGarden.weekly-garden{padding-top:44px!important}
+}
+</style>
 </head>
 <body id="top" data-view="child">
 <a class="skip" href="#activities">Skip to learning adventures</a>
@@ -1584,6 +1611,7 @@ body #myHome :is(a,button,summary):focus-visible{outline:3px solid #203c65!impor
   <div class="shell hero-inner">
     <div class="hero-copy">
       <p class="eyebrow" id="heroEyebrow">🌟 A colorful first doorway to learning</p>
+      <button class="reading-time-launch" id="readingTimeBtn" type="button" aria-haspopup="dialog" aria-controls="readingModal">📚 Reading Time<span>72 shared family stories</span></button>
       <h1>Crechè<span>Khaemenes Preschool · Read · Count · Create · Feel · Move · Wonder</span></h1>
       <p class="lead" id="heroLead">A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.</p>
       <div class="actions">
@@ -1606,7 +1634,7 @@ body #myHome :is(a,button,summary):focus-visible{outline:3px solid #203c65!impor
       <a class="orbit-button" href="#new" title="See new adventures" data-label="New" data-ticker data-ticker-label="New Adventures">🎈</a>
       <a class="orbit-button" href="#activities" title="Explore all activities" data-label="Adventures" data-ticker data-ticker-label="Adventures">🎨</a>
       <a class="orbit-button" href="#graduation-garden" title="Visit Graduation Garden" data-label="Graduation" data-ticker data-ticker-label="Graduation Garden">🎓</a>
-      <button class="reading-time-launch" id="readingTimeBtn" type="button" aria-haspopup="dialog" aria-controls="readingModal">📚 Reading Time<span>72 shared family stories</span></button>
+      
     </div>
   </div>
 </section>
