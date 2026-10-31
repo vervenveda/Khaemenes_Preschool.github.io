@@ -56,5 +56,5 @@ function restore(){const s=load();if(['names','objects','memory'].includes(s.mod
 function updateSound(){$('sound').setAttribute('aria-pressed',String(soundOn));$('sound').textContent=soundOn?'🔊 Sound On':'🔇 Sound Off'}
 $('sound').onclick=()=>{soundOn=!soundOn;updateSound();save({soundOn});$('message').textContent=soundOn?'Sound is on.':'Sound is off.'};$('newGame').onclick=startGame;$('nextRound').onclick=startGame;$('mode').onchange=startGame;$('difficulty').onchange=startGame;restore();
 </script>
-<script src="/assets/vnv-beta-link.js" defer></script>
+<script src="https://vervenveda.com/assets/vnv-ecosystem-toolbar.js"></script>
 <footer class="site-footer"><strong>© 2026 Verve N Veda · Khaemenes Academy · Khaemenes Preschool · Jennifer Kay Pearl</strong><br>Free learning · Child-friendly · Family guided</footer><script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.js" defer></script></body></html>
