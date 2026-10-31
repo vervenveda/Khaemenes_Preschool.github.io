@@ -1581,6 +1581,56 @@ body #weeklyGarden.weekly-garden{padding-top:62px!important}
  body #weeklyGarden.weekly-garden{padding-top:44px!important}
 }
 </style>
+<style id="creche-hero-tapered-actions-20261031">
+/* Compact symmetrical reverse-triangle action layout within the Crèche oval.
+   Only appearance changes: preserve all existing hrefs, IDs and handlers. */
+body .hero .hero-copy .actions{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ width:min(100%,400px)!important;max-width:400px!important;
+ gap:8px 10px!important;margin:18px auto 0!important;
+ justify-items:stretch!important;align-items:stretch!important;
+}
+body .hero .hero-copy .actions > .btn{
+ grid-column:auto!important;width:100%!important;max-width:100%!important;
+ min-width:0!important;min-height:42px!important;height:auto!important;
+ box-sizing:border-box!important;padding:9px 7px!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ text-align:center!important;white-space:normal!important;
+ font-size:13px!important;line-height:1.2!important;border-radius:7px!important;
+}
+body .hero .hero-copy .actions > .btn.primary{
+ grid-column:1 / -1!important;width:100%!important;min-height:46px!important;
+}
+body .hero .hero-copy .actions > .view-switch{
+ grid-column:1 / -1!important;width:70%!important;max-width:270px!important;
+ margin:1px auto 0!important;padding:0!important;
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:8px!important;background:transparent!important;border:0!important;box-shadow:none!important;
+}
+body .hero .hero-copy .actions .view-choice{
+ width:100%!important;min-width:0!important;min-height:37px!important;
+ box-sizing:border-box!important;padding:7px 5px!important;
+ font-size:12px!important;line-height:1.2!important;text-align:center!important;
+}
+body .hero .hero-copy .hero-notes{
+ display:flex!important;flex-wrap:wrap!important;align-items:center!important;
+ justify-content:center!important;width:min(100%,410px)!important;
+ max-width:410px!important;gap:6px!important;margin:16px auto 0!important;
+}
+body .hero .hero-copy .hero-notes .hero-note{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ max-width:100%!important;box-sizing:border-box!important;
+ padding:5px 9px!important;text-align:center!important;
+ font-size:11px!important;line-height:1.25!important;white-space:normal!important;
+}
+@media(max-width:580px){
+ body .hero .hero-copy .actions{width:100%!important;gap:7px!important;margin-top:15px!important}
+ body .hero .hero-copy .actions > .btn{min-height:41px!important;font-size:12px!important;padding:7px 5px!important}
+ body .hero .hero-copy .actions > .view-switch{width:82%!important}
+ body .hero .hero-copy .hero-notes{gap:5px!important;margin-top:12px!important}
+ body .hero .hero-copy .hero-notes .hero-note{font-size:10px!important;padding:4px 6px!important}
+}
+</style>
 </head>
 <body id="top" data-view="child">
 <a class="skip" href="#activities">Skip to learning adventures</a>
