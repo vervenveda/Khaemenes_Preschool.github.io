@@ -1631,7 +1631,19 @@ body .hero .hero-copy .hero-notes .hero-note{
  body .hero .hero-copy .hero-notes .hero-note{font-size:10px!important;padding:4px 6px!important}
 }
 </style>
-</head>
+<style id="creche-heading-hierarchy-20261031">
+body main .heading{text-align:center}
+body main .heading>.kicker,body main .weekly-garden-head .kicker,body main .support-copy>.kicker{font-size:clamp(11px,1vw,13px)!important;font-weight:400!important;letter-spacing:.09em!important;line-height:1.4!important;margin-bottom:9px!important}
+body main .heading>h2,body main .weekly-garden-head h2{font-family:Cinzel,Georgia,serif!important;font-size:clamp(29px,3.8vw,48px)!important;font-weight:400!important;line-height:1.16!important;margin:0 auto 13px!important;max-width:900px!important}
+body main .heading>p:not(.kicker){font-size:clamp(15px,1.4vw,17px)!important;line-height:1.6!important;max-width:760px!important;margin-left:auto!important;margin-right:auto!important}
+body main .weekly-garden-head h2{font-size:clamp(25px,3vw,37px)!important}
+body main .creche-support-closing .support-copy{text-align:center!important}
+body main .creche-support-closing #contributeTitle{font-family:Cinzel,Georgia,serif!important;font-size:clamp(27px,3.6vw,43px)!important;font-weight:400!important;line-height:1.2!important;margin:0 auto 12px!important}
+body main .creche-support-closing .support-copy>p:not(.kicker){font-size:clamp(14px,1.3vw,16px)!important;line-height:1.6!important}
+body main .parent-dashboard .dashboard-head h3,body main .mentor-day #mentorDayTitle{font-size:clamp(23px,2.5vw,32px)!important;line-height:1.2!important}
+body main .parent-dashboard .dashboard-head .kicker,body main .mentor-day .home-label{font-size:12px!important;line-height:1.4!important;font-weight:400!important}
+@media(max-width:640px){body main .heading>h2,body main .weekly-garden-head h2{font-size:clamp(27px,7.5vw,38px)!important}}
+</style></head>
 <body id="top" data-view="child">
 <a class="skip" href="#activities">Skip to learning adventures</a>
 <div class="sky-decor" aria-hidden="true"><span class="float-shape">⭐</span><span class="float-shape">♥</span><span class="float-shape">●</span><span class="float-shape">▲</span></div>
@@ -1691,7 +1703,7 @@ body .hero .hero-copy .hero-notes .hero-note{
 
 <section class="weekly-garden child-mode-only" id="weeklyGarden" aria-labelledby="weeklyGardenTitle">
   <div class="shell"><div class="weekly-garden-card">
-    <div class="weekly-garden-head"><div><p class="kicker">🌱 This Week in Our Learning Garden</p><h2 id="weeklyGardenTitle">A gentle path for curious little learners.</h2><p class="weekly-garden-note" id="weeklyGardenNote">These are invitations, not assignments. Explore them in any order—or wander anywhere in the Adventure Garden.</p></div><div class="weekly-garden-controls"><button id="weeklyPrev" type="button" aria-label="Previous week">←</button><span class="weekly-garden-week" id="weeklyWeek">Week 1</span><button id="weeklyNext" type="button" aria-label="Next week">→</button></div></div>
+    <div class="weekly-garden-head"><div><p class="kicker">A gentle path for curious little learners</p><h2 id="weeklyGardenTitle">This Week in Our Learning Garden</h2><p class="weekly-garden-note" id="weeklyGardenNote">These are invitations, not assignments. Explore them in any order—or wander anywhere in the Adventure Garden.</p></div><div class="weekly-garden-controls"><button id="weeklyPrev" type="button" aria-label="Previous week">←</button><span class="weekly-garden-week" id="weeklyWeek">Week 1</span><button id="weeklyNext" type="button" aria-label="Next week">→</button></div></div>
     <div class="weekly-continue" id="weeklyContinue" aria-label="Continue learning"><span class="continue-icon" id="continueIcon" aria-hidden="true">🌱</span><div><h3 id="continueTitle">Start this week</h3><p id="continueDesc">Choose one gentle adventure and begin wherever curiosity leads.</p></div><a id="continueLink" href="#weeklyGarden">Start This Week →</a></div>
     <div class="weekly-garden-grid" id="weeklyGardenGrid" aria-live="polite"></div>
     <div class="weekly-graduation" id="weeklyGraduation"><strong>🎓 Ready for the Next Garden</strong><div>This final week can include a joyful Preschool celebration whenever your family feels ready.</div><a href="./graduation/">Visit Graduation Garden →</a></div>
@@ -1702,8 +1714,7 @@ body .hero .hero-copy .hero-notes .hero-note{
 <section class="section learner-home child-mode-only" id="myHome" aria-labelledby="myHomeTitle">
   <div class="shell">
     <div class="heading compact-heading">
-      <p class="kicker" id="homeKicker">My Crechè Home</p>
-      <h2 id="myHomeTitle">A little home base for today.</h2>
+      <p class="kicker" id="homeKicker">A little home base for today</p><h2 id="myHomeTitle">My Crechè Home</h2>
       <p id="myHomeIntro">Play, save favorites, and explore every Crechè adventure without registration. A family learner profile is used for the child’s personalized Mentor and formal curriculum continuity.</p>
     </div>
 
@@ -1752,8 +1763,7 @@ body .hero .hero-copy .hero-notes .hero-note{
   <span id="rooms" class="section-anchor-alias" aria-hidden="true"></span>
   <div class="shell">
     <div class="heading explore-heading">
-      <p class="kicker">🌈 Explore &amp; Play</p>
-      <h2 id="explorePlayTitle">Pick a place to play!</h2>
+      <p class="kicker">Pick a place to play!</p><h2 id="explorePlayTitle">Explore &amp; Play</h2>
       <p>Choose a colorful learning room, try something fresh, or let Crechè surprise you.</p>
     </div>
 
@@ -1778,8 +1788,7 @@ body .hero .hero-copy .hero-notes .hero-note{
   <span id="activities" class="section-anchor-alias" aria-hidden="true"></span>
   <div class="shell">
     <div class="heading garden-heading">
-      <p class="kicker">🌻 The Crechè Learning Garden</p>
-      <h2 id="learningGardenTitle">What would you like to learn today?</h2>
+      <p class="kicker">What would you like to learn today?</p><h2 id="learningGardenTitle">The Crechè Learning Garden</h2>
       <p>Tap a colorful subject. A little menu will open with real Crechè games and learning tools.</p>
     </div>
 
@@ -1837,8 +1846,7 @@ body .hero .hero-copy .hero-notes .hero-note{
 <section class="section family-pathway" id="profiles">
   <div class="shell">
     <div class="heading">
-      <p class="kicker">Returning learner</p>
-      <h2>Your learning profile is your way back in.</h2>
+      <p class="kicker">Your way back into learning</p><h2>My Learning Profile</h2>
       <p>If this child already has a Pre-K Academy learner selected, My Profile opens that learner directly with today’s next step, pinned adventures, and learning continuity. Family administration is only needed when choosing or enrolling a different learner.</p>
     </div>
 
@@ -1971,7 +1979,7 @@ body .hero .hero-copy .hero-notes .hero-note{
 
 <section class="section grownup grownup-mode-only" id="grownups">
   <div class="shell">
-    <div class="heading"><p class="kicker">Parents, caregivers & teachers</p><h2>The grown-up corner</h2><p>Support gentle routines, adjust the visual experience, and continue into the wider family of public educational resources.</p></div>
+    <div class="heading"><p class="kicker">Parents, caregivers & teachers</p><h2>The Grown-Up Corner</h2><p>Support gentle routines, adjust the visual experience, and continue into the wider family of public educational resources.</p></div>
     <div class="grownup-mentor-hub">
 <article class="family-mentor-entry" id="familyMentorEntry" aria-label="Parent and Family Mentor Account">
       <div class="family-mentor-entry-head">
@@ -2048,8 +2056,7 @@ body .hero .hero-copy .hero-notes .hero-note{
     <article class="creche-support-card">
       <div class="support-heart" aria-hidden="true">💝</div>
       <div class="support-copy">
-        <p class="kicker">Free for all · supported by those who choose to help</p>
-        <h2 id="contributeTitle">Help our learning garden keep growing.</h2>
+        <p class="kicker">Help our learning garden keep growing</p><h2 id="contributeTitle">Support Free Learning</h2>
         <p><strong>Verve N Veda and Khaemenes Academy are free for everyone.</strong> There is no fee to learn here and a contribution is never required for access.</p>
         <p>This educational ecosystem is being built and cared for by a family with the hope that free learning can reach children everywhere. If this work has value to your family and you are able to help, an optional contribution can support both the continued growth of these free resources and the family creating them.</p>
         <div class="support-promises" aria-label="Our contribution promise">
