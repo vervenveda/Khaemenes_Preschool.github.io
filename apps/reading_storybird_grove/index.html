@@ -536,6 +536,36 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
 .app .nest-banner-content .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 </style>
+<style id="storybird-layout-six-cards">
+@media screen{
+.app .main-layout>.grove>.story-card{min-height:clamp(440px,57vh,780px)!important;display:flex;flex-direction:column;justify-content:flex-start}
+.app .main-layout>.grove>.story-card .illustration{min-height:clamp(260px,36vh,480px)!important;flex:1 0 auto}
+.app .main-layout>.grove>.story-card .status{margin-top:12px}
+.app .main-layout>.grove>.child-controls{width:100%;display:grid!important;grid-template-columns:1fr!important;align-items:stretch!important;gap:12px!important;margin:14px 0 12px!important;padding:16px!important;background:#fff9e8!important;border:3px solid #e0aa21!important;border-radius:7px!important}
+.app .child-controls>.control-group:first-child{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}
+.app .child-controls>.control-group:first-child .field{min-width:0}
+.app .child-controls>.control-group:first-child select{width:100%;font-size:16px!important;border-radius:7px!important}
+.app .child-controls>.control-group:last-child{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.app .clusters{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;align-items:stretch}
+.app .clusters>.cluster{min-width:0;min-height:230px;height:100%;border-radius:7px!important;border:3px solid #6c49b4!important;border-top:6px solid #e7b831!important;padding:14px!important}
+.app .clusters>.cluster:nth-child(2){border-color:#169b9f!important;border-top-color:#18b4b7!important}
+.app .clusters>.cluster:nth-child(3){border-color:#b44c78!important;border-top-color:#e2739a!important}
+.app .clusters>.cluster:nth-child(4){border-color:#be8d22!important;border-top-color:#f2c852!important}
+.app .clusters>.cluster:nth-child(5){border-color:#2d8b68!important;border-top-color:#64d2a4!important}
+.app .clusters>.tool-cluster{border-color:#6541b8!important;border-top-color:#6541b8!important;background:#f2ebff!important}
+.app .tool-cluster .story-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+.app .tool-cluster .story-actions>.btn{min-width:0!important;min-height:50px!important;width:100%!important;font-size:16px!important;border-radius:7px!important;white-space:normal!important}
+.app .clusters .cluster-title{font-size:18px!important}
+.app .clusters .cluster-title small{font-size:16px!important}
+}
+@media screen and (max-width:900px){.app .clusters{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media screen and (max-width:560px){
+.app .clusters{grid-template-columns:1fr!important}
+.app .child-controls>.control-group:first-child{grid-template-columns:1fr!important}
+.app .child-controls>.control-group:last-child{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.app .main-layout>.grove>.story-card{min-height:400px!important}
+}
+</style>
 </head>
 <body>
 <header data-khae-header class="khae-global-campus-header">
@@ -567,6 +597,17 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
   </section>
 
   <section class="eiren-companion" aria-labelledby="eirenTitle"><div class="eiren-companion-row"><div class="eiren-mark" aria-hidden="true">🌸</div><div><h3 id="eirenTitle">Eiren · Story Friend</h3><p>Pip helps grow the story. Eiren reads the finished story with you. She never changes your choices or the Storybird story engine.</p></div></div><div class="eiren-actions"><button class="btn secondary" type="button" id="eirenHello">🌸 Meet Eiren</button><button class="btn secondary" type="button" id="eirenRead">📖 Eiren, Read My Story</button><button class="btn secondary" type="button" id="eirenStop">⏹ Stop Eiren</button></div><div class="eiren-status" id="eirenStatus" aria-live="polite">Eiren is getting the storybook ready…</div></section>
+  <div class="main-layout">
+    <main class="card grove">
+      <section class="story-card" aria-label="Finished story">
+        <h2 class="story-title" id="storyTitle">Your Story Will Bloom Here</h2>
+        <p class="story-text" id="storyText">Choose a character, a place, and an action. Then press Make My Story.</p>
+        <div class="meta" id="storyMeta"></div>
+        <div class="illustration" id="illustrationArea" aria-label="Story picture">🌿</div>
+
+        <div class="status" id="statusBox" role="status" aria-live="polite">Ready. Everything stays private on this device.</div>
+      </section>
+
   <section class="child-controls" aria-label="Story controls">
     <div class="control-group">
       <div class="field"><label for="modeSelect">Story Size</label><select id="modeSelect"><option value="little">Little Story</option><option value="growing">Growing Story</option></select></div>
@@ -580,26 +621,6 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
     </div>
   </section>
 
-  <div class="main-layout">
-    <main class="card grove">
-      <section class="story-card" aria-label="Finished story">
-        <h2 class="story-title" id="storyTitle">Your Story Will Bloom Here</h2>
-        <p class="story-text" id="storyText">Choose a character, a place, and an action. Then press Make My Story.</p>
-        <div class="meta" id="storyMeta"></div>
-        <div class="illustration" id="illustrationArea" aria-label="Story picture">🌿</div>
-        <div class="story-actions">
-          <button class="btn secondary" id="readBtn" type="button">🔊 Read</button>
-          <button class="btn secondary" id="pauseBtn" type="button">⏸ Pause</button>
-          <button class="btn secondary" id="resumeBtn" type="button">▶ Resume</button>
-          <button class="btn secondary" id="stopBtn" type="button">⏹ Stop</button>
-          <button class="btn secondary" id="copyBtn" type="button">📋 Copy</button>
-          <button class="btn secondary" id="printStoryBtn" type="button">🖨 Print</button>
-          <button class="btn secondary" id="saveBtn" type="button">💛 Save</button>
-          <button class="btn secondary" id="clearBtn" type="button">🧹 Clear</button>
-        </div>
-        <div class="status" id="statusBox" role="status" aria-live="polite">Ready. Everything stays private on this device.</div>
-      </section>
-
       <div class="theme-banner" id="themeBanner">🌱 Garden Path 1</div>
       <p class="guide-note" id="guideNote">Pick one card from each garden bed. Growing Story adds a feeling and an ending.</p>
 
@@ -609,6 +630,16 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
         <div class="cluster"><div class="cluster-title"><span>✨ Action</span><small>pick 1</small></div><div class="spirit-grid" id="verbsList"></div></div>
         <div class="cluster extra hidden" id="feelingCluster"><div class="cluster-title"><span>💗 Feeling</span><small>pick 1</small></div><div class="spirit-grid" id="feelingsList"></div></div>
         <div class="cluster extra hidden" id="endingCluster"><div class="cluster-title"><span>🌈 Ending</span><small>pick 1</small></div><div class="spirit-grid" id="endingsList"></div></div>
+        <div class="cluster tool-cluster" aria-label="Story tools"><div class="cluster-title"><span>🧰 Story Tools</span><small>read · keep · share</small></div>        <div class="story-actions" aria-label="Read, print, save and manage story">
+          <button class="btn secondary" id="readBtn" type="button">🔊 Read</button>
+          <button class="btn secondary" id="pauseBtn" type="button">⏸ Pause</button>
+          <button class="btn secondary" id="resumeBtn" type="button">▶ Resume</button>
+          <button class="btn secondary" id="stopBtn" type="button">⏹ Stop</button>
+          <button class="btn secondary" id="copyBtn" type="button">📋 Copy</button>
+          <button class="btn secondary" id="printStoryBtn" type="button">🖨 Print</button>
+          <button class="btn secondary" id="saveBtn" type="button">💛 Save</button>
+          <button class="btn secondary" id="clearBtn" type="button">🧹 Clear</button>
+        </div></div>
       </section>
 
 
