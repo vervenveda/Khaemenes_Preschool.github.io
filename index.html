@@ -1768,7 +1768,7 @@ body main .family-card,.family-pathway .family-card{overflow-wrap:break-word}
         <p class="daily-school-kicker">Daily ABC</p>
         <h3 id="dailyAbcTitle">ABC Adventure</h3>
         <p id="dailyAbcDesc">Letters, sounds, matching, and early reading play.</p>
-        <a class="daily-school-btn" id="dailyAbcLink" href="#activities">Play Today’s ABC Game →</a>
+        <a class="daily-school-btn" id="dailyAbcLink" href="./apps/ABC_Story_Time/index.html">Play Today’s ABC Game →</a>
       </article>
       <article class="daily-school-card numbers-card" data-daily-subject="numbers">
         <div class="daily-school-icon" aria-hidden="true">🔢</div>
@@ -1840,7 +1840,7 @@ body main .family-card,.family-pathway .family-card{overflow-wrap:break-word}
       <article class="garden-today" hidden aria-hidden="true">
         <span class="garden-mini-icon" aria-hidden="true">☀️</span>
         <div><p class="kicker">Today’s little adventure</p><h3 id="dailyTitle"></h3><p id="dailyDesc"></p></div>
-        <a id="dailyLink" href="./">Play Today →</a>
+        <a id="dailyLink" href="#today">Play Today →</a>
       </article>
       <article class="garden-stars">
         <div><p class="kicker">My Adventure Stars</p><strong id="visitCount">0/52</strong></div>
@@ -2169,7 +2169,7 @@ body main .family-card,.family-pathway .family-card{overflow-wrap:break-word}
   <section class="app-window" id="readingWindow" role="dialog" aria-modal="true" aria-labelledby="readingWindowTitle">
     <header class="app-window-bar">
       <div class="app-window-title"><i>📚</i><span><strong id="readingWindowTitle">Reading Time</strong><small>The same shared story shelf used in Khaemenes Kinder Garden</small></span></div>
-      <div class="app-window-controls"><button id="readingMaximize" type="button" aria-label="Maximize Reading Time" title="Maximize / Restore">□</button><button class="app-close" id="readingClose" type="button" aria-label="Close Reading Time" title="Close">×</button></div>
+      <div class="app-window-controls"><button id="readingPrint" type="button" aria-label="Open Reading Time for printing" title="Print Reading Time">🖨</button><button id="readingMaximize" type="button" aria-label="Maximize Reading Time" title="Maximize / Restore">□</button><button class="app-close" id="readingClose" type="button" aria-label="Close Reading Time" title="Close">×</button></div>
     </header>
     <div class="app-window-body"><div class="app-window-loading" id="readingLoading">Opening the family story shelf…</div><iframe class="app-window-frame" id="readingFrame" title="Khaemenes Reading Time"></iframe><span class="app-resize-note">↘ drag this corner to resize</span></div>
   </section>
@@ -2183,7 +2183,7 @@ body main .family-card,.family-pathway .family-card{overflow-wrap:break-word}
         <span><strong id="appWindowTitle">Crechè Adventure</strong><small>Play without leaving the Preschool home page</small></span>
       </div>
       <div class="app-window-controls">
-        <button id="appMaximize" type="button" aria-label="Maximize app window" title="Maximize / Restore">□</button>
+        <button id="appPrint" type="button" aria-label="Print current adventure" title="Print current adventure">🖨</button><button id="appMaximize" type="button" aria-label="Maximize app window" title="Maximize / Restore">□</button>
         <button class="app-close" id="appClose" type="button" aria-label="Close app window" title="Close">×</button>
       </div>
     </header>
@@ -3264,6 +3264,17 @@ $("readingFrame").addEventListener("load",()=>$("readingLoading").classList.add(
 $("readingModal").addEventListener("click",event=>{if(event.target===$("readingModal"))closeReadingTime()});
 $("appClose").addEventListener("click",closeAppModal);
 $("appMaximize").addEventListener("click",toggleAppMaximize);
+$("appPrint").addEventListener("click",()=>{
+  const frame=$("appWindowFrame");
+  if($("appModal").hidden||!frame.src||frame.src==="about:blank")return;
+  try{frame.contentWindow.focus();frame.contentWindow.print()}
+  catch(error){toast("Printing is unavailable in this adventure. Open it separately to print.")}
+});
+$("readingPrint").addEventListener("click",()=>{
+  // Shared Reading Time may restrict printing from an embedded frame.
+  const tab=window.open(SHARED_READING_URL,"_blank","noopener,noreferrer");
+  if(!tab)toast("Allow the Reading Time tab, then use your browser’s Print command.");
+});
 $("appWindowFrame").addEventListener("load",()=>$("appWindowLoading").classList.add("done"));
 $("appModal").addEventListener("click",event=>{if(event.target===$("appModal"))closeAppModal()});
 $("featuredAnother").addEventListener("click",renderFeaturedGame);
