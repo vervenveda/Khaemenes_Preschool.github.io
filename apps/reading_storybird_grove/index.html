@@ -626,6 +626,65 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
 .app .illustration svg{display:block!important;width:100%!important;height:100%!important}
 @media screen and (min-width:900px){.app .main-layout>.grove>.story-card .illustration{min-height:420px!important}}
 </style>
+<style id="storybird-five-color-palette">
+/* Five-color founder palette; scoped to Storybird's own interface.
+   Shared header, ticker and ecosystem toolbar are intentionally untouched. */
+:root{
+ --story-peach:#FFADAD;--story-apricot:#FFD6A5;--story-lemon:#FDFFB6;
+ --story-mint:#CAFFBF;--story-aqua:#9BF6FF;
+ --story-ink:#26354A;--story-outline:#476176;
+}
+body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A5 78%,#FFADAD 100%) fixed!important;color:var(--story-ink)}
+.app{color:var(--story-ink)!important;--grove-ink:var(--story-ink);--grove-gold:#FFD6A5;--grove-paper:#FDFFB6}
+.app .hero{
+ background:linear-gradient(110deg,#FFADAD,#FFD6A5 27%,#FDFFB6 51%,#CAFFBF 75%,#9BF6FF)!important;
+ color:var(--story-ink)!important;border:3px solid var(--story-outline)!important;border-radius:7px!important
+}
+.app .hero :is(h1,h2,p,.subtitle,.privacy){color:var(--story-ink)!important;text-shadow:none!important}
+.app :is(.mascot-banner,.eiren-companion,.guide,.eiren-panel,.card,.vocab-garden,.story-nest,.passport,.theme-banner){
+ background:linear-gradient(115deg,#FDFFB6,#CAFFBF 58%,#9BF6FF)!important;
+ color:var(--story-ink)!important;border-color:var(--story-outline)!important;border-radius:7px!important
+}
+.app .main-layout>.grove>.story-card{
+ background:linear-gradient(125deg,#FFD6A5,#FDFFB6 34%,#CAFFBF 68%,#9BF6FF)!important;
+ color:var(--story-ink)!important;border:3px solid var(--story-outline)!important;border-radius:7px!important
+}
+.app .story-card :is(.story-title,.story-text,.meta){color:var(--story-ink)!important}
+.app .main-layout>.grove>.child-controls{background:linear-gradient(110deg,#FFD6A5,#FDFFB6,#CAFFBF)!important;border:2px solid var(--story-outline)!important}
+.app .clusters>.cluster{background:#FDFFB6!important;border:2px solid var(--story-outline)!important;border-radius:7px!important}
+.app .clusters>.cluster:nth-child(5n+1){background:#FFADAD!important;border-color:#99504f!important}
+.app .clusters>.cluster:nth-child(5n+2){background:#9BF6FF!important;border-color:#397884!important}
+.app .clusters>.cluster:nth-child(5n+3){background:#FFD6A5!important;border-color:#986a37!important}
+.app .clusters>.cluster:nth-child(5n+4){background:#CAFFBF!important;border-color:#4c8150!important}
+.app .clusters>.cluster:nth-child(5n+5){background:#FDFFB6!important;border-color:#888c3e!important}
+.app .clusters>.tool-cluster{background:linear-gradient(130deg,#CAFFBF,#9BF6FF)!important;border-color:var(--story-outline)!important}
+.app .clusters>.cluster .story-choice-toggle,
+.app .clusters>.cluster:nth-child(3n+2) .story-choice-toggle,
+.app .clusters>.cluster:nth-child(3n) .story-choice-toggle{
+ background:linear-gradient(110deg,#FFD6A5,#FDFFB6,#CAFFBF)!important;
+ color:var(--story-ink)!important;border:2px solid var(--story-outline)!important;border-radius:7px!important
+}
+.app .story-choice-toggle .choice-caption{color:var(--story-ink)!important}
+.app .clusters>.cluster .spirit{background:#fffdf4!important;color:var(--story-ink)!important;border:2px solid var(--story-outline)!important;border-radius:7px!important}
+.app .clusters>.cluster .spirit[aria-pressed="true"]{background:#476176!important;color:white!important;border-color:#26354A!important}
+.app .clusters>.cluster .spirit[aria-pressed="true"]>span:last-child{color:white!important}
+.app .clusters>.tool-cluster .story-actions>.btn,
+.app .child-controls .btn,.app .eiren-actions .btn{
+ color:var(--story-ink)!important;border:2px solid var(--story-outline)!important;border-radius:7px!important;
+ background:#9BF6FF!important
+}
+.app .clusters>.tool-cluster .story-actions>.btn:nth-child(5n+2),
+.app .child-controls .btn:nth-child(5n+2){background:#FFD6A5!important}
+.app .clusters>.tool-cluster .story-actions>.btn:nth-child(5n+3),
+.app .child-controls .btn:nth-child(5n+3){background:#CAFFBF!important}
+.app .clusters>.tool-cluster .story-actions>.btn:nth-child(5n+4),
+.app .child-controls .btn:nth-child(5n+4){background:#FFADAD!important}
+.app .clusters>.tool-cluster .story-actions>.btn:nth-child(5n+5){background:#FDFFB6!important}
+.app .illustration{background:linear-gradient(115deg,#FFADAD,#FFD6A5,#FDFFB6,#CAFFBF,#9BF6FF)!important;border:2px solid var(--story-outline)!important;border-radius:7px!important}
+.app :is(.story-card,.clusters,.child-controls,.vocab-garden,.story-nest) :is(button,select,input){font-size:max(16px,1em);border-radius:7px!important}
+.app :is(.story-card,.clusters,.child-controls,.vocab-garden,.story-nest) :is(p,label,small){font-size:max(16px,1em)}
+@media print{body{background:white!important}.app .story-card{background:white!important}}
+</style>
 </head>
 <body>
 <header data-khae-header class="khae-global-campus-header">
