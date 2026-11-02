@@ -72,6 +72,30 @@ body[data-prek-frame="hexagon"] .profile-hero .photo{clip-path:polygon(25% 0,75%
 #prek-popup-host:empty{display:none}.prek-pop-panel{border:3px solid #476276;border-radius:7px;padding:14px;background:#fffdf2;margin:12px 0 20px}.prek-pop-panel[hidden]{display:none}.prek-pop-panel>.card{margin:0}.prek-pop-panel .grid{margin:0}.prek-pop-close{display:block;margin:0 0 12px auto;background:#263d4b;color:white;border-radius:7px;padding:10px 16px;font-size:18px}
 @media(max-width:700px){.prek-classes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media print{.prek-pop-close{display:none}}
+
+/* Pre-K panel palette and readable local content. Shared ecosystem chrome is excluded. */
+main.shell{font-size:18px;line-height:1.55}
+main.shell :is(p,a,button,label,select,input,option,small,span,.muted,.status,.notice,.pill){font-size:18px;line-height:1.5}
+main.shell :is(h1,h2,h3){font-size:clamp(24px,2.5vw,38px);line-height:1.25}
+main.shell .prek-menu{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+main.shell .prek-menu .prek-tile{font-size:18px;min-height:104px}
+main.shell .prek-menu .prek-tile span{font-size:32px}
+main.shell #prek-popup-host .prek-pop-panel{background:linear-gradient(115deg,#FFADAD,#FFD6A5 28%,#FDFFB6 52%,#CAFFBF 76%,#9BF6FF);border:2px solid #476276;border-radius:7px;padding:18px}
+main.shell #prek-popup-host .prek-pop-panel>.card{background:#fffdf1;border:2px solid #52677b;border-radius:7px;padding:20px;color:#263b4b}
+main.shell #prek-popup-host :is(button,select,input,.activity,.button){border-radius:7px;min-height:46px}
+main.shell #prek-popup-host .appearance-controls{background:#fffdf1}
+main.shell #prek-popup-host .appearance-controls :is(.choice,.actions){gap:10px}
+main.shell #prek-popup-host .status{display:block;min-height:1.5em;color:#173d4c;font-weight:600}
+main.shell #prek-popup-host .status.error{color:#922d39}
+main.shell #prek-popup-host .prek-pop-close{background:#263d4b;color:#fff;padding:10px 18px}
+main.shell #prek-popup-host .prek-pop-panel:nth-child(2n)>.card{background:#f4ffed}
+main.shell #prek-popup-host .prek-pop-panel:nth-child(3n)>.card{background:#eefcff}
+main.shell #prek-popup-host .prek-pop-panel:nth-child(5n)>.card{background:#fff2e9}
+main.shell #prek-popup-host .prek-pop-panel :is(a,button){overflow-wrap:anywhere}
+main.shell #prek-popup-host .prek-pop-panel [hidden]{display:none!important}
+main.shell .prek-daily :is(a,p){font-size:18px}
+main.shell :is(.card,.notice,.prek-daily,.prek-welcome,.prek-menu .prek-tile){border-radius:7px}
+@media(max-width:680px){main.shell .prek-menu{grid-template-columns:repeat(2,minmax(0,1fr))}main.shell .prek-classes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-profile-v2.css">
 <style id="academy-profile-common-readable-hero-20261101">
@@ -117,7 +141,7 @@ body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font
 <section class="card span6 appearance-controls" aria-labelledby="pictureTitle">
 <h2 id="pictureTitle">My picture &amp; avatar</h2><p class="muted">Choose a picture with a grown-up. Your photo appears in the large profile frame above and is saved privately on this device, not uploaded to a server.</p>
 <label><input type="checkbox" id="adultConfirm"> I am an adult helping the selected child personalize this profile.</label>
-<div class="choice" id="avatarChoices" aria-label="Choose an avatar"></div>
+<p class="notice" id="photoHelp">To add a picture, select your Pre-K learner and check the grown-up confirmation box above. Your photo stays on this device.</p><div class="choice" id="avatarChoices" aria-label="Choose an avatar"></div>
 <label for="frameShape">Choose a picture frame shape</label><select id="frameShape" aria-label="Picture frame shape"><option value="square">Rounded square</option><option value="circle">Circle</option><option value="oval">Oval</option><option value="diamond">Diamond</option><option value="hexagon">Hexagon</option></select>
 <label for="childPhoto">Choose a profile photo (JPG, PNG, WebP, or GIF; under 5 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
 <div class="actions"><button type="button" id="removePhoto" class="secondary">Remove photo</button></div>
@@ -134,7 +158,7 @@ body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font
 <section class="card span7" aria-labelledby="nextTitle"><h2 id="nextTitle">Today · Next</h2><div id="nextStep" class="activity-list" aria-live="polite"><a class="activity" href="../#today">Open Preschool’s family-guided activities →</a></div></section>
 <section class="card span5" aria-labelledby="pinsTitle"><h2 id="pinsTitle">📌 My pinned adventures</h2><div id="pinnedActivities" class="activity-list"><p class="muted">Pin your favorite games in the Preschool Adventure Garden.</p></div>
 <div class="actions appearance-controls"><button type="button" id="pinPreschoolPath" class="secondary">📌 Pin Preschool pathway</button><button type="button" id="unpinPreschoolPath" class="secondary">Remove pathway pin</button></div>
-<div class="appearance-controls" id="pinControls">
+<div class="appearance-controls" id="pinControls"><p class="notice" id="pinHelp">Choose a game from the list, then select Pin adventure. A grown-up must check the confirmation box in My Picture first.</p>
   <label for="adventureSelect">Choose a favorite Pre-K adventure</label>
   <select id="adventureSelect"><option value="">Choose a Preschool game</option></select>
   <div class="actions">
@@ -213,7 +237,7 @@ function normalize(input){
   photo:typeof v.photo==="string"&&/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(v.photo)&&v.photo.length<180000?v.photo:""
  };
 }
-function announce(message,bad=false){$("lookStatus").textContent=message;$("lookStatus").classList.toggle("error",bad)}
+function announce(message,bad=false){$("lookStatus").textContent=message;$("lookStatus").classList.toggle("error",bad);if(bad&&$("photoHelp"))$("photoHelp").textContent=message}
 function consent(){if(!eligible()){announce("Select an existing Pre-K learner on the Academy Family Portal first.",true);return false}if(!$("adultConfirm").checked){announce("An adult must confirm before changing this child's profile.",true);return false}return true}
 function saveLook(){
  if(!consent())return false;
@@ -258,6 +282,7 @@ function selectedFavorites(){
  return Array.isArray(map?.[activeId])?map[activeId].filter(id=>typeof id==="string"):[];
 }
 function updateFavorite(id,add){
+ if(!id){$("pinStatus").textContent="Please choose a Preschool game from the list first.";return}
  if(!consent())return;
  const activity=(catalog?.childActivities?.()||[]).find(item=>item?.id===id);
  if(!activity){$("pinStatus").textContent="Choose a Preschool game first.";return}
@@ -394,7 +419,7 @@ $("childPhoto").addEventListener("change",async event=>{
   announce("Please choose a JPG, PNG, WebP, or GIF smaller than 5 MB.",true);event.target.value="";return;
  }
  const learnerId=activeId;
- announce("Preparing your picture…");
+ announce("Preparing your picture…");$("photoHelp").textContent="Preparing your picture. Please wait…";
  const url=URL.createObjectURL(file);
  try{
   const img=new Image();
@@ -415,9 +440,9 @@ $("childPhoto").addEventListener("change",async event=>{
   if(!data||data.length>=180000)throw Error("The resized picture exceeds the local profile limit");
   const previous=look.photo;look.photo=data;
   if(!saveLook()){look.photo=previous;renderLook();return}
-  announce("Your picture is now showing in the profile and saved on this device.");
+  announce("Your picture is now showing in the profile and saved on this device.");$("photoHelp").textContent="✓ Your picture is showing in the profile above and saved on this device.";
  }catch(error){
-  announce("The picture could not be added: "+(error?.message||"unsupported image")+". Try a JPG or PNG.",true);
+  announce("The picture could not be added: "+(error?.message||"unsupported image")+". Try a JPG or PNG.",true);$("photoHelp").textContent="Picture not saved. Try a JPG or PNG file.";
  }finally{URL.revokeObjectURL(url);event.target.value=""}
 });
 $("removePhoto").addEventListener("click",()=>{if(!consent())return;look.photo="";saveLook()});
