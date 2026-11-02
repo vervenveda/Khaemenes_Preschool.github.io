@@ -141,6 +141,22 @@ body.certificate-open{overflow:hidden}
  #certificateOutput .recipient{font-size:30px!important;margin:20px 0!important}
  #certificateOutput .fine{font-size:13px!important}
 }
+
+/* Graduation handoff: one student destination, separate guardian guidance. */
+.garden-next{max-width:900px;margin:auto;padding:32px clamp(18px,5vw,56px);text-align:center;border:3px solid #e2a936;border-radius:22px;background:linear-gradient(125deg,#fff4c8 0%,#dcf9e1 43%,#d8f0ff 78%,#f5e2ff 100%);box-shadow:0 14px 34px #243b4d1c;color:#203b51}
+.garden-next-art{font-size:clamp(34px,5vw,60px);letter-spacing:.12em}
+.garden-next .eyebrow{color:#693e76!important;font-size:16px!important;letter-spacing:.12em}
+.garden-next h2{font-size:clamp(34px,5vw,58px);line-height:1.1;color:#1f5065;margin:8px 0 16px}
+.garden-next-intro{max-width:650px;margin:0 auto 18px;font-size:19px;line-height:1.6}
+.garden-gate-status{max-width:660px;margin:16px auto;padding:13px 18px;border-radius:12px;background:#fffdf5;border:2px solid #d8b960;color:#28445a;font-size:17px;font-weight:700}
+.garden-entry{display:inline-block;max-width:100%;padding:17px 26px;border-radius:12px;background:#1c6554;color:#fff!important;font-size:20px;font-weight:700;text-decoration:none;box-shadow:0 5px 0 #16483d}
+.garden-entry.is-locked{background:#596a76;box-shadow:none;cursor:not-allowed;opacity:.88}
+.garden-entry:focus-visible,.garden-parent-link:focus-visible{outline:4px solid #a64c22;outline-offset:4px}
+.garden-family{max-width:680px;margin:28px auto 0;padding:22px;border:2px solid #a6b7c8;border-radius:14px;background:#fffdf5;text-align:left;color:#233b50}
+.garden-family h3{font-size:23px;margin:0 0 10px;color:#244d69}
+.garden-family p{font-size:17px;line-height:1.6;margin:0 0 14px}
+.garden-parent-link{display:inline-block;padding:12px 18px;border-radius:9px;background:#254d68;color:white!important;font-size:17px;text-decoration:none}
+@media(max-width:620px){.garden-next{padding:24px 16px}.garden-entry{font-size:18px}}
 </style>
 </head>
 <body>
@@ -248,26 +264,20 @@ body.certificate-open{overflow:hidden}
   </div>
 </section></div></div>
 
-<section class="section shell" id="next-garden">
-  <div class="transition-card">
-    <div>
-      <p class="eyebrow" style="color:#ffe2a3">Your next chapter</p>
-      <h2>Welcome to Khaemenes Kinder Garden!</h2>
-      <p>You can carry your curiosity, favourite adventures, and growing confidence into the next garden. The Kindergarten platform continues the learning journey with guided lessons, family tools, and familiar early-learning experiences for review.</p>
-      <div class="steps">
-        <div class="step"><strong>1 · Keep the same learner</strong>Ask a grown-up to open Enrollment &amp; Placement, find the existing Pre-K child, and choose <em>Placement → Kindergarten (k)</em>. Do not register the child again.</div>
-        <div class="step"><strong>2 · Meet the new garden</strong>Open Kinder Garden and explore its learning spaces and curriculum roadmap.</div>
-        <div class="step"><strong>3 · Guardian release, then first lesson</strong>After placing the same child into Kindergarten, an authorized grown-up reviews the separate seven-point Kindergarten release before opening formal lessons. The original learner ID and Pre-K keepsake remain unchanged.</div>
-      </div>
-      <div class="quicklinks">
-        <a class="primary" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/">🌻 Visit My New Kindergarten Garden</a>
-        <a class="secondary" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/student-profile/">My Kindergarten Profile</a>
-        <a class="secondary" href="../index.html">Return to Crechè</a>
-      </div>
-      <div class="notice" style="margin-top:16px"><strong>For grown-ups:</strong> Keep the same learner record when the child advances. <a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/enroll/">Open Enrollment &amp; Placement</a> or <a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">open the Family Profile</a>. Do not create a second learner.</div>
-    </div>
-    <div aria-hidden="true" style="font-size:clamp(4rem,10vw,8rem);text-align:center">🌱➡️🌻</div>
+<section class="section shell" id="next-garden" aria-labelledby="gardenNextTitle">
+ <div class="garden-next">
+  <div class="garden-next-art" aria-hidden="true">🌈 🌱 🦋 🌻 🎒</div>
+  <p class="eyebrow">Your next big adventure</p>
+  <h2 id="gardenNextTitle">Kindergarten, here I come!</h2>
+  <p class="garden-next-intro">Three adventures. Five questions each. Earn at least four correct answers in every game to open your next learning garden!</p>
+  <p id="gardenGateStatus" class="garden-gate-status" role="status" aria-live="polite">🔒 Your Kindergarten garden opens when all three games reach 80% mastery.</p>
+  <a id="kindergartenGate" class="garden-entry is-locked" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/" aria-disabled="true" tabindex="-1">🔒 Kindergarten Garden · Locked</a>
+  <div class="garden-family">
+   <h3>👨‍👩‍👧 For parents and guardians</h3>
+   <p>Keep your child's existing learner record. Once the games are passed, use the Family Portal to review placement into Kindergarten and complete its separate guardian release before formal lessons. Do not enroll the child a second time.</p>
+   <a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/" class="garden-parent-link">Open Parent &amp; Family Portal →</a>
   </div>
+ </div>
 </section>
 </main>
 <footer class="footer shell">Built for little learners and their grown-ups · Free, local-first celebration · Khaemenes Academy</footer>
@@ -335,6 +345,7 @@ function load(){
    renderQuestion(game);
  }
  certificateUnlocked=completed.size===3&&record?.certificateUnlocked===true;
+ updateKindergartenGate();
 }
 function persist(){
  const root=stateRoot(),id=learnerIdentity();
@@ -343,7 +354,19 @@ function persist(){
  root.records[id]={...old,completed:Object.fromEntries(GAME_IDS.map(g=>[g,completed.has(g)])),scores:{...scores},attempts:{...attempts},certificateUnlocked:completed.size===3&&certificateUnlocked,nickname:$("certificateName").value.trim().slice(0,40),updatedAt:new Date().toISOString()};
  try{localStorage.setItem(GRADUATION_KEY,JSON.stringify(root))}catch(e){$("certificateStatus").textContent="Progress could not be saved on this device. Check available browser storage."}
 }
+function updateKindergartenGate(){
+ const passed=GAME_IDS.every(g=>completed.has(g)&&Number.isInteger(scores[g])&&scores[g]>=4);
+ const link=$("kindergartenGate"),status=$("gardenGateStatus");
+ if(!link||!status)return;
+ link.classList.toggle("is-locked",!passed);
+ link.setAttribute("aria-disabled",String(!passed));
+ link.tabIndex=passed?0:-1;
+ link.textContent=passed?"🌻 Enter My Kindergarten Garden →":"🔒 Kindergarten Garden · Locked";
+ status.textContent=passed?"🌟 You passed all three games with at least 80%! Your Kindergarten garden is ready. A guardian must still complete formal placement and release.":"🔒 Earn 4 out of 5 in each of the three games to open your Kindergarten garden. "+completed.size+" of 3 games passed.";
+}
+$("kindergartenGate").addEventListener("click",e=>{if($("kindergartenGate").getAttribute("aria-disabled")==="true")e.preventDefault()});
 function updateProgress(){
+ updateKindergartenGate();
  const n=completed.size;
  $("progressFill").style.width=(n/3*100)+"%";
  $("progressCount").textContent=n+" of 3 stars ⭐";
