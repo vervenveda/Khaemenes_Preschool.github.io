@@ -1689,10 +1689,14 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
     cards.forEach((card,index)=>{
       const heading=card.querySelector(".cluster-title"),panel=card.querySelector(".spirit-grid");
       if(!heading||!panel||card.querySelector(".story-choice-toggle"))return;
+      if(!panel.id)panel.id="storybird-choices-"+index;
       const label=heading.querySelector("span")?.textContent||"Story choices";
       const button=document.createElement("button");
       button.type="button";button.className="story-choice-toggle";
+      button.id="storybird-choice-toggle-"+index;
       button.setAttribute("aria-controls",panel.id);
+      panel.setAttribute("role","region");
+      panel.setAttribute("aria-labelledby",button.id);
       button.innerHTML='<span></span><span class="choice-caption">Choose one</span><span class="choice-arrow" aria-hidden="true">▾</span>';
       button.firstChild.textContent=label;
       heading.replaceWith(button);
@@ -1701,6 +1705,7 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
         button.setAttribute("aria-expanded",String(open));
         button.querySelector(".choice-arrow").textContent=open?"▴":"▾";
         panel.hidden=!open;
+        panel.setAttribute("aria-hidden",String(!open));
       };
       button.addEventListener("click",()=>{
         const open=card.classList.contains("story-choice-collapsed");
@@ -1802,7 +1807,7 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
 
   function askChoice(title,message,choices){return new Promise(resolve=>{els.modalTitle.textContent=title;els.modalMessage.textContent=message;els.modalActions.innerHTML="";choices.forEach(c=>{const b=document.createElement("button");b.type="button";b.className=`btn ${c.kind||"secondary"}`;b.textContent=c.label;b.addEventListener("click",()=>{els.modalOverlay.classList.remove("show");resolve(c.value)});els.modalActions.appendChild(b)});els.modalOverlay.classList.add("show");els.modalActions.querySelector("button")?.focus()})}
   function askConfirm(message,label="Continue"){return askChoice("Grown-Up Check",message,[{label:"Cancel",value:false},{label,value:true,kind:"danger"}])}
-  async function importNestFile(file){if(file.size>IMPORT_LIMIT){setStatus("That backup is too large to open safely.",true);return}try{const parsed=JSON.parse(await file.text());if(!parsed||typeof parsed!=="object"||parsed.app!=="Storybird Grove"||!Array.isArray(parsed.nest))throw new Error("Not a nest backup");const incoming=sanitizeState(parsed);const choice=await askChoice("Import Story Nest","Would you like to add these stories to the current Nest or replace the current Nest?",[{label:"Cancel",value:"cancel"},{label:"Merge",value:"merge",kind:"good"},{label:"Replace",value:"replace",kind:"danger"}]);if(choice==="cancel")return;if(choice==="replace")state=incoming;else{const map=new Map(state.nest.map(n=>[n.text,n]));incoming.nest.forEach(n=>{if(!map.has(n.text))map.set(n.text,n)});state.nest=[...map.values()].sort((a,b)=>b.ts-a.ts).slice(0,MAX_NEST);state.visitedWeeks=[...new Set([...state.visitedWeeks,...incoming.visitedWeeks])]}currentWeek=state.lastWeek;applySettings();renderWeeks();renderClusters();saveState();renderNest();setStatus("Story Nest imported safely.")}catch(e){setStatus("Import failed. Choose a Storybird Grove backup file.",true)}}
+  async function importNestFile(file){if(file.size>IMPORT_LIMIT){setStatus("That backup is too large to open safely.",true);return}try{const parsed=JSON.parse(await file.text());if(!parsed||typeof parsed!=="object"||parsed.app!=="Storybird Grove"||!Array.isArray(parsed.nest))throw new Error("Not a nest backup");if(parsed.nest.length>MAX_NEST)throw new Error("Backup exceeds Story Nest capacity");const incoming=sanitizeState(parsed);if(incoming.nest.length!==parsed.nest.length)throw new Error("Backup contains invalid stories");const choice=await askChoice("Import Story Nest","Would you like to add these stories to the current Nest or replace the current Nest?",[{label:"Cancel",value:"cancel"},{label:"Merge",value:"merge",kind:"good"},{label:"Replace",value:"replace",kind:"danger"}]);if(choice==="cancel")return;if(choice==="replace")state=incoming;else{const map=new Map(state.nest.map(n=>[n.text,n]));incoming.nest.forEach(n=>{if(!map.has(n.text))map.set(n.text,n)});if(map.size>MAX_NEST){setStatus("Merge cancelled: "+map.size+" unique stories exceed the "+MAX_NEST+"-story limit. Export backups before making room.",true);return}state.nest=[...map.values()].sort((a,b)=>b.ts-a.ts);state.visitedWeeks=[...new Set([...state.visitedWeeks,...incoming.visitedWeeks])]}currentWeek=state.lastWeek;applySettings();renderWeeks();renderClusters();saveState();renderNest();setStatus("Story Nest imported safely.")}catch(e){setStatus("Import failed. Choose a Storybird Grove backup file.",true)}}
 
 
 
