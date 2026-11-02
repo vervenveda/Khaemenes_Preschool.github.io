@@ -52,6 +52,17 @@ main .photo{border-radius:7px}main .pill{border-radius:7px}main .choice button{m
 main .grid>.card{min-width:0}main .hero-actions>a{flex:1 1 190px}main .activity-list .activity{min-height:65px}
 @media(max-width:700px){.prek-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.prek-menu a{min-height:100px}.grid>.card{grid-column:span 12}}
 @media print{.prek-menu,.prek-welcome{display:none!important}}
+
+/* Pre-K appearance studio immediately below the learner hero. */
+.prek-appearance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.prek-appearance-grid>.card{grid-column:span 1;min-width:0}
+.profile-hero .photo{width:220px;height:220px;font-size:110px;border-radius:7px;transition:clip-path .2s,border-radius .2s}
+body[data-prek-frame="circle"] .profile-hero .photo{border-radius:50%}
+body[data-prek-frame="oval"] .profile-hero .photo{width:220px;height:170px;border-radius:50%}
+body[data-prek-frame="diamond"] .profile-hero .photo{clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);border-radius:0}
+body[data-prek-frame="hexagon"] .profile-hero .photo{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);border-radius:0}
+.prek-appearance-grid :is(button,select,input){font-size:18px;min-height:48px}
+@media(max-width:760px){.prek-appearance-grid>.card{grid-column:1/-1}.profile-hero .photo{width:190px;height:190px}body[data-prek-frame="oval"] .profile-hero .photo{width:190px;height:150px}}
 </style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-profile-v2.css">
 <style id="academy-profile-common-readable-hero-20261101">
@@ -90,6 +101,23 @@ body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font
 <div class="hero-actions"><a class="button" id="firstStepLink" href="../#today">🌟 Today’s first step →</a><a class="button secondary" href="#learningStudio">My complete profile ↓</a></div>
 </div>
 </section>
+<div class="grid prek-appearance-grid">
+<section class="card span6 appearance-controls" aria-labelledby="pictureTitle">
+<h2 id="pictureTitle">My picture &amp; avatar</h2><p class="muted">A grown-up may choose an avatar or a small photo. Images are resized on this device and are never uploaded by this page.</p>
+<label><input type="checkbox" id="adultConfirm"> I am an adult helping the selected child personalize this profile.</label>
+<div class="choice" id="avatarChoices" aria-label="Choose an avatar"></div>
+<label for="frameShape">Choose a picture frame shape</label><select id="frameShape" aria-label="Picture frame shape"><option value="square">Rounded square</option><option value="circle">Circle</option><option value="oval">Oval</option><option value="diamond">Diamond</option><option value="hexagon">Hexagon</option></select>
+<label for="childPhoto">Choose a photo (optional, maximum 5 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+<div class="actions"><button type="button" id="removePhoto" class="secondary">Remove photo</button></div>
+</section>
+<section class="card span6 appearance-controls" aria-labelledby="backgroundTitle">
+<h2 id="backgroundTitle">My background &amp; comfort</h2><p class="muted">Pick a happy color world. The selected child’s appearance is saved separately from other learners.</p>
+<div id="backgroundChoices" class="choice" aria-label="Background themes"></div>
+<div class="actions"><button type="button" id="resetLook" class="secondary">Restore original colors</button><button type="button" id="exportLook" class="secondary">Export picture &amp; colors</button><button type="button" id="printProfile" class="secondary">Print profile</button></div>
+<label for="importLook">Restore picture &amp; colors from a local backup</label><input id="importLook" type="file" accept=".json,application/json">
+<p id="lookStatus" class="status" aria-live="polite"></p>
+</section>
+</div>
 <div class="grid">
 <section class="card span7" aria-labelledby="nextTitle"><h2 id="nextTitle">Today · Next</h2><div id="nextStep" class="activity-list" aria-live="polite"><a class="activity" href="../#today">Open Preschool’s family-guided activities →</a></div></section>
 <section class="card span5" aria-labelledby="pinsTitle"><h2 id="pinsTitle">📌 My pinned adventures</h2><div id="pinnedActivities" class="activity-list"><p class="muted">Pin your favorite games in the Preschool Adventure Garden.</p></div>
@@ -103,20 +131,7 @@ body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font
   </div>
   <p id="pinStatus" class="status" aria-live="polite"></p>
 </div><a class="button secondary" href="../#activities">Find more adventures →</a></section>
-<section class="card span6 appearance-controls" aria-labelledby="pictureTitle">
-<h2 id="pictureTitle">My picture &amp; avatar</h2><p class="muted">A grown-up may choose an avatar or a small photo. Images are resized on this device and are never uploaded by this page.</p>
-<label><input type="checkbox" id="adultConfirm"> I am an adult helping the selected child personalize this profile.</label>
-<div class="choice" id="avatarChoices" aria-label="Choose an avatar"></div>
-<label for="childPhoto">Choose a photo (optional, maximum 5 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
-<div class="actions"><button type="button" id="removePhoto" class="secondary">Remove photo</button></div>
-</section>
-<section class="card span6 appearance-controls" aria-labelledby="backgroundTitle">
-<h2 id="backgroundTitle">My background &amp; comfort</h2><p class="muted">Pick a happy color world. The selected child’s appearance is saved separately from other learners.</p>
-<div id="backgroundChoices" class="choice" aria-label="Background themes"></div>
-<div class="actions"><button type="button" id="resetLook" class="secondary">Restore original colors</button><button type="button" id="exportLook" class="secondary">Export picture &amp; colors</button><button type="button" id="printProfile" class="secondary">Print profile</button></div>
-<label for="importLook">Restore picture &amp; colors from a local backup</label><input id="importLook" type="file" accept=".json,application/json">
-<p id="lookStatus" class="status" aria-live="polite"></p>
-</section>
+
 </div>
 <section class="card" id="kindergartenHandoff" aria-labelledby="handoffTitle">
   <p class="eyebrow">When our learner is ready · a gentle next chapter</p>
@@ -160,6 +175,7 @@ const KEY="khaemenes_preschool_visual_profile_v1:";
 const FAVORITES_KEY="khaemenes_profile_favorites_v1";
 const COURSE_KEY="khaemenes_course_pins_v1";
 const THEMES=["sky","forest","ocean","sunset","night"];
+const FRAMES=["square","circle","oval","diamond","hexagon"];
 const AVATARS=["🌈","🦊","🦋","🦉","🚀","🌻","🐝","🐢"];
 const $=id=>document.getElementById(id);
 const R=window.KhaemenesFamilyRegistry;
@@ -180,6 +196,7 @@ function normalize(input){
  const v=input&&typeof input==="object"?input:{};
  return {
   theme:THEMES.includes(v.theme)?v.theme:"sky",
+  frame:FRAMES.includes(v.frame)?v.frame:"square",
   avatar:AVATARS.includes(v.avatar)?v.avatar:"🌈",
   photo:typeof v.photo==="string"&&/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(v.photo)&&v.photo.length<180000?v.photo:""
  };
@@ -191,8 +208,11 @@ function saveLook(){
  try{localStorage.setItem(profileKey(),JSON.stringify({schema:"khaemenes.prek-visual.v1",learnerId:activeId,updatedAt:new Date().toISOString(),...look}));renderLook();announce("Saved for this learner on this browser.");return true}
  catch{announce("Could not save. Browser storage may be full; try a smaller photo or export a backup.",true);return false}
 }
+$("frameShape").addEventListener("change",function(){if(!consent()){this.value=look.frame||"square";return}look.frame=FRAMES.includes(this.value)?this.value:"square";saveLook()});
 function renderLook(){
  document.body.dataset.prekBackground=look.theme;
+ document.body.dataset.prekFrame=look.frame||"square";
+ $("frameShape").value=look.frame||"square";
  const box=$("photoPreview");
  box.replaceChildren();
  if(look.photo){const img=document.createElement("img");img.src=look.photo;img.alt="Child's locally stored profile picture";box.append(img)}
