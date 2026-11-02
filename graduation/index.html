@@ -114,6 +114,33 @@ body.certificate-open{overflow:hidden}
  #certificateOutput .recipient{font-size:32px!important;margin:24px 0!important}
  #certificateOutput .fine{font-size:14px!important}
 }
+
+/* Single-sheet print isolation: remove all non-certificate layout, not merely visibility. */
+@media print{
+ @page{size:letter portrait;margin:0}
+ html,body{width:8.5in!important;height:11in!important;min-height:0!important;margin:0!important;padding:0!important;background:#fff!important;overflow:hidden!important}
+ body>*:not(main){display:none!important}
+ body>main{display:block!important;width:8.5in!important;height:11in!important;min-height:0!important;margin:0!important;padding:0!important;overflow:visible!important}
+ body>main>*:not(#certificateModal){display:none!important}
+ #certificateModal[hidden]{display:block!important}
+ #certificateModal{display:block!important;position:static!important;inset:auto!important;width:8.5in!important;height:11in!important;min-height:0!important;margin:0!important;padding:0!important;overflow:visible!important;background:#fff!important;border:0!important}
+ #certificateModal .certificate-dialog{display:block!important;position:static!important;box-sizing:border-box!important;width:8.5in!important;height:11in!important;min-height:0!important;max-width:none!important;margin:0!important;padding:0!important;overflow:visible!important;border:0!important;border-radius:0!important;background:#fff!important;box-shadow:none!important}
+ #certificateModal .certificate-dialog>.certificate-close{display:none!important}
+ #certificate{display:block!important;box-sizing:border-box!important;width:8.5in!important;height:11in!important;max-width:none!important;margin:0!important;padding:0!important;overflow:visible!important}
+ #certificate .section-head,#certificate .certificate-form,#certificate .game-status,#certificate .no-print{display:none!important}
+ #certificate .certificate-panel,#certificate .certificate-layout{display:block!important;box-sizing:border-box!important;width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+ #certificate .certificate-layout>.medal,#certificate .certificate-layout>h2,#certificate .certificate-layout>p{display:none!important}
+ #certificateOutput{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;position:relative!important;width:7.7in!important;height:10.2in!important;min-height:0!important;max-height:10.2in!important;max-width:none!important;margin:.4in auto!important;padding:.55in .65in!important;overflow:hidden!important;border:7px double #9e762c!important;outline:2px solid #9e762c!important;outline-offset:-.2in!important;border-radius:0!important;background:#fffdf4!important;box-shadow:none!important;break-before:avoid!important;break-after:avoid!important;break-inside:avoid!important;page-break-inside:avoid!important}
+ #certificateOutput:before,#certificateOutput:after{content:"❦  ✦  ❦  ✦  ❦";display:block!important;position:absolute!important;left:0!important;right:0!important;text-align:center!important;color:#98712d!important;font-size:21px!important;letter-spacing:9px!important}
+ #certificateOutput:before{top:.25in!important}
+ #certificateOutput:after{bottom:.25in!important}
+ #certificateOutput *{color:#243b4d!important;text-shadow:none!important}
+ #certificateOutput .seal{font-size:40px!important}
+ #certificateOutput h2{font-size:34px!important;line-height:1.15!important}
+ #certificateOutput p{font-size:16px!important;line-height:1.4!important;margin:10px 0!important}
+ #certificateOutput .recipient{font-size:30px!important;margin:20px 0!important}
+ #certificateOutput .fine{font-size:13px!important}
+}
 </style>
 </head>
 <body>
@@ -414,7 +441,7 @@ $("makeCertificate").addEventListener("click",()=>{
  certificateUnlocked=true;persist();showCertificate();fireworks();$("certificateOutput").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"});
 });
 $("certificateName").addEventListener("input",()=>{if(certificateUnlocked){showCertificate();persist()}});
-$("printCertificate").addEventListener("click",()=>{if(!certificateUnlocked)return;showCertificate();window.print()});
+$("printCertificate").addEventListener("click",()=>{if(!certificateUnlocked)return;showCertificate();certificateModal.scrollTop=0;window.print()});
 $("celebrateAgain").addEventListener("click",()=>fireworks());
 let frame=null,particles=[],ctx=null,last=0;
 const canvas=$("fireworks");
