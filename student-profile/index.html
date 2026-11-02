@@ -63,6 +63,15 @@ body[data-prek-frame="diamond"] .profile-hero .photo{clip-path:polygon(50% 0,100
 body[data-prek-frame="hexagon"] .profile-hero .photo{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);border-radius:0}
 .prek-appearance-grid :is(button,select,input){font-size:18px;min-height:48px}
 @media(max-width:760px){.prek-appearance-grid>.card{grid-column:1/-1}.profile-hero .photo{width:190px;height:190px}body[data-prek-frame="oval"] .profile-hero .photo{width:190px;height:150px}}
+
+/* Pre-K expandable learning menu and schedule. Existing sections are moved, never cloned. */
+.prek-menu .prek-tile{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;min-height:110px;padding:16px 12px;border:2px solid #476276;border-radius:7px;color:#24384a;text-align:center;font-size:18px;font-weight:600;line-height:1.35;cursor:pointer;width:100%}
+.prek-menu .prek-tile span{font-size:32px;line-height:1.1}.prek-menu .prek-tile:nth-child(6n+1){background:#FFD6A5}.prek-menu .prek-tile:nth-child(6n+2){background:#9BF6FF}.prek-menu .prek-tile:nth-child(6n+3){background:#FFADAD}.prek-menu .prek-tile:nth-child(6n+4){background:#FDFFB6}.prek-menu .prek-tile:nth-child(6n+5){background:#CAFFBF}.prek-menu .prek-tile:nth-child(6n+6){background:#FFD6A5}
+.prek-menu .prek-tile[aria-expanded="true"]{outline:3px solid #28465c;outline-offset:2px}
+.prek-daily{background:#FDFFB6;border:2px solid #476276;border-radius:7px;padding:18px;margin:12px 0 20px;color:#253b49}.prek-daily h2{font-size:24px;margin:0 0 6px}.prek-daily p{font-size:18px}.prek-classes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.prek-classes a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:70px;padding:10px;background:#CAFFBF;color:#263d4b;border:2px solid #476276;border-radius:7px;font-size:18px;text-decoration:none;font-weight:600}.prek-classes a:nth-child(even){background:#9BF6FF}
+#prek-popup-host:empty{display:none}.prek-pop-panel{border:3px solid #476276;border-radius:7px;padding:14px;background:#fffdf2;margin:12px 0 20px}.prek-pop-panel[hidden]{display:none}.prek-pop-panel>.card{margin:0}.prek-pop-panel .grid{margin:0}.prek-pop-close{display:block;margin:0 0 12px auto;background:#263d4b;color:white;border-radius:7px;padding:10px 16px;font-size:18px}
+@media(max-width:700px){.prek-classes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.prek-pop-close{display:none}}
 </style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-profile-v2.css">
 <style id="academy-profile-common-readable-hero-20261101">
@@ -95,13 +104,15 @@ body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font
 </section>
 <section class="prek-welcome" aria-label="Welcome to your learning home"><h2>🌈 My Happy Learning Home</h2><p>Pick an adventure! Your games, picture, and learning garden are all here.</p></section>
 <nav class="prek-menu" aria-label="My Pre-K learning shortcuts">
-<a href="#nextTitle"><span aria-hidden="true">🌞</span>Today's Adventure</a>
-<a href="#pinsTitle"><span aria-hidden="true">🎮</span>My Favorite Games</a>
-<a href="#pictureTitle"><span aria-hidden="true">🎨</span>My Picture</a>
-<a href="#backgroundTitle"><span aria-hidden="true">🌈</span>My Colors</a>
-<a href="#kindergartenHandoff"><span aria-hidden="true">🌻</span>My Graduation Garden</a>
-<a href="#learningStudio"><span aria-hidden="true">🏡</span>Grown-Up Corner</a>
+<button type="button" class="prek-tile" data-prek-panel="nextTitle" aria-expanded="false" aria-controls="prek-panel-nextTitle"><span aria-hidden="true">🌞</span>Today's Adventure</button>
+<button type="button" class="prek-tile" data-prek-panel="pinsTitle" aria-expanded="false" aria-controls="prek-panel-pinsTitle"><span aria-hidden="true">🎮</span>My Favorite Games</button>
+<button type="button" class="prek-tile" data-prek-panel="pictureTitle" aria-expanded="false" aria-controls="prek-panel-pictureTitle"><span aria-hidden="true">🎨</span>My Picture</button>
+<button type="button" class="prek-tile" data-prek-panel="backgroundTitle" aria-expanded="false" aria-controls="prek-panel-backgroundTitle"><span aria-hidden="true">🌈</span>My Colors</button>
+<button type="button" class="prek-tile" data-prek-panel="kindergartenHandoff" aria-expanded="false" aria-controls="prek-panel-kindergartenHandoff"><span aria-hidden="true">🌻</span>My Graduation Garden</button>
+<button type="button" class="prek-tile" data-prek-panel="learningStudio" aria-expanded="false" aria-controls="prek-panel-learningStudio"><span aria-hidden="true">🏡</span>Grown-Up Corner</button>
 </nav>
+<section class="prek-daily" aria-label="My daily schedule"><h2>🌞 My Daily Schedule &amp; Classes</h2><p>Choose a class to visit its Preschool learning area.</p><div class="prek-classes"><a href="../#today">📅 Today’s Lesson</a><a href="../#activities">🔤 Letters &amp; Reading</a><a href="../#activities">🔢 Numbers &amp; Shapes</a><a href="../#activities">🎨 Art &amp; Creativity</a><a href="../#activities">🎵 Music &amp; Movement</a><a href="../#activities">🌿 Science &amp; Nature</a></div></section>
+<div id="prek-popup-host" aria-live="polite"></div>
 <div class="grid prek-appearance-grid">
 <section class="card span6 appearance-controls" aria-labelledby="pictureTitle">
 <h2 id="pictureTitle">My picture &amp; avatar</h2><p class="muted">Choose a picture with a grown-up. Your photo appears in the large profile frame above and is saved privately on this device, not uploaded to a server.</p>
@@ -461,4 +472,21 @@ refresh();
 <script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
 <script>VNV_TICKER.autoPopulate({label:"Preschool Profile Quick Links",max:14});</script>
 <script src="https://vervenveda.com/assets/vnv-ecosystem-toolbar.js"></script>
+
+<script>
+/* Progressive enhancement: relocate existing feature nodes, preserving their IDs, listeners and saved state. */
+(function(){
+ const host=document.getElementById("prek-popup-host");if(!host)return;
+ const mapping={nextTitle:()=>document.getElementById("nextTitle")?.closest("section"),pinsTitle:()=>document.getElementById("pinsTitle")?.closest("section"),pictureTitle:()=>document.getElementById("pictureTitle")?.closest("section"),backgroundTitle:()=>document.getElementById("backgroundTitle")?.closest("section"),kindergartenHandoff:()=>document.getElementById("kindergartenHandoff"),learningStudio:()=>document.getElementById("learningStudio")};
+ const panels={};let open=null;
+ for(const [key,find] of Object.entries(mapping)){
+  const node=find();if(!node)continue;
+  const panel=document.createElement("div");panel.id="prek-panel-"+key;panel.className="prek-pop-panel";panel.hidden=true;
+  const close=document.createElement("button");close.type="button";close.className="prek-pop-close";close.textContent="✕ Close";close.addEventListener("click",()=>toggle(key));panel.append(close,node);host.append(panel);panels[key]=panel;
+ }
+ function toggle(key){const target=panels[key];if(!target)return;const shouldOpen=open!==key;for(const [id,panel] of Object.entries(panels)){panel.hidden=true;document.querySelector('[data-prek-panel="'+id+'"]')?.setAttribute("aria-expanded","false")}open=null;if(shouldOpen){target.hidden=false;open=key;document.querySelector('[data-prek-panel="'+key+'"]')?.setAttribute("aria-expanded","true");target.scrollIntoView({block:"nearest",behavior:"smooth"})}}
+ document.querySelectorAll("[data-prek-panel]").forEach(button=>button.addEventListener("click",()=>toggle(button.dataset.prekPanel)));
+ document.querySelectorAll('a[href^="#"]').forEach(link=>{const key=Object.keys(mapping).find(k=>link.getAttribute("href")==="#"+k);if(key)link.addEventListener("click",()=>{if(open!==key)toggle(key)})});
+})();
+</script>
 </body></html>
