@@ -566,6 +566,36 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
 .app .main-layout>.grove>.story-card{min-height:400px!important}
 }
 </style>
+<style id="storybird-balanced-choice-buttons">
+/* Storybird choice cards: retain every choice; do not truncate language. */
+@media screen{
+.app .clusters>.cluster{display:flex!important;flex-direction:column!important;min-height:0!important;height:100%!important}
+.app .clusters>.cluster .spirit-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(94px,auto)!important;gap:10px!important;align-content:start!important;flex:1}
+.app .clusters>.cluster .spirit{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;
+ align-items:center!important;text-align:center!important;gap:7px!important;
+ min-width:0!important;width:100%!important;min-height:94px!important;height:100%!important;
+ padding:10px 8px!important;white-space:normal!important;overflow-wrap:anywhere!important;
+ word-break:normal!important;line-height:1.3!important;font-size:16px!important;
+ border-radius:7px!important
+}
+.app .clusters>.cluster .spirit>span:last-child{
+ display:block!important;width:100%!important;min-width:0!important;
+ font-size:16px!important;line-height:1.3!important;overflow-wrap:anywhere!important;
+ white-space:normal!important;hyphens:auto!important
+}
+.app .clusters>.cluster .spirit-dot{
+ width:40px!important;height:40px!important;flex:0 0 40px!important;
+ font-size:24px!important;border-radius:7px!important
+}
+.app .clusters>.cluster .cluster-title{min-height:40px;align-items:center}
+.app .clusters>.tool-cluster .story-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(60px,auto)!important}
+.app .clusters>.tool-cluster .story-actions>.btn{min-height:60px!important;padding:10px 6px!important;overflow-wrap:anywhere!important;white-space:normal!important}
+}
+@media screen and (max-width:560px){
+.app .clusters>.cluster .spirit-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+</style>
 </head>
 <body>
 <header data-khae-header class="khae-global-campus-header">
@@ -1451,12 +1481,14 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
   const WEEK_COUNT = 84;
   const IMPORT_LIMIT = 3 * 1024 * 1024;
 
-  const FEELINGS = ["happy","curious","brave","kind","calm","excited","hopeful","proud","surprised","shy","worried","peaceful","silly","grateful"];
+  const FEELINGS = ["happy","curious","brave","kind","calm","excited","hopeful","proud","surprised","shy","worried","peaceful","silly","grateful","thoughtful","patient","confident","gentle","delighted","determined"];
   const ENDINGS = [
     "made a new friend","helped someone nearby","found a cozy way home","shared a wonderful discovery",
     "learned to try again","celebrated with everyone","planted a new beginning","ended the day with a smile",
     "shared what they learned","thanked a helpful friend","made room for one more friend","left a kind note",
-    "promised to care for the garden","tucked the memory safely away"
+    "promised to care for the garden","tucked the memory safely away",
+    "invited a shy friend to join","listened to a friend with care","found courage to try something new",
+    "shared a story with the village","helped the garden bloom again","welcomed a new neighbor"
   ];
   const WEEK_TOPICS = [
     {name:"Kindness",icon:"💛",focus:"A small act of kindness can help a friend."},
@@ -1514,7 +1546,7 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
   function verbToGerundPhrase(verb){const phrase=verbToPlainPhrase(verb);if(!phrase)return"wondering";if(phrase.includes(" and "))return phrase.split(/\s+and\s+/).map(verbToGerundPhrase).join(" and ");const words=phrase.split(/\s+/);words[0]=toGerundWord(words[0]);return words.join(" ")}
 
   function weekTopic(week){const topic=WEEK_TOPICS[(week-1)%WEEK_TOPICS.length];const level=WEEK_LEVELS[Math.floor((week-1)/WEEK_TOPICS.length)]||WEEK_LEVELS[WEEK_LEVELS.length-1];return {...topic,level,label:`${level} ${topic.name}`}}
-  function getWeek(week,round){const r=clampInt(round??state.weekRounds[String(week)]??0,0,999999);return{week,characters:shuffleSeeded(CHARACTERS,`characters:${week}:${r}`).slice(0,7),settings:shuffleSeeded(SETTINGS,`settings:${week}:${r}`).slice(0,7),verbs:shuffleSeeded(VERBS,`verbs:${week}:${r}`).slice(0,7)}}
+  function getWeek(week,round){const r=clampInt(round??state.weekRounds[String(week)]??0,0,999999);return{week,characters:shuffleSeeded(CHARACTERS,`characters:${week}:${r}`).slice(0,12),settings:shuffleSeeded(SETTINGS,`settings:${week}:${r}`).slice(0,12),verbs:shuffleSeeded(VERBS,`verbs:${week}:${r}`).slice(0,12)}}
   function isGrowing(){return state.settings.mode==="growing"}
   function isComplete(sel=selection){return !!(sel.character&&sel.setting&&sel.verb&&(!isGrowing()||(sel.feeling&&sel.ending)))}
 
@@ -1564,7 +1596,7 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
   }
 
   function renderClusters(options={}){const keepStory=!!options.keepStory;const w=getWeek(currentWeek);renderSpiritList(els.charsList,w.characters,"character");renderSpiritList(els.setsList,w.settings,"setting");renderSpiritList(els.verbsList,w.verbs,"verb");renderSpiritList(els.feelingsList,FEELINGS,"feeling");renderSpiritList(els.endingsList,ENDINGS,"ending");if(!options.keepSelection)selection=blankSelection();if(!keepStory)currentStory=null;refreshSelectionVisuals();updateSlots();if(!keepStory)clearStory(false);updateThemeBanner();saveState()}
-  function renderSpiritList(container,items,type){container.innerHTML="";items.forEach(label=>{const b=document.createElement("button");b.type="button";b.className="spirit";b.dataset.type=type;b.dataset.value=label;b.setAttribute("aria-pressed",selection[type]===label?"true":"false");const dot=document.createElement("span");dot.className="spirit-dot";dot.textContent=type==="feeling"?({happy:"😊",curious:"🤔",brave:"⭐",kind:"💛",calm:"🌿",excited:"🎉",hopeful:"🌈",proud:"🌟",surprised:"😮",shy:"🌷",worried:"💭",peaceful:"🕊️",silly:"😄",grateful:"💖"}[label]||"💗"):type==="ending"?"🌈":iconFor(type,label);const name=document.createElement("span");name.textContent=label;b.append(dot,name);b.addEventListener("click",()=>{pickSpirit(type,label);eirenSpeak(label)});container.appendChild(b)})}
+  function renderSpiritList(container,items,type){container.innerHTML="";items.forEach(label=>{const b=document.createElement("button");b.type="button";b.className="spirit";b.dataset.type=type;b.dataset.value=label;b.setAttribute("aria-pressed",selection[type]===label?"true":"false");const dot=document.createElement("span");dot.className="spirit-dot";dot.textContent=type==="feeling"?({happy:"😊",curious:"🤔",brave:"⭐",kind:"💛",calm:"🌿",excited:"🎉",hopeful:"🌈",proud:"🌟",surprised:"😮",shy:"🌷",worried:"💭",peaceful:"🕊️",silly:"😄",grateful:"💖",thoughtful:"🤔",patient:"🌱",confident:"🌟",gentle:"🌷",delighted:"😃",determined:"💪"}[label]||"💗"):type==="ending"?"🌈":iconFor(type,label);const name=document.createElement("span");name.textContent=label;b.append(dot,name);b.addEventListener("click",()=>{pickSpirit(type,label);eirenSpeak(label)});container.appendChild(b)})}
   function pickSpirit(type,value){selection[type]=selection[type]===value?null:value;currentStory=null;refreshSelectionVisuals();updateSlots();renderWordGarden();saveState();if(isComplete())setStatus("All your story choices are ready. Press Make My Story!")}
   function refreshSelectionVisuals(){document.querySelectorAll(".spirit").forEach(b=>b.setAttribute("aria-pressed",selection[b.dataset.type]===b.dataset.value?"true":"false"))}
   function updateSlots(){els.selChar.textContent=selection.character||"— character —";els.selSet.textContent=selection.setting||"— place —";els.selVerb.textContent=selection.verb||"— action —";els.selFeeling.textContent=selection.feeling||"— feeling —";els.selEnding.textContent=selection.ending||"— ending —"}
