@@ -483,19 +483,12 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
 
   <section class="eiren-companion" aria-labelledby="eirenTitle"><div class="eiren-companion-row"><div class="eiren-mark" aria-hidden="true">🌸</div><div><h3 id="eirenTitle">Eiren · Story Friend</h3><p>Pip helps grow the story. Eiren reads the finished story with you. She never changes your choices or the Storybird story engine.</p></div></div><div class="eiren-actions"><button class="btn secondary" type="button" id="eirenHello">🌸 Meet Eiren</button><button class="btn secondary" type="button" id="eirenRead">📖 Eiren, Read My Story</button><button class="btn secondary" type="button" id="eirenStop">⏹ Stop Eiren</button></div><div class="eiren-status" id="eirenStatus" aria-live="polite">Eiren is getting the storybook ready…</div></section>
   <section class="voice-studio" aria-labelledby="voiceTitle">
-    <h3 id="voiceTitle">Choose Your Reading Friend</h3>
-    <div class="voice-friends" id="voiceFriends">
-      <button type="button" class="voice-friend" data-voice="fairy"><span class="emoji">🧚</span><span class="name">Fairy Lily</span></button>
-      <button type="button" class="voice-friend" data-voice="bear"><span class="emoji">🐻</span><span class="name">Benny Bear</span></button>
-      <button type="button" class="voice-friend" data-voice="owl"><span class="emoji">🦉</span><span class="name">Professor Owl</span></button>
-      <button type="button" class="voice-friend" data-voice="robot"><span class="emoji">🤖</span><span class="name">Robo Reader</span></button>
-      <button type="button" class="voice-friend" data-voice="rainbow"><span class="emoji">🌈</span><span class="name">Rainbow Friend</span></button>
-    </div>
+    <h3 id="voiceTitle">Eiren’s Reading Voice</h3>
+    <p class="voice-status" id="voiceStatus" aria-live="polite">A gentle US English reading voice is ready when available on your device.</p>
     <div class="voice-options">
-      <button type="button" id="previewVoice" class="btn secondary">👋 Meet My Voice</button>
+      <button type="button" id="previewVoice" class="btn secondary">🌸 Hear Eiren</button>
       <button type="button" id="stopVoiceFriend" class="btn secondary">⏹ Stop Voice</button>
     </div>
-    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
   </section>
 
   <section class="child-controls" aria-label="Story controls">
@@ -1418,7 +1411,7 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
   function defaultState(){return{version:2,nest:[],lastWeek:1,weekRounds:{},visitedWeeks:[1],settings:{tone:"gentle",runs:60,mode:"little",pronoun:"they",rate:.95,voiceFriend:"fairy",animations:true,simple:false,large:false,contrast:false},draft:{selection:blankSelection(),story:null}}}
   function sanitizeSelection(sel){sel=sel&&typeof sel==="object"?sel:{};return{character:String(sel.character||"").slice(0,90)||null,setting:String(sel.setting||"").slice(0,90)||null,verb:String(sel.verb||"").slice(0,90)||null,feeling:String(sel.feeling||"").slice(0,40)||null,ending:String(sel.ending||"").slice(0,90)||null}}
   function sanitizeStory(n){if(!n||typeof n!=="object")return null;const text=String(n.text||"").slice(0,1800).trim();if(!text)return null;const meta=n.meta&&typeof n.meta==="object"?n.meta:{};return{id:String(n.id||`sbg-${Date.now()}-${Math.random().toString(36).slice(2,8)}`).slice(0,80),title:String(n.title||"A Storybird Story").slice(0,120),text,meta:{week:clampInt(meta.week||1,1,WEEK_COUNT),tone:TEMPLATES[meta.tone]?meta.tone:"gentle",mode:meta.mode==="growing"?"growing":"little",selection:sanitizeSelection(meta.selection),score:Number.isFinite(meta.score)?Math.round(meta.score):null},ts:Number(n.ts)||Date.now(),favorite:!!n.favorite}}
-  function sanitizeState(input){const safe=defaultState();if(!input||typeof input!=="object")return safe;safe.lastWeek=clampInt(input.lastWeek||1,1,WEEK_COUNT);safe.weekRounds=input.weekRounds&&typeof input.weekRounds==="object"?Object.fromEntries(Object.entries(input.weekRounds).slice(0,WEEK_COUNT).map(([k,v])=>[String(clampInt(k,1,WEEK_COUNT)),clampInt(v,0,999999)])):{};safe.visitedWeeks=Array.isArray(input.visitedWeeks)?[...new Set(input.visitedWeeks.map(v=>clampInt(v,1,WEEK_COUNT)))]:[safe.lastWeek];const s=input.settings&&typeof input.settings==="object"?input.settings:{};safe.settings.tone=TEMPLATES[s.tone]?s.tone:"gentle";safe.settings.runs=clampInt(s.runs||60,10,200);safe.settings.mode=s.mode==="growing"?"growing":"little";safe.settings.pronoun=["they","she","he"].includes(s.pronoun)?s.pronoun:"they";safe.settings.rate=Math.max(.65,Math.min(1.2,Number(s.rate)||.95));safe.settings.voiceFriend=["fairy","bear","owl","robot","rainbow"].includes(s.voiceFriend)?s.voiceFriend:"fairy";safe.settings.animations=s.animations!==false;safe.settings.simple=!!s.simple;safe.settings.large=!!s.large;safe.settings.contrast=!!s.contrast;safe.nest=Array.isArray(input.nest)?input.nest.slice(0,MAX_NEST).map(sanitizeStory).filter(Boolean):[];safe.draft={selection:sanitizeSelection(input.draft?.selection),story:sanitizeStory(input.draft?.story)};return safe}
+  function sanitizeState(input){const safe=defaultState();if(!input||typeof input!=="object")return safe;safe.lastWeek=clampInt(input.lastWeek||1,1,WEEK_COUNT);safe.weekRounds=input.weekRounds&&typeof input.weekRounds==="object"?Object.fromEntries(Object.entries(input.weekRounds).slice(0,WEEK_COUNT).map(([k,v])=>[String(clampInt(k,1,WEEK_COUNT)),clampInt(v,0,999999)])):{};safe.visitedWeeks=Array.isArray(input.visitedWeeks)?[...new Set(input.visitedWeeks.map(v=>clampInt(v,1,WEEK_COUNT)))]:[safe.lastWeek];const s=input.settings&&typeof input.settings==="object"?input.settings:{};safe.settings.tone=TEMPLATES[s.tone]?s.tone:"gentle";safe.settings.runs=clampInt(s.runs||60,10,200);safe.settings.mode=s.mode==="growing"?"growing":"little";safe.settings.pronoun=["they","she","he"].includes(s.pronoun)?s.pronoun:"they";safe.settings.rate=Math.max(.65,Math.min(1.2,Number(s.rate)||.95));safe.settings.voiceFriend="fairy";safe.settings.animations=s.animations!==false;safe.settings.simple=!!s.simple;safe.settings.large=!!s.large;safe.settings.contrast=!!s.contrast;safe.nest=Array.isArray(input.nest)?input.nest.slice(0,MAX_NEST).map(sanitizeStory).filter(Boolean):[];safe.draft={selection:sanitizeSelection(input.draft?.selection),story:sanitizeStory(input.draft?.story)};return safe}
   function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(raw)return sanitizeState(JSON.parse(raw));const old=localStorage.getItem(OLD_STORAGE_KEY);if(old){const migrated=sanitizeState(JSON.parse(old));migrated.version=2;return migrated}}catch(e){}return defaultState()}
   function saveState(){state.lastWeek=currentWeek;state.draft={selection:{...selection},story:currentStory?{...currentStory}:null};try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){setStatus("This browser is low on storage. Export a backup before saving more stories.",true)}renderStats()}
 
@@ -1486,14 +1479,9 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
   }
   function chooseFriendlyVoice(){
     if(!availableVoices.length)refreshVoices();
-    const f=VOICE_FRIENDS[state.settings.voiceFriend]||VOICE_FRIENDS.fairy;
     const us=availableVoices.filter(v=>/^en[-_]US$/i.test(v.lang||""));
     const english=availableVoices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
-    const pool=us.length?us:(english.length?english:availableVoices);
-    if(["fairy","rainbow"].includes(state.settings.voiceFriend))return preferredFemaleUS(pool);
-    const bridge=window.KhaemenesPreschoolVoice;
-    if(bridge?.supported())return bridge.choose({role:state.settings.voiceFriend==="bear"?"archaemenes":"eiren",lang:"en-US",prefer:f.preferred.source});
-    return pool.find(v=>f.preferred.test(v.name))||pool[0]||null;
+    return preferredFemaleUS(us.length?us:(english.length?english:availableVoices));
   }
   function updateVoiceButtons(){document.querySelectorAll("[data-voice]").forEach(b=>{const active=b.dataset.voice===state.settings.voiceFriend;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))})}
   const EIREN_PUBLIC_ADAPTER="../../assets/eiren-adapter.js";
@@ -1569,7 +1557,6 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
     if(els.eirenHello)els.eirenHello.addEventListener("click",meetEiren);
     if(els.eirenRead)els.eirenRead.addEventListener("click",eirenReadCurrentStory);
     if(els.eirenStop)els.eirenStop.addEventListener("click",stopEiren);
-    if(els.voiceFriends)els.voiceFriends.addEventListener("click",e=>{const b=e.target.closest("[data-voice]");if(!b)return;state.settings.voiceFriend=b.dataset.voice;saveState();updateVoiceButtons();const f=VOICE_FRIENDS[state.settings.voiceFriend];els.voiceStatus.textContent=`${f.emoji} ${f.name} selected. Tap Meet My Voice to listen.`});
     if(els.previewVoice)els.previewVoice.addEventListener("click",()=>speakText("",{preview:true}));
     if(els.stopVoiceFriend)els.stopVoiceFriend.addEventListener("click",stopSpeech);
     els.modeSelect.addEventListener("change",()=>{state.settings.mode=els.modeSelect.value;updateModeUI();saveState();setStatus("Story size changed.")});
