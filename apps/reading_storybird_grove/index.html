@@ -52,7 +52,7 @@ button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visi
   outline:4px solid rgba(60,140,220,.45);outline-offset:3px
 }
 .sparkles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.sparkles span{position:absolute;font-size:clamp(1.1rem,2.6vw,2rem);opacity:.3;animation:float 12s ease-in-out infinite}
+.sparkles span{position:absolute;font-size:clamp(11rem,26vw,20rem);opacity:.55;animation:float 12s ease-in-out infinite;line-height:1;filter:drop-shadow(0 3px 7px rgba(38,53,74,.12))}
 .sparkles span:nth-child(1){left:4%;top:14%}.sparkles span:nth-child(2){left:13%;top:72%;animation-delay:-4s}
 .sparkles span:nth-child(3){left:30%;top:5%;animation-delay:-8s}.sparkles span:nth-child(4){left:48%;top:86%;animation-delay:-2s}
 .sparkles span:nth-child(5){left:66%;top:8%;animation-delay:-7s}.sparkles span:nth-child(6){left:79%;top:74%;animation-delay:-10s}
@@ -686,8 +686,10 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
 </style>
 <style id="storybird-hero-footer-and-18px-type">
 /* Storybird-owned interface only. Shared Academy chrome is excluded. */
+/* Explicit selectors avoid ambiguity in the hero/footer color ownership. */
 .app{--story-heading:24px;--story-body:18px}
-:is(.app>header.hero,.app>footer.footer){
+.app > header.hero,
+.app > footer.footer{
  background:linear-gradient(110deg,#FFADAD 0%,#FFD6A5 26%,#FDFFB6 50%,#CAFFBF 74%,#9BF6FF 100%)!important;
  color:#26354A!important;border:3px solid #476176!important;
  border-radius:7px!important;
