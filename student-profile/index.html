@@ -103,11 +103,11 @@ body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font
 </section>
 <div class="grid prek-appearance-grid">
 <section class="card span6 appearance-controls" aria-labelledby="pictureTitle">
-<h2 id="pictureTitle">My picture &amp; avatar</h2><p class="muted">A grown-up may choose an avatar or a small photo. Images are resized on this device and are never uploaded by this page.</p>
+<h2 id="pictureTitle">My picture &amp; avatar</h2><p class="muted">Choose a picture with a grown-up. Your photo appears in the large profile frame above and is saved privately on this device, not uploaded to a server.</p>
 <label><input type="checkbox" id="adultConfirm"> I am an adult helping the selected child personalize this profile.</label>
 <div class="choice" id="avatarChoices" aria-label="Choose an avatar"></div>
 <label for="frameShape">Choose a picture frame shape</label><select id="frameShape" aria-label="Picture frame shape"><option value="square">Rounded square</option><option value="circle">Circle</option><option value="oval">Oval</option><option value="diamond">Diamond</option><option value="hexagon">Hexagon</option></select>
-<label for="childPhoto">Choose a photo (optional, maximum 5 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+<label for="childPhoto">Choose a profile photo (JPG, PNG, WebP, or GIF; under 5 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
 <div class="actions"><button type="button" id="removePhoto" class="secondary">Remove photo</button></div>
 </section>
 <section class="card span6 appearance-controls" aria-labelledby="backgroundTitle">
@@ -375,23 +375,38 @@ function refresh(){
 for(const avatar of AVATARS){const b=document.createElement("button");b.type="button";b.className="secondary";b.dataset.avatar=avatar;b.textContent=avatar;b.setAttribute("aria-label","Use "+avatar+" avatar");b.addEventListener("click",()=>{if(!consent())return;look.avatar=avatar;look.photo="";saveLook()});$("avatarChoices").append(b)}
 for(const theme of THEMES){const b=document.createElement("button");b.type="button";b.className="secondary";b.dataset.theme=theme;b.textContent=theme[0].toUpperCase()+theme.slice(1);b.addEventListener("click",()=>{if(!consent())return;look.theme=theme;saveLook()});$("backgroundChoices").append(b)}
 $("childPhoto").addEventListener("change",async event=>{
- const file=event.target.files?.[0];event.target.value="";
- if(!file||!consent())return;
- if(!["image/jpeg","image/png","image/webp","image/gif"].includes(file.type)||file.size>5*1024*1024){announce("Choose a JPG, PNG, WebP, or GIF under 5 MB.",true);return}
- const id=activeId,url=URL.createObjectURL(file);
+ const file=event.target.files?.[0];
+ if(!file)return;
+ if(!consent()){event.target.value="";return}
+ if(!["image/jpeg","image/png","image/webp","image/gif"].includes(file.type)||file.size>5*1024*1024){
+  announce("Please choose a JPG, PNG, WebP, or GIF smaller than 5 MB.",true);event.target.value="";return;
+ }
+ const learnerId=activeId;
+ announce("Preparing your picture…");
+ const url=URL.createObjectURL(file);
  try{
-  const img=new Image();img.src=url;await img.decode();
-  if(id!==activeId||!consent())return;
+  const img=new Image();
+  img.src=url;
+  if(img.decode)await img.decode();
+  else await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject});
+  if(learnerId!==activeId){announce("The selected learner changed. Please choose the picture again.",true);return}
   const canvas=document.createElement("canvas");canvas.width=256;canvas.height=256;
-  const ctx=canvas.getContext("2d");if(!ctx)throw Error("Canvas unavailable");
-  const size=Math.min(img.naturalWidth,img.naturalHeight);if(!size)throw Error("Invalid image");
+  const ctx=canvas.getContext("2d");if(!ctx)throw Error("Image editing is unavailable in this browser");
+  const size=Math.min(img.naturalWidth,img.naturalHeight);if(!size)throw Error("The selected image has no readable dimensions");
   ctx.fillStyle="#fff";ctx.fillRect(0,0,256,256);
   ctx.drawImage(img,(img.naturalWidth-size)/2,(img.naturalHeight-size)/2,size,size,0,0,256,256);
-  const data=canvas.toDataURL("image/jpeg",.72);
-  if(data.length>180000)throw Error("Resized photo is still too large");
-  const prior=look.photo;look.photo=data;if(!saveLook()){look.photo=prior;renderLook()}
- }catch{announce("This picture could not be processed. Try a smaller JPG or PNG.",true)}
- finally{URL.revokeObjectURL(url)}
+  let data="";
+  for(const quality of [.78,.64,.5,.38]){
+   data=canvas.toDataURL("image/jpeg",quality);
+   if(data.length<180000)break;
+  }
+  if(!data||data.length>=180000)throw Error("The resized picture exceeds the local profile limit");
+  const previous=look.photo;look.photo=data;
+  if(!saveLook()){look.photo=previous;renderLook();return}
+  announce("Your picture is now showing in the profile and saved on this device.");
+ }catch(error){
+  announce("The picture could not be added: "+(error?.message||"unsupported image")+". Try a JPG or PNG.",true);
+ }finally{URL.revokeObjectURL(url);event.target.value=""}
 });
 $("removePhoto").addEventListener("click",()=>{if(!consent())return;look.photo="";saveLook()});
 $("pinAdventure").addEventListener("click",()=>updateFavorite($("adventureSelect").value,true));
