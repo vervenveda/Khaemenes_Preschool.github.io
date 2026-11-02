@@ -65,6 +65,23 @@ main :is(h2,h3){font-size:clamp(24px,3vw,38px);line-height:1.2}
 .topline .brand small{font-size:18px}
 @media(max-width:780px){.game-grid{grid-template-columns:1fr}.game-card{min-height:0}}
 @media print{body{background:white}.certificate-output{background:white}.certificate-panel{background:white}}
+
+/* Five-question learning games: readable cards and gentle celebration palette. */
+.game-card{background:#fffdf2!important;border-color:#688a92!important}
+.game-card:nth-child(1){background:#fff0e9!important}
+.game-card:nth-child(2){background:#f4ffdf!important}
+.game-card:nth-child(3){background:#eaffff!important}
+.game-card.done{border-color:#367c62!important}
+.quiz-prompt{font-size:20px!important;font-weight:750;color:#203c51!important;margin:12px 0}
+.quiz-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.quiz-next{width:100%;margin-top:12px}
+.choices{display:block}
+.quiz-options .choice{width:100%;min-height:76px;font-size:18px}
+.celebrate{background:linear-gradient(120deg,#ffadad,#ffd6a5 26%,#fdffb6 50%,#caffbf 75%,#9bf6ff)!important;color:#243b4d!important;border:3px solid #47768a}
+.celebrate h2,.celebrate p{color:#243b4d!important;text-shadow:none!important}
+.celebrate .big{color:#243b4d}
+.celebrate .primary{background:#285c73;color:white}
+@media(max-width:430px){.quiz-options{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -82,9 +99,9 @@ main :is(h2,h3){font-size:clamp(24px,3vw,38px);line-height:1.2}
   <div class="shell">
     <span class="hero-badge">🌱 One garden grows into another</span>
     <h1>Look how far you’ve grown!<span>Next stop: Kindergarten!</span></h1>
-    <p>This is your special bridge from Crechè Preschool to Khaemenes Kinder Garden. Play three cheerful mini-games, collect celebration stars, make a certificate, and get ready to discover a brand-new learning garden.</p>
+    <p>Play three five-question learning games. Earn at least four correct answers in each to unlock your celebration certificate and prepare for the next learning garden.</p>
     <div class="hero-emoji" aria-hidden="true">🦉 🌈 🎨 📚 🌻 🎓</div>
-    <div class="notice"><strong>A note for grown-ups:</strong> this is a celebratory transition experience, not a formal academic assessment. Preschool adventure visits do not prove Kindergarten readiness or replace family/teacher judgement. Your certificate celebrates participation and effort. Progress is stored locally in this browser, for the active learner when a profile is available.</div>
+    <div class="notice"><strong>A note for grown-ups:</strong> these games provide a playful 80% learning checkpoint, not a formal placement assessment. Preschool adventure visits do not prove Kindergarten readiness or replace family/teacher judgement. Your certificate celebrates participation and effort. Progress is stored locally in this browser, for the active learner when a profile is available.</div>
     <div class="progress-panel" aria-label="Graduation game progress">
       <div><strong id="progressLabel">Your celebration is ready!</strong><div class="progress-track"><div id="progressFill" class="progress-fill"></div></div></div>
       <div id="progressCount" class="count">0 of 3 stars ⭐</div>
@@ -132,36 +149,36 @@ main :is(h2,h3){font-size:clamp(24px,3vw,38px);line-height:1.2}
   </div>
   <div id="celebrateBanner" class="celebrate" aria-live="polite">
     <div class="big" aria-hidden="true">🎉 🌟 🎆 🌟 🎉</div>
-    <h2>All three stars are yours!</h2>
-    <p>You practised getting ready, noticing a pattern, and welcoming someone kindly. That deserves a celebration!</p>
+    <h2>All three games passed!</h2>
+    <p>You answered at least four of five questions correctly in every game. That deserves a celebration!</p>
     <a class="primary" href="#certificate">Make My Certificate 🎓</a>
   </div>
 </section>
 
 <section class="section shell" id="certificate">
-  <div class="section-head"><p class="eyebrow">A keepsake for your learning journey</p><h2>Your Preschool Celebration Certificate</h2><p>Play all three games to unlock the personalized printable certificate. A grown-up can help with the name and printing.</p></div>
+  <div class="section-head"><p class="eyebrow">A keepsake for your learning journey</p><h2>Your Preschool Celebration Certificate</h2><p>Earn 4 out of 5 correct answers in each game to unlock the personalized printable certificate. A grown-up can help with the name and printing.</p></div>
   <div class="certificate-panel">
     <div class="certificate-layout">
       <div class="medal" aria-hidden="true">🏅🌈🎓</div>
       <h2>Growing & Glowing</h2>
       <p>Crechè Preschool · Khaemenes Academy</p>
-      <p>Complete the three celebration games to unlock your certificate.</p>
+      <p>Pass all three five-question games with at least 80% correct to unlock your certificate.</p>
       <div class="certificate-form no-print">
         <label for="certificateName">First name or nickname for the certificate</label>
         <input id="certificateName" maxlength="40" autocomplete="off" placeholder="Preschool Explorer">
         <button class="primary" id="makeCertificate" type="button" disabled>Unlock my certificate 🔒</button>
       </div>
-      <p id="certificateStatus" class="game-status" aria-live="polite">Three celebration stars unlock the certificate.</p>
+      <p id="certificateStatus" class="game-status" aria-live="polite">Three games passed at 80% unlock the certificate.</p>
       <div id="certificateOutput" class="certificate-output" aria-label="Printable graduation certificate">
         <div class="seal" aria-hidden="true">🌻 🎓 🌈</div>
         <p class="eyebrow">Khaemenes Academy · Crechè Preschool</p>
         <h2>Certificate of Celebration</h2>
         <p>This certificate is joyfully presented to</p>
         <div class="recipient" id="recipientName">Preschool Explorer</div>
-        <p>for completing the Preschool-to-Kindergarten Celebration Garden and practising curiosity, preparation, pattern noticing, and kind communication.</p>
+        <p>for passing all three five-question learning games with at least 80% correct answers in each, and practising curiosity, preparation, pattern noticing, and kind communication.</p>
         <p><strong>May your next learning garden be filled with wonder, friendship, and brave new discoveries!</strong></p>
         <p id="certificateDate"></p>
-        <p class="fine">Celebration of participation and effort · Not a formal academic credential or readiness assessment.</p>
+        <p class="fine">Celebration of learning-game mastery · Not an official placement, academic credential, or guardian release.</p>
         <p class="fine">Khaemenes Academy · Crechè → Kinder Garden</p>
       </div>
       <div class="quicklinks no-print" style="justify-content:center;margin-top:18px">
@@ -204,69 +221,127 @@ const PROFILE_KEY="khaemenes_preschool_profile_v1";
 const CONTINUITY_KEY="khaemenes_learning_continuity_v1";
 const GRADUATION_KEY="creche-preschool-graduation-v1";
 const completed=new Set();
-let chosenItems=new Set();
-let certificateUnlocked=false;
-let journeyId="";
+let certificateUnlocked=false,journeyId="";
+const GAME_IDS=["backpack","pattern","kindness"];
+const BANK={
+backpack:[
+{q:"Which three things can help you learn and stay comfortable at school?",opts:["📚 Storybook","💧 Water bottle","🖍️ Crayons","🚀 Toy spaceship"],correct:[0,1,2],multi:true,why:"A book, water, and crayons are useful learning-day helpers."},
+{q:"What could help you draw a picture?",opts:["🖍️ Crayons","🧱 Heavy rock","🛞 Tire","🧊 Ice cube"],correct:[0]},
+{q:"What could you bring to read with your teacher?",opts:["📚 Storybook","🧹 Broom","🪨 Pebble","🧤 Oven mitt"],correct:[0]},
+{q:"What helps you drink water during your day?",opts:["💧 Water bottle","🧸 Teddy bear","🎈 Balloon","🧩 Puzzle"],correct:[0]},
+{q:"What is a helpful way to get ready for class?",opts:["🎒 Pack your learning things","🙈 Hide your shoes","🗑️ Throw your book away","💤 Leave everything behind"],correct:[0]}
+],
+pattern:[
+{q:"🌻 🌈 🌻 🌈 🌻 … What comes next?",opts:["🌻 Sunflower","🌈 Rainbow","🦉 Owl","⭐ Star"],correct:[1]},
+{q:"⭐ 🌙 ⭐ 🌙 ⭐ … What comes next?",opts:["🌙 Moon","⭐ Star","🌻 Flower","🦋 Butterfly"],correct:[0]},
+{q:"🍎 🍌 🍎 🍌 🍎 … What comes next?",opts:["🍎 Apple","🍌 Banana","🍇 Grapes","🍐 Pear"],correct:[1]},
+{q:"🔴 🔵 🔴 🔵 🔴 … What comes next?",opts:["🟢 Green","🔴 Red","🔵 Blue","🟡 Yellow"],correct:[2]},
+{q:"🐝 🌼 🐝 🌼 🐝 … What comes next?",opts:["🐝 Bee","🌼 Flower","🌈 Rainbow","⭐ Star"],correct:[1]}
+],
+kindness:[
+{q:"You meet a new friend. What could you say?",opts:["👋 Hi! Want to play?","🤫 Never talk to anyone","📣 You must do it my way","😠 Go away"],correct:[0]},
+{q:"Someone feels sad. What could you do?",opts:["💛 Ask if they are okay","😂 Laugh at them","🙈 Ignore their feelings","📣 Shout at them"],correct:[0]},
+{q:"You need help with something tricky. What can you do?",opts:["🧑‍🏫 Ask a trusted grown-up","🚫 Give up forever","😠 Push a friend","🙊 Keep a safety worry secret"],correct:[0]},
+{q:"A friend wants a turn with the crayons. What is kind?",opts:["🤝 Take turns","🖍️ Grab them all","😠 Shout no","🙈 Hide them"],correct:[0]},
+{q:"Someone says they do not want to play right now. What should you do?",opts:["💚 Respect their choice","📣 Keep demanding","✋ Pull their arm","😠 Call them names"],correct:[0]}
+]};
+const scores={backpack:null,pattern:null,kindness:null};
+const attempts={backpack:0,pattern:0,kindness:0};
+const progress={backpack:0,pattern:0,kindness:0};
+const answers={backpack:[],pattern:[],kindness:[]};
 function readJSON(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch{return fallback}}
 function learnerIdentity(){
-  const academy=window.KhaemenesFamilyRegistry?.getLearner?.()||null;
-  if(academy?.learnerId)return String(academy.learnerId); // Preserve historical Pre-K keepsakes when this learner advances into Kindergarten or Elementary.
-  try{
-    const active=window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.();
-    if(active)return String(active);
-  }catch{}
-  const profile=readJSON(PROFILE_KEY,null);
-  if(profile?.learnerId)return String(profile.learnerId);
-  const continuity=readJSON(CONTINUITY_KEY,null);
-  if(continuity?.learner?.learnerId)return String(continuity.learner.learnerId);
-  return "guest";
+ const academy=window.KhaemenesFamilyRegistry?.getLearner?.()||null;
+ if(academy?.learnerId)return String(academy.learnerId);
+ try{const active=window.KhaemenesPreschoolLearnerStorage?.activeLearnerId?.();if(active)return String(active)}catch{}
+ const profile=readJSON(PROFILE_KEY,null);if(profile?.learnerId)return String(profile.learnerId);
+ const continuity=readJSON(CONTINUITY_KEY,null);if(continuity?.learner?.learnerId)return String(continuity.learner.learnerId);
+ return "guest";
 }
-function stateRoot(){const x=readJSON(GRADUATION_KEY,{version:1,records:{}});if(!x||typeof x!=="object"||!x.records||typeof x.records!=="object")return {version:1,records:{}};return x}
+function stateRoot(){const x=readJSON(GRADUATION_KEY,{version:2,records:{}});if(!x||typeof x!=="object"||!x.records||typeof x.records!=="object")return {version:2,records:{}};return x}
 function load(){
  const root=stateRoot(),id=learnerIdentity(),record=root.records[id],profile=readJSON(PROFILE_KEY,null);
- journeyId=id;completed.clear();chosenItems.clear();certificateUnlocked=false;
+ journeyId=id;completed.clear();certificateUnlocked=false;
  $("certificateOutput").classList.remove("show");$("printCertificate").disabled=true;
- document.querySelectorAll("#backpackChoices .choice, #patternChoices .choice, #kindnessChoices .choice").forEach(b=>{b.setAttribute("aria-pressed","false");b.classList.remove("correct")});
- $("backpackStatus").textContent="";$("patternStatus").textContent="";$("kindnessStatus").textContent="";
  const academy=window.KhaemenesFamilyRegistry?.getLearner?.(id)||null;
  $("certificateName").value=typeof record?.nickname==="string"&&record.nickname?record.nickname:(academy?.learnerId===id&&typeof academy.nickname==="string"?academy.nickname:(id!=="guest"&&profile?.learnerId===id&&typeof profile.nickname==="string"?profile.nickname:""));
- if(record&&typeof record==="object"){
-  for(const gameId of ["backpack","pattern","kindness"])if(record.completed?.[gameId]===true)completed.add(gameId);
-  certificateUnlocked=completed.size===3&&record.certificateUnlocked===true;
+ for(const game of GAME_IDS){
+   scores[game]=Number.isInteger(record?.scores?.[game])?record.scores[game]:null;
+   attempts[game]=Number.isInteger(record?.attempts?.[game])?record.attempts[game]:0;
+   progress[game]=0;answers[game]=[];
+   // Earlier one-question stars are preserved as historical participation, not counted as new 80% mastery.
+   if(scores[game]!==null&&scores[game]>=4)completed.add(game);
+   renderQuestion(game);
  }
+ certificateUnlocked=completed.size===3&&record?.certificateUnlocked===true;
 }
-function persist(){const root=stateRoot();const id=learnerIdentity();root.records[id]={completed:{backpack:completed.has("backpack"),pattern:completed.has("pattern"),kindness:completed.has("kindness")},certificateUnlocked:completed.size===3&&certificateUnlocked,nickname:$("certificateName").value.trim().slice(0,40),updatedAt:new Date().toISOString()};try{localStorage.setItem(GRADUATION_KEY,JSON.stringify(root))}catch{}}
+function persist(){
+ const root=stateRoot(),id=learnerIdentity();
+ const old=root.records[id]||{};
+ root.version=2;
+ root.records[id]={...old,completed:Object.fromEntries(GAME_IDS.map(g=>[g,completed.has(g)])),scores:{...scores},attempts:{...attempts},certificateUnlocked:completed.size===3&&certificateUnlocked,nickname:$("certificateName").value.trim().slice(0,40),updatedAt:new Date().toISOString()};
+ try{localStorage.setItem(GRADUATION_KEY,JSON.stringify(root))}catch(e){$("certificateStatus").textContent="Progress could not be saved on this device. Check available browser storage."}
+}
 function updateProgress(){
- const n=completed.size;$("progressFill").style.width=(n/3*100)+"%";$("progressCount").textContent=n+" of 3 stars ⭐";$("progressLabel").textContent=n===0?"Your celebration is ready!":n===3?"You grew all the way to three stars!":"Lovely progress—keep exploring!";
- $("celebrateBanner").classList.toggle("show",n===3);$("makeCertificate").disabled=n!==3;$("makeCertificate").textContent=n===3?"Unlock my certificate 🎓":"Unlock my certificate 🔒";$("certificateStatus").textContent=n===3?"All three games complete! Enter a first name or nickname and unlock your keepsake.":(3-n)+" more celebration game"+(3-n===1?"":"s")+" to go before the certificate unlocks.";
+ const n=completed.size;
+ $("progressFill").style.width=(n/3*100)+"%";
+ $("progressCount").textContent=n+" of 3 stars ⭐";
+ $("progressLabel").textContent=n===0?"Answer five questions in each game to earn your stars!":n===3?"Three games passed at 80% or higher!":"Keep going! Four correct answers earn each star.";
+ $("celebrateBanner").classList.toggle("show",n===3);
+ $("makeCertificate").disabled=n!==3;
+ $("makeCertificate").textContent=n===3?"Unlock my certificate 🎓":"Unlock my certificate 🔒";
+ $("certificateStatus").textContent=n===3?"All three games passed! Add a name to unlock your keepsake.":(3-n)+" game"+(3-n===1?"":"s")+" still need at least 4 of 5 correct answers.";
  document.querySelectorAll(".game-card").forEach(card=>card.classList.toggle("done",completed.has(card.id.replace("game-",""))));
  if(certificateUnlocked)showCertificate();
 }
-function markComplete(id,message){if(learnerIdentity()!==journeyId){load();updateProgress()}completed.add(id);$(id+"Status").textContent=message;persist();updateProgress();if(completed.size===3)fireworks();}
-function toggleChoice(button,container,max){
- const group=$(container);const id=button.dataset.item;
- if(chosenItems.has(id)){chosenItems.delete(id);button.setAttribute("aria-pressed","false")}
- else if(chosenItems.size<max){chosenItems.add(id);button.setAttribute("aria-pressed","true")}
- else{$("backpackStatus").textContent="Choose three helpers. Tap one item to change your selection.";return}
- button.classList.toggle("correct",chosenItems.has(id));
+function renderQuestion(game){
+ const holder=$(game+"Choices"),status=$(game+"Status"),check=$("checkBackpack");
+ if(completed.has(game)){
+  holder.innerHTML='<p class="quiz-prompt">⭐ You earned this star with '+scores[game]+' out of 5 correct!</p><button type="button" class="secondary quiz-retry">Practice again</button>';
+  holder.querySelector(".quiz-retry").addEventListener("click",()=>restart(game));
+  status.textContent="Passed · "+Math.round(scores[game]/5*100)+"% · Your star is saved.";
+  if(game==="backpack")check.hidden=true;
+  return;
+ }
+ if(game==="backpack")check.hidden=true;
+ const idx=progress[game];
+ if(idx>=5){
+  const score=answers[game].filter(Boolean).length;
+  scores[game]=score;attempts[game]++;
+  if(score>=4){completed.add(game);status.textContent="🌟 Wonderful! "+score+"/5 correct ("+score*20+"%). Your star is saved."}
+  else status.textContent="You got "+score+"/5. You need 4/5 to earn this star. You can try again!";
+  persist();updateProgress();
+  holder.innerHTML='<p class="quiz-prompt">'+(score>=4?"⭐ Star earned!":"🌱 Every try helps us grow!")+'</p><button type="button" class="secondary quiz-retry">'+(score>=4?"Practice again":"Try these five again")+'</button>';
+  holder.querySelector(".quiz-retry").addEventListener("click",()=>restart(game));
+  if(completed.size===3&&score>=4)fireworks();
+  return;
+ }
+ const item=BANK[game][idx];
+ holder.innerHTML="";
+ const heading=document.createElement("p");heading.className="quiz-prompt";heading.textContent="Question "+(idx+1)+" of 5 · "+item.q;holder.appendChild(heading);
+ const group=document.createElement("div");group.className="quiz-options";holder.appendChild(group);
+ const selected=new Set();
+ item.opts.forEach((label,i)=>{
+  const btn=document.createElement("button");btn.type="button";btn.className="choice";btn.textContent=label;btn.setAttribute("aria-pressed","false");
+  btn.addEventListener("click",()=>{
+   if(item.multi){
+    if(selected.has(i))selected.delete(i);else if(selected.size<3)selected.add(i);
+    group.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-pressed",String(selected.has(j))));
+   }else{selected.clear();selected.add(i);group.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-pressed",String(i===j)))}
+  });
+  group.appendChild(btn);
+ });
+ const next=document.createElement("button");next.type="button";next.className="primary quiz-next";next.textContent=idx===4?"Finish my five questions ✨":"Check answer & next →";
+ next.addEventListener("click",()=>{
+  if(selected.size!==(item.multi?3:1)){status.textContent=item.multi?"Choose three answers first.":"Choose one answer first.";return}
+  const correct=selected.size===item.correct.length&&item.correct.every(i=>selected.has(i));
+  answers[game].push(correct);progress[game]++;
+  status.textContent=(correct?"✓ Nice work! ":"Let's learn from that! ")+(item.why||"Keep growing and trying.");
+  renderQuestion(game);
+ });
+ holder.appendChild(next);
 }
-document.querySelectorAll("#backpackChoices .choice").forEach(b=>b.addEventListener("click",()=>toggleChoice(b,"backpackChoices",3)));
-$("checkBackpack").addEventListener("click",()=>{
- if(chosenItems.size!==3){$("backpackStatus").textContent="Choose three things for your backpack, then check again.";return}
- const useful=["book","water","crayons"].every(x=>chosenItems.has(x));
- if(useful)markComplete("backpack","🎒 Great thinking! A storybook, water, and crayons can help a day of learning. Your star is saved.");
- else{$("backpackStatus").textContent="Good exploring! Try a storybook, water bottle, and crayons as your three learning-day helpers. You can change choices and try again.";chosenItems.clear();document.querySelectorAll("#backpackChoices .choice").forEach(b=>{b.setAttribute("aria-pressed","false");b.classList.remove("correct")})}
-});
-$("patternChoices").querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>{
- if(completed.has("pattern"))return;
- if(b.dataset.answer==="rainbow"){b.classList.add("correct");b.setAttribute("aria-pressed","true");markComplete("pattern","🌈 Yes! Sunflower, rainbow, sunflower, rainbow… the rainbow comes next. Pattern star collected!")}
- else{$("patternStatus").textContent="Look again: sunflower, rainbow, sunflower, rainbow. What repeats next? Try again.";b.setAttribute("aria-pressed","false")}
-}));
-$("kindnessChoices").querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>{
- if(completed.has("kindness"))return;
- if(["hello","help"].includes(b.dataset.answer)){b.classList.add("correct");b.setAttribute("aria-pressed","true");markComplete("kindness",b.dataset.answer==="hello"?"💛 A warm hello invites friendship. You can always choose to join, wait, or ask for help. Kindness star collected!":"🧑‍🏫 Asking a trusted grown-up for help is a smart and caring choice. Kindness star collected!")}
- else{$("kindnessStatus").textContent="A friendly hello or asking a trusted grown-up for help are both good ways to begin. Try another choice.";b.setAttribute("aria-pressed","false")}
-}));
+function restart(game){progress[game]=0;answers[game]=[];renderQuestion(game)}
 function showCertificate(){
  if(completed.size!==3||!certificateUnlocked)return;
  const name=$("certificateName").value.trim().slice(0,40)||"Preschool Explorer";
