@@ -482,15 +482,6 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
   </section>
 
   <section class="eiren-companion" aria-labelledby="eirenTitle"><div class="eiren-companion-row"><div class="eiren-mark" aria-hidden="true">🌸</div><div><h3 id="eirenTitle">Eiren · Story Friend</h3><p>Pip helps grow the story. Eiren reads the finished story with you. She never changes your choices or the Storybird story engine.</p></div></div><div class="eiren-actions"><button class="btn secondary" type="button" id="eirenHello">🌸 Meet Eiren</button><button class="btn secondary" type="button" id="eirenRead">📖 Eiren, Read My Story</button><button class="btn secondary" type="button" id="eirenStop">⏹ Stop Eiren</button></div><div class="eiren-status" id="eirenStatus" aria-live="polite">Eiren is getting the storybook ready…</div></section>
-  <section class="voice-studio" aria-labelledby="voiceTitle">
-    <h3 id="voiceTitle">Eiren’s Reading Voice</h3>
-    <p class="voice-status" id="voiceStatus" aria-live="polite">A gentle US English reading voice is ready when available on your device.</p>
-    <div class="voice-options">
-      <button type="button" id="previewVoice" class="btn secondary">🌸 Hear Eiren</button>
-      <button type="button" id="stopVoiceFriend" class="btn secondary">⏹ Stop Voice</button>
-    </div>
-  </section>
-
   <section class="child-controls" aria-label="Story controls">
     <div class="control-group">
       <div class="field"><label for="modeSelect">Story Size</label><select id="modeSelect"><option value="little">Little Story</option><option value="growing">Growing Story</option></select></div>
@@ -1429,7 +1420,7 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
   function updateSlots(){els.selChar.textContent=selection.character||"— character —";els.selSet.textContent=selection.setting||"— place —";els.selVerb.textContent=selection.verb||"— action —";els.selFeeling.textContent=selection.feeling||"— feeling —";els.selEnding.textContent=selection.ending||"— ending —"}
   function updateModeUI(){const growing=isGrowing();els.feelingCluster.classList.toggle("hidden",!growing);els.endingCluster.classList.toggle("hidden",!growing);els.selFeeling.classList.toggle("hidden",!growing);els.selEnding.classList.toggle("hidden",!growing);els.selectionRow.classList.toggle("growing",growing);els.guideNote.textContent=growing?"Pick five cards to grow a beginning, middle, and ending.":"Pick one character, one place, and one action to make a little story.";if(!growing){selection.feeling=null;selection.ending=null}refreshSelectionVisuals();updateSlots()}
   function newChoices(){state.weekRounds[String(currentWeek)]=clampInt((state.weekRounds[String(currentWeek)]||0)+1,0,999999);renderClusters({keepStory:true});setStatus("New garden choices are ready.")}
-  function randomizeSelection(){const w=getWeek(currentWeek);selection={character:choose(w.characters),setting:choose(w.settings),verb:choose(w.verbs),feeling:isGrowing()?choose(FEELINGS):null,ending:isGrowing()?choose(ENDINGS):null};refreshSelectionVisuals();updateSlots();saveState();setStatus("Surprise choices are ready. Press Make My Story!")}
+  function randomizeSelection(){const w=getWeek(currentWeek);selection={character:choose(w.characters),setting:choose(w.settings),verb:choose(w.verbs),feeling:isGrowing()?choose(FEELINGS):null,ending:isGrowing()?choose(ENDINGS):null};refreshSelectionVisuals();updateSlots();weaveStory();setStatus("Surprise! Your story is ready to read, save, or print.")}
 
   function pronoun(){return PRONOUNS.find(p=>p.subject===state.settings.pronoun)||PRONOUNS[2]}
   function polishText(text){return String(text).replace(/wandered (the [A-Z])/g,"wandered through $1").replace(/\s+/g," ").trim()}
@@ -1452,7 +1443,7 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
   function toast(msg){els.toast.textContent=msg;els.toast.classList.remove("show");void els.toast.offsetWidth;els.toast.classList.add("show")}
   function saveCurrentStory(){if(!currentStory){setStatus("Make a complete story before saving.",true);return}if(state.nest.some(n=>n.text===currentStory.text)){setStatus("That story is already in your Story Nest.",true);return}state.nest.unshift(sanitizeStory(currentStory));if(state.nest.length>MAX_NEST)state.nest.length=MAX_NEST;saveState();renderNest();toast("Saved to My Story Nest ✨");setStatus("Saved privately on this device.")}
   function renderStats(){els.storyCount.textContent=String(state.nest.length);els.favoriteCount.textContent=String(state.nest.filter(n=>n.favorite).length);els.pathCount.textContent=String(new Set(state.visitedWeeks).size)}
-  function renderNest(){updatePassport();els.nestList.innerHTML="";const list=state.nest.filter(n=>nestFilter==="favorites"?n.favorite:true);els.showAllBtn.setAttribute("aria-pressed",nestFilter==="all"?"true":"false");els.favoritesBtn.setAttribute("aria-pressed",nestFilter==="favorites"?"true":"false");if(!list.length){els.nestList.innerHTML=`<div class="empty">${nestFilter==="favorites"?"No favorite stories yet. Tap the heart on a saved story.":"Your Story Nest is empty. Make and save a story to begin."}</div>`;renderStats();return}list.forEach(n=>{const item=document.createElement("article");item.className="nest-item";item.setAttribute("role","listitem");const title=document.createElement("div");title.className="nest-title";title.textContent=n.title;const text=document.createElement("div");text.className="nest-text";text.textContent=n.text.length>220?n.text.slice(0,220)+"…":n.text;const meta=document.createElement("div");meta.className="nest-meta";meta.textContent=`Path ${n.meta.week} • ${titleCase(n.meta.tone)} • ${new Date(n.ts).toLocaleDateString()}`;const row=document.createElement("div");row.className="nest-actions";row.append(smallButton("Load",()=>loadNestStory(n)),smallButton("Read",()=>speakText(n.text)),smallButton(n.favorite?"💛 Favorite":"♡ Favorite",()=>{n.favorite=!n.favorite;saveState();renderNest()}),smallButton("Export",()=>exportJSON(n,`${safeFilename(n.title)}.json`),"adult-only"),smallButton("Delete",async()=>{if(await askConfirm("Delete this saved story?","Delete")){state.nest=state.nest.filter(x=>x.id!==n.id);saveState();renderNest();setStatus("Story deleted.")}},"adult-only danger"));item.append(title,text,meta,row);els.nestList.appendChild(item)});renderStats()}
+  function renderNest(){updatePassport();updateGroveGrowth();els.nestList.innerHTML="";const list=state.nest.filter(n=>nestFilter==="favorites"?n.favorite:true);els.showAllBtn.setAttribute("aria-pressed",nestFilter==="all"?"true":"false");els.favoritesBtn.setAttribute("aria-pressed",nestFilter==="favorites"?"true":"false");if(!list.length){els.nestList.innerHTML=`<div class="empty">${nestFilter==="favorites"?"No favorite stories yet. Tap the heart on a saved story.":"Your Story Nest is empty. Make and save a story to begin."}</div>`;renderStats();return}list.forEach(n=>{const item=document.createElement("article");item.className="nest-item";item.setAttribute("role","listitem");const title=document.createElement("div");title.className="nest-title";title.textContent=n.title;const text=document.createElement("div");text.className="nest-text";text.textContent=n.text.length>220?n.text.slice(0,220)+"…":n.text;const meta=document.createElement("div");meta.className="nest-meta";meta.textContent=`Path ${n.meta.week} • ${titleCase(n.meta.tone)} • ${new Date(n.ts).toLocaleDateString()}`;const row=document.createElement("div");row.className="nest-actions";row.append(smallButton("Load",()=>loadNestStory(n)),smallButton("Read",()=>speakText(n.text)),smallButton(n.favorite?"💛 Favorite":"♡ Favorite",()=>{n.favorite=!n.favorite;saveState();renderNest()}),smallButton("Export",()=>exportJSON(n,`${safeFilename(n.title)}.json`),"adult-only"),smallButton("Delete",async()=>{if(await askConfirm("Delete this saved story?","Delete")){state.nest=state.nest.filter(x=>x.id!==n.id);saveState();renderNest();setStatus("Story deleted.")}},"adult-only danger"));item.append(title,text,meta,row);els.nestList.appendChild(item)});renderStats()}
   function smallButton(label,fn,extra=""){const b=document.createElement("button");b.type="button";b.className=`btn secondary ${extra}`;b.textContent=label;b.addEventListener("click",fn);return b}
   function loadNestStory(n){currentWeek=n.meta.week;state.lastWeek=currentWeek;if(!state.visitedWeeks.includes(currentWeek))state.visitedWeeks.push(currentWeek);els.weekSelect.value=String(currentWeek);state.settings.mode=n.meta.mode;state.settings.tone=n.meta.tone;applySettings();renderClusters({keepStory:true});selection={...n.meta.selection};currentStory={...n};refreshSelectionVisuals();updateSlots();showStory(currentStory);setStatus("Saved story loaded.");window.scrollTo({top:0,behavior:reducedMotion()?"auto":"smooth"})}
 
@@ -1535,6 +1526,20 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
     unique.forEach(word=>{const chip=document.createElement("span");chip.className="vocab-chip";chip.textContent=word;els.vocabChips.appendChild(chip)});
   }
 
+  function updateGroveGrowth(){
+    const n=state.nest.length;
+    const milestones=[[5,"🪴","First Sprout"],[12,"🕊️","Storybird Visitor"],[30,"✨","Firefly Grove"],[60,"🌈","Rainbow Canopy"]];
+    let area=document.getElementById("groveGrowth");
+    if(!area){
+      area=document.createElement("div");area.id="groveGrowth";area.setAttribute("aria-live","polite");
+      area.style.cssText="margin:12px 0;padding:12px 16px;border:2px solid #6b44bc;border-radius:12px;background:#fff9df;color:#352454;text-align:center;font-size:16px";
+      const board=document.querySelector(".grove");
+      if(board)board.appendChild(area);else return;
+    }
+    const earned=milestones.filter(item=>n>=item[0]);
+    const next=milestones.find(item=>n<item[0]);
+    area.textContent="🌿 My Growing Grove · "+n+" saved stories · "+(earned.map(item=>item[1]+" "+item[2]).join(" · ")||"Plant your first story!")+(next?" · Next surprise at "+next[0]+" stories":" · Your Grove is blooming!");
+  }
   function updatePassport(){
     const tones=new Set(state.nest.map(n=>n.meta?.tone).filter(Boolean));
     const earned={
@@ -1561,7 +1566,10 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
     if(els.stopVoiceFriend)els.stopVoiceFriend.addEventListener("click",stopSpeech);
     els.modeSelect.addEventListener("change",()=>{state.settings.mode=els.modeSelect.value;updateModeUI();saveState();setStatus("Story size changed.")});
     els.toneSelect.addEventListener("change",()=>{state.settings.tone=els.toneSelect.value;renderWordGarden();saveState();setStatus("Story feeling changed.")});
-    els.randomBtn.addEventListener("click",randomizeSelection);els.magicBtn.addEventListener("click",magicStory);els.weaveBtn.addEventListener("click",weaveStory);els.newChoicesBtn.addEventListener("click",newChoices);
+    [["randomBtn",randomizeSelection],["magicBtn",magicStory],["weaveBtn",weaveStory],["newChoicesBtn",newChoices]].forEach(([id,action])=>{
+      const button=els[id];if(!button)return;
+      button.addEventListener("click",()=>{try{action()}catch(error){console.error("Storybird action:",id,error);setStatus("The story garden could not finish that action. Please try again.",true)}});
+    });
     els.readBtn.addEventListener("click",()=>currentStory?speakText(`${currentStory.title}. ${currentStory.text}`):setStatus("Make a story first.",true));els.pauseBtn.addEventListener("click",pauseSpeech);els.resumeBtn.addEventListener("click",resumeSpeech);els.stopBtn.addEventListener("click",stopSpeech);els.copyBtn.addEventListener("click",copyCurrent);els.printStoryBtn.addEventListener("click",()=>currentStory?printMode("story"):setStatus("Make a story before printing.",true));els.saveBtn.addEventListener("click",saveCurrentStory);els.clearBtn.addEventListener("click",clearAll);
     els.showAllBtn.addEventListener("click",()=>{nestFilter="all";renderNest()});els.favoritesBtn.addEventListener("click",()=>{nestFilter="favorites";renderNest()});
     els.weekSelect.addEventListener("change",()=>{currentWeek=clampInt(els.weekSelect.value,1,WEEK_COUNT);state.lastWeek=currentWeek;if(!state.visitedWeeks.includes(currentWeek))state.visitedWeeks.push(currentWeek);renderClusters();setStatus("A new Garden Path is ready.")});
@@ -1574,7 +1582,7 @@ body:not(.high-contrast) .app .main-layout>.card.grove .story-card{border:3px so
     window.addEventListener("beforeunload",saveState);
   }
 
-  function init(){renderWeeks();applySettings();bindEvents();connectEirenBoundary();
+  function init(){bindEvents();renderWeeks();applySettings();connectEirenBoundary();
     if("speechSynthesis" in window){refreshVoices();speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);speechSynthesis.onvoiceschanged=refreshVoices;setTimeout(refreshVoices,250);setTimeout(refreshVoices,900)}else{if(els.previewVoice)els.previewVoice.disabled=true;if(els.stopVoiceFriend)els.stopVoiceFriend.disabled=true;if(els.readBtn)els.readBtn.disabled=true;if(els.voiceStatus)els.voiceStatus.textContent="Read-aloud voices are not available in this browser."}
     updateVoiceButtons();if(!state.visitedWeeks.includes(currentWeek))state.visitedWeeks.push(currentWeek);renderClusters({keepStory:true,keepSelection:true});if(currentStory){showStory(currentStory)}else{clearStory(false)}renderNest();updateThemeBanner();updatePassport();saveState()}
   init();
