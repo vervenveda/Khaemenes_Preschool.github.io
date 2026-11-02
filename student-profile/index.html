@@ -39,6 +39,19 @@ fieldset{border:1px solid var(--line);padding:13px;border-radius:7px;margin:10px
 footer{padding:24px 0;text-align:center;font-size:13px;color:var(--muted)}
 @media(max-width:760px){.profile-hero{grid-template-columns:1fr;text-align:center}.photo{margin:auto}.span5,.span6,.span7{grid-column:span 12}.hero-actions{justify-content:center}}
 @media print{.top,.actions,.appearance-controls,.no-print{display:none!important}body{background:white;color:black}.card{box-shadow:none;background:#fff}}
+
+/* Pre-K child-facing navigation: additive only; existing profile engines and IDs are preserved. */
+.prek-welcome{margin:14px 0;padding:20px;background:linear-gradient(110deg,#FFADAD,#FFD6A5 25%,#FDFFB6 50%,#CAFFBF 75%,#9BF6FF);border:2px solid #34566b;border-radius:7px;color:#243d50;text-align:center}
+.prek-welcome h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px}.prek-welcome p{font-size:18px;margin:0}
+.prek-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 22px}
+.prek-menu a{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;min-height:110px;padding:16px 12px;border:2px solid #476276;border-radius:7px;color:#24384a;text-decoration:none;text-align:center;font-size:18px;font-weight:600;line-height:1.35}
+.prek-menu a span{font-size:32px;line-height:1.1}.prek-menu a:nth-child(6n+1){background:#FFD6A5}.prek-menu a:nth-child(6n+2){background:#9BF6FF}.prek-menu a:nth-child(6n+3){background:#FFADAD}.prek-menu a:nth-child(6n+4){background:#FDFFB6}.prek-menu a:nth-child(6n+5){background:#CAFFBF}.prek-menu a:nth-child(6n+6){background:#FFD6A5}
+.prek-menu a:hover,.prek-menu a:focus-visible{outline:3px solid #3b5c7a;outline-offset:2px;transform:translateY(-2px)}
+main .card{border-radius:7px}main :is(button,a.button,.activity){font-size:max(18px,1em);border-radius:7px}main :is(label,.muted,.status,.pill,.eyebrow){font-size:18px}main h2{font-size:clamp(24px,3vw,30px)}main h3{font-size:24px}
+main .photo{border-radius:7px}main .pill{border-radius:7px}main .choice button{min-height:52px}
+main .grid>.card{min-width:0}main .hero-actions>a{flex:1 1 190px}main .activity-list .activity{min-height:65px}
+@media(max-width:700px){.prek-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.prek-menu a{min-height:100px}.grid>.card{grid-column:span 12}}
+@media print{.prek-menu,.prek-welcome{display:none!important}}
 </style>
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-profile-v2.css">
 <style id="academy-profile-common-readable-hero-20261101">
@@ -56,6 +69,15 @@ body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font
 <p class="eyebrow">Khaemenes Academy · Pre-K Learning</p>
 <h1>My Student Profile · Pre-K</h1>
 <p class="muted">Your child’s picture and next adventure come first. Below are the same learning-profile tools available across the Academy, presented in a family-assisted Pre-K format.</p>
+<section class="prek-welcome" aria-label="Welcome to your learning home"><h2>🌈 My Happy Learning Home</h2><p>Pick an adventure! Your games, picture, and learning garden are all here.</p></section>
+<nav class="prek-menu" aria-label="My Pre-K learning shortcuts">
+<a href="#nextTitle"><span aria-hidden="true">🌞</span>Today's Adventure</a>
+<a href="#pinsTitle"><span aria-hidden="true">🎮</span>My Favorite Games</a>
+<a href="#pictureTitle"><span aria-hidden="true">🎨</span>My Picture</a>
+<a href="#backgroundTitle"><span aria-hidden="true">🌈</span>My Colors</a>
+<a href="#kindergartenHandoff"><span aria-hidden="true">🌻</span>My Graduation Garden</a>
+<a href="#learningStudio"><span aria-hidden="true">🏡</span>Grown-Up Corner</a>
+</nav>
 <div id="accountNote" class="notice" role="status">Looking for an existing Pre-K learner on this browser…</div>
 <div id="learnerSwitch" class="card" hidden><label for="learnerSelect">Choose an existing Pre-K learner in this family</label><select id="learnerSelect"></select><p class="muted">Each learner has separate pictures, colors, goals, pinned adventures, and evidence.</p></div>
 <section class="card profile-hero" aria-labelledby="childTitle">
