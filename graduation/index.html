@@ -82,6 +82,38 @@ main :is(h2,h3){font-size:clamp(24px,3vw,38px);line-height:1.2}
 .celebrate .big{color:#243b4d}
 .celebrate .primary{background:#285c73;color:white}
 @media(max-width:430px){.quiz-options{grid-template-columns:1fr}}
+
+/* Graduation certificate overlay; isolated from shared ecosystem chrome. */
+.certificate-modal[hidden]{display:none!important}
+.certificate-modal{position:fixed;inset:0;z-index:10000;background:rgba(21,43,58,.8);overflow-y:auto;padding:24px 14px;display:flex;align-items:flex-start;justify-content:center}
+.certificate-dialog{position:relative;width:min(1040px,100%);background:linear-gradient(120deg,#ffadad,#ffd6a5 25%,#fdffb6 50%,#caffbf 75%,#9bf6ff);border:3px solid #355b70;border-radius:7px;box-shadow:0 20px 70px #102b3c77;padding:24px}
+.certificate-dialog .shell{width:100%;max-width:100%}
+.certificate-dialog .section{padding:24px 0}
+.certificate-close{position:sticky;top:0;z-index:2;display:block;margin:0 0 0 auto;background:#254b61;color:#fff;border:2px solid white;border-radius:7px;padding:12px 20px;font-size:18px;cursor:pointer}
+body.certificate-open{overflow:hidden}
+.certificate-dialog .certificate-output{background:#fffef8;color:#243b4d}
+.certificate-dialog .certificate-output h2{color:#243b4d}
+.certificate-dialog .certificate-output .fine{color:#34485a;font-size:18px}
+@media print{
+ @page{size:letter portrait;margin:0}
+ html,body{background:white!important;margin:0!important;padding:0!important;overflow:visible!important}
+ body *{visibility:hidden!important}
+ #certificateModal,#certificateModal .certificate-dialog,#certificateOutput,#certificateOutput *{visibility:visible!important}
+ #certificateModal{display:block!important;position:static!important;inset:auto!important;overflow:visible!important;background:white!important;padding:0!important;margin:0!important;border:0!important}
+ #certificateModal .certificate-dialog{position:static!important;width:100%!important;max-width:none!important;min-height:0!important;padding:0!important;margin:0!important;background:white!important;border:0!important;box-shadow:none!important}
+ #certificateModal .certificate-dialog>*:not(#certificate){display:none!important}
+ #certificate{display:block!important;position:static!important;width:100%!important;padding:0!important;margin:0!important}
+ #certificate .section-head,#certificate .certificate-form,#certificate .no-print,#certificate .game-status{display:none!important}
+ #certificate .certificate-panel,#certificate .certificate-layout{display:block!important;border:0!important;background:white!important;box-shadow:none!important;padding:0!important;margin:0!important}
+ #certificate .certificate-layout> :not(#certificateOutput){display:none!important}
+ #certificateOutput{display:block!important;box-sizing:border-box!important;position:relative!important;width:7.6in!important;max-width:7.6in!important;height:10.15in!important;min-height:10.15in!important;margin:.34in auto!important;padding:.7in .55in!important;border:8px double #bd9140!important;border-radius:0!important;background:#fffef8!important;color:#243b4d!important;box-shadow:none!important;break-inside:avoid!important;page-break-inside:avoid!important;text-align:center!important}
+ #certificateOutput *{color:#243b4d!important;text-shadow:none!important}
+ #certificateOutput .seal{font-size:42px!important}
+ #certificateOutput h2{font-size:38px!important;line-height:1.15!important}
+ #certificateOutput p{font-size:17px!important;line-height:1.5!important}
+ #certificateOutput .recipient{font-size:32px!important;margin:24px 0!important}
+ #certificateOutput .fine{font-size:14px!important}
+}
 </style>
 </head>
 <body>
@@ -151,12 +183,12 @@ main :is(h2,h3){font-size:clamp(24px,3vw,38px);line-height:1.2}
     <div class="big" aria-hidden="true">🎉 🌟 🎆 🌟 🎉</div>
     <h2>All three games passed!</h2>
     <p>You answered at least four of five questions correctly in every game. That deserves a celebration!</p>
-    <a class="primary" href="#certificate">Make My Certificate 🎓</a>
+    <button class="primary" id="openCertificate" type="button">Make My Certificate 🎓</button>
   </div>
 </section>
 
-<section class="section shell" id="certificate">
-  <div class="section-head"><p class="eyebrow">A keepsake for your learning journey</p><h2>Your Preschool Celebration Certificate</h2><p>Earn 4 out of 5 correct answers in each game to unlock the personalized printable certificate. A grown-up can help with the name and printing.</p></div>
+<div id="certificateModal" class="certificate-modal" role="dialog" aria-modal="true" aria-labelledby="certificateTitle" hidden><div class="certificate-dialog"><button type="button" id="closeCertificate" class="certificate-close no-print" aria-label="Close certificate">✕ Close</button><section class="section shell" id="certificate">
+  <div class="section-head"><p class="eyebrow">A keepsake for your learning journey</p><h2 id="certificateTitle">Your Preschool Celebration Certificate</h2><p>Earn 4 out of 5 correct answers in each game to unlock the personalized printable certificate. A grown-up can help with the name and printing.</p></div>
   <div class="certificate-panel">
     <div class="certificate-layout">
       <div class="medal" aria-hidden="true">🏅🌈🎓</div>
@@ -187,7 +219,7 @@ main :is(h2,h3){font-size:clamp(24px,3vw,38px);line-height:1.2}
       </div>
     </div>
   </div>
-</section>
+</section></div></div>
 
 <section class="section shell" id="next-garden">
   <div class="transition-card">
@@ -223,6 +255,8 @@ const GRADUATION_KEY="creche-preschool-graduation-v1";
 const completed=new Set();
 let certificateUnlocked=false,journeyId="";
 const GAME_IDS=["backpack","pattern","kindness"];
+function shuffledIndices(n){const order=Array.from({length:n},(_,i)=>i);for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}return order}
+const optionOrder={backpack:[],pattern:[],kindness:[]};
 const BANK={
 backpack:[
 {q:"Which three things can help you learn and stay comfortable at school?",opts:["📚 Storybook","💧 Water bottle","🖍️ Crayons","🚀 Toy spaceship"],correct:[0,1,2],multi:true,why:"A book, water, and crayons are useful learning-day helpers."},
@@ -268,7 +302,7 @@ function load(){
  for(const game of GAME_IDS){
    scores[game]=Number.isInteger(record?.scores?.[game])?record.scores[game]:null;
    attempts[game]=Number.isInteger(record?.attempts?.[game])?record.attempts[game]:0;
-   progress[game]=0;answers[game]=[];
+   progress[game]=0;answers[game]=[];optionOrder[game]=[];
    // Earlier one-question stars are preserved as historical participation, not counted as new 80% mastery.
    if(scores[game]!==null&&scores[game]>=4)completed.add(game);
    renderQuestion(game);
@@ -320,13 +354,14 @@ function renderQuestion(game){
  const heading=document.createElement("p");heading.className="quiz-prompt";heading.textContent="Question "+(idx+1)+" of 5 · "+item.q;holder.appendChild(heading);
  const group=document.createElement("div");group.className="quiz-options";holder.appendChild(group);
  const selected=new Set();
- item.opts.forEach((label,i)=>{
-  const btn=document.createElement("button");btn.type="button";btn.className="choice";btn.textContent=label;btn.setAttribute("aria-pressed","false");
+ if(!optionOrder[game][idx])optionOrder[game][idx]=shuffledIndices(item.opts.length);
+ optionOrder[game][idx].forEach(i=>{const label=item.opts[i];
+  const btn=document.createElement("button");btn.type="button";btn.className="choice";btn.textContent=label;btn.dataset.originalIndex=String(i);btn.setAttribute("aria-pressed","false");
   btn.addEventListener("click",()=>{
    if(item.multi){
     if(selected.has(i))selected.delete(i);else if(selected.size<3)selected.add(i);
-    group.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-pressed",String(selected.has(j))));
-   }else{selected.clear();selected.add(i);group.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-pressed",String(i===j)))}
+    group.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(selected.has(Number(b.dataset.originalIndex)))));
+   }else{selected.clear();selected.add(i);group.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(i===Number(b.dataset.originalIndex))))}
   });
   group.appendChild(btn);
  });
@@ -340,7 +375,33 @@ function renderQuestion(game){
  });
  holder.appendChild(next);
 }
-function restart(game){progress[game]=0;answers[game]=[];renderQuestion(game)}
+function restart(game){progress[game]=0;answers[game]=[];optionOrder[game]=[];renderQuestion(game)}
+const certificateModal=$("certificateModal");
+let returnFocus=null;
+function openCertificate(){
+ returnFocus=document.activeElement;
+ certificateModal.hidden=false;
+ document.body.classList.add("certificate-open");
+ $("closeCertificate").focus();
+}
+function closeCertificate(){
+ certificateModal.hidden=true;
+ document.body.classList.remove("certificate-open");
+ if(returnFocus&&typeof returnFocus.focus==="function")returnFocus.focus();
+}
+$("openCertificate").addEventListener("click",openCertificate);
+$("closeCertificate").addEventListener("click",closeCertificate);
+certificateModal.addEventListener("click",e=>{if(e.target===certificateModal)closeCertificate()});
+certificateModal.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){e.preventDefault();closeCertificate()}
+ if(e.key==="Tab"){
+  const focusable=[...certificateModal.querySelectorAll('button:not([disabled]),input:not([disabled]),a[href]')].filter(el=>el.getClientRects().length);
+  if(!focusable.length)return;
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+ }
+});
 function showCertificate(){
  if(completed.size!==3||!certificateUnlocked)return;
  const name=$("certificateName").value.trim().slice(0,40)||"Preschool Explorer";
@@ -350,7 +411,7 @@ function showCertificate(){
 $("makeCertificate").addEventListener("click",()=>{
  if(completed.size!==3)return;
  if(!$("certificateName").value.trim())$("certificateName").value="Preschool Explorer";
- certificateUnlocked=true;persist();showCertificate();fireworks();$("certificateOutput").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});
+ certificateUnlocked=true;persist();showCertificate();fireworks();$("certificateOutput").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"});
 });
 $("certificateName").addEventListener("input",()=>{if(certificateUnlocked){showCertificate();persist()}});
 $("printCertificate").addEventListener("click",()=>{if(!certificateUnlocked)return;showCertificate();window.print()});
