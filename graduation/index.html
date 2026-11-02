@@ -297,8 +297,7 @@ function updateProgress(){
 function renderQuestion(game){
  const holder=$(game+"Choices"),status=$(game+"Status"),check=$("checkBackpack");
  if(completed.has(game)){
-  holder.innerHTML='<p class="quiz-prompt">⭐ You earned this star with '+scores[game]+' out of 5 correct!</p><button type="button" class="secondary quiz-retry">Practice again</button>';
-  holder.querySelector(".quiz-retry").addEventListener("click",()=>restart(game));
+  holder.innerHTML='<p class="quiz-prompt">⭐ You earned this star with '+scores[game]+' out of 5 correct!</p>';
   status.textContent="Passed · "+Math.round(scores[game]/5*100)+"% · Your star is saved.";
   if(game==="backpack")check.hidden=true;
   return;
