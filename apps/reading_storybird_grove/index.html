@@ -509,7 +509,34 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
 @media screen and (max-width:420px){
 .app .child-controls>.control-group:last-child{grid-template-columns:1fr!important}
 }
-</style></head>
+</style>
+<style id="storybird-wide-board">
+@media screen {
+.app{width:min(96vw,1500px)!important;max-width:1500px!important}
+.app .main-layout{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+.app .main-layout>.grove{width:100%!important;min-width:0!important;padding:clamp(16px,2.5vw,32px)!important}
+.app .main-layout>.grove>.story-card{padding:clamp(18px,2.5vw,34px)!important}
+.app .main-layout>.grove .story-text{max-width:90ch!important;line-height:1.75!important}
+.app .main-layout>.grove .illustration{min-height:220px!important}
+.app .main-layout>.nest-banner{width:100%!important;min-width:0!important;border:3px solid #ffca27!important;background:linear-gradient(110deg,#f9edff,#e6fcf7)!important;padding:0!important;border-radius:7px!important}
+.app .nest-banner>summary{display:flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:12px 20px;background:linear-gradient(100deg,#6541b8,#126e96)!important;color:#fff!important;font-size:18px!important;font-weight:650;cursor:pointer;border-radius:7px!important;list-style:none}
+.app .nest-banner>summary::-webkit-details-marker{display:none}
+.app .nest-banner>summary:after{content:"▾";margin-left:auto;font-size:20px}
+.app .nest-banner[open]>summary:after{content:"▴"}
+.app .nest-banner>summary #nestBannerSummary{font-size:16px!important;font-weight:400}
+.app .nest-banner-content{padding:18px!important}
+.app .nest-banner-content .stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.app .nest-banner-content .filter-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.app .nest-banner-content .filter-row>.btn{width:100%;min-height:48px}
+.app .nest-banner-content .nest-list{max-height:480px;overflow:auto}
+}
+@media screen and (max-width:600px){
+.app{width:100%!important}
+.app .nest-banner>summary{flex-wrap:wrap;justify-content:flex-start}
+.app .nest-banner-content .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+</style>
+</head>
 <body>
 <header data-khae-header class="khae-global-campus-header">
   <div data-khae-header-inner>
@@ -608,13 +635,16 @@ body:not(.high-contrast) .app .main-layout>.card.grove .spirit-grid{
       </section>
     </main>
 
-    <aside class="card side" aria-label="My saved stories">
+    <details class="card side nest-banner" aria-label="My saved stories" id="nestBanner">
+      <summary>📚 My Story Nest · <span id="nestBannerSummary">Open saved stories and favorites</span></summary>
+      <div class="nest-banner-content">
       <h2 class="side-title">My Story Nest</h2>
       <p class="side-sub">Saved stories stay on this device. Tap Load to enjoy one again.</p>
       <div class="stats"><div class="stat"><strong id="storyCount">0</strong>Stories</div><div class="stat"><strong id="favoriteCount">0</strong>Favorites</div><div class="stat"><strong id="pathCount">1</strong>Paths</div></div>
       <div class="filter-row"><button class="btn secondary" id="showAllBtn" type="button" aria-pressed="true">All Stories</button><button class="btn secondary" id="favoritesBtn" type="button" aria-pressed="false">💛 Favorites</button></div>
       <div class="nest-list" id="nestList" role="list"></div>
-    </aside>
+      </div>
+    </details>
   </div>
 
   <details class="adult-panel" id="adultPanel">
