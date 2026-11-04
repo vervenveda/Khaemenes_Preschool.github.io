@@ -22,4 +22,4 @@ jobs:
         with:
           node-version: "22"
       - name: Storybird story engine and backup regression
-        run: node --test tests/storybird-grove-regression.test.mjs
+        run: node --test tests/storybird-grove-regression.test.mjs tests/storybird-eiren-comprehension.test.mjs
