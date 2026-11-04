@@ -1,0 +1,25 @@
+name: Storybird Grove focused regression
+on:
+  push:
+    paths:
+      - "apps/reading_storybird_grove/**"
+      - "tests/storybird-grove-regression.test.mjs"
+      - ".github/workflows/storybird-grove-regression.yml"
+  pull_request:
+    paths:
+      - "apps/reading_storybird_grove/**"
+      - "tests/storybird-grove-regression.test.mjs"
+      - ".github/workflows/storybird-grove-regression.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Storybird story engine and backup regression
+        run: node --test tests/storybird-grove-regression.test.mjs
