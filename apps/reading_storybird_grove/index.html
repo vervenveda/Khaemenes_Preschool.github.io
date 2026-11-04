@@ -760,22 +760,6 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
   <button class="btn secondary" id="eirenQuestionNext" type="button" disabled>🌱 Next Question</button>
  </div>
 </section>
-<section class="eiren-own-ending" aria-labelledby="eirenOwnEndingTitle">
- <h2 id="eirenOwnEndingTitle">🌸 Tell Eiren Your Own Ending</h2>
- <p>What if the story ended differently? Tell a grown-up, use your device's keyboard dictation, or type your own ending. Your original story stays just as it was.</p>
- <label for="eirenEndingText">My new ending</label>
- <textarea id="eirenEndingText" rows="4" maxlength="500" placeholder="And then something wonderful happened…" disabled></textarea>
- <p class="eiren-ending-count" id="eirenEndingCount">0 / 500 characters</p>
- <p class="eiren-ending-preview" id="eirenEndingPreview" hidden></p>
- <div class="eiren-ending-actions">
-  <button class="btn secondary" id="eirenEndingPreviewBtn" type="button" disabled>📖 Preview My Story</button>
-  <button class="btn secondary" id="eirenEndingRead" type="button" disabled>🔊 Eiren, Read My Ending</button>
-  <button class="btn good" id="eirenEndingSave" type="button" disabled>💛 Save as a New Story</button>
-  <button class="btn secondary" id="eirenEndingClear" type="button" disabled>🌱 Start Again</button>
- </div>
- <p class="eiren-ending-status" id="eirenEndingStatus" role="status" aria-live="polite">Make or open a story first, then invent an ending with Eiren.</p>
- <p class="eiren-ending-note">Nothing is saved while you write, preview, or listen. Saving creates a separate Story Nest story only when you choose “Save as a New Story.”</p>
-</section>
 <div class="main-layout">
     <main class="card grove">
       <section class="story-card" aria-label="Finished story">
@@ -903,26 +887,7 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
 @media(max-width:620px){.app .eiren-question-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media print{.app .eiren-comprehension{display:none!important}}
 </style>
-<style id="storybird-own-ending-style">
-.app .eiren-own-ending{margin:14px 0;padding:18px;border:2px solid #476176;border-radius:7px;background:#fffdf4;color:#26354a}
-.app .eiren-own-ending h2{font-size:24px;color:#26354a;margin:0 0 10px;text-align:center}
-.app .eiren-own-ending p,.app .eiren-own-ending label{font-size:18px;line-height:1.6;color:#26354a}
-.app .eiren-own-ending label{display:block;font-weight:600;margin-top:10px}
-.app .eiren-own-ending textarea{display:block;width:100%;box-sizing:border-box;min-height:120px;padding:12px;border:2px solid #476176;border-radius:7px;background:#fff;color:#26354a;font:inherit;font-size:18px;line-height:1.5;resize:vertical}
-.app .eiren-own-ending textarea:focus-visible,.app .eiren-ending-actions .btn:focus-visible{outline:3px solid #6244ae;outline-offset:3px}
-.app .eiren-own-ending textarea:disabled{opacity:.6}
-.app .eiren-own-ending .eiren-ending-count{text-align:right;font-size:16px;margin:4px 0}
-.app .eiren-own-ending .eiren-ending-preview{padding:14px;background:#fdffb6;border:2px solid #476176;border-radius:7px;white-space:pre-line}
-.app .eiren-own-ending .eiren-ending-preview[hidden]{display:none}
-.app .eiren-own-ending .eiren-ending-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
-.app .eiren-own-ending .eiren-ending-actions .btn{min-height:54px;font-size:18px;border-radius:7px;white-space:normal;overflow-wrap:anywhere}
-.app .eiren-own-ending .eiren-ending-actions .btn:disabled{opacity:.55;cursor:not-allowed}
-.app .eiren-own-ending .eiren-ending-note{font-size:16px}
-@media(max-width:600px){.app .eiren-own-ending .eiren-ending-actions{grid-template-columns:1fr}}
-@media print{.app .eiren-own-ending{display:none!important}}
-</style>
 <script src="./eiren-story-questions.js"></script>
-<script src="./eiren-own-ending.js"></script>
 <script>
 (function(){
   "use strict";
@@ -1814,7 +1779,7 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
   }
   function renderClusters(options={}){const keepStory=!!options.keepStory;const w=getWeek(currentWeek);renderSpiritList(els.charsList,w.characters,"character");renderSpiritList(els.setsList,w.settings,"setting");renderSpiritList(els.verbsList,w.verbs,"verb");renderSpiritList(els.feelingsList,FEELINGS,"feeling");renderSpiritList(els.endingsList,ENDINGS,"ending");if(!options.keepSelection)selection=blankSelection();if(!keepStory)currentStory=null;refreshSelectionVisuals();updateSlots();if(!keepStory)clearStory(false);updateThemeBanner();saveState()}
   function renderSpiritList(container,items,type){container.innerHTML="";items.forEach(label=>{const b=document.createElement("button");b.type="button";b.className="spirit";b.dataset.type=type;b.dataset.value=label;b.setAttribute("aria-pressed",selection[type]===label?"true":"false");const dot=document.createElement("span");dot.className="spirit-dot";dot.textContent=type==="feeling"?({happy:"😊",curious:"🤔",brave:"⭐",kind:"💛",calm:"🌿",excited:"🎉",hopeful:"🌈",proud:"🌟",surprised:"😮",shy:"🌷",worried:"💭",peaceful:"🕊️",silly:"😄",grateful:"💖",thoughtful:"🤔",patient:"🌱",confident:"🌟",gentle:"🌷",delighted:"😃",determined:"💪"}[label]||"💗"):type==="ending"?"🌈":iconFor(type,label);const name=document.createElement("span");name.textContent=label;b.append(dot,name);b.addEventListener("click",()=>{pickSpirit(type,label);eirenSpeak(label)});container.appendChild(b)})}
-  function pickSpirit(type,value){selection[type]=selection[type]===value?null:value;currentStory=null;window.StorybirdEirenQuestions?.setStory(null);window.StorybirdOwnEnding?.setStory(null);refreshSelectionVisuals();updateSlots();renderWordGarden();saveState();if(isComplete())setStatus("All your story choices are ready. Press Make My Story!")}
+  function pickSpirit(type,value){selection[type]=selection[type]===value?null:value;currentStory=null;refreshSelectionVisuals();updateSlots();renderWordGarden();saveState();if(isComplete())setStatus("All your story choices are ready. Press Make My Story!")}
   function refreshSelectionVisuals(){document.querySelectorAll(".spirit").forEach(b=>b.setAttribute("aria-pressed",selection[b.dataset.type]===b.dataset.value?"true":"false"))}
   function updateSlots(){els.selChar.textContent=selection.character||"— character —";els.selSet.textContent=selection.setting||"— place —";els.selVerb.textContent=selection.verb||"— action —";els.selFeeling.textContent=selection.feeling||"— feeling —";els.selEnding.textContent=selection.ending||"— ending —"}
   function updateModeUI(){const growing=isGrowing();els.feelingCluster.classList.toggle("hidden",!growing);els.endingCluster.classList.toggle("hidden",!growing);els.selFeeling.classList.toggle("hidden",!growing);els.selEnding.classList.toggle("hidden",!growing);els.selectionRow.classList.toggle("growing",growing);els.guideNote.textContent=growing?"Pick five cards to grow a beginning, middle, and ending.":"Pick one character, one place, and one action to make a little story.";if(!growing){selection.feeling=null;selection.ending=null}refreshSelectionVisuals();updateSlots()}
@@ -1831,8 +1796,8 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
   function magicStory(){const w=getWeek(currentWeek);const runs=clampInt(els.runsRange.value,10,200);let best=null;for(let i=0;i<runs;i++){const sel={character:choose(w.characters),setting:choose(w.settings),verb:choose(w.verbs),feeling:isGrowing()?choose(FEELINGS):null,ending:isGrowing()?choose(ENDINGS):null};const record=makeRecord(sel,els.toneSelect.value);record.meta.score=scoreCandidate(record);if(!best||record.meta.score>best.meta.score)best=record}selection={...best.meta.selection};currentStory=best;showStory(best);state.weekRounds[String(currentWeek)]=clampInt((state.weekRounds[String(currentWeek)]||0)+1,0,999999);saveState();renderClusters({keepStory:true});updatePassport();sparkleBurst(10);setStatus("Magic Story found a bright combination for you.")}
   function scoreCandidate(record){let score=50;const recent=state.nest.slice(0,25).map(n=>n.text.toLowerCase()).join(" ");Object.values(record.meta.selection).filter(Boolean).forEach(v=>score+=recent.includes(String(v).toLowerCase())?-6:9);score+=Math.max(0,18-Math.abs((record.meta.mode==="growing"?360:145)-record.text.length)/12);score+=Math.random()*4;return Math.round(score)}
 
-  function showStory(record){window.StorybirdEirenQuestions?.setStory(record);window.StorybirdOwnEnding?.setStory(record);els.storyTitle.textContent=record.title;els.storyText.textContent=record.text;const t=weekTopic(record.meta.week);els.storyMeta.textContent=[`Garden Path ${record.meta.week}: ${t.label}`,`Feeling: ${titleCase(record.meta.tone)}`,record.meta.mode==="growing"?"Growing Story":"Little Story",new Date(record.ts).toLocaleString()].join(" • ");renderIllustration(record.meta.selection,record.meta.tone);if(!reducedMotion())els.storyText.animate([{opacity:0,transform:"translateY(8px)"},{opacity:1,transform:"translateY(0)"}],{duration:300,easing:"ease-out"});saveState()}
-  function clearStory(reset=true){if(reset)currentStory=null;if(!currentStory){window.StorybirdEirenQuestions?.setStory(null);window.StorybirdOwnEnding?.setStory(null);}els.storyTitle.textContent="Your Story Will Bloom Here";els.storyText.textContent="Choose a character, a place, and an action. Then press Make My Story.";els.storyMeta.textContent="";els.illustrationArea.textContent="🌿";if(reset)saveState()}
+  function showStory(record){window.StorybirdEirenQuestions?.setStory(record);els.storyTitle.textContent=record.title;els.storyText.textContent=record.text;const t=weekTopic(record.meta.week);els.storyMeta.textContent=[`Garden Path ${record.meta.week}: ${t.label}`,`Feeling: ${titleCase(record.meta.tone)}`,record.meta.mode==="growing"?"Growing Story":"Little Story",new Date(record.ts).toLocaleString()].join(" • ");renderIllustration(record.meta.selection,record.meta.tone);if(!reducedMotion())els.storyText.animate([{opacity:0,transform:"translateY(8px)"},{opacity:1,transform:"translateY(0)"}],{duration:300,easing:"ease-out"});saveState()}
+  function clearStory(reset=true){if(reset)currentStory=null;if(!currentStory)window.StorybirdEirenQuestions?.setStory(null);els.storyTitle.textContent="Your Story Will Bloom Here";els.storyText.textContent="Choose a character, a place, and an action. Then press Make My Story.";els.storyMeta.textContent="";els.illustrationArea.textContent="🌿";if(reset)saveState()}
   function clearAll(){selection=blankSelection();currentStory=null;refreshSelectionVisuals();updateSlots();clearStory(false);saveState();setStatus("Cleared. Ready for a new story.")}
 
   function colorFrom(str,offset=0){const palette=["#FFADAD","#FFD6A5","#FDFFB6","#CAFFBF","#9BF6FF"];return palette[(hashString(str)+offset%palette.length)%palette.length]}
@@ -1840,16 +1805,7 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
 
   function setStatus(msg,error=false){els.statusBox.textContent=msg;els.statusBox.style.color=error?"#ffd5d1":""}
   function toast(msg){els.toast.textContent=msg;els.toast.classList.remove("show");void els.toast.offsetWidth;els.toast.classList.add("show")}
-  function saveOwnEndingToNest(variant,source){
- if(!currentStory||!source||source.id!==currentStory.id||source.text!==currentStory.text)return {ok:false,message:"Your story has changed. Open the current story and write a new ending."};
- if(!variant||typeof variant.text!=="string"||variant.text.length>1800||variant.text.length<5)return {ok:false,message:"Please check the length of your new story."};
- if(state.nest.some(n=>n.text===variant.text))return {ok:false,message:"This new ending is already saved in My Story Nest."};
- if(state.nest.length>=MAX_NEST)return {ok:false,message:"My Story Nest is full. Export a backup before adding more stories."};
- state.nest.unshift(sanitizeStory(variant));saveState();renderNest();
- toast("Your own ending was saved as a new story! 🌸");
- return {ok:true};
-}
-function saveCurrentStory(){if(!currentStory){setStatus("Make a complete story before saving.",true);return}if(state.nest.some(n=>n.text===currentStory.text)){setStatus("That story is already in your Story Nest.",true);return}if(state.nest.length>=MAX_NEST){setStatus("Your Story Nest is full. Export a backup before removing older stories to make room.",true);return}state.nest.unshift(sanitizeStory(currentStory));saveState();renderNest();toast("Saved to My Story Nest ✨");setStatus("Saved privately on this device.")}
+  function saveCurrentStory(){if(!currentStory){setStatus("Make a complete story before saving.",true);return}if(state.nest.some(n=>n.text===currentStory.text)){setStatus("That story is already in your Story Nest.",true);return}if(state.nest.length>=MAX_NEST){setStatus("Your Story Nest is full. Export a backup before removing older stories to make room.",true);return}state.nest.unshift(sanitizeStory(currentStory));saveState();renderNest();toast("Saved to My Story Nest ✨");setStatus("Saved privately on this device.")}
   function renderStats(){els.storyCount.textContent=String(state.nest.length);els.favoriteCount.textContent=String(state.nest.filter(n=>n.favorite).length);els.pathCount.textContent=String(new Set(state.visitedWeeks).size)}
   function renderNest(){updatePassport();updateGroveGrowth();els.nestList.innerHTML="";const list=state.nest.filter(n=>nestFilter==="favorites"?n.favorite:true);els.showAllBtn.setAttribute("aria-pressed",nestFilter==="all"?"true":"false");els.favoritesBtn.setAttribute("aria-pressed",nestFilter==="favorites"?"true":"false");if(!list.length){els.nestList.innerHTML=`<div class="empty">${nestFilter==="favorites"?"No favorite stories yet. Tap the heart on a saved story.":"Your Story Nest is empty. Make and save a story to begin."}</div>`;renderStats();return}list.forEach(n=>{const item=document.createElement("article");item.className="nest-item";item.setAttribute("role","listitem");const title=document.createElement("div");title.className="nest-title";title.textContent=n.title;const text=document.createElement("div");text.className="nest-text";text.textContent=n.text.length>220?n.text.slice(0,220)+"…":n.text;const meta=document.createElement("div");meta.className="nest-meta";meta.textContent=`Path ${n.meta.week} • ${titleCase(n.meta.tone)} • ${new Date(n.ts).toLocaleDateString()}`;const row=document.createElement("div");row.className="nest-actions";row.append(smallButton("Load",()=>loadNestStory(n)),smallButton("Read",()=>speakText(n.text)),smallButton(n.favorite?"💛 Favorite":"♡ Favorite",()=>{n.favorite=!n.favorite;saveState();renderNest()}),smallButton("Export",()=>exportJSON(n,`${safeFilename(n.title)}.json`),"adult-only"),smallButton("Delete",async()=>{if(await askConfirm("Delete this saved story?","Delete")){state.nest=state.nest.filter(x=>x.id!==n.id);saveState();renderNest();setStatus("Story deleted.")}},"adult-only danger"));item.append(title,text,meta,row);els.nestList.appendChild(item)});renderStats()}
   function smallButton(label,fn,extra=""){const b=document.createElement("button");b.type="button";b.className=`btn secondary ${extra}`;b.textContent=label;b.addEventListener("click",fn);return b}
@@ -1995,7 +1951,7 @@ function saveCurrentStory(){if(!currentStory){setStatus("Make a complete story b
     window.addEventListener("beforeunload",saveState);
   }
 
-  function init(){window.StorybirdEirenQuestions?.init();window.StorybirdOwnEnding?.init({saveVariant:saveOwnEndingToNest,speakEnding:eirenSpeak});bindEvents();renderWeeks();applySettings();connectEirenBoundary();
+  function init(){window.StorybirdEirenQuestions?.init();bindEvents();renderWeeks();applySettings();connectEirenBoundary();
     if("speechSynthesis" in window){refreshVoices();speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);speechSynthesis.onvoiceschanged=refreshVoices;setTimeout(refreshVoices,250);setTimeout(refreshVoices,900)}else{if(els.previewVoice)els.previewVoice.disabled=true;if(els.stopVoiceFriend)els.stopVoiceFriend.disabled=true;if(els.readBtn)els.readBtn.disabled=true;if(els.voiceStatus)els.voiceStatus.textContent="Read-aloud voices are not available in this browser."}
     updateVoiceButtons();if(!state.visitedWeeks.includes(currentWeek))state.visitedWeeks.push(currentWeek);renderClusters({keepStory:true,keepSelection:true});if(currentStory){showStory(currentStory)}else{clearStory(false)}renderNest();updateThemeBanner();updatePassport();saveState()}
   init();
