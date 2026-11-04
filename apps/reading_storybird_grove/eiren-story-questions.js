@@ -30,7 +30,8 @@ function render(){
  if(prompt)prompt.textContent=q?("Question "+(index+1)+" of "+active.length+": "+q.ask):"Make or open a story, then ask Eiren for a story question.";
  if(reveal){reveal.textContent="";reveal.hidden=true;}
  const next=by("eirenQuestionNext"),hint=by("eirenQuestionHint"),show=by("eirenQuestionReveal"),speak=by("eirenQuestionSpeak");
- for(const btn of [next,hint,show,speak])if(btn)btn.disabled=!q;
+ if(next)next.disabled=!active.length;
+ for(const btn of [hint,show,speak])if(btn)btn.disabled=!q;
 }
 function setStory(record){
  const signature=record?String(record.id||"")+"|"+safe(record.text):"";
