@@ -744,7 +744,23 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
   </section>
 
   <section class="eiren-companion" aria-labelledby="eirenTitle"><div class="eiren-companion-row"><div class="eiren-mark" aria-hidden="true">🌸</div><div><h3 id="eirenTitle">Eiren · Story Friend</h3><p>Pip helps grow the story. Eiren reads the finished story with you. She never changes your choices or the Storybird story engine.</p></div></div><div class="eiren-actions"><button class="btn secondary" type="button" id="eirenHello">🌸 Meet Eiren</button><button class="btn secondary" type="button" id="eirenRead">📖 Eiren, Read My Story</button><button class="btn secondary" type="button" id="eirenStop">⏹ Stop Eiren</button></div><div class="eiren-status" id="eirenStatus" aria-live="polite">Eiren is getting the storybook ready…</div></section>
-  <div class="main-layout">
+  <section class="eiren-comprehension" aria-labelledby="eirenQuestionsTitle">
+ <h2 id="eirenQuestionsTitle">🌸 Eiren's Story Questions</h2>
+ <p>After making a story, tell Eiren who was there, where they went, how they felt, and what happened next. Talk together—there are no grades or saved answers.</p>
+ <div class="eiren-question-card">
+  <p id="eirenQuestionPrompt" aria-live="polite">Make or open a story, then ask Eiren for a story question.</p>
+  <p id="eirenQuestionAnswer" hidden></p>
+  <p id="eirenQuestionStatus" role="status" aria-live="polite">Grow a story first, then Eiren can ask questions.</p>
+ </div>
+ <div class="eiren-question-actions">
+  <button class="btn secondary" id="eirenQuestionStart" type="button">🌸 Ask Eiren</button>
+  <button class="btn secondary" id="eirenQuestionHint" type="button" disabled>💡 Gentle Hint</button>
+  <button class="btn secondary" id="eirenQuestionReveal" type="button" disabled>📖 Show Story Answer</button>
+  <button class="btn secondary" id="eirenQuestionSpeak" type="button" disabled>🔊 Hear Question</button>
+  <button class="btn secondary" id="eirenQuestionNext" type="button" disabled>🌱 Next Question</button>
+ </div>
+</section>
+<div class="main-layout">
     <main class="card grove">
       <section class="story-card" aria-label="Finished story">
         <h2 class="story-title" id="storyTitle">Your Story Will Bloom Here</h2>
@@ -857,6 +873,21 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<style id="storybird-eiren-comprehension-style">
+.app .eiren-comprehension{margin:14px 0;padding:18px;border:2px solid #476176;border-radius:7px;background:#fffdf4;color:#26354a}
+.app .eiren-comprehension h2{font-size:24px;color:#26354a;margin:0 0 10px;text-align:center}
+.app .eiren-comprehension p{font-size:18px;line-height:1.6;margin:8px 0;color:#26354a}
+.app .eiren-question-card{background:#fdffb6;border:2px solid #476176;border-radius:7px;padding:14px;margin-top:12px}
+.app #eirenQuestionPrompt{font-size:20px;font-weight:600}
+.app #eirenQuestionAnswer{background:#caffbf;border-radius:7px;padding:12px;white-space:pre-line}
+.app #eirenQuestionAnswer[hidden]{display:none}
+.app .eiren-question-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:12px}
+.app .eiren-question-actions .btn{min-height:54px;font-size:18px;border-radius:7px;white-space:normal;overflow-wrap:anywhere}
+.app .eiren-question-actions .btn:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:620px){.app .eiren-question-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.app .eiren-comprehension{display:none!important}}
+</style>
+<script src="./eiren-story-questions.js"></script>
 <script>
 (function(){
   "use strict";
@@ -1765,8 +1796,8 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
   function magicStory(){const w=getWeek(currentWeek);const runs=clampInt(els.runsRange.value,10,200);let best=null;for(let i=0;i<runs;i++){const sel={character:choose(w.characters),setting:choose(w.settings),verb:choose(w.verbs),feeling:isGrowing()?choose(FEELINGS):null,ending:isGrowing()?choose(ENDINGS):null};const record=makeRecord(sel,els.toneSelect.value);record.meta.score=scoreCandidate(record);if(!best||record.meta.score>best.meta.score)best=record}selection={...best.meta.selection};currentStory=best;showStory(best);state.weekRounds[String(currentWeek)]=clampInt((state.weekRounds[String(currentWeek)]||0)+1,0,999999);saveState();renderClusters({keepStory:true});updatePassport();sparkleBurst(10);setStatus("Magic Story found a bright combination for you.")}
   function scoreCandidate(record){let score=50;const recent=state.nest.slice(0,25).map(n=>n.text.toLowerCase()).join(" ");Object.values(record.meta.selection).filter(Boolean).forEach(v=>score+=recent.includes(String(v).toLowerCase())?-6:9);score+=Math.max(0,18-Math.abs((record.meta.mode==="growing"?360:145)-record.text.length)/12);score+=Math.random()*4;return Math.round(score)}
 
-  function showStory(record){els.storyTitle.textContent=record.title;els.storyText.textContent=record.text;const t=weekTopic(record.meta.week);els.storyMeta.textContent=[`Garden Path ${record.meta.week}: ${t.label}`,`Feeling: ${titleCase(record.meta.tone)}`,record.meta.mode==="growing"?"Growing Story":"Little Story",new Date(record.ts).toLocaleString()].join(" • ");renderIllustration(record.meta.selection,record.meta.tone);if(!reducedMotion())els.storyText.animate([{opacity:0,transform:"translateY(8px)"},{opacity:1,transform:"translateY(0)"}],{duration:300,easing:"ease-out"});saveState()}
-  function clearStory(reset=true){if(reset)currentStory=null;els.storyTitle.textContent="Your Story Will Bloom Here";els.storyText.textContent="Choose a character, a place, and an action. Then press Make My Story.";els.storyMeta.textContent="";els.illustrationArea.textContent="🌿";if(reset)saveState()}
+  function showStory(record){window.StorybirdEirenQuestions?.setStory(record);els.storyTitle.textContent=record.title;els.storyText.textContent=record.text;const t=weekTopic(record.meta.week);els.storyMeta.textContent=[`Garden Path ${record.meta.week}: ${t.label}`,`Feeling: ${titleCase(record.meta.tone)}`,record.meta.mode==="growing"?"Growing Story":"Little Story",new Date(record.ts).toLocaleString()].join(" • ");renderIllustration(record.meta.selection,record.meta.tone);if(!reducedMotion())els.storyText.animate([{opacity:0,transform:"translateY(8px)"},{opacity:1,transform:"translateY(0)"}],{duration:300,easing:"ease-out"});saveState()}
+  function clearStory(reset=true){if(reset)currentStory=null;if(!currentStory)window.StorybirdEirenQuestions?.setStory(null);els.storyTitle.textContent="Your Story Will Bloom Here";els.storyText.textContent="Choose a character, a place, and an action. Then press Make My Story.";els.storyMeta.textContent="";els.illustrationArea.textContent="🌿";if(reset)saveState()}
   function clearAll(){selection=blankSelection();currentStory=null;refreshSelectionVisuals();updateSlots();clearStory(false);saveState();setStatus("Cleared. Ready for a new story.")}
 
   function colorFrom(str,offset=0){const palette=["#FFADAD","#FFD6A5","#FDFFB6","#CAFFBF","#9BF6FF"];return palette[(hashString(str)+offset%palette.length)%palette.length]}
@@ -1920,7 +1951,7 @@ body{background:linear-gradient(125deg,#9BF6FF 0%,#CAFFBF 28%,#FDFFB6 55%,#FFD6A
     window.addEventListener("beforeunload",saveState);
   }
 
-  function init(){bindEvents();renderWeeks();applySettings();connectEirenBoundary();
+  function init(){window.StorybirdEirenQuestions?.init();bindEvents();renderWeeks();applySettings();connectEirenBoundary();
     if("speechSynthesis" in window){refreshVoices();speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);speechSynthesis.onvoiceschanged=refreshVoices;setTimeout(refreshVoices,250);setTimeout(refreshVoices,900)}else{if(els.previewVoice)els.previewVoice.disabled=true;if(els.stopVoiceFriend)els.stopVoiceFriend.disabled=true;if(els.readBtn)els.readBtn.disabled=true;if(els.voiceStatus)els.voiceStatus.textContent="Read-aloud voices are not available in this browser."}
     updateVoiceButtons();if(!state.visitedWeeks.includes(currentWeek))state.visitedWeeks.push(currentWeek);renderClusters({keepStory:true,keepSelection:true});if(currentStory){showStory(currentStory)}else{clearStory(false)}renderNest();updateThemeBanner();updatePassport();saveState()}
   init();
