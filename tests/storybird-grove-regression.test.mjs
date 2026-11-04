@@ -22,7 +22,7 @@ function fixture(){
  "function setStatus(){} function renderStats(){}\n"+
  helpers+"\n"+pathFunctions+"\n"+storageFunctions+"\n"+storyFunctions+"\n"+
  "({characters:CHARACTERS,settings:SETTINGS,verbs:VERBS,feelings:FEELINGS,endings:ENDINGS,topics:WEEK_TOPICS,levels:WEEK_LEVELS,moods:Object.keys(TEMPLATES),weekTopic,getWeek,littleText,growingText,sanitizeState,loadState,setMode:m=>state.settings.mode=m,setPronoun:p=>state.settings.pronoun=p,setWeek:n=>currentWeek=n})";
- const engine=vm.runInNewContext(code,{Math,Date,JSON},{timeout:2000});
+ const engine=vm.runInNewContext(code,{Math,Date,JSON,storage},{timeout:2000});
  return {engine,storage};
 }
 const sample={character:"tiny owl spirit",setting:"the Whispering Grove",verb:"discover",feeling:"happy",ending:"made a new friend"};
