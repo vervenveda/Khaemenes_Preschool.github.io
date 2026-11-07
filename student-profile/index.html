@@ -308,7 +308,7 @@ function renderLook(){
  if(!look.photo&&badges.has(rich?.badge))box.textContent=rich.badge;
  if(card){
   const ch=tint?[1,3,5].map(i=>parseInt(tint.slice(i,i+2),16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4):null;
-  const lum=ch?.length?.2126*ch[0]+.7152*ch[1]+.0722*ch[2]:0;
+  const lum=ch?(.2126*ch[0]+.7152*ch[1]+.0722*ch[2]):0;
   const dark=lum>.18;
   const ink=tint?(dark?"#202724":"#fff8e9"):"";
   card.style.color=ink;
