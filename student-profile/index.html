@@ -317,7 +317,7 @@ function renderLook(){
  }
  box.style.color=""; // Keep the original photo/badge contrast.
  const nameFonts={academy:'Cinzel,Georgia,serif',friendly:'Nunito,"Trebuchet MS",Arial,sans-serif',classic:'Georgia,"Times New Roman",serif',modern:'"Trebuchet MS",Arial,sans-serif',handwriting:'"Comic Sans MS","Trebuchet MS",cursive'};
- $("childTitle").style.fontFamily=Object.hasOwn(nameFonts,rich?.nameFont)?nameFonts[rich.nameFont]:"";
+ $("childTitle").style.setProperty("font-family",Object.hasOwn(nameFonts,rich?.nameFont)?nameFonts[rich.nameFont]:'"Trebuchet MS",Nunito,Arial,sans-serif',"important");
  $("childTitle").style.fontWeight="400";
  for(const b of $("avatarChoices").querySelectorAll("button"))b.setAttribute("aria-pressed",String(b.dataset.avatar===look.avatar&&!look.photo));
  for(const b of $("backgroundChoices").querySelectorAll("button"))b.setAttribute("aria-pressed",String(b.dataset.theme===look.theme));
