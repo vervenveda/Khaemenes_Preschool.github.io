@@ -115,7 +115,7 @@ body :is(.hero,.ug-hero,.mast)> :is(h1,p),body :is(.hero,.ug-hero,.mast)>div> :i
 body :is(.hero,.ug-hero,.mast) h1{font-size:clamp(30px,4.4vw,52px)!important;line-height:1.18!important;font-weight:400!important}
 body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font-size:16px!important;letter-spacing:.045em!important;line-height:1.4!important}
 </style></head>
-<body data-prek-background="sky">
+<body data-prek-background="sky" data-profile-stage="preschool">
 <a href="#main" class="skip">Skip to Pre-K profile</a>
 <header class="top"><div class="shell"><a class="brand" href="https://vervenveda.com/Khaemenes_Academy.github.io/">Khaemenes Academy <small>· Pre-K</small></a><nav class="nav"><a href="../">🌈 Preschool</a><a href="https://vervenveda.com/Khaemenes_Academy.github.io/student/">Student Portal</a><a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Family</a><a href="https://vervenveda.com/">Ecosystem</a></nav></div></header>
 <main id="main" class="shell">
@@ -250,7 +250,12 @@ function announce(message,bad=false){$("lookStatus").textContent=message;$("look
 function consent(){if(!eligible()){announce("Select an existing Pre-K learner on the Academy Family Portal first.",true);return false}if(!$("adultConfirm").checked){announce("An adult must confirm before changing this child's profile.",true);return false}return true}
 function saveLook(){
  if(!consent())return false;
- try{localStorage.setItem(profileKey(),JSON.stringify({schema:"khaemenes.prek-visual.v1",learnerId:activeId,updatedAt:new Date().toISOString(),...look}));renderLook();announce("Saved for this learner on this browser.");return true}
+ try{
+  const prior=read(profileKey(),null);
+  const extra=prior?.learnerId===activeId&&prior?.schema==="khaemenes.prek-visual.v1"&&prior?.universalLook&&typeof prior.universalLook==="object"?{universalLook:prior.universalLook}:{};
+  localStorage.setItem(profileKey(),JSON.stringify({schema:"khaemenes.prek-visual.v1",learnerId:activeId,updatedAt:new Date().toISOString(),...look,...extra}));
+  renderLook();announce("Saved for this learner on this browser.");return true
+ }
  catch{announce("Could not save. Browser storage may be full; try a smaller photo or export a backup.",true);return false}
 }
 $("frameShape").addEventListener("change",function(){if(!consent()){this.value=look.frame||"square";return}look.frame=FRAMES.includes(this.value)?this.value:"square";saveLook()});
@@ -262,6 +267,21 @@ function renderLook(){
  box.replaceChildren();
  if(look.photo){const img=document.createElement("img");img.src=look.photo;img.alt="Child's locally stored profile picture";box.append(img)}
  else box.textContent=look.avatar;
+ // Apply universal badge/frame/card tint only when saved for this same child.
+ // The native theme, photo, consent checkbox, backup and handoff remain owners.
+ const richRecord=read(profileKey(),null),rich=richRecord?.learnerId===activeId?richRecord?.universalLook:null;
+ const shapes=new Set(["rectangle","square","circle","oval","rhombus","heart","star","octagon","semicircle","kite"]);
+ const badges=new Set(["★","✦","📚","🧭","⚛","🎨","🎵","🌿","🔬","🧪","🧬","🌌","🌙","☀️","🪐","🌎","⚙️","💻","✏️","🎭","📐","🏛️","🦋","🏆"]);
+ const clips={rhombus:"polygon(50% 0,100% 50%,50% 100%,0 50%)",heart:"polygon(50% 95%,43% 88%,31% 76%,20% 64%,10% 51%,4% 39%,4% 25%,10% 13%,21% 7%,32% 7%,42% 13%,50% 24%,58% 13%,68% 7%,79% 7%,90% 13%,96% 25%,96% 39%,90% 51%,80% 64%,69% 76%,57% 88%)",star:"polygon(50% 2%,63% 34%,98% 36%,71% 58%,80% 94%,50% 75%,20% 94%,29% 58%,2% 36%,37% 34%)",octagon:"polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)",semicircle:"polygon(0 100%,0 50%,4% 31%,15% 15%,31% 4%,50% 0%,69% 4%,85% 15%,96% 31%,100% 50%,100% 100%)",kite:"polygon(50% 0,90% 38%,50% 100%,10% 38%)"};
+ const shape=shapes.has(rich?.frame)?rich.frame:null;
+ box.style.clipPath=shape?(clips[shape]||"none"):"";
+ box.style.borderRadius=shape?(["circle","oval"].includes(shape)?"50%":["square","rectangle"].includes(shape)?"7px":"0"):"";
+ box.style.width=shape?(shape==="rectangle"?"230px":shape==="oval"?"190px":"220px"):"";
+ box.style.height=shape?(shape==="rectangle"?"165px":shape==="oval"?"170px":"220px"):"";
+ const tint=typeof rich?.cardColor==="string"&&/^#[0-9a-f]{6}$/i.test(rich.cardColor)?rich.cardColor:"";
+ box.style.background=tint||"";
+ if(!look.photo&&badges.has(rich?.badge))box.textContent=rich.badge;
+ if(tint){const ch=[1,3,5].map(i=>parseInt(tint.slice(i,i+2),16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);box.style.color=.2126*ch[0]+.7152*ch[1]+.0722*ch[2]>.18?"#202724":"#fff8e9"}else box.style.color="";
  for(const b of $("avatarChoices").querySelectorAll("button"))b.setAttribute("aria-pressed",String(b.dataset.avatar===look.avatar&&!look.photo));
  for(const b of $("backgroundChoices").querySelectorAll("button"))b.setAttribute("aria-pressed",String(b.dataset.theme===look.theme));
  if(!$("handoffPreview").hidden)renderHandoff();
@@ -479,7 +499,17 @@ $("importLook").addEventListener("change",async event=>{
  if(file.size>400000){announce("Visual backup file is too large.",true);return}
  const id=activeId;
  try{const value=JSON.parse(await file.text());if(id!==activeId||value?.schema!=="khaemenes.prek-visual.v1"||value?.learnerId!==activeId){announce("Backup belongs to another learner or has the wrong format. No changes made.",true);return}
-  const prior=look;look=normalize(value);if(!saveLook()){look=prior;renderLook()}
+  const prior=look;look=normalize(value);
+  if(!saveLook()){look=prior;renderLook()}
+  else{
+   // Restore verified extras from the same learner's native visual backup.
+   const saved=read(profileKey(),null),extra=value.universalLook;
+   const validFrame=new Set(["rectangle","square","circle","oval","rhombus","heart","star","octagon","semicircle","kite"]);
+   const validBadge=new Set(["★","✦","📚","🧭","⚛","🎨","🎵","🌿","🔬","🧪","🧬","🌌","🌙","☀️","🪐","🌎","⚙️","💻","✏️","🎭","📐","🏛️","🦋","🏆"]);
+   const accepted=extra&&validFrame.has(extra.frame)&&validBadge.has(extra.badge)&&(!extra.cardColor||/^#[0-9a-f]{6}$/i.test(extra.cardColor));
+   if(saved){if(accepted)saved.universalLook={frame:extra.frame,badge:extra.badge,cardColor:extra.cardColor||""};else delete saved.universalLook;
+    localStorage.setItem(profileKey(),JSON.stringify(saved));renderLook()}
+  }
  }catch{announce("Could not read the visual backup. No changes made.",true)}
 });
 $("learnerSelect").addEventListener("change",event=>{
@@ -488,6 +518,10 @@ $("learnerSelect").addEventListener("change",event=>{
  if(found&&found.familyId===family.familyId)R.setActive?.({familyId:family.familyId,learnerId:id});
 });
 window.addEventListener("khaemenes-family-changed",refresh);
+window.addEventListener("khaemenes-prek-universal-look-updated",event=>{
+ if(event.detail?.learnerId!==activeId)return;
+ look=normalize(read(profileKey(),null));renderLook();
+});
 window.addEventListener("storage",event=>{
  if(["khaemenes_active_learner_v1","khaemenes_family_registry_v1"].includes(event.key)){refresh();return}
  if(!activeId)return;
@@ -523,4 +557,9 @@ refresh();
  document.querySelectorAll('a[href^="#"]').forEach(link=>{const key=Object.keys(mapping).find(k=>link.getAttribute("href")==="#"+k);if(key)link.addEventListener("click",()=>{if(open!==key)toggle(key)})});
 })();
 </script>
+<!-- Shared Account Cloud editor: explicit Preschool adapter, one universal instance,
+     original native controls and guardian-owned backup tools retained for fallback. -->
+<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-universal-profile-look-editor.js?v=20261107-universal-v3" defer></script>
+<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-adapter.js?v=20261107-prek-v1" defer></script>
+<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-entry.js?v=20261107-prek-v1" defer></script>
 </body></html>
