@@ -114,7 +114,24 @@ body :is(main, .hero, .ug-hero, .mast) :is(a.btn,a.button,.hero-btn,.ug-priority
 body :is(.hero,.ug-hero,.mast)> :is(h1,p),body :is(.hero,.ug-hero,.mast)>div> :is(h1,p){text-align:center}
 body :is(.hero,.ug-hero,.mast) h1{font-size:clamp(30px,4.4vw,52px)!important;line-height:1.18!important;font-weight:400!important}
 body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font-size:16px!important;letter-spacing:.045em!important;line-height:1.4!important}
-</style></head>
+</style>
+<style id="prek-universal-look-refinement-v1">
+/* Profile-only presentation. No global header, tickers, or other campus styles. */
+main.shell .profile-hero{transition:background-color .15s ease;border:2px solid #52677b!important}
+main.shell .profile-hero .photo{background:linear-gradient(135deg,#ffe2b3,#d7edff);border:4px solid #fff}
+main.shell #khaePrekUniversalLookEntry{width:100%;max-width:none;margin:16px auto 20px;background:linear-gradient(110deg,#ffe5bf,#faffd1 48%,#d5f7e9);border:2px solid #476276;color:#243d50}
+main.shell #khaePrekUniversalLookEntry .kpu-open{background:#243d50;border-color:#243d50;color:#fff8e9}
+main.shell :is(h1,h2,h3,.prek-menu .prek-tile,.prek-daily h2){text-shadow:none!important;animation:none!important;font-weight:400!important}
+main.shell :is(h1,h2,h3){font-family:"Trebuchet MS",Nunito,Arial,sans-serif!important;letter-spacing:0!important}
+main.shell #childTitle{font-size:clamp(27px,3vw,38px);font-weight:400!important}
+main.shell #khaePrekUniversalLookEntry :is(p,label,button){font-family:Nunito,"Trebuchet MS",Arial,sans-serif!important;font-weight:400!important}
+main.shell .prek-menu .prek-tile{font-weight:400!important}
+#kplsDialog :is(h2,h3,p,label,button,select,input){text-shadow:none!important;animation:none!important;font-weight:400!important}
+#kplsDialog :is(h2,h3){font-family:Nunito,"Trebuchet MS",Arial,sans-serif!important}
+#kplsDialog :is(button,select,input){font-family:Nunito,"Trebuchet MS",Arial,sans-serif!important}
+#prek-panel-pictureTitle{display:none!important}
+</style>
+</head>
 <body data-prek-background="sky" data-profile-stage="preschool">
 <a href="#main" class="skip">Skip to Pre-K profile</a>
 <header class="top"><div class="shell"><a class="brand" href="https://vervenveda.com/Khaemenes_Academy.github.io/">Khaemenes Academy <small>· Pre-K</small></a><nav class="nav"><a href="../">🌈 Preschool</a><a href="https://vervenveda.com/Khaemenes_Academy.github.io/student/">Student Portal</a><a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Family</a><a href="https://vervenveda.com/">Ecosystem</a></nav></div></header>
@@ -139,7 +156,7 @@ body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font
 <nav class="prek-menu" aria-label="My Pre-K learning shortcuts">
 <button type="button" class="prek-tile" data-prek-panel="nextTitle" aria-expanded="false" aria-controls="prek-panel-nextTitle"><span aria-hidden="true">🌞</span>Today's Adventure</button>
 <button type="button" class="prek-tile" data-prek-panel="pinsTitle" aria-expanded="false" aria-controls="prek-panel-pinsTitle"><span aria-hidden="true">🎮</span>My Favorite Games</button>
-<button type="button" class="prek-tile" data-prek-panel="pictureTitle" aria-expanded="false" aria-controls="prek-panel-pictureTitle"><span aria-hidden="true">🎨</span>My Picture</button>
+<button type="button" class="prek-tile" data-universal-picture="true" aria-haspopup="dialog" aria-controls="kplsDialog"><span aria-hidden="true">🎨</span>My Picture</button>
 <button type="button" class="prek-tile" data-prek-panel="backgroundTitle" aria-expanded="false" aria-controls="prek-panel-backgroundTitle"><span aria-hidden="true">🌈</span>My Colors</button>
 <button type="button" class="prek-tile" data-prek-panel="kindergartenHandoff" aria-expanded="false" aria-controls="prek-panel-kindergartenHandoff"><span aria-hidden="true">🌻</span>My Graduation Garden</button>
 <button type="button" class="prek-tile" data-prek-panel="learningStudio" aria-expanded="false" aria-controls="prek-panel-learningStudio"><span aria-hidden="true">🏡</span>Grown-Up Corner</button>
@@ -285,9 +302,23 @@ function renderLook(){
  box.style.width=shape?(shape==="rectangle"?"230px":shape==="oval"?"190px":"220px"):"";
  box.style.height=shape?(shape==="rectangle"?"165px":shape==="oval"?"170px":"220px"):"";
  const tint=typeof rich?.cardColor==="string"&&/^#[0-9a-f]{6}$/i.test(rich.cardColor)?rich.cardColor:"";
- box.style.background=tint||"";
+ box.style.background=""; // The color belongs to the whole profile card, not the portrait.
+ const card=document.querySelector("main.shell .profile-hero");
+ if(card){card.style.backgroundColor=tint||"";card.style.backgroundImage=tint?"none":"";}
  if(!look.photo&&badges.has(rich?.badge))box.textContent=rich.badge;
- if(tint){const ch=[1,3,5].map(i=>parseInt(tint.slice(i,i+2),16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);box.style.color=.2126*ch[0]+.7152*ch[1]+.0722*ch[2]>.18?"#202724":"#fff8e9"}else box.style.color="";
+ if(card){
+  const ch=tint?[1,3,5].map(i=>parseInt(tint.slice(i,i+2),16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4):null;
+  const lum=ch?.length?.2126*ch[0]+.7152*ch[1]+.0722*ch[2]:0;
+  const dark=lum>.18;
+  const ink=tint?(dark?"#202724":"#fff8e9"):"";
+  card.style.color=ink;
+  const meta=$("childMeta");if(meta)meta.style.color=ink;
+  card.querySelectorAll(".eyebrow").forEach(el=>{el.style.color=ink;});
+ }
+ box.style.color=""; // Keep the original photo/badge contrast.
+ const nameFonts={academy:'Cinzel,Georgia,serif',friendly:'Nunito,"Trebuchet MS",Arial,sans-serif',classic:'Georgia,"Times New Roman",serif',modern:'"Trebuchet MS",Arial,sans-serif',handwriting:'"Comic Sans MS","Trebuchet MS",cursive'};
+ $("childTitle").style.fontFamily=Object.hasOwn(nameFonts,rich?.nameFont)?nameFonts[rich.nameFont]:"";
+ $("childTitle").style.fontWeight="400";
  for(const b of $("avatarChoices").querySelectorAll("button"))b.setAttribute("aria-pressed",String(b.dataset.avatar===look.avatar&&!look.photo));
  for(const b of $("backgroundChoices").querySelectorAll("button"))b.setAttribute("aria-pressed",String(b.dataset.theme===look.theme));
  if(!$("handoffPreview").hidden)renderHandoff();
@@ -513,7 +544,8 @@ $("importLook").addEventListener("change",async event=>{
    const validFrame=new Set(["rectangle","square","circle","oval","rhombus","heart","star","octagon","semicircle","kite"]);
    const validBadge=new Set(["★","✦","📚","🧭","⚛","🎨","🎵","🌿","🔬","🧪","🧬","🌌","🌙","☀️","🪐","🌎","⚙️","💻","✏️","🎭","📐","🏛️","🦋","🏆"]);
    const accepted=extra&&validFrame.has(extra.frame)&&validBadge.has(extra.badge)&&(!extra.cardColor||/^#[0-9a-f]{6}$/i.test(extra.cardColor));
-   if(saved){if(accepted)saved.universalLook={frame:extra.frame,badge:extra.badge,cardColor:extra.cardColor||""};else delete saved.universalLook;
+   const allowedFonts=new Set(["academy","friendly","classic","modern","handwriting"]);
+   if(saved){if(accepted)saved.universalLook={frame:extra.frame,badge:extra.badge,cardColor:extra.cardColor||"",nameFont:allowedFonts.has(extra.nameFont)?extra.nameFont:"academy"};else delete saved.universalLook;
     localStorage.setItem(profileKey(),JSON.stringify(saved));renderLook()}
   }
  }catch{announce("Could not read the visual backup. No changes made.",true)}
