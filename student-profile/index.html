@@ -252,7 +252,13 @@ function saveLook(){
  if(!consent())return false;
  try{
   const prior=read(profileKey(),null);
-  const extra=prior?.learnerId===activeId&&prior?.schema==="khaemenes.prek-visual.v1"&&prior?.universalLook&&typeof prior.universalLook==="object"?{universalLook:prior.universalLook}:{};
+  let extra={};
+  if(prior?.learnerId===activeId&&prior?.schema==="khaemenes.prek-visual.v1"&&prior?.universalLook&&typeof prior.universalLook==="object"){
+   const rich={...prior.universalLook};
+   if(prior.avatar!==look.avatar)delete rich.badge; // Native child avatar selection remains functional.
+   if(prior.frame!==look.frame)rich.frame=look.frame==="diamond"?"rhombus":look.frame==="hexagon"?"octagon":look.frame;
+   extra={universalLook:rich};
+  }
   localStorage.setItem(profileKey(),JSON.stringify({schema:"khaemenes.prek-visual.v1",learnerId:activeId,updatedAt:new Date().toISOString(),...look,...extra}));
   renderLook();announce("Saved for this learner on this browser.");return true
  }
