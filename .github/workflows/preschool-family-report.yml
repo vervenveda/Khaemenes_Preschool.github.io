@@ -1,0 +1,21 @@
+name: Preschool Family Reporting
+on:
+  workflow_dispatch:
+  push:
+    branches: [audit/preschool-family-report-2026-11-09]
+    paths:
+      - index.html
+      - assets/khaemenes-preschool-continuation.js
+      - tests/preschool-family-report.test.cjs
+      - .github/workflows/preschool-family-report.yml
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/preschool-family-report.test.cjs
