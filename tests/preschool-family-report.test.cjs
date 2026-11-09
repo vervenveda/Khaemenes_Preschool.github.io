@@ -85,9 +85,9 @@ test("Bubble 5: backup is one validated write, not a partial two-phase restore",
  assert.doesNotMatch(code,/saveLook\s*\(/);
 });
 
-function syntheticDay({id="child-a",familyId="family-a",writeFails=false}={}){
+function syntheticDay({id="child-a",familyId="family-a",writeFails=false,sharedStore=null}={}){
  const code=fs.readFileSync(path.resolve(__dirname,"../assets/khaemenes-prek-family-day.js"),"utf8");
- const store=new Map(),events={};
+ const store=sharedStore||new Map(),events={};
  const child={learnerId:id,familyId,stage:"preschool",grade:"pre-k"};
  const family={familyId,learnerIds:[id]};
  const localStorage={
@@ -152,4 +152,23 @@ test("Pre-K profile keeps both new age-appropriate panels in the shared pop-up m
  assert.doesNotMatch(module,/\.publish\(/);
  assert.doesNotMatch(module,/writeState\(/);
  new vm.Script(module);
+});
+
+test("Pre-K keeps siblings' local notes separate and trims older observations",()=>{
+ const sharedStore=new Map();
+ const a=syntheticDay({id:"child-a",sharedStore});
+ const b=syntheticDay({id:"child-b",sharedStore});
+ assert.equal(a.api.update("observation","Played with shapes").ok,true);
+ assert.equal(b.api.update("observation","Read a story").ok,true);
+ assert.equal(a.api.view().today.observation,"Played with shapes");
+ assert.equal(b.api.view().today.observation,"Read a story");
+ assert.equal(sharedStore.size,2);
+ const key="khaemenes.prek.family-day.v1:child-a";
+ const raw=JSON.parse(sharedStore.get(key));
+ for(let n=1;n<=18;n++)raw.days["2026-10-"+String(n).padStart(2,"0")]={checks:{story:true},observation:"old"};
+ sharedStore.set(key,JSON.stringify(raw));
+ assert.equal(a.api.update("checks",{story:true}).ok,true);
+ const retained=JSON.parse(sharedStore.get(key));
+ assert.ok(Object.keys(retained.days).length<=14);
+ assert.equal(b.api.view().today.observation,"Read a story");
 });
