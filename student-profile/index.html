@@ -258,9 +258,17 @@ const C=window.KhaemenesLearningContinuation;
 const catalog=window.KhaemenesPreschoolCatalog;
 let activeId="",look={theme:"sky",avatar:"🌈",photo:""};
 const read=(key,fallback)=>{try{const val=localStorage.getItem(key);return val?JSON.parse(val):fallback}catch{return fallback}};
+function verifiedWrite(key,payload){
+ const expected=JSON.stringify(payload);
+ try{localStorage.setItem(key,expected);return localStorage.getItem(key)===expected}catch{return false}
+}
 function learner(){
- const value=R?.getLearner?.()||null;
- return value&&String(value.stage).toLowerCase()==="preschool"&&value.learnerId?value:null;
+ const ids=R?.activeIds?.()||{};
+ const value=R?.getLearner?.(ids.learnerId)||null;
+ const family=R?.getFamily?.(ids.familyId)||null;
+ return value&&family&&value.learnerId===ids.learnerId&&value.familyId===family.familyId&&
+  value.grade==="pre-k"&&value.stage==="preschool"&&value.selfDirectedAdult!==true&&
+  family.learnerIds?.includes(value.learnerId)?value:null;
 }
 function eligible(){
  if(location.origin!=="https://vervenveda.com")return false;
@@ -289,7 +297,8 @@ function saveLook(){
    if(prior.frame!==look.frame)rich.frame=look.frame==="diamond"?"rhombus":look.frame==="hexagon"?"octagon":look.frame;
    extra={universalLook:rich};
   }
-  localStorage.setItem(profileKey(),JSON.stringify({schema:"khaemenes.prek-visual.v1",learnerId:activeId,updatedAt:new Date().toISOString(),...look,...extra}));
+  const payload={schema:"khaemenes.prek-visual.v1",learnerId:activeId,updatedAt:new Date().toISOString(),...look,...extra};
+  if(!verifiedWrite(profileKey(),payload))throw Error("profile-write-not-confirmed");
   renderLook();announce("Saved for this learner on this browser.");return true
  }
  catch{announce("Could not save. Browser storage may be full; try a smaller photo or export a backup.",true);return false}
@@ -375,7 +384,7 @@ function updateFavorite(id,add){
  // Preserve all other learner entries; reuse the exact favorites key the Preschool Garden writes.
  map[activeId]=next;
  try{
-  localStorage.setItem(FAVORITES_KEY,JSON.stringify(map));
+  if(!verifiedWrite(FAVORITES_KEY,map))throw Error("favorites-write-not-confirmed");
   renderLearning();
   $("pinStatus").textContent=add?"Adventure pinned for this learner.":"Adventure removed from this learner's favorites.";
  }catch{$("pinStatus").textContent="Could not save this change. Browser storage may be full."}
@@ -395,7 +404,7 @@ function updatePreschoolPath(pin){
  const filtered=entries.filter(x=>x?.id!=="khaemenes-preschool"&&x?.courseId!=="khaemenes-preschool");
  prior.learners[activeId]=pin?[...filtered,{id:"khaemenes-preschool",courseId:"khaemenes-preschool",title:"Khaemenes Preschool",subtitle:"Family-guided Pre-K learning",href:BASE,source:"preschool-profile",pinnedAt:new Date().toISOString()}]:filtered;
  prior.updatedAt=new Date().toISOString();
- try{localStorage.setItem(COURSE_KEY,JSON.stringify(prior));renderLearning();announce(pin?"Preschool pathway pinned for this child.":"Preschool pathway removed from this child's pins.")}catch{announce("Could not save the pathway pin. Nothing changed.",true)}
+ try{if(!verifiedWrite(COURSE_KEY,prior))throw Error("pathway-pin-write-not-confirmed");renderLearning();announce(pin?"Preschool pathway pinned for this child.":"Preschool pathway removed from this child's pins.")}catch{announce("Could not confirm the pathway pin was saved. Please check browser storage.",true)}
 }
 function renderLearning(){
  $("nextStep").replaceChildren();$("pinnedActivities").replaceChildren();
@@ -416,7 +425,8 @@ function renderLearning(){
  try{rows=C?.readLearner?.(activeId)||[]}catch{}
  if(!Array.isArray(rows))rows=[];
  const preschoolRows=rows.filter(row=>{
-  if(!row||row.stage!=="preschool"||!row.nextHref)return false;
+  if(!row||row.learnerId!==activeId||row.stage!=="preschool"||row.grade!=="Pre-K"||
+     row.courseId!=="preschool-adventure-garden"||!row.nextHref)return false;
   try{
    const target=new URL(row.nextHref,BASE);
    return target.protocol==="https:"&&target.origin==="https://vervenveda.com"&&
@@ -505,7 +515,7 @@ $("childPhoto").addEventListener("change",async event=>{
   img.src=url;
   if(img.decode)await img.decode();
   else await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject});
-  if(learnerId!==activeId){announce("The selected learner changed. Please choose the picture again.",true);return}
+  if(learnerId!==activeId||!eligible()||!$("adultConfirm").checked){announce("The learner or adult confirmation changed. Please choose the picture again.",true);return}
   const canvas=document.createElement("canvas");canvas.width=256;canvas.height=256;
   const ctx=canvas.getContext("2d");if(!ctx)throw Error("Image editing is unavailable in this browser");
   const size=Math.min(img.naturalWidth,img.naturalHeight);if(!size)throw Error("The selected image has no readable dimensions");
@@ -517,6 +527,7 @@ $("childPhoto").addEventListener("change",async event=>{
    if(data.length<180000)break;
   }
   if(!data||data.length>=180000)throw Error("The resized picture exceeds the local profile limit");
+  if(learnerId!==activeId||!eligible()||!$("adultConfirm").checked){announce("The learner or adult confirmation changed. The picture was not saved.",true);return}
   const previous=look.photo;look.photo=data;
   if(!saveLook()){look.photo=previous;renderLook();return}
   announce("Your picture is now showing in the profile and saved on this device.");$("photoHelp").textContent="✓ Your picture is showing in the profile above and saved on this device.";
