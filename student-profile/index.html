@@ -601,4 +601,14 @@ refresh();
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-universal-profile-look-editor.js?v=20261109-swatch-yearbook-v3" defer></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-adapter.js?v=20261109-hero-yearbook-v3" defer></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-entry.js?v=20261107-prek-v2" defer></script>
+
+<!-- Learner-owned profile creative rail: uses existing local photo and hero stores, never creates a second profile. -->
+<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-profile-creative-rail.js?v=20261109-universal-v1"></script>
+<script>
+(function(){
+ const show=()=>window.KhaemenesProfileCreativeRail?.mount?.("preschool","accountNote");
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",show,{once:true});else show();
+ window.addEventListener("pageshow",show);
+})();
+</script>
 </body></html>
