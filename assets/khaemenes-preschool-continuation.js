@@ -1,6 +1,6 @@
 (function attachKhaemenesPreschoolContinuation(global){
 "use strict";
-const VERSION="1.0.0";
+const VERSION="1.0.1";
 const PROFILE_KEY="khaemenes_preschool_profile_v1";
 const VISITS_KEY="khaemenes_profile_visits_v1";
 const FAVORITES_KEY="khaemenes_profile_favorites_v1";
@@ -13,7 +13,9 @@ function activePreschoolLearner(){
  const ids=R.activeIds?.()||{};
  const learner=R.getLearner?.(ids.learnerId)||null;
  const stage=R.normalizeStage?R.normalizeStage(learner?.stage):String(learner?.stage||"").toLowerCase();
- return stage==="preschool"?learner:null;
+ if(stage!=="preschool"||learner?.grade!=="pre-k"||learner?.selfDirectedAdult||!learner?.familyId)return null;
+ const family=R.getFamily?.(learner.familyId);
+ return family?.learnerIds?.includes(learner.learnerId)?learner:null;
 }
 function linkedProfile(learner){
  const profile=read(PROFILE_KEY,null);
