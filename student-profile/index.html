@@ -131,6 +131,13 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
 #kplsDialog :is(button,select,input){font-family:Nunito,"Trebuchet MS",Arial,sans-serif!important}
 #prek-panel-pictureTitle{display:none!important}
 </style>
+<style id="prek-photo-frame-parity-20261109">
+#frameShape,#childPhoto,.appearance-controls button{font-size:16px;min-height:44px;border-radius:7px}
+body[data-prek-frame="rhombus"] .profile-hero .photo{border-radius:0!important;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)!important}
+body[data-prek-frame="semicircle"] .profile-hero .photo{border-radius:0!important;clip-path:polygon(0 100%,0 50%,5% 28%,18% 12%,36% 2%,64% 2%,82% 12%,95% 28%,100% 50%,100% 100%)!important}
+body[data-prek-frame="kite"] .profile-hero .photo{border-radius:0!important;clip-path:polygon(50% 0%,95% 36%,50% 100%,5% 36%)!important}
+body[data-prek-frame="octagon"] .profile-hero .photo{border-radius:0!important;clip-path:polygon(29% 0%,71% 0%,100% 29%,100% 71%,71% 100%,29% 100%,0% 71%,0% 29%)!important}
+</style>
 </head>
 <body data-prek-background="sky" data-profile-stage="preschool">
 <a href="#main" class="skip">Skip to Pre-K profile</a>
@@ -168,7 +175,7 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
 <h2 id="pictureTitle">My picture &amp; avatar</h2><p class="muted">Choose a picture with a grown-up. Your photo appears in the large profile frame above and is saved privately on this device, not uploaded to a server.</p>
 <label><input type="checkbox" id="adultConfirm"> I am an adult helping the selected child personalize this profile.</label>
 <p class="notice" id="photoHelp">To add a picture, select your Pre-K learner and check the grown-up confirmation box above. Your photo stays on this device.</p><div class="choice" id="avatarChoices" aria-label="Choose an avatar"></div>
-<label for="frameShape">Choose a picture frame shape</label><select id="frameShape" aria-label="Picture frame shape"><option value="square">Rounded square</option><option value="circle">Circle</option><option value="oval">Oval</option><option value="diamond">Diamond</option><option value="hexagon">Hexagon</option></select>
+<label for="frameShape">Choose a picture frame shape</label><select id="frameShape" aria-label="Picture frame shape"><option value="square">Rounded square</option><option value="circle">Circle</option><option value="oval">Oval</option><option value="rhombus">Rhombus</option><option value="semicircle">Semicircle</option><option value="kite">Kite</option><option value="octagon">Octagon</option></select>
 <label for="childPhoto">Choose a profile photo (JPG, PNG, WebP, or GIF; under 5 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
 <div class="actions"><button type="button" id="removePhoto" class="secondary">Remove photo</button></div>
 </section>
@@ -237,13 +244,13 @@ const KEY="khaemenes_preschool_visual_profile_v1:";
 const FAVORITES_KEY="khaemenes_profile_favorites_v1";
 const COURSE_KEY="khaemenes_course_pins_v1";
 const THEMES=["sky","forest","ocean","sunset","night"];
-const FRAMES=["square","circle","oval","diamond","hexagon"];
+const FRAMES=["square","circle","oval","rhombus","semicircle","kite","octagon"];
 const AVATARS=["🌈","🦊","🦋","🦉","🚀","🌻","🐝","🐢"];
 const $=id=>document.getElementById(id);
 const R=window.KhaemenesFamilyRegistry;
 const C=window.KhaemenesLearningContinuation;
 const catalog=window.KhaemenesPreschoolCatalog;
-let activeId="",look={theme:"sky",avatar:"🌈",photo:""};
+let activeId="",look={theme:"sky",avatar:"🌈",photo:""},photoRequest=0;
 const read=(key,fallback)=>{try{const val=localStorage.getItem(key);return val?JSON.parse(val):fallback}catch{return fallback}};
 function learner(){
  const value=R?.getLearner?.()||null;
@@ -258,7 +265,7 @@ function normalize(input){
  const v=input&&typeof input==="object"?input:{};
  return {
   theme:THEMES.includes(v.theme)?v.theme:"sky",
-  frame:FRAMES.includes(v.frame)?v.frame:"square",
+  frame:FRAMES.includes(v.frame)?v.frame:v.frame==="diamond"?"rhombus":v.frame==="hexagon"?"octagon":"square",
   avatar:AVATARS.includes(v.avatar)?v.avatar:"🌈",
   photo:typeof v.photo==="string"&&/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(v.photo)&&v.photo.length<180000?v.photo:""
  };
@@ -273,7 +280,7 @@ function saveLook(){
   if(prior?.learnerId===activeId&&prior?.schema==="khaemenes.prek-visual.v1"&&prior?.universalLook&&typeof prior.universalLook==="object"){
    const rich={...prior.universalLook};
    if(prior.avatar!==look.avatar)delete rich.badge; // Native child avatar selection remains functional.
-   if(prior.frame!==look.frame)rich.frame=look.frame==="diamond"?"rhombus":look.frame==="hexagon"?"octagon":look.frame;
+   if(prior.frame!==look.frame)rich.frame=look.frame;
    extra={universalLook:rich};
   }
   localStorage.setItem(profileKey(),JSON.stringify({schema:"khaemenes.prek-visual.v1",learnerId:activeId,updatedAt:new Date().toISOString(),...look,...extra}));
@@ -481,10 +488,10 @@ $("childPhoto").addEventListener("change",async event=>{
  const file=event.target.files?.[0];
  if(!file)return;
  if(!consent()){event.target.value="";return}
- if(!["image/jpeg","image/png","image/webp","image/gif"].includes(file.type)||file.size>5*1024*1024){
-  announce("Please choose a JPG, PNG, WebP, or GIF smaller than 5 MB.",true);event.target.value="";return;
+ if(!["image/jpeg","image/png","image/webp","image/gif"].includes(file.type)||file.size===0||file.size>4*1024*1024){
+  announce("Please choose a JPG, PNG, WebP, or GIF smaller than 4 MB.",true);event.target.value="";return;
  }
- const learnerId=activeId;
+ const learnerId=activeId,request=++photoRequest;
  announce("Preparing your picture…");$("photoHelp").textContent="Preparing your picture. Please wait…";
  const url=URL.createObjectURL(file);
  try{
@@ -492,7 +499,7 @@ $("childPhoto").addEventListener("change",async event=>{
   img.src=url;
   if(img.decode)await img.decode();
   else await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject});
-  if(learnerId!==activeId){announce("The selected learner changed. Please choose the picture again.",true);return}
+  if(learnerId!==activeId||request!==photoRequest){announce("The selected learner or picture changed. Please choose the picture again.",true);return}
   const canvas=document.createElement("canvas");canvas.width=256;canvas.height=256;
   const ctx=canvas.getContext("2d");if(!ctx)throw Error("Image editing is unavailable in this browser");
   const size=Math.min(img.naturalWidth,img.naturalHeight);if(!size)throw Error("The selected image has no readable dimensions");
@@ -597,7 +604,7 @@ refresh();
 </script>
 <!-- Shared Account Cloud editor: explicit Preschool adapter, one universal instance,
      original native controls and guardian-owned backup tools retained for fallback. -->
-<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-universal-profile-look-editor.js?v=20261107-universal-v5" defer></script>
+<script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-universal-profile-look-editor.js?v=20261109-photo-safety-v1" defer></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-adapter.js?v=20261107-prek-v3" defer></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-entry.js?v=20261107-prek-v2" defer></script>
 </body></html>
