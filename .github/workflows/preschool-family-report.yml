@@ -10,6 +10,7 @@ on:
       - assets/khaemenes-prek-family-day.js
       - student-profile/index.html
       - tests/preschool-family-report.test.cjs
+      - tests/prek-family-browser-check.html
       - .github/workflows/preschool-family-report.yml
 jobs:
   verify:
@@ -22,3 +23,16 @@ jobs:
         with:
           node-version: '22'
       - run: node --test tests/preschool-family-report.test.cjs
+      - name: Headless Chromium with fictional learners
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/prek-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+          for i in 1 2 3 4 5; do
+            if curl -fsS http://127.0.0.1:8765/tests/prek-family-browser-check.html >/dev/null; then break; fi
+            sleep 1
+          done
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME" || { echo "No Chromium browser available"; exit 1; }
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=4000 --dump-dom "http://127.0.0.1:8765/tests/prek-family-browser-check.html" > /tmp/prek-browser-dom.html
+          grep -F 'id="result" data-result="PASS"' /tmp/prek-browser-dom.html
