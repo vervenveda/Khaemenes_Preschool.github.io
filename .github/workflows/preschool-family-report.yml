@@ -7,6 +7,7 @@ on:
       - index.html
       - assets/khaemenes-preschool-continuation.js
       - assets/khaemenes-prek-family-progress.js
+      - assets/khaemenes-prek-family-day.js
       - student-profile/index.html
       - tests/preschool-family-report.test.cjs
       - .github/workflows/preschool-family-report.yml
