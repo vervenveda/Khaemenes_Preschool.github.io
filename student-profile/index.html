@@ -160,6 +160,7 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
 <button type="button" class="prek-tile" data-prek-panel="backgroundTitle" aria-expanded="false" aria-controls="prek-panel-backgroundTitle"><span aria-hidden="true">🌈</span>My Colors</button>
 <button type="button" class="prek-tile" data-prek-panel="kindergartenHandoff" aria-expanded="false" aria-controls="prek-panel-kindergartenHandoff"><span aria-hidden="true">🌻</span>My Graduation Garden</button>
 <button type="button" class="prek-tile" data-prek-panel="learningStudio" aria-expanded="false" aria-controls="prek-panel-learningStudio"><span aria-hidden="true">🏡</span>Grown-Up Corner</button>
+<button type="button" class="prek-tile" data-prek-panel="prekFamilyProgress" aria-expanded="false" aria-controls="prek-panel-prekFamilyProgress"><span aria-hidden="true">📖</span>Family Progress</button>
 </nav>
 <section class="prek-daily" aria-label="My daily schedule"><h2>🌞 My Daily Learning &amp; Classes</h2><p>Choose a class to open its own learning activity. Today’s Lesson opens the Preschool daily plan.</p><div class="prek-classes"><a href="../#today">📅 Today’s Lesson</a><a href="../apps/ABC_Story_Time/index.html">🔤 Letters &amp; Reading</a><a href="../apps/numbers_1-12_fun_index.html">🔢 Numbers &amp; Shapes</a><a href="../apps/Art_color_studio/index.html">🎨 Art &amp; Creativity</a><a href="../apps/Music_piano_index.html">🎵 Music &amp; Movement</a><a href="../apps/weather_for_tots_index.html">🌿 Science &amp; Nature</a></div></section>
 <div id="prek-popup-host" aria-live="polite"></div>
@@ -214,6 +215,17 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
     </div>
   </div>
 </section>
+<section class="card" id="prekFamilyProgress" aria-labelledby="prekFamilyProgressTitle">
+<p class="eyebrow">My learning story · read with a grown-up</p>
+<h2 id="prekFamilyProgressTitle">Family Progress</h2>
+<p id="prekFamilyProgressMessage" role="status" aria-live="polite">Checking this child's available adventure summary…</p>
+<div id="prekFamilyProgressDetails" class="muted" aria-live="polite"></div>
+<p class="muted">This is a browser-local activity summary. Pre-K play is not graded, and no cross-device synchronization is claimed.</p>
+<div class="actions">
+<a class="button" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/#family-progress">Open Family Learning Center</a>
+<a class="button secondary" href="../#rooms">Explore Preschool Adventures</a>
+</div>
+</section>
 <section class="card" id="learningStudio">
 <p class="eyebrow">One profile · the full Academy feature spectrum</p>
 <h2>Goals, learning map, evidence, workspace &amp; backups</h2>
@@ -229,6 +241,7 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-learning-continuation.js"></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-profile-v2.js"></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-quick-pins-v1.js"></script>
+<script src="../assets/khaemenes-prek-family-progress.js"></script>
 <script>
 (function(){
 "use strict";
@@ -583,7 +596,7 @@ refresh();
 /* Progressive enhancement: relocate existing feature nodes, preserving their IDs, listeners and saved state. */
 (function(){
  const host=document.getElementById("prek-popup-host");if(!host)return;
- const mapping={nextTitle:()=>document.getElementById("nextTitle")?.closest("section"),pinsTitle:()=>document.getElementById("pinsTitle")?.closest("section"),pictureTitle:()=>document.getElementById("pictureTitle")?.closest("section"),backgroundTitle:()=>document.getElementById("backgroundTitle")?.closest("section"),kindergartenHandoff:()=>document.getElementById("kindergartenHandoff"),learningStudio:()=>document.getElementById("learningStudio")};
+ const mapping={nextTitle:()=>document.getElementById("nextTitle")?.closest("section"),pinsTitle:()=>document.getElementById("pinsTitle")?.closest("section"),pictureTitle:()=>document.getElementById("pictureTitle")?.closest("section"),backgroundTitle:()=>document.getElementById("backgroundTitle")?.closest("section"),kindergartenHandoff:()=>document.getElementById("kindergartenHandoff"),learningStudio:()=>document.getElementById("learningStudio"),prekFamilyProgress:()=>document.getElementById("prekFamilyProgress")};
  const panels={};let open=null;
  for(const [key,find] of Object.entries(mapping)){
   const node=find();if(!node)continue;
