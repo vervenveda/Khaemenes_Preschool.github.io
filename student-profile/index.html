@@ -559,20 +559,27 @@ $("importLook").addEventListener("change",async event=>{
  const file=event.target.files?.[0];event.target.value="";if(!file||!consent())return;
  if(file.size>400000){announce("Visual backup file is too large.",true);return}
  const id=activeId;
- try{const value=JSON.parse(await file.text());if(id!==activeId||value?.schema!=="khaemenes.prek-visual.v1"||value?.learnerId!==activeId){announce("Backup belongs to another learner or has the wrong format. No changes made.",true);return}
-  const prior=look;look=normalize(value);
-  if(!saveLook()){look=prior;renderLook()}
-  else{
-   // Restore verified extras from the same learner's native visual backup.
-   const saved=read(profileKey(),null),extra=value.universalLook;
-   const validFrame=new Set(["rectangle","square","circle","oval","rhombus","heart","star","octagon","semicircle","kite"]);
-   const validBadge=new Set(["★","✦","📚","🧭","⚛","🎨","🎵","🌿","🔬","🧪","🧬","🌌","🌙","☀️","🪐","🌎","⚙️","💻","✏️","🎭","📐","🏛️","🦋","🏆"]);
-   const accepted=extra&&validFrame.has(extra.frame)&&validBadge.has(extra.badge)&&(!extra.cardColor||/^#[0-9a-f]{6}$/i.test(extra.cardColor));
-   const allowedFonts=new Set(["academy","friendly","classic","modern","handwriting"]);
-   if(saved){if(accepted)saved.universalLook={frame:extra.frame,badge:extra.badge,cardColor:extra.cardColor||"",nameFont:allowedFonts.has(extra.nameFont)?extra.nameFont:"academy"};else delete saved.universalLook;
-    localStorage.setItem(profileKey(),JSON.stringify(saved));renderLook()}
+ try{
+  const value=JSON.parse(await file.text());
+  if(id!==activeId||!eligible()||!$("adultConfirm").checked||value?.schema!=="khaemenes.prek-visual.v1"||value?.learnerId!==id){
+   announce("The learner or adult confirmation changed, or this backup belongs to another learner. No changes made.",true);return;
   }
- }catch{announce("Could not read the visual backup. No changes made.",true)}
+  const next=normalize(value),extra=value.universalLook;
+  const validFrame=new Set(["rectangle","square","circle","oval","rhombus","heart","star","octagon","semicircle","kite"]);
+  const validBadge=new Set(["★","✦","📚","🧭","⚛","🎨","🎵","🌿","🔬","🧪","🧬","🌌","🌙","☀️","🪐","🌎","⚙️","💻","✏️","🎭","📐","🏛️","🦋","🏆"]);
+  const fonts=new Set(["academy","friendly","classic","modern","handwriting"]);
+  const accepted=extra&&validFrame.has(extra.frame)&&validBadge.has(extra.badge)&&(!extra.cardColor||/^#[0-9a-f]{6}$/i.test(extra.cardColor));
+  // Build the full replacement before one verified write; no partial intermediate restore.
+  const payload={
+   schema:"khaemenes.prek-visual.v1",learnerId:id,updatedAt:new Date().toISOString(),...next,
+   ...(accepted?{universalLook:{frame:extra.frame,badge:extra.badge,cardColor:extra.cardColor||"",nameFont:fonts.has(extra.nameFont)?extra.nameFont:"academy"}}:{})
+  };
+  if(!verifiedWrite(profileKey(),payload)){
+   announce("Could not confirm the restored profile was saved. Review browser storage before retrying.",true);return;
+  }
+  if(id!==activeId){announce("Learner selection changed during restoration. Return to the Family Portal and review the local profile.",true);return}
+  look=next;renderLook();announce("Visual backup restored for this learner on this browser.");
+ }catch{announce("Could not read or save the visual backup. No profile change was confirmed.",true)}
 });
 $("learnerSelect").addEventListener("change",event=>{
  const id=event.target.value, family=R?.getFamily?.();
