@@ -40,3 +40,47 @@ test("Pre-K family summary filters another child's record",()=>{
  vm.runInNewContext(module,{window,document,Number,Date},{timeout:2000});
  assert.equal(window.KhaemenesPreKFamilyProgress.summary().kind,"missing");
 });
+
+test("Pre-K profile full inline JavaScript parses and keeps native control identities",()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,"../student-profile/index.html"),"utf8");
+ const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);
+ assert.ok(scripts.length>=3);
+ scripts.forEach((code,i)=>new vm.Script(code,{filename:"prek-inline-"+i+".js"}));
+ for(const id of ["adultConfirm","childPhoto","importLook","exportLook","pinAdventure","pinPreschoolPath","learnerSelect","prekFamilyProgress"])
+  assert.ok(html.includes('id="'+id+'"'),"Missing original control "+id);
+});
+test("Bubble 1: learner is confirmed in selected family and grade before personalization",()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,"../student-profile/index.html"),"utf8");
+ assert.match(html,/value\.learnerId===ids\.learnerId/);
+ assert.match(html,/value\.familyId===family\.familyId/);
+ assert.match(html,/value\.grade==="pre-k"/);
+ assert.match(html,/family\.learnerIds\?\.includes\(value\.learnerId\)/);
+});
+test("Bubble 2: next-step report belongs to current student and canonical course",()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,"../student-profile/index.html"),"utf8");
+ assert.match(html,/row\.learnerId!==activeId/);
+ assert.match(html,/row\.courseId!=="preschool-adventure-garden"/);
+ assert.match(html,/row\.grade!=="Pre-K"/);
+ assert.match(html,/target\.origin==="https:\/\/vervenveda\.com"/);
+});
+test("Bubbles 3 and 4: profile and pins verify browser storage writes",()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,"../student-profile/index.html"),"utf8");
+ assert.match(html,/function verifiedWrite\(key,payload\)/);
+ assert.match(html,/localStorage\.getItem\(key\)===expected/);
+ assert.match(html,/verifiedWrite\(profileKey\(\),payload\)/);
+ assert.match(html,/verifiedWrite\(FAVORITES_KEY,map\)/);
+ assert.match(html,/verifiedWrite\(COURSE_KEY,prior\)/);
+ assert.match(html,/learnerId!==activeId\|\|!eligible\(\)\|\|!\$\("adultConfirm"\)\.checked/);
+});
+test("Bubble 5: backup is one validated write, not a partial two-phase restore",()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,"../student-profile/index.html"),"utf8");
+ const start=html.indexOf('$("importLook").addEventListener("change",async event=>{');
+ const end=html.indexOf('$("learnerSelect").addEventListener',start);
+ assert.ok(start>=0&&end>start);
+ const code=html.slice(start,end);
+ assert.match(code,/const value=JSON\.parse\(await file\.text\(\)\)/);
+ assert.match(code,/id!==activeId\|\|!eligible\(\)\|\|!\$\("adultConfirm"\)\.checked/);
+ assert.equal((code.match(/verifiedWrite\(profileKey\(\),payload\)/g)||[]).length,1);
+ assert.doesNotMatch(code,/localStorage\.setItem\s*\(/);
+ assert.doesNotMatch(code,/saveLook\s*\(/);
+});
