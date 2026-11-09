@@ -84,3 +84,72 @@ test("Bubble 5: backup is one validated write, not a partial two-phase restore",
  assert.doesNotMatch(code,/localStorage\.setItem\s*\(/);
  assert.doesNotMatch(code,/saveLook\s*\(/);
 });
+
+function syntheticDay({id="child-a",familyId="family-a",writeFails=false}={}){
+ const code=fs.readFileSync(path.resolve(__dirname,"../assets/khaemenes-prek-family-day.js"),"utf8");
+ const store=new Map(),events={};
+ const child={learnerId:id,familyId,stage:"preschool",grade:"pre-k"};
+ const family={familyId,learnerIds:[id]};
+ const localStorage={
+  getItem:k=>store.get(k)??null,
+  setItem:(k,v)=>{if(!writeFails)store.set(k,v)}
+ };
+ const w={
+  localStorage,
+  KhaemenesFamilyRegistry:{
+   activeIds:()=>({learnerId:id,familyId}),
+   getLearner:()=>child,
+   getFamily:()=>family
+  },
+  addEventListener:(name,fn)=>{events[name]=fn}
+ };
+ w.window=w;
+ vm.runInNewContext(code,{window:w,document:{readyState:"loading",addEventListener:()=>{}},Date,Number,Object},{timeout:2000});
+ return {api:w.KhaemenesPreKFamilyDay,store,child,family};
+}
+test("Pre-K family day saves only current child and keeps short bounded observations",()=>{
+ const {api,store}=syntheticDay();
+ const a=api.update("checks",{story:true,create:false,move:true,connect:true});
+ assert.equal(a.ok,true);
+ const b=api.update("observation","A".repeat(280));
+ assert.equal(b.ok,true);
+ const snap=api.view();
+ assert.equal(snap.kind,"ready");
+ assert.equal(snap.today.checks.story,true);
+ assert.equal(snap.today.checks.create,false);
+ assert.equal(snap.today.observation.length,240);
+ assert.equal(store.size,1);
+ assert.match([...store.keys()][0],/child-a/);
+});
+test("Pre-K daily notes never overwrite mismatched owner records",()=>{
+ const {api,store}=syntheticDay();
+ store.set("khaemenes.prek.family-day.v1:child-a",JSON.stringify({schema:"khaemenes.prek.family-day.v1",learnerId:"child-b",days:{}}));
+ const result=api.update("observation","Sample");
+ assert.equal(result.ok,false);
+ assert.equal(api.view().kind,"invalid");
+ assert.match(store.get("khaemenes.prek.family-day.v1:child-a"),/child-b/);
+});
+test("Pre-K daily notes fail closed on unverified writes and missing family membership",()=>{
+ const bad=syntheticDay({writeFails:true});
+ assert.equal(bad.api.update("checks",{story:true}).ok,false);
+ assert.equal(bad.store.size,0);
+ const missing=syntheticDay();
+ missing.family.learnerIds=[];
+ assert.equal(missing.api.update("checks",{story:true}).ok,false);
+ assert.equal(missing.api.view().kind,"select");
+});
+test("Pre-K profile keeps both new age-appropriate panels in the shared pop-up menu",()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,"../student-profile/index.html"),"utf8");
+ for(const panel of ["prekMyDay","prekKeepsakes"]){
+  assert.match(html,new RegExp('data-prek-panel="'+panel+'"'));
+  assert.match(html,new RegExp('id="'+panel+'"'));
+ }
+ assert.match(html,/khaemenes-prek-family-day\.js/);
+ assert.match(html,/id="prekDayAdultConfirm"/);
+ assert.match(html,/id="prekKeepsakeAdultConfirm"/);
+ assert.match(html,/maxlength="240"/);
+ const module=fs.readFileSync(path.resolve(__dirname,"../assets/khaemenes-prek-family-day.js"),"utf8");
+ assert.doesNotMatch(module,/\.publish\(/);
+ assert.doesNotMatch(module,/writeState\(/);
+ new vm.Script(module);
+});
