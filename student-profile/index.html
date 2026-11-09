@@ -176,7 +176,7 @@ body[data-prek-frame="octagon"] .profile-hero .photo{border-radius:0!important;c
 <label><input type="checkbox" id="adultConfirm"> I am an adult helping the selected child personalize this profile.</label>
 <p class="notice" id="photoHelp">To add a picture, select your Pre-K learner and check the grown-up confirmation box above. Your photo stays on this device.</p><div class="choice" id="avatarChoices" aria-label="Choose an avatar"></div>
 <label for="frameShape">Choose a picture frame shape</label><select id="frameShape" aria-label="Picture frame shape"><option value="square">Rounded square</option><option value="circle">Circle</option><option value="oval">Oval</option><option value="rhombus">Rhombus</option><option value="semicircle">Semicircle</option><option value="kite">Kite</option><option value="octagon">Octagon</option></select>
-<label for="childPhoto">Choose a profile photo (JPG, PNG, WebP, or GIF; under 4 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><button type="button" class="secondary" id="nativeYearbookPicture" style="font-size:16px;min-height:44px;border-radius:7px;margin-top:8px">Choose from My Yearbook</button>
+<label for="childPhoto">Choose a profile photo (JPG, PNG, WebP, or GIF; under 4 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><button type="button" class="secondary" id="nativeYearbookPicture" style="font-size:16px;min-height:44px;border-radius:7px;margin-top:8px">Choose from My Yearbook</button><button type="button" id="openYearbookFromProfile" style="font-size:16px;min-height:44px;border-radius:7px;margin-top:8px;background:#243038;color:#fff8e9">Open My Yearbook</button>
 <div class="actions"><button type="button" id="removePhoto" class="secondary">Remove photo</button></div>
 </section>
 <section class="card span6 appearance-controls" aria-labelledby="backgroundTitle">
@@ -485,6 +485,12 @@ function refresh(){
 }
 for(const avatar of AVATARS){const b=document.createElement("button");b.type="button";b.className="secondary";b.dataset.avatar=avatar;b.textContent=avatar;b.setAttribute("aria-label","Use "+avatar+" avatar");b.addEventListener("click",()=>{if(!consent())return;look.avatar=avatar;look.photo="";saveLook()});$("avatarChoices").append(b)}
 for(const theme of THEMES){const b=document.createElement("button");b.type="button";b.className="secondary";b.dataset.theme=theme;b.textContent=theme[0].toUpperCase()+theme.slice(1);b.addEventListener("click",()=>{if(!consent())return;look.theme=theme;saveLook()});$("backgroundChoices").append(b)}
+$("openYearbookFromProfile").addEventListener("click",()=>{
+ if(!consent())return;
+ if(!window.KhaemenesYearbookProfileImages?.openYearbook?.(activeId)){
+  announce("Yearbook is unavailable for this learner.",true)
+ }
+});
 $("nativeYearbookPicture").addEventListener("click",()=>{
  if(!consent())return;
  const id=activeId,bridge=window.KhaemenesYearbookProfileImages;
