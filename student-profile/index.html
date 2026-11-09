@@ -131,6 +131,16 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
 #kplsDialog :is(button,select,input){font-family:Nunito,"Trebuchet MS",Arial,sans-serif!important}
 #prek-panel-pictureTitle{display:none!important}
 </style>
+<style id="prek-family-day-style">
+main.shell .prek-day-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+main.shell .prek-day-checks label{padding:14px;border:1px solid #8ea7a8;border-radius:7px;background:#fffdf8;color:#243b4b;font-size:16px;line-height:1.5}
+main.shell .prek-day-adult{margin:15px 0;padding:10px;font-size:16px}
+main.shell #prekKeepsakes textarea{display:block;width:100%;min-height:100px;background:#fff;color:#243b4b;font-size:16px;line-height:1.55;border:1px solid #8ea7a8;border-radius:7px;padding:12px}
+main.shell .prek-keepsake-list{display:grid;gap:10px;margin:12px 0}
+main.shell .prek-keepsake-entry{border:1px solid #a8b9b3;border-radius:7px;padding:13px;background:#fffdf8;color:#243b4b;overflow-wrap:anywhere}
+main.shell .prek-keepsake-entry p{margin:6px 0 0;font-size:16px}
+@media(max-width:680px){main.shell .prek-day-checks{grid-template-columns:1fr}}
+</style>
 </head>
 <body data-prek-background="sky" data-profile-stage="preschool">
 <a href="#main" class="skip">Skip to Pre-K profile</a>
@@ -161,6 +171,8 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
 <button type="button" class="prek-tile" data-prek-panel="kindergartenHandoff" aria-expanded="false" aria-controls="prek-panel-kindergartenHandoff"><span aria-hidden="true">🌻</span>My Graduation Garden</button>
 <button type="button" class="prek-tile" data-prek-panel="learningStudio" aria-expanded="false" aria-controls="prek-panel-learningStudio"><span aria-hidden="true">🏡</span>Grown-Up Corner</button>
 <button type="button" class="prek-tile" data-prek-panel="prekFamilyProgress" aria-expanded="false" aria-controls="prek-panel-prekFamilyProgress"><span aria-hidden="true">📖</span>Family Progress</button>
+<button type="button" class="prek-tile" data-prek-panel="prekMyDay" aria-expanded="false" aria-controls="prek-panel-prekMyDay"><span aria-hidden="true">☀️</span>My Day</button>
+<button type="button" class="prek-tile" data-prek-panel="prekKeepsakes" aria-expanded="false" aria-controls="prek-panel-prekKeepsakes"><span aria-hidden="true">🌿</span>Learning Keepsakes</button>
 </nav>
 <section class="prek-daily" aria-label="My daily schedule"><h2>🌞 My Daily Learning &amp; Classes</h2><p>Choose a class to open its own learning activity. Today’s Lesson opens the Preschool daily plan.</p><div class="prek-classes"><a href="../#today">📅 Today’s Lesson</a><a href="../apps/ABC_Story_Time/index.html">🔤 Letters &amp; Reading</a><a href="../apps/numbers_1-12_fun_index.html">🔢 Numbers &amp; Shapes</a><a href="../apps/Art_color_studio/index.html">🎨 Art &amp; Creativity</a><a href="../apps/Music_piano_index.html">🎵 Music &amp; Movement</a><a href="../apps/weather_for_tots_index.html">🌿 Science &amp; Nature</a></div></section>
 <div id="prek-popup-host" aria-live="polite"></div>
@@ -215,6 +227,33 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
     </div>
   </div>
 </section>
+<section class="card" id="prekMyDay" aria-labelledby="prekMyDayTitle">
+<p class="eyebrow">Our family learning day</p>
+<h2 id="prekMyDayTitle">☀️ My Day</h2>
+<p>Choose gentle activities with a grown-up. These checkmarks celebrate participation, not test performance.</p>
+<div class="prek-day-checks">
+<label><input type="checkbox" id="prekTask_story"> 📚 Share a story or listen to one</label>
+<label><input type="checkbox" id="prekTask_create"> 🎨 Draw, build or imagine</label>
+<label><input type="checkbox" id="prekTask_move"> 🌿 Move, stretch or play outside</label>
+<label><input type="checkbox" id="prekTask_connect"> 💛 Practice kindness or family time</label>
+</div>
+<label class="prek-day-adult"><input type="checkbox" id="prekDayAdultConfirm"> I am an adult helping the selected child record today's activities.</label>
+<button type="button" id="prekSaveDay">Save Our Day</button>
+<p id="prekDayStatus" role="status" aria-live="polite">Choose a family learner to begin.</p>
+</section>
+<section class="card" id="prekKeepsakes" aria-labelledby="prekKeepsakesTitle">
+<p class="eyebrow">Family-assisted learning moments</p>
+<h2 id="prekKeepsakesTitle">🌿 Learning Keepsakes</h2>
+<p>Write a short, optional observation about something enjoyed, noticed or created. Avoid full names, addresses, medical details or private information. These are family notes, not academic evaluations.</p>
+<label for="prekObservation">Today's family observation (maximum 240 characters)</label>
+<textarea id="prekObservation" rows="3" maxlength="240" placeholder="We enjoyed making shapes with blocks today."></textarea>
+<label class="prek-day-adult"><input type="checkbox" id="prekKeepsakeAdultConfirm"> I am an adult helping the selected child save this observation.</label>
+<button type="button" id="prekSaveObservation">Save Learning Keepsake</button>
+<p id="prekKeepsakeStatus" role="status" aria-live="polite"></p>
+<h3>Recent Learning Moments</h3>
+<div id="prekKeepsakeEntries" class="prek-keepsake-list" aria-live="polite"></div>
+<p class="muted">Saved locally for this learner, up to the most recent 14 calendar days. These observations do not grant grades, certification or enrollment.</p>
+</section>
 <section class="card" id="prekFamilyProgress" aria-labelledby="prekFamilyProgressTitle">
 <p class="eyebrow">My learning story · read with a grown-up</p>
 <h2 id="prekFamilyProgressTitle">Family Progress</h2>
@@ -242,6 +281,7 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-profile-v2.js"></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-quick-pins-v1.js"></script>
 <script src="../assets/khaemenes-prek-family-progress.js"></script>
+<script src="../assets/khaemenes-prek-family-day.js"></script>
 <script>
 (function(){
 "use strict";
@@ -614,7 +654,7 @@ refresh();
 /* Progressive enhancement: relocate existing feature nodes, preserving their IDs, listeners and saved state. */
 (function(){
  const host=document.getElementById("prek-popup-host");if(!host)return;
- const mapping={nextTitle:()=>document.getElementById("nextTitle")?.closest("section"),pinsTitle:()=>document.getElementById("pinsTitle")?.closest("section"),pictureTitle:()=>document.getElementById("pictureTitle")?.closest("section"),backgroundTitle:()=>document.getElementById("backgroundTitle")?.closest("section"),kindergartenHandoff:()=>document.getElementById("kindergartenHandoff"),learningStudio:()=>document.getElementById("learningStudio"),prekFamilyProgress:()=>document.getElementById("prekFamilyProgress")};
+ const mapping={nextTitle:()=>document.getElementById("nextTitle")?.closest("section"),pinsTitle:()=>document.getElementById("pinsTitle")?.closest("section"),pictureTitle:()=>document.getElementById("pictureTitle")?.closest("section"),backgroundTitle:()=>document.getElementById("backgroundTitle")?.closest("section"),kindergartenHandoff:()=>document.getElementById("kindergartenHandoff"),learningStudio:()=>document.getElementById("learningStudio"),prekFamilyProgress:()=>document.getElementById("prekFamilyProgress"),prekMyDay:()=>document.getElementById("prekMyDay"),prekKeepsakes:()=>document.getElementById("prekKeepsakes")};
  const panels={};let open=null;
  for(const [key,find] of Object.entries(mapping)){
   const node=find();if(!node)continue;
