@@ -176,7 +176,7 @@ body[data-prek-frame="octagon"] .profile-hero .photo{border-radius:0!important;c
 <label><input type="checkbox" id="adultConfirm"> I am an adult helping the selected child personalize this profile.</label>
 <p class="notice" id="photoHelp">To add a picture, select your Pre-K learner and check the grown-up confirmation box above. Your photo stays on this device.</p><div class="choice" id="avatarChoices" aria-label="Choose an avatar"></div>
 <label for="frameShape">Choose a picture frame shape</label><select id="frameShape" aria-label="Picture frame shape"><option value="square">Rounded square</option><option value="circle">Circle</option><option value="oval">Oval</option><option value="rhombus">Rhombus</option><option value="semicircle">Semicircle</option><option value="kite">Kite</option><option value="octagon">Octagon</option></select>
-<label for="childPhoto">Choose a profile photo (JPG, PNG, WebP, or GIF; under 5 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+<label for="childPhoto">Choose a profile photo (JPG, PNG, WebP, or GIF; under 4 MB)</label><input id="childPhoto" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
 <div class="actions"><button type="button" id="removePhoto" class="secondary">Remove photo</button></div>
 </section>
 <section class="card span6 appearance-controls" aria-labelledby="backgroundTitle">
@@ -454,6 +454,7 @@ function renderLearnerChoices(){
  area.hidden=candidates.length===0||(candidates.length===1&&candidates[0].learnerId===active?.learnerId);
 }
 function refresh(){
+ photoRequest++; // Cancel stale photo decoding after learner selection.
  renderLearnerChoices();
  const l=learner();
  const box=$("accountNote");
@@ -518,7 +519,7 @@ $("childPhoto").addEventListener("change",async event=>{
   announce("The picture could not be added: "+(error?.message||"unsupported image")+". Try a JPG or PNG.",true);$("photoHelp").textContent="Picture not saved. Try a JPG or PNG file.";
  }finally{URL.revokeObjectURL(url);event.target.value=""}
 });
-$("removePhoto").addEventListener("click",()=>{if(!consent())return;look.photo="";saveLook()});
+$("removePhoto").addEventListener("click",()=>{if(!consent())return;photoRequest++;look.photo="";saveLook()});
 $("pinAdventure").addEventListener("click",()=>updateFavorite($("adventureSelect").value,true));
 $("pinPreschoolPath").addEventListener("click",()=>updatePreschoolPath(true));
 $("unpinPreschoolPath").addEventListener("click",()=>updatePreschoolPath(false));
@@ -530,7 +531,7 @@ $("showHandoff").addEventListener("click",()=>{
  preview.hidden=!open;$("showHandoff").setAttribute("aria-expanded",String(open));
  if(open)renderHandoff();
 });
-$("resetLook").addEventListener("click",()=>{if(!consent())return;look=normalize(null);saveLook()});
+$("resetLook").addEventListener("click",()=>{if(!consent())return;photoRequest++;look=normalize(null);saveLook()});
 $("exportLook").addEventListener("click",()=>{
  if(!eligible()){announce("Choose a Pre-K learner first.",true);return}
  const payload=read(profileKey(),null)||{schema:"khaemenes.prek-visual.v1",learnerId:activeId,...look};
