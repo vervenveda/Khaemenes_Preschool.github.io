@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Pre-K Browser Interaction Probe</title></head>
+<body>
+<h1>Fictional Pre-K family interaction probe</h1>
+<section id="prekMyDay">
+ <input type="checkbox" id="prekTask_story"><input type="checkbox" id="prekTask_create">
+ <input type="checkbox" id="prekTask_move"><input type="checkbox" id="prekTask_connect">
+ <input type="checkbox" id="prekDayAdultConfirm"><button id="prekSaveDay">Save day</button>
+ <p id="prekDayStatus"></p>
+</section>
+<section id="prekKeepsakes">
+ <textarea id="prekObservation"></textarea>
+ <input type="checkbox" id="prekKeepsakeAdultConfirm"><button id="prekSaveObservation">Save observation</button>
+ <p id="prekKeepsakeStatus"></p><div id="prekKeepsakeEntries"></div>
+</section>
+<output id="result" data-result="PENDING">Loading…</output>
+<script>
+"use strict";
+const family={familyId:"fictional-family-1",learnerIds:["child-a","child-b"]};
+const learners={
+ "child-a":{learnerId:"child-a",familyId:family.familyId,stage:"preschool",grade:"pre-k",nickname:"Fictional A"},
+ "child-b":{learnerId:"child-b",familyId:family.familyId,stage:"preschool",grade:"pre-k",nickname:"Fictional B"}
+};
+let activeId="child-a";
+window.KhaemenesFamilyRegistry={
+ activeIds:()=>({familyId:family.familyId,learnerId:activeId}),
+ getLearner:id=>learners[id]||null,
+ getFamily:id=>id===family.familyId?family:null
+};
+</script>
+<script src="../assets/khaemenes-prek-family-day.js"></script>
+<script>
+window.addEventListener("load",()=>{
+ const fail=[];
+ const check=(ok,message)=>{if(!ok)fail.push(message)};
+ const $=id=>document.getElementById(id);
+ const key=id=>"khaemenes.prek.family-day.v1:"+encodeURIComponent(id);
+ // 1: No adult confirmation must not save.
+ $("prekTask_story").checked=true;$("prekSaveDay").click();
+ check(localStorage.getItem(key("child-a"))===null,"unconfirmed checklist was saved");
+ // 2: Confirm and save via the actual button.
+ $("prekDayAdultConfirm").checked=true;$("prekSaveDay").click();
+ check(JSON.parse(localStorage.getItem(key("child-a"))||"null")?.days!==undefined,"child-a daily save failed");
+ // 3: Observation save via the actual button.
+ $("prekObservation").value="We built bridges with blocks.";
+ $("prekKeepsakeAdultConfirm").checked=true;$("prekSaveObservation").click();
+ let a=JSON.parse(localStorage.getItem(key("child-a"))||"null");
+ check(Object.values(a?.days||{})[0]?.observation==="We built bridges with blocks.","child-a note failed");
+ check($("prekKeepsakeEntries").textContent.includes("bridges"),"observation did not render");
+ // 4: Switch to fictional sibling and confirm checkbox reset and absence of copied activity.
+ activeId="child-b";window.dispatchEvent(new Event("khaemenes-family-changed"));
+ check(!$("prekDayAdultConfirm").checked&&!$("prekKeepsakeAdultConfirm").checked,"adult checkboxes persisted across siblings");
+ check(!$("prekTask_story").checked,"child-a activity leaked into child-b");
+ check(!$("prekObservation").value,"child-a note leaked into child-b");
+ // 5: Save different sibling note, verify original unchanged.
+ $("prekObservation").value="We sang songs together.";
+ $("prekKeepsakeAdultConfirm").checked=true;$("prekSaveObservation").click();
+ const b=JSON.parse(localStorage.getItem(key("child-b"))||"null");
+ check(Object.values(b?.days||{})[0]?.observation==="We sang songs together.","child-b note failed");
+ a=JSON.parse(localStorage.getItem(key("child-a"))||"null");
+ check(Object.values(a?.days||{})[0]?.observation==="We built bridges with blocks.","child-a note was changed");
+ // 6: Wrong-owner record must remain untouched.
+ const wrong={schema:"khaemenes.prek.family-day.v1",learnerId:"child-a",days:{}};
+ localStorage.setItem(key("child-b"),JSON.stringify(wrong));
+ $("prekKeepsakeAdultConfirm").checked=true;$("prekObservation").value="Should not be saved";$("prekSaveObservation").click();
+ check(localStorage.getItem(key("child-b"))===JSON.stringify(wrong),"wrong-owner record overwritten");
+ // 7: Parent-facing storage schema points to exactly the selected learner.
+ check(a.schema==="khaemenes.prek.family-day.v1"&&a.learnerId==="child-a","parent report schema differs");
+ const output=$("result");
+ output.dataset.result=fail.length?"FAIL":"PASS";
+ output.textContent=fail.length?"FAIL: "+fail.join("; "):"PASS: adult-gated button flows, siblings, wrong-owner and shared parent record schema";
+});
+</script>
+</body></html>
