@@ -1687,7 +1687,17 @@ body main .section .intro-copy{font-size:max(16px,1rem)!important;line-height:1.
 body main .family-card .family-meta span{line-height:1.4!important}
 body main .family-card,.family-pathway .family-card{overflow-wrap:break-word}
 @media(max-width:640px){body main .section article>p:not(.kicker),body main .heading>p:not(.kicker){font-size:16px!important}}
-</style></head>
+</style><style id="preschool-weekly-palette-refinement">
+/* Scoped to the weekly garden; does not affect records or toolbar. */
+body #weeklyGarden .weekly-garden-card{background:linear-gradient(145deg,#fff8e9 0%,#e8faff 38%,#fff2c6 70%,#fce9f5 100%)!important;border:3px solid #fff!important;box-shadow:0 16px 42px rgba(42,76,103,.16),inset 0 0 0 2px rgba(8,125,136,.10)!important}
+body #weeklyGarden .weekly-continue{background:linear-gradient(105deg,#d8f7fb 0%,#dcf8ee 65%,#fff2bd 100%)!important;border:2px solid rgba(8,125,136,.16)!important}
+body #weeklyGarden .weekly-adventure:nth-child(4n+1){background:#eafaff!important;border-color:#8fe6f9!important}
+body #weeklyGarden .weekly-adventure:nth-child(4n+2){background:#fff7d8!important;border-color:#ffd63d!important}
+body #weeklyGarden .weekly-adventure:nth-child(4n+3){background:#f2ebff!important;border-color:#bba1ed!important}
+body #weeklyGarden .weekly-adventure:nth-child(4n){background:#fff0f7!important;border-color:#ef9ac8!important}
+body #weeklyGarden .weekly-garden-controls button{background:#fffdf7!important;color:#26364a!important;border-color:#8fe6f9!important}
+</style>
+</head>
 <body id="top" data-view="child">
 <a class="skip" href="#activities">Skip to learning adventures</a>
 <div class="sky-decor" aria-hidden="true"><span class="float-shape">⭐</span><span class="float-shape">♥</span><span class="float-shape">●</span><span class="float-shape">▲</span></div>
@@ -3734,5 +3744,7 @@ document.addEventListener("DOMContentLoaded",function(){
 <script>VNV_TICKER.autoPopulate({label:"Preschool Quick Links",max:10});</script>
 <script>VNV_HEADER.mount({"title":"Khaemenes Preschool","subtitle":"Crechè · Bright Beginnings","icon":"PK","home":"https://vervenveda.com/Khaemenes_Academy.github.io/","actions":[{"label":"Academy Home","href":"https://vervenveda.com/Khaemenes_Academy.github.io/"},{"label":"Student Profile","href":"https://vervenveda.com/Khaemenes_Academy.github.io/student/"},{"label":"Family","href":"https://vervenveda.com/Khaemenes_Academy.github.io/family/"},{"label":"Teacher","href":"https://vervenveda.com/Khaemenes_Academy.github.io/teacher-admin/"},{"label":"Kindergarten","href":"https://vervenveda.com/Khaemenes_KinderGarden.github.io/"}]});</script>
 <script src="https://vervenveda.com/assets/vnv-ecosystem-toolbar.js" defer data-vnv-ecosystem-toolbar="1"></script>
+<script src="assets/early-learning-minimum-text-18.js" defer></script>
+<script src="assets/preschool-floating-badge-clearance.js" defer></script>
 </body>
 </html>
