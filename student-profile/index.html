@@ -551,9 +551,19 @@ $("importLook").addEventListener("change",async event=>{
  }catch{announce("Could not read the visual backup. No changes made.",true)}
 });
 $("learnerSelect").addEventListener("change",event=>{
- const id=event.target.value, family=R?.getFamily?.();
+ const id=event.target.value, family=R?.getFamily?.(),ids=R?.activeIds?.()||{};
  const found=family?.learners?.find?.(x=>x.learnerId===id&&x.stage==="preschool");
- if(found&&found.familyId===family.familyId)R.setActive?.({familyId:family.familyId,learnerId:id});
+ const adult=R?.getAdult?.(ids.adultId);
+ const permitted=found?.familyId===family?.familyId&&ids.familyId===family?.familyId&&
+  family?.adultIds?.includes(ids.adultId)&&adult&&R?.canAdult?.(ids.adultId,id,"progress.view")===true;
+ if(!permitted){event.target.value=activeId;announce("This adult cannot open that learner's profile.",true);return}
+ try{
+  R.setActive({familyId:family.familyId,adultId:ids.adultId,learnerId:id});
+  const after=R.activeIds?.()||{};
+  if(after.familyId!==family.familyId||after.adultId!==ids.adultId||after.learnerId!==id)
+   throw Error("Selection was not saved");
+  $("adultConfirm").checked=false;
+ }catch{event.target.value=activeId;announce("Learner switch could not be verified. Existing work is unchanged.",true)}
 });
 window.addEventListener("khaemenes-family-changed",refresh);
 window.addEventListener("khaemenes-prek-universal-look-updated",event=>{
