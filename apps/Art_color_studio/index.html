@@ -557,6 +557,68 @@ body{font-family:Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif;back
 @media(max-width:1000px){.app .prompt-dock,.app .layout{grid-template-columns:1fr}}
 @media(max-width:600px){.app{width:calc(100% - 16px);padding-top:16px}.app .prompt-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.app .voice-friends{grid-template-columns:repeat(2,minmax(0,1fr))}.app .palette{grid-template-columns:repeat(4,minmax(0,1fr))}.app .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
+<style id="color-studio-canvas-first-layout-20261111">
+/* Artwork-first layout: keep all controls and functional IDs in their original order. */
+.app .prompt-dock{
+  display:grid;
+  grid-template-columns:minmax(0,1.3fr) minmax(320px,1fr);
+  align-items:start;
+  gap:14px;
+  margin-bottom:14px;
+}
+.app .prompt-dock > .activity,
+.app .prompt-dock > .voice-card{padding:14px 18px}
+.app .prompt-dock h2{margin:0 0 8px;font-size:23px}
+.app .prompt-dock .prompt-card{
+  min-height:64px;
+  height:auto;
+  padding:12px 16px;
+  font-size:18px;
+  line-height:1.45;
+}
+.app .prompt-actions{margin-top:10px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.app .prompt-actions button{min-width:0;padding:9px 7px}
+.app .voice-card{gap:6px;align-content:start}
+.app .voice-card .voice-status{margin:0}
+.app .voice-friends{grid-template-columns:repeat(5,minmax(0,1fr))}
+.app .voice-friend{min-width:0;padding:7px 4px}
+.app .layout{display:grid;grid-template-columns:minmax(0,1fr);gap:15px}
+.app .layout > .panel{width:100%;padding:18px}
+.app .canvas-shell{padding:12px}
+.app .canvas-wrap{
+  aspect-ratio:1200/760;
+  min-height:480px;
+  width:100%;
+}
+.app .side-stack{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  align-items:start;
+}
+.app .side-stack > *{min-width:0;height:100%;margin:0}
+.app .side-stack .activity{padding:17px}
+.app .side-stack .activity h2{margin:0 0 12px}
+.app .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.app .palette{grid-template-columns:repeat(6,minmax(0,1fr))}
+.app .stamp-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+.app .mini-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+.app .site-footer{margin-top:18px}
+@media(max-width:1100px){
+  .app .prompt-dock{grid-template-columns:1fr}
+  .app .prompt-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .app .side-stack{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .app .canvas-wrap{min-height:400px}
+}
+@media(max-width:700px){
+  .app .side-stack{grid-template-columns:1fr}
+  .app .prompt-dock > .activity,.app .prompt-dock > .voice-card{padding:12px}
+  .app .voice-friends{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .app .canvas-wrap{min-height:320px;aspect-ratio:1/1}
+  .app .layout > .panel{padding:9px}
+  .app .canvas-shell{padding:7px}
+}
+</style>
 </head>
 <body>
 
