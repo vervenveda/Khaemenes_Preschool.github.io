@@ -619,6 +619,7 @@ body{font-family:Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif;back
   .app .canvas-shell{padding:7px}
 }
 </style>
+<style id="color-studio-eiren-chat-door-20261111">.app .eiren-chat-door{display:flex;align-items:center;justify-content:center;min-height:48px;margin:8px 0;padding:10px 14px;border-radius:7px;background:#5423a6;color:#fff!important;font:700 18px/1.45 Nunito,"Trebuchet MS",Arial,sans-serif;text-decoration:none;text-align:center}.app .eiren-chat-door:hover,.app .eiren-chat-door:focus-visible{background:#36136e}</style>
 </head>
 <body>
 
@@ -664,8 +665,8 @@ body{font-family:Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif;back
     </div>
 
     <div class="voice-card">
-      <h2>🌸 Eiren · Your Preschool Art Guide</h2>
-      <p class="voice-status">Eiren guides the creative prompt. Choose a reading friend below for a playful voice style.</p>
+      <h2>🌸 Eiren · Your Art Guide</h2>
+      <p class="voice-status">Eiren reads your art adventure. Visit her chat for story ideas and creative questions.</p><a class="eiren-chat-door" href="https://artist1970.github.io/Eiren.github.io/#eirenConversation" target="_blank" rel="noopener noreferrer">💬 Chat with Eiren</a>
       <div class="voice-friends" id="voiceFriends">
         <button type="button" class="voice-friend" data-voice="fairy" title="Fairy Lily">
           <span class="voice-emoji">🧚</span><span class="voice-name">Fairy</span>
@@ -1374,21 +1375,13 @@ function refreshVoices(){
     :"Loading a friendly voice…";
 }
 
-function chooseFriendlyVoice(friendKey=state.voiceFriend){
-  if(!voices.length)refreshVoices();
-  const friend=VOICE_FRIENDS[friendKey]||VOICE_FRIENDS.fairy;
-  const english=voices.filter(v=>/^en([-_]|$)/i.test(v.lang||""));
-  const pool=english.length?english:voices;
-
-  if(friendKey==="rainbow"&&pool.length){
-    const friendly=pool.filter(v=>/samantha|aria|jenny|ava|karen|moira|serena|victoria|female/i.test(v.name));
-    const choices=friendly.length?friendly:pool;
-    return choices[Math.floor(Math.random()*choices.length)]||null;
-  }
-  const bridge=window.KhaemenesPreschoolVoice;\n  if(bridge?.supported())return bridge.choose({role:"gentle",lang:"en-US",prefer:friend.preferred.source});\n  return pool.find(v=>friend.preferred.test(v.name))
-    ||pool.find(v=>/natural|enhanced|premium/i.test(v.name))
-    ||pool[0]
-    ||null;
+function chooseFriendlyVoice(){
+ if(!voices.length)refreshVoices();
+ const us=voices.filter(v=>/^en[-_]US$/i.test(v.lang||""));
+ return us.find(v=>/google\s+us\s+english/i.test(v.name||""))
+   ||us.find(v=>/nicky/i.test(v.name||""))
+   ||us.find(v=>/natural|enhanced|premium/i.test(v.name||""))
+   ||us[0]||voices.find(v=>/^en(?:[-_]|$)/i.test(v.lang||""))||null;
 }
 
 function setVoiceButtons(){
@@ -1426,7 +1419,7 @@ function speak(text,{preview=false}={}){
   if(voice)utterance.voice=voice;
   utterance.lang=(voice&&voice.lang)||"en-US";
   utterance.rate=Math.max(.55,Math.min(1.16,friend.rate*(VOICE_SPEEDS[state.voiceSpeed]||1)));
-  utterance.pitch=friend.pitch;
+  utterance.pitch=1.04;
   utterance.volume=1;
 
   utterance.onstart=()=>{
