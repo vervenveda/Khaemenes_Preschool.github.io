@@ -162,7 +162,7 @@ function childFacingSurface(){
 }
 function stripEscapeControls(){
   if(!childFacingSurface())return;
-  document.querySelectorAll('#vnvEcosystemUtilityDock,#vnvEcosystemMenuButton,[data-vnv-ecosystem-slot]').forEach(el=>el.remove());
+  document.querySelectorAll('#vnvEcosystemUtilityDock,#vnvEcosystemMenuButton,[data-vnv-ecosystem-slot],#vnvTickerAutoPopulate').forEach(el=>el.remove());
   document.querySelectorAll('header a,nav a').forEach(a=>{
     try{
       const u=new URL(a.href,location.href);
@@ -174,6 +174,12 @@ function stripEscapeControls(){
 }
 
 function mountAuto(){
+  if(childFacingSurface()){
+    document.querySelectorAll("#vnvTickerAutoPopulate,script[src*='vnv-ticker-autopopulate.js']").forEach(el=>el.remove());
+    document.documentElement.dataset.khaemenesAutoTicker="intentionally-omitted-child-safe";
+    strip333();
+    return;
+  }
   try{if(!document.getElementById("vnvTickerAutoPopulate"))window.VNV_TICKER?.autoPopulate?.({mode:"auto"})}catch{}
   strip333();
 }
@@ -183,7 +189,7 @@ function mountHeader(){
       title:"Khaemenes Academy",
       subtitle:"Preschool",
       icon:"K",
-      home:"https://vervenveda.com/KhaemenesAcademy_Home.github.io/",
+      home:childFacingSurface()?ROOT:"https://vervenveda.com/KhaemenesAcademy_Home.github.io/",
       actions:[
         {label:"Preschool Home",href:ROOT},
         {label:"ABC",href:ROOT+"apps/ABC_adventure_hub_index.html"},
@@ -213,7 +219,8 @@ function schedule(){
 async function start(){
   if(!document.body)return;
   strip333();installTypography();normalizeHierarchy(document);
-  await load(SCRIPTS.tickerAuto,"khaemenesPreschoolAutoTicker");mountAuto();
+  if(childFacingSurface())mountAuto();
+  else {await load(SCRIPTS.tickerAuto,"khaemenesPreschoolAutoTicker");mountAuto();}
   await load(SCRIPTS.header,"khaemenesPreschoolHeader");mountHeader();
   if(childFacingSurface()){
     stripEscapeControls();
