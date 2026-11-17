@@ -1,0 +1,27 @@
+name: Preschool Child-Safe Navigation Regression
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/preschool-global-standard-v1.js'
+      - 'assets/khaemenes-child-safe-learning-dock.js'
+      - 'tools/validate-child-safe-navigation.mjs'
+      - '.github/workflows/preschool-child-safe-navigation.yml'
+  pull_request:
+    paths:
+      - 'assets/preschool-global-standard-v1.js'
+      - 'assets/khaemenes-child-safe-learning-dock.js'
+      - 'tools/validate-child-safe-navigation.mjs'
+      - '.github/workflows/preschool-child-safe-navigation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - run: node tools/validate-child-safe-navigation.mjs
