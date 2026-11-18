@@ -64,7 +64,7 @@ body main .creche-support-closing .creche-support-card{background:#ffd63d!import
 body main .creche-support-closing .support-action{background:#7457ff!important;color:#fff!important}
 /* Same hues as the rainbow entry; no unrelated dark ribbon palette. */
 body footer.footer{
- background:linear-gradient(105deg,#168fe5 0 20%,#22cbe6 20% 38%,#8bd83e 38% 53%,#ffd63d 53% 68%,#ff942b 68% 82%,#ef5bb8 82% 100%)!important;
+ background:linear-gradient(rgba(36,48,56,.73),rgba(36,48,56,.73)),linear-gradient(105deg,#168fe5 0 20%,#22cbe6 20% 38%,#8bd83e 38% 53%,#ffd63d 53% 68%,#ff942b 68% 82%,#ef5bb8 82% 100%)!important;
  border-top:7px solid #7457ff!important;
  border-radius:7px!important;color:#20354a!important;
 }
@@ -243,7 +243,7 @@ body main :is(
 body footer.footer{
  border-radius:7px!important;
  color:#fff8e9!important;
- background:linear-gradient(105deg,#168fe5 0 20%,#22cbe6 20% 38%,#8bd83e 38% 53%,#ffd63d 53% 68%,#ff942b 68% 82%,#ef5bb8 82% 100%)!important;
+ background:linear-gradient(rgba(36,48,56,.73),rgba(36,48,56,.73)),linear-gradient(105deg,#168fe5 0 20%,#22cbe6 20% 38%,#8bd83e 38% 53%,#ffd63d 53% 68%,#ff942b 68% 82%,#ef5bb8 82% 100%)!important;
 }
 body footer.footer :is(.footer-inner,.footer-inner *,span,strong,a,button,p,small){
  color:#fff8e9!important;
