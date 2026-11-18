@@ -262,7 +262,7 @@ html:root body :is(
  .weekly-adventure,.weekly-adventure *, .footer,.footer *,
  .family-card,.family-card *, .parent-card,.parent-card *,
  .creche-support-card,.creche-support-card *
-){font-size:max(18px,1em)!important}
+){font-size:max(18px,1rem)!important}
 html:root body [data-khaemenes-primary-title="true"]{font-size:66px!important}
 body main .hero .hero-copy{border-radius:56% 44% 52% 48% / 47% 55% 45% 53%!important}
 body main .hero .orbit-button{border-radius:50%!important}
@@ -340,3 +340,102 @@ body #grownups .family-mentor-entry .family-mentor-actions>a{
   color:#fff8e9!important;
   -webkit-text-fill-color:#fff8e9!important;
 }
+
+/* 2026-11-18 hero recovery: preserve the original large animated oval.
+   Avoid parent-relative typography inherited from the 66px hero heading. */
+body .hero .hero-copy h1>span{
+ display:block!important;
+ max-width:430px!important;
+ margin:14px auto 0!important;
+ font-family:Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif!important;
+ font-size:18px!important;
+ line-height:1.45!important;
+ font-weight:400!important;
+ letter-spacing:.025em!important;
+ overflow-wrap:normal!important;
+ word-break:normal!important;
+ text-wrap:wrap!important;
+ color:#243038!important;
+}
+body .hero .hero-copy h1{
+ font-size:clamp(48px,5.3vw,66px)!important;
+ line-height:1.12!important;
+ margin:4px auto 0!important;
+ overflow-wrap:normal!important;
+ word-break:normal!important;
+ text-wrap:balance!important;
+}
+body .hero .hero-copy .lead{
+ font-size:18px!important;
+ line-height:1.58!important;
+ max-width:490px!important;
+ margin:14px auto 0!important;
+}
+body .hero .hero-undertray{
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:center!important;
+ gap:14px!important;
+ width:min(760px,calc(100% - 32px))!important;
+ padding:20px!important;
+ margin:128px auto 0!important;
+}
+body .hero .hero-undertray .hero-orbit-labels{
+ width:100%!important;
+ max-width:680px!important;
+ display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:10px!important;
+ margin:0 auto!important;
+}
+body .hero .hero-undertray .hero-orbit-labels>a{
+ display:flex!important;
+ width:100%!important;
+ min-width:0!important;
+ min-height:52px!important;
+ align-items:center!important;
+ justify-content:center!important;
+ padding:10px 8px!important;
+ font-size:18px!important;
+ line-height:1.25!important;
+ text-align:center!important;
+ text-decoration:none!important;
+ white-space:normal!important;
+ overflow-wrap:normal!important;
+ word-break:normal!important;
+ border-radius:7px!important;
+}
+body .hero .hero-undertray .hero-undertray-notes{
+ width:100%!important;
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:10px!important;
+ align-items:stretch!important;
+ margin:0!important;
+}
+body .hero .hero-undertray .hero-undertray-notes .hero-note{
+ display:flex!important;
+ width:100%!important;
+ min-width:0!important;
+ min-height:52px!important;
+ align-items:center!important;
+ justify-content:center!important;
+ padding:10px!important;
+ margin:0!important;
+ font-size:18px!important;
+ line-height:1.35!important;
+ text-align:center!important;
+ border-radius:7px!important;
+ white-space:normal!important;
+ overflow-wrap:normal!important;
+ word-break:normal!important;
+}
+@media(max-width:600px){
+ body .hero .hero-undertray{margin-top:110px!important;padding:14px!important}
+ body .hero .hero-undertray .hero-orbit-labels{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body .hero .hero-undertray .hero-undertray-notes{grid-template-columns:1fr!important}
+ body .hero .hero-copy h1>span{font-size:18px!important;line-height:1.4!important}
+}
+/* Do not collapse the oval illustration into a generic rectangular card. */
+body main .hero .hero-copy{border-radius:56% 44% 52% 48% / 47% 55% 45% 53%!important}
+body main .hero .orbit-button{border-radius:50%!important}
