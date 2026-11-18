@@ -439,3 +439,117 @@ body .hero .hero-undertray .hero-undertray-notes .hero-note{
 /* Do not collapse the oval illustration into a generic rectangular card. */
 body main .hero .hero-copy{border-radius:56% 44% 52% 48% / 47% 55% 45% 53%!important}
 body main .hero .orbit-button{border-radius:50%!important}
+
+/* 2026-11-18 | canonical page-wide alignment and section-grid parity
+   Centers readable content; preserves oval dimensions, orbit animation and route behavior. */
+html:root body :is(header,main,footer,section,article,aside,nav,details,summary,h1,h2,h3,h4,h5,h6,p,blockquote,figcaption,caption,label,legend,li,small,strong,a,button,span){
+  text-align:center!important;
+}
+html:root body :is(button,a,summary,select,input,textarea){
+  border-radius:7px!important;
+}
+body main :is(#weeklyGarden,#myHome,#new,#today,#profiles,#grownups,#contribute)>.shell{
+  box-sizing:border-box!important;
+  width:min(calc(100% - 32px),1080px)!important;
+  max-width:1080px!important;
+  margin-inline:auto!important;
+}
+body main :is(#weeklyGarden,#myHome,#new,#today,#profiles,#grownups,#contribute)>.shell>:is(
+ .heading,.weekly-garden-card,.quick-picks,.quick-comfort,.garden-heading,
+ .explore-heading,.category-grid,.family-grid,.subject-garden,.creche-support-card,
+ .parent-tools,.site-grid,.fresh-adventures,.pinned-wrap
+){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+/* Equal sibling widths and equal-height cells inside each course/family section. */
+body main :is(
+ #weeklyGarden .weekly-garden-grid,#myHome .daily-school-grid,
+ #new .category-grid,#new .new-grid,#today .subject-garden,
+ #profiles .family-grid,#grownups .parent-tools,#grownups .site-grid
+){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  align-items:stretch!important;
+  justify-items:stretch!important;
+}
+body #weeklyGarden .weekly-garden-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+body #myHome .daily-school-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+body #new .category-grid,body #today .subject-garden,body #profiles .family-grid,body #grownups .parent-tools{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+body #grownups .site-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+body main :is(
+ #weeklyGarden .weekly-adventure,#myHome .daily-school-card,
+ #new .category-card,#new .new-card,#today .subject-tile,
+ #profiles .family-card,#grownups .parent-card,#grownups .site-card
+){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  border-radius:7px!important;
+  text-align:center!important;
+}
+body main :is(.family-card,.parent-card,.site-card,.subject-tile,.daily-school-card,.category-card,.new-card){
+  text-align:center!important;
+}
+body main :is(.family-card,.parent-card,.site-card,.subject-tile,.daily-school-card,.category-card,.new-card)>:is(h2,h3,p,span,strong,small){
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+body main :is(.family-actions,.family-mentor-actions,.mentor-day-actions,.explore-actions,.garden-bottom-actions){
+  justify-content:center!important;
+  text-align:center!important;
+}
+body main :is(.family-action,.mentor-day-btn,.daily-school-btn,.garden-action,.support-action,.directory-launch,.explore-surprise){
+  text-align:center!important;
+  justify-content:center!important;
+  align-items:center!important;
+}
+/* Color-aware ink: creamy lettering belongs on saturated dark action surfaces. */
+body main :is(
+ .family-action:not(.light),.family-mentor-actions>a,
+ .daily-school-btn,.garden-action,.subject-tool,.explore-surprise,
+ .directory-launch,.support-action,.mentor-day-btn.primary,
+ #homeCalmBtn,#motionBtn
+),body main :is(
+ .family-action:not(.light),.family-mentor-actions>a,
+ .daily-school-btn,.garden-action,.subject-tool,.explore-surprise,
+ .directory-launch,.support-action,.mentor-day-btn.primary,
+ #homeCalmBtn,#motionBtn
+) :is(span,strong,small,i,em){
+  color:#fff8e9!important;
+  -webkit-text-fill-color:#fff8e9!important;
+}
+body main :is(.weekly-adventure,.daily-school-card,.family-card,.parent-card,.category-card,.new-card,.quick-picks){
+  color:#243038!important;
+}
+@media(max-width:900px){
+ body #weeklyGarden .weekly-garden-grid,body #myHome .daily-school-grid,
+ body #new .category-grid,body #today .subject-garden,body #profiles .family-grid,
+ body #grownups .parent-tools,body #grownups .site-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+}
+@media(max-width:580px){
+ body main :is(#weeklyGarden,#myHome,#new,#today,#profiles,#grownups,#contribute)>.shell{
+  width:calc(100% - 24px)!important;
+ }
+ body #myHome .daily-school-grid,body #new .category-grid,
+ body #today .subject-garden,body #profiles .family-grid,
+ body #grownups .parent-tools,body #grownups .site-grid{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ body #weeklyGarden .weekly-garden-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+/* Preserve organic shapes and accessible keyboard targets. */
+body main .hero .hero-copy{border-radius:56% 44% 52% 48% / 47% 55% 45% 53%!important}
+body main .hero .orbit-button{border-radius:50%!important}
+body :is(a,button,summary):focus-visible{outline:3px solid #243038;outline-offset:2px}
