@@ -90,7 +90,7 @@ html:root body :is(
   .breadcrumbs,.breadcrumb,.badge,.chip,.pill,.status,.meta,
   .caption,.note,.helper,.hint,.message,.toast,
   .brand-name,.brand-sub,.menu-group,.menu-link,.menu-link small,.menu-link strong
-){font-size:max(18px,1em)!important}
+):not(.orbit-button){font-size:max(18px,1em)!important}
 html:root body :is(
   h1,h2,h3,h4,h5,h6,[role="heading"],
   .page-title,.hero-title,.main-title,.section-title,.card-title,
