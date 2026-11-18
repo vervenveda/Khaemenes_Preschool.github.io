@@ -1,0 +1,80 @@
+/* Khaemenes Preschool • Vivid Rainbow + Seven-Pixel Corners
+   Scoped presentation only. Keep oval hero and round animated orbit anchors,
+   overlay/dialog behavior, tool URLs and student data untouched. */
+:root{
+ --creche-vivid-yellow:#ffd63d;
+ --creche-vivid-cyan:#22cbe6;
+ --creche-vivid-blue:#168fe5;
+ --creche-vivid-pink:#ef5bb8;
+ --creche-vivid-orange:#ff942b;
+ --creche-vivid-green:#8bd83e;
+ --creche-vivid-purple:#7457ff;
+ --creche-vivid-ink:#20354a;
+ --radius:7px;
+}
+/* Replace the faded parchment fields on the public learning path. */
+body #weeklyGarden.weekly-garden{background:linear-gradient(123deg,#22cbe6 0%,#8fe6f9 53%,#168fe5 100%)!important}
+body #myHome.learner-home{background:linear-gradient(128deg,#ffd63d,#ff942b 54%,#ff526d)!important}
+body #new.explore-play{background:linear-gradient(128deg,#22cbe6,#8bd83e 53%,#ffd63d)!important}
+body #today.learning-garden{background:linear-gradient(130deg,#168fe5,#22cbe6 47%,#8bd83e)!important}
+body #profiles.family-pathway{background:linear-gradient(125deg,#ef5bb8,#7457ff 48%,#22cbe6)!important}
+body #grownups.grownup{background:linear-gradient(120deg,#8bd83e,#22cbe6 55%,#168fe5)!important}
+body #contribute.creche-support-closing{background:linear-gradient(115deg,#ff942b,#ef5bb8 49%,#7457ff)!important}
+/* Readable saturated cards, with familiar alternating preschool colors. */
+body main :is(
+ .weekly-garden-card,.home-card,.daily-school-card,.explore-heading,
+ .garden-heading,.subject-tile,.garden-today,.garden-stars,.garden-trail,
+ .garden-catalog,.family-card,.parent-card,.metric-card,.site-card,
+ .new-card,.category-card,.read-card,.creche-support-card,.support-copy,
+ .support-cta,.mentor-day,.parent-dashboard,.weekly-snapshot,
+ .enrolled-prek-tools,.favorite,.fresh-adventures,.quick-comfort,
+ .learning-card,.dashboard-card,.trail-stop,.parent-tools,.network-directory
+){border-radius:7px!important}
+/* Saturated but text-safe learning panels, not washed-out parchment. */
+body main :is(.weekly-garden-card,.explore-heading,.garden-heading,.garden-catalog,.fresh-adventures,.quick-comfort,.parent-dashboard,.weekly-snapshot,.enrolled-prek-tools){background:#d7f8ff!important;color:#20354a!important}
+body main .daily-school-card:nth-child(4n+1),
+body main .family-card:nth-child(4n+1),
+body main .category-card:nth-child(4n+1){background:#ffd63d!important;color:#20354a!important}
+body main .daily-school-card:nth-child(4n+2),
+body main .family-card:nth-child(4n+2),
+body main .category-card:nth-child(4n+2){background:#ffadcf!important;color:#20354a!important}
+body main .daily-school-card:nth-child(4n+3),
+body main .family-card:nth-child(4n+3),
+body main .category-card:nth-child(4n+3){background:#8fe6f9!important;color:#20354a!important}
+body main .daily-school-card:nth-child(4n),
+body main .family-card:nth-child(4n),
+body main .category-card:nth-child(4n){background:#b3ee75!important;color:#20354a!important}
+body main :is(.garden-today,.garden-stars,.trail-stop,.new-card,.parent-card,.metric-card,.site-card,.read-card){background:#ffd63d!important;color:#20354a!important}
+body main :is(.garden-stars,.parent-card:nth-child(2n),.new-card:nth-child(2n),.metric-card:nth-child(2n)){background:#ffadcf!important}
+body main :is(.trail-stop:nth-child(3n),.site-card:nth-child(3n),.read-card:nth-child(3n)){background:#8fe6f9!important}
+/* Each button has a consistent corner radius; keep existing action semantics. */
+body main :is(
+ .btn,.button,.daily-school-btn,.garden-action,.family-action,.support-action,
+ .subject-tool,.subject-tile,.category-button,.tool-btn,.view-choice,
+ .view-switch,.directory-launch,.explore-actions button,.category-card,
+ .trail-stop,.family-card a,.family-card button,.parent-card a,.parent-card button,
+ .fresh-adventures summary,.garden-trail summary,.reading-time-launch
+){border-radius:7px!important}
+/* Vivid controls without tinting input fields or mutating their state. */
+body main .daily-school-btn,body main .garden-action,body main .subject-tool{background:#7457ff!important;color:#fff!important}
+body main .explore-surprise,body main #surpriseHero{background:#d72b85!important;color:#fff!important}
+body main .directory-launch,body main .garden-action.all{background:#304bb6!important;color:#fff!important}
+body main .garden-action.graduate{background:#087d88!important;color:#fff!important}
+body main .creche-support-closing .creche-support-card{background:#ffd63d!important;color:#20354a!important}
+body main .creche-support-closing .support-action{background:#7457ff!important;color:#fff!important}
+/* Same hues as the rainbow entry; no unrelated dark ribbon palette. */
+body footer.footer{
+ background:linear-gradient(105deg,#168fe5 0 20%,#22cbe6 20% 38%,#8bd83e 38% 53%,#ffd63d 53% 68%,#ff942b 68% 82%,#ef5bb8 82% 100%)!important;
+ border-top:7px solid #7457ff!important;
+ border-radius:7px!important;color:#20354a!important;
+}
+body footer.footer :is(strong,span,a){color:#20354a!important;text-shadow:none!important}
+body footer.footer a{background:rgba(255,255,255,.82)!important;border-radius:7px!important;color:#20354a!important}
+/* A 7px standard except intentionally circular or oval identity art. */
+body main :is(.app-window,.profile-dialog,.subject-popover,.category-dialog,.category-overlay .dialog,.garden-today,.garden-stars,.family-mentor-entry){border-radius:7px!important}
+body :is(#khaemenesEarlyLearningDock,#vnvEcosystemUtilityDock){border-radius:7px!important}
+body #khaemenesEarlyLearningDock a{border-radius:7px!important}
+/* Keep organic art and orbital circles round, with their text readable. */
+body main .hero .hero-copy{border-radius:56% 44% 52% 48% / 47% 55% 45% 53%!important}
+body main .hero .orbit-button{border-radius:50%!important}
+@media(prefers-reduced-motion:reduce){body main :is(.subject-tile,.daily-school-card,.category-card){transition:none!important}}
