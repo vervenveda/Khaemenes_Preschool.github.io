@@ -78,3 +78,90 @@ body #khaemenesEarlyLearningDock a{border-radius:7px!important}
 body main .hero .hero-copy{border-radius:56% 44% 52% 48% / 47% 55% 45% 53%!important}
 body main .hero .orbit-button{border-radius:50%!important}
 @media(prefers-reduced-motion:reduce){body main :is(.subject-tile,.daily-school-card,.category-card){transition:none!important}}
+
+/* 2026-11-18: hero information moves below the rainbow crest. */
+body [data-khae-header] :is([data-khae-nav],[data-khae-actions],[data-khae-nav] *,[data-khae-actions] *,button,a,span),
+body [data-khae-header] :is(.header-center,.header-center *,[data-khae-center],[data-khae-center] *){
+  color:#243038!important;
+  -webkit-text-fill-color:#243038!important;
+  opacity:1!important;
+}
+body .hero .hero-copy :is(h1,h1 span,.lead){color:#243038!important;-webkit-text-fill-color:#243038!important;text-shadow:none!important}
+body .hero .hero-playground .orbit-button::after{content:none!important;display:none!important}
+body .hero{padding-bottom:82px!important}
+body .hero .hero-inner{margin-bottom:0!important}
+body .hero .hero-undertray{
+  position:relative;z-index:9;
+  width:min(980px,calc(100% - 36px));
+  margin:128px auto 0;padding:18px 20px 20px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  border:2px solid rgba(255,255,255,.9);border-radius:7px;
+  background:rgba(255,253,248,.92);color:#243038;
+  text-align:center;box-shadow:0 10px 28px rgba(32,53,74,.16);
+}
+body .hero .hero-undertray .hero-undertray-eyebrow{
+  display:block!important;position:static!important;
+  margin:0!important;min-height:0!important;padding:0!important;
+  background:transparent!important;border:0!important;border-radius:7px!important;
+  color:#243038!important;-webkit-text-fill-color:#243038!important;
+  font:400 16px/1.45 Nunito,"Brandon Grotesque",Arial,sans-serif!important;
+  letter-spacing:.07em;text-transform:uppercase;
+}
+body .hero .hero-orbit-labels{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+  width:min(100%,650px);align-items:stretch;
+}
+body .hero .hero-orbit-labels a{
+  display:flex;align-items:center;justify-content:center;min-height:44px;
+  padding:9px 12px;border:2px solid rgba(36,48,56,.16);border-radius:7px!important;
+  background:#ffd63d;color:#243038!important;-webkit-text-fill-color:#243038!important;
+  font:400 16px/1.3 Nunito,"Brandon Grotesque",Arial,sans-serif!important;
+  text-decoration:none;
+}
+body .hero .hero-orbit-labels a:nth-child(6n+2){background:#8fe6f9}
+body .hero .hero-orbit-labels a:nth-child(6n+3){background:#b3ee75}
+body .hero .hero-orbit-labels a:nth-child(6n+4){background:#ffadcf}
+body .hero .hero-orbit-labels a:nth-child(6n+5){background:#ffbf64}
+body .hero .hero-orbit-labels a:nth-child(6n){background:#d5bfff}
+body .hero .hero-orbit-labels a:is(:hover,:focus-visible){outline:3px solid #243038;outline-offset:2px}
+body .hero .hero-undertray-notes{
+  display:flex!important;flex-wrap:wrap;align-items:center;justify-content:center;
+  width:100%!important;max-width:800px!important;gap:9px!important;
+  margin:0!important;
+}
+body .hero .hero-undertray-notes .hero-note{
+  display:inline-flex!important;align-items:center;justify-content:center;
+  min-height:38px;padding:8px 12px;border:1px solid rgba(36,48,56,.16);
+  border-radius:7px!important;background:#ffd63d!important;color:#243038!important;
+  font:400 16px/1.4 Nunito,"Brandon Grotesque",Arial,sans-serif!important;
+}
+body .hero .hero-undertray-notes .hero-note:nth-child(2){background:#8fe6f9!important}
+body .hero .hero-undertray-notes .hero-note:nth-child(3){background:#ffadcf!important}
+body .hero .hero-undertray-notes .hero-note:nth-child(4){background:#b3ee75!important}
+@media(max-width:900px){
+  body .hero .hero-undertray{margin-top:145px;padding:16px}
+}
+@media(max-width:580px){
+  body .hero .hero-undertray{width:calc(100% - 24px);margin-top:125px;gap:10px;padding:14px 10px}
+  body .hero .hero-orbit-labels{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  body .hero .hero-orbit-labels a{min-height:44px;padding:8px 5px}
+  body .hero .hero-undertray-notes{gap:7px!important}
+}
+/* Saturate the remaining My Creche Home parchment tiles and controls. */
+body #myHome .heading.compact-heading{
+  background:#22cbe6!important;color:#243038!important;border:3px solid #fff!important;
+  border-radius:7px!important;
+}
+body #myHome .heading.compact-heading :is(h2,p){color:#243038!important;-webkit-text-fill-color:#243038!important}
+body #myHome .quick-picks{background:#8bd83e!important;border:3px solid #fff!important;border-radius:7px!important}
+body #myHome .quick-picks>summary{background:#ffd63d!important;color:#243038!important;border-radius:7px!important}
+body #myHome .quick-picks .quick-picks-note{color:#243038!important}
+body #myHome :is(.home-stats,.home-status,.home-toolbar,.home-actions,.home-controls,.home-utilities,.home-quick-actions){
+  background:#ef5bb8!important;color:#243038!important;border-radius:7px!important;
+}
+body #myHome :is(.home-stats,.home-status,.home-toolbar,.home-actions,.home-controls,.home-utilities,.home-quick-actions) :is(button,span){
+  border-radius:7px!important;
+}
+body #myHome #homeCalmBtn{background:#168fe5!important;color:#fff!important;border-radius:7px!important}
+body #myHome #motionBtn{background:#7457ff!important;color:#fff!important;border-radius:7px!important}
+body #myHome :is(.quick-picks,.quick-picks summary,.heading,.heading.compact-heading,.weekly-continue,.home-card,.home-status,.home-stats){border-radius:7px!important}
