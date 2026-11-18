@@ -214,3 +214,55 @@ body #myHome #myHomeTitle{
   text-shadow:none!important;-webkit-text-stroke:0 transparent!important;
   filter:none!important;background:none!important;
 }
+
+/* 2026-11-18: final radius, footer and minimum type contract.
+   Circular orbit buttons and organic oval remain intentional exceptions. */
+body main :is(
+ .weekly-garden-card,.weekly-continue,.weekly-adventure,.weekly-family,
+ .family-card,.family-grid .family-card,.parent-card,.site-card,.metric-card,
+ .favorite,.family-mentor-entry,.mentor-day,.mentor-day-controls,.parent-dashboard,
+ .weekly-snapshot,.support-promises span,.support-cta,.support-action,
+ .creche-support-card,.creche-support-closing .creche-support-card,
+ .parent-note,.network-directory,.family-pathway .pinned-wrap,
+ .profile-card,.profile-summary,.profile-actions,.family-actions,
+ .heading,.compact-heading,.category-card,.new-card,.read-card,.category-button,
+ .daily-school-card,.quick-picks,.quick-comfort,.garden-card,.garden-catalog,
+ .subject-tile,.garden-heading,.garden-trail,.garden-today,.garden-stars,
+ .garden-action,.explore-heading,.fresh-adventures,.explore-actions button,
+ .btn,.button,.toolbar,.tool-btn
+){border-radius:7px!important}
+body main :is(
+ .weekly-garden-card,.weekly-continue,.weekly-adventure,.weekly-family,
+ .family-card,.parent-card,.site-card,.metric-card,.favorite,.family-mentor-entry,
+ .mentor-day,.parent-dashboard,.weekly-snapshot,.creche-support-card,
+ .parent-note,.network-directory,.profile-card,.profile-summary,.category-card,
+ .new-card,.read-card,.daily-school-card,.quick-picks,.quick-comfort,
+ .garden-card,.garden-catalog,.subject-tile,.garden-heading,.garden-trail,
+ .garden-today,.garden-stars,.explore-heading,.fresh-adventures
+) :is(a,button,summary,input,select,textarea){border-radius:7px!important}
+body footer.footer{
+ border-radius:7px!important;
+ color:#fff8e9!important;
+ background:linear-gradient(105deg,#168fe5 0 20%,#22cbe6 20% 38%,#8bd83e 38% 53%,#ffd63d 53% 68%,#ff942b 68% 82%,#ef5bb8 82% 100%)!important;
+}
+body footer.footer :is(.footer-inner,.footer-inner *,span,strong,a,button,p,small){
+ color:#fff8e9!important;
+ -webkit-text-fill-color:#fff8e9!important;
+ text-shadow:0 1px 2px rgba(20,35,55,.78)!important;
+ background:transparent!important;
+ border-radius:7px!important;
+}
+body footer.footer :is(a,button){background:rgba(36,48,56,.72)!important;border:1px solid rgba(255,248,233,.75)!important}
+body footer.footer :is(a,button):focus-visible{outline:3px solid #fff8e9;outline-offset:2px}
+/* Native text, dynamically inserted links and accessibility controls alike. */
+html:root body :is(
+ p,span,small,strong,b,i,em,li,dt,dd,label,legend,summary,
+ a,button,input,select,textarea,option,output,
+ figcaption,caption,blockquote,th,td,time,.kicker,.eyebrow,
+ .weekly-adventure,.weekly-adventure *, .footer,.footer *,
+ .family-card,.family-card *, .parent-card,.parent-card *,
+ .creche-support-card,.creche-support-card *
+){font-size:max(18px,1em)!important}
+html:root body [data-khaemenes-primary-title="true"]{font-size:66px!important}
+body main .hero .hero-copy{border-radius:56% 44% 52% 48% / 47% 55% 45% 53%!important}
+body main .hero .orbit-button{border-radius:50%!important}
