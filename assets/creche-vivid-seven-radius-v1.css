@@ -165,3 +165,23 @@ body #myHome :is(.home-stats,.home-status,.home-toolbar,.home-actions,.home-cont
 body #myHome #homeCalmBtn{background:#168fe5!important;color:#fff!important;border-radius:7px!important}
 body #myHome #motionBtn{background:#7457ff!important;color:#fff!important;border-radius:7px!important}
 body #myHome :is(.quick-picks,.quick-picks summary,.heading,.heading.compact-heading,.weekly-continue,.home-card,.home-status,.home-stats){border-radius:7px!important}
+
+/* Remaining home-base cards from visual proof: no parchment rectangles. */
+body #myHome .quick-comfort{
+  background:#ef5bb8!important;color:#243038!important;
+  border:3px solid #fff!important;border-radius:7px!important;
+}
+body #myHome .quick-comfort>span{
+  background:#ffd63d!important;color:#243038!important;
+  border-radius:7px!important;padding:7px 11px;
+}
+body main>div[style*="background:#e7f7ff"]{
+  background:#22cbe6!important;color:#243038!important;
+  border:2px solid #fff!important;border-radius:7px!important;
+}
+body main>div[style*="background:#e7f7ff"] a{color:#243038!important}
+body #myHome .quick-picks .daily-school-card{border-radius:7px!important}
+body #myHome .quick-picks .daily-school-card:nth-child(4n+1){background:#ffd63d!important}
+body #myHome .quick-picks .daily-school-card:nth-child(4n+2){background:#ffadcf!important}
+body #myHome .quick-picks .daily-school-card:nth-child(4n+3){background:#8fe6f9!important}
+body #myHome .quick-picks .daily-school-card:nth-child(4n){background:#b3ee75!important}
