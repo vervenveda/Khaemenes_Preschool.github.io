@@ -67,7 +67,8 @@ function enforceFloor(root=document.body){
   if(root.querySelectorAll)nodes.push(...root.querySelectorAll("*"));
   for(const el of nodes){
     if(!hasReadableText(el))continue;
-    if(el.matches("h1,h2,h3,h4,h5,h6,[role=heading],["+PRIMARY_ATTR+"]"))continue;
+    // Check headings too: their normal 33/66px hierarchy is retained, but any
+    // unexpectedly undersized heading must also meet the 18px floor.
     const size=parseFloat(getComputedStyle(el).fontSize||"0");
     if(size>0&&size<18){
       el.style.setProperty("font-size","18px","important");
