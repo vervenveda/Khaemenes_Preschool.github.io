@@ -185,3 +185,32 @@ body #myHome .quick-picks .daily-school-card:nth-child(4n+1){background:#ffd63d!
 body #myHome .quick-picks .daily-school-card:nth-child(4n+2){background:#ffadcf!important}
 body #myHome .quick-picks .daily-school-card:nth-child(4n+3){background:#8fe6f9!important}
 body #myHome .quick-picks .daily-school-card:nth-child(4n){background:#b3ee75!important}
+
+/* 2026-11-18: centered garden heading, bordered activity cards and clean title ink. */
+body #weeklyGarden .weekly-garden-head{
+  display:flex!important;flex-direction:column!important;
+  justify-content:center!important;align-items:center!important;
+  gap:12px!important;text-align:center!important;
+}
+body #weeklyGarden .weekly-garden-head>div:first-child{
+  width:min(100%,760px);margin-inline:auto!important;
+  display:flex;flex-direction:column;align-items:center;
+}
+body #weeklyGarden .weekly-garden-head :is(.kicker,h2,.weekly-garden-note){
+  text-align:center!important;margin-left:auto!important;margin-right:auto!important;
+}
+body #weeklyGarden .weekly-garden-controls{
+  align-self:center!important;justify-content:center!important;
+}
+body #weeklyGarden .weekly-garden-grid .weekly-adventure{
+  border:1px solid #243038!important;
+  border-radius:7px!important;
+}
+body #weeklyGarden .weekly-garden-grid .weekly-adventure:is(:hover,:focus-visible){
+  border-color:#17242e!important;outline:2px solid #17242e;outline-offset:2px;
+}
+body #myHome #myHomeTitle{
+  color:#243038!important;-webkit-text-fill-color:#243038!important;
+  text-shadow:none!important;-webkit-text-stroke:0 transparent!important;
+  filter:none!important;background:none!important;
+}
