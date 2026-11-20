@@ -11,7 +11,15 @@ const localCss=[...html.matchAll(/<link[^>]+rel=["']stylesheet["'][^>]*href=["']
 if(localCss.length!==1 || !localCss[0].includes("creche-vivid-seven-radius-v1.css")){
   problems.push("Preschool home must have exactly one local CSS owner; found: "+JSON.stringify(localCss));
 }
-const headerMounts=(html.match(/VNV_HEADER\.mount\(/g)||[]).length;
+const headerMounts=(html.match(/VNV_HEADER\\.mount\\(/g)||[]).length;
+const toolbar=(html.match(/<nav class="hero-orbit-labels"[\\s\\S]*?<\\/nav>/)||[])[0]||"";
+const heroToolbarControls=(toolbar.match(/<(?:a|button)\\b/g)||[]).length;
+if(heroToolbarControls!==16) problems.push("expected 16 unique hero-toolbar controls; found "+heroToolbarControls);
+if(/<div class="actions">/.test((html.match(/<div class="hero-copy">[\\s\\S]*?<div class="hero-playground"/)||[])[0]||"")) problems.push("hero oval still contains the retired action block");
+for(const id of ["surpriseHero","menuBtn","childViewBtn","grownupViewBtn","readingTimeBtn"]){
+  const count=(html.match(new RegExp('id=["\\\\']'+id+'["\\\\']','g'))||[]).length;
+  if(count!==1) problems.push("expected exactly one #"+id+"; found "+count);
+}
 if(headerMounts!==1) problems.push("expected one VNV_HEADER.mount call; found "+headerMounts);
 if(!/VNV_HEADER\.mount\(\{[^;]*"actions":\[\]\}/s.test(html)) problems.push("official header must remain hamburger-only with actions:[]");
 if(!css.includes("--prek-font-floor:18px")) problems.push("18px Preschool font floor missing");
