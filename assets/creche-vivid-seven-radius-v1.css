@@ -2591,3 +2591,152 @@ body main :is(.quick-picks>summary,.fresh-adventures>summary,.garden-trail>summa
   font-size:18px!important;
   line-height:1.4!important;
 }
+
+/* ==========================================================================
+   HERO STREAMLINE + SECTION CONTRAST · 2026-11-19
+   The oval owns identity; the undertray owns navigation/actions.
+   ========================================================================== */
+body .hero .hero-copy{
+  min-height:360px!important;
+  padding:66px 64px 54px!important;
+}
+body .hero .hero-copy .actions{display:none!important}
+body .hero .hero-undertray{margin-top:82px!important}
+body .hero .hero-undertray .hero-orbit-labels{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  max-width:960px!important;
+}
+body .hero .hero-undertray .hero-orbit-labels>:is(a,button){
+  appearance:none!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:54px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:10px 12px!important;
+  border:2px solid #fff!important;
+  border-radius:var(--prek-radius)!important;
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+  font:444 18px/1.25 Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif!important;
+  text-decoration:none!important;
+  text-align:center!important;
+  cursor:pointer!important;
+  box-shadow:none!important;
+}
+body .hero .hero-undertray .hero-orbit-labels>:nth-child(6n+1){background:var(--prek-yellow)!important}
+body .hero .hero-undertray .hero-orbit-labels>:nth-child(6n+2){background:var(--prek-aqua)!important}
+body .hero .hero-undertray .hero-orbit-labels>:nth-child(6n+3){background:var(--prek-green)!important}
+body .hero .hero-undertray .hero-orbit-labels>:nth-child(6n+4){background:var(--prek-pink)!important}
+body .hero .hero-undertray .hero-orbit-labels>:nth-child(6n+5){background:var(--prek-orange)!important}
+body .hero .hero-undertray .hero-orbit-labels>:nth-child(6n){background:var(--prek-lavender)!important}
+body .hero .hero-undertray .hero-orbit-labels>:is(a,button):hover,
+body .hero .hero-undertray .hero-orbit-labels>:is(a,button):focus-visible{
+  transform:translateY(-2px)!important;
+  filter:saturate(1.05)!important;
+  outline:3px solid var(--prek-charcoal)!important;
+  outline-offset:2px!important;
+}
+
+/* One six-color section system. Remove legacy gradients and decorative blobs below the hero. */
+body main :is(#weeklyGarden,#myHome,#new,#today,#profiles,#grownups,#contribute){
+  background-image:none!important;
+  color:var(--prek-charcoal)!important;
+}
+body main :is(#weeklyGarden,#myHome,#new,#today,#profiles,#grownups,#contribute)::before,
+body main :is(#weeklyGarden,#myHome,#new,#today,#profiles,#grownups,#contribute)::after{
+  content:none!important;
+  display:none!important;
+}
+body #weeklyGarden{background:var(--prek-aqua)!important;border-color:var(--prek-yellow)!important}
+body #myHome{background:var(--prek-yellow)!important;border-color:var(--prek-orange)!important}
+body #new{background:var(--prek-pink)!important;border-color:var(--prek-lavender)!important}
+body #today{background:var(--prek-green)!important;border-color:var(--prek-aqua)!important}
+body #profiles{background:var(--prek-lavender)!important;border-color:var(--prek-pink)!important}
+body #grownups{background:var(--prek-orange)!important;border-color:var(--prek-yellow)!important}
+body #contribute{background:var(--prek-pink)!important;border-color:var(--prek-lavender)!important}
+
+/* Major section heading cards use the same palette and keep strong readable contrast. */
+body #weeklyGarden .weekly-garden-head,
+body #myHome .compact-heading,
+body #new .explore-heading,
+body #today .garden-heading,
+body #profiles>.shell>.heading,
+body #grownups>.shell>.heading{
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding:22px 24px!important;
+  border:3px solid #fff!important;
+  border-radius:var(--prek-radius)!important;
+  box-shadow:none!important;
+  color:var(--prek-charcoal)!important;
+}
+body #weeklyGarden .weekly-garden-head{background:var(--prek-yellow)!important}
+body #myHome .compact-heading{background:var(--prek-aqua)!important}
+body #new .explore-heading{background:var(--prek-green)!important}
+body #today .garden-heading{background:var(--prek-pink)!important}
+body #profiles>.shell>.heading{background:var(--prek-orange)!important}
+body #grownups>.shell>.heading{background:var(--prek-lavender)!important}
+body main :is(
+  #weeklyGarden .weekly-garden-head,
+  #myHome .compact-heading,
+  #new .explore-heading,
+  #today .garden-heading,
+  #profiles>.shell>.heading,
+  #grownups>.shell>.heading
+) :is(h2,h3,p,.kicker,.eyebrow,span,strong){
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+  text-shadow:none!important;
+}
+
+/* Dark surfaces are always charcoal + light cream. */
+body main :is(
+  .daily-school-btn,.garden-action,.support-action,.family-action:not(.light),
+  .family-mentor-actions>a,.mentor-day-btn.primary,#homeCalmBtn,#motionBtn,
+  .subject-popover-close,.app-window-bar,.weekly-head
+){
+  background:var(--prek-charcoal)!important;
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+body main :is(
+  .daily-school-btn,.garden-action,.support-action,.family-action:not(.light),
+  .family-mentor-actions>a,.mentor-day-btn.primary,#homeCalmBtn,#motionBtn,
+  .subject-popover-close,.app-window-bar,.weekly-head
+) :is(span,strong,small,p,h2,h3,h4,i,em){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+body footer.footer{
+  background:var(--prek-charcoal)!important;
+  color:var(--prek-cream)!important;
+}
+body footer.footer :is(strong,span,a,p){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+body footer.footer a{background:transparent!important;border-color:var(--prek-cream)!important}
+
+/* The My Creche Home title must never disappear against its heading card. */
+body #myHome #myHomeTitle,
+body #myHome .compact-heading :is(.kicker,p){
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+  opacity:1!important;
+}
+
+/* 16 unique controls remain symmetrical at every breakpoint. */
+@media(max-width:900px){
+  body .hero .hero-copy{min-height:390px!important;padding:62px 46px 50px!important}
+  body .hero .hero-undertray .hero-orbit-labels{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+@media(max-width:760px){
+  body .hero .hero-undertray .hero-orbit-labels{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:580px){
+  body .hero .hero-copy{min-height:460px!important;padding:64px 24px 46px!important}
+}
