@@ -631,7 +631,16 @@ $('printBtn').onclick=()=>{
   updateSummary();
   const win=window.open('','_blank');
   if(!win)return;
-  win.document.write(`<html><head><title>Life Skills Progress Summary</title><style>body{font-family:Arial,sans-serif;padding:28px;line-height:1.5}h1{color:#6b4f87}.box{border:1px solid #ccc;border-radius:10px;padding:12px;margin:8px 0}</style></head><body><h1>Little Tikes Life Skills Progress Summary</h1>${$('summaryGrid').innerHTML.replaceAll('summary-box','box')}<p>Printed ${new Date().toLocaleString()}</p><footer class="site-footer"><strong>© 2026 Verve N Veda · Khaemenes Academy · Khaemenes Preschool · Jennifer Kay Pearl</strong><br>Free learning · Child-friendly · Family guided</footer><script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.js" defer></script></body></html>`);
+  win.document.write(`<html><head><title>Life Skills Progress Summary</title><style>body{font-family:Arial,sans-serif;padding:28px;line-height:1.5}h1{color:#6b4f87}.box{border:1px solid #ccc;border-radius:10px;padding:12px;margin:8px 0}</style></head><body><h1>Little Tikes Life Skills Progress Summary</h1>${$('summaryGrid').innerHTML.replaceAll('summary-box','box')}<p>Printed ${new Date().toLocaleString()}</p><footer class="site-footer"><strong>© 2026 Verve N Veda · Khaemenes Academy · Khaemenes Preschool · Jennifer Kay Pearl</strong><br>Free learning · Child-friendly · Family guided</footer>
+<!-- Preschool contained canonical shell -->
+<script src="/Khaemenes_Preschool.github.io/assets/preschool-local-menu-adapter.js"></script>
+<script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
+<script>VNV_TICKER.autoPopulate({label:"Preschool Quick Links",max:7,cleanLegacy:true,links:[{label:"Home",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/"},{label:"Today",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#today"},{label:"Learning Garden",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#activities"},{label:"Reading",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#readingFeature"},{label:"My Profile",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/student-profile/"},{label:"Graduation",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/graduation/"}]});</script>
+<script src="https://vervenveda.com/assets/vnv-header-autopopulate.js"></script>
+<script>VNV_HEADER.mount({title:"Khaemenes Preschool",subtitle:"Crechè · Bright Beginnings",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});</script>
+<script src="/Khaemenes_Preschool.github.io/assets/preschool-language-loader.js" defer></script>
+<script src="/Khaemenes_Preschool.github.io/assets/preschool-local-toolbar.js" defer></script>
+</body></html>`);
   win.document.close();win.focus();setTimeout(()=>win.print(),250);
 };
 
@@ -681,6 +690,5 @@ updatePassport();
 
 window.addEventListener('beforeunload',()=>stopSpeaking(''));
 </script>
-<script src="https://vervenveda.com/assets/vnv-ecosystem-toolbar.js"></script>
 </body>
 </html>
