@@ -53,6 +53,7 @@ for(const size of ["112px","96px","84px"]){
 
 if(!css.includes("HERO STREAMLINE + SECTION CONTRAST")) problems.push("hero streamline/contrast authority missing");
 if(!css.includes("Dark surfaces are always charcoal + light cream")) problems.push("dark-surface contrast rule missing");
+if(!css.includes("body .hero .hero-undertray{margin-top:11px!important}")) problems.push("hero/toolbox gap must remain exactly 11px");
 
 if(problems.length){
   console.error(JSON.stringify({status:"FAIL",problems},null,2));
@@ -68,5 +69,6 @@ console.log(JSON.stringify({
   fontFloor:"18px",
   contentWidth:"1080px",
   orbitSizes:["112px","96px","84px"],
-  darkSurfaceInk:"cream"
+  darkSurfaceInk:"cream",
+  heroToolboxGap:"11px"
 },null,2));
