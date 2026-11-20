@@ -103,6 +103,24 @@ for (const file of htmlFiles) {
   if (/actions\.google\.com\/sounds|artist1970\.github\.io\/Eiren\.github\.io\/eiren-adapter\.js/.test(source)) {
     problems.push(`${fileName}: forbidden remote runtime dependency remains.`);
   }
+
+  const childShellExempt = new Set(["mentor/index.html", "apps/PE_move_n_groove_teacher_guide.html"]);
+  if (!childShellExempt.has(fileName)) {
+    const autoTickerCount = (source.match(/vnv-ticker-autopopulate\\.js/g) || []).length;
+    if (autoTickerCount !== 1) problems.push(`${fileName}: expected exactly one canonical auto ticker loader; found ${autoTickerCount}.`);
+    if (/vnv-333-ticker\\.js/.test(source)) problems.push(`${fileName}: legacy 333 ticker loader is forbidden in child-facing Preschool pages.`);
+    if (/vnv-ecosystem-toolbar\\.js|khaemenes-landing-toolbar\\.js|vnv-ecosystem-menu\\.js/.test(source)) {
+      problems.push(`${fileName}: general ecosystem navigation runtime is forbidden in child-facing Preschool pages.`);
+    }
+    for (const required of [
+      "vnv-header-autopopulate.js",
+      "preschool-local-menu-adapter.js",
+      "preschool-language-loader.js",
+      "preschool-local-toolbar.js"
+    ]) {
+      if (!source.includes(required)) problems.push(`${fileName}: missing contained Preschool shell dependency ${required}.`);
+    }
+  }
 }
 
 const primaryCatalog = path.join(root, "assets", "preschool-catalog.js");
