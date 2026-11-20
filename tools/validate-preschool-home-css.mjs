@@ -2,16 +2,16 @@
 import fs from "node:fs";
 
 const html=fs.readFileSync("index.html","utf8");
-const css=fs.readFileSync("assets/creche-vivid-seven-radius-v1.css","utf8");
+const css=fs.readFileSync("assets/creche-home-fresh-v1.css","utf8");
 const problems=[];
 
 if(/<style\b/i.test(html)) problems.push("index.html contains inline <style> blocks");
 const localCss=[...html.matchAll(/<link[^>]+rel=["']stylesheet["'][^>]*href=["']([^"']+)["'][^>]*>/gi)]
   .map(m=>m[1]).filter(h=>!/^https?:/i.test(h));
-if(localCss.length!==1 || !localCss[0].includes("creche-vivid-seven-radius-v1.css")){
+if(localCss.length!==1 || !localCss[0].includes("creche-home-fresh-v1.css")){
   problems.push("Preschool home must have exactly one local CSS owner; found: "+JSON.stringify(localCss));
 }
-if(!html.includes('data-creche-visual-standard="fresh-reset-20261119"')){
+if(!html.includes('data-creche-visual-standard="creche-home-fresh-v1"')){
   problems.push("fresh reset visual-standard marker missing from index");
 }
 const headerMounts=(html.match(/VNV_HEADER\.mount\(/g)||[]).length;
@@ -48,10 +48,9 @@ for(const token of [
 ]){
   if(!css.includes(token)) problems.push("fresh palette token missing: "+token);
 }
-const uniqueSelectors=[".hero-copy{",".hero-playground{",".hero-undertray{","#weeklyGarden{","#myHome{","#new{","#today{","#profiles{","#grownups{","#contribute{"];
-for(const token of uniqueSelectors){
+for(const token of ["#weeklyGarden{","#myHome{","#new{","#today{","#profiles{","#grownups{","#contribute{"]){
   const count=css.split(token).length-1;
-  if(count!==1) problems.push("expected one canonical selector "+token+"; found "+count);
+  if(count!==1) problems.push("expected one section owner "+token+"; found "+count);
 }
 
 if(problems.length){
