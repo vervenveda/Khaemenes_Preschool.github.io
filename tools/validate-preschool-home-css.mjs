@@ -53,6 +53,27 @@ for(const size of ["112px","96px","84px"]){
 
 if(!css.includes("HERO STREAMLINE + SECTION CONTRAST")) problems.push("hero streamline/contrast authority missing");
 if(!css.includes("Dark surfaces are always charcoal + light cream")) problems.push("dark-surface contrast rule missing");
+if(!css.includes("Vibrant light Preschool spectrum — sole section-color authority")) problems.push("sole vibrant section palette authority missing");
+for(const token of [
+  "--prek-yellow:#FFE45E","--prek-aqua:#62E4F5","--prek-green:#A6E85C",
+  "--prek-pink:#FF88C8","--prek-orange:#FFB347","--prek-lavender:#B89CFF",
+  "--prek-sky:#67CFFF","--prek-watermelon:#FF7A8A","--prek-mint:#77E6B6"
+]){
+  if(!css.includes(token)) problems.push("bright Preschool palette token missing: "+token);
+}
+const legacyCss=css.split("KHAEMENES PRESCHOOL · CONSOLIDATED HOME VISUAL STANDARD")[0];
+const legacyTargets=new Set([
+  "body #weeklyGarden.weekly-garden","body #myHome.learner-home","body #new.explore-play",
+  "body #today.learning-garden","body #profiles.family-pathway","body #grownups.grownup",
+  "body #contribute.creche-support-closing",".weekly-garden",".learner-home",".explore-play",
+  ".learning-garden",".family-pathway",".grownup",".creche-support-closing"
+]);
+for(const match of legacyCss.matchAll(/([^{}]+)\{([^{}]*)\}/g)){
+  const selector=match[1].replace(/\/\*[\s\S]*?\*\//g,"").trim().replace(/\s+/g," ");
+  if(legacyTargets.has(selector) && /\bbackground(?:-image|-color)?\s*:/.test(match[2])){
+    problems.push("legacy section background returned: "+selector);
+  }
+}
 if(!css.includes("body .hero .hero-undertray{margin-top:11px!important}")) problems.push("hero/toolbox gap must remain exactly 11px");
 
 if(problems.length){
