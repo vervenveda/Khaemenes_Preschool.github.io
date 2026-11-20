@@ -20,6 +20,7 @@
   --prek-lavender:#b89cff;
   --prek-shell:1080px;
   --prek-narrow:900px;
+  --prek-accordion:960px;
   --prek-radius:7px;
   --prek-shadow:0 14px 32px rgba(36,48,56,.12);
   --prek-shadow-soft:0 8px 20px rgba(36,48,56,.09);
@@ -63,7 +64,7 @@ button,a,.btn,summary{touch-action:manipulation}
   width:min(var(--prek-shell),calc(100% - 32px));
   margin-inline:auto;
 }
-.section,.weekly-garden{padding:48px 0}
+.section,.weekly-garden,.feature-section{padding:11px 0}
 .section-anchor-alias{position:relative;top:calc(-1 * var(--creche-anchor-offset))}
 .heading,.weekly-garden-head{
   width:100%;
@@ -136,30 +137,30 @@ button,a,.btn,summary{touch-action:manipulation}
    ========================================================================== */
 .hero{
   position:relative;
-  padding:64px 0 36px;
-  background:linear-gradient(140deg,var(--prek-sky) 0 34%,var(--prek-sun) 34% 68%,var(--prek-pink) 68% 100%);
-  border-bottom:3px solid var(--prek-orange);
+  padding:55px 0 34px;
+  background:var(--prek-green);
+  border-bottom:3px solid #fff;
   overflow:hidden;
 }
 .hero-inner{
   position:relative;
-  min-height:610px;
+  min-height:560px;
   display:grid;
   place-items:center;
 }
 .hero-copy{
   position:relative;
   z-index:4;
-  width:min(640px,calc(100% - 200px));
-  min-height:390px;
-  padding:62px 58px 50px;
+  width:min(620px,calc(100% - 220px));
+  min-height:355px;
+  padding:44px 48px;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
   background:rgba(255,254,248,.98);
-  border-radius:50% 50% 47% 53% / 52% 48% 52% 48%;
+  border-radius:50%;
   box-shadow:
     0 0 0 10px #fff,
     0 0 0 20px var(--prek-sun),
@@ -168,22 +169,19 @@ button,a,.btn,summary{touch-action:manipulation}
     0 22px 45px rgba(36,48,56,.18);
   animation:creche-breathe 7s ease-in-out infinite alternate;
 }
-.hero-copy h1{margin:14px 0 12px}
-.hero-copy h1 span{
-  display:block;
-  margin-top:12px;
-  color:var(--prek-muted);
-  font-family:Nunito,"Brandon Grotesque","Trebuchet MS",Arial,sans-serif;
-  font-size:18px!important;
-  font-weight:444;
-  line-height:1.45;
-  letter-spacing:.04em;
-}
-.hero-copy .lead{
-  max-width:530px;
+.hero-copy h1{
   margin:0;
-  color:var(--prek-muted);
-  font-size:18px!important;
+  font-size:77px!important;
+  line-height:1!important;
+  letter-spacing:.01em;
+}
+.hero-preschool{
+  margin:12px 0 0;
+  color:var(--prek-charcoal);
+  font-family:Cinzel,Georgia,serif;
+  font-size:44px!important;
+  font-weight:400;
+  line-height:1.1;
 }
 .reading-time-launch{
   min-height:54px;
@@ -237,16 +235,15 @@ button,a,.btn,summary{touch-action:manipulation}
 .hero-undertray{
   position:relative;
   z-index:6;
-  width:min(980px,calc(100% - 32px));
+  width:min(var(--prek-accordion),calc(100% - 32px));
   margin:11px auto 0;
-  padding:18px;
-  background:rgba(255,254,248,.96);
+  padding:14px;
+  background:rgba(255,254,248,.97);
   border:var(--prek-line);
   border-radius:var(--prek-radius);
   box-shadow:var(--prek-shadow);
   text-align:center;
 }
-.hero-undertray-eyebrow{margin:0 0 12px;font-weight:444}
 .hero-orbit-labels{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -276,21 +273,98 @@ button,a,.btn,summary{touch-action:manipulation}
 .hero-orbit-labels>:nth-child(8n){background:var(--prek-mint)}
 .hero-orbit-labels>:is(a,button):hover{transform:translateY(-2px);filter:saturate(1.06)}
 .view-choice[aria-pressed="true"]{box-shadow:inset 0 0 0 3px var(--prek-charcoal)}
-.hero-undertray-notes{
-  margin-top:10px;
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:8px;
+/* ==========================================================================
+   MATCHED FEATURE ACCORDIONS
+   ========================================================================== */
+main > section.feature-section{
+  padding:11px 0!important;
+  background:var(--prek-cream)!important;
+  border:0!important;
 }
-.hero-note{
-  min-height:44px;
-  display:flex;
+.feature-accordion{
+  width:min(var(--prek-accordion),calc(100% - 32px));
+  margin:0 auto;
+  overflow:hidden;
+  background:var(--prek-paper);
+  border:3px solid #fff;
+  border-radius:var(--prek-radius);
+  box-shadow:var(--prek-shadow-soft);
+}
+.feature-accordion>summary{
+  min-height:66px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:12px;
+  padding:13px 18px;
+  list-style:none;
+  color:var(--prek-charcoal);
+  cursor:pointer;
+  font-size:20px!important;
+  font-weight:444;
+}
+.feature-accordion>summary::-webkit-details-marker{display:none}
+.feature-accordion>summary strong{font-size:20px!important}
+.accordion-icon{font-size:30px!important;line-height:1}
+.accordion-state{
+  min-width:76px;
+  text-align:right;
+  color:var(--prek-muted);
+  font-size:18px!important;
+}
+.accordion-state::after{content:"Open +"}
+.feature-accordion[open] .accordion-state::after{content:"Close −"}
+.feature-accordion[data-feature="reading"]>summary{background:var(--prek-sun)}
+.feature-accordion[data-feature="weekly"]>summary{background:var(--prek-aqua)}
+.feature-accordion[data-feature="home"]>summary{background:var(--prek-mint)}
+.feature-accordion[data-feature="discovery"]>summary{background:var(--prek-sky)}
+.feature-accordion[data-feature="explore"]>summary{background:var(--prek-pink)}
+.feature-accordion[data-feature="garden"]>summary{background:var(--prek-lavender)}
+.feature-accordion[data-feature="graduation"]>summary{background:var(--prek-green)}
+.feature-accordion[data-feature="profile"]>summary{background:var(--prek-orange)}
+.feature-accordion[data-feature="grownup"]>summary{background:var(--prek-sun)}
+.feature-accordion[data-feature="support"]>summary{background:var(--prek-watermelon)}
+.feature-accordion-panel{
+  padding:18px;
+  background:var(--prek-paper);
+  border-top:3px solid #fff;
+}
+.feature-accordion-panel>.shell{
+  width:100%;
+  margin:0;
+}
+.feature-intro-card{
+  width:100%;
+  padding:22px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:18px;
+  align-items:center;
+  background:var(--prek-cream);
+  border:3px solid #fff;
+  border-radius:var(--prek-radius);
+  text-align:left;
+}
+.feature-intro-card h2{margin-bottom:8px}
+.feature-intro-card p{margin:0;color:var(--prek-muted)}
+.feature-primary-link,.feature-intro-card .reading-time-launch{
+  min-height:50px;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding:7px 9px;
-  background:var(--prek-paper);
+  padding:10px 16px;
   border:2px solid #fff;
-  color:var(--prek-muted);
+  background:var(--prek-charcoal);
+  color:var(--prek-cream);
+  text-decoration:none;
+  cursor:pointer;
+  font-weight:444;
+}
+
+/* The accordion owns the page width; old full-bleed section fields are retired. */
+#weeklyGarden,#myHome,#new,#today,#profiles,#grownups,#contribute{
+  background:var(--prek-cream)!important;
+  border:0!important;
 }
 
 /* ==========================================================================
@@ -1193,12 +1267,15 @@ body.reduce-motion *,body.calm *{animation-duration:.001ms!important;animation-i
    ========================================================================== */
 @media(max-width:900px){
   .hero{padding-top:52px}
-  .hero-inner{min-height:650px}
-  .hero-copy{width:min(600px,calc(100% - 160px));padding:58px 42px 46px}
+  .hero-inner{min-height:590px}
+  .hero-copy{width:min(560px,calc(100% - 180px));min-height:330px;padding:40px}
+  .hero-copy h1{font-size:64px!important}
+  .hero-preschool{font-size:36px!important}
   .hero-playground{width:96vw;height:610px}
   .orbit-button{width:96px;height:96px;font-size:42px!important}
   .hero-orbit-labels{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .hero-undertray-notes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .feature-intro-card{grid-template-columns:1fr;text-align:center}
+  .feature-primary-link,.feature-intro-card .reading-time-launch{width:100%}
   .weekly-garden-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .category-grid,.new-grid,.subject-garden,.activity-grid,.family-grid,.parent-tools,.site-grid,.category-popup-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1216,13 +1293,13 @@ body.reduce-motion *,body.calm *{animation-duration:.001ms!important;animation-i
   :root{--creche-anchor-offset:130px}
   body{font-size:18px}
   .shell{width:calc(100% - 24px)}
-  .section,.weekly-garden{padding:34px 0}
+  .section,.weekly-garden,.feature-section{padding:11px 0}
   .hero{padding:42px 0 28px}
-  .hero-inner{min-height:600px}
+  .hero-inner{min-height:560px}
   .hero-copy{
-    width:calc(100% - 90px);
-    min-height:430px;
-    padding:58px 24px 42px;
+    width:calc(100% - 110px);
+    min-height:320px;
+    padding:38px 22px;
     box-shadow:
       0 0 0 7px #fff,
       0 0 0 14px var(--prek-sun),
@@ -1240,7 +1317,12 @@ body.reduce-motion *,body.calm *{animation-duration:.001ms!important;animation-i
   .orbit-button:nth-of-type(6){right:5%}
   .hero-undertray{width:calc(100% - 24px);padding:14px}
   .hero-orbit-labels{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hero-undertray-notes{grid-template-columns:1fr}
+  .feature-accordion{width:calc(100% - 24px)}
+  .feature-accordion-panel{padding:12px}
+  .feature-accordion>summary{grid-template-columns:auto 1fr;padding:12px 14px}
+  .accordion-state{grid-column:2;text-align:left;min-width:0}
+  .hero-copy h1{font-size:55px!important}
+  .hero-preschool{font-size:30px!important}
   .weekly-continue{grid-template-columns:1fr;text-align:center}
   .weekly-garden-grid,.daily-school-grid,.category-grid,.new-grid,.subject-garden,.activity-grid,.family-grid,.parent-tools,.site-grid,
   .dashboard-grid,.weekly-grid,.trail-grid,.child-mentor-buttons,.mentor-stations,.category-popup-grid,.profile-fields,.subject-tool-grid{
@@ -1254,8 +1336,9 @@ body.reduce-motion *,body.calm *{animation-duration:.001ms!important;animation-i
 }
 
 @media(max-width:420px){
-  .hero-copy{width:calc(100% - 72px);padding-inline:18px}
-  h1{font-size:48px}
+  .hero-copy{width:calc(100% - 84px);padding-inline:18px}
+  .hero-copy h1{font-size:50px!important}
+  .hero-preschool{font-size:28px!important}
   .orbit-button{width:74px;height:74px;font-size:31px!important}
 }
 
@@ -1265,6 +1348,8 @@ body.reduce-motion *,body.calm *{animation-duration:.001ms!important;animation-i
 
 @media print{
   .hero-playground,.hero-undertray,.menu-overlay,.category-overlay,.profile-overlay,.app-modal,.footer,.breadcrumbs,[data-preschool-language-control]{display:none!important}
+  .feature-accordion>summary{display:none!important}
+  .feature-accordion-panel{display:block!important;border:0!important;padding:0!important}
   body,main,.section,.weekly-garden{background:#fff!important;color:#000!important}
   .hero{padding:20px 0;background:#fff!important}
   .hero-copy{box-shadow:none;border:2px solid #000}
@@ -1275,4 +1360,26 @@ body.reduce-motion *,body.calm *{animation-duration:.001ms!important;animation-i
 }
 @keyframes orbit-float{
   to{transform:translateY(-8px) rotate(3deg)}
+}
+
+/* Accordion-era section tuning */
+.feature-accordion-panel :is(.weekly-garden-card,.quick-picks,.fresh-adventures,.garden-trail,.garden-catalog,.parent-dashboard,.weekly-snapshot,.enrolled-prek-tools,.mentor-day,.family-mentor-entry,.network-directory,.creche-support-card){
+  max-width:100%;
+}
+.feature-accordion-panel :is(.heading,.weekly-garden-head){
+  margin-bottom:18px;
+}
+.feature-accordion-panel .weekly-garden-card,
+.feature-accordion-panel .quick-picks,
+.feature-accordion-panel .fresh-adventures,
+.feature-accordion-panel .garden-trail,
+.feature-accordion-panel .garden-catalog,
+.feature-accordion-panel .parent-dashboard,
+.feature-accordion-panel .weekly-snapshot,
+.feature-accordion-panel .enrolled-prek-tools,
+.feature-accordion-panel .mentor-day,
+.feature-accordion-panel .family-mentor-entry,
+.feature-accordion-panel .network-directory,
+.feature-accordion-panel .creche-support-card{
+  box-shadow:none;
 }
