@@ -2559,3 +2559,35 @@ body main .mini-plan-empty{grid-column:1/-1}
   0%,100%{transform:translateY(0) rotate(0)}
   50%{transform:translateY(-3px) rotate(1.5deg)}
 }
+
+/* Final six-color lock for dynamically generated Preschool surfaces. */
+body main :is(.subject-tile,.subject-tool,.category-app,.trail-stop){
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+  border-color:#fff!important;
+}
+body main :is(.subject-tile,.subject-tool,.category-app,.trail-stop):nth-child(6n+1){background:var(--prek-yellow)!important}
+body main :is(.subject-tile,.subject-tool,.category-app,.trail-stop):nth-child(6n+2){background:var(--prek-aqua)!important}
+body main :is(.subject-tile,.subject-tool,.category-app,.trail-stop):nth-child(6n+3){background:var(--prek-green)!important}
+body main :is(.subject-tile,.subject-tool,.category-app,.trail-stop):nth-child(6n+4){background:var(--prek-pink)!important}
+body main :is(.subject-tile,.subject-tool,.category-app,.trail-stop):nth-child(6n+5){background:var(--prek-orange)!important}
+body main :is(.subject-tile,.subject-tool,.category-app,.trail-stop):nth-child(6n){background:var(--prek-lavender)!important}
+body main :is(.subject-tile,.subject-tool,.category-app,.trail-stop) :is(strong,small,span){
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+  font-size:18px!important;
+}
+body main .quick-picks>summary{background:var(--prek-yellow)!important;color:var(--prek-charcoal)!important}
+body main .fresh-adventures>summary{background:var(--prek-aqua)!important;color:var(--prek-charcoal)!important}
+body main .garden-trail>summary{background:var(--prek-green)!important;color:var(--prek-charcoal)!important}
+body main .network-directory>summary{background:var(--prek-lavender)!important;color:var(--prek-charcoal)!important}
+body main .mentor-intro-strip{background:var(--prek-orange)!important;color:var(--prek-charcoal)!important}
+body main :is(.quick-picks>summary,.fresh-adventures>summary,.garden-trail>summary,.network-directory>summary,.mentor-intro-strip){
+  width:100%!important;
+  min-height:54px!important;
+  padding:12px 16px!important;
+  box-sizing:border-box!important;
+  border-radius:var(--prek-radius)!important;
+  font-size:18px!important;
+  line-height:1.4!important;
+}
