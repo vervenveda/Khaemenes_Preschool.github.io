@@ -42,6 +42,10 @@ for(const feature of ["reading","weekly","home","discovery","explore","garden","
   if(!html.includes('data-feature="'+feature+'"')) problems.push("missing feature accordion: "+feature);
 }
 if(!css.includes("--prek-accordion:960px")) problems.push("shared 960px accordion width token missing");
+for(const id of ["weeklyGarden","myHome","new","today","profiles","grownups","contribute"]){
+  const rx=new RegExp("\\n#"+id+"\\{[^{}]*\\}\\n","g");
+  if(rx.test(css)) problems.push("retired full-width section background returned: #"+id);
+}
 if(!css.includes("margin:11px auto 0")) problems.push("11px hero/toolbox gap missing");
 if(!css.includes("font-size:18px;")) problems.push("18px body floor missing");
 for(const size of ["112px","96px","84px"]){
@@ -60,7 +64,7 @@ if(problems.length){
 console.log(JSON.stringify({
   status:"PASS",
   hero:"solid-lime / Crechè 77 / Preschool 44",
-  toolboxControls,
+  toolbarControls,
   featureAccordions:accordions.length,
   accordionWidth:"960px",
   defaultState:"collapsed",
