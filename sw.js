@@ -1,4 +1,4 @@
-const CACHE="khaemenes-preschool-v13";
+const CACHE="khaemenes-preschool-v14";
 const SHELL=[
   "./",
   "./index.html",
