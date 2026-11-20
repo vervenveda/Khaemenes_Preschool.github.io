@@ -28,8 +28,7 @@ const heroToolbarControls=(toolbar.match(/<(?:a|button)\b/g)||[]).length;
 if(heroToolbarControls!==16) problems.push("expected 16 unique hero-toolbar controls; found "+heroToolbarControls);
 
 for(const id of ["surpriseHero","menuBtn","childViewBtn","grownupViewBtn","readingTimeBtn"]){
-  const rx=new RegExp('id=["\\\']'+id+'["\\\']','g');
-  const count=(html.match(rx)||[]).length;
+  const count=(html.split('id="'+id+'"').length-1)+(html.split("id='"+id+"'").length-1);
   if(count!==1) problems.push("expected exactly one #"+id+"; found "+count);
 }
 if(/id=["']navReadingTime["']/.test(html)) problems.push("duplicate Reading Time toolbar control returned");
