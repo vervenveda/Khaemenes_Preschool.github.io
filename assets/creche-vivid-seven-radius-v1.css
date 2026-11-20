@@ -2512,3 +2512,50 @@ body footer.footer :is(strong,span,a){
 @media(prefers-reduced-motion:reduce){
   body main .hero .hero-playground .orbit-button{animation:none!important}
 }
+
+/* Folded landing-page portions of former local sacred/playful styles.
+   Scoped to main so canonical shared chrome remains independent. */
+body main :where(.card,.course-card,.grade-card,.portal-card,.lesson-card,.resource-card,.tool-card,.tile,.panel,.door){
+  border-radius:var(--prek-radius)!important;
+  overflow-wrap:normal;word-break:normal;hyphens:manual;
+}
+body main :where(.card-grid,.course-grid,.grade-grid,.portal-grid,.lesson-grid,.resource-grid,.tool-grid,.tile-grid){
+  align-items:stretch;
+}
+body main :where(.card-grid,.course-grid,.grade-grid,.portal-grid,.lesson-grid,.resource-grid,.tool-grid,.tile-grid) >
+:where(.card,.course-card,.grade-card,.portal-card,.lesson-card,.resource-card,.tool-card,.tile,.door){
+  height:100%;min-width:0;display:flex;flex-direction:column;
+}
+body main :where(.card-grid,.course-grid,.grade-grid,.portal-grid,.lesson-grid,.resource-grid,.tool-grid,.tile-grid) >
+:where(.card,.course-card,.grade-card,.portal-card,.lesson-card,.resource-card,.tool-card,.tile,.door)
+:where(.actions,.card-actions,.buttons){margin-top:auto}
+body main :is(button,.btn,[class*="button"],[class*="-btn"],a[class*="btn"],a[class*="open"]){
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease!important;
+}
+body main :is(button,.btn,[class*="button"],[class*="-btn"],a[class*="btn"],a[class*="open"]):hover{
+  filter:saturate(1.08) brightness(1.02);
+  transform:translateY(-2px);
+  box-shadow:0 10px 23px rgba(36,48,56,.16);
+}
+body main :is(button,a,input,select,textarea):focus-visible{
+  outline:3px solid var(--prek-yellow)!important;
+  outline-offset:3px!important;
+}
+body main :is(.emoji,.icon,[class*="-icon"],[class*="Icon"]){
+  transform-origin:50% 80%;
+  animation:prek-icon-bob 4.8s ease-in-out infinite;
+}
+body main .discovery-callout{
+  width:min(860px,100%);margin:12px auto;padding:15px 12px;
+  text-align:center;background:var(--prek-aqua);border:3px solid #fff;border-radius:var(--prek-radius);
+}
+body main .discovery-link{
+  color:var(--prek-charcoal)!important;
+  font-size:18px!important;
+  text-decoration:underline;
+}
+body main .mini-plan-empty{grid-column:1/-1}
+@keyframes prek-icon-bob{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-3px) rotate(1.5deg)}
+}
