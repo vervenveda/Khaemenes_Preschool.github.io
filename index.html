@@ -10,8 +10,6 @@
 <meta name="format-detection" content="telephone=no">
 <link rel="canonical" href="https://vervenveda.com/Khaemenes_Preschool.github.io/">
 <title>Khaemenes Preschool · Crechè Family Home | Bright Beginnings</title>
-<link rel="stylesheet" href="assets/khaemenes-sacred-layout.css" data-khaemenes-sacred-layout>
-<link rel="stylesheet" href="assets/preschool-playful-theme.css" data-preschool-playful-theme>
 <link rel="stylesheet" href="https://vervenveda.com/assets/vnv-ecosystem-menu.css">
 
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-standard.css">
@@ -153,7 +151,7 @@
   </div>
 </section>
 
-<div style="text-align:center;padding:15px 12px;background:#e7f7ff;border-radius:7px;margin:12px auto;max-width:860px"><a href="learning/five-days-of-discovery.html" style="font-size:1.1rem;color:#164785;text-decoration:underline">Five Days of Discovery — guided Pre-K lessons in stories, numbers, colors and kindness</a></div>
+<div class="discovery-callout"><a class="discovery-link" href="learning/five-days-of-discovery.html">Five Days of Discovery — guided Pre-K lessons in stories, numbers, colors and kindness</a></div>
 <section class="section explore-play" id="new" aria-labelledby="explorePlayTitle">
   <span id="rooms" class="section-anchor-alias" aria-hidden="true"></span>
   <div class="shell">
@@ -301,7 +299,7 @@
     </section>
 
     <div class="family-grid">
-      <article class="family-card featured" style="--family-glow:rgba(66,199,220,.18)">
+      <article class="family-card featured">
         <span class="family-icon" aria-hidden="true">✨</span>
         <h3>Archaemenes · Wise Owl</h3>
         <p>After a family links a child learner, Archaemenes becomes that child’s continuous Academy Mentor. In Preschool he appears as Wise Owl and guides a short, age-aware path through Crechè activities.</p>
@@ -309,7 +307,7 @@
         <div class="family-actions"><a class="family-action" href="#familyMentorEntry">Enter the Learning Hub →</a></div>
       </article>
 
-      <article class="family-card" style="--family-soft:#fff2c8;--family-glow:rgba(255,214,61,.16)">
+      <article class="family-card">
         <span class="family-icon" aria-hidden="true">🧒</span>
         <h3>Optional Local Play Preferences</h3>
         <p>Games and favorites work without a profile. This small browser-local preference record can personalize the Preschool display, but Archaemenes uses the Academy Family Profile as the learner authority.</p>
@@ -323,7 +321,7 @@
         </div>
       </article>
 
-      <article class="family-card" style="--family-soft:#e6f7ef;--family-glow:rgba(0,174,136,.14)">
+      <article class="family-card">
         <span class="family-icon" aria-hidden="true">🧑‍🧒</span>
         <h3>Family &amp; Parent Controls</h3>
         <p>Review browser-local exploration, observations, and comfort preferences here. Use the Academy Family Profile for the child’s Archaemenes Mentor and formal continuity across Khaemenes schools.</p>
@@ -336,7 +334,7 @@
         </div>
       </article>
 
-      <article class="family-card" style="--family-soft:#eff9d9;--family-glow:rgba(139,216,62,.15)">
+      <article class="family-card">
         <span class="family-icon" aria-hidden="true">🌻</span>
         <h3>Khaemenes Kinder Garden</h3>
         <p>Continue into kindness, curiosity, early literacy, number sense, nature, creativity, and school readiness.</p>
@@ -344,7 +342,7 @@
         <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/">Enter Kinder Garden →</a></div>
       </article>
 
-      <article class="family-card" style="--family-soft:#e7f0ff;--family-glow:rgba(22,143,229,.14)">
+      <article class="family-card">
         <span class="family-icon" aria-hidden="true">🏫</span>
         <h3>Khaemenes Elementary School</h3>
         <p>Carry the learner’s continuity record toward Kinder Garden through Grade 5 courses, tools, and family resources.</p>
@@ -352,7 +350,7 @@
         <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Elementary.github.io/">Enter Elementary School →</a></div>
       </article>
 
-      <article class="family-card" style="--family-soft:#f2edff;--family-glow:rgba(116,87,255,.13)">
+      <article class="family-card">
         <span class="family-icon" aria-hidden="true">🎓</span>
         <h3>Khaemenes Academy</h3>
         <p>Open the larger campus directory for every educational level while keeping Crechè as the child’s first joyful doorway.</p>
@@ -1426,7 +1424,7 @@ function renderMentorJourney(){
   if(!learner){
     $("mentorDayTitle").textContent="A small, balanced learning path";
     $("mentorDayIntro").textContent="Link a child learner through the Academy Family Profile to unlock a personalized Wise Owl path.";
-    $("mentorJourneyStations").innerHTML='<div class="mini-plan-empty" style="grid-column:1/-1">Public Crechè adventures remain open. Archaemenes becomes personalized only after a family learner is linked.</div>';
+    $("mentorJourneyStations").innerHTML='<div class="mini-plan-empty">Public Crechè adventures remain open. Archaemenes becomes personalized only after a family learner is linked.</div>';
     $("openArchaemenes").href="https://vervenveda.com/Khaemenes_Academy.github.io/family/";
     $("openArchaemenes").textContent="Link Family Learner →";
     return;
@@ -1438,7 +1436,7 @@ function renderMentorJourney(){
   $("mentorDayIntro").textContent=data?`${done} of ${data.items.length} stations explored · ${data.plan.minutes} minute plan · ${data.plan.energy==="steady"?"ready":data.plan.energy} energy`:"Choose Make Today’s Path when you are ready.";
   $("openArchaemenes").href="https://vervenveda.com/Khaemenes_Academy.github.io/mentor/";
   $("openArchaemenes").textContent="Open Archaemenes →";
-  $("mentorJourneyStations").innerHTML=data&&data.items.length?data.items.map((item,index)=>`<a class="mentor-station ${item.done?"done":""}" href="${appUrl(item.app)}" data-mentor-station="${item.app.id}"><i>${item.app.icon}</i><strong>${escapeHtml(displayTitle(item.app))}</strong><small>${item.done?"Explored ✓":`Station ${index+1} · ${item.app.mentor?.minutes||"short"} min`}</small></a>`).join(""):'<div class="mini-plan-empty" style="grid-column:1/-1">No plan is ready yet.</div>';
+  $("mentorJourneyStations").innerHTML=data&&data.items.length?data.items.map((item,index)=>`<a class="mentor-station ${item.done?"done":""}" href="${appUrl(item.app)}" data-mentor-station="${item.app.id}"><i>${item.app.icon}</i><strong>${escapeHtml(displayTitle(item.app))}</strong><small>${item.done?"Explored ✓":`Station ${index+1} · ${item.app.mentor?.minutes||"short"} min`}</small></a>`).join(""):'<div class="mini-plan-empty">No plan is ready yet.</div>';
   document.querySelectorAll("[data-mentor-station]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.mentorStation)));
 }
 function renderMentorPlanPreview(){
