@@ -147,3 +147,38 @@ article:hover {
     transition-duration: .001ms !important;
   }
 }
+
+
+/* Preschool containment + universal geometry · 2026-11-19 */
+:root{--prek-radius:7px;--prek-charcoal:#243038;--prek-cream:#fff8e9}
+button,.btn,[class*="button"],[class*="-btn"],a[class*="btn"],a[class*="open"],
+.card,.activity,.panel,article,section,details,input,select,textarea{border-radius:var(--prek-radius)!important}
+#vnvEcosystemUtilityDock,.vnv-ecosystem-toolbar,[data-vnv-ecosystem-toolbar-root]{display:none!important}
+#vnv-language-rail{box-sizing:border-box;width:100%;min-height:54px;padding:7px 16px 8px;background:var(--prek-charcoal);color:var(--prek-cream);border-bottom:1px solid rgba(255,255,255,.14);text-align:center}
+#vnvEnrichedMenuOverlay{position:fixed;inset:0;z-index:2147483000;display:grid;justify-items:end;visibility:hidden;opacity:0;background:rgba(6,15,12,.56);transition:opacity .18s ease,visibility .18s ease}
+#vnvEnrichedMenuOverlay[data-open="true"]{visibility:visible;opacity:1}
+.prek-local-menu-panel{width:min(92vw,390px);height:100%;overflow:auto;padding:18px;background:#fffdf8;box-shadow:-18px 0 48px rgba(8,11,15,.18);transform:translateX(100%);transition:transform .2s ease}
+#vnvEnrichedMenuOverlay[data-open="true"] .prek-local-menu-panel{transform:none}
+.prek-local-menu-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid rgba(18,23,19,.14)}
+.prek-local-menu-top strong{font-size:24px}.prek-local-menu-close{width:44px;height:44px;border:1px solid rgba(18,23,19,.2);background:#fff;color:#243038;font-size:24px}
+.prek-local-menu-list{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
+.prek-local-menu-list a{min-height:55px;display:flex;align-items:center;justify-content:center;padding:11px;border:1px solid rgba(18,23,19,.14);background:#fff;color:#243038!important;text-decoration:none!important;font-size:16px;text-align:center}
+#prekLocalToolbar{position:fixed;left:14px;bottom:14px;z-index:2147482500;font-size:16px}
+.prek-tool-toggle{min-width:66px;min-height:44px;padding:7px 11px;border:1px solid #111;background:var(--prek-charcoal);color:var(--prek-cream)}
+.prek-tool-panel{position:absolute;left:0;bottom:55px;width:min(300px,calc(100vw - 28px));display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:11px;border:1px solid rgba(18,23,19,.18);background:#fffdf8;box-shadow:0 14px 33px rgba(18,23,19,.18)}
+.prek-tool-panel[hidden]{display:none!important}
+.prek-tool-panel a,.prek-tool-panel button{min-height:55px;display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid rgba(18,23,19,.16);background:#fff;color:#243038!important;text-decoration:none!important;font-size:16px;text-align:center}
+#prekExitNotice{position:fixed;inset:0;z-index:2147483600;display:grid;place-items:center;padding:14px;background:rgba(8,11,15,.68)}
+#prekExitNotice[hidden]{display:none!important}
+.prek-exit-card{width:min(520px,100%);padding:24px;border:1px solid rgba(18,23,19,.2);background:#fffdf8;color:#243038;text-align:center}
+.prek-exit-card strong{display:block;font-size:24px}.prek-exit-card p{font-size:16px}.prek-exit-card button{min-height:55px;padding:10px 18px;background:var(--prek-charcoal);color:var(--prek-cream)}
+html.prek-calm *,html.prek-calm *::before,html.prek-calm *::after{animation:none!important;transition:none!important}
+html.prek-calm body{background-image:none!important;background:#fffaf0!important}
+body[data-view="child"] #menuBtn,body[data-view="child"] #menuOverlay{display:none!important}
+.site-footer,body>footer{box-sizing:border-box;width:100%;padding:24px 16px;background:var(--prek-charcoal)!important;color:var(--prek-cream)!important;text-align:center!important;border-radius:0!important}
+.site-footer a,body>footer a{color:var(--prek-cream)!important}
+.prek-hero-academy{font-size:33px!important;line-height:1.1!important}
+.prek-hero-title{font-size:77px!important;line-height:.98!important}
+.prek-hero-descriptor{font-size:24px!important;line-height:1.35!important}
+@media(max-width:760px){.prek-hero-academy{font-size:24px!important}.prek-hero-title{font-size:clamp(48px,14vw,66px)!important}.prek-hero-descriptor{font-size:20px!important}}
+@media(max-width:560px){.prek-local-menu-list,.prek-tool-panel{grid-template-columns:1fr}}
