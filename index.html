@@ -43,10 +43,9 @@
 <main>
 <section class="hero">
   <div class="shell hero-inner">
-    <div class="hero-copy">
-      <button class="reading-time-launch" id="readingTimeBtn" type="button" aria-haspopup="dialog" aria-controls="readingModal">📚 Reading Time<span>72 shared family stories</span></button>
-      <h1>Crechè<span>Khaemenes Preschool · Read · Count · Create · Feel · Move · Wonder</span></h1>
-      <p class="lead" id="heroLead">A joyful preschool world where little learners can tap, play, read, count, draw, move, laugh, practice everyday skills, and follow their curiosity—one bright adventure at a time.</p>
+    <div class="hero-copy" aria-label="Crechè Preschool">
+      <h1>Crechè</h1>
+      <p class="hero-preschool">Preschool</p>
     </div>
     <div class="hero-playground" aria-label="Quick Preschool section buttons">
       <a class="orbit-button" href="./student-profile/" title="Open my learning profile" data-label="My Profile">😊</a>
@@ -54,12 +53,15 @@
       <a class="orbit-button" href="#today" title="See today's pick" data-label="Today" data-ticker data-ticker-label="Today">⭐</a>
       <a class="orbit-button" href="#new" title="See new adventures" data-label="New" data-ticker data-ticker-label="New Adventures">🎈</a>
       <a class="orbit-button" href="#activities" title="Explore all activities" data-label="Adventures" data-ticker data-ticker-label="Adventures">🎨</a>
-      <a class="orbit-button" href="#graduation-garden" title="Visit Graduation Garden" data-label="Graduation" data-ticker data-ticker-label="Graduation Garden">🎓</a>
-      
+      <a class="orbit-button" href="#graduationFeature" title="Visit Graduation Garden" data-label="Graduation" data-ticker data-ticker-label="Graduation Garden">🎓</a>
     </div>
   </div>
-  <div class="hero-undertray" aria-label="Preschool welcome and quick routes">
-    <p class="eyebrow hero-undertray-eyebrow" id="heroEyebrow">🌟 A colorful first doorway to learning</p>
+
+  <span id="heroEyebrow" hidden></span>
+  <span id="heroLead" hidden></span>
+  <strong id="heroKidCount" hidden>52</strong>
+
+  <div class="hero-undertray" aria-label="Preschool quick routes">
     <nav class="hero-orbit-labels" aria-label="Preschool navigation toolbar">
       <a href="https://vervenveda.com/Khaemenes_Academy.github.io/">Academy Home</a>
       <a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Family</a>
@@ -71,23 +73,37 @@
       <a href="#today">Today</a>
       <a href="#new">New Adventures</a>
       <a href="#activities">Adventures</a>
-      <a href="#graduation-garden">Graduation</a>
+      <a href="#graduationFeature">Graduation</a>
       <a href="#contribute">Grown-Up Support</a>
       <button type="button" id="surpriseHero">🎈 Surprise Me</button>
       <button type="button" id="menuBtn" aria-label="Open complete Preschool directory" aria-controls="menuOverlay" aria-expanded="false">☰ Preschool Directory</button>
       <button class="view-choice" id="childViewBtn" type="button" data-view-choice="child" aria-pressed="true">🌈 Child View</button>
       <button class="view-choice" id="grownupViewBtn" type="button" data-view-choice="grownup" aria-pressed="false">🧑‍🧒 Grown-Up View</button>
     </nav>
-    <div class="hero-notes hero-undertray-notes" aria-label="Preschool information">
-      <span class="hero-note"><strong id="heroKidCount">52</strong>&nbsp;child adventures</span>
-      <span class="hero-note">No account required</span>
-      <span class="hero-note">Returning learners go straight to My Profile</span>
-      <span class="hero-note">Large, playful buttons</span>
-    </div>
   </div>
 </section>
+<section class="feature-section" id="readingFeature" aria-label="Reading Time">
+  <details class="feature-accordion" data-feature="reading">
+    <summary><span class="accordion-icon" aria-hidden="true">📚</span><strong>Reading Time</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+      <div class="feature-intro-card reading-feature-card">
+        <div>
+          <p class="kicker">Shared family library</p>
+          <h2>Reading Time</h2>
+          <p>Open the shared collection of 72 family stories whenever you are ready for a quiet reading adventure.</p>
+        </div>
+        <button class="reading-time-launch" id="readingTimeBtn" type="button" aria-haspopup="dialog" aria-controls="readingModal">📚 Open Reading Time</button>
+      </div>
+    </div>
+  </details>
+</section>
 
-<section class="weekly-garden child-mode-only" id="weeklyGarden" aria-labelledby="weeklyGardenTitle">
+
+<section class="weekly-garden child-mode-only feature-section" id="weeklyGarden" aria-labelledby="weeklyGardenTitle">
+  <details class="feature-accordion" data-feature="weekly">
+    <summary><span class="accordion-icon" aria-hidden="true">🌱</span><strong>This Week in Our Learning Garden</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+
   <div class="shell"><div class="weekly-garden-card">
     <div class="weekly-garden-head"><div><p class="kicker">A gentle path for curious little learners</p><h2 id="weeklyGardenTitle">This Week in Our Learning Garden</h2><p class="weekly-garden-note" id="weeklyGardenNote">These are invitations, not assignments. Explore them in any order, or wander anywhere in the Adventure Garden.</p></div><div class="weekly-garden-controls"><button id="weeklyPrev" type="button" aria-label="Previous week">←</button><span class="weekly-garden-week" id="weeklyWeek">Week 1</span><button id="weeklyNext" type="button" aria-label="Next week">→</button></div></div>
     <div class="weekly-continue" id="weeklyContinue" aria-label="Continue learning"><span class="continue-icon" id="continueIcon" aria-hidden="true">🌱</span><div><h3 id="continueTitle">Start this week</h3><p id="continueDesc">Choose one gentle adventure and begin wherever curiosity leads.</p></div><a id="continueLink" href="#weeklyGarden">Start This Week →</a></div>
@@ -95,9 +111,16 @@
     <div class="weekly-graduation" id="weeklyGraduation"><strong>🎓 Ready for the Next Garden</strong><div>This final week can include a joyful Preschool celebration whenever your family feels ready.</div><a href="./graduation/">Visit Graduation Garden →</a></div>
     <p class="weekly-family" id="weeklyFamily"><strong>For families:</strong> Notice curiosity, conversation, movement, and joy—no grading needed.</p>
   </div></div>
+
+    </div>
+  </details>
 </section>
 
-<section class="section learner-home child-mode-only" id="myHome" aria-labelledby="myHomeTitle">
+<section class="section learner-home child-mode-only feature-section" id="myHome" aria-labelledby="myHomeTitle">
+  <details class="feature-accordion" data-feature="home">
+    <summary><span class="accordion-icon" aria-hidden="true">🏡</span><strong>My Crechè Home</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+
   <div class="shell">
     <div class="heading compact-heading">
       <p class="kicker" id="homeKicker">A little home base for today</p><h2 id="myHomeTitle">My Crechè Home</h2>
@@ -142,10 +165,24 @@
       <button id="motionBtn" type="button" aria-pressed="false">🫧 Reduce movement</button>
     </div>
   </div>
+
+    </div>
+  </details>
 </section>
 
-<div class="discovery-callout"><a class="discovery-link" href="learning/five-days-of-discovery.html">Five Days of Discovery — guided Pre-K lessons in stories, numbers, colors and kindness</a></div>
-<section class="section explore-play" id="new" aria-labelledby="explorePlayTitle">
+<section class="feature-section child-mode-only" id="discoveryFeature" aria-label="Five Days of Discovery">
+  <details class="feature-accordion" data-feature="discovery">
+    <summary><span class="accordion-icon" aria-hidden="true">🗓️</span><strong>Five Days of Discovery</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+      <div class="discovery-callout"><a class="discovery-link" href="learning/five-days-of-discovery.html">Open the guided Pre-K lessons in stories, numbers, colors, and kindness →</a></div>
+    </div>
+  </details>
+</section>
+<section class="section explore-play feature-section" id="new" aria-labelledby="explorePlayTitle">
+  <details class="feature-accordion" data-feature="explore">
+    <summary><span class="accordion-icon" aria-hidden="true">🎨</span><strong>Explore & Play</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+
   <span id="rooms" class="section-anchor-alias" aria-hidden="true"></span>
   <div class="shell">
     <div class="heading explore-heading">
@@ -166,9 +203,16 @@
       <div class="new-grid" id="newGrid"></div>
     </details>
   </div>
+
+    </div>
+  </details>
 </section>
 
-<section class="section learning-garden child-mode-only" id="today" aria-labelledby="learningGardenTitle">
+<section class="section learning-garden child-mode-only feature-section" id="today" aria-labelledby="learningGardenTitle">
+  <details class="feature-accordion" data-feature="garden">
+    <summary><span class="accordion-icon" aria-hidden="true">🌈</span><strong>The Crechè Learning Garden</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+
   <span id="trail" class="section-anchor-alias" aria-hidden="true"></span>
   <span id="graduation-garden" class="section-anchor-alias" aria-hidden="true"></span>
   <span id="activities" class="section-anchor-alias" aria-hidden="true"></span>
@@ -227,9 +271,32 @@
       <div class="subject-tool-grid" id="subjectToolGrid"></div>
     </section>
   </div>
+
+    </div>
+  </details>
+</section>
+<section class="feature-section child-mode-only" id="graduationFeature" aria-label="Graduation Garden">
+  <details class="feature-accordion" data-feature="graduation">
+    <summary><span class="accordion-icon" aria-hidden="true">🎓</span><strong>Graduation Garden</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+      <div class="feature-intro-card graduation-feature-card">
+        <div>
+          <p class="kicker">A joyful next-step celebration</p>
+          <h2>Graduation Garden</h2>
+          <p>Visit the playful Preschool graduation checkpoint when your family feels ready. The 80% learning checkpoint remains separate from formal placement and family release.</p>
+        </div>
+        <a class="feature-primary-link" href="./graduation/">🎓 Visit Graduation Garden →</a>
+      </div>
+    </div>
+  </details>
 </section>
 
-<section class="section family-pathway" id="profiles">
+
+<section class="section family-pathway feature-section" id="profiles">
+  <details class="feature-accordion" data-feature="profile">
+    <summary><span class="accordion-icon" aria-hidden="true">😊</span><strong>My Learning Profile</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+
   <div class="shell">
     <div class="heading">
       <p class="kicker">Your way back into learning</p><h2>My Learning Profile</h2>
@@ -361,9 +428,16 @@
       <div class="continuity-note"><strong>Registration boundary:</strong> open games, apps, and browser-local favorites do not require registration. Personalized Archaemenes mentorship and formal curriculum continuity require an intentionally linked Academy Family learner.</div>
     </div>
   </div>
+
+    </div>
+  </details>
 </section>
 
-<section class="section grownup grownup-mode-only" id="grownups">
+<section class="section grownup grownup-mode-only feature-section" id="grownups">
+  <details class="feature-accordion" data-feature="grownup">
+    <summary><span class="accordion-icon" aria-hidden="true">🦉</span><strong>Grown-Up Corner</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+
   <div class="shell">
     <div class="heading"><p class="kicker">Parents, caregivers & teachers</p><h2>The Grown-Up Corner</h2><p>Support gentle routines, adjust the visual experience, and continue into the wider family of public educational resources.</p></div>
     <div class="grownup-mentor-hub">
@@ -435,9 +509,16 @@
     </details>
     <div class="parent-note"><strong>Family note:</strong> Young children benefit most when a caring adult explores with them, talks about what they see, celebrates effort, and offers breaks before frustration grows. Crechè activities are educational tools and do not replace professional medical, developmental, or educational evaluation.</div>
   </div>
+
+    </div>
+  </details>
 </section>
 
-<section class="section creche-support-closing" id="contribute" aria-labelledby="contributeTitle">
+<section class="section creche-support-closing feature-section" id="contribute" aria-labelledby="contributeTitle">
+  <details class="feature-accordion" data-feature="support">
+    <summary><span class="accordion-icon" aria-hidden="true">💛</span><strong>Support Crechè</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel">
+
   <div class="shell">
     <article class="creche-support-card">
       <div class="support-heart" aria-hidden="true">💝</div>
@@ -457,6 +538,9 @@
       </div>
     </article>
   </div>
+
+    </div>
+  </details>
 </section>
 </main>
 
@@ -1637,7 +1721,8 @@ document.addEventListener("click",event=>{
    =========================================================== */
 const CLEAN_ANCHOR_MAP={
   "#parentDashboard":"#profiles",
-  "#pinnedGames":"#profiles"
+  "#pinnedGames":"#profiles",
+  "#graduation-garden":"#graduationFeature"
 };
 
 function measureStickyStack(){
@@ -1671,6 +1756,11 @@ function goToSection(hash,{history=true,behavior=null}={}){
   const target=cleanAnchorTarget(hash);
   if(!target)return false;
 
+  const featureDetails=target.matches?.("details.feature-accordion")
+    ? target
+    : target.querySelector?.(":scope > details.feature-accordion") || target.closest?.("details.feature-accordion");
+  if(featureDetails)featureDetails.open=true;
+
   const offset=measureStickyStack();
   const motion=behavior||(reduceMotion||calm?"auto":"smooth");
   const top=hash==="#top"
@@ -1691,7 +1781,7 @@ function prepareViewForHash(hash){
   /* familyMentorEntry now lives inside the grown-up closing section. */
   if(["#grownups","#parentDashboard","#familyMentorEntry"].includes(hash)){
     setView("grownup",{scroll:false});
-  }else if(["#myHome","#trail","#today","#activities","#rooms","#new","#graduation-garden"].includes(hash)){
+  }else if(["#weeklyGarden","#myHome","#trail","#today","#activities","#rooms","#new","#discoveryFeature","#graduation-garden","#graduationFeature"].includes(hash)){
     setView("child",{scroll:false});
   }
 }
