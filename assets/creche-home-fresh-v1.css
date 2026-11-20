@@ -370,10 +370,6 @@ main > section.feature-section{
 /* ==========================================================================
    WEEKLY LEARNING GARDEN
    ========================================================================== */
-#weeklyGarden{
-  background:linear-gradient(135deg,var(--prek-aqua),var(--prek-sky));
-  border-block:3px solid var(--prek-sun);
-}
 .weekly-garden-card{
   width:min(var(--prek-narrow),100%);
   margin:auto;
@@ -477,10 +473,6 @@ main > section.feature-section{
 /* ==========================================================================
    MY CRÈCHE HOME
    ========================================================================== */
-#myHome{
-  background:linear-gradient(135deg,var(--prek-sun),var(--prek-orange),var(--prek-watermelon));
-  border-block:3px solid var(--prek-orange);
-}
 #myHome .compact-heading{
   width:min(var(--prek-narrow),100%);
   padding:22px 24px;
@@ -576,10 +568,6 @@ main > section.feature-section{
 /* ==========================================================================
    EXPLORE & PLAY
    ========================================================================== */
-#new{
-  background:linear-gradient(135deg,var(--prek-mint),var(--prek-lavender));
-  border-block:3px solid var(--prek-pink);
-}
 #new .explore-heading{
   width:min(var(--prek-narrow),100%);
   padding:22px 24px;
@@ -675,10 +663,6 @@ main > section.feature-section{
 /* ==========================================================================
    LEARNING GARDEN
    ========================================================================== */
-#today{
-  background:linear-gradient(135deg,var(--prek-pink),var(--prek-orange));
-  border-block:3px solid var(--prek-sun);
-}
 #today .garden-heading{
   width:min(var(--prek-narrow),100%);
   padding:22px 24px;
@@ -869,10 +853,6 @@ main > section.feature-section{
 /* ==========================================================================
    PROFILES / FAMILY PATHWAY
    ========================================================================== */
-#profiles{
-  background:linear-gradient(135deg,var(--prek-lavender),var(--prek-sky));
-  border-block:3px solid var(--prek-aqua);
-}
 #profiles>.shell>.heading{
   padding:22px 24px;
   background:var(--prek-orange);
@@ -1005,10 +985,6 @@ main > section.feature-section{
 /* ==========================================================================
    GROWN-UP CORNER
    ========================================================================== */
-#grownups{
-  background:linear-gradient(135deg,var(--prek-orange),var(--prek-sun));
-  border-block:3px solid var(--prek-watermelon);
-}
 #grownups>.shell>.heading{
   padding:22px 24px;
   background:var(--prek-mint);
@@ -1086,10 +1062,6 @@ main > section.feature-section{
 /* ==========================================================================
    SUPPORT
    ========================================================================== */
-#contribute{
-  background:linear-gradient(135deg,var(--prek-watermelon),var(--prek-pink));
-  border-block:3px solid var(--prek-lavender);
-}
 .creche-support-card{
   width:min(var(--prek-narrow),100%);
   margin:auto;
