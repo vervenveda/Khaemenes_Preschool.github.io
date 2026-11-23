@@ -25,10 +25,10 @@
     <h2 id="discoveryWeekTheme">Welcome to Our Learning Garden</h2>
     <div class="discover-week-controls">
       <button id="discoveryPrev" type="button" aria-label="Previous Preschool week">←</button>
-      <label for="discoveryWeekSelect">Week <select id="discoveryWeekSelect" aria-label="Choose Preschool week"><option value="1">Week 1</option></select></label>
+      <label for="discoveryWeekSelect"><span id="discoveryWeekLabel">Week</span> <select id="discoveryWeekSelect" aria-label="Choose Preschool week"><option value="1">Week 1</option></select></label>
       <button id="discoveryNext" type="button" aria-label="Next Preschool week">→</button>
     </div>
-    <p class="discover-week-hint" id="discoveryWeekText">Week 1 of 42 · Welcome to Our Learning Garden</p>
+    <p class="discover-week-hint" id="discoveryWeekText"><span id="discoveryWeekCount">Week 1 of 42</span><span aria-hidden="true"> · </span><span id="discoveryWeekThemeName">Welcome to Our Learning Garden</span></p>
     <p id="discoveryStatus" role="status" aria-live="polite">Choose a day to begin exploring.</p>
   </section>
   <nav class="discover-day-nav" aria-label="Jump to a learning day">
@@ -97,7 +97,7 @@
 </main>
 <script src="../assets/preschool-catalog.js"></script>
 <script src="../curriculum/preschool-42-week-spine.js"></script>
-<script src="./five-days-of-discovery.js?v=20261123-1" defer></script>
+<script src="./five-days-of-discovery.js?v=20261123-2" defer></script>
 <!-- Existing canonical Preschool ticker, VNV header, language loader and local tools. -->
 <script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
 <script>
