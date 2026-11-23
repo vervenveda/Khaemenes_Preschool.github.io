@@ -1444,3 +1444,24 @@ body.reduce-motion *,body.calm *{animation-duration:.001ms!important;animation-i
   text-decoration:none!important;
   outline-offset:2px!important;
 }
+
+/* Learning Garden: the optional Today card is deliberately hidden; don't
+   reserve its unused second column beside My Adventure Stars. */
+html body #today .garden-quick-row{
+  grid-template-columns:minmax(0,1fr)!important;
+}
+html body #today .garden-quick-row>.garden-today[hidden]{display:none!important}
+html body #today .garden-quick-row>.garden-stars{
+  grid-column:1/-1!important;
+  width:100%!important;
+  min-width:0!important;
+}
+/* The dark See Every Adventure card below the learning subjects is red. */
+html body #today #gardenAllBtn{
+  background:var(--prek-watermelon)!important;
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  border:5px solid #fff!important;
+  border-radius:7px!important;
+  text-decoration:none!important;
+}
