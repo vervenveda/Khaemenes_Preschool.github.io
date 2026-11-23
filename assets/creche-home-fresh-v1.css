@@ -2232,3 +2232,103 @@ section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywher
 #contribute .creche-support-card .support-cta small{
   text-align:center!important;max-width:100%!important;
 }
+
+
+/* Canonical saturated-surface legibility. Existing palette only; do not add another stylesheet.
+   Dark green, watermelon/coral, orange and purple use the approved cream text. */
+:is(
+  .weekly-adventure:nth-child(8n+3),
+  .weekly-adventure:nth-child(8n+4),
+  .weekly-adventure:nth-child(8n+5),
+  .weekly-adventure:nth-child(8n+6),
+  .category-card:nth-child(8n+3),
+  .category-card:nth-child(8n+4),
+  .category-card:nth-child(8n+5),
+  .category-card:nth-child(8n+6),
+  .new-card:nth-child(3n+2),
+  .activity:nth-child(8n+3),
+  .activity:nth-child(8n+4),
+  .activity:nth-child(8n+5),
+  .activity:nth-child(8n+6),
+  .parent-card:nth-child(7n+3),
+  .parent-card:nth-child(7n+4),
+  .parent-card:nth-child(7n+5),
+  .parent-card:nth-child(7n+6),
+  .site-card:nth-child(7n+3),
+  .site-card:nth-child(7n+4),
+  .site-card:nth-child(7n+5),
+  .site-card:nth-child(7n+6),
+  #profiles .family-card:nth-child(4),
+  #profiles .family-card:nth-child(5),
+  #profiles .family-card:nth-child(6),
+  #today .garden-heading,
+  #profiles .feature-accordion>.feature-accordion-panel
+){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+:is(
+  .weekly-adventure:nth-child(8n+3),
+  .weekly-adventure:nth-child(8n+4),
+  .weekly-adventure:nth-child(8n+5),
+  .weekly-adventure:nth-child(8n+6),
+  .category-card:nth-child(8n+3),
+  .category-card:nth-child(8n+4),
+  .category-card:nth-child(8n+5),
+  .category-card:nth-child(8n+6),
+  .new-card:nth-child(3n+2),
+  .activity:nth-child(8n+3),
+  .activity:nth-child(8n+4),
+  .activity:nth-child(8n+5),
+  .activity:nth-child(8n+6),
+  .parent-card:nth-child(7n+3),
+  .parent-card:nth-child(7n+4),
+  .parent-card:nth-child(7n+5),
+  .parent-card:nth-child(7n+6),
+  .site-card:nth-child(7n+3),
+  .site-card:nth-child(7n+4),
+  .site-card:nth-child(7n+5),
+  .site-card:nth-child(7n+6),
+  #today .garden-heading
+) :is(h2,h3,h4,p,small,strong,span,a,button,.kicker,.category-label){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  text-shadow:none!important;
+}
+/* Existing saturated accordion bars and action buttons. */
+:is(
+  .feature-accordion[data-feature="explore"],
+  .feature-accordion[data-feature="garden"],
+  .feature-accordion[data-feature="profile"],
+  .feature-accordion[data-feature="support"]
+)>summary,
+:is(
+  .feature-accordion[data-feature="explore"],
+  .feature-accordion[data-feature="garden"],
+  .feature-accordion[data-feature="profile"],
+  .feature-accordion[data-feature="support"]
+)>summary :is(strong,span){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  text-shadow:none!important;
+}
+:is(.feature-accordion-panel,.weekly-garden-card,.activity-grid,.category-grid,.new-grid,.family-grid)
+:is(a,button)[class*="btn"],
+:is(.feature-accordion-panel,.weekly-garden-card,.activity-grid,.category-grid,.new-grid,.family-grid)
+:is(a,button)[class*="action"],
+#profiles .family-card .family-actions>.family-action,
+#contribute #crecheSupportLaunch{
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+/* Preserve dark ink on deliberately light yellow, aqua and mint cards. */
+:is(
+  .weekly-adventure:nth-child(8n+1),
+  .weekly-adventure:nth-child(8n+2),
+  .weekly-adventure:nth-child(8n+7),
+  .weekly-adventure:nth-child(8n+8),
+  .category-card:nth-child(8n+1),
+  .category-card:nth-child(8n+2),
+  .category-card:nth-child(8n+7),
+  .category-card:nth-child(8n+8)
+){-webkit-text-fill-color:var(--prek-charcoal)!important}
