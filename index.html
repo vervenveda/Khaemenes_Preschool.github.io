@@ -2300,6 +2300,38 @@ document.addEventListener("DOMContentLoaded",function(){
 window.VNV_HEADER?.mount({title:"Khaemenes Preschool",subtitle:"Crèche · Bright Beginnings",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});
 </script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-language-loader.js" defer></script>
+<!-- Canonical lower-left VNV Class Tools: gateway-owned, directory-backed, idempotent. -->
+<script id="prek-canonical-class-tools-config">
+window.KhaemenesClassToolsConfigV1=Object.freeze({
+ id:"preschool-home",
+ match:()=>/^\/Khaemenes_Preschool\.github\.io\/(?:index\.html)?$/i.test(location.pathname),
+ toggleLabel:"Tools",
+ ariaLabel:"Preschool learning tools",
+ tools:[
+  {type:"link",label:"Home",sub:"Preschool welcome",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/"},
+  {type:"link",label:"Today",sub:"Preschool Tools",href:"#today"},
+  {type:"link",label:"Profile",sub:"Learner profile",href:"./student-profile/"},
+  {type:"link",label:"Explore",sub:"Explore and Play",href:"#new"},
+  {type:"link",label:"Reading",sub:"Read together",href:"#readingFeature"},
+  {type:"link",label:"Pinned",sub:"Favorite apps",href:"#pinnedApps"},
+  {type:"link",label:"Graduate",sub:"Graduation Garden",href:"#graduationFeature"},
+  {type:"link",label:"Parent",sub:"Grown-up support",href:"#profiles"},
+  {type:"link",label:"Search",sub:"PLERASearch",href:"https://vervenveda.com/PLERASearch.github.io/"},
+  {type:"ecosystem-list",label:"Learning",sub:"Free learning resources",filter:{category:"education",limit:12}},
+  {type:"ecosystem-list",label:"Creative",sub:"Creative resources",filter:{category:"creative",limit:12}},
+  {type:"help",label:"Help",sub:"About the toolbar"}
+ ],
+ help:{
+  title:"Preschool Tools",
+  paragraphs:[
+   "These buttons open existing Preschool sections and approved Verve N Veda resources. They do not change grades, family accounts or student records.",
+   "Today opens Preschool Tools; Explore opens Explore & Play; Reading opens Reading Time; Pinned opens your saved apps.",
+   "Learning and Creative lists come from the canonical public ecosystem directory. Use Parent for the grown-up profile and enrollment pathway."
+  ]
+ }
+});
+</script>
+<script src="https://vervenveda.com/assets/vnv-class-tools-toolbar.js?v=1.6.1" defer></script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-local-toolbar.js" defer></script>
 </body>
 </html>
