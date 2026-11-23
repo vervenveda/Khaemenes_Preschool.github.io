@@ -1741,54 +1741,181 @@ html body #graduationFeature .graduation-feature-card>.feature-primary-link:focu
 }
 
 
-/* Recovery refinement: compact two-column family pathway; no directory placeholders. */
-@media (min-width:641px){
-  html body #profiles .family-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+/* Recovery refinement: compact two-column family pathway; no directory placeholders.
+   Single scoped owner; preserve existing palette and functional event IDs. */
+html body #profiles .family-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:16px!important;
+  align-items:stretch!important;
 }
-html body #profiles .family-grid{align-items:stretch!important;gap:14px!important;}
 html body #profiles .family-grid>.family-card,
 html body #profiles .family-grid>#pinnedGames{
-  min-width:0!important;height:100%!important;display:flex!important;flex-direction:column!important;
-  border:3px solid #fff!important;border-radius:7px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  height:100%!important;
+  padding:20px!important;
+  border:3px solid #fff!important;
+  border-radius:7px!important;
+  text-align:center!important;
 }
-html body #profiles .family-card :is(h3,p),
-html body #profiles .family-card .family-actions{overflow-wrap:anywhere;}
-html body #profiles .family-card .family-actions{margin-top:auto!important;display:flex!important;justify-content:center!important;align-items:stretch!important;gap:8px!important;}
+html body #profiles .family-card>.family-icon{align-self:center!important;}
+html body #profiles .family-card h3,
+html body #profiles #pinnedGames h3{
+  margin:8px 0 14px!important;
+  line-height:1.25!important;
+}
+html body #profiles .family-card p{
+  margin:0 0 14px!important;
+  line-height:1.5!important;
+}
+html body #profiles .family-card .family-meta{
+  justify-content:center!important;
+  margin:6px 0 16px!important;
+}
+html body #profiles .family-card .family-actions{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:9px!important;
+  margin-top:auto!important;
+  padding-top:18px!important;
+  align-items:stretch!important;
+}
+html body #profiles .family-card .family-actions>:only-child{grid-column:1/-1!important;}
+html body #profiles .family-card:nth-child(3) .family-actions>a:last-child{grid-column:1/-1!important;}
 html body #profiles .family-card .family-actions>:is(a,button),
 html body #profiles #managePinnedGames{
-  display:inline-flex!important;align-items:center!important;justify-content:center!important;
-  min-height:48px!important;padding:10px 14px!important;max-width:100%!important;
-  background:var(--prek-charcoal)!important;color:var(--prek-cream)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  min-height:48px!important;
+  margin:0!important;
+  padding:10px 12px!important;
+  background:var(--prek-charcoal)!important;
+  color:var(--prek-cream)!important;
   -webkit-text-fill-color:var(--prek-cream)!important;
-  border:2px solid var(--prek-cream)!important;border-radius:7px!important;
-  text-align:center!important;text-decoration:none!important;
+  border:2px solid var(--prek-cream)!important;
+  border-radius:7px!important;
+  font-size:16px!important;
+  line-height:1.3!important;
+  text-align:center!important;
+  text-decoration:none!important;
+  overflow-wrap:break-word!important;
+}
+html body #profiles .family-card .profile-summary{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:left!important;
+  margin:10px 0 16px!important;
+}
+html body #profiles .profile-summary :is(strong,small){
+  font-size:16px!important;
+  line-height:1.4!important;
+}
+html body #profiles .actions[aria-label="Pre-K student profile entrances"]{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:12px!important;
+  margin:0 auto 18px!important;
+}
+html body #profiles .actions[aria-label="Pre-K student profile entrances"]>.btn{
+  max-width:100%!important;
+  min-height:48px!important;
+  padding:12px 18px!important;
+  border-radius:7px!important;
+  background:var(--prek-charcoal)!important;
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  border:2px solid #fff!important;
+  text-align:center!important;
 }
 html body #profiles .feature-accordion[data-feature="profile"]>summary{
-  background:var(--prek-watermelon)!important;color:var(--prek-charcoal)!important;
+  background:var(--prek-watermelon)!important;
+  color:var(--prek-charcoal)!important;
 }
 html body #profiles .feature-accordion[data-feature="profile"]>summary :is(strong,span){
-  color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important;
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
 }
-html body #profiles .heading{background:var(--prek-watermelon)!important;border:3px solid #fff!important;border-radius:7px!important;padding:18px!important;}
-html body #profiles .heading :is(h2,p){color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important;}
+html body #profiles .heading{
+  padding:20px!important;
+  border:3px solid #fff!important;
+  border-radius:7px!important;
+  background:var(--prek-watermelon)!important;
+}
+html body #profiles .heading :is(h2,p){
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+}
 html body #profiles .family-grid>.family-card:nth-child(3){
-  background:var(--prek-green)!important;color:var(--prek-cream)!important;
+  background:var(--prek-green)!important;
+  color:var(--prek-cream)!important;
 }
 html body #profiles .family-grid>.family-card:nth-child(3) :is(h3,p,span,strong,small){
-  color:var(--prek-cream)!important;-webkit-text-fill-color:var(--prek-cream)!important;
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
 }
 html body #profiles .family-grid>#pinnedGames{
-  margin:0!important;justify-content:space-between!important;
-  background:var(--prek-lavender)!important;color:var(--prek-charcoal)!important;
+  margin:0!important;
+  background:var(--prek-lavender)!important;
+  color:var(--prek-charcoal)!important;
+  gap:12px!important;
+  justify-content:flex-start!important;
 }
-html body #profiles #pinnedGames .pinned-head{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;}
-html body #profiles #pinnedGames .pinned-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+html body #profiles #pinnedGames .pinned-head{
+  display:block!important;
+  text-align:center!important;
+  margin:0!important;
+}
+html body #profiles #pinnedGames .pinned-head p{
+  font-size:18px!important;
+  line-height:1.5!important;
+  margin:0!important;
+}
+html body #profiles #pinnedGames .pinned-list{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+  margin:0!important;
+}
+html body #profiles #pinnedGames .pinned-list:empty{display:none!important;}
+html body #profiles #pinnedGames .continuity-note{
+  margin-top:auto!important;
+  padding:14px!important;
+  text-align:left!important;
+  background:var(--prek-cream)!important;
+  color:var(--prek-charcoal)!important;
+  border:2px solid #fff!important;
+  border-radius:7px!important;
+  font-size:16px!important;
+  line-height:1.5!important;
+}
+html body #profiles #managePinnedGames{margin-top:4px!important;}
 html body #graduationFeature .feature-accordion[data-feature="graduation"]>summary{
-  background:var(--prek-green)!important;color:var(--prek-cream)!important;
+  background:var(--prek-green)!important;
+  color:var(--prek-cream)!important;
 }
 html body #graduationFeature .feature-accordion[data-feature="graduation"]>summary :is(strong,span){
-  color:var(--prek-cream)!important;-webkit-text-fill-color:var(--prek-cream)!important;
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
 }
+html body #graduationFeature .graduation-feature-card{
+  min-height:390px!important;
+  padding:28px!important;
+  gap:20px!important;
+}
+html body #graduationFeature .graduation-feature-card>div{gap:16px!important;}
 @media(max-width:640px){
   html body #profiles .family-grid{grid-template-columns:1fr!important;}
+  html body #profiles .family-card .family-actions{grid-template-columns:1fr!important;}
+  html body #profiles .family-card .family-actions>:is(a,button){grid-column:1/-1!important;}
+  html body #profiles #pinnedGames .pinned-list{grid-template-columns:1fr!important;}
+  html body #graduationFeature .graduation-feature-card{min-height:0!important;padding:18px!important;}
 }
