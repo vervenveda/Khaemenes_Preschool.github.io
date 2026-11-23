@@ -244,28 +244,28 @@
         <p class="daily-school-kicker">Daily ABC</p>
         <h3 id="dailyAbcTitle">ABC Adventure</h3>
         <p id="dailyAbcDesc">Letters, sounds, matching, and early reading play.</p>
-        <a class="daily-school-btn" id="dailyAbcLink" href="./apps/ABC_Story_Time/index.html">Play Today’s ABC Game →</a>
+        <a class="daily-school-btn" id="dailyAbcLink" href="./apps/ABC_Story_Time/index.html">PLAY</a>
       </article>
       <article class="daily-school-card numbers-card" data-daily-subject="numbers">
         <div class="daily-school-icon" aria-hidden="true">🔢</div>
         <p class="daily-school-kicker">Daily 123</p>
         <h3 id="dailyNumbersTitle">Number Adventure</h3>
         <p id="dailyNumbersDesc">Counting, shapes, quantities, and early reasoning.</p>
-        <a class="daily-school-btn" id="dailyNumbersLink" href="./apps/numbers_1-12_fun_index.html">Play Today’s 123 Game →</a>
+        <a class="daily-school-btn" id="dailyNumbersLink" href="./apps/numbers_1-12_fun_index.html">PLAY</a>
       </article>
       <article class="daily-school-card pe-card" data-daily-subject="pe">
         <div class="daily-school-icon" aria-hidden="true">🤸</div>
         <p class="daily-school-kicker">Daily PE</p>
         <h3 id="dailyPeTitle">Move &amp; Groove</h3>
         <p id="dailyPeDesc">Move, stretch, balance, dance, and build healthy-body confidence.</p>
-        <a class="daily-school-btn" id="dailyPeLink" href="./apps/PE_move_n_groove_index.html">Move &amp; Play →</a>
+        <a class="daily-school-btn" id="dailyPeLink" href="./apps/PE_move_n_groove_index.html">PLAY</a>
       </article>
       <article class="daily-school-card life-card" data-daily-subject="life">
         <div class="daily-school-icon" aria-hidden="true">🧺</div>
         <p class="daily-school-kicker">Daily Life Skills</p>
         <h3 id="dailyLifeTitle">Little Life Skill</h3>
         <p id="dailyLifeDesc">Practice a useful everyday routine with a caring grown-up nearby.</p>
-        <a class="daily-school-btn" id="dailyLifeLink" href="./apps/Life_skills_little_Tikes_How_to_Brush_Your_Teeth/index.html">Try Today’s Life Skill →</a>
+        <a class="daily-school-btn" id="dailyLifeLink" href="./apps/Life_skills_little_Tikes_How_to_Brush_Your_Teeth/index.html">PLAY</a>
       </article>
     </div></details>
 
@@ -1078,15 +1078,16 @@ function setDaily(){
 }
 function syncDailySchoolToWeek(){
   const picks=[
-    ["literacy","dailyAbcTitle","dailyAbcDesc","dailyAbcLink","Play This Week’s ABC →"],
-    ["earlyMath","dailyNumbersTitle","dailyNumbersDesc","dailyNumbersLink","Play This Week’s 123 →"],
-    ["movement","dailyPeTitle","dailyPeDesc","dailyPeLink","Move & Play →"],
-    ["lifeSkill","dailyLifeTitle","dailyLifeDesc","dailyLifeLink","Try This Week’s Life Skill →"]
+    ["literacy","dailyAbcTitle","dailyAbcDesc","dailyAbcLink"],
+    ["earlyMath","dailyNumbersTitle","dailyNumbersDesc","dailyNumbersLink"],
+    ["movement","dailyPeTitle","dailyPeDesc","dailyPeLink"],
+    ["lifeSkill","dailyLifeTitle","dailyLifeDesc","dailyLifeLink"]
   ];
-  for(const [domain,titleId,descId,linkId,label] of picks){
+  for(const [domain,titleId,descId,linkId] of picks){
     const app=weeklyApp(domain);if(!app)continue;
     $(titleId).textContent=displayTitle(app);$(descId).textContent=app.desc;
-    $(linkId).href=appUrl(app);$(linkId).dataset.openApp=app.id;$(linkId).textContent=label;
+    $(linkId).href=appUrl(app);$(linkId).dataset.openApp=app.id;$(linkId).textContent="PLAY";
+    $(linkId).setAttribute("aria-label","Play "+displayTitle(app));
   }
   setDaily();
 }
