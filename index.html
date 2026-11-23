@@ -14,7 +14,7 @@
 
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-standard.css">
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.css">
-<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#67cfff"><link rel="stylesheet" href="./assets/creche-home-fresh-v1.css?v=20261123-graduation-5" data-creche-visual-standard="creche-home-fresh-v1">
+<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#67cfff"><link rel="stylesheet" href="./assets/creche-home-fresh-v1.css?v=20261123-tools-2" data-creche-visual-standard="creche-home-fresh-v1">
   <link rel="stylesheet" href="/Khaemenes_Preschool.github.io/assets/preschool-playful-theme.css" data-preschool-playful-theme>
 </head>
 <body id="top" data-view="child">
@@ -392,7 +392,6 @@
     <div class="feature-accordion-panel">
       <div class="feature-intro-card graduation-feature-card">
         <div>
-          <span class="graduation-feature-icon" aria-hidden="true">🎓🌻</span>
           <p class="kicker">A joyful next-step celebration</p>
           <h2>Graduation Garden</h2>
           <p>Visit the playful Preschool graduation checkpoint when your family feels ready. The 80% learning checkpoint remains separate from formal placement and family release.</p>
@@ -476,7 +475,7 @@
         <h3>Archaemenes · Wise Owl</h3>
         <p>After a family links a child learner, Archaemenes becomes that child’s continuous Academy Mentor. In Preschool he appears as Wise Owl and guides a short, age-aware path through Crechè activities.</p>
         <div class="family-meta"><span>Family-linked learner</span><span>One Academy Mentor</span><span>Balanced learning day</span></div>
-        <div class="family-actions"><a class="family-action" href="#familyMentorEntry">Enter</a></div>
+        <div class="family-actions"><a class="family-action" href="#familyMentorEntry">Enter the Learning Hub →</a></div>
       </article>
 
       <article class="family-card">
@@ -488,8 +487,8 @@
           <span><strong id="profileName">No local preferences needed for play</strong><small id="profileStatus">Public adventures and favorites remain open without registration.</small></span>
         </div>
         <div class="family-actions">
-          <button class="family-action" id="openChildProfile" type="button">Customize</button>
-          <button class="family-action light" id="showProfileFavorites" type="button">Pinned</button>
+          <button class="family-action" id="openChildProfile" type="button">Local Play Preferences</button>
+          <button class="family-action light" id="showProfileFavorites" type="button">Show Pinned Games</button>
         </div>
       </article>
 
@@ -499,10 +498,10 @@
         <p>Review browser-local exploration, observations, and comfort preferences here. Use the Academy Family Profile for the child’s Archaemenes Mentor and formal continuity across Khaemenes schools.</p>
         <div class="family-meta"><span id="profileFavoriteCount">0 pinned</span><span id="profileVisitCount">0 visited</span><span>No parent account required</span></div>
         <div class="family-actions">
-          <button class="family-action" id="editProfileFromParent" type="button">Profile</button>
+          <button class="family-action" id="editProfileFromParent" type="button">Review Profile</button>
           <button class="family-action light" id="exportFamilyData" type="button">Export</button>
           <button class="family-action light" id="eraseFamilyData" type="button">Erase</button>
-          <a class="family-action light" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Family</a>
+          <a class="family-action light" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Formal Curriculum Family Profile →</a>
         </div>
       </article>
 
@@ -511,7 +510,7 @@
         <h3>Khaemenes Kinder Garden</h3>
         <p>Continue into kindness, curiosity, early literacy, number sense, nature, creativity, and school readiness.</p>
         <div class="family-meta"><span>Next learning stage</span><span>Same custom-domain origin</span></div>
-        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/">Explore</a></div>
+        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/">Enter Kinder Garden →</a></div>
       </article>
 
       <article class="family-card">
@@ -519,7 +518,7 @@
         <h3>Khaemenes Elementary School</h3>
         <p>Carry the learner’s continuity record toward Kinder Garden through Grade 5 courses, tools, and family resources.</p>
         <div class="family-meta"><span>Kinder–Grade 5</span><span>Continuity-ready</span></div>
-        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Elementary.github.io/">Visit</a></div>
+        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Elementary.github.io/">Enter Elementary School →</a></div>
       </article>
 
       <article class="family-card">
@@ -527,7 +526,7 @@
         <h3>Khaemenes Academy</h3>
         <p>Open the larger campus directory for every educational level while keeping Crechè as the child’s first joyful doorway.</p>
         <div class="family-meta"><span>Full campus</span><span>All learning levels</span></div>
-        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Academy.github.io/">Discover</a></div>
+        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Academy.github.io/">Visit the Academy →</a></div>
       </article>
     </div>
 
@@ -995,7 +994,7 @@ function displayTitle(app){
   return app.id==="sunny-abcs-file" ? `${app.title} · Classic` : app.title;
 }
 function renderActivities(){
-  $("activityGrid").innerHTML=KID_APPS.map(app=>`<article class="activity ${visited.has(app.id)?"visited":""}" data-id="${app.id}" data-category="${app.category}" data-search="${escapeHtml((displayTitle(app)+" "+app.desc+" "+app.tags+" "+app.file+" "+catLabel(app.category)).toLowerCase())}" style="--category-color:${catColor(app.category)};--card-color:${catColor(app.category)}22"><div class="card-top"><span class="app-icon" aria-hidden="true">${app.icon}</span></div><p class="category-label">${escapeHtml(catLabel(app.category))}</p><h3>${escapeHtml(displayTitle(app))}</h3><p>${escapeHtml(app.desc)}</p>${stageBadge(app)}<span class="visited-badge">Adventure visited ✓</span><div class="card-actions"><a class="open" data-open-app="${app.id}" href="${appUrl(app)}" aria-label="Play ${escapeHtml(displayTitle(app))}">PLAY</a><button class="read-card" type="button" data-read-app="${app.id}" aria-label="Read about ${escapeHtml(displayTitle(app))}">READ</button><button class="favorite" type="button" data-favorite="${app.id}" aria-label="Save ${escapeHtml(displayTitle(app))} as a favorite" aria-pressed="${favorites.has(app.id)}">${favorites.has(app.id)?"♥":"♡"}</button></div></article>`).join("");
+  $("activityGrid").innerHTML=KID_APPS.map(app=>`<article class="activity ${visited.has(app.id)?"visited":""}" data-id="${app.id}" data-category="${app.category}" data-search="${escapeHtml((displayTitle(app)+" "+app.desc+" "+app.tags+" "+app.file+" "+catLabel(app.category)).toLowerCase())}" style="--category-color:${catColor(app.category)};--card-color:${catColor(app.category)}22"><div class="card-top"><span class="app-icon" aria-hidden="true">${app.icon}</span><button class="favorite" type="button" data-favorite="${app.id}" aria-label="Save ${escapeHtml(displayTitle(app))} as a favorite" aria-pressed="${favorites.has(app.id)}">${favorites.has(app.id)?"♥":"♡"}</button></div><p class="category-label">${escapeHtml(catLabel(app.category))}</p><h3>${escapeHtml(displayTitle(app))}</h3><p>${escapeHtml(app.desc)}</p>${stageBadge(app)}<span class="visited-badge">Adventure visited ✓</span><div class="card-actions"><a class="open" data-open-app="${app.id}" href="${appUrl(app)}">Open Adventure</a><button class="read-card" type="button" data-read-app="${app.id}" aria-label="Read about ${escapeHtml(displayTitle(app))}">🔊 Read</button></div></article>`).join("");
   document.querySelectorAll("[data-favorite]").forEach(button=>button.addEventListener("click",()=>toggleFavorite(button.dataset.favorite,button)));
   document.querySelectorAll("#activityGrid [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
   document.querySelectorAll("#activityGrid [data-read-app]").forEach(button=>button.addEventListener("click",()=>{
@@ -2332,133 +2331,5 @@ window.VNV_HEADER?.mount({title:"Khaemenes Preschool",subtitle:"Crèche · Brigh
 </script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-language-loader.js" defer></script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-local-toolbar.js" defer></script>
-
-<!-- Preschool family pathway visual refinement: scoped, reversible, no action or routing changes. -->
-<style id="preschool-family-card-refinement-20261123">
-/* Use the site's existing preschool palette rather than introducing a new red. */
-#profiles .feature-accordion>summary {
-  background:var(--prek-watermelon,#ff7a8a)!important;
-  color:var(--prek-cream,#fffbea)!important;
-  border-color:var(--prek-cream,#fffbea)!important;
-}
-#profiles .feature-accordion>summary :is(strong,.accordion-icon,.accordion-state){
-  color:var(--prek-cream,#fffbea)!important;
-  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
-  -webkit-text-stroke:0!important;text-shadow:none!important;
-}
-/* Purple body of the expanded Learning Profile accordion. */
-#profiles .feature-accordion>.feature-accordion-panel {
-  background:var(--prek-purple,#7957ff)!important;
-  color:var(--prek-cream,#fffbea)!important;
-}
-#profiles .feature-accordion-panel>.shell>.heading {
-  background:transparent!important;color:var(--prek-cream,#fffbea)!important;
-  text-align:center!important;
-}
-#profiles .feature-accordion-panel>.shell>.heading :is(h2,p,.kicker){
-  color:var(--prek-cream,#fffbea)!important;
-  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
-  -webkit-text-stroke:0!important;text-shadow:none!important;
-}
-#profiles .feature-accordion-panel>.shell>.actions .btn{
-  background:var(--prek-charcoal,#243038)!important;
-  color:var(--prek-cream,#fffbea)!important;
-  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
-}
-#profiles .family-grid{align-items:stretch!important}
-#profiles .family-grid>.family-card{
-  display:flex!important;flex-direction:column!important;
-  min-width:0!important;height:100%!important;
-}
-#profiles .family-card>.family-icon,
-#profiles .feature-accordion>summary .accordion-icon{
-  display:inline-flex!important;align-items:center!important;justify-content:center!important;
-  width:auto!important;height:auto!important;min-width:32px!important;min-height:32px!important;
-  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif!important;
-  font-size:30px!important;line-height:1.25!important;
-  visibility:visible!important;opacity:1!important;overflow:visible!important;
-  -webkit-text-fill-color:initial!important;-webkit-text-stroke:0!important;
-  filter:none!important;text-shadow:none!important;
-}
-/* Brighter warm and violet cards have cream text; light yellow, cyan and green remain dark. */
-#profiles .family-grid>.family-card:nth-child(4){
-  background:var(--prek-pink,#ff4fa3)!important;
-}
-#profiles .family-grid>.family-card:nth-child(5){
-  background:var(--prek-orange,#ff8f3d)!important;
-}
-#profiles .family-grid>.family-card:nth-child(6){
-  background:var(--prek-purple,#7957ff)!important;
-}
-#profiles .family-grid>.family-card:nth-child(-n+3) :is(h3,p){
-  color:var(--prek-charcoal,#243038)!important;
-  -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
-  text-shadow:none!important;
-}
-#profiles .family-grid>.family-card:nth-child(n+4) :is(h3,p){
-  color:var(--prek-cream,#fffbea)!important;
-  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
-  text-shadow:none!important;
-}
-#profiles .family-card .family-meta{display:none!important}
-#profiles .family-card .family-actions{
-  margin-top:auto!important;padding-top:18px!important;
-  display:flex!important;flex-direction:column!important;gap:10px!important;
-  align-items:stretch!important;
-}
-#profiles .family-card .family-actions>.family-action{
-  box-sizing:border-box!important;display:flex!important;justify-content:center!important;
-  align-items:center!important;width:100%!important;min-width:0!important;
-  min-height:48px!important;margin:0!important;padding:9px 12px!important;
-  background:var(--prek-charcoal,#243038)!important;
-  color:var(--prek-cream,#fffbea)!important;
-  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
-  border:2px solid var(--prek-cream,#fffbea)!important;border-radius:7px!important;
-  font:400 17px/1.3 "Comic Sans MS","Chalkboard SE",sans-serif!important;
-  text-align:center!important;text-decoration:none!important;box-shadow:none!important;
-  overflow-wrap:anywhere!important;text-shadow:none!important;
-}
-#profiles .family-card .family-actions>.family-action:hover{
-  background:#101820!important;
-}
-#profiles .family-card .family-actions>.family-action:focus-visible{
-  outline:3px solid var(--prek-charcoal,#243038)!important;outline-offset:3px!important;
-}
-/* Yellow favorite-adventures card, with its blue action centered under the wording. */
-#profiles #pinnedGames{
-  background:var(--prek-sun,#ffe45e)!important;
-  color:var(--prek-charcoal,#243038)!important;
-  border:3px solid #fff!important;border-radius:7px!important;
-}
-#profiles #pinnedGames :is(h3,p,.continuity-note){
-  color:var(--prek-charcoal,#243038)!important;
-  -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
-  text-shadow:none!important;
-}
-#profiles #pinnedGames .pinned-head{
-  display:flex!important;flex-direction:column!important;align-items:center!important;
-  text-align:center!important;gap:14px!important;
-}
-#profiles #pinnedGames .pinned-head>div{width:100%!important}
-#profiles #managePinnedGames{
-  display:inline-flex!important;align-self:center!important;
-  align-items:center!important;justify-content:center!important;
-  margin:0 auto!important;min-height:48px!important;padding:10px 18px!important;
-  background:var(--prek-sky,#67cfff)!important;
-  color:var(--prek-charcoal,#243038)!important;
-  -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
-  border:2px solid var(--prek-charcoal,#243038)!important;border-radius:7px!important;
-  text-align:center!important;text-shadow:none!important;
-}
-#profiles #managePinnedGames:focus-visible{
-  outline:3px solid var(--prek-charcoal,#243038)!important;outline-offset:3px!important;
-}
-@media(max-width:840px){
-  #profiles .family-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-@media(max-width:520px){
-  #profiles .family-grid{grid-template-columns:minmax(0,1fr)!important}
-}
-</style>
 </body>
 </html>
