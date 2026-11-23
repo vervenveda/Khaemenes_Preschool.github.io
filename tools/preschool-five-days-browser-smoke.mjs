@@ -18,8 +18,13 @@ await page.route(origin+"/**",async route=>{
  const url=new URL(route.request().url());
  const prefix="/Khaemenes_Preschool.github.io/";
  if(!url.pathname.startsWith(prefix)){
-  // External canonical header, ticker and translator are not the subject of
-  // this test. They must have their separate integration checks.
+  // Load the real canonical VNV header and ticker, checked out by this workflow.
+  if(url.pathname==="/assets/vnv-header-autopopulate.js"||
+     url.pathname==="/assets/vnv-ticker-autopopulate.js"){
+   const local=path.resolve(root,"shared-vnv","."+url.pathname);
+   return route.fulfill({status:200,contentType:"text/javascript; charset=utf-8",body:fs.readFileSync(local)});
+  }
+  // Other shared services are out of scope for this isolated lesson-engine test.
   return route.fulfill({status:200,contentType:"text/javascript; charset=utf-8",body:""});
  }
  const local=decodeURIComponent(url.pathname.slice(prefix.length));
@@ -40,6 +45,28 @@ function exists(link){
 try{
  const resp=await page.goto(url,{waitUntil:"load"});
  assert.equal(resp.status(),200);
+ const ticker=page.locator("#vnvTickerAutoPopulate");
+ const header=page.locator("#vnvHeaderAutoPopulate");
+ await ticker.waitFor({state:"attached"});
+ await header.waitFor({state:"attached"});
+ const fullWidth=await page.evaluate(()=>{
+  const ticker=document.getElementById("vnvTickerAutoPopulate");
+  const header=document.getElementById("vnvHeaderAutoPopulate");
+  const lessons=document.querySelector(".discover-shell");
+  const t=ticker.getBoundingClientRect(),h=header.getBoundingClientRect(),m=lessons.getBoundingClientRect();
+  return {tickerParent:ticker.parentElement===document.body,headerParent:header.parentElement===document.body,
+   tickerWidth:t.width,headerWidth:h.width,lessonWidth:m.width,viewport:document.documentElement.clientWidth,
+   tickerBeforeHeader:ticker.nextElementSibling===header};
+ });
+ assert.equal(fullWidth.tickerParent,true,"ticker must mount directly under body");
+ assert.equal(fullWidth.headerParent,true,"header must mount directly under body");
+ assert.ok(fullWidth.tickerWidth>=fullWidth.viewport-3,"ticker fails full width: "+JSON.stringify(fullWidth));
+ assert.ok(fullWidth.headerWidth>=fullWidth.viewport-3,"header fails full width: "+JSON.stringify(fullWidth));
+ assert.ok(fullWidth.lessonWidth<fullWidth.viewport-100,"lesson cards should remain centered, not stretch full width");
+ assert.equal(fullWidth.tickerBeforeHeader,true,"one ticker followed by one canonical header");
+ assert.equal(await ticker.count(),1);
+ assert.equal(await header.count(),1);
+ console.log("PASS real canonical ticker and header full width; centered lesson content retained");
  assert.equal(await page.locator(".discover-lesson").count(),5);
  assert.equal(await page.locator("#discoveryWeekSelect option").count(),42);
  assert.match(await page.locator("#discoveryWeekTheme").innerText(),/Welcome to Our Learning Garden/);
