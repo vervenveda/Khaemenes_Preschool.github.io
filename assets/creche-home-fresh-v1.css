@@ -1537,7 +1537,7 @@ html body #today #activityGrid>.activity{
  align-items:center!important;
  gap:8px!important;
  text-align:center!important;
- border:5px solid #fff!important;
+ border:5px solid #000!important;
  border-radius:7px!important;
  overflow-wrap:break-word!important;
  word-break:normal!important;
