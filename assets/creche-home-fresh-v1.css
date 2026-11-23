@@ -2117,3 +2117,73 @@ html body #contribute .feature-accordion[data-feature="support"]>summary :is(str
   color:var(--prek-cream)!important;
   -webkit-text-fill-color:var(--prek-cream)!important;
 }
+
+
+/* Global white type on existing purple, watermelon and orange actions. */
+/* Typography-only correction. No fills, borders, dimensions, or destinations changed.
+   Apply to the actual interactive controls, including dynamically rendered grids. */
+html body :is(
+  .hero-orbit-labels>:nth-child(8n+4),
+  .hero-orbit-labels>:nth-child(8n+5),
+  .hero-orbit-labels>:nth-child(8n+6),
+  .hero-playground>.orbit-button:nth-of-type(2),
+  .hero-playground>.orbit-button:nth-of-type(5),
+  .hero-playground>.orbit-button:nth-of-type(6),
+  #myHome .quick-picks .daily-school-card:nth-child(1)>.daily-school-btn,
+  #myHome .quick-picks .daily-school-card:nth-child(2)>.daily-school-btn,
+  #myHome .quick-picks .daily-school-card:nth-child(3)>.daily-school-btn,
+  #profiles .actions[aria-label="Pre-K student profile entrances"]>.btn.primary,
+  #profiles .family-card:nth-child(1) .family-actions>.family-action,
+  #profiles .family-card:nth-child(2) .family-actions>:nth-child(1),
+  #profiles .family-card:nth-child(3) .family-actions>:nth-child(3),
+  #profiles .family-card:nth-child(3) .family-actions>:nth-child(4),
+  #today #gardenAllBtn,
+  #today .garden-bottom-actions>.garden-action.graduate,
+  #today #activityGrid>.activity .card-actions :is(.open,.read-card,.favorite),
+  #contribute #crecheSupportLaunch,
+  #weeklyGarden .weekly-adventure:nth-child(8n+4),
+  #weeklyGarden .weekly-adventure:nth-child(8n+5),
+  #weeklyGarden .weekly-adventure:nth-child(8n+6),
+  .category-grid>.category-card:nth-child(8n+4),
+  .category-grid>.category-card:nth-child(8n+5),
+  .category-grid>.category-card:nth-child(8n+6),
+  .subject-garden>.subject-tile:nth-child(8n+4),
+  .subject-garden>.subject-tile:nth-child(8n+5),
+  .subject-garden>.subject-tile:nth-child(8n+6),
+  .trail-grid>.trail-stop:nth-child(6n+4),
+  .trail-grid>.trail-stop:nth-child(6n+5),
+  .trail-grid>.trail-stop:nth-child(6n+6)
+){
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+html body :is(
+  #myHome .quick-picks .daily-school-card:nth-child(-n+3)>.daily-school-btn,
+  .category-grid>.category-card:nth-child(8n+4),
+  .category-grid>.category-card:nth-child(8n+5),
+  .category-grid>.category-card:nth-child(8n+6),
+  .subject-garden>.subject-tile:nth-child(8n+4),
+  .subject-garden>.subject-tile:nth-child(8n+5),
+  .subject-garden>.subject-tile:nth-child(8n+6),
+  .trail-grid>.trail-stop:nth-child(6n+4),
+  .trail-grid>.trail-stop:nth-child(6n+5),
+  .trail-grid>.trail-stop:nth-child(6n+6),
+  #weeklyGarden .weekly-adventure:nth-child(8n+4),
+  #weeklyGarden .weekly-adventure:nth-child(8n+5),
+  #weeklyGarden .weekly-adventure:nth-child(8n+6)
+) :is(span,strong,small){
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+/* Accordion tabs with violet, pink and orange backgrounds also use white labels. */
+html body .feature-accordion[data-feature="explore"]>summary,
+html body .feature-accordion[data-feature="garden"]>summary,
+html body .feature-accordion[data-feature="support"]>summary,
+html body :is(
+ .feature-accordion[data-feature="explore"]>summary,
+ .feature-accordion[data-feature="garden"]>summary,
+ .feature-accordion[data-feature="support"]>summary
+) :is(strong,span){
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
