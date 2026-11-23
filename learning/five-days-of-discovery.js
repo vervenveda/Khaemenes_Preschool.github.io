@@ -87,6 +87,7 @@ function render(){
 }
 function init(){
  const selector=$("discoveryWeekSelect");
+ if(selector)selector.replaceChildren(); // Remove the no-JS Week 1 fallback before populating all 42.
  if(selector)for(let week=1;week<=42;week++){
   const opt=document.createElement("option");opt.value=String(week);opt.textContent="Week "+week;selector.append(opt);
  }
