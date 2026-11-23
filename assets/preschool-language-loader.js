@@ -24,6 +24,20 @@ async function start(){
  const header=document.getElementById("vnvHeaderAutoPopulate");(header?.parentNode||document.body).insertBefore(rail,header?.nextSibling||document.body.firstChild)}
  for(const src of resources)await load(src);
  try{await window.KhaemenesTranslatorLoader?.ensure?.({full:true,upgradeLegacyCore:true});window.VNVLanguage?.refresh?.()}catch{}
+ /* Official language script may mount before <main> on non-gateway pages.
+    Rehome its ONE control into the shared rail; do not clone or rebuild it. */
+ const attach=()=>{
+  const canonical=document.getElementById("vnv-language-switch");
+  const target=document.getElementById("vnv-language-rail");
+  if(!canonical||!target)return false;
+  if(canonical.parentElement!==target)target.append(canonical);
+  return true;
+ };
+ if(!attach()){
+  const watch=new MutationObserver(()=>{if(attach())watch.disconnect()});
+  watch.observe(document.body,{childList:true,subtree:true});
+  document.addEventListener("vnv:language-change",()=>watch.disconnect(),{once:true});
+ }
 }
 window.KhaemenesPreschoolLanguageLoader=Object.freeze({start});
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
