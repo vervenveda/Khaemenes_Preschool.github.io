@@ -1,0 +1,30 @@
+name: Preschool Five Days Weekly Engine Browser Audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - "learning/five-days-of-discovery.html"
+      - "learning/five-days-of-discovery.css"
+      - "learning/five-days-of-discovery.js"
+      - "curriculum/preschool-42-week-spine.js"
+      - "assets/preschool-catalog.js"
+      - "tools/preschool-five-days-browser-smoke.mjs"
+      - ".github/workflows/preschool-five-days-browser-smoke.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  five-days:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install browser test dependency
+        run: npm install --no-save --no-package-lock playwright
+      - name: Install Chromium
+        run: npx playwright install chromium
+      - name: Verify Five Days of Discovery links and weekly lesson controls
+        run: node tools/preschool-five-days-browser-smoke.mjs
