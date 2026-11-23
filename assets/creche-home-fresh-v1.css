@@ -1919,3 +1919,54 @@ html body #graduationFeature .graduation-feature-card>div{gap:16px!important;}
   html body #profiles #pinnedGames .pinned-list{grid-template-columns:1fr!important;}
   html body #graduationFeature .graduation-feature-card{min-height:0!important;padding:18px!important;}
 }
+
+
+/* Preschool readable text and rainbow actions - 2026-11-23 */
+/* Explicit user-approved palette: watermelon title remains pink, no black plate. */
+html body #profiles .heading h2 {
+ background:transparent!important;
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+ -webkit-text-stroke:1.3px #101010!important;
+ paint-order:stroke fill!important;
+ text-shadow:1px 1px 0 #101010,-1px -1px 0 #101010,1px -1px 0 #101010,-1px 1px 0 #101010!important;
+}
+/* Page content typography; canonical site header, tickers and toolbars remain untouched. */
+html body main :is(p,li,small,label,legend,summary,a,button,input,select,textarea,strong,span),
+html body footer :is(p,small,a,strong,span){
+ font-size:24px!important;line-height:1.4!important;
+}
+html body main :is(h3,h4,h5,h6){font-size:max(24px,1.5rem)!important;}
+html body main .family-icon{font-size:46px!important;}
+html body main #graduationFeature .graduation-feature-icon{font-size:66px!important;}
+html body main .accordion-icon{font-size:30px!important;}
+html body #profiles :is(.profile-summary strong,.profile-summary small,.pinned-head p,.continuity-note,.family-meta span),
+html body #profiles .family-card :is(p,small,strong,span),
+html body #profiles #pinnedGames :is(p,strong,span){
+ font-size:24px!important;line-height:1.4!important;
+}
+/* Preserve existing 2x2 grid and ensure comfortably sized, colorful working actions. */
+html body #profiles .family-card .family-actions>:is(a,button),
+html body #profiles #managePinnedGames,
+html body #profiles .actions[aria-label="Pre-K student profile entrances"]>.btn {
+ min-height:66px!important;min-width:0!important;
+ padding:12px 14px!important;
+ font-size:24px!important;line-height:1.3!important;font-weight:400!important;
+ border:3px solid #fff!important;border-radius:7px!important;
+ text-align:center!important;overflow-wrap:break-word!important;
+ background:var(--prek-sun)!important;
+ color:var(--prek-charcoal)!important;
+ -webkit-text-fill-color:var(--prek-charcoal)!important;
+}
+html body #profiles .actions[aria-label="Pre-K student profile entrances"]>.btn.primary{background:var(--prek-lavender)!important;}
+html body #profiles .actions[aria-label="Pre-K student profile entrances"]>.btn.secondary{background:var(--prek-sky)!important;}
+html body #profiles .family-card:nth-child(1) .family-action{background:var(--prek-orange)!important;}
+html body #profiles .family-card:nth-child(2) .family-actions>:nth-child(1){background:var(--prek-lavender)!important;}
+html body #profiles .family-card:nth-child(2) .family-actions>:nth-child(2){background:var(--prek-mint)!important;}
+html body #profiles .family-card:nth-child(3) .family-actions>:nth-child(1){background:var(--prek-sun)!important;}
+html body #profiles .family-card:nth-child(3) .family-actions>:nth-child(2){background:var(--prek-sky)!important;}
+html body #profiles .family-card:nth-child(3) .family-actions>:nth-child(3){background:var(--prek-orange)!important;}
+html body #profiles .family-card:nth-child(3) .family-actions>:nth-child(4){background:var(--prek-lavender)!important;}
+html body #profiles #managePinnedGames{background:var(--prek-mint)!important;}
+@media(max-width:640px){
+ html body #profiles .family-card .family-actions{grid-template-columns:1fr!important;}
+}
