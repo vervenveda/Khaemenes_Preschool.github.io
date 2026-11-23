@@ -244,3 +244,49 @@ section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywher
  .hero-copy h1{font-size:clamp(48px,12vw,66px)!important}
  .hero-preschool{font-size:clamp(24px,7vw,36px)!important}
 }
+
+/* 2026-11-23 · Round orbit icons and readable cream text on dark buttons. */
+/* Keep light yellow, aqua, mint and orange controls dark-lettered. */
+.hero-playground .orbit-button{
+  border-radius:50%!important;
+  width:112px!important;
+  height:112px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  border:4px solid #ffffff!important;
+  box-sizing:border-box;
+}
+/* Pull the orbit out from the rainbow border: visible clear space on every side. */
+.hero-playground{width:min(1120px,calc(100vw - 24px))!important}
+.hero-copy{width:min(480px,calc(100% - 290px))!important}
+.hero-playground .orbit-button:nth-of-type(1){left:0!important;top:2%!important}
+.hero-playground .orbit-button:nth-of-type(2){right:0!important;top:2%!important}
+.hero-playground .orbit-button:nth-of-type(3){left:0!important;top:42%!important}
+.hero-playground .orbit-button:nth-of-type(4){right:0!important;top:42%!important}
+.hero-playground .orbit-button:nth-of-type(5){left:9%!important;bottom:0!important}
+.hero-playground .orbit-button:nth-of-type(6){right:9%!important;bottom:0!important}
+/* Deeper shades of the existing pink/purple/green palette have cream lettering. */
+.hero-orbit-labels>:nth-child(4){background:#A92C75!important;color:#FFF9EA!important}
+.hero-orbit-labels>:nth-child(6){background:#6B45A7!important;color:#FFF9EA!important}
+.hero-orbit-labels #childViewBtn{background:#087D67!important;color:#FFF9EA!important}
+.hero-orbit-labels #grownupViewBtn{background:#B62C78!important;color:#FFF9EA!important}
+.feature-accordion[data-feature="explore"]>summary{background:#B62C78!important;color:#FFF9EA!important}
+.feature-accordion[data-feature="garden"]>summary{background:#6B45A7!important;color:#FFF9EA!important}
+.feature-accordion[data-feature="graduation"]>summary{background:#087D67!important;color:#FFF9EA!important}
+.feature-accordion[data-feature="explore"]>summary .accordion-state,
+.feature-accordion[data-feature="garden"]>summary .accordion-state,
+.feature-accordion[data-feature="graduation"]>summary .accordion-state{color:#FFF9EA!important}
+.prek-parent-links a:nth-child(4n){background:#B62C78!important;color:#FFF9EA!important}
+@media(max-width:900px) and (min-width:601px){
+ .hero-playground{width:calc(100vw - 20px)!important}
+ .hero-copy{width:min(400px,calc(100% - 240px))!important}
+ .hero-playground .orbit-button{width:94px!important;height:94px!important}
+ .hero-playground .orbit-button:nth-of-type(5){left:5%!important}
+ .hero-playground .orbit-button:nth-of-type(6){right:5%!important}
+}
+@media(max-width:600px){
+ .hero-copy{width:min(330px,calc(100% - 75px))!important}
+ .hero-playground .orbit-button{width:min(96px,100%)!important;height:96px!important}
+ .hero-playground .orbit-button:nth-of-type(n){left:auto!important;right:auto!important;top:auto!important;bottom:auto!important}
+}
