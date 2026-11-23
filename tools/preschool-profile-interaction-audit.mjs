@@ -166,6 +166,8 @@ try{
  console.log("PASS 12 sticker choices, 10 cap, draggable positions, removal and learner-scoped persistence");
 
  // The visible My Picture shortcut must route to the SAME guarded editor.
+ await page.locator("#khaePrekUniversalLookEntry .prek-picture-summary").click();
+ await page.locator("#adultConfirm").check();
  await page.locator('[data-universal-picture="true"]').click();
  await editor.waitFor({state:"visible"});
  if(await close.count())await close.click();
