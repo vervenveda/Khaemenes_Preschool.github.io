@@ -72,6 +72,26 @@ try{
  assert.match(await page.locator("#discoveryWeekTheme").innerText(),/Welcome to Our Learning Garden/);
  assert.equal(await page.locator("#day1").getAttribute("open"),"");
  console.log("PASS five days, canonical Week 1 and 42-week selector");
+ // The shared VNV translator skips OPTION nodes: the weekly engine must
+ // translate the native options and regenerated status itself.
+ await page.evaluate(()=>{
+  document.documentElement.lang="bn";
+  document.dispatchEvent(new CustomEvent("vnv:language-change",{detail:{language:"bn"}}));
+ });
+ assert.match(await page.locator("#discoveryWeekSelect option").first().innerText(),/সপ্তাহ/);
+ assert.match(await page.locator("#discoveryWeekCount").innerText(),/সপ্তাহ/);
+ assert.match(await page.locator("#discoveryStatus").innerText(),/প্রস্তুত/);
+ await page.locator("#discoveryWeekSelect").selectOption("7");
+ assert.match(await page.locator("#discoveryStatus").innerText(),/7তম সপ্তাহ প্রস্তুত/);
+ await page.evaluate(()=>{
+  document.documentElement.lang="en";
+  document.dispatchEvent(new CustomEvent("vnv:language-change",{detail:{language:"en"}}));
+ });
+ assert.equal(await page.locator("#discoveryWeekSelect option").first().innerText(),"Week 1");
+ assert.match(await page.locator("#discoveryStatus").innerText(),/Week 7 is ready/);
+ await page.locator("#discoveryWeekSelect").selectOption("1");
+ console.log("PASS Bengali week dropdown and status, switching weeks, returning to English");
+
 
  const bg=await page.locator("body").evaluate(el=>getComputedStyle(el).backgroundColor);
  assert.equal(bg,"rgb(36, 48, 56)","charcoal background should match homepage");
@@ -80,6 +100,28 @@ try{
   assert.equal(bw,"5px",sel+" should have a five-pixel frame");
  }
  console.log("PASS charcoal and rainbow layout with 5px section borders");
+ // The page loads the shared Preschool color contract via its existing
+ // language loader, not a duplicate stylesheet or another translator.
+ await page.waitForFunction(()=>[...document.querySelectorAll('link[rel="stylesheet"]')].some(
+  link=>link.href.includes("preschool-shared-chrome.css")
+ ),null,{timeout:5000});
+ const cream=await page.evaluate(()=>{
+  const color=selector=>getComputedStyle(document.querySelector(selector)).color;
+  return {
+   purple:color(".discover-summary"),
+   coral:color(".discover-parent"),
+   orange:color("#day5"),
+   violetPlay:color(".discover-play.primary"),
+   yellow:color(".discover-hero"),
+   aqua:color(".discover-week")
+  };
+ });
+ for(const key of ["purple","coral","orange","violetPlay"])
+  assert.equal(cream[key],"rgb(255, 251, 234)",key+" should display approved cream lettering");
+ for(const key of ["yellow","aqua"])
+  assert.equal(cream[key],"rgb(0, 0, 0)",key+" should preserve dark lettering");
+ console.log("PASS shared cream text contract on purple/coral/orange, with yellow/aqua dark");
+
 
  await page.locator(".discover-day-nav a[href='#day4']").click();
  await page.waitForFunction(()=>document.getElementById("day4").open&&!document.getElementById("day1").open,null,{timeout:3000});
