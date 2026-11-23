@@ -229,6 +229,7 @@ try{
  assert.equal(homepage.status(),200);
  const shelf=page.locator("#pinnedApps");
  await shelf.waitFor({state:"visible",timeout:5000});
+ await page.waitForFunction(()=>document.querySelector("#pinnedApps details.feature-accordion")?.open===true,null,{timeout:5000});
  assert.equal(await shelf.locator("details.feature-accordion").getAttribute("open"),"");
  assert.equal(await shelf.locator(".prek-pin-item").count(),1,"shelf must display the active learner's pinned app");
  assert.ok(await page.evaluate(()=>document.querySelector("#pinnedApps").compareDocumentPosition(document.querySelector("#readingFeature"))&Node.DOCUMENT_POSITION_FOLLOWING),"pinned shelf must be above Reading");
@@ -239,7 +240,10 @@ try{
   await page.goto(home+hash,{waitUntil:"load"});
   const el=page.locator(target);
   assert.ok(await el.count(),"missing navigation target "+hash);
-  if(hash!=="#top")assert.equal(await el.locator("details.feature-accordion").getAttribute("open"),"");
+  if(hash!=="#top"){
+   await page.waitForFunction(h=>document.querySelector(h+" details.feature-accordion")?.open===true,hash,{timeout:5000});
+   assert.equal(await el.locator("details.feature-accordion").getAttribute("open"),"");
+  }
  }
  console.log("PASS Pre-K home top, This Week and Explore & Play deep links");
 
