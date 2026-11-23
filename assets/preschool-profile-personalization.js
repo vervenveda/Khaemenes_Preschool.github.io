@@ -65,7 +65,7 @@ function addLaunches(){
  const area=document.querySelector("main.shell .profile-hero .hero-actions");
  if(!area||$("prekEditProfileLaunch"))return;
  const a=node("button",{type:"button",id:"prekEditProfileLaunch"},"🖍️ Edit Profile");
- const b=node("button",{type:"button",id:"prekEditBackgroundLaunch"},"🌈 Edit Background");
+ const b=node("button",{type:"button",id:"prekEditBackgroundLaunch"},"🌟 Edit Stickers");
  area.append(a,b);
  a.addEventListener("click",openProfile);
  b.addEventListener("click",openBackground);
