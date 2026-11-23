@@ -7,7 +7,7 @@
 <title>My Pre-K Profile | Khaemenes Academy</title>
 
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-profile-v2.css">
-<link rel="stylesheet" href="../assets/preschool-profile-unified.css?v=20261123-11" data-prek-profile-style-owner="unified">
+<link rel="stylesheet" href="../assets/preschool-profile-unified.css?v=20261123-12" data-prek-profile-style-owner="unified">
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-global-standard-v1.js" defer data-preschool-global-standard="18-33-66-auto-no333"></script>
 </head>
 <body data-prek-background="sky" data-profile-stage="preschool">
@@ -32,8 +32,8 @@
 <p class="eyebrow">My Learning Profile</p>
 <h2 id="childTitle">Our little learner</h2>
 <p id="childMeta" class="muted">Select an existing family learner to view their profile.</p>
-<div class="pills"><span class="pill" id="stagePill">Pre-K</span><span class="pill" id="favoritePill">Pinned adventures</span><span class="pill" id="progressPill">Family-guided learning</span></div>
-<div class="hero-actions"><a class="button" id="firstStepLink" href="../#today">🌟 Today’s first step →</a><a class="button secondary" href="#learningStudio">My complete profile ↓</a></div>
+<nav class="pills" aria-label="Pre-K profile quick destinations"><a class="pill" id="stagePill" href="../#top">🏡 Pre-K Home</a><a class="pill" id="favoritePill" href="../#pinnedApps" aria-label="Open pinned apps">📌 Pinned Apps</a><a class="pill" id="progressPill" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">👨‍👩‍👧 Parent Portal</a></nav>
+<div class="hero-actions"><a class="button" id="firstStepLink" href="../#weeklyGarden">🌟 Today’s first step →</a><a class="button secondary" id="explorePlayLink" href="../#new">🎨 Explore &amp; Play →</a></div>
 </div>
 </section>
 <section class="prek-welcome" aria-label="Welcome to your learning home"><h2>🌈 My Happy Learning Home</h2><p>Pick an adventure! Your games, picture, and learning garden are all here.</p></section>
@@ -277,7 +277,7 @@ function renderLearning(){
  const byId=id=>items.find(item=>String(item.id)===String(id));
  const pinned=favoriteIds.map(byId).filter(Boolean).slice(0,12);
  if(preschoolPathPinned())linkItem($("pinnedActivities"),"🌈 My Preschool Pathway",BASE+"#today","Family-guided learning; not a graded class");
- $("favoritePill").textContent=String(pinned.length+(preschoolPathPinned()?1:0))+" pinned favorites";
+ $("favoritePill").setAttribute("aria-label",String(pinned.length+(preschoolPathPinned()?1:0))+" pinned favorites. Open Pinned Apps.");
  for(const item of pinned)linkItem($("pinnedActivities"),(item.icon||"🌟")+" "+(item.title||"Adventure"),safeActivityUrl(item),"Pinned in Preschool");
  if(!pinned.length&&!preschoolPathPinned()){const p=document.createElement("p");p.className="muted";p.textContent="No pinned adventures yet. Choose a favorite below or tap a heart in the Preschool Garden.";$("pinnedActivities").append(p)}
  const select=$("adventureSelect"),previous=select.value;
@@ -301,13 +301,13 @@ function renderLearning(){
    const url=new URL(row.nextHref,BASE);
    linkItem($("nextStep"),row.nextTitle||row.courseTitle||"Continue learning",url.href,row.summary||"");
   });
-  const first=$("nextStep").querySelector("a");if(first)$("firstStepLink").href=first.href;
+  const first=$("nextStep").querySelector("a");if(first)$("firstStepLink").href=BASE+"#weeklyGarden";
  }else{
   const first=pinned[0],dest=first?safeActivityUrl(first):BASE+"#today";
   linkItem($("nextStep"),first?"Continue "+(first.title||"your favorite"):"Choose your first adventure",dest,"Family-guided discovery; not a graded assessment.");
-  $("firstStepLink").href=dest;
+  $("firstStepLink").href=BASE+"#weeklyGarden";
  }
- $("progressPill").textContent=preschoolRows.length?"Learning continuation available":"Family-guided learning";
+ $("progressPill").title=preschoolRows.length?"Learning continuation is available through the Family Portal":"Open the Family Portal";
  if(!$("handoffPreview").hidden)renderHandoff();
 }
 function renderHandoff(){
@@ -352,7 +352,7 @@ function refresh(){
   look=normalize(null);renderLook();
   $("pinnedActivities").textContent="Choose an existing Pre-K learner to see pinned games.";
   $("nextStep").textContent="Explore Preschool's Today activities.";
-  $("firstStepLink").href=BASE+"#today";announce("");
+  $("firstStepLink").href=BASE+"#weeklyGarden";announce("");
   return;
  }
  box.hidden=true;
