@@ -673,311 +673,373 @@ body main.shell .profile-hero .photo{border-radius:7px}
  body main.shell .prek-profile-title h1{font-size:clamp(45px,10vw,66px)!important}
 }
 
-/* Preschool home-palette fidelity · 2026-11-23
-   All surface colors below are verbatim from assets/creche-home-fresh-v1.css.
-   Keep the requested sunset coral body. Never substitute unrelated dark palettes.
-   Accessible cream text uses a charcoal label backing where the homepage color is pale.
-*/
+/* =======================================================================
+   PRE-K PROFILE · SINGLE FINAL VISUAL CONTRACT · 2026-11-23
+   This replaces the five cumulative local override passes that followed
+   the underlying profile/layout engine styles. No additional CSS files.
+   Source palette: creche-home-fresh-v1.css + existing approved purple.
+   Colors never randomize on reload; curated non-adjacent order.
+   ======================================================================= */
 :root{
- --prek-cream:#fffbea;--prek-charcoal:#243038;
- --prek-sun:#ffe45e;--prek-sky:#67cfff;--prek-aqua:#62e4f5;
- --prek-mint:#77e6b6;--prek-green:#a6e85c;--prek-pink:#ff88c8;
- --prek-watermelon:#ff7a8a;--prek-orange:#ffb347;--prek-lavender:#b89cff;
- --prek-home-emerald:#24c98b;--prek-coral:#ffadad;
+  --prek-cream:#fffbea;
+  --prek-charcoal:#243038;
+  --prek-coral:#ffadad;
+  --prek-home-emerald:#24c98b;
+  --prek-sun:#ffe45e;
+  --prek-sky:#67cfff;
+  --prek-aqua:#62e4f5;
+  --prek-mint:#77e6b6;
+  --prek-green:#a6e85c;
+  --prek-pink:#ff88c8;
+  --prek-watermelon:#ff7a8a;
+  --prek-orange:#ffb347;
+  --prek-lavender:#b89cff;
+  --prek-purple:#7957ff;
+  --prek-radius:7px;
+  --prek-edge:5px;
 }
-html body[data-profile-stage="preschool"][data-prek-background="sky"],
-html body[data-profile-stage="preschool"][data-prek-background="sunset"],
-html body[data-profile-stage="preschool"]:not([data-prek-background]){
- background:#ffadad!important;color:var(--prek-charcoal)!important
+body[data-profile-stage="preschool"][data-prek-background="sky"],
+body[data-profile-stage="preschool"][data-prek-background="sunset"],
+body[data-profile-stage="preschool"]:not([data-prek-background]){
+  background:var(--prek-coral)!important;
+  background-image:none!important;
 }
-body[data-profile-stage="preschool"] .prek-profile-breadcrumbs{
- background:#24c98b!important;border-bottom:3px solid var(--prek-sun)!important;
- color:var(--prek-charcoal)!important;border-radius:7px!important;
- font:400 24px/1.4 "Comic Sans MS","Chalkboard SE",cursive!important;
- padding:14px 18px!important;text-align:center!important
-}
-body[data-profile-stage="preschool"] .prek-profile-breadcrumbs a{
- color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important;
- font-size:24px!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-profile-title{
- background:var(--prek-sun)!important;border:3px solid #fff!important;
- border-radius:7px!important;padding:32px 18px!important;margin:0 auto 14px!important;
- width:100%!important;text-align:center!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-profile-title :is(.eyebrow,h1){
- color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important;
- font-weight:400!important;text-align:center!important;text-shadow:none!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-profile-title .eyebrow{
- font-size:33px!important;line-height:1.3!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-profile-title h1{
- font:400 77px/1.12 "Comic Sans MS","Chalkboard SE",cursive!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-profile-info{
- display:grid!important;gap:12px!important;margin:0 auto 20px!important;
- padding:24px 18px!important;background:var(--prek-lavender)!important;
- border:3px solid #fff!important;border-radius:7px!important;text-align:center!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-profile-info p{
- font:400 30px/1.45 "Comic Sans MS","Chalkboard SE",cursive!important;
- color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important;
- margin:0 auto!important;max-width:960px
-}
-body[data-profile-stage="preschool"] main.shell .profile-hero{
- background:var(--prek-aqua)!important;color:var(--prek-charcoal)!important;
- border:4px solid var(--prek-sun)!important;border-radius:7px!important
-}
-body[data-profile-stage="preschool"] main.shell .profile-hero :is(h2,p,.eyebrow,.muted){
- color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important
-}
-body[data-profile-stage="preschool"] main.shell .profile-hero .pill{
- background:var(--prek-lavender)!important;border:2px solid #fff!important;
- color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-welcome{
- background:var(--prek-mint)!important;color:var(--prek-charcoal)!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-daily{
- background:var(--prek-sky)!important;color:var(--prek-charcoal)!important
-}
-body[data-profile-stage="preschool"] main.shell :is(.prek-welcome,.prek-daily) :is(h2,h3,p){
- color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+1),
-body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+1){background:var(--prek-sun)!important}
-body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+2),
-body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+2){background:var(--prek-aqua)!important}
-body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+3),
-body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+3){background:var(--prek-pink)!important}
-body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+4),
-body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+4){background:var(--prek-mint)!important}
-body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+5),
-body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+5){background:var(--prek-lavender)!important}
-body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n),
-body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n){background:var(--prek-orange)!important}
-body[data-profile-stage="preschool"] main.shell :is(.prek-menu .prek-tile,.prek-classes a){
- color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important;
- border:3px solid #fff!important;border-radius:7px!important;font-size:26px!important
-}
-body[data-profile-stage="preschool"] main.shell .profile-hero #prekEditProfileLaunch{
- background:#7957ff!important;color:#fffbea!important;-webkit-text-fill-color:#fffbea!important
-}
-body[data-profile-stage="preschool"] main.shell .profile-hero #prekEditBackgroundLaunch{
- background:#ff4fa3!important;color:#243038!important;-webkit-text-fill-color:#243038!important
-}
-body[data-profile-stage="preschool"] main.shell footer{
- background:var(--prek-mint)!important;color:var(--prek-charcoal)!important;border:3px solid #fff!important
-}
-body[data-profile-stage="preschool"] main.shell #accountNote,
-body[data-profile-stage="preschool"] main.shell #learnerSwitch{
- background:#fff!important;color:var(--prek-charcoal)!important
-}
-@media(max-width:760px){
- body[data-profile-stage="preschool"] main.shell .prek-profile-title h1{font-size:clamp(44px,9vw,77px)!important}
- body[data-profile-stage="preschool"] main.shell .prek-profile-info p{font-size:26px!important}
-}
-
-/* USER-APPROVED TYPE CONTRACT — main, 2026-11-23
-   Exact cheerful home colors STAY unchanged. Cream WHITE typography is
-   intentional, even on bright yellow/pink/aqua panels. Provide a strong
-   charcoal edge for readability rather than silently recoloring surfaces. */
-:root{--prek-requested-white:#fffbea}
-body[data-profile-stage="preschool"] .prek-profile-breadcrumbs,
-body[data-profile-stage="preschool"] .prek-profile-breadcrumbs :is(a,span),
-body[data-profile-stage="preschool"] main.shell :is(.prek-profile-title,.prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,.prek-menu .prek-tile,.prek-classes a,footer),
-body[data-profile-stage="preschool"] main.shell :is(.prek-profile-title,.prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,.prek-menu .prek-tile,.prek-classes a,footer) :is(h1,h2,h3,h4,h5,h6,p,span,small,em,strong,b,label,a,button,li){
- color:#fffbea!important;
- -webkit-text-fill-color:#fffbea!important;
- font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
- font-weight:400!important;
- text-shadow:0 1px 2px rgba(36,48,56,.95),1px 0 1px rgba(36,48,56,.85),-1px 0 1px rgba(36,48,56,.85)!important
-}
-body[data-profile-stage="preschool"] .prek-profile-breadcrumbs,
-body[data-profile-stage="preschool"] .prek-profile-breadcrumbs :is(a,span),
-body[data-profile-stage="preschool"] main.shell :is(.prek-profile-title,.prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,.prek-menu .prek-tile,.prek-classes a,footer) :is(p,span,small,label,a,button,li){
- font-size:max(24px,1.5rem)!important;
- line-height:1.45!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-profile-title .eyebrow{font-size:33px!important}
-body[data-profile-stage="preschool"] main.shell .prek-profile-title h1{font-size:77px!important}
-body[data-profile-stage="preschool"] main.shell .prek-profile-info p{font-size:30px!important}
-body[data-profile-stage="preschool"] main.shell .profile-hero #childTitle{font-size:clamp(36px,5vw,55px)!important}
-body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile>span:first-child,
-body[data-profile-stage="preschool"] main.shell .prek-classes .prek-class-icon,
-body[data-profile-stage="preschool"] main.shell .prek-studio-sticker{font-size:66px!important}
-/* Profile editor and account forms remain readable against their WHITE input
-   surfaces. Text on brightly colored buttons and cards stays cream. */
-body[data-profile-stage="preschool"] main.shell :is(input,select,textarea,option){
- color:#243038!important;-webkit-text-fill-color:#243038!important;
- background-color:#ffffff!important;font-size:24px!important
-}
-body[data-profile-stage="preschool"] main.shell :is(.notice,#accountNote,#learnerSwitch){
- background:#ffffff!important;color:#243038!important
-}
-body[data-profile-stage="preschool"] main.shell :is(.notice,#accountNote,#learnerSwitch) :is(p,label,span,a){
- color:#243038!important;-webkit-text-fill-color:#243038!important;
- text-shadow:none!important;font-size:24px!important
-}
-/* Preserve cream on the two primary personalization buttons. */
-body[data-profile-stage="preschool"] main.shell .profile-hero #prekEditProfileLaunch,
-body[data-profile-stage="preschool"] main.shell .profile-hero #prekEditBackgroundLaunch,
-body[data-profile-stage="preschool"] main.shell .profile-hero .hero-actions :is(a,button){
- color:#fffbea!important;-webkit-text-fill-color:#fffbea!important;
- font-size:24px!important
-}
-@media(max-width:760px){
- body[data-profile-stage="preschool"] main.shell .prek-profile-title h1{font-size:clamp(44px,9vw,77px)!important}
-}
-
-/* PRE-K TITLE & BORDER REFINEMENT — 2026-11-23. Home palette remains unchanged.
-   5px section borders; real black outline around cream title lettering. */
-body[data-profile-stage="preschool"] main.shell .prek-profile-title :is(.eyebrow,#pageTitle,.prek-profile-grade){
- color:#fffbea!important;
- -webkit-text-fill-color:#fffbea!important;
- -webkit-text-stroke:1.3px #000!important;
- paint-order:stroke fill;
- text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000!important;
- font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
- font-weight:400!important;
- text-align:center!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-profile-title #pageTitle{
- font-size:77px!important;line-height:1.12!important;margin:0 auto 8px!important;
-}
-body[data-profile-stage="preschool"] main.shell .prek-profile-title .prek-profile-grade{
- display:block!important;font-size:44px!important;line-height:1.25!important;
- margin:0!important;padding:0!important
+body[data-profile-stage="preschool"] main.shell{
+  width:min(1160px,calc(100% - 32px))!important;
+  margin:0 auto!important;
+  text-align:center!important;
+  font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
+  font-weight:400!important;
 }
 body[data-profile-stage="preschool"] main.shell :is(
- .prek-profile-title,.prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,
- .card,.notice,.prek-pop-panel,.prek-menu .prek-tile,.prek-classes a,footer
+  p,label,small,summary,li,a,button,span,input,select,textarea
 ){
- border-width:5px!important;border-style:solid!important;border-radius:7px!important
+  font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
+  font-weight:400!important;
+  font-size:max(24px,1.5rem)!important;
 }
-body[data-profile-stage="preschool"] main.shell .prek-profile-title{border-color:#fff!important}
-body[data-profile-stage="preschool"] main.shell .prek-profile-info{border-color:#fff!important}
-body[data-profile-stage="preschool"] main.shell .profile-hero{border-color:var(--prek-sun)!important}
-body[data-profile-stage="preschool"] main.shell :is(.prek-menu .prek-tile,.prek-classes a){border-color:#fff!important}
-body[data-profile-stage="preschool"] main.shell .prek-pop-panel{border-color:var(--prek-lavender)!important}
-body[data-profile-stage="preschool"] main.shell :is(.card,.notice){border-color:#fff!important}
-body[data-profile-stage="preschool"] main.shell #learnerSwitch{border-color:var(--prek-sky)!important}
-@media(max-width:760px){
- body[data-profile-stage="preschool"] main.shell .prek-profile-title #pageTitle{
-  font-size:clamp(44px,9vw,77px)!important
- }
- body[data-profile-stage="preschool"] main.shell .prek-profile-title .prek-profile-grade{
-  font-size:44px!important
- }
+body[data-profile-stage="preschool"] .prek-profile-breadcrumbs{
+  background:var(--prek-home-emerald)!important;
+  color:var(--prek-cream)!important;
+  text-align:center!important;
+  padding:14px 18px!important;
+  border-bottom:5px solid var(--prek-sun)!important;
+  border-radius:7px!important;
+  font:400 24px/1.4 "Comic Sans MS","Chalkboard SE",cursive!important;
 }
-
-/* 2026-11-23 · PROFILE HEADING AND BUTTON PARITY
-   Approved homepage colors only. Outline colors rotate by section
-   deterministically, so reloading does not flicker or randomly restyle a page.
-   The top page title keeps its previous cream fill / black outline. */
-body[data-profile-stage="preschool"] main.shell{
- --prek-heading-outline:var(--prek-pink);
+body[data-profile-stage="preschool"] .prek-profile-breadcrumbs a{
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  font-size:24px!important;
 }
-body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+1){--prek-heading-outline:var(--prek-watermelon)}
-body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+2){--prek-heading-outline:var(--prek-sun)}
-body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+3){--prek-heading-outline:var(--prek-lavender)}
-body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+4){--prek-heading-outline:var(--prek-orange)}
-body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+5){--prek-heading-outline:var(--prek-mint)}
-body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n){--prek-heading-outline:var(--prek-sky)}
-body[data-profile-stage="preschool"] main.shell > .grid .card:nth-child(odd){--prek-heading-outline:var(--prek-pink)}
-body[data-profile-stage="preschool"] main.shell > .grid .card:nth-child(even){--prek-heading-outline:var(--prek-green)}
-body[data-profile-stage="preschool"] main.shell .prek-pop-panel:nth-child(3n+1){--prek-heading-outline:var(--prek-sun)}
-body[data-profile-stage="preschool"] main.shell .prek-pop-panel:nth-child(3n+2){--prek-heading-outline:var(--prek-sky)}
-body[data-profile-stage="preschool"] main.shell .prek-pop-panel:nth-child(3n){--prek-heading-outline:var(--prek-watermelon)}
-/* Main section headings, including Our Little Learner, are solid BLACK
-   with a clearly visible outline drawn from the existing homepage palette. */
-body[data-profile-stage="preschool"] main.shell :is(.profile-hero,.prek-welcome,.prek-daily,.card,.prek-pop-panel) :is(h2,h3),
-body[data-profile-stage="preschool"] main.shell .profile-hero #childTitle{
- color:#000!important;
- -webkit-text-fill-color:#000!important;
- -webkit-text-stroke:2.5px var(--prek-heading-outline)!important;
- paint-order:stroke fill!important;
- text-shadow:none!important;
- font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
- font-weight:400!important;
- line-height:1.22!important;
+body[data-profile-stage="preschool"] main.shell :is(
+  .prek-profile-title,.prek-profile-info,.profile-hero,.prek-welcome,
+  .prek-daily,.card,.notice,.prek-pop-panel,.prek-menu .prek-tile,
+  .prek-classes a,footer
+){
+  box-sizing:border-box!important;
+  border:var(--prek-edge) solid #fff!important;
+  border-radius:var(--prek-radius)!important;
 }
-/* The hero's title uses a contrasting pink edge on the aqua frame. */
+body[data-profile-stage="preschool"] main.shell .prek-profile-title{
+  background:var(--prek-sun)!important;
+  padding:30px 22px!important;
+  margin:0 auto 14px!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-title :is(.eyebrow,.prek-profile-grade){
+  font:400 33px/1.3 "Comic Sans MS","Chalkboard SE",cursive!important;
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  -webkit-text-stroke:1.2px #000!important;
+  text-shadow:1px 1px 0 #000,-1px -1px 0 #000!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-title #pageTitle{
+  font:400 77px/1.12 "Comic Sans MS","Chalkboard SE",cursive!important;
+  color:#000!important;
+  -webkit-text-fill-color:#000!important;
+  -webkit-text-stroke:3px var(--prek-purple)!important;
+  paint-order:stroke fill!important;
+  text-shadow:none!important;
+  margin:0 auto 10px!important;
+  text-align:center!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-title .prek-profile-grade{
+  display:block!important;
+  font-size:44px!important;
+  margin:0!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-info{
+  display:grid!important;
+  gap:12px!important;
+  padding:24px 18px!important;
+  margin:0 auto 20px!important;
+  background:var(--prek-lavender)!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-info p{
+  font:400 30px/1.45 "Comic Sans MS","Chalkboard SE",cursive!important;
+  margin:0 auto!important;
+}
 body[data-profile-stage="preschool"] main.shell .profile-hero{
- --prek-heading-outline:var(--prek-pink);
+  --prek-heading-outline:var(--prek-pink);
+  background:var(--prek-aqua)!important;
+  border-color:var(--prek-sun)!important;
+  display:grid!important;
+  justify-items:center!important;
+  grid-template-columns:1fr!important;
 }
-body[data-profile-stage="preschool"] main.shell .profile-hero #childTitle{
- font-size:clamp(44px,5vw,55px)!important;
+body[data-profile-stage="preschool"] main.shell .profile-hero>div{
+  width:100%!important;
+  min-width:0!important;
+  text-align:center!important;
 }
-/* Uniform heights by button family, with consistent padding and 7px corners.
-   Actual colors remain those already approved for each button. */
-body[data-profile-stage="preschool"] main.shell .hero-actions{
- display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
- grid-auto-rows:minmax(90px,auto)!important;gap:14px!important;
-}
-body[data-profile-stage="preschool"] main.shell .hero-actions :is(a,button),
-body[data-profile-stage="preschool"] main.shell .actions :is(a,button){
- box-sizing:border-box!important;min-height:90px!important;
- height:100%!important;width:100%!important;
- display:flex!important;align-items:center!important;justify-content:center!important;
- padding:14px 18px!important;border-radius:7px!important;
- text-align:center!important;line-height:1.3!important;font-size:24px!important;
- overflow-wrap:anywhere!important;
-}
-body[data-profile-stage="preschool"] main.shell .actions{
- display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
- grid-auto-rows:minmax(90px,auto)!important;gap:14px!important;
-}
-body[data-profile-stage="preschool"] main.shell .prek-menu{
- grid-template-columns:repeat(3,minmax(0,1fr))!important;
- grid-auto-rows:minmax(200px,auto)!important;gap:14px!important;
-}
-body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile{
- box-sizing:border-box!important;min-width:0!important;width:100%!important;
- height:100%!important;min-height:200px!important;
- padding:18px 12px!important;
- display:flex!important;flex-direction:column!important;
- align-items:center!important;justify-content:center!important;gap:12px!important;
- text-align:center!important;overflow-wrap:anywhere!important
-}
-body[data-profile-stage="preschool"] main.shell .prek-classes{
- grid-template-columns:repeat(2,minmax(0,1fr))!important;
- grid-auto-rows:minmax(158px,auto)!important;gap:14px!important;
-}
-body[data-profile-stage="preschool"] main.shell .prek-classes>a{
- box-sizing:border-box!important;width:100%!important;
- min-height:158px!important;height:100%!important;
- padding:15px 12px!important;display:flex!important;flex-direction:column!important;
- align-items:center!important;justify-content:center!important;
- gap:12px!important;overflow-wrap:anywhere!important
-}
-/* Large rainbow/avatar; saved pictures are still displayed without distortion. */
 body[data-profile-stage="preschool"] main.shell .profile-hero #photoPreview{
- box-sizing:border-box!important;width:268px!important;height:268px!important;
- display:grid!important;place-items:center!important;
- font-size:164px!important;line-height:1!important;overflow:hidden!important;
- margin:8px auto 24px!important;
+  box-sizing:border-box!important;
+  width:280px!important;
+  height:280px!important;
+  margin:8px auto 26px!important;
+  display:grid!important;
+  place-items:center!important;
+  font-size:170px!important;
+  line-height:1!important;
+  overflow:hidden!important;
 }
 body[data-profile-stage="preschool"] main.shell .profile-hero #photoPreview img{
- max-width:100%!important;max-height:100%!important;width:100%!important;
- height:100%!important;object-fit:cover!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+}
+body[data-profile-stage="preschool"] main.shell #prekStudioSticker[hidden]{
+  display:none!important;
+}
+/* Section heading fill = BLACK. Outline cycles through approved page colors. */
+body[data-profile-stage="preschool"] main.shell .prek-welcome{
+  --prek-heading-outline:var(--prek-watermelon);
+  background:var(--prek-mint)!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-daily{
+  --prek-heading-outline:var(--prek-lavender);
+  background:var(--prek-sky)!important;
+}
+body[data-profile-stage="preschool"] main.shell .grid>.card:nth-child(odd){
+  --prek-heading-outline:var(--prek-orange);
+}
+body[data-profile-stage="preschool"] main.shell .grid>.card:nth-child(even){
+  --prek-heading-outline:var(--prek-aqua);
+}
+body[data-profile-stage="preschool"] main.shell #kindergartenHandoff{
+  --prek-heading-outline:var(--prek-pink);
+}
+body[data-profile-stage="preschool"] main.shell #learningStudio{
+  --prek-heading-outline:var(--prek-sun);
+}
+body[data-profile-stage="preschool"] main.shell .prek-pop-panel:nth-child(3n+1){
+  --prek-heading-outline:var(--prek-sun);
+}
+body[data-profile-stage="preschool"] main.shell .prek-pop-panel:nth-child(3n+2){
+  --prek-heading-outline:var(--prek-pink);
+}
+body[data-profile-stage="preschool"] main.shell .prek-pop-panel:nth-child(3n){
+  --prek-heading-outline:var(--prek-mint);
+}
+body[data-profile-stage="preschool"] main.shell :is(
+  .profile-hero,.prek-welcome,.prek-daily,.card,.prek-pop-panel
+) :is(h2,h3),
+body[data-profile-stage="preschool"] main.shell .profile-hero #childTitle{
+  color:#000!important;
+  -webkit-text-fill-color:#000!important;
+  -webkit-text-stroke:2.5px var(--prek-heading-outline,var(--prek-lavender))!important;
+  paint-order:stroke fill!important;
+  text-shadow:none!important;
+  font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
+  font-weight:400!important;
+  line-height:1.2!important;
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero #childTitle{
+  font-size:clamp(44px,5vw,55px)!important;
+}
+/* Keep cream copy with a DARK OUTLINE, not dark lettering or darker backgrounds. */
+body[data-profile-stage="preschool"] main.shell :is(
+  .prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,
+  .prek-menu .prek-tile,.prek-classes a,footer
+),
+body[data-profile-stage="preschool"] main.shell :is(
+  .prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,
+  .prek-menu .prek-tile,.prek-classes a,footer
+) :is(p,span,small,label,a,button,li){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000!important;
+}
+body[data-profile-stage="preschool"] main.shell :is(
+  .prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,
+  .prek-menu .prek-tile,.prek-classes a
+) :is(p,span,small,label,a,button){
+  font-size:max(24px,1.5rem)!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-info p{
+  font-size:30px!important;
+}
+/* Profile "pills" are evenly spaced, distinct approved colors. */
+body[data-profile-stage="preschool"] main.shell .pills{
+  width:100%!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+body[data-profile-stage="preschool"] main.shell .pills .pill{
+  display:flex!important;justify-content:center!important;align-items:center!important;
+  padding:12px 8px!important;min-width:0!important;min-height:68px!important;
+  border:5px solid #fff!important;border-radius:7px!important;
+  overflow-wrap:anywhere!important;
+}
+body[data-profile-stage="preschool"] main.shell .pills .pill:nth-child(1){
+  background:var(--prek-lavender)!important;
+}
+body[data-profile-stage="preschool"] main.shell .pills .pill:nth-child(2){
+  background:var(--prek-pink)!important;
+}
+body[data-profile-stage="preschool"] main.shell .pills .pill:nth-child(3){
+  background:var(--prek-orange)!important;
+}
+/* Top FOUR hero actions = same 2-column widths as the learning buttons. */
+body[data-profile-stage="preschool"] main.shell .hero-actions{
+  width:100%!important;
+  max-width:none!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-rows:minmax(100px,auto)!important;
+  gap:14px!important;
+  margin:18px auto 0!important;
+}
+body[data-profile-stage="preschool"] main.shell .hero-actions :is(a,button){
+  box-sizing:border-box!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;height:100%!important;min-height:100px!important;
+  margin:0!important;padding:16px 12px!important;
+  border:5px solid #fff!important;border-radius:7px!important;
+  color:var(--prek-cream)!important;-webkit-text-fill-color:var(--prek-cream)!important;
+  font:400 24px/1.3 "Comic Sans MS","Chalkboard SE",cursive!important;
+  text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000!important;
+  text-align:center!important;overflow-wrap:anywhere!important;
+}
+body[data-profile-stage="preschool"] main.shell #firstStepLink{background:var(--prek-sun)!important}
+body[data-profile-stage="preschool"] main.shell .hero-actions .button.secondary{background:var(--prek-aqua)!important}
+body[data-profile-stage="preschool"] main.shell #prekEditProfileLaunch{background:var(--prek-lavender)!important}
+body[data-profile-stage="preschool"] main.shell #prekEditBackgroundLaunch{background:var(--prek-pink)!important}
+/* 3x2 play cards and 2x3 classes have an intentional mixed, unique sequence. */
+body[data-profile-stage="preschool"] main.shell .prek-menu{
+  width:100%!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:minmax(200px,auto)!important;
+  gap:14px!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile{
+  box-sizing:border-box!important;
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  width:100%!important;height:100%!important;min-height:200px!important;
+  padding:18px 12px!important;gap:10px!important;
+  border:5px solid #fff!important;border-radius:7px!important;
+  font-size:24px!important;font-weight:400!important;
+  text-align:center!important;overflow-wrap:anywhere!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile>span:first-child,
+body[data-profile-stage="preschool"] main.shell .prek-classes .prek-class-icon{
+  font-size:66px!important;line-height:1!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(1){background:var(--prek-sun)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(2){background:var(--prek-aqua)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(3){background:var(--prek-pink)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(4){background:var(--prek-lavender)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(5){background:var(--prek-orange)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6){background:var(--prek-mint)!important}
+body[data-profile-stage="preschool"] main.shell .prek-classes{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-rows:minmax(158px,auto)!important;
+  gap:14px!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-classes>a{
+  box-sizing:border-box!important;
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  width:100%!important;height:100%!important;min-height:158px!important;
+  padding:15px 12px!important;gap:10px!important;
+  border:5px solid #fff!important;border-radius:7px!important;
+  font-size:24px!important;font-weight:400!important;
+  overflow-wrap:anywhere!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-classes>a:nth-child(1){background:var(--prek-pink)!important}
+body[data-profile-stage="preschool"] main.shell .prek-classes>a:nth-child(2){background:var(--prek-mint)!important}
+body[data-profile-stage="preschool"] main.shell .prek-classes>a:nth-child(3){background:var(--prek-sun)!important}
+body[data-profile-stage="preschool"] main.shell .prek-classes>a:nth-child(4){background:var(--prek-orange)!important}
+body[data-profile-stage="preschool"] main.shell .prek-classes>a:nth-child(5){background:var(--prek-aqua)!important}
+body[data-profile-stage="preschool"] main.shell .prek-classes>a:nth-child(6){background:var(--prek-lavender)!important}
+/* Remaining native actions use homepage colors, not hunter green/dark blue. */
+body[data-profile-stage="preschool"] main.shell .actions{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-rows:minmax(90px,auto)!important;gap:14px!important;
+}
+body[data-profile-stage="preschool"] main.shell .actions :is(button,a),
+body[data-profile-stage="preschool"] main.shell .card :is(a.button,button.secondary){
+  box-sizing:border-box!important;width:100%!important;min-height:90px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:12px!important;border:5px solid #fff!important;border-radius:7px!important;
+  background:var(--prek-lavender)!important;
+  color:var(--prek-cream)!important;-webkit-text-fill-color:var(--prek-cream)!important;
+  text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000!important;
+  font:400 24px/1.3 "Comic Sans MS","Chalkboard SE",cursive!important;
+  text-align:center!important;
+}
+body[data-profile-stage="preschool"] main.shell .actions :is(button,a):nth-child(3n+2){
+  background:var(--prek-orange)!important;
+}
+body[data-profile-stage="preschool"] main.shell .actions :is(button,a):nth-child(3n){
+  background:var(--prek-pink)!important;
+}
+/* Preserve editable white form inputs with dark text. */
+body[data-profile-stage="preschool"] main.shell :is(input,select,textarea,option){
+  background:#fff!important;color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+  font-size:24px!important;text-shadow:none!important;
+}
+body[data-profile-stage="preschool"] main.shell :is(.notice,#accountNote,#learnerSwitch){
+  background:#fff!important;color:var(--prek-charcoal)!important;
+  border:5px solid #fff!important;
+}
+body[data-profile-stage="preschool"] main.shell :is(.notice,#accountNote,#learnerSwitch) :is(p,label,span,a){
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+  text-shadow:none!important;font-size:24px!important;
+}
+body[data-profile-stage="preschool"] main.shell footer{
+  background:var(--prek-mint)!important;
+  text-align:center!important;
 }
 @media(max-width:900px){
- body[data-profile-stage="preschool"] main.shell .prek-menu{
-  grid-template-columns:repeat(2,minmax(0,1fr))!important
- }
+  body[data-profile-stage="preschool"] main.shell .prek-menu{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:760px){
+  body[data-profile-stage="preschool"] main.shell .prek-profile-title #pageTitle{
+    font-size:clamp(44px,9vw,77px)!important;
+  }
+  body[data-profile-stage="preschool"] main.shell .prek-profile-title .prek-profile-grade{
+    font-size:44px!important;
+  }
 }
 @media(max-width:600px){
- body[data-profile-stage="preschool"] main.shell .hero-actions,
- body[data-profile-stage="preschool"] main.shell .actions,
- body[data-profile-stage="preschool"] main.shell .prek-classes{
-  grid-template-columns:1fr!important
- }
- body[data-profile-stage="preschool"] main.shell .profile-hero #photoPreview{
-  width:214px!important;height:214px!important;font-size:142px!important
- }
- body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile{
-  min-height:190px!important
- }
+  body[data-profile-stage="preschool"] main.shell .hero-actions,
+  body[data-profile-stage="preschool"] main.shell .actions,
+  body[data-profile-stage="preschool"] main.shell .prek-classes{
+    grid-template-columns:1fr!important;
+  }
+  body[data-profile-stage="preschool"] main.shell .pills{
+    grid-template-columns:1fr!important;
+  }
+  body[data-profile-stage="preschool"] main.shell .profile-hero #photoPreview{
+    width:214px!important;height:214px!important;font-size:142px!important;
+  }
 }
