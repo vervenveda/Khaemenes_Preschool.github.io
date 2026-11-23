@@ -100,6 +100,38 @@
     <p class="prek-parent-hint">Family accounts open directly from this adult-controlled area, without repeated exit notices.</p>
   </div>
 </section>
+<!-- Only newly authorized homepage feature: pinned apps, immediately before Reading Time. -->
+<style id="prekPinnedShelfStyle">
+#pinnedApps{scroll-margin-top:var(--creche-anchor-offset,150px)}
+#pinnedApps .prek-pin-shell{max-width:960px;margin:0 auto;padding:18px 20px 25px;text-align:center}
+#pinnedApps .prek-pin-intro{margin:5px auto 17px;max-width:760px;font:400 24px/1.45 "Comic Sans MS","Chalkboard SE",cursive;color:#243038}
+#pinnedApps .prek-pin-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+#pinnedApps .prek-pin-item{min-width:0;background:#ffe45e;border:5px solid #fff;border-radius:7px;padding:18px 12px;display:grid;justify-items:center;gap:8px}
+#pinnedApps .prek-pin-item:nth-child(6n+2){background:#62e4f5}
+#pinnedApps .prek-pin-item:nth-child(6n+3){background:#ff88c8}
+#pinnedApps .prek-pin-item:nth-child(6n+4){background:#77e6b6}
+#pinnedApps .prek-pin-item:nth-child(6n+5){background:#b89cff}
+#pinnedApps .prek-pin-item:nth-child(6n){background:#ffb347}
+#pinnedApps .prek-pin-item a{color:#000;text-decoration:none;font:400 24px/1.3 "Comic Sans MS","Chalkboard SE",cursive;overflow-wrap:anywhere}
+#pinnedApps .prek-pin-icon{font-size:66px;line-height:1}
+#pinnedApps .prek-pin-remove{color:#000;background:#fffbea;border:2px solid #243038;border-radius:7px;min-height:48px;padding:6px 14px;font:400 18px/1.2 "Comic Sans MS","Chalkboard SE",cursive;cursor:pointer}
+#pinnedApps .prek-pin-empty{padding:18px 14px;background:#77e6b6;border:5px solid #fff;border-radius:7px;font:400 24px/1.4 "Comic Sans MS","Chalkboard SE",cursive;color:#000}
+#pinnedApps .prek-pin-help{margin:18px auto 0}
+#pinnedApps .prek-pin-help a{display:inline-flex;padding:12px 20px;border-radius:7px;border:3px solid white;background:#b89cff;color:#000;font:400 24px/1.3 "Comic Sans MS","Chalkboard SE",cursive;text-decoration:none}
+@media(max-width:760px){#pinnedApps .prek-pin-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){#pinnedApps .prek-pin-list{grid-template-columns:1fr}}
+</style>
+<section class="feature-section child-mode-only prek-pin-shelf" id="pinnedApps" aria-label="My Pinned Apps">
+  <details class="feature-accordion" data-feature="pinned">
+    <summary><span class="accordion-icon" aria-hidden="true">📌</span><strong>My Pinned Apps</strong><span class="accordion-state" aria-hidden="true"></span></summary>
+    <div class="feature-accordion-panel"><div class="prek-pin-shell">
+      <p class="prek-pin-intro">Your favorite adventures, all in one happy place. Tap an app to play, or remove a pin when you're ready.</p>
+      <div id="prekPinnedAppsList" class="prek-pin-list" aria-live="polite"><p class="prek-pin-empty">Your favorite adventures will appear here. Tap a heart in Explore &amp; Play to pin an app!</p></div>
+      <p class="prek-pin-help"><a href="#new">🎨 Find more adventures in Explore &amp; Play</a></p>
+    </div></div>
+  </details>
+</section>
+
 <section class="feature-section" id="readingFeature" aria-label="Reading Time">
   <details class="feature-accordion" data-feature="reading">
     <summary><span class="accordion-icon" aria-hidden="true">📚</span><strong>Reading Time</strong><span class="accordion-state" aria-hidden="true"></span></summary>
@@ -1037,10 +1069,34 @@ function renderProfileCenter(){
   renderParentDashboard();
   renderAdventureTrail();
 }
+/* Same favorites and learner/guest ownership as the Adventure Garden.
+   New shelf is a VIEW over the existing saved pins, never a second store. */
+function renderPinnedShelf(){
+ const box=$("prekPinnedAppsList");
+ if(!box)return;
+ const apps=[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean);
+ box.replaceChildren();
+ if(!apps.length){
+  const message=document.createElement("p");
+  message.className="prek-pin-empty";
+  message.textContent="No pinned adventures yet. Tap a heart in Explore & Play to add your favorites here!";
+  box.append(message);return;
+ }
+ for(const app of apps){
+  const item=document.createElement("article");item.className="prek-pin-item";
+  const icon=document.createElement("span");icon.className="prek-pin-icon";icon.setAttribute("aria-hidden","true");icon.textContent=app.icon||"🌟";
+  const link=document.createElement("a");link.href=appUrl(app);link.textContent=displayTitle(app);link.dataset.openApp=app.id;
+  link.addEventListener("click",()=>markVisited(app.id));
+  const remove=document.createElement("button");remove.type="button";remove.className="prek-pin-remove";remove.textContent="✕ Unpin";remove.setAttribute("aria-label","Remove "+displayTitle(app)+" from pinned apps");
+  remove.addEventListener("click",()=>toggleFavorite(app.id,remove));
+  item.append(icon,link,remove);box.append(item);
+ }
+}
 function renderPinnedGames(){
   const apps=[...favorites].map(id=>KID_APPS.find(app=>app.id===id)).filter(Boolean);
   $("pinnedList").innerHTML=apps.length?apps.slice(0,12).map(app=>`<a class="pinned-app" href="${appUrl(app)}" data-open-app="${app.id}"><i>${app.icon}</i><span><strong>${escapeHtml(app.title)}</strong><small>${escapeHtml(catLabel(app.category))}</small></span></a>`).join(""):`<div class="pinned-empty">No pinned adventures yet. Tap a ♡ heart in the complete Adventure Garden to add one to the active child profile.</div>`;
   document.querySelectorAll("#pinnedList [data-open-app]").forEach(link=>link.addEventListener("click",()=>markVisited(link.dataset.openApp)));
+  renderPinnedShelf();
 }
 let profileRestoreFocus=null;
 function openProfileDialog(){
@@ -1806,7 +1862,7 @@ function prepareViewForHash(hash){
   /* familyMentorEntry now lives inside the grown-up closing section. */
   if(["#grownups","#parentDashboard","#familyMentorEntry","#profiles","#contribute","#prekParentCenter"].includes(hash)){
     setView("grownup",{scroll:false});
-  }else if(["#weeklyGarden","#myHome","#trail","#today","#activities","#rooms","#new","#discoveryFeature","#graduation-garden","#graduationFeature"].includes(hash)){
+  }else if(["#top","#pinnedApps","#weeklyGarden","#myHome","#trail","#today","#activities","#rooms","#new","#discoveryFeature","#graduation-garden","#graduationFeature"].includes(hash)){
     setView("child",{scroll:false});
   }
 }
