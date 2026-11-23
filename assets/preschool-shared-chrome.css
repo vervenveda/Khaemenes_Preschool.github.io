@@ -63,7 +63,7 @@ html body :is(
  .feature-accordion[data-feature="support"]>summary,
  #weeklyGarden .weekly-adventure:nth-child(8n+5),
  #weeklyGarden .weekly-adventure:nth-child(8n+6),
- #myHome .daily-school-card:nth-child(4)>.daily-school-btn,
+ #myHome .daily-school-card:nth-child(1)>.daily-school-btn,
  #myHome .daily-school-card:nth-child(2)>.daily-school-btn
  ){
  color:var(--prek-vivid-cream)!important;
@@ -78,7 +78,8 @@ html body :is(
  .feature-accordion[data-feature="profile"]>summary,
  .feature-accordion[data-feature="support"]>summary,
  #weeklyGarden .weekly-adventure:nth-child(8n+5),
- #weeklyGarden .weekly-adventure:nth-child(8n+6)
+ #weeklyGarden .weekly-adventure:nth-child(8n+6),
+ #pinnedApps .prek-pin-shell
  ) :is(h1,h2,h3,h4,p,small,strong,span,a,button,summary){
  color:var(--prek-vivid-cream)!important;
  -webkit-text-fill-color:var(--prek-vivid-cream)!important;
