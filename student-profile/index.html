@@ -131,6 +131,74 @@ main.shell .prek-menu .prek-tile{font-weight:400!important}
 #kplsDialog :is(button,select,input){font-family:Nunito,"Trebuchet MS",Arial,sans-serif!important}
 #prek-panel-pictureTitle{display:none!important}
 </style>
+<style id="prek-profile-playful-20261123">
+/* Local Pre-K Profile presentation only. Preserves native profile engines and learner IDs. */
+:root{--prek-profile-ink:#273847;--prek-profile-cream:#fff9e9;--prek-profile-green:#24c98b;--prek-profile-aqua:#62e4f5;--prek-profile-sun:#ffe45e;--prek-profile-purple:#7957ff;--prek-profile-pink:#ff4fa3}
+body:not([data-prek-background="night"]){background:#fff!important;color:#273847}
+body:not([data-prek-background="night"]) main.shell{color:#273847}
+body main.shell{width:min(1160px,calc(100% - 36px))!important;max-width:1160px!important;margin:0 auto;padding:32px 0 68px!important;line-height:1.45}
+main.shell :is(h1,h2,h3,p,a,button,label,input,select,textarea,small,span,li,summary,legend){font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",ui-rounded,cursive!important;font-weight:400!important;letter-spacing:0!important}
+main.shell :is(p,a,button,label,input,select,textarea,small,span,li,summary,legend,.muted,.status,.notice,.pill){font-size:24px!important;line-height:1.45!important;font-weight:400!important}
+main.shell>.eyebrow{color:#087d67!important;font-size:24px!important;letter-spacing:0!important}
+main.shell>h1{font-size:clamp(40px,5vw,66px)!important;font-weight:400!important;line-height:1.16!important;text-align:center;margin:8px 0 18px}
+main.shell>.muted{text-align:center;max-width:850px;margin:0 auto 25px}
+main.shell :is(h2,h3){font-weight:400!important;line-height:1.2!important}
+main.shell h2{font-size:clamp(32px,3.7vw,44px)!important}
+main.shell h3{font-size:clamp(28px,3vw,36px)!important}
+main.shell :is(.card,.notice,.prek-daily,.prek-welcome,.prek-pop-panel,.prek-menu .prek-tile){border-radius:7px!important}
+main.shell .card{padding:26px;background:#fff!important;border:3px solid #62e4f5!important;box-shadow:0 9px 24px rgba(36,48,56,.09)}
+body[data-prek-background="night"] main.shell .card{background:var(--panel)!important;color:var(--ink)}
+main.shell .profile-hero{max-width:100%;grid-template-columns:260px minmax(0,1fr);gap:32px;padding:34px!important;border:4px solid #ffe45e!important;background:linear-gradient(110deg,#fff 0%,#e1fff3 48%,#dcfaff 100%)!important}
+main.shell .profile-hero .photo{width:240px;height:240px;font-size:110px;border:6px solid #fff;box-shadow:0 0 0 7px #ff4fa3,0 0 0 14px #ffe45e,0 8px 22px rgba(36,48,56,.14)}
+main.shell #childTitle{font-size:clamp(35px,4vw,54px)!important}
+main.shell .pills{gap:12px}
+main.shell .pill{padding:9px 15px;background:#e0f9ff!important;color:#273847!important;border:2px solid #62e4f5!important}
+main.shell :is(button,a.button,.prek-classes a){min-height:66px!important;padding:14px 18px;font-size:24px!important;line-height:1.35!important;border-radius:7px!important;text-decoration:none}
+main.shell :is(button,a.button){background:#087d67;color:var(--prek-profile-cream);border:2px solid #087d67}
+main.shell :is(button.secondary,a.button.secondary){background:#fff;color:#273847;border:2px solid #7957ff}
+main.shell .prek-welcome{background:linear-gradient(110deg,#ffe45e,#62e4f5 50%,#77e6b6)!important;border:3px solid #fff!important;padding:26px;margin:26px 0 16px}
+main.shell .prek-welcome h2{font-size:clamp(32px,4vw,48px)!important}
+main.shell .prek-menu{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px!important;margin:18px 0 28px}
+main.shell .prek-menu .prek-tile{min-height:185px!important;padding:20px 16px!important;gap:12px;font-size:24px!important;color:#273847;border:3px solid #fff!important;box-shadow:0 8px 18px rgba(36,48,56,.08)}
+main.shell .prek-menu .prek-tile span{font-size:66px!important;line-height:1!important}
+main.shell .prek-menu .prek-tile:nth-child(6n+1){background:#ffe45e}
+main.shell .prek-menu .prek-tile:nth-child(6n+2){background:#62e4f5}
+main.shell .prek-menu .prek-tile:nth-child(6n+3){background:#ff88c8}
+main.shell .prek-menu .prek-tile:nth-child(6n+4){background:#77e6b6}
+main.shell .prek-menu .prek-tile:nth-child(6n+5){background:#b89cff}
+main.shell .prek-menu .prek-tile:nth-child(6n+6){background:#ffb347}
+main.shell .prek-menu .prek-tile:nth-child(6n+5){color:#273847}
+main.shell .prek-menu .prek-tile[aria-expanded="true"]{outline:4px solid #7957ff!important;outline-offset:3px}
+main.shell .prek-daily{padding:26px!important;background:#e3fff2!important;border:3px solid #24c98b!important}
+main.shell .prek-classes{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+main.shell .prek-classes a{min-height:110px!important;background:#ffe45e!important;color:#273847!important;border:3px solid #fff!important;font-weight:400!important;overflow-wrap:anywhere}
+main.shell .prek-classes a:nth-child(3n+2){background:#62e4f5!important}
+main.shell .prek-classes a:nth-child(3n){background:#ff88c8!important}
+main.shell #prek-popup-host .prek-pop-panel{background:#fff!important;border:3px solid #7957ff!important;padding:22px}
+main.shell #prek-popup-host .prek-pop-panel>.card{background:#fff!important}
+main.shell #prek-popup-host .prek-pop-close{background:#273847!important;color:var(--prek-profile-cream)!important}
+main.shell .notice{background:#fff9df;color:#493b27;border:2px solid #ffe45e;padding:18px}
+main.shell :is(input[type="text"],input[type="file"],select,textarea){min-height:60px;padding:10px 13px;background:#fff;color:#273847;border:2px solid #62e4f5}
+main.shell .activity{min-height:90px;padding:18px;overflow-wrap:anywhere}
+main.shell footer{font-size:24px!important}
+@media(max-width:900px){
+ main.shell .profile-hero{grid-template-columns:1fr;text-align:center;justify-items:center}
+ main.shell .hero-actions,.pills{justify-content:center}
+ main.shell .prek-menu{grid-template-columns:repeat(2,minmax(0,1fr))}
+ main.shell .prek-classes{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+ body main.shell{width:calc(100% - 20px)!important;padding-top:20px!important}
+ main.shell .profile-hero{padding:24px 14px!important}
+ main.shell .profile-hero .photo{width:180px;height:180px}
+ main.shell .prek-menu{gap:10px!important}
+ main.shell .prek-menu .prek-tile{min-height:170px!important;padding:14px 8px!important;overflow-wrap:anywhere}
+ main.shell .prek-menu .prek-tile span{font-size:66px!important}
+ main.shell .prek-classes{grid-template-columns:1fr}
+ main.shell .card{padding:16px}
+}
+@media print{main.shell .prek-menu,main.shell .prek-welcome{display:none!important}}
+</style>
   <script src="/Khaemenes_Preschool.github.io/assets/preschool-global-standard-v1.js" defer data-preschool-global-standard="18-33-66-auto-no333"></script>
 </head>
 <body data-prek-background="sky" data-profile-stage="preschool">
