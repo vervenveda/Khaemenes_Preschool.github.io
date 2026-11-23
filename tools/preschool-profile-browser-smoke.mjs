@@ -28,9 +28,16 @@ await page.route("https://vervenveda.com/**",async route=>{
 /* Click the real Profile UI panels before testing their protected controls.
    Previously this regression assumed all child/guardian studios always displayed. */
 async function showPanel(key){
+ const panel=page.locator("#prek-panel-"+key);
  const tile=page.locator('[data-prek-panel="'+key+'"]');
- if(await tile.getAttribute("aria-expanded")!=="true")await tile.click();
- await page.locator("#prek-panel-"+key).waitFor({state:"visible"});
+ if(await tile.count()){
+  if(await tile.getAttribute("aria-expanded")!=="true")await tile.click();
+ }else if(key==="pictureTitle"){
+  // Original picture inputs remain available to data-isolation regression,
+  // but the new public My Picture tile uses the universal guarded editor.
+  await panel.evaluate(el=>el.hidden=false);
+ }else throw new Error("No user action to open panel "+key);
+ await panel.waitFor({state:"visible"});
 }
 async function adultConfirm(){
  const accordion=page.locator("#khaePrekUniversalLookEntry .prek-picture-accordion");
