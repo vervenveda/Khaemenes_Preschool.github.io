@@ -11,7 +11,14 @@ function load(src){return new Promise(resolve=>{
  if([...document.scripts].some(s=>s.src===new URL(src,location.href).href)){resolve();return}
  const s=document.createElement("script");s.src=src;s.defer=true;s.onload=resolve;s.onerror=resolve;(document.head||document.documentElement).append(s);
 })}
+function sharedChrome(){
+ if(document.querySelector('link[data-preschool-shared-chrome]'))return;
+ const link=document.createElement("link");
+ link.rel="stylesheet";link.href="/Khaemenes_Preschool.github.io/assets/preschool-shared-chrome.css?v=20261123-3";
+ link.dataset.preschoolSharedChrome="true";document.head.append(link);
+}
 async function start(){
+ sharedChrome();
  let rail=document.getElementById("vnv-language-rail");
  if(!rail){rail=document.createElement("div");rail.id="vnv-language-rail";rail.setAttribute("role","group");rail.setAttribute("aria-label","Page translation tools");
  const header=document.getElementById("vnvHeaderAutoPopulate");(header?.parentNode||document.body).insertBefore(rail,header?.nextSibling||document.body.firstChild)}
