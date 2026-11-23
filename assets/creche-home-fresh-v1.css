@@ -265,7 +265,7 @@ button,a,.btn,summary{touch-action:manipulation}
 }
 .hero-orbit-labels>:nth-child(8n+1){background:var(--prek-sun)}
 .hero-orbit-labels>:nth-child(8n+2){background:var(--prek-aqua)}
-.hero-orbit-labels>:nth-child(8n+3){background:var(--prek-green);color:var(--prek-cream);-webkit-text-fill-color:var(--prek-cream)}
+.hero-orbit-labels>:nth-child(8n+3){background:var(--prek-green)}
 .hero-orbit-labels>:nth-child(8n+4){background:var(--prek-pink)}
 .hero-orbit-labels>:nth-child(8n+5){background:var(--prek-orange)}
 .hero-orbit-labels>:nth-child(8n+6){background:var(--prek-lavender)}
@@ -569,19 +569,12 @@ main > section.feature-section{
    EXPLORE & PLAY
    ========================================================================== */
 #new .explore-heading{
-  color:var(--prek-cream);
-  -webkit-text-fill-color:var(--prek-cream);
   width:min(var(--prek-narrow),100%);
   padding:22px 24px;
   background:var(--prek-green);
   border:var(--prek-line);
   border-radius:var(--prek-radius);
   box-shadow:var(--prek-shadow-soft);
-}
-#new .explore-heading :is(h2,p,.kicker){
-  color:var(--prek-cream)!important;
-  -webkit-text-fill-color:var(--prek-cream)!important;
-  text-shadow:none!important;
 }
 .explore-actions,.garden-bottom-actions{
   display:flex;
@@ -906,7 +899,7 @@ main > section.feature-section{
   box-shadow:var(--prek-shadow-soft);
 }
 .family-card:nth-child(6n+1){background:var(--prek-sun)}
-.family-card:nth-child(6n+2){background:var(--prek-orange)}
+.family-card:nth-child(6n+2){background:var(--prek-aqua)}
 .family-card:nth-child(6n+3){background:var(--prek-green)}
 .family-card:nth-child(6n+4){background:var(--prek-pink)}
 .family-card:nth-child(6n+5){background:var(--prek-orange)}
@@ -2135,12 +2128,12 @@ section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywher
 #profiles .family-grid>.family-card:nth-child(6){
   background:var(--prek-purple,#7957ff)!important;
 }
-#profiles .family-grid>.family-card:nth-child(1) :is(h3,p){
+#profiles .family-grid>.family-card:nth-child(-n+3) :is(h3,p){
   color:var(--prek-charcoal,#243038)!important;
   -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
   text-shadow:none!important;
 }
-#profiles .family-grid>.family-card:nth-child(n+2) :is(h3,p,small,strong,span:not(.family-icon)){
+#profiles .family-grid>.family-card:nth-child(n+4) :is(h3,p){
   color:var(--prek-cream,#fffbea)!important;
   -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
   text-shadow:none!important;
@@ -2175,7 +2168,7 @@ section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywher
   color:var(--prek-charcoal,#243038)!important;
   border:3px solid #fff!important;border-radius:7px!important;
 }
-#profiles #pinnedGames :is(h3,p,.continuity-note,.pinned-list,.pinned-list>*,.pinned-list p,.pinned-list span,.pinned-list small){
+#profiles #pinnedGames :is(h3,p,.continuity-note){
   color:var(--prek-charcoal,#243038)!important;
   -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
   text-shadow:none!important;
