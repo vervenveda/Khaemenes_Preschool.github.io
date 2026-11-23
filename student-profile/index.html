@@ -7,19 +7,20 @@
 <title>My Pre-K Profile | Khaemenes Academy</title>
 
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-student-profile-v2.css">
-<link rel="stylesheet" href="../assets/preschool-profile-unified.css?v=20261123-1" data-prek-profile-style-owner="unified">
+<link rel="stylesheet" href="../assets/preschool-profile-unified.css?v=20261123-2" data-prek-profile-style-owner="unified">
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-global-standard-v1.js" defer data-preschool-global-standard="18-33-66-auto-no333"></script>
 </head>
 <body data-prek-background="sky" data-profile-stage="preschool">
 <a href="#main" class="skip">Skip to Pre-K profile</a>
-<header class="top"><div class="shell"><a class="brand" href="https://vervenveda.com/Khaemenes_Academy.github.io/">Khaemenes Academy <small>· Pre-K</small></a><nav class="nav"><a href="../">🌈 Preschool</a><a href="https://vervenveda.com/Khaemenes_Academy.github.io/student/">Student Portal</a><a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Family</a><a href="https://vervenveda.com/">Ecosystem</a></nav></div></header>
+<nav class="prek-profile-breadcrumbs" aria-label="Breadcrumb"><a href="https://vervenveda.com/">Verve N Veda</a> · <a href="https://vervenveda.com/Khaemenes_Academy.github.io/">Khaemenes Academy</a> · <a href="../">Preschool</a> · Student Profile</nav>
 <main id="main" class="shell">
-<p class="eyebrow">Khaemenes Academy · Pre-K Learning</p>
-<h1>My Student Profile · Pre-K</h1>
-<p class="muted">Your child’s picture and next adventure come first. Below are the same learning-profile tools available across the Academy, presented in a family-assisted Pre-K format.</p>
+<section class="prek-profile-title" aria-labelledby="pageTitle">
+<p class="eyebrow">Khaemenes Academy</p>
+<h1 id="pageTitle">My Student Profile · Pre-K</h1>
+<p class="prek-profile-description"><span>Play, explore, and discover your favorite games.</span><span>Create a colorful learning home that feels like you.</span><span>Save your adventures and make every day your own.</span></p>
+</section>
 
-<div id="accountNote" class="notice" role="status">Looking for an existing Pre-K learner on this browser…</div>
-<div id="learnerSwitch" class="card" hidden><label for="learnerSelect">Choose an existing Pre-K learner in this family</label><select id="learnerSelect"></select><p class="muted">Each learner has separate pictures, colors, goals, pinned adventures, and evidence.</p></div>
+
 <section class="card profile-hero" aria-labelledby="childTitle">
 <div id="photoPreview" class="photo" aria-label="Child avatar">🌈</div>
 <div>
@@ -37,9 +38,9 @@
 <button type="button" class="prek-tile" data-universal-picture="true" aria-haspopup="dialog" aria-controls="kplsDialog"><span aria-hidden="true">🎨</span>My Picture</button>
 <button type="button" class="prek-tile" data-prek-panel="backgroundTitle" aria-expanded="false" aria-controls="prek-panel-backgroundTitle"><span aria-hidden="true">🌈</span>My Colors</button>
 <button type="button" class="prek-tile" data-prek-panel="kindergartenHandoff" aria-expanded="false" aria-controls="prek-panel-kindergartenHandoff"><span aria-hidden="true">🌻</span>My Graduation Garden</button>
-<button type="button" class="prek-tile" data-prek-panel="learningStudio" aria-expanded="false" aria-controls="prek-panel-learningStudio"><span aria-hidden="true">🏡</span>Grown-Up Corner</button>
+<button type="button" class="prek-tile" data-prek-panel="learningStudio" aria-expanded="false" aria-controls="prek-panel-learningStudio"><span aria-hidden="true">🧩</span>My Learning Studio</button>
 </nav>
-<section class="prek-daily" aria-label="My daily schedule"><h2>🌞 My Daily Learning &amp; Classes</h2><p>Choose a class to open its own learning activity. Today’s Lesson opens the Preschool daily plan.</p><div class="prek-classes"><a href="../#today">📅 Today’s Lesson</a><a href="../apps/ABC_Story_Time/index.html">🔤 Letters &amp; Reading</a><a href="../apps/numbers_1-12_fun_index.html">🔢 Numbers &amp; Shapes</a><a href="../apps/Art_color_studio/index.html">🎨 Art &amp; Creativity</a><a href="../apps/Music_piano_index.html">🎵 Music &amp; Movement</a><a href="../apps/weather_for_tots_index.html">🌿 Science &amp; Nature</a></div></section>
+<section class="prek-daily" aria-label="My daily schedule"><h2>🌞 My Daily Learning &amp; Classes</h2><p>Choose a class to open its own learning activity. Today’s Lesson opens the Preschool daily plan.</p><div class="prek-classes"><a href="../#today"><span class="prek-class-icon" aria-hidden="true">📅</span><span>Today’s Lesson</span></a><a href="../apps/ABC_Story_Time/index.html"><span class="prek-class-icon" aria-hidden="true">🔤</span><span>Letters &amp; Reading</span></a><a href="../apps/numbers_1-12_fun_index.html"><span class="prek-class-icon" aria-hidden="true">🔢</span><span>Numbers &amp; Shapes</span></a><a href="../apps/Art_color_studio/index.html"><span class="prek-class-icon" aria-hidden="true">🎨</span><span>Art &amp; Creativity</span></a><a href="../apps/Music_piano_index.html"><span class="prek-class-icon" aria-hidden="true">🎵</span><span>Music &amp; Movement</span></a><a href="../apps/weather_for_tots_index.html"><span class="prek-class-icon" aria-hidden="true">🌿</span><span>Science &amp; Nature</span></a></div></section>
 <div id="prek-popup-host" aria-live="polite"></div>
 <div class="grid prek-appearance-grid">
 <section class="card span6 appearance-controls" aria-labelledby="pictureTitle">
@@ -93,6 +94,8 @@
   </div>
 </section>
 <section class="card" id="learningStudio">
+<div id="accountNote" class="notice" role="status">Looking for an existing Pre-K learner on this browser…</div>
+<div id="learnerSwitch" class="card" hidden><label for="learnerSelect">Choose an existing Pre-K learner in this family</label><select id="learnerSelect"></select><p class="muted">Each learner has separate pictures, colors, goals, pinned adventures, and evidence.</p></div>
 <p class="eyebrow">One profile · the full Academy feature spectrum</p>
 <h2>Goals, learning map, evidence, workspace &amp; backups</h2>
 <p class="muted">This shared Academy profile studio provides family-assisted goals and reflections, Today / Review / Next, learning strengths and supports, a learning-moment passport, language and accessibility preferences, and protected profile-bundle export and restore. These preferences cannot award grades or bypass assessments.</p>
@@ -100,7 +103,7 @@
 <p id="studioUnavailable" class="notice" hidden>The Academy profile studio could not load. Existing learner records remain unchanged. Open the <a href="https://vervenveda.com/Khaemenes_Academy.github.io/student/profile.html">Academy Student Profile</a> instead.</p>
 </section>
 <p class="notice">Family privacy: the pictures and colors here are optional, browser-local preferences. They are not an authenticated identity or proof of enrollment. Preschool guest play stays available without signing in. Formal placement, grades, portfolio approval, and promotion remain in their original Academy systems.</p>
-<footer>Khaemenes Academy · Pre-K · Free access · No external analytics or photo uploads</footer>
+<footer>🌈 Khaemenes Academy · Pre-K · Play · Create · Discover · Free Learning</footer>
 </main>
 <script src="../assets/preschool-catalog.js"></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-family-registry.js"></script>
@@ -338,7 +341,7 @@ function refresh(){
   box.hidden=false;
   box.replaceChildren();
   box.append("No active Pre-K Academy learner is selected on this website address. Existing accounts are never created or changed here. ");
-  const a=document.createElement("a");a.href="https://vervenveda.com/Khaemenes_Academy.github.io/family/";a.textContent="Choose an existing child in the Family Portal →";box.append(a);
+  const a=document.createElement("a");a.href="https://vervenveda.com/Khaemenes_Preschool.github.io/#prekParentCenter";a.textContent="Open the Grown-Up Center on Preschool Home →";box.append(a);
   $("childTitle").textContent="Our little learner";$("childMeta").textContent="Guest play is open. Select the learner to personalize.";
   $("profileStudio").hidden=true;$("studioUnavailable").hidden=false;
   look=normalize(null);renderLook();
@@ -475,19 +478,44 @@ refresh();
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-adapter.js?v=20261109-hero-yearbook-v3" defer></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-entry.js?v=20261107-prek-v2" defer></script>
 
-<!-- Preschool contained canonical shell -->
-<script src="/Khaemenes_Preschool.github.io/assets/preschool-local-menu-adapter.js"></script>\n<script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
-<script>VNV_TICKER.autoPopulate({label:"Preschool Quick Links",max:7,cleanLegacy:true,links:[
- {label:"Home",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/"},
- {label:"Today",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#today"},
- {label:"Learning Garden",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#activities"},
- {label:"Reading",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#readingFeature"},
- {label:"My Profile",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/student-profile/"},
- {label:"Graduation",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/graduation/"}
-]});</script>
+<!-- Single child-friendly adventure ticker; canonical VNV header and branched menu. -->
+<script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
+<script>
+(function(){"use strict";
+ const catalog=window.KhaemenesPreschoolCatalog;
+ const apps=typeof catalog?.childActivities==="function"?catalog.childActivities():[];
+ const valid=apps.filter(a=>a?.file&&a?.title);
+ if(!valid.length)return;
+ const today=new Date(),day=Math.floor((Date.UTC(today.getFullYear(),today.getMonth(),today.getDate())-Date.UTC(today.getFullYear(),0,1))/86400000);
+ const links=[],count=Math.min(12,valid.length);
+ for(let i=0;i<count;i++){
+  const a=valid[(day*7+i*5)%valid.length];
+  const href="https://vervenveda.com/Khaemenes_Preschool.github.io/apps/"+a.file.split("/").map(encodeURIComponent).join("/");
+  if(!links.some(x=>x.href===href))links.push({label:(a.icon?a.icon+" ":"")+a.title,href});
+ }
+ window.VNV_TICKER?.autoPopulate({label:"🌈 Pre-K Adventures",ariaLabel:"Child-friendly Preschool learning apps",cleanLegacy:true,max:12,links});
+})();
+</script>
 <script src="https://vervenveda.com/assets/vnv-header-autopopulate.js"></script>
-<script>VNV_HEADER.mount({title:"Khaemenes Preschool",subtitle:"Crechè · Bright Beginnings",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});</script>
+<script>window.VNV_HEADER?.mount({title:"Khaemenes Academy",subtitle:"Pre-K · My Student Profile",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});</script>
+<script>
+window.KhaemenesClassToolsConfigV1={
+ id:"preschool-profile",match:()=>location.pathname.includes("/Khaemenes_Preschool.github.io/student-profile/"),
+ toggleLabel:"Tools",ariaLabel:"Pre-K learning tools",
+ tools:[
+  {type:"link",label:"Games",sub:"Adventures",href:"../#activities"},
+  {type:"link",label:"Reading",sub:"Stories",href:"../#readingFeature"},
+  {type:"link",label:"Today",sub:"Learn",href:"../#today"},
+  {type:"link",label:"Profile",sub:"My Studio",href:"#learningStudio"},
+  {type:"link",label:"Home",sub:"Preschool",href:"../"},
+  {type:"help",label:"Help",sub:"How to play"}
+ ],
+ help:{title:"My Pre-K Learning Tools",paragraphs:["Choose an adventure to play or explore your favorite stories.","For family account help, use the Grown-Up Center on the Preschool homepage."]}
+};
+</script>
+<script src="https://vervenveda.com/assets/vnv-class-tools-toolbar.js?v=1.6.1" defer></script>
+<script src="https://vervenveda.com/assets/vnv-ecosystem-toolbar.js" defer></script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-language-loader.js" defer></script>
-<script src="/Khaemenes_Preschool.github.io/assets/preschool-local-toolbar.js" defer></script>
+
 <script src="../assets/preschool-profile-personalization.js?v=20261123-1"></script>
 </body></html>
