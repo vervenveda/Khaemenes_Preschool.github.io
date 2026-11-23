@@ -54,6 +54,12 @@ try{
  assert.equal(nav.status(),200,"Student Profile landing must load");
  await page.waitForTimeout(450);
  assert.equal(await page.locator("#pageTitle").innerText(),"My Student Profile");
+ assert.match(await page.locator("#stagePill").getAttribute("href"),/#top$/);
+ assert.match(await page.locator("#favoritePill").getAttribute("href"),/#pinnedApps$/);
+ assert.match(await page.locator("#progressPill").getAttribute("href"),/Khaemenes_Academy\.github\.io\/family\/$/);
+ assert.match(await page.locator("#firstStepLink").getAttribute("href"),/#weeklyGarden$/);
+ assert.match(await page.locator("#explorePlayLink").getAttribute("href"),/#new$/);
+ console.log("PASS first six profile destination links point to correct existing anchors and Parent Portal");
  assert.equal(await page.locator(".prek-privacy-note").count(),1,"privacy text should be a disclosure, not a white direction box");
  assert.equal(await page.locator(".prek-privacy-note").getAttribute("open"),null,"privacy disclosure should be closed");
  console.log("PASS profile page, headline and unobtrusive privacy disclosure");
@@ -124,6 +130,40 @@ try{
  if(await close.count())await close.click();
  else await editor.evaluate(d=>d.close?.());
  console.log("PASS actual picture editor opens when learner and adult consent are present");
+ 
+ // 12 sticker choices, up to 10 saved to the selected verified learner only.
+ await page.locator("#prekEditBackgroundLaunch").click();
+ const stickerDialog=page.locator("#prekEditBackgroundDialog");
+ await stickerDialog.waitFor({state:"visible"});
+ assert.equal(await stickerDialog.locator("[data-add-sticker]").count(),12,"12 sticker choices must be shown");
+ assert.equal(await stickerDialog.locator(".prek-edit-colors").count(),0,"old color picker must be gone");
+ for(let i=0;i<10;i++)await stickerDialog.locator("[data-add-sticker]").nth(i).click();
+ assert.match(await stickerDialog.locator("[data-prek-sticker-count]").innerText(),/10 of 10/);
+ const owned=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes.prek.background-studio.v1:"+encodeURIComponent(id))),r);
+ assert.equal(owned.learnerId,r);
+ assert.equal(owned.placements.length,10,"all ten stickers belong only to active learner");
+ await stickerDialog.locator("[data-add-sticker]").nth(10).click();
+ assert.match(await stickerDialog.locator("[data-prek-studio-status]").innerText(),/ten stickers/i);
+ assert.equal(await page.locator("#prekStickerCanvas .prek-placed-sticker").count(),10);
+ await stickerDialog.locator(".prek-edit-close").click();
+ // Pointer drag must save learner-scoped coordinates without changing the coral background.
+ const drag=page.locator("#prekStickerCanvas .prek-sticker-drag").first();
+ const before=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes.prek.background-studio.v1:"+encodeURIComponent(id))).placements[0],r);
+ const bounds=await drag.boundingBox();assert.ok(bounds,"draggable sticker should be visible");
+ await page.mouse.move(bounds.x+bounds.width/2,bounds.y+bounds.height/2);
+ await page.mouse.down();
+ await page.mouse.move(bounds.x+bounds.width/2+95,bounds.y+bounds.height/2+35,{steps:8});
+ await page.mouse.up();
+ const after=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes.prek.background-studio.v1:"+encodeURIComponent(id))).placements[0],r);
+ assert.ok(after.x!==before.x||after.y!==before.y,"drag should persist the new coordinates");
+ await page.locator("#prekStickerCanvas .prek-sticker-remove").first().click();
+ const remaining=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes.prek.background-studio.v1:"+encodeURIComponent(id))).placements.length,r);
+ assert.equal(remaining,9,"single sticker can be removed");
+ await page.reload({waitUntil:"domcontentloaded"});
+ await page.waitForTimeout(150);
+ assert.equal(await page.locator("#prekStickerCanvas .prek-placed-sticker").count(),9,"nine stickers should persist after reload");
+ console.log("PASS 12 sticker choices, 10 cap, draggable positions, removal and learner-scoped persistence");
+
  // The visible My Picture shortcut must route to the SAME guarded editor.
  await page.locator('[data-universal-picture="true"]').click();
  await editor.waitFor({state:"visible"});
@@ -172,5 +212,33 @@ try{
   assert.ok(await page.locator("body").count(),"Class landing lacks body: "+href);
  }
  console.log("PASS all six class destinations load as real browser pages");
+ // Homepage addition: pinned apps shelf is inserted immediately above Reading.
+ // This view reads existing learner-owned favorite IDs; no duplicate favorites store.
+ await page.goto(profile,{waitUntil:"domcontentloaded"});
+ await page.evaluate(id=>{
+  const R=window.KhaemenesFamilyRegistry,first=window.KhaemenesPreschoolCatalog.childActivities()[0];
+  R.setActive({familyId:R.getLearner().familyId,learnerId:id});
+  const key="khaemenes_profile_favorites_v1",map=JSON.parse(localStorage.getItem(key)||"{}");
+  map[id]=[first.id];localStorage.setItem(key,JSON.stringify(map));
+ },r);
+ const home=origin+"/Khaemenes_Preschool.github.io/";
+ const homepage=await page.goto(home+"#pinnedApps",{waitUntil:"load"});
+ assert.equal(homepage.status(),200);
+ const shelf=page.locator("#pinnedApps");
+ await shelf.waitFor({state:"visible",timeout:5000});
+ assert.equal(await shelf.locator("details.feature-accordion").getAttribute("open"),"");
+ assert.equal(await shelf.locator(".prek-pin-item").count(),1,"shelf must display the active learner's pinned app");
+ assert.ok(await page.evaluate(()=>document.querySelector("#pinnedApps").compareDocumentPosition(document.querySelector("#readingFeature"))&Node.DOCUMENT_POSITION_FOLLOWING),"pinned shelf must be above Reading");
+ await shelf.locator(".prek-pin-remove").click();
+ assert.equal(await shelf.locator(".prek-pin-item").count(),0,"unpin should remove the shelf tile");
+ console.log("PASS homepage pinned accordion, real learner favorites, and removal without touching other sections");
+ for(const [hash,target] of [["#weeklyGarden","#weeklyGarden"],["#new","#new"],["#top","body"]]){
+  await page.goto(home+hash,{waitUntil:"load"});
+  const el=page.locator(target);
+  assert.ok(await el.count(),"missing navigation target "+hash);
+  if(hash!=="#top")assert.equal(await el.locator("details.feature-accordion").getAttribute("open"),"");
+ }
+ console.log("PASS Pre-K home top, This Week and Explore & Play deep links");
+
  console.log("PASS complete Pre-K Student Profile click-through and landing audit");
 }finally{await context.close();await browser.close()}
