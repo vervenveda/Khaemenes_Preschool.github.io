@@ -36,7 +36,7 @@ async function adultConfirm(){
  const accordion=page.locator("#khaePrekUniversalLookEntry .prek-picture-accordion");
  await accordion.waitFor({state:"attached"});
  if(!(await accordion.evaluate(el=>el.open)))await accordion.locator("summary").click();
- await adultConfirm();
+ await page.locator("#adultConfirm").check();
 }
 const url="https://vervenveda.com/Khaemenes_Preschool.github.io/student-profile/";
 try{
