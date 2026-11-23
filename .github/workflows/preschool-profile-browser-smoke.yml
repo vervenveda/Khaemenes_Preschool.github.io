@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - "student-profile/**"
+      - "assets/preschool-profile-unified.css"
+      - "assets/preschool-profile-personalization.js"
       - "index.html"
       - "tools/preschool-profile-browser-smoke.mjs"
       - "tools/preschool-profile-interaction-audit.mjs"
@@ -11,6 +13,8 @@ on:
   pull_request:
     paths:
       - "student-profile/**"
+      - "assets/preschool-profile-unified.css"
+      - "assets/preschool-profile-personalization.js"
       - "index.html"
       - "tools/preschool-profile-browser-smoke.mjs"
       - "tools/preschool-profile-interaction-audit.mjs"
