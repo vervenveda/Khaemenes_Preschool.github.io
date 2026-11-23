@@ -1451,11 +1451,13 @@ function randomFeaturedGame(){
   return pool[Math.floor(Math.random()*pool.length)]||KID_APPS[0];
 }
 function renderFeaturedGame(){
+  const title=$("featuredGameTitle"),frame=$("featuredGameFrame");
+  if(!title||!frame)return; // Retired featured-game module has no visible DOM.
   featuredGame=randomFeaturedGame();
   if(!featuredGame)return;
-  $("featuredGameTitle").textContent=displayTitle(featuredGame);
-  $("featuredGameFrame").src=appUrl(featuredGame);
-  $("featuredGameFrame").title=`Featured Crechè game: ${displayTitle(featuredGame)}`;
+  title.textContent=displayTitle(featuredGame);
+  frame.src=appUrl(featuredGame);
+  frame.title=`Featured Crechè game: ${displayTitle(featuredGame)}`;
 }
 
 function setView(view,{scroll=false}={}){
