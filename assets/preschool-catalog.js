@@ -227,6 +227,16 @@
 
   const ACTIVITIES = [
   {
+    "id": "five-days-of-discovery",
+    "title": "Five Days of Discovery",
+    "file": "five-days-of-discovery.html",
+    "category": "wonder",
+    "icon": "🌈",
+    "desc": "Explore five playful daily lessons connected to the Preschool 42-week Learning Garden.",
+    "tags": "five days discovery weekly lesson learning garden preschool",
+    "mentor": {"eligible": false}
+  },
+  {
     "id": "abc-story-time-folder",
     "title": "ABC Story Time",
     "file": "ABC_Story_Time/index.html",
@@ -1579,7 +1589,7 @@
     const grownups = grownupActivities().length;
     const mentorCount = ACTIVITIES.filter(activity => activity.mentor?.eligible).length;
 
-    if (children !== 49) warnings.push(`Expected 49 child activities; found ${children}.`);
+    if (children !== 50) warnings.push(`Expected 50 child activities; found ${children}.`);
     if (grownups !== 1) warnings.push(`Expected 1 grown-up resource; found ${grownups}.`);
     if (mentorCount !== 47) warnings.push(`Expected 47 mentor-eligible activities; found ${mentorCount}.`);
 
