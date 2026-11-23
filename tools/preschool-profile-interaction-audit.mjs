@@ -150,6 +150,7 @@ try{
  const drag=page.locator("#prekStickerCanvas .prek-sticker-drag").first();
  const before=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes.prek.background-studio.v1:"+encodeURIComponent(id))).placements[0],r);
  const bounds=await drag.boundingBox();assert.ok(bounds,"draggable sticker should be visible");
+ console.log("HIT DEBUG",JSON.stringify(await drag.evaluate(el=>{const r=el.getBoundingClientRect(),cx=r.x+r.width/2,cy=r.y+r.height/2;const top=document.elementFromPoint(cx,cy);return {rect:{x:r.x,y:r.y,w:r.width,h:r.height},hit:top?.outerHTML.slice(0,220),pointer:getComputedStyle(el).pointerEvents,parent:getComputedStyle(el.parentElement).pointerEvents,stage:getComputedStyle(el.parentElement.parentElement).pointerEvents,dialog:document.querySelector("#prekEditBackgroundDialog")?.open}})));
  await page.mouse.move(bounds.x+bounds.width/2,bounds.y+bounds.height/2);
  await page.mouse.down();
  await page.mouse.move(bounds.x+bounds.width/2+95,bounds.y+bounds.height/2+35,{steps:8});
