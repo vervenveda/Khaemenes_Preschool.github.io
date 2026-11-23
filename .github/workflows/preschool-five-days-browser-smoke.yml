@@ -19,6 +19,12 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+      - name: Checkout canonical VNV header and ticker for actual layout verification
+        uses: actions/checkout@v4
+        with:
+          repository: vervenveda/vervenveda.github.io
+          ref: main
+          path: shared-vnv
       - uses: actions/setup-node@v4
         with:
           node-version: 22
