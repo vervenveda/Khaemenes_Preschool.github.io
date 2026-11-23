@@ -672,3 +672,121 @@ body main.shell .profile-hero .photo{border-radius:7px}
  body main.shell .prek-classes{grid-template-columns:1fr!important}
  body main.shell .prek-profile-title h1{font-size:clamp(45px,10vw,66px)!important}
 }
+
+/* ============================================================================
+  Pre-K 3–5-year-old visual rhythm. SINGLE profile CSS owner.
+  Saturated color fills + LARGE light-cream words; no cream-on-pale surfaces.
+  This section deliberately supersedes only earlier local profile declarations.
+============================================================================ */
+:root{--prek-child-cream:#fffbea;--prek-child-coral:#b53e63;--prek-child-yellow:#956000;--prek-child-purple:#6940a5;--prek-child-teal:#076d77;--prek-child-green:#146c5a;--prek-child-blue:#2368ad;--prek-child-orange:#a34d16}
+html body[data-profile-stage="preschool"][data-prek-background="sky"],
+html body[data-profile-stage="preschool"][data-prek-background="sunset"],
+html body[data-profile-stage="preschool"]:not([data-prek-background]){
+ background:var(--prek-child-coral)!important;color:var(--prek-child-cream)!important
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-title{
+ background:var(--prek-child-yellow)!important;color:var(--prek-child-cream)!important;
+ border:3px solid #ffe45e!important;border-radius:7px!important;
+ padding:34px 22px 32px!important;margin:0 auto 15px!important;
+ width:100%!important;box-shadow:none!important
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-title .eyebrow{
+ color:var(--prek-child-cream)!important;
+ -webkit-text-fill-color:var(--prek-child-cream)!important;
+ font:400 33px/1.25 "Comic Sans MS","Chalkboard SE",cursive!important;
+ margin:0 0 10px!important;text-align:center
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-title h1{
+ color:var(--prek-child-cream)!important;
+ -webkit-text-fill-color:var(--prek-child-cream)!important;
+ font:400 77px/1.12 "Comic Sans MS","Chalkboard SE",cursive!important;
+ text-align:center!important;margin:0!important
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-info{
+ box-sizing:border-box;width:100%;margin:0 auto 20px!important;
+ padding:24px 18px 26px;background:var(--prek-child-purple)!important;
+ border:3px solid #b89cff!important;border-radius:7px!important;
+ display:grid;grid-template-columns:1fr;gap:12px;text-align:center
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-info p{
+ font:400 30px/1.45 "Comic Sans MS","Chalkboard SE",cursive!important;
+ color:var(--prek-child-cream)!important;-webkit-text-fill-color:var(--prek-child-cream)!important;
+ margin:0 auto!important;max-width:960px;overflow-wrap:anywhere
+}
+body[data-profile-stage="preschool"] .prek-profile-breadcrumbs{
+ background:var(--prek-child-teal)!important;
+ color:var(--prek-child-cream)!important;
+ border-bottom:3px solid #ffe45e!important;
+ font:400 24px/1.4 "Comic Sans MS","Chalkboard SE",cursive!important;
+ text-align:center!important;padding:14px 18px!important
+}
+body[data-profile-stage="preschool"] .prek-profile-breadcrumbs a{
+ color:var(--prek-child-cream)!important;-webkit-text-fill-color:var(--prek-child-cream)!important;
+ font-size:24px!important
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero{
+ background:var(--prek-child-teal)!important;color:var(--prek-child-cream)!important;
+ border:4px solid #62e4f5!important;border-radius:7px!important
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero :is(h2,p,.eyebrow,.muted){
+ color:var(--prek-child-cream)!important;-webkit-text-fill-color:var(--prek-child-cream)!important
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero .pill{
+ background:var(--prek-child-purple)!important;color:var(--prek-child-cream)!important;
+ -webkit-text-fill-color:var(--prek-child-cream)!important;border-color:#b89cff!important
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero .hero-actions .button.secondary{
+ background:var(--prek-child-blue)!important;color:var(--prek-child-cream)!important;
+ -webkit-text-fill-color:var(--prek-child-cream)!important;border-color:#62e4f5!important
+}
+body[data-profile-stage="preschool"] main.shell .prek-welcome{
+ background:var(--prek-child-green)!important;color:var(--prek-child-cream)!important
+}
+body[data-profile-stage="preschool"] main.shell .prek-daily{
+ background:var(--prek-child-blue)!important;color:var(--prek-child-cream)!important
+}
+body[data-profile-stage="preschool"] main.shell :is(.prek-welcome,.prek-daily) :is(h2,h3,p){
+ color:var(--prek-child-cream)!important;-webkit-text-fill-color:var(--prek-child-cream)!important
+}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+1),
+body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+1){background:var(--prek-child-yellow)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+2),
+body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+2){background:var(--prek-child-blue)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+3),
+body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+3){background:var(--prek-child-coral)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+4),
+body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+4){background:var(--prek-child-green)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n+5),
+body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n+5){background:var(--prek-child-purple)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile:nth-child(6n),
+body[data-profile-stage="preschool"] main.shell .prek-classes a:nth-child(6n){background:var(--prek-child-orange)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile,
+body[data-profile-stage="preschool"] main.shell .prek-classes a{
+ color:var(--prek-child-cream)!important;-webkit-text-fill-color:var(--prek-child-cream)!important;
+ border:3px solid #fffbea!important;font-size:26px!important;font-weight:400!important
+}
+body[data-profile-stage="preschool"] main.shell footer{
+ background:var(--prek-child-purple)!important;color:var(--prek-child-cream)!important;
+ border-color:#b89cff!important
+}
+body[data-profile-stage="preschool"] main.shell footer :is(p,a,span){
+ color:var(--prek-child-cream)!important;-webkit-text-fill-color:var(--prek-child-cream)!important
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero #prekEditProfileLaunch{
+ background:var(--prek-child-purple)!important;color:var(--prek-child-cream)!important
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero #prekEditBackgroundLaunch{
+ background:var(--prek-child-coral)!important;color:var(--prek-child-cream)!important
+}
+body[data-profile-stage="preschool"] main.shell #accountNote,
+body[data-profile-stage="preschool"] main.shell #learnerSwitch{
+ background:var(--prek-child-blue)!important;color:var(--prek-child-cream)!important
+}
+body[data-profile-stage="preschool"] main.shell #accountNote a,
+body[data-profile-stage="preschool"] main.shell #learnerSwitch :is(label,p){
+ color:var(--prek-child-cream)!important;-webkit-text-fill-color:var(--prek-child-cream)!important
+}
+@media(max-width:760px){
+ body[data-profile-stage="preschool"] main.shell .prek-profile-title h1{font-size:clamp(44px,9vw,77px)!important}
+ body[data-profile-stage="preschool"] main.shell .prek-profile-info p{font-size:26px!important}
+}
