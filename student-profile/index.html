@@ -506,10 +506,11 @@ window.KhaemenesClassToolsConfigV1={
   {type:"link",label:"Games",sub:"Adventures",href:"../#activities"},
   {type:"link",label:"Reading",sub:"Stories",href:"../#readingFeature"},
   {type:"link",label:"Today",sub:"Learn",href:"../#today"},
-  {type:"link",label:"Profile",sub:"My Studio",href:"#learningStudio"},
+  {type:"action",action:"openStudio",label:"Profile",sub:"My Studio"},
   {type:"link",label:"Home",sub:"Preschool",href:"../"},
   {type:"help",label:"Help",sub:"How to play"}
  ],
+ actions:{openStudio:()=>document.querySelector('[data-prek-panel="learningStudio"]')?.click()},
  help:{title:"My Pre-K Learning Tools",paragraphs:["Choose an adventure to play or explore your favorite stories.","For family account help, use the Grown-Up Center on the Preschool homepage."]}
 };
 </script>
