@@ -220,7 +220,7 @@
     <div class="weekly-continue" id="weeklyContinue" aria-label="Continue learning"><span class="continue-icon" id="continueIcon" aria-hidden="true">🌱</span><div><h3 id="continueTitle">Start this week</h3><p id="continueDesc">Choose one gentle adventure and begin wherever curiosity leads.</p></div><a id="continueLink" href="#weeklyGarden">Start This Week →</a></div>
     <div class="weekly-garden-grid" id="weeklyGardenGrid" aria-live="polite"></div>
     <div class="weekly-graduation" id="weeklyGraduation"><strong>🎓 Ready for the Next Garden</strong><div>This final week can include a joyful Preschool celebration whenever your family feels ready.</div><a href="./graduation/">Visit Graduation Garden →</a></div>
-    <p class="weekly-family" id="weeklyFamily"><strong>For families:</strong> Notice curiosity, conversation, movement, and joy—no grading needed.</p>
+    
   </div></div>
 
     </div>
@@ -747,7 +747,7 @@ function initWeeklyGarden(){
   if(!spine||!grid)return;
   const labels={literacy:["📚","Literacy"],earlyMath:["🔢","Early Math"],wonderScience:["🔭","Wonder"],feelingsSEL:["💛","Feelings"],creativeArtsMusic:["🎨","Create"],movement:["🤸","Move"],lifeSkill:["🧺","Life Skill"],storyImagination:["✨","Story"]};
   let week=Math.max(1,Math.min(42,Number(localStorage.getItem("khaemenes.preschool.week")||1)));
-  function render(){const w=spine.weeks[week-1];if(!w)return;document.getElementById("weeklyWeek").textContent="Week "+week;document.getElementById("weeklyGardenTitle").textContent=w.theme;grid.innerHTML=Object.entries(w.recommended).map(([domain,id])=>{const app=PRESCHOOL_CATALOG.byId(id);if(!app)return"";const meta=labels[domain]||["🌟",domain];return '<a class="weekly-adventure" href="./apps/'+app.file+'" data-app-id="'+app.id+'"><span aria-hidden="true">'+meta[0]+'</span><small>'+meta[1]+'</small><strong>'+app.title+'</strong></a>'}).join("");document.getElementById("weeklyFamily").innerHTML="<strong>For families:</strong> "+w.familyObservation;document.getElementById("weeklyGraduation")?.classList.toggle("show",week===42);localStorage.setItem("khaemenes.preschool.week",String(week));}
+  function render(){const w=spine.weeks[week-1];if(!w)return;document.getElementById("weeklyWeek").textContent="Week "+week;document.getElementById("weeklyGardenTitle").textContent=w.theme;grid.innerHTML=Object.entries(w.recommended).map(([domain,id])=>{const app=PRESCHOOL_CATALOG.byId(id);if(!app)return"";const meta=labels[domain]||["🌟",domain];return '<a class="weekly-adventure" href="./apps/'+app.file+'" data-app-id="'+app.id+'"><span aria-hidden="true">'+meta[0]+'</span><small>'+meta[1]+'</small><strong>'+app.title+'</strong></a>'}).join("");document.getElementById("weeklyGraduation")?.classList.toggle("show",week===42);localStorage.setItem("khaemenes.preschool.week",String(week));}
   document.getElementById("weeklyPrev").addEventListener("click",()=>{week=week<=1?42:week-1;render();syncDailySchoolToWeek();renderWeeklyGardenState();});document.getElementById("weeklyNext").addEventListener("click",()=>{week=week>=42?1:week+1;render();syncDailySchoolToWeek();renderWeeklyGardenState();});render();
 }
 
