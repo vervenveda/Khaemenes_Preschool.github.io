@@ -2241,3 +2241,58 @@ html body #new #categoryGrid .category-card small{
   line-height:1.4!important;
   text-align:center!important;
 }
+
+
+/* Preschool Tools: clear cyan text, count rows, five distinctive actions. */
+/* Text color on both light-blue surfaces, without modifying their backgrounds. */
+html body #today .garden-stars :is(.kicker,#visitCount,#starMeter,.empty-stars),
+html body #today #subjectGarden>.subject-tile:nth-child(2),
+html body #today #subjectGarden>.subject-tile:nth-child(2) :is(strong,small,span){
+ color:#101010!important;
+ -webkit-text-fill-color:#101010!important;
+}
+/* Place the count and its noun together on a separate line in every subject. */
+html body #today #subjectGarden .subject-tile small .subject-description{
+ display:block!important;
+}
+html body #today #subjectGarden .subject-tile small .subject-count{
+ display:block!important;
+ white-space:nowrap!important;
+ margin-top:6px!important;
+ font-size:24px!important;
+ line-height:1.3!important;
+}
+/* Five working buttons, five existing palette colors, none charcoal. */
+html body #today #favoritesBtn{
+ background:var(--prek-pink)!important;
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+}
+html body #today #favoritesBtn #favoriteCount{
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+}
+html body #today #calmBtn{
+ background:var(--prek-lavender)!important;
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+}
+html body #today #randomBtn{
+ background:var(--prek-orange)!important;
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+}
+html body #today #gardenAllBtn{
+ background:var(--prek-watermelon)!important;
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+}
+html body #today .garden-bottom-actions>.garden-action.graduate{
+ background:var(--prek-sky)!important;
+ color:var(--prek-charcoal)!important;
+ -webkit-text-fill-color:var(--prek-charcoal)!important;
+}
+html body #today :is(#favoritesBtn,#calmBtn,#randomBtn,#gardenAllBtn,.garden-bottom-actions>.garden-action.graduate){
+ border:3px solid #fff!important;
+ border-radius:7px!important;
+}
