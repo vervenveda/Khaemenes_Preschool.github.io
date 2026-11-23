@@ -178,8 +178,56 @@ function mount(){
  const frame=$("photoPreview");if(frame&&!$("prekStudioSticker")){const sticker=node("span",{id:"prekStudioSticker",class:"prek-studio-sticker","aria-hidden":"true"});sticker.hidden=true;frame.after(sticker)}
  renderPublic();renderBackground();
 }
+/* Page-owned picture entry adapter. The Academy's shared editor and its
+   family/adult permission checks remain authoritative; never write identity. */
+function configurePictureAccordion(){
+ const section=$("khaePrekUniversalLookEntry");
+ if(!section||section.dataset.prekPictureAccordion==="ready")return Boolean(section);
+ const heading=section.querySelector("#kpuTitle");
+ const button=section.querySelector("button.kpu-open");
+ const statusNode=section.querySelector(".kpu-status");
+ if(!heading||!button||!statusNode)return false;
+ section.dataset.prekPictureAccordion="ready";
+ const details=node("details",{class:"prek-picture-accordion"});
+ const summary=node("summary",{class:"prek-picture-summary"},"🎨 My Picture & Colors");
+ summary.setAttribute("aria-label","Expand My Picture and Colors");
+ const content=node("div",{class:"prek-picture-contents"});
+ const original=[...section.children];
+ section.replaceChildren(details);
+ details.append(summary,content);
+ for(const child of original){if(child===heading){heading.remove();continue}content.append(child)}
+ details.open=false;
+ const linkToParents=()=>{
+  const a=node("a",{href:"../#prekParentCenter"},"Open the Preschool Grown-Up Center");
+  statusNode.replaceChildren(
+   document.createTextNode("Choose an existing Pre-K learner with a grown-up first. "),
+   a
+  );
+ };
+ // The shared script disables this action without identity. Keep the action
+ // clickable so its reason is explained; NEVER bypass the native editor gates.
+ const keepActionResponsive=()=>{if(button.disabled)button.disabled=false};
+ keepActionResponsive();
+ const disabledObserver=new MutationObserver(keepActionResponsive);
+ disabledObserver.observe(button,{attributes:true,attributeFilter:["disabled"]});
+ button.addEventListener("click",event=>{
+  const identity=window.KhaemenesPreschoolUniversalLookAdapter?.getIdentity?.();
+  if(identity)return; // The Academy's original guarded click handler runs.
+  event.stopImmediatePropagation();
+  linkToParents();
+ },true);
+ return true;
+}
+function mountPictureAccordion(){
+ if(configurePictureAccordion())return;
+ const observer=new MutationObserver(()=>{
+  if(configurePictureAccordion())observer.disconnect();
+ });
+ observer.observe(document.body,{subtree:true,childList:true});
+ window.addEventListener("pagehide",()=>observer.disconnect(),{once:true});
+}
 window.KhaemenesPrekPersonalization=Object.freeze({mount,refresh:()=>{renderPublic();renderBackground()}});
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount,{once:true});else mount();
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>{mount();mountPictureAccordion()},{once:true});else{mount();mountPictureAccordion()}
 window.addEventListener("khaemenes-family-changed",()=>{profileDialog?.close();backgroundDialog?.close();renderPublic();renderBackground()});
 document.getElementById("learnerSelect")?.addEventListener("change",()=>setTimeout(()=>{renderPublic();renderBackground()},0));
 window.addEventListener("storage",e=>{if(e.key?.startsWith(PROFILE_PREFIX)||e.key?.startsWith(BG_PREFIX)){renderPublic();renderBackground()}});
