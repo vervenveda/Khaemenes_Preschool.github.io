@@ -9,13 +9,8 @@ if(window.KhaemenesPrekPersonalization)return;
 const $=id=>document.getElementById(id);
 const PROFILE_PREFIX="khaemenes.prek.personal-details.v1:";
 const BG_PREFIX="khaemenes.prek.background-studio.v1:";
-const DEFAULT="#ffadad";
-const choices=[
- ["🪸 Coral","#ffadad"],["🌈 Pink","#ff88c8"],["🌞 Sunshine","#ffe45e"],
- ["🌊 Aqua","#9bf6ff"],["🌱 Garden","#77e6b6"],["🦄 Lavender","#b89cff"],
- ["🍊 Orange","#ffb347"],["💙 Blue","#62e4f5"]
-];
-const stickers=["🌈","🦋","🌻","⭐","🎨","🦊","🚀","🎵","🐢","🐝"];
+const stickers=["🌈","🦋","🌻","⭐","🎨","🦊","🚀","🎵","🐢","🐝","🌙","🐞"];
+const MAX_STICKERS=10;
 const fields=[
  ["about","🌈 All About Me","textarea","What makes you happy?"],
  ["favoriteGame","🎮 My Favorite Game","text","A game I love to play"],
@@ -86,23 +81,76 @@ function renderPublic(){
   const row=node("p",{},icon+" "+v.values[key]);target.append(row);
  }
 }
+/* A learner-scoped collection of draggable stickers. No new account storage or
+   profile background colors. Positions use 0..100 percentages for tablet parity. */
+function placementsFor(id){
+ const saved=read(BG_PREFIX,id);
+ const raw=Array.isArray(saved?.placements)?saved.placements:
+  saved?.sticker&&saved.sticker!=="🌈"?[{emoji:saved.sticker,x:18,y:20}]:[];
+ return raw.filter(p=>p&&stickers.includes(p.emoji)&&Number.isFinite(p.x)&&Number.isFinite(p.y))
+  .slice(0,MAX_STICKERS).map(p=>({emoji:p.emoji,x:Math.max(6,Math.min(94,p.x)),y:Math.max(8,Math.min(92,p.y))}));
+}
+function paintStickers(){
+ const stage=$("prekStickerCanvas");
+ if(!stage)return;
+ stage.replaceChildren();
+ const id=active();
+ for(const [index,p] of placementsFor(id).entries()){
+  const item=node("div",{class:"prek-placed-sticker","data-sticker-index":String(index)});
+  item.style.left=p.x+"%";item.style.top=p.y+"%";
+  const drag=node("button",{type:"button",class:"prek-sticker-drag","aria-label":"Drag "+p.emoji+" sticker to move it"},p.emoji);
+  const remove=node("button",{type:"button",class:"prek-sticker-remove","aria-label":"Remove "+p.emoji+" sticker"},"×");
+  remove.addEventListener("click",()=>{
+   const next=placementsFor(active());next.splice(index,1);
+   if(save(BG_PREFIX,active(),{placements:next},backgroundDialog||{querySelector:()=>null})){
+    paintStickers();if(backgroundDialog)updateStickerCount(backgroundDialog);
+   }
+  });
+  drag.addEventListener("pointerdown",event=>{
+   if(!active()||!permitted(active())){if(backgroundDialog)status(backgroundDialog,"Select an enrolled learner and confirm the grown-up checkbox to move saved stickers.");return}
+   if(event.button!==0)return;
+   event.preventDefault();drag.setPointerCapture(event.pointerId);
+   const bounds=stage.getBoundingClientRect();
+   const move=e=>{
+    const x=Math.max(6,Math.min(94,100*(e.clientX-bounds.left)/bounds.width));
+    const y=Math.max(8,Math.min(92,100*(e.clientY-bounds.top)/bounds.height));
+    item.style.left=x+"%";item.style.top=y+"%";
+   };
+   const finish=e=>{
+    drag.removeEventListener("pointermove",move);drag.removeEventListener("pointerup",finish);
+    drag.removeEventListener("pointercancel",cancel);
+    const next=placementsFor(active());if(!next[index])return;
+    next[index].x=Number.parseFloat(item.style.left);next[index].y=Number.parseFloat(item.style.top);
+    if(!save(BG_PREFIX,active(),{placements:next},backgroundDialog||{querySelector:()=>null}))paintStickers();
+   };
+   const cancel=()=>{drag.removeEventListener("pointermove",move);drag.removeEventListener("pointerup",finish);drag.removeEventListener("pointercancel",cancel);paintStickers()};
+   drag.addEventListener("pointermove",move);drag.addEventListener("pointerup",finish);drag.addEventListener("pointercancel",cancel);
+  });
+  // Keyboard parity for young learners using assistive input.
+  drag.addEventListener("keydown",event=>{
+   const step=event.shiftKey?10:3;
+   const directions={ArrowLeft:[-step,0],ArrowRight:[step,0],ArrowUp:[0,-step],ArrowDown:[0,step]};
+   if(!directions[event.key])return;
+   event.preventDefault();
+   const current=placementsFor(active());if(!current[index])return;
+   current[index].x=Math.max(6,Math.min(94,current[index].x+directions[event.key][0]));
+   current[index].y=Math.max(8,Math.min(92,current[index].y+directions[event.key][1]));
+   if(save(BG_PREFIX,active(),{placements:current},backgroundDialog||{querySelector:()=>null}))paintStickers();
+  });
+  item.append(drag,remove);stage.append(item);
+ }
+}
+function updateStickerCount(d){
+ const count=d?.querySelector("[data-prek-sticker-count]");
+ if(count)count.textContent=placementsFor(active()).length+" of "+MAX_STICKERS+" stickers added";
+}
 function renderBackground(){
- const id=active(),saved=read(BG_PREFIX,id);
- const color=saved?.color&&choices.some(x=>x[1]===saved.color)?saved.color:null;
- // Respect the original Academy theme setting if no additional studio design is saved.
- if(color){
-  document.body.style.setProperty("background",color,"important");
-  document.body.dataset.prekStudioColor="custom";
- }else{
-  document.body.style.removeProperty("background");
-  delete document.body.dataset.prekStudioColor;
- }
- const sticker=$("prekStudioSticker");
- if(sticker){
-  const chosen=stickers.includes(saved?.sticker)&&saved.sticker!=="🌈"?saved.sticker:"";
-  sticker.textContent=chosen;
-  sticker.hidden=!chosen;
- }
+ // The Preschool coral background and original picture frame are not edited.
+ document.body.style.removeProperty("background");
+ delete document.body.dataset.prekStudioColor;
+ const old=$("prekStudioSticker");if(old)old.hidden=true;
+ paintStickers();
+ if(backgroundDialog)updateStickerCount(backgroundDialog);
 }
 let profileDialog=null,backgroundDialog=null;
 function openProfile(){
@@ -136,46 +184,48 @@ function openProfile(){
 }
 function openBackground(){
  if(!backgroundDialog){
-  const {d,st}=dialog("prekEditBackgroundDialog","My Background Studio","🌈");backgroundDialog=d;
-  d.append(node("p",{},"Choose a cheerful page color and a little sticker. Only the selected learner's appearance is changed."));
-  const colors=node("div",{class:"prek-edit-colors"});
-  for(const [label,color] of choices){
-   const b=node("button",{type:"button","data-color":color,"aria-label":label},label);
-   b.style.backgroundColor=color;b.style.color="#273847";
-   b.addEventListener("click",()=>{d.dataset.selectedColor=color;for(const x of colors.children)x.setAttribute("aria-pressed",String(x===b))});
-   colors.append(b);
-  }
+  const {d,st}=dialog("prekEditBackgroundDialog","My Sticker Studio","🌈");backgroundDialog=d;
+  d.append(node("p",{},"Choose up to ten stickers for your Pre-K profile! Tap one to add it, then drag it around your rainbow picture. Use × to remove any sticker. A grown-up helps save changes."));
+  const count=node("p",{"data-prek-sticker-count":"","role":"status","aria-live":"polite"});
   const row=node("div",{class:"prek-edit-stickers"});
   for(const emoji of stickers){
-   const b=node("button",{type:"button","data-sticker":emoji,"aria-label":"Choose "+emoji},emoji);
-   b.addEventListener("click",()=>{d.dataset.selectedSticker=emoji;for(const x of row.children)x.setAttribute("aria-pressed",String(x===b))});row.append(b);
+   const b=node("button",{type:"button","data-add-sticker":emoji,"aria-label":"Add "+emoji+" sticker"},emoji);
+   b.addEventListener("click",()=>{
+    const id=active(),chosen=placementsFor(id);
+    if(chosen.length>=MAX_STICKERS){status(d,"Your profile has ten stickers! Remove one before adding another.");return}
+    const placements=[
+      [17,19],[83,19],[17,42],[83,42],[15,65],
+      [85,65],[24,82],[76,82],[34,12],[66,12]
+    ];
+    const pos=placements[chosen.length];
+    chosen.push({emoji,x:pos[0],y:pos[1]});
+    if(save(BG_PREFIX,id,{placements:chosen},d)){
+      paintStickers();updateStickerCount(d);
+      status(d,"Sticker added! Close this popup to drag it around your profile.");
+    }
+   });row.append(b);
   }
-  const saveButton=node("button",{type:"button"},"💾 Save My Background");
-  saveButton.addEventListener("click",()=>{
-   const id=active(),color=d.dataset.selectedColor,sticker=d.dataset.selectedSticker;
-   if(save(BG_PREFIX,id,{color,sticker},d)){renderBackground();status(d,"Background saved for this learner on this device.")}
-  });
-  const reset=node("button",{type:"button"},"↺ Use Original Background");
-  reset.addEventListener("click",()=>{
+  const clear=node("button",{type:"button",class:"prek-clear-stickers"},"🧹 Remove All Stickers");
+  clear.addEventListener("click",()=>{
    const id=active();
-   if(!permitted(id)){status(d,"Ask a grown-up to confirm before changing your background.");return}
-   try{localStorage.removeItem(key(BG_PREFIX,id));renderBackground();status(d,"Original background restored.")}
-   catch{status(d,"Could not restore the background on this device.")}
+   if(save(BG_PREFIX,id,{placements:[]},d)){
+    paintStickers();updateStickerCount(d);status(d,"All stickers removed. Your profile picture and learning work remain unchanged.");
+   }
   });
-  d.append(node("h3",{},"🎨 My Colors"),colors,node("h3",{},"⭐ My Sticker"),row,saveButton,reset,st);
+  d.append(node("h3",{},"⭐ My Stickers"),count,row,clear,st);
  }
- const v=read(BG_PREFIX,active());
- backgroundDialog.dataset.selectedColor=v?.color||DEFAULT;
- backgroundDialog.dataset.selectedSticker=v?.sticker||"🌈";
- for(const b of backgroundDialog.querySelectorAll("[data-color]"))b.setAttribute("aria-pressed",String(b.dataset.color===backgroundDialog.dataset.selectedColor));
- for(const b of backgroundDialog.querySelectorAll("[data-sticker]"))b.setAttribute("aria-pressed",String(b.dataset.sticker===backgroundDialog.dataset.selectedSticker));
+ updateStickerCount(backgroundDialog);
  open(backgroundDialog);
 }
 function mount(){
  addLaunches();
  const hero=document.querySelector("main.shell .profile-hero>div:last-child");
  if(hero&&!$("prekPersonalIntroduction"))hero.append(node("div",{id:"prekPersonalIntroduction",class:"prek-personal-introduction","aria-live":"polite"}));
- const frame=$("photoPreview");if(frame&&!$("prekStudioSticker")){const sticker=node("span",{id:"prekStudioSticker",class:"prek-studio-sticker","aria-hidden":"true"});sticker.hidden=true;frame.after(sticker)}
+ const frame=$("photoPreview");if(frame&&!$("prekStickerCanvas")){
+  const heroCard=document.querySelector("main.shell .profile-hero");
+  const canvas=node("div",{id:"prekStickerCanvas",class:"prek-sticker-canvas","aria-label":"Draggable learner stickers"});
+  heroCard?.append(canvas);
+}
  renderPublic();renderBackground();
 }
 /* Page-owned picture entry adapter. The Academy's shared editor and its
