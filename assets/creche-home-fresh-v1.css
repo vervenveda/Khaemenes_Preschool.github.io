@@ -1465,3 +1465,44 @@ html body #today #gardenAllBtn{
   border-radius:7px!important;
   text-decoration:none!important;
 }
+
+/* PRESCHOOL TOOLS · 2026-11-23
+   The optional Today tile is hidden; a single Adventure Stars card should
+   occupy the entire available row, with no reserved black second column. */
+html body #today .garden-quick-row{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr)!important;
+ width:100%!important;
+}
+html body #today .garden-quick-row>.garden-today[hidden]{display:none!important}
+html body #today .garden-quick-row>.garden-stars{
+ grid-column:1/-1!important;
+ width:100%!important;
+ max-width:none!important;
+ min-width:0!important;
+ justify-self:stretch!important;
+}
+/* User-approved cream font rule, scoped to vivid Preschool Tools subject
+   cards: third green, fourth pink/red, fifth orange, sixth purple. */
+html body #today #subjectGarden>.subject-tile:nth-child(8n+3),
+html body #today #subjectGarden>.subject-tile:nth-child(8n+4),
+html body #today #subjectGarden>.subject-tile:nth-child(8n+5),
+html body #today #subjectGarden>.subject-tile:nth-child(8n+6),
+html body #today #subjectGarden>.subject-tile:nth-child(8n+3) :is(strong,small,span),
+html body #today #subjectGarden>.subject-tile:nth-child(8n+4) :is(strong,small,span),
+html body #today #subjectGarden>.subject-tile:nth-child(8n+5) :is(strong,small,span),
+html body #today #subjectGarden>.subject-tile:nth-child(8n+6) :is(strong,small,span){
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+ text-shadow:none!important;
+}
+/* Keep approved red for the previously dark controls beneath subject cards. */
+html body #today .garden-bottom-actions>#gardenAllBtn,
+html body #today .garden-bottom-actions>.garden-action.graduate{
+ background:var(--prek-watermelon)!important;
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+ border:5px solid #fff!important;
+ border-radius:7px!important;
+ text-decoration:none!important;
+}
