@@ -70,12 +70,32 @@
       <a href="#new">New Adventures</a>
       <a href="#activities">Adventures</a>
       <a href="#graduationFeature">Graduation</a>
-      <a href="#contribute">Grown-Up Support</a>
+      <a href="./apps/Life_skills_organizer_index.html">🧺 Little Organizer</a>
       <button type="button" id="surpriseHero">🎈 Surprise Me</button>
       <button type="button" id="menuBtn" aria-label="Open complete Preschool directory" aria-controls="menuOverlay" aria-expanded="false">☰ Preschool Directory</button>
       <button class="view-choice" id="childViewBtn" type="button" data-view-choice="child" aria-pressed="true">🌈 Child View</button>
-      <button class="view-choice" id="grownupViewBtn" type="button" data-view-choice="grownup" aria-pressed="false">🧑‍🧒 Grown-Up View</button>
+      <button class="view-choice" id="grownupViewBtn" type="button" data-view-choice="grownup" aria-pressed="false" aria-controls="prekParentCenter">🧑‍🧒 Grown-Up Center</button>
     </nav>
+  </div>
+</section>
+<section id="prekParentCenter" class="prek-parent-center" aria-label="Preschool Grown-Up Center" hidden>
+  <div class="prek-parent-shell">
+    <div class="prek-parent-heading">
+      <span class="prek-parent-emoji" aria-hidden="true">👨‍👩‍👧‍👦</span>
+      <div><h2>Grown-Up Center</h2><p>All family controls in one place. Your child's adventures remain free and open.</p></div>
+      <button type="button" id="prekParentClose" aria-label="Close Grown-Up Center">✕ Close</button>
+    </div>
+    <nav class="prek-parent-links" aria-label="Parent and family controls">
+      <a href="#parentDashboard">📊 Learning Dashboard</a>
+      <a href="#grownups">🦉 Parent & Mentor Tools</a>
+      <a href="#familyMentorEntry">🌟 Family Mentor</a>
+      <a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">👨‍👩‍👧 Family Account & Enrollment</a>
+      <a href="#profiles">😊 Child Learning Profile</a>
+      <a href="#weeklyGarden">🌱 Weekly Learning Plan</a>
+      <a href="./apps/Life_skills_organizer_index.html">🧺 Little Organizer</a>
+      <a href="#contribute">💛 Optional Support</a>
+    </nav>
+    <p class="prek-parent-hint">Family accounts open directly from this adult-controlled area, without repeated exit notices.</p>
   </div>
 </section>
 <section class="feature-section" id="readingFeature" aria-label="Reading Time">
@@ -1381,6 +1401,13 @@ function renderFeaturedGame(){
 }
 
 function setView(view,{scroll=false}={}){
+  const parentCenter=document.getElementById("prekParentCenter");
+  if(parentCenter){
+    const showing=view==="grownup";
+    parentCenter.hidden=!showing;
+    if(showing)requestAnimationFrame(()=>parentCenter.scrollIntoView({behavior:"smooth",block:"start"}));
+  }
+
   currentView=view==="grownup"?"grownup":"child";
   document.body.dataset.view=currentView;
   writeJSON(VIEW_KEY,currentView);
@@ -1775,7 +1802,7 @@ function goToSection(hash,{history=true,behavior=null}={}){
 
 function prepareViewForHash(hash){
   /* familyMentorEntry now lives inside the grown-up closing section. */
-  if(["#grownups","#parentDashboard","#familyMentorEntry"].includes(hash)){
+  if(["#grownups","#parentDashboard","#familyMentorEntry","#profiles","#contribute"].includes(hash)){
     setView("grownup",{scroll:false});
   }else if(["#weeklyGarden","#myHome","#trail","#today","#activities","#rooms","#new","#discoveryFeature","#graduation-garden","#graduationFeature"].includes(hash)){
     setView("child",{scroll:false});
@@ -1890,6 +1917,7 @@ $("favoritesBtn").addEventListener("click",()=>{favoritesOnly=!favoritesOnly;upd
 $("randomBtn").addEventListener("click",()=>chooseRandom($("category").value));$("surpriseHero").addEventListener("click",()=>chooseRandom());$("orbitRandom").addEventListener("click",()=>chooseRandom());
 $("calmBtn").addEventListener("click",()=>setCalm(!calm));$("menuBtn").addEventListener("click",openMenu);$("closeMenu").addEventListener("click",()=>closeMenu(true));
 $("childViewBtn").addEventListener("click",()=>setView("child",{scroll:true}));
+document.getElementById("prekParentClose")?.addEventListener("click",()=>setView("child",{scroll:false}));
 $("grownupViewBtn").addEventListener("click",()=>setView("grownup",{scroll:true}));
 $("homeSurprise").addEventListener("click",()=>chooseRandom());
 $("homeCalmBtn").addEventListener("click",()=>setCalm(!calm));
