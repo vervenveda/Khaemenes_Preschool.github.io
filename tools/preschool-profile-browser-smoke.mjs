@@ -89,12 +89,10 @@ try{
  },lookKey);
  assert.equal(await page.locator("body").getAttribute("data-prek-background"),"forest");
  console.log("PASS Pre-K visual changes from another tab refresh selected learner");
- assert.equal(await showPanel("pictureTitle");
- await page.locator("#avatarChoices button").count(),8,"Pre-K should have eight supported avatars");
- assert.equal(await showPanel("pictureTitle");
- await page.locator("#avatarChoices button[data-avatar='🐝']").count(),1);
- assert.equal(await showPanel("pictureTitle");
- await page.locator("#avatarChoices button[data-avatar='🐢']").count(),1);
+ await showPanel("pictureTitle");
+ assert.equal(await page.locator("#avatarChoices button").count(),8,"Pre-K should have eight supported avatars");
+ assert.equal(await page.locator("#avatarChoices button[data-avatar='🐝']").count(),1);
+ assert.equal(await page.locator("#avatarChoices button[data-avatar='🐢']").count(),1);
  await adultConfirm();
  const favoriteId=await page.evaluate(()=>window.KhaemenesPreschoolCatalog.childActivities()[0].id);
  await showPanel("pinsTitle");
