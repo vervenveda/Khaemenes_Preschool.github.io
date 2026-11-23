@@ -1506,8 +1506,10 @@ function chooseOffscreenPrompt(){
   const prompts=OFFSCREEN_PROMPTS[category]||OFFSCREEN_PROMPTS.wonder;
   const prompt=prompts[Math.floor(Math.random()*prompts.length)];
   const data=CATEGORIES[category]||{icon:"🌿",label:"Little Adventure"};
-  $("awayTitle").textContent=`${data.icon} ${data.label}`;
-  $("awayPrompt").textContent=prompt;
+  if($("awayTitle")&&$("awayPrompt")){
+    $("awayTitle").textContent=`${data.icon} ${data.label}`;
+    $("awayPrompt").textContent=prompt;
+  }
   return prompt;
 }
 function mentorPlanData(){
