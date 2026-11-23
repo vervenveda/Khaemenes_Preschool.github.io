@@ -120,6 +120,72 @@
 #pinnedApps .prek-pin-help a{display:inline-flex;padding:12px 20px;border-radius:7px;border:3px solid white;background:#b89cff;color:#000;font:400 24px/1.3 "Comic Sans MS","Chalkboard SE",cursive;text-decoration:none}
 @media(max-width:760px){#pinnedApps .prek-pin-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){#pinnedApps .prek-pin-list{grid-template-columns:1fr}}
+/* Coral pinned shelf and varied approved-color outlines — scoped to the two requested sections. */
+#pinnedApps .feature-accordion[data-feature="pinned"]>summary{
+ background:#ffadad!important;color:#000!important;border-bottom:4px solid #fff!important;
+}
+#pinnedApps .feature-accordion[data-feature="pinned"]>.feature-accordion-panel,
+#pinnedApps .prek-pin-shell{background:#ffadad!important}
+#pinnedApps .feature-accordion>summary strong{
+ color:#000!important;
+ -webkit-text-stroke:.65px #b89cff!important;
+ text-shadow:1px 1px 0 #b89cff,-1px -1px 0 #b89cff,1px -1px 0 #b89cff,-1px 1px 0 #b89cff!important;
+}
+#pinnedApps .prek-pin-intro{
+ color:#000!important;
+ text-shadow:.8px .8px 0 #67cfff,-.8px -.8px 0 #67cfff!important;
+}
+#pinnedApps .prek-pin-empty{
+ grid-column:1/-1!important;width:100%!important;max-width:100%!important;
+ color:#000!important;text-align:center!important;
+ text-shadow:1px 1px 0 #b89cff,-1px -1px 0 #b89cff!important;
+}
+#pinnedApps .prek-pin-item a{
+ color:#000!important;
+ text-shadow:1px 1px 0 #ff88c8,-1px -1px 0 #ff88c8!important;
+}
+#pinnedApps .prek-pin-help a{
+ color:#000!important;
+ text-shadow:1px 1px 0 #ffe45e,-1px -1px 0 #ffe45e!important;
+}
+#weeklyGarden .feature-accordion>summary strong{
+ color:#000!important;
+ -webkit-text-stroke:.6px #ff88c8!important;
+ text-shadow:1px 1px 0 #ff88c8,-1px -1px 0 #ff88c8!important;
+}
+#weeklyGarden .weekly-garden-head h2{
+ color:#243038!important;
+ -webkit-text-stroke:.5px #b89cff!important;
+ text-shadow:1.3px 1.3px 0 #b89cff,-1.3px -1.3px 0 #b89cff!important;
+}
+#weeklyGarden .weekly-garden-head .kicker{
+ color:#243038!important;
+ text-shadow:1px 1px 0 #67cfff,-1px -1px 0 #67cfff!important;
+}
+#weeklyGarden #continueTitle{
+ color:#000!important;
+ text-shadow:1.1px 1.1px 0 #b89cff,-1.1px -1.1px 0 #b89cff!important;
+}
+#weeklyGarden .weekly-continue{grid-template-columns:52px minmax(0,1fr) 186px!important}
+#weeklyGarden .weekly-continue>div{min-width:0!important}
+#weeklyGarden #continueLink{
+ box-sizing:border-box!important;
+ display:flex!important;justify-content:center!important;align-items:center!important;
+ min-width:0!important;width:186px!important;max-width:100%!important;
+ min-height:90px!important;padding:12px 14px!important;
+ background:#ff88c8!important;color:#000!important;
+ border:5px solid #fff!important;border-radius:7px!important;
+ font:400 24px/1.18 "Comic Sans MS","Chalkboard SE",cursive!important;
+ white-space:pre-line!important;text-align:center!important;text-decoration:none!important;
+ text-shadow:1px 1px 0 #ffe45e,-1px -1px 0 #ffe45e!important;
+}
+#weeklyGarden #continueLink:focus-visible{
+ outline:4px solid #243038!important;outline-offset:3px!important
+}
+@media(max-width:700px){
+ #weeklyGarden .weekly-continue{grid-template-columns:1fr!important;text-align:center!important}
+ #weeklyGarden #continueLink{width:min(100%,240px)!important;justify-self:center!important}
+}
 </style>
 <section class="feature-section child-mode-only prek-pin-shelf" id="pinnedApps" aria-label="My Pinned Apps">
   <details class="feature-accordion" data-feature="pinned">
@@ -1651,7 +1717,7 @@ function renderLearnerHome(){
     $("continueDesc").textContent=`Continue the last adventure opened on this browser. ${lastApp.desc}`;
     $("continueLink").href=appUrl(lastApp);
     $("continueLink").dataset.continueApp=lastApp.id;
-    $("continueLink").textContent="Continue Adventure →";
+    $("continueLink").textContent="Continue\nAdventure →";
   }else{
     const first=weeklyApp("literacy");
     $("continueIcon").textContent=first?.icon||"🌱";
@@ -1659,7 +1725,7 @@ function renderLearnerHome(){
     $("continueDesc").textContent=first?("Begin with "+displayTitle(first)+", or choose any invitation below."):"Choose any gentle invitation in this week’s Learning Garden.";
     $("continueLink").href=first?appUrl(first):"#weeklyGarden";
     if(first)$("continueLink").dataset.continueApp=first.id;else delete $("continueLink").dataset.continueApp;
-    $("continueLink").textContent="Start This Week →";
+    $("continueLink").textContent="Start This\nWeek →";
   }
   $("homeVisitedCount").textContent=KID_APPS.filter(app=>visited.has(app.id)).length;
   $("homeFavoriteCount").textContent=favorites.size;
