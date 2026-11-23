@@ -1037,10 +1037,10 @@ body[data-profile-stage="preschool"] main.shell :is(
   -webkit-text-stroke:0!important;
   text-shadow:none!important;
 }
-/* Blue/aqua and green/mint surfaces use BLACK readable lettering.
-   No palette changes and no site-wide effects. */
+/* Approved aqua, sky-blue, mint-green panels and matching buttons: BLACK.
+   Explicitly target labels/icons so earlier cream declarations cannot override. */
 body[data-profile-stage="preschool"] main.shell :is(.profile-hero,.prek-welcome,.prek-daily),
-body[data-profile-stage="preschool"] main.shell :is(.profile-hero,.prek-welcome,.prek-daily) :is(p,span,small,label,a,button,li),
+body[data-profile-stage="preschool"] main.shell :is(.profile-hero,.prek-welcome,.prek-daily) :is(h2,h3,p,span,small,label,a,button,li),
 body[data-profile-stage="preschool"] main.shell :is(
   .prek-menu .prek-tile:nth-child(2),.prek-menu .prek-tile:nth-child(6),
   .prek-classes>a:nth-child(2),.prek-classes>a:nth-child(5),
@@ -1050,7 +1050,7 @@ body[data-profile-stage="preschool"] main.shell :is(
   .prek-menu .prek-tile:nth-child(2),.prek-menu .prek-tile:nth-child(6),
   .prek-classes>a:nth-child(2),.prek-classes>a:nth-child(5),
   .hero-actions .button.secondary
-) :is(span,p,a,button,small){
+) :is(span,p,a,button,small,strong){
   color:#000!important;
   -webkit-text-fill-color:#000!important;
   -webkit-text-stroke:0!important;
@@ -1130,6 +1130,27 @@ body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .kpu
   outline:4px solid #000!important;outline-offset:-5px!important;
 }
 
+/* The former large white privacy card is now a quiet, optional footer
+   disclosure: no white directional box on the profile landing page. */
+body[data-profile-stage="preschool"] main.shell .prek-privacy-note{
+  display:block!important;max-width:100%!important;
+  width:100%!important;margin:14px auto!important;
+  padding:0!important;background:transparent!important;
+  color:#000!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;text-align:center!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-privacy-note summary{
+  display:inline-block!important;padding:8px 12px!important;
+  font:400 24px/1.35 "Comic Sans MS","Chalkboard SE",cursive!important;
+  text-decoration:underline!important;color:#000!important;
+  -webkit-text-fill-color:#000!important;cursor:pointer!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-privacy-note p{
+  max-width:900px;margin:8px auto!important;
+  padding:0!important;border:0!important;background:transparent!important;
+  color:#000!important;-webkit-text-fill-color:#000!important;
+  font:400 24px/1.45 "Comic Sans MS","Chalkboard SE",cursive!important;
+}
 /* Preserve editable white form inputs with dark text. */
 body[data-profile-stage="preschool"] main.shell :is(input,select,textarea,option){
   background:#fff!important;color:var(--prek-charcoal)!important;
