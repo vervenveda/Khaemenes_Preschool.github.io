@@ -124,6 +124,12 @@ try{
  if(await close.count())await close.click();
  else await editor.evaluate(d=>d.close?.());
  console.log("PASS actual picture editor opens when learner and adult consent are present");
+ // The visible My Picture shortcut must route to the SAME guarded editor.
+ await page.locator('[data-universal-picture="true"]').click();
+ await editor.waitFor({state:"visible"});
+ if(await close.count())await close.click();
+ else await editor.evaluate(d=>d.close?.());
+ console.log("PASS My Picture shortcut opens the existing guarded editor");
 
  await openPanel("pinsTitle");
  const pins=page.locator("#prek-panel-pinsTitle");
@@ -134,6 +140,11 @@ try{
  await pins.locator("#unpinAdventure").click();
  assert.match(await pins.locator("#pinStatus").innerText(),/unpinned|removed|no longer pinned/i);
  console.log("PASS favorite-game pin and unpin controls on registered test learner");
+ await pins.locator("#pinPreschoolPath").click();
+ assert.match(await pins.locator("#pinnedActivities").innerText(),/My Preschool Pathway/i);
+ await pins.locator("#unpinPreschoolPath").click();
+ assert.doesNotMatch(await pins.locator("#pinnedActivities").innerText(),/My Preschool Pathway/i);
+ console.log("PASS Preschool pathway pin/unpin buttons");
 
  await pins.locator(".prek-pop-close").click();
  await openPanel("kindergartenHandoff");
@@ -141,6 +152,25 @@ try{
  await graduation.locator("#showHandoff").click();
  assert.equal(await graduation.locator("#showHandoff").getAttribute("aria-expanded"),"true");
  console.log("PASS Kindergarten preview action without promotion");
+ await graduation.locator(".prek-pop-close").click();
+ await openPanel("backgroundTitle");
+ const background=page.locator("#prek-panel-backgroundTitle");
+ await page.evaluate(()=>{window.__qaPrints=0;window.print=()=>{window.__qaPrints++}});
+ await background.locator("#printProfile").click();
+ assert.equal(await page.evaluate(()=>window.__qaPrints),1);
+ const download=page.waitForEvent("download");
+ await background.locator("#exportLook").click();
+ const data=await download;
+ assert.match(data.suggestedFilename(),/prek-visual.*\.json$/);
+ console.log("PASS print and visual-profile export buttons");
+
  assert.deepEqual(errors,[],"uncaught client JS: "+JSON.stringify(errors));
+ // End-to-end route loading on the actual six linked Preschool pages.
+ for(const href of classLinks){
+  const response=await page.goto(href,{waitUntil:"domcontentloaded"});
+  assert.equal(response.status(),200,"Class landing did not load: "+href);
+  assert.ok(await page.locator("body").count(),"Class landing lacks body: "+href);
+ }
+ console.log("PASS all six class destinations load as real browser pages");
  console.log("PASS complete Pre-K Student Profile click-through and landing audit");
 }finally{await context.close();await browser.close()}
