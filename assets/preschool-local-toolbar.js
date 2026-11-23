@@ -12,6 +12,8 @@ function guardExternal(event){
  const a=event.target.closest?.("a[href]");
  if(!a||a.hasAttribute("download")||a.dataset.prekGrownupExit==="true")return;
  if(samePreschool(a.href))return;
+ /* Parent-approved Academy navigation is direct from the dedicated adult screen. */
+ if(a.closest("#prekParentCenter")||document.body.dataset.view==="grownup")return;
  event.preventDefault();
  const box=document.getElementById("prekExitNotice");
  if(box){box.hidden=false;box.querySelector("button")?.focus()}
