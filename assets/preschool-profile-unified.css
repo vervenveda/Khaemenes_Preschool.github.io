@@ -1,0 +1,553 @@
+/* Khaemenes Preschool Student Profile — canonical page-only stylesheet.
+   Replaces one shared Preschool theme include plus four competing inline blocks.
+   Shared Academy profile-v2.css remains a separate component dependency. */
+/* Khaemenes Preschool · Playful Light Theme
+   Local, dependency-free presentation layer shared across the Preschool portal. */
+:root {
+  --prek-title-font: "Marker Felt", "Chalkboard SE", "Comic Sans MS", "Comic Sans", cursive;
+  --prek-body-font: "Comic Sans MS", "Comic Sans", "Chalkboard SE", ui-rounded, cursive;
+  --prek-pink: #ff4fa3;
+  --prek-purple: #7957ff;
+  --prek-blue: #20bde8;
+  --prek-green: #24c98b;
+  --prek-yellow: #ffd83d;
+  --prek-orange: #ff8f3d;
+  --prek-ink: #34345e;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--prek-body-font) !important;
+  font-weight: 333 !important;
+}
+
+body {
+  color: var(--prek-ink);
+  background-color: #fffaf0;
+  background-image:
+    radial-gradient(circle at 8% 8%, rgba(255, 216, 61, .25), transparent 22rem),
+    radial-gradient(circle at 92% 13%, rgba(32, 189, 232, .20), transparent 24rem),
+    radial-gradient(circle at 78% 88%, rgba(255, 79, 163, .16), transparent 25rem),
+    radial-gradient(circle at 18% 84%, rgba(36, 201, 139, .16), transparent 23rem);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title,
+.brand,
+.logo,
+[class*="title"] {
+  font-family: var(--prek-title-font) !important;
+  letter-spacing: .015em !important;
+}
+
+h1,
+h2,
+.hero-title,
+.page-title {
+  text-shadow: 0 3px 0 rgba(255, 255, 255, .85), 0 8px 20px rgba(121, 87, 255, .13);
+  animation: prek-title-float 6s ease-in-out infinite;
+}
+
+p,
+li,
+label,
+small,
+span,
+a,
+strong,
+b,
+.btn,
+button {
+  font-weight: 333 !important;
+}
+
+button,
+.btn,
+[class*="button"],
+[class*="-btn"],
+a[class*="btn"],
+a[class*="open"] {
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease !important;
+}
+
+button:hover,
+.btn:hover,
+[class*="button"]:hover,
+[class*="-btn"]:hover,
+a[class*="btn"]:hover,
+a[class*="open"]:hover {
+  filter: saturate(1.14) brightness(1.035);
+  transform: translateY(-2px) rotate(-.25deg);
+  box-shadow: 0 10px 23px rgba(87, 73, 170, .18);
+}
+
+button:active,
+.btn:active,
+[class*="button"]:active,
+[class*="-btn"]:active {
+  transform: translateY(0) scale(.98);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--prek-yellow) !important;
+  outline-offset: 3px !important;
+}
+
+.card,
+.activity,
+.panel,
+article {
+  border-color: rgba(121, 87, 255, .18) !important;
+}
+
+.card:hover,
+.activity:hover,
+article:hover {
+  border-color: rgba(255, 79, 163, .28) !important;
+}
+
+.emoji,
+.icon,
+[class*="-icon"],
+[class*="Icon"] {
+  transform-origin: 50% 80%;
+  animation: prek-icon-bob 4.8s ease-in-out infinite;
+}
+
+::selection {
+  color: #2f285e;
+  background: #ffe67a;
+}
+
+@keyframes prek-title-float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-3px) rotate(-.2deg); }
+}
+
+@keyframes prek-icon-bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-3px) rotate(1.5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+
+/* Preschool containment + universal geometry · 2026-11-19 */
+:root{--prek-radius:7px;--prek-charcoal:#243038;--prek-cream:#fff8e9}
+button,.btn,[class*="button"],[class*="-btn"],a[class*="btn"],a[class*="open"],
+.card,.activity,.panel,article,section,details,input,select,textarea{border-radius:var(--prek-radius)!important}
+#vnvEcosystemUtilityDock,.vnv-ecosystem-toolbar,[data-vnv-ecosystem-toolbar-root]{display:none!important}
+#vnv-language-rail{box-sizing:border-box;width:100%;min-height:54px;padding:7px 16px 8px;background:var(--prek-charcoal);color:var(--prek-cream);border-bottom:1px solid rgba(255,255,255,.14);text-align:center}
+#vnvEnrichedMenuOverlay{position:fixed;inset:0;z-index:2147483000;display:grid;justify-items:end;visibility:hidden;opacity:0;background:rgba(6,15,12,.56);transition:opacity .18s ease,visibility .18s ease}
+#vnvEnrichedMenuOverlay[data-open="true"]{visibility:visible;opacity:1}
+.prek-local-menu-panel{width:min(92vw,390px);height:100%;overflow:auto;padding:18px;background:#fffdf8;box-shadow:-18px 0 48px rgba(8,11,15,.18);transform:translateX(100%);transition:transform .2s ease}
+#vnvEnrichedMenuOverlay[data-open="true"] .prek-local-menu-panel{transform:none}
+.prek-local-menu-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid rgba(18,23,19,.14)}
+.prek-local-menu-top strong{font-size:24px}.prek-local-menu-close{width:44px;height:44px;border:1px solid rgba(18,23,19,.2);background:#fff;color:#243038;font-size:24px}
+.prek-local-menu-list{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
+.prek-local-menu-list a{min-height:55px;display:flex;align-items:center;justify-content:center;padding:11px;border:1px solid rgba(18,23,19,.14);background:#fff;color:#243038!important;text-decoration:none!important;font-size:16px;text-align:center}
+#prekLocalToolbar{position:fixed;left:14px;bottom:14px;z-index:2147482500;font-size:16px}
+.prek-tool-toggle{min-width:66px;min-height:44px;padding:7px 11px;border:1px solid #111;background:var(--prek-charcoal);color:var(--prek-cream)}
+.prek-tool-panel{position:absolute;left:0;bottom:55px;width:min(300px,calc(100vw - 28px));display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:11px;border:1px solid rgba(18,23,19,.18);background:#fffdf8;box-shadow:0 14px 33px rgba(18,23,19,.18)}
+.prek-tool-panel[hidden]{display:none!important}
+.prek-tool-panel a,.prek-tool-panel button{min-height:55px;display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid rgba(18,23,19,.16);background:#fff;color:#243038!important;text-decoration:none!important;font-size:16px;text-align:center}
+#prekExitNotice{position:fixed;inset:0;z-index:2147483600;display:grid;place-items:center;padding:14px;background:rgba(8,11,15,.68)}
+#prekExitNotice[hidden]{display:none!important}
+.prek-exit-card{width:min(520px,100%);padding:24px;border:1px solid rgba(18,23,19,.2);background:#fffdf8;color:#243038;text-align:center}
+.prek-exit-card strong{display:block;font-size:24px}.prek-exit-card p{font-size:16px}.prek-exit-card button{min-height:55px;padding:10px 18px;background:var(--prek-charcoal);color:var(--prek-cream)}
+html.prek-calm *,html.prek-calm *::before,html.prek-calm *::after{animation:none!important;transition:none!important}
+html.prek-calm body{background-image:none!important;background:#fffaf0!important}
+/* Preserve the complete Preschool directory in Child View: the twelfth grid button. */
+.site-footer,body>footer{box-sizing:border-box;width:100%;padding:24px 16px;background:var(--prek-charcoal)!important;color:var(--prek-cream)!important;text-align:center!important;border-radius:0!important}
+.site-footer a,body>footer a{color:var(--prek-cream)!important}
+.prek-hero-academy{font-size:33px!important;line-height:1.1!important}
+.prek-hero-title{font-size:77px!important;line-height:.98!important}
+.prek-hero-descriptor{font-size:24px!important;line-height:1.35!important}
+@media(max-width:760px){.prek-hero-academy{font-size:24px!important}.prek-hero-title{font-size:clamp(48px,14vw,66px)!important}.prek-hero-descriptor{font-size:20px!important}}
+@media(max-width:560px){.prek-local-menu-list,.prek-tool-panel{grid-template-columns:1fr}}
+
+
+/* Child-friendly Pre-K scaling, intact rainbow palette, no parchment/beige. */
+:root{--prek-cream:#ffffff}
+body,html.prek-calm body{background-color:#ffffff!important}
+body{background-image:radial-gradient(circle at 8% 8%,rgba(255,216,61,.18),transparent 22rem),radial-gradient(circle at 92% 13%,rgba(32,189,232,.16),transparent 24rem),radial-gradient(circle at 78% 88%,rgba(255,79,163,.12),transparent 25rem)!important}
+.hero-undertray{width:min(1040px,calc(100% - 28px))!important;background:#ffffff!important}
+.hero-orbit-labels{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px}
+.hero-orbit-labels>:is(a,button){font-size:24px!important;font-weight:400!important;min-height:88px!important;padding:12px!important;line-height:1.3;overflow-wrap:anywhere}
+main p,main li,main label,main input,main select,main textarea,main a,main button,main .kicker,main .feature-accordion>summary strong,main .accordion-state{font-size:max(24px,1.5rem)!important;font-weight:400!important;line-height:1.4}
+.feature-accordion>summary{min-height:100px!important;gap:15px!important;padding:14px 22px!important}
+.feature-accordion>summary .accordion-icon{font-size:66px!important;line-height:1!important;min-width:70px}
+.feature-accordion>summary .accordion-state{min-width:100px}
+.hero-playground .orbit-button{font-size:66px!important}
+section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywhere}
+.prek-parent-center[hidden]{display:none!important}
+.prek-parent-center{background:#ffffff;padding:20px 16px 32px;color:#34345e}
+.prek-parent-shell{max-width:1040px;margin:0 auto;background:#ffffff;border:3px solid #20bde8;border-radius:7px;padding:24px;box-shadow:0 10px 30px rgba(32,189,232,.15)}
+.prek-parent-heading{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.prek-parent-heading>div{flex:1;min-width:min(240px,100%)}
+.prek-parent-heading h2{margin:0;font:400 36px/1.2 "Comic Sans MS","Chalkboard SE",cursive}
+.prek-parent-heading p,.prek-parent-hint{font:400 24px/1.4 "Comic Sans MS","Chalkboard SE",cursive}
+.prek-parent-emoji{font-size:66px;line-height:1}
+#prekParentClose{font:400 24px "Comic Sans MS","Chalkboard SE",cursive;min-height:60px;padding:10px 16px;border:2px solid #7957ff;background:#ffffff;color:#34345e}
+.prek-parent-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0}
+.prek-parent-links a{min-height:90px;display:flex;align-items:center;justify-content:center;padding:12px;border:2px solid #fff;text-align:center;text-decoration:none;color:#243038;font:400 24px/1.3 "Comic Sans MS","Chalkboard SE",cursive;overflow-wrap:anywhere}
+.prek-parent-links a:nth-child(4n+1){background:#ffe36c}.prek-parent-links a:nth-child(4n+2){background:#70dce8}.prek-parent-links a:nth-child(4n+3){background:#66e3c0}.prek-parent-links a:nth-child(4n){background:#ff8fbe}
+.prek-local-menu-panel,.prek-tool-panel,.prek-exit-card{background:#fff!important}
+@media(max-width:900px){.hero-orbit-labels{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:560px){.hero-undertray{width:calc(100% - 20px)!important;padding:9px!important}.hero-orbit-labels{gap:8px}.hero-orbit-labels>:is(a,button){min-height:78px!important;font-size:24px!important;padding:8px!important}.feature-accordion>summary{grid-template-columns:auto minmax(0,1fr) auto!important;gap:8px!important;padding:12px!important}.feature-accordion>summary .accordion-icon{font-size:66px!important;min-width:66px}.feature-accordion>summary .accordion-state{font-size:24px!important;min-width:54px}.prek-parent-links{grid-template-columns:1fr}.prek-parent-shell{padding:12px}}
+
+/* 2026-11-23 · Official VNV shell, balanced child buttons, and spaced rainbow orbit. */
+/* The canonical branched hamburger in the official header owns global navigation. */
+.hero-orbit-labels #menuBtn{display:none!important}
+#vnvHeaderAutoPopulate{width:100%!important;background:#ffffff!important;color:#243038!important}
+#vnvHeaderAutoPopulate .vnv-header-inner{width:100%;max-width:none}
+#vnvHeaderAutoPopulate .vnv-header-menu-button{justify-self:end}
+#vnvTickerAutoPopulate{width:100%;max-width:none}
+.hero-playground{width:min(1080px,calc(100vw - 40px))!important}
+.hero-copy{width:min(500px,calc(100% - 280px))!important;min-height:340px}
+.hero-inner{min-height:600px}
+.orbit-button{width:114px;height:114px}
+.orbit-button:nth-of-type(1){left:3%;top:6%}
+.orbit-button:nth-of-type(2){right:3%;top:6%}
+.orbit-button:nth-of-type(3){left:0;top:42%}
+.orbit-button:nth-of-type(4){right:0;top:42%}
+.orbit-button:nth-of-type(5){left:12%;bottom:1%}
+.orbit-button:nth-of-type(6){right:12%;bottom:1%}
+@media(max-width:900px){
+ .hero-copy{width:min(430px,calc(100% - 230px))!important;min-height:300px}
+ .hero-inner{min-height:590px}
+ .hero-playground{width:calc(100vw - 24px)!important}
+ .orbit-button{width:96px;height:96px}
+}
+@media(max-width:600px){
+ .hero-inner{display:flex;flex-direction:column;gap:45px;min-height:0;padding:36px 0 22px}
+ .hero-copy{width:min(330px,calc(100% - 75px))!important;min-height:255px;padding:30px 16px}
+ .hero-playground{position:relative!important;inset:auto!important;transform:none!important;width:min(440px,100%)!important;height:auto!important;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-items:center;gap:18px;pointer-events:auto}
+ .hero-playground .orbit-button{position:relative!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;width:min(96px,100%);height:96px;font-size:66px!important}
+ .hero-copy h1{font-size:clamp(48px,12vw,66px)!important}
+ .hero-preschool{font-size:clamp(24px,7vw,36px)!important}
+}
+
+/* 2026-11-23 · Round orbit icons and readable cream text on dark buttons. */
+/* Keep light yellow, aqua, mint and orange controls dark-lettered. */
+.hero-playground .orbit-button{
+  border-radius:50%!important;
+  width:112px!important;
+  height:112px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  border:4px solid #ffffff!important;
+  box-sizing:border-box;
+}
+/* Pull the orbit out from the rainbow border: visible clear space on every side. */
+.hero-playground{width:min(1120px,calc(100vw - 24px))!important}
+.hero-copy{width:min(480px,calc(100% - 290px))!important}
+.hero-playground .orbit-button:nth-of-type(1){left:0!important;top:2%!important}
+.hero-playground .orbit-button:nth-of-type(2){right:0!important;top:2%!important}
+.hero-playground .orbit-button:nth-of-type(3){left:0!important;top:42%!important}
+.hero-playground .orbit-button:nth-of-type(4){right:0!important;top:42%!important}
+.hero-playground .orbit-button:nth-of-type(5){left:9%!important;bottom:0!important}
+.hero-playground .orbit-button:nth-of-type(6){right:9%!important;bottom:0!important}
+/* Deeper shades of the existing pink/purple/green palette have cream lettering. */
+.hero-orbit-labels>:nth-child(4){background:#A92C75!important;color:#FFF9EA!important}
+.hero-orbit-labels>:nth-child(6){background:#6B45A7!important;color:#FFF9EA!important}
+.hero-orbit-labels #childViewBtn{background:#087D67!important;color:#FFF9EA!important}
+.hero-orbit-labels #grownupViewBtn{background:#B62C78!important;color:#FFF9EA!important}
+.feature-accordion[data-feature="explore"]>summary{background:#B62C78!important;color:#FFF9EA!important}
+.feature-accordion[data-feature="garden"]>summary{background:#6B45A7!important;color:#FFF9EA!important}
+.feature-accordion[data-feature="graduation"]>summary{background:#087D67!important;color:#FFF9EA!important}
+.feature-accordion[data-feature="explore"]>summary .accordion-state,
+.feature-accordion[data-feature="garden"]>summary .accordion-state,
+.feature-accordion[data-feature="graduation"]>summary .accordion-state{color:#FFF9EA!important}
+.prek-parent-links a:nth-child(4n){background:#B62C78!important;color:#FFF9EA!important}
+@media(max-width:900px) and (min-width:601px){
+ .hero-playground{width:calc(100vw - 20px)!important}
+ .hero-copy{width:min(400px,calc(100% - 240px))!important}
+ .hero-playground .orbit-button{width:94px!important;height:94px!important}
+ .hero-playground .orbit-button:nth-of-type(5){left:5%!important}
+ .hero-playground .orbit-button:nth-of-type(6){right:5%!important}
+}
+@media(max-width:600px){
+ .hero-copy{width:min(330px,calc(100% - 75px))!important}
+ .hero-playground .orbit-button{width:min(96px,100%)!important;height:96px!important}
+ .hero-playground .orbit-button:nth-of-type(n){left:auto!important;right:auto!important;top:auto!important;bottom:auto!important}
+}
+
+/* Profile legacy layout and controls: preserved without touching learner interactions */
+
+:root{--ink:#273847;--muted:#536472;--forest:#315e60;--burgundy:#7563a0;--gold:#bd8a36;--line:#c6d5d4;--panel:#fffdf8;--paper2:#f5f7ef;--shadow:0 8px 25px rgba(34,56,69,.08);--formal:Cinzel,Georgia,serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:400 17px/1.6 "Nunito","Avenir Next","Segoe UI",Arial,sans-serif;color:var(--ink);background:linear-gradient(145deg,#fff2d3,#e2f9fb 55%,#f5e9ff)}
+body[data-prek-background="forest"]{background:linear-gradient(145deg,#e4f7d8,#c8ece4 55%,#f5f7e4)}
+body[data-prek-background="ocean"]{background:linear-gradient(145deg,#d9f5ff,#c5dffa 56%,#ecf7ff)}
+body[data-prek-background="sunset"]{background:linear-gradient(145deg,#ffe7da,#fce7ec 50%,#f8e5fa)}
+body[data-prek-background="night"]{background:linear-gradient(145deg,#1a2c48,#354b65 55%,#283b53);--ink:#f9f6ec;--muted:#e1e8ee;--line:#587184;--panel:#23394c;--paper2:#2d4856;--forest:#d7efd8;--burgundy:#f2d6b2}
+body[data-prek-background="night"] .pill,body[data-prek-background="night"] button.secondary{color:#f9f6ec;background:#344f5d}
+a{color:inherit}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #cb8b42;outline-offset:3px}
+.shell{width:min(1150px,calc(100% - 28px));margin:auto}.skip{position:absolute;top:-90px;left:8px;background:#fff;color:#142b36;padding:8px}.skip:focus{top:8px;z-index:20}
+.top{padding:16px 0;background:#173d4d;color:#fff}.top .shell{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.brand{font:400 21px/1.3 var(--formal);text-decoration:none}.nav{display:flex;gap:8px;flex-wrap:wrap}.nav a{padding:8px 11px;border:1px solid #7899a3;border-radius:7px;text-decoration:none;font-size:14px}
+main{padding:22px 0 64px}.eyebrow{font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--burgundy)}
+h1,h2,h3{font-family:var(--formal);font-weight:400;line-height:1.25}h1{font-size:clamp(30px,5vw,42px);margin:5px 0 6px}h2{font-size:24px;margin:0 0 12px}h3{font-size:20px;margin:0 0 6px}
+p{margin:7px 0 13px}.muted{color:var(--muted)}.card{border:1px solid var(--line);border-radius:7px;background:var(--panel);padding:23px;box-shadow:var(--shadow)}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:15px;margin:15px 0}.span7{grid-column:span 7}.span5{grid-column:span 5}.span6{grid-column:span 6}
+.profile-hero{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:22px;padding:25px;margin:14px 0 18px}
+.photo{width:146px;height:146px;border:5px solid #fff;border-radius:28px;box-shadow:0 6px 20px rgba(0,0,0,.1);background:linear-gradient(135deg,#ffe2b3,#d7edff);display:grid;place-items:center;color:#354765;font-size:72px;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}.photo button{border:0;background:transparent;cursor:pointer}
+.hero-actions,.actions,.pills{display:flex;flex-wrap:wrap;gap:9px;margin:11px 0}
+a.button,button{font:inherit;font-size:14px;border:1px solid #376473;border-radius:7px;background:#315e60;color:#fff;padding:10px 14px;min-height:44px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+a.button.secondary,button.secondary{background:#fff;color:#294a54;border-color:#b4c6c6}
+.pill{background:#f0f7f3;border:1px solid var(--line);padding:5px 10px;border-radius:20px;color:#29505d;font-size:13px}
+label{display:block;font-size:14px;margin-bottom:7px}input[type="file"],select,input[type="text"]{display:block;width:100%;min-height:42px;padding:8px;border:1px solid var(--line);border-radius:7px;background:#fff;color:#20343c}
+fieldset{border:1px solid var(--line);padding:13px;border-radius:7px;margin:10px 0}legend{padding:0 8px}.choice{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0}.choice button[aria-pressed="true"]{outline:3px solid #d69b34;outline-offset:2px}
+.notice{background:#fff2ce;color:#59401d;border:1px solid #d9b465;border-radius:7px;padding:14px;margin:12px 0}.error{color:#a13e3a}.status{min-height:1.4em;font-size:14px}
+.activity-list{display:grid;gap:9px}.activity{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);padding:12px;border-radius:7px;text-decoration:none;background:var(--paper2)}
+#profileStudio{margin-top:28px}.profile-v2-card{--line:var(--line);--panel:var(--panel);--ink:var(--ink);--muted:var(--muted);--paper2:var(--paper2);--forest:var(--forest);--burgundy:var(--burgundy)}
+#profileStudio .profile-v2-card{color:var(--ink)}#profileStudio h2{font-size:24px}
+#profileStudio input,#profileStudio textarea,#profileStudio select{font-size:15px}
+footer{padding:24px 0;text-align:center;font-size:13px;color:var(--muted)}
+@media(max-width:760px){.profile-hero{grid-template-columns:1fr;text-align:center}.photo{margin:auto}.span5,.span6,.span7{grid-column:span 12}.hero-actions{justify-content:center}}
+@media print{.top,.actions,.appearance-controls,.no-print{display:none!important}body{background:white;color:black}.card{box-shadow:none;background:#fff}}
+
+/* Pre-K child-facing navigation: additive only; existing profile engines and IDs are preserved. */
+.prek-welcome{margin:14px 0;padding:20px;background:linear-gradient(110deg,#FFADAD,#FFD6A5 25%,#FDFFB6 50%,#CAFFBF 75%,#9BF6FF);border:2px solid #34566b;border-radius:7px;color:#243d50;text-align:center}
+.prek-welcome h2{font-size:clamp(26px,4vw,38px);margin:0 0 6px}.prek-welcome p{font-size:18px;margin:0}
+.prek-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 22px}
+.prek-menu a{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;min-height:110px;padding:16px 12px;border:2px solid #476276;border-radius:7px;color:#24384a;text-decoration:none;text-align:center;font-size:18px;font-weight:600;line-height:1.35}
+.prek-menu a span{font-size:32px;line-height:1.1}.prek-menu a:nth-child(6n+1){background:#FFD6A5}.prek-menu a:nth-child(6n+2){background:#9BF6FF}.prek-menu a:nth-child(6n+3){background:#FFADAD}.prek-menu a:nth-child(6n+4){background:#FDFFB6}.prek-menu a:nth-child(6n+5){background:#CAFFBF}.prek-menu a:nth-child(6n+6){background:#FFD6A5}
+.prek-menu a:hover,.prek-menu a:focus-visible{outline:3px solid #3b5c7a;outline-offset:2px;transform:translateY(-2px)}
+main .card{border-radius:7px}main :is(button,a.button,.activity){font-size:max(18px,1em);border-radius:7px}main :is(label,.muted,.status,.pill,.eyebrow){font-size:18px}main h2{font-size:clamp(24px,3vw,30px)}main h3{font-size:24px}
+main .photo{border-radius:7px}main .pill{border-radius:7px}main .choice button{min-height:52px}
+main .grid>.card{min-width:0}main .hero-actions>a{flex:1 1 190px}main .activity-list .activity{min-height:65px}
+@media(max-width:700px){.prek-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.prek-menu a{min-height:100px}.grid>.card{grid-column:span 12}}
+@media print{.prek-menu,.prek-welcome{display:none!important}}
+
+/* Pre-K appearance studio immediately below the learner hero. */
+.prek-appearance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.prek-appearance-grid>.card{grid-column:span 1;min-width:0}
+.profile-hero .photo{width:220px;height:220px;font-size:110px;border-radius:7px;transition:clip-path .2s,border-radius .2s}
+body[data-prek-frame="circle"] .profile-hero .photo{border-radius:50%}
+body[data-prek-frame="oval"] .profile-hero .photo{width:220px;height:170px;border-radius:50%}
+body[data-prek-frame="diamond"] .profile-hero .photo{clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);border-radius:0}
+body[data-prek-frame="hexagon"] .profile-hero .photo{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);border-radius:0}
+.prek-appearance-grid :is(button,select,input){font-size:18px;min-height:48px}
+@media(max-width:760px){.prek-appearance-grid>.card{grid-column:1/-1}.profile-hero .photo{width:190px;height:190px}body[data-prek-frame="oval"] .profile-hero .photo{width:190px;height:150px}}
+
+/* Pre-K expandable learning menu and schedule. Existing sections are moved, never cloned. */
+.prek-menu .prek-tile{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;min-height:110px;padding:16px 12px;border:2px solid #476276;border-radius:7px;color:#24384a;text-align:center;font-size:18px;font-weight:600;line-height:1.35;cursor:pointer;width:100%}
+.prek-menu .prek-tile span{font-size:32px;line-height:1.1}.prek-menu .prek-tile:nth-child(6n+1){background:#FFD6A5}.prek-menu .prek-tile:nth-child(6n+2){background:#9BF6FF}.prek-menu .prek-tile:nth-child(6n+3){background:#FFADAD}.prek-menu .prek-tile:nth-child(6n+4){background:#FDFFB6}.prek-menu .prek-tile:nth-child(6n+5){background:#CAFFBF}.prek-menu .prek-tile:nth-child(6n+6){background:#FFD6A5}
+.prek-menu .prek-tile[aria-expanded="true"]{outline:3px solid #28465c;outline-offset:2px}
+.prek-daily{background:#FDFFB6;border:2px solid #476276;border-radius:7px;padding:18px;margin:12px 0 20px;color:#253b49}.prek-daily h2{font-size:24px;margin:0 0 6px}.prek-daily p{font-size:18px}.prek-classes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.prek-classes a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:70px;padding:10px;background:#CAFFBF;color:#263d4b;border:2px solid #476276;border-radius:7px;font-size:18px;text-decoration:none;font-weight:600}.prek-classes a:nth-child(even){background:#9BF6FF}
+#prek-popup-host:empty{display:none}.prek-pop-panel{border:3px solid #476276;border-radius:7px;padding:14px;background:#fffdf2;margin:12px 0 20px}.prek-pop-panel[hidden]{display:none}.prek-pop-panel>.card{margin:0}.prek-pop-panel .grid{margin:0}.prek-pop-close{display:block;margin:0 0 12px auto;background:#263d4b;color:white;border-radius:7px;padding:10px 16px;font-size:18px}
+@media(max-width:700px){.prek-classes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.prek-pop-close{display:none}}
+
+/* Pre-K panel palette and readable local content. Shared ecosystem chrome is excluded. */
+main.shell{font-size:18px;line-height:1.55}
+main.shell :is(p,a,button,label,select,input,option,small,span,.muted,.status,.notice,.pill){font-size:18px;line-height:1.5}
+main.shell :is(h1,h2,h3){font-size:clamp(24px,2.5vw,38px);line-height:1.25}
+main.shell .prek-menu{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+main.shell .prek-menu .prek-tile{font-size:18px;min-height:104px}
+main.shell .prek-menu .prek-tile span{font-size:32px}
+main.shell #prek-popup-host .prek-pop-panel{background:linear-gradient(115deg,#FFADAD,#FFD6A5 28%,#FDFFB6 52%,#CAFFBF 76%,#9BF6FF);border:2px solid #476276;border-radius:7px;padding:18px}
+main.shell #prek-popup-host .prek-pop-panel>.card{background:#fffdf1;border:2px solid #52677b;border-radius:7px;padding:20px;color:#263b4b}
+main.shell #prek-popup-host :is(button,select,input,.activity,.button){border-radius:7px;min-height:46px}
+main.shell #prek-popup-host .appearance-controls{background:#fffdf1}
+main.shell #prek-popup-host .appearance-controls :is(.choice,.actions){gap:10px}
+main.shell #prek-popup-host .status{display:block;min-height:1.5em;color:#173d4c;font-weight:600}
+main.shell #prek-popup-host .status.error{color:#922d39}
+main.shell #prek-popup-host .prek-pop-close{background:#263d4b;color:#fff;padding:10px 18px}
+main.shell #prek-popup-host .prek-pop-panel:nth-child(2n)>.card{background:#f4ffed}
+main.shell #prek-popup-host .prek-pop-panel:nth-child(3n)>.card{background:#eefcff}
+main.shell #prek-popup-host .prek-pop-panel:nth-child(5n)>.card{background:#fff2e9}
+main.shell #prek-popup-host .prek-pop-panel :is(a,button){overflow-wrap:anywhere}
+main.shell #prek-popup-host .prek-pop-panel [hidden]{display:none!important}
+main.shell .prek-daily :is(a,p){font-size:18px}
+main.shell :is(.card,.notice,.prek-daily,.prek-welcome,.prek-menu .prek-tile){border-radius:7px}
+@media(max-width:680px){main.shell .prek-menu{grid-template-columns:repeat(2,minmax(0,1fr))}main.shell .prek-classes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Kindergarten preview: explicit accessible contrast, isolated to this popup. */
+main #prek-popup-host #kindergartenHandoff{background:#fff9ec!important;color:#213a4a!important;border:2px solid #34576b!important}
+main #prek-popup-host #kindergartenHandoff .eyebrow{color:#73364e!important;font-size:18px!important;font-weight:700!important;letter-spacing:.05em!important}
+main #prek-popup-host #kindergartenHandoff :is(h2,h3){color:#183a4d!important;font-size:clamp(24px,2.6vw,34px)!important;text-shadow:none!important}
+main #prek-popup-host #kindergartenHandoff :is(p,.muted,.notice,#handoffDetails,#handoffFavorites){color:#243e4e!important;font-size:18px!important;opacity:1!important}
+main #prek-popup-host #kindergartenHandoff :is(button,.button,a.button){background:#254c60!important;color:#fff!important;border:2px solid #254c60!important;font-size:18px!important;font-weight:650!important}
+main #prek-popup-host #kindergartenHandoff :is(button,.button,a.button):focus-visible{outline:3px solid #b14b63!important;outline-offset:3px}
+main #prek-popup-host #kindergartenHandoff #handoffPreview{background:#eafff2!important;color:#243e4e!important;border-radius:7px;padding:14px}
+
+/* Shared profile typography normalization */
+
+/* Grade-level profile visual contract. Shared controls retain their existing owners. */
+body :is(main, .hero, .ug-hero, .mast) :is(p,li,label,summary,small,button,input,select,textarea){font-size:max(16px,1rem)!important;line-height:1.5!important}
+body :is(main, .hero, .ug-hero, .mast) :is(a.btn,a.button,.hero-btn,.ug-priority-nav a){font-size:16px!important;line-height:1.4!important;min-height:45px!important}
+body :is(.hero,.ug-hero,.mast)> :is(h1,p),body :is(.hero,.ug-hero,.mast)>div> :is(h1,p){text-align:center}
+body :is(.hero,.ug-hero,.mast) h1{font-size:clamp(30px,4.4vw,52px)!important;line-height:1.18!important;font-weight:400!important}
+body :is(.hero,.ug-hero,.mast) :is(.eyebrow,.ug-eyebrow),body main>.eyebrow{font-size:16px!important;letter-spacing:.045em!important;line-height:1.4!important}
+
+/* Universal photo/editor behavior */
+
+/* Profile-only presentation. No global header, tickers, or other campus styles. */
+main.shell .profile-hero{transition:background-color .15s ease;border:2px solid #52677b!important}
+main.shell .profile-hero .photo{background:linear-gradient(135deg,#ffe2b3,#d7edff);border:4px solid #fff}
+main.shell #khaePrekUniversalLookEntry{width:100%;max-width:none;margin:16px auto 20px;background:linear-gradient(110deg,#ffe5bf,#faffd1 48%,#d5f7e9);border:2px solid #476276;color:#243d50}
+main.shell #khaePrekUniversalLookEntry .kpu-open{background:#243d50;border-color:#243d50;color:#fff8e9}
+main.shell :is(h1,h2,h3,.prek-menu .prek-tile,.prek-daily h2){text-shadow:none!important;animation:none!important;font-weight:400!important}
+main.shell :is(h1,h2,h3){font-family:"Trebuchet MS",Nunito,Arial,sans-serif!important;letter-spacing:0!important}
+main.shell #childTitle{font-size:clamp(27px,3vw,38px);font-weight:400!important}
+main.shell #khaePrekUniversalLookEntry :is(p,label,button){font-family:Nunito,"Trebuchet MS",Arial,sans-serif!important;font-weight:400!important}
+main.shell .prek-menu .prek-tile{font-weight:400!important}
+#kplsDialog :is(h2,h3,p,label,button,select,input){text-shadow:none!important;animation:none!important;font-weight:400!important}
+#kplsDialog :is(h2,h3){font-family:Nunito,"Trebuchet MS",Arial,sans-serif!important}
+#kplsDialog :is(button,select,input){font-family:Nunito,"Trebuchet MS",Arial,sans-serif!important}
+#prek-panel-pictureTitle{display:none!important}
+
+/* Playful profile presentation */
+
+/* Local Pre-K Profile presentation only. Preserves native profile engines and learner IDs. */
+:root{--prek-profile-ink:#273847;--prek-profile-cream:#fff9e9;--prek-profile-green:#24c98b;--prek-profile-aqua:#62e4f5;--prek-profile-sun:#ffe45e;--prek-profile-purple:#7957ff;--prek-profile-pink:#ff4fa3}
+body:not([data-prek-background="night"]){background:#fff!important;color:#273847}
+body:not([data-prek-background="night"]) main.shell{color:#273847}
+body main.shell{width:min(1160px,calc(100% - 36px))!important;max-width:1160px!important;margin:0 auto;padding:32px 0 68px!important;line-height:1.45}
+main.shell :is(h1,h2,h3,p,a,button,label,input,select,textarea,small,span,li,summary,legend){font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",ui-rounded,cursive!important;font-weight:400!important;letter-spacing:0!important}
+main.shell :is(p,a,button,label,input,select,textarea,small,span,li,summary,legend,.muted,.status,.notice,.pill){font-size:24px!important;line-height:1.45!important;font-weight:400!important}
+main.shell>.eyebrow{color:#087d67!important;font-size:24px!important;letter-spacing:0!important}
+main.shell>h1{font-size:clamp(40px,5vw,66px)!important;font-weight:400!important;line-height:1.16!important;text-align:center;margin:8px 0 18px}
+main.shell>.muted{text-align:center;max-width:850px;margin:0 auto 25px}
+main.shell :is(h2,h3){font-weight:400!important;line-height:1.2!important}
+main.shell h2{font-size:clamp(32px,3.7vw,44px)!important}
+main.shell h3{font-size:clamp(28px,3vw,36px)!important}
+main.shell :is(.card,.notice,.prek-daily,.prek-welcome,.prek-pop-panel,.prek-menu .prek-tile){border-radius:7px!important}
+main.shell .card{padding:26px;background:#fff!important;border:3px solid #62e4f5!important;box-shadow:0 9px 24px rgba(36,48,56,.09)}
+body[data-prek-background="night"] main.shell .card{background:var(--panel)!important;color:var(--ink)}
+main.shell .profile-hero{max-width:100%;grid-template-columns:260px minmax(0,1fr);gap:32px;padding:34px!important;border:4px solid #ffe45e!important;background:linear-gradient(110deg,#fff 0%,#e1fff3 48%,#dcfaff 100%)!important}
+main.shell .profile-hero .photo{width:240px;height:240px;font-size:110px;border:6px solid #fff;box-shadow:0 0 0 7px #ff4fa3,0 0 0 14px #ffe45e,0 8px 22px rgba(36,48,56,.14)}
+main.shell #childTitle{font-size:clamp(35px,4vw,54px)!important}
+main.shell .pills{gap:12px}
+main.shell .pill{padding:9px 15px;background:#e0f9ff!important;color:#273847!important;border:2px solid #62e4f5!important}
+main.shell :is(button,a.button,.prek-classes a){min-height:66px!important;padding:14px 18px;font-size:24px!important;line-height:1.35!important;border-radius:7px!important;text-decoration:none}
+main.shell :is(button,a.button){background:#087d67;color:var(--prek-profile-cream);border:2px solid #087d67}
+main.shell :is(button.secondary,a.button.secondary){background:#fff;color:#273847;border:2px solid #7957ff}
+main.shell .prek-welcome{background:linear-gradient(110deg,#ffe45e,#62e4f5 50%,#77e6b6)!important;border:3px solid #fff!important;padding:26px;margin:26px 0 16px}
+main.shell .prek-welcome h2{font-size:clamp(32px,4vw,48px)!important}
+main.shell .prek-menu{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px!important;margin:18px 0 28px}
+main.shell .prek-menu .prek-tile{min-height:185px!important;padding:20px 16px!important;gap:12px;font-size:24px!important;color:#273847;border:3px solid #fff!important;box-shadow:0 8px 18px rgba(36,48,56,.08)}
+main.shell .prek-menu .prek-tile span{font-size:66px!important;line-height:1!important}
+main.shell .prek-menu .prek-tile:nth-child(6n+1){background:#ffe45e}
+main.shell .prek-menu .prek-tile:nth-child(6n+2){background:#62e4f5}
+main.shell .prek-menu .prek-tile:nth-child(6n+3){background:#ff88c8}
+main.shell .prek-menu .prek-tile:nth-child(6n+4){background:#77e6b6}
+main.shell .prek-menu .prek-tile:nth-child(6n+5){background:#b89cff}
+main.shell .prek-menu .prek-tile:nth-child(6n+6){background:#ffb347}
+main.shell .prek-menu .prek-tile:nth-child(6n+5){color:#273847}
+main.shell .prek-menu .prek-tile[aria-expanded="true"]{outline:4px solid #7957ff!important;outline-offset:3px}
+main.shell .prek-daily{padding:26px!important;background:#e3fff2!important;border:3px solid #24c98b!important}
+main.shell .prek-classes{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+main.shell .prek-classes a{min-height:110px!important;background:#ffe45e!important;color:#273847!important;border:3px solid #fff!important;font-weight:400!important;overflow-wrap:anywhere}
+main.shell .prek-classes a:nth-child(3n+2){background:#62e4f5!important}
+main.shell .prek-classes a:nth-child(3n){background:#ff88c8!important}
+main.shell #prek-popup-host .prek-pop-panel{background:#fff!important;border:3px solid #7957ff!important;padding:22px}
+main.shell #prek-popup-host .prek-pop-panel>.card{background:#fff!important}
+main.shell #prek-popup-host .prek-pop-close{background:#273847!important;color:var(--prek-profile-cream)!important}
+main.shell .notice{background:#fff9df;color:#493b27;border:2px solid #ffe45e;padding:18px}
+main.shell :is(input[type="text"],input[type="file"],select,textarea){min-height:60px;padding:10px 13px;background:#fff;color:#273847;border:2px solid #62e4f5}
+main.shell .activity{min-height:90px;padding:18px;overflow-wrap:anywhere}
+main.shell footer{font-size:24px!important}
+@media(max-width:900px){
+ main.shell .profile-hero{grid-template-columns:1fr;text-align:center;justify-items:center}
+ main.shell .hero-actions,.pills{justify-content:center}
+ main.shell .prek-menu{grid-template-columns:repeat(2,minmax(0,1fr))}
+ main.shell .prek-classes{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+ body main.shell{width:calc(100% - 20px)!important;padding-top:20px!important}
+ main.shell .profile-hero{padding:24px 14px!important}
+ main.shell .profile-hero .photo{width:180px;height:180px}
+ main.shell .prek-menu{gap:10px!important}
+ main.shell .prek-menu .prek-tile{min-height:170px!important;padding:14px 8px!important;overflow-wrap:anywhere}
+ main.shell .prek-menu .prek-tile span{font-size:66px!important}
+ main.shell .prek-classes{grid-template-columns:1fr}
+ main.shell .card{padding:16px}
+}
+@media print{main.shell .prek-menu,main.shell .prek-welcome{display:none!important}}
+
+
+/* FINAL PROFILE DESIGN CONTRACT — single page-style owner, 2026-11-23.
+   Coral default canvas, aqua title and hero, normal Comic Sans >=24px, centered layout.
+   Preserve theme selection for alternate backgrounds and shared Academy profile engine. */
+:root{--prek-profile-coral:#ffadad;--prek-profile-aqua:#9bf6ff;--prek-profile-ink:#273847;--prek-profile-cream:#fff9e9}
+body[data-prek-background="sky"],body[data-prek-background="sunset"],body:not([data-prek-background]){
+ background:#ffadad!important;background-image:none!important;color:#273847!important;
+}
+body[data-prek-background="forest"]{background:#77e6b6!important;background-image:none!important}
+body[data-prek-background="ocean"]{background:#62e4f5!important;background-image:none!important}
+body[data-prek-background="night"]{background:#26394f!important;background-image:none!important}
+body main.shell{
+ width:min(1200px,calc(100% - 32px))!important;max-width:1200px!important;
+ margin:0 auto!important;padding:36px 0 72px!important;text-align:center!important;
+ font:400 24px/1.45 "Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
+}
+body main.shell :is(h1,h2,h3,h4,h5,h6,p,a,button,label,legend,li,small,span,input,select,textarea,option,summary,div,fieldset){
+ font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
+ font-weight:400!important;
+}
+body main.shell :is(p,a,button,label,legend,li,small,span,input,select,textarea,option,summary,.muted,.notice,.pill,.status){
+ font-size:max(24px,1.5rem)!important;line-height:1.45!important;
+}
+body main.shell :is(.eyebrow,.kicker){font-size:24px!important;letter-spacing:0!important}
+body main.shell h1{font-size:clamp(48px,5vw,66px)!important}
+body main.shell h2{font-size:clamp(32px,3.5vw,44px)!important}
+body main.shell h3{font-size:clamp(28px,3vw,36px)!important}
+body main.shell :is(.profile-hero,.prek-welcome,.prek-daily,.card,.notice,.prek-pop-panel){text-align:center!important}
+body main.shell .profile-hero{
+ background:#9bf6ff!important;border:4px solid #ffe45e!important;
+ grid-template-columns:1fr!important;justify-items:center!important;gap:24px!important;
+ padding:32px!important;
+}
+body main.shell .profile-hero>div{width:100%;text-align:center!important}
+body main.shell .profile-hero .photo{margin:0 auto!important}
+body main.shell .hero-actions,body main.shell .pills,body main.shell .actions,body main.shell .choice{justify-content:center!important}
+body main.shell .prek-welcome{background:#9bf6ff!important;color:#273847!important}
+body main.shell .prek-menu,body main.shell .prek-classes{justify-content:center!important}
+body main.shell .prek-menu .prek-tile{font-size:24px!important;text-align:center!important}
+body main.shell .prek-menu .prek-tile>span{font-size:66px!important}
+body main.shell .prek-classes>a{font-size:24px!important;text-align:center!important}
+body main.shell .card,body main.shell .prek-pop-panel{max-width:100%;margin-left:auto;margin-right:auto}
+body main.shell :is(input,select,textarea){text-align:center!important;min-height:66px}
+body main.shell :is(a.button,button,.activity){min-height:66px}
+body main.shell :is(.grid,.prek-appearance-grid){justify-content:center}
+body main.shell .notice{background:#fff!important;color:#273847!important;border:2px solid #ffe45e}
+body main.shell #profileStudio{max-width:100%;margin:24px auto}
+body main.shell #profileStudio :is(button,a,input,select,textarea,label,p,small,span,li){font-family:"Comic Sans MS","Chalkboard SE",cursive!important;font-size:max(24px,1.5rem)!important;font-weight:400!important}
+body main.shell .prek-pop-panel :is(button,a,input,select,textarea,label,p,small,span,li){font-size:max(24px,1.5rem)!important;font-weight:400!important}
+body main.shell .prek-pop-panel .notice{background:#fff!important}
+@media(max-width:680px){
+ body main.shell{width:calc(100% - 20px)!important;padding:20px 0 48px!important}
+ body main.shell .profile-hero{padding:18px 12px!important}
+ body main.shell .prek-menu{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body main.shell .prek-classes{grid-template-columns:1fr}
+ body main.shell .prek-menu .prek-tile{min-height:180px!important}
+}
+@media print{
+ body{background:#fff!important}
+ body main.shell{color:#273847!important}
+}
