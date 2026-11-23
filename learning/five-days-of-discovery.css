@@ -92,3 +92,16 @@ a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible{
  .discover-lesson-body{display:grid!important}
  .discover-parent,.discover-day-nav,.discover-week-controls{display:none!important}
 }
+
+/* Friday readability exception: black lettering inside the orange lesson,
+   including the inner activity panel, play links and reflection summary.
+   Keep all other approved Preschool color rules unchanged. */
+html body #day5,
+html body #day5 :is(summary,h2,h3,h4,p,span,strong,small,a,button),
+html body #day5 .discover-play,
+html body #day5 .discover-activity,
+html body #day5 .discover-reflect{
+ color:#000!important;
+ -webkit-text-fill-color:#000!important;
+ text-shadow:none!important;
+}
