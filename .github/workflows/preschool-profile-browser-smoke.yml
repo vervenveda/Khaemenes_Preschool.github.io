@@ -6,12 +6,14 @@ on:
       - "student-profile/**"
       - "index.html"
       - "tools/preschool-profile-browser-smoke.mjs"
+      - "tools/preschool-profile-interaction-audit.mjs"
       - ".github/workflows/preschool-profile-browser-smoke.yml"
   pull_request:
     paths:
       - "student-profile/**"
       - "index.html"
       - "tools/preschool-profile-browser-smoke.mjs"
+      - "tools/preschool-profile-interaction-audit.mjs"
       - ".github/workflows/preschool-profile-browser-smoke.yml"
   workflow_dispatch:
 permissions:
@@ -35,5 +37,7 @@ jobs:
         run: npm install --no-save --no-package-lock playwright
       - name: Install Chromium
         run: npx playwright install chromium
+      - name: Audit all Student Profile visible buttons, consent and class links
+        run: node tools/preschool-profile-interaction-audit.mjs
       - name: Test Pre-K profile learner isolation, appearance and evidence
         run: node tools/preschool-profile-browser-smoke.mjs
