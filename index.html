@@ -227,7 +227,7 @@
   </details>
 </section>
 
-<section class="section learner-home child-mode-only feature-section" id="myHome" aria-labelledby="myHomeTitle">
+<section class="section learner-home child-mode-only feature-section" id="myHome" aria-labelledby="myHomeTitle" hidden aria-hidden="true">
   <details class="feature-accordion" data-feature="home">
     <summary><span class="accordion-icon" aria-hidden="true">🏡</span><strong>My Crechè Home</strong><span class="accordion-state" aria-hidden="true"></span></summary>
     <div class="feature-accordion-panel">
@@ -1512,7 +1512,7 @@ function setView(view,{scroll=false}={}){
   });
   if(scroll){
     requestAnimationFrame(()=>{
-      goToSection(currentView==="grownup"?"#profiles":"#myHome",{
+      goToSection(currentView==="grownup"?"#profiles":"#weeklyGarden",{
         history:false,
         behavior:reduceMotion||calm?"auto":"smooth"
       });
