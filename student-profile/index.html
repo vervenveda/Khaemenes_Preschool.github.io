@@ -666,18 +666,26 @@ refresh();
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-adapter.js?v=20261109-hero-yearbook-v3" defer></script>
 <script src="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-preschool-look-entry.js?v=20261107-prek-v2" defer></script>
 
-<!-- Preschool contained canonical shell -->
-<script src="/Khaemenes_Preschool.github.io/assets/preschool-local-menu-adapter.js"></script>\n<script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
-<script>VNV_TICKER.autoPopulate({label:"Preschool Quick Links",max:7,cleanLegacy:true,links:[
- {label:"Home",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/"},
- {label:"Today",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#today"},
- {label:"Learning Garden",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#activities"},
- {label:"Reading",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#readingFeature"},
- {label:"My Profile",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/student-profile/"},
- {label:"Graduation",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/graduation/"}
-]});</script>
+<!-- Canonical Preschool profile shell: child-only ticker and official branched header. -->
+<script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
+<script>
+(function(){
+ "use strict";
+ const catalog=window.KhaemenesPreschoolCatalog;
+ const apps=Array.isArray(catalog?.activities)?catalog.activities.filter(a=>a.category!=="grownup"&&a.file&&a.title):[];
+ if(!apps.length)return;
+ const date=new Date();
+ const day=Math.floor((Date.UTC(date.getFullYear(),date.getMonth(),date.getDate())-Date.UTC(date.getFullYear(),0,1))/86400000);
+ const count=Math.min(12,apps.length);
+ const links=Array.from({length:count},(_,i)=>{
+  const app=apps[(day*7+i*5)%apps.length];
+  return {label:(app.icon?app.icon+" ":"")+app.title,href:"https://vervenveda.com/Khaemenes_Preschool.github.io/apps/"+app.file.split("/").map(encodeURIComponent).join("/")};
+ });
+ window.VNV_TICKER?.autoPopulate({label:"🌈 Preschool Adventures",ariaLabel:"Rotating child-friendly Preschool activities",max:count,cleanLegacy:true,before:"body > header.top",links});
+})();
+</script>
 <script src="https://vervenveda.com/assets/vnv-header-autopopulate.js"></script>
-<script>VNV_HEADER.mount({title:"Khaemenes Preschool",subtitle:"Crechè · Bright Beginnings",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});</script>
+<script>window.VNV_HEADER?.mount({title:"Khaemenes Preschool",subtitle:"My Pre-K Student Profile",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});</script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-language-loader.js" defer></script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-local-toolbar.js" defer></script>
 </body></html>
