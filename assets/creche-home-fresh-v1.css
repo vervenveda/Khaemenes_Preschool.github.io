@@ -1739,3 +1739,56 @@ html body #graduationFeature .graduation-feature-card>.feature-primary-link:focu
  outline:4px solid #243038!important;
  outline-offset:3px!important;
 }
+
+
+/* Recovery refinement: compact two-column family pathway; no directory placeholders. */
+@media (min-width:641px){
+  html body #profiles .family-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+}
+html body #profiles .family-grid{align-items:stretch!important;gap:14px!important;}
+html body #profiles .family-grid>.family-card,
+html body #profiles .family-grid>#pinnedGames{
+  min-width:0!important;height:100%!important;display:flex!important;flex-direction:column!important;
+  border:3px solid #fff!important;border-radius:7px!important;
+}
+html body #profiles .family-card :is(h3,p),
+html body #profiles .family-card .family-actions{overflow-wrap:anywhere;}
+html body #profiles .family-card .family-actions{margin-top:auto!important;display:flex!important;justify-content:center!important;align-items:stretch!important;gap:8px!important;}
+html body #profiles .family-card .family-actions>:is(a,button),
+html body #profiles #managePinnedGames{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-height:48px!important;padding:10px 14px!important;max-width:100%!important;
+  background:var(--prek-charcoal)!important;color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  border:2px solid var(--prek-cream)!important;border-radius:7px!important;
+  text-align:center!important;text-decoration:none!important;
+}
+html body #profiles .feature-accordion[data-feature="profile"]>summary{
+  background:var(--prek-watermelon)!important;color:var(--prek-charcoal)!important;
+}
+html body #profiles .feature-accordion[data-feature="profile"]>summary :is(strong,span){
+  color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important;
+}
+html body #profiles .heading{background:var(--prek-watermelon)!important;border:3px solid #fff!important;border-radius:7px!important;padding:18px!important;}
+html body #profiles .heading :is(h2,p){color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important;}
+html body #profiles .family-grid>.family-card:nth-child(3){
+  background:#176c50!important;color:var(--prek-cream)!important;
+}
+html body #profiles .family-grid>.family-card:nth-child(3) :is(h3,p,span,strong,small){
+  color:var(--prek-cream)!important;-webkit-text-fill-color:var(--prek-cream)!important;
+}
+html body #profiles .family-grid>#pinnedGames{
+  margin:0!important;justify-content:space-between!important;
+  background:var(--prek-lavender)!important;color:var(--prek-charcoal)!important;
+}
+html body #profiles #pinnedGames .pinned-head{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;}
+html body #profiles #pinnedGames .pinned-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+html body #graduationFeature .feature-accordion[data-feature="graduation"]>summary{
+  background:#176c50!important;color:var(--prek-cream)!important;
+}
+html body #graduationFeature .feature-accordion[data-feature="graduation"]>summary :is(strong,span){
+  color:var(--prek-cream)!important;-webkit-text-fill-color:var(--prek-cream)!important;
+}
+@media(max-width:640px){
+  html body #profiles .family-grid{grid-template-columns:1fr!important;}
+}
