@@ -94,6 +94,14 @@ function init(){
  selector&&selector.addEventListener("change",()=>choose(Number(selector.value)));
  $("discoveryPrev")?.addEventListener("click",()=>choose(selected===1?42:selected-1));
  $("discoveryNext")?.addEventListener("click",()=>choose(selected===42?1:selected+1));
+ document.querySelectorAll(".discover-day-nav a[href^='#day']").forEach(link=>{
+  link.addEventListener("click",()=>{
+   const target=document.querySelector(link.getAttribute("href"));
+   if(target&&target.matches(".discover-lesson")){
+    document.querySelectorAll(".discover-lesson").forEach(el=>{el.open=el===target});
+   }
+  });
+ });
  document.querySelectorAll(".discover-lesson").forEach((el,i)=>{
   el.open=i===0;
   el.addEventListener("toggle",()=>{if(el.open)document.querySelectorAll(".discover-lesson").forEach(other=>{if(other!==el)other.open=false})});
