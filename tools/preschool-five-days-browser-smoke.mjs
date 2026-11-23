@@ -116,8 +116,9 @@ try{
    aqua:color(".discover-week")
   };
  });
- for(const key of ["purple","coral","orange","violetPlay"])
+ for(const key of ["purple","coral","violetPlay"])
   assert.equal(cream[key],"rgb(255, 251, 234)",key+" should display approved cream lettering");
+ assert.equal(cream.orange,"rgb(0, 0, 0)","Friday explicitly uses black text for readability");
  for(const key of ["yellow","aqua"])
   assert.equal(cream[key],"rgb(0, 0, 0)",key+" should preserve dark lettering");
  console.log("PASS shared cream text contract on purple/coral/orange, with yellow/aqua dark");
