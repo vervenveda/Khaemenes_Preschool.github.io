@@ -1355,3 +1355,39 @@ body.reduce-motion *,body.calm *{animation-duration:.001ms!important;animation-i
 .feature-accordion-panel .creche-support-card{
   box-shadow:none;
 }
+
+/* Charcoal page backdrop · 2026-11-23
+   Only neutral WHITE/CREAM exterior and accordion surfaces change.
+   All approved colorful cards, accordions, labels and buttons keep their fill.
+   The coral pinned-apps interior is explicitly preserved. */
+@media screen{
+ html body{background:var(--prek-charcoal)!important}
+ html body main > section.feature-section,
+ html body main > section.section,
+ html body main > section.weekly-garden,
+ html body :is(#weeklyGarden,#myHome,#new,#today,#profiles,#grownups,#contribute){
+  background:var(--prek-charcoal)!important;
+ }
+ html body .feature-accordion{
+  background:var(--prek-charcoal)!important;
+ }
+ html body .feature-accordion>.feature-accordion-panel{
+  background:var(--prek-charcoal)!important;
+  color:var(--prek-cream)!important;
+ }
+ html body .weekly-garden-card{
+  background:var(--prek-charcoal)!important;
+  color:var(--prek-cream)!important;
+ }
+ html body #pinnedApps .feature-accordion[data-feature="pinned"]>.feature-accordion-panel,
+ html body #pinnedApps .prek-pin-shell{
+  background:#ffadad!important;color:#243038!important;
+ }
+ html body.calm main :is(#weeklyGarden,#myHome,#new,#today,#profiles,#grownups,#contribute){
+  background:var(--prek-charcoal)!important;
+ }
+ html body .feature-accordion-panel>p,
+ html body .weekly-garden-card>p{
+  color:var(--prek-cream)!important;
+ }
+}
