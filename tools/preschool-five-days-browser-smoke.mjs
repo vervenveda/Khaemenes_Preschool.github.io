@@ -15,7 +15,7 @@ const page=await context.newPage();
 const errors=[];
 page.on("pageerror",e=>errors.push(e.message));
 await page.route(origin+"/**",async route=>{
- const url=new URL(route.request().url);
+ const url=new URL(route.request().url());
  const prefix="/Khaemenes_Preschool.github.io/";
  if(!url.pathname.startsWith(prefix)){
   // External canonical header, ticker and translator are not the subject of
