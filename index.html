@@ -1783,8 +1783,8 @@ $("readingPrint").addEventListener("click",()=>{
 });
 $("appWindowFrame").addEventListener("load",()=>$("appWindowLoading").classList.add("done"));
 $("appModal").addEventListener("click",event=>{if(event.target===$("appModal"))closeAppModal()});
-$("featuredAnother").addEventListener("click",renderFeaturedGame);
-$("featuredOpenLarge").addEventListener("click",()=>{if(featuredGame)openAppModal(appUrl(featuredGame),displayTitle(featuredGame),featuredGame.icon,featuredGame.id)});
+$("featuredAnother")?.addEventListener("click",renderFeaturedGame);
+$("featuredOpenLarge")?.addEventListener("click",()=>{if(featuredGame)openAppModal(appUrl(featuredGame),displayTitle(featuredGame),featuredGame.icon,featuredGame.id)});
 document.addEventListener("click",event=>{
   const link=event.target.closest("a[href]");
   if(!link||!isPreschoolAppHref(link.getAttribute("href")))return;
