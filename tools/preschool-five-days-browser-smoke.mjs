@@ -55,7 +55,7 @@ try{
  console.log("PASS charcoal and rainbow layout with 5px section borders");
 
  await page.locator(".discover-day-nav a[href='#day4']").click();
- await page.locator("#day4 > summary").click();
+ await page.waitForFunction(()=>document.getElementById("day4").open&&!document.getElementById("day1").open,null,{timeout:3000});
  assert.equal(await page.locator("#day4").getAttribute("open"),"");
  assert.equal(await page.locator("#day1").getAttribute("open"),null);
  console.log("PASS day navigation and expandable lesson sections");
