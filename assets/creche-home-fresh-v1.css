@@ -1393,26 +1393,8 @@ body.reduce-motion *,body.calm *{animation-duration:.001ms!important;animation-i
 }
 
 
-/* Preschool homepage · two remaining white regions and weekday links.
-   The VNV header engine itself is untouched; styling is local to this page.
-   Keep the approved rainbow panels, hero, navigation, and other pages intact. */
+/* Preschool Week selector and activity links only; official VNV header uses its original styling. */
 @media screen{
-  html body #vnvHeaderAutoPopulate{
-    background:var(--prek-charcoal)!important;
-    color:var(--prek-cream)!important;
-    border-bottom:2px solid var(--prek-sun)!important;
-  }
-  html body #vnvHeaderAutoPopulate .vnv-header-home,
-  html body #vnvHeaderAutoPopulate .vnv-header-title,
-  html body #vnvHeaderAutoPopulate .vnv-header-subtitle{
-    color:var(--prek-cream)!important;
-    -webkit-text-fill-color:var(--prek-cream)!important;
-  }
-  html body #vnvHeaderAutoPopulate .vnv-header-actions a{
-    background:var(--prek-sun)!important;
-    color:var(--prek-charcoal)!important;
-    -webkit-text-fill-color:var(--prek-charcoal)!important;
-  }
   html body #weeklyGarden .weekly-garden-week{
     background:var(--prek-charcoal)!important;
     color:var(--prek-cream)!important;
