@@ -1,22 +1,118 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preschool · Five Days of Discovery</title><link rel="stylesheet" href="../assets/preschool-playful-theme.css"><style>body{font-family:Arial,sans-serif;background:#fff7e8;color:#25344a;margin:0;line-height:1.55}main{width:min(95%,890px);margin:auto;padding:24px 0 60px}h1{font-size:clamp(27px,5vw,42px);font-weight:500}h2{font-size:22px;font-weight:500}h3{font-size:18px;font-weight:500}.lesson{background:white;border:1px solid #d8e3e8;border-radius:7px;padding:18px;margin:14px 0}a{color:#124fa0}a:focus-visible{outline:3px solid #e38b20;outline-offset:3px}.note{padding:14px;background:#e7f7ff;border-radius:7px}@media(max-width:300px){.lesson{padding:11px}}</style>  <script src="/Khaemenes_Preschool.github.io/assets/preschool-global-standard-v1.js" defer data-preschool-global-standard="18-33-66-auto-no333"></script>
-</head><body><main><p><a href="../index.html">← Preschool Home</a></p><h1>Five Days of Discovery</h1><p class="note">A free, gently guided Pre-K pathway. Activities can be spoken, signed, pointed to or drawn. No grades, timers, personal information or required login. An adult may keep private observations on paper; this page does not collect them.</p><article class="lesson"><h2>Monday · Listen and Notice</h2><h3>Story & Sounds</h3><p>Read a short story aloud. Invite the child to name a character, point to an object and clap syllables in one familiar word.</p><p><strong>Learning evidence:</strong> Show or tell one thing remembered from the story.</p><a href="../apps/ABC_Story_Time/index.html">Open ABC Story Time</a></article>
-<article class="lesson"><h2>Tuesday · Count and Compare</h2><h3>Numbers in Our World</h3><p>Count 1–5 safe objects together. Move one object at a time, then compare two groups using more, fewer and the same.</p><p><strong>Learning evidence:</strong> Arrange two groups and explain which has more.</p><a href="../apps/Sunny_ABCs_123s_Storytime/index.html">Open Sunny ABCs & 123s</a></article>
-<article class="lesson"><h2>Wednesday · Explore Color</h2><h3>Color & Observation</h3><p>Find two colors around the room. Name them, notice light and dark examples, and describe what changes when colors are combined in art.</p><p><strong>Learning evidence:</strong> Create an original two-color drawing and describe the choices.</p><a href="../apps/Art_color_studio/index.html">Open Art Color Studio</a></article>
-<article class="lesson"><h2>Thursday · Feel and Connect</h2><h3>Friendship & Feelings</h3><p>Use a fictional story about a friend needing help. Model naming a feeling, asking a question and choosing a kind action.</p><p><strong>Learning evidence:</strong> Role-play a respectful response to a pretend friend.</p><a href="../apps/Life_skills_little_Tikes_Life_Skills_Emotions_Friendship_Garden/index.html">Open Friendship Garden</a></article>
-<article class="lesson"><h2>Friday · Share and Reflect</h2><h3>My Mini Showcase</h3><p>Invite the learner to retell a story, count objects, show art and practice a helpful phrase. Let them choose speaking, pointing or drawing.</p><p><strong>Learning evidence:</strong> A grown-up notes three things the learner tried and one gentle goal for next week.</p><a href="../apps/ABC_Story_Time/index.html">Revisit Story Time</a></article><p><a href="../index.html">Return to Preschool Activities</a></p><footer>Jennifer Kay Pearl · Khaemenes Academy</footer></main>
-
-<!-- Preschool contained canonical shell -->
-<script src="/Khaemenes_Preschool.github.io/assets/preschool-local-menu-adapter.js"></script>\n<script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
-<script>VNV_TICKER.autoPopulate({label:"Preschool Quick Links",max:7,cleanLegacy:true,links:[
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Khaemenes Preschool Five Days of Discovery: a free, colorful, play-based 42-week preschool lesson pathway.">
+<meta name="theme-color" content="#243038">
+<title>Five Days of Discovery · Khaemenes Preschool</title>
+<link rel="stylesheet" href="./five-days-of-discovery.css?v=20261123-1">
+<script src="/Khaemenes_Preschool.github.io/assets/preschool-global-standard-v1.js" defer data-preschool-global-standard="18-33-66-auto-no333"></script>
+</head>
+<body>
+<nav class="discover-breadcrumbs" aria-label="Breadcrumb"><a href="../#weeklyGarden">🏡 Preschool Home</a> · Five Days of Discovery</nav>
+<main class="discover-shell" id="main">
+  <header class="discover-hero">
+    <p class="discover-eyebrow">Khaemenes Academy</p>
+    <h1>Five Days of Discovery</h1>
+    <p class="discover-grade">Preschool · Pre-K</p>
+  </header>
+  <section class="discover-summary" aria-label="Our learning invitation">
+    <p>🌈 Five gentle days to listen, count, wonder, connect, and share. Play together, explore in any order, and follow your own curiosity. No grades, timers, sign-in, or required evidence.</p>
+  </section>
+  <section class="discover-week" aria-label="Choose our Preschool week">
+    <p class="discover-week-label">🌱 This Week in Our Learning Garden</p>
+    <h2 id="discoveryWeekTheme">Welcome to Our Learning Garden</h2>
+    <div class="discover-week-controls">
+      <button id="discoveryPrev" type="button" aria-label="Previous Preschool week">←</button>
+      <label for="discoveryWeekSelect">Week <select id="discoveryWeekSelect" aria-label="Choose Preschool week"><option value="1">Week 1</option></select></label>
+      <button id="discoveryNext" type="button" aria-label="Next Preschool week">→</button>
+    </div>
+    <p class="discover-week-hint" id="discoveryWeekText">Week 1 of 42 · Welcome to Our Learning Garden</p>
+    <p id="discoveryStatus" role="status" aria-live="polite">Choose a day to begin exploring.</p>
+  </section>
+  <nav class="discover-day-nav" aria-label="Jump to a learning day">
+    <a href="#day1">📚 Monday</a>
+    <a href="#day2">🔢 Tuesday</a>
+    <a href="#day3">🎨 Wednesday</a>
+    <a href="#day4">💛 Thursday</a>
+    <a href="#day5">🌟 Friday</a>
+  </nav>
+  <section class="discover-days" id="discoveryDays" aria-label="Five days of Preschool lessons">
+      <details class="discover-lesson" id="day1" open>
+        <summary><span class="day-icon" aria-hidden="true">📚</span><span class="day-copy"><span class="day-name">Monday · Listen &amp; Notice</span><span class="day-topic">Story &amp; Sounds</span></span><span class="day-toggle" aria-hidden="true"></span></summary>
+        <div class="discover-lesson-body">
+          <section><h3>🌱 Let's discover</h3><p class="discover-invitation">Read a short story aloud. Invite the child to name a character, point to an object and clap syllables in one familiar word.</p></section>
+          <section class="discover-activity"><span class="activity-icon" aria-hidden="true">📚</span><h3>🎲 Let's try it!</h3><p class="discover-try">Choose a story picture. Ask what the child noticed, then listen or point together.</p><p class="discover-app-caption">Choose a playful activity and enjoy it together.</p><p class="discover-extra-caption" hidden></p></section>
+          <div class="discover-actions"><a class="discover-play primary" href="../apps/ABC_Story_Time/index.html" aria-label="Play the Monday learning activity">PLAY</a><a class="discover-play secondary" hidden>PLAY</a></div>
+          <details class="discover-reflect"><summary>⭐ Show what you noticed</summary><p class="discover-evidence">Show or tell one thing remembered from the story.</p></details>
+        </div>
+      </details>
+      <details class="discover-lesson" id="day2">
+        <summary><span class="day-icon" aria-hidden="true">🔢</span><span class="day-copy"><span class="day-name">Tuesday · Count &amp; Compare</span><span class="day-topic">Numbers in Our World</span></span><span class="day-toggle" aria-hidden="true"></span></summary>
+        <div class="discover-lesson-body">
+          <section><h3>🌱 Let's discover</h3><p class="discover-invitation">Count 1–5 safe objects together. Move one object at a time, then compare two groups using more, fewer and the same.</p></section>
+          <section class="discover-activity"><span class="activity-icon" aria-hidden="true">🔢</span><h3>🎲 Let's try it!</h3><p class="discover-try">Count a few safe objects together, then arrange them into two little groups.</p><p class="discover-app-caption">Choose a playful activity and enjoy it together.</p><p class="discover-extra-caption" hidden></p></section>
+          <div class="discover-actions"><a class="discover-play primary" href="../apps/Sunny_ABCs_123s_Storytime/index.html" aria-label="Play the Tuesday learning activity">PLAY</a><a class="discover-play secondary" hidden>PLAY</a></div>
+          <details class="discover-reflect"><summary>⭐ Show what you noticed</summary><p class="discover-evidence">Arrange two groups and show which has more.</p></details>
+        </div>
+      </details>
+      <details class="discover-lesson" id="day3">
+        <summary><span class="day-icon" aria-hidden="true">🎨</span><span class="day-copy"><span class="day-name">Wednesday · Wonder &amp; Create</span><span class="day-topic">Color, Nature &amp; Wonder</span></span><span class="day-toggle" aria-hidden="true"></span></summary>
+        <div class="discover-lesson-body">
+          <section><h3>🌱 Let's discover</h3><p class="discover-invitation">Find two colors around the room. Name them, notice light and dark examples, and describe what changes when colors are combined in art.</p></section>
+          <section class="discover-activity"><span class="activity-icon" aria-hidden="true">🎨</span><h3>🎲 Let's try it!</h3><p class="discover-try">Choose two colors and make a tiny picture, or point to a detail outdoors.</p><p class="discover-app-caption">Choose a playful activity and enjoy it together.</p><p class="discover-extra-caption" hidden></p></section>
+          <div class="discover-actions"><a class="discover-play primary" href="../apps/Art_color_studio/index.html" aria-label="Play the Wednesday learning activity">PLAY</a><a class="discover-play secondary" hidden>PLAY</a></div>
+          <details class="discover-reflect"><summary>⭐ Show what you noticed</summary><p class="discover-evidence">Create an original two-color drawing and describe one choice.</p></details>
+        </div>
+      </details>
+      <details class="discover-lesson" id="day4">
+        <summary><span class="day-icon" aria-hidden="true">💛</span><span class="day-copy"><span class="day-name">Thursday · Feel &amp; Connect</span><span class="day-topic">Friendship &amp; Feelings</span></span><span class="day-toggle" aria-hidden="true"></span></summary>
+        <div class="discover-lesson-body">
+          <section><h3>🌱 Let's discover</h3><p class="discover-invitation">Use a pretend story about a friend needing help. Model naming a feeling, asking a question and choosing a kind action.</p></section>
+          <section class="discover-activity"><span class="activity-icon" aria-hidden="true">💛</span><h3>🎲 Let's try it!</h3><p class="discover-try">Act out a small helping moment using a toy or puppet.</p><p class="discover-app-caption">Choose a playful activity and enjoy it together.</p><p class="discover-extra-caption" hidden></p></section>
+          <div class="discover-actions"><a class="discover-play primary" href="../apps/Life_skills_little_Tikes_Life_Skills_Emotions_Friendship_Garden/index.html" aria-label="Play the Thursday learning activity">PLAY</a><a class="discover-play secondary" hidden>PLAY</a></div>
+          <details class="discover-reflect"><summary>⭐ Show what you noticed</summary><p class="discover-evidence">Role-play a respectful response to a pretend friend.</p></details>
+        </div>
+      </details>
+      <details class="discover-lesson" id="day5">
+        <summary><span class="day-icon" aria-hidden="true">🌟</span><span class="day-copy"><span class="day-name">Friday · Share &amp; Celebrate</span><span class="day-topic">My Mini Showcase</span></span><span class="day-toggle" aria-hidden="true"></span></summary>
+        <div class="discover-lesson-body">
+          <section><h3>🌱 Let's discover</h3><p class="discover-invitation">Retell a story, count objects, show art and practice a helpful phrase. Choose speaking, pointing, signing, movement or drawing.</p></section>
+          <section class="discover-activity"><span class="activity-icon" aria-hidden="true">🌟</span><h3>🎲 Let's try it!</h3><p class="discover-try">Choose two favorite discoveries and share them in a way that feels joyful.</p><p class="discover-app-caption">Choose a playful activity and enjoy it together.</p><p class="discover-extra-caption" hidden></p></section>
+          <div class="discover-actions"><a class="discover-play primary" href="../apps/ABC_Story_Time/index.html" aria-label="Play the Friday learning activity">PLAY</a><a class="discover-play secondary" hidden>PLAY</a></div>
+          <details class="discover-reflect"><summary>⭐ Show what you noticed</summary><p class="discover-evidence">A grown-up may remember three things tried and one gentle goal for next week.</p></details>
+        </div>
+      </details>
+  </section>
+  <details class="discover-parent">
+    <summary>💛 A Little Note for Grown-Ups</summary>
+    <p>These lessons are invitations, not assessments. Children may speak, sign, point, move, draw, or simply watch. Participation can be short, repeated, or skipped. Keep observations private if you choose to make them; this page collects no learner records.</p>
+  </details>
+  <div class="discover-foot">
+    <p>🌟 Every discovery is worth celebrating!</p>
+    <a href="../#weeklyGarden">🌱 Back to Our Learning Garden</a>
+  </div>
+  <footer class="discover-footer">Jennifer Kay Pearl · Khaemenes Academy</footer>
+</main>
+<script src="../assets/preschool-catalog.js"></script>
+<script src="../curriculum/preschool-42-week-spine.js"></script>
+<script src="./five-days-of-discovery.js?v=20261123-1" defer></script>
+<!-- Existing canonical Preschool ticker, VNV header, language loader and local tools. -->
+<script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
+<script>
+window.VNV_TICKER?.autoPopulate({label:"Preschool Quick Links",max:7,cleanLegacy:true,links:[
  {label:"Home",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/"},
- {label:"Today",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#today"},
- {label:"Learning Garden",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#activities"},
+ {label:"This Week",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#weeklyGarden"},
  {label:"Reading",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#readingFeature"},
+ {label:"Explore & Play",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#new"},
  {label:"My Profile",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/student-profile/"},
  {label:"Graduation",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/graduation/"}
-]});</script>
+]});
+</script>
 <script src="https://vervenveda.com/assets/vnv-header-autopopulate.js"></script>
-<script>VNV_HEADER.mount({title:"Khaemenes Preschool",subtitle:"Crechè · Bright Beginnings",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});</script>
+<script>window.VNV_HEADER?.mount({title:"Khaemenes Preschool",subtitle:"Crechè · Five Days of Discovery",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});</script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-language-loader.js" defer></script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-local-toolbar.js" defer></script>
-</body></html>
+</body>
+</html>
