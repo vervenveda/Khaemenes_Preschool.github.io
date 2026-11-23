@@ -40,3 +40,47 @@ html body #vnv-language-rail #vnv-language-switch [data-vnv-coverage]{
  html body #vnv-language-rail{overflow-x:auto!important;justify-content:flex-start!important;scrollbar-width:thin}
  html body #vnv-language-rail #vnv-language-switch{min-width:max-content!important}
 }
+
+/* PRESCHOOL APPROVED COLOR CONTRACT · 2026-11-23
+   Purple (#b89cff), red/watermelon (#ff7a8a), orange (#ffb347)
+   and coral (#ffadad) surfaces use light cream (#fffbea) lettering.
+   Explicit selectors only: avoid guessing background colors or recoloring
+   forms, shared navigation, toolbars, inset light panels and other surfaces. */
+:root{
+ --prek-vivid-cream:#fffbea;
+ --prek-vivid-purple:#b89cff;
+ --prek-vivid-red:#ff7a8a;
+ --prek-vivid-orange:#ffb347;
+ --prek-vivid-coral:#ffadad;
+}
+html body :is(
+ [data-prek-surface="purple"],[data-prek-surface="red"],
+ [data-prek-surface="orange"],[data-prek-surface="coral"],
+ .prek-cream-on-vivid,
+ #pinnedApps .prek-pin-shell,
+ #pinnedApps .feature-accordion[data-feature="pinned"]>summary,
+ .feature-accordion[data-feature="profile"]>summary,
+ .feature-accordion[data-feature="support"]>summary,
+ #weeklyGarden .weekly-adventure:nth-child(8n+5),
+ #weeklyGarden .weekly-adventure:nth-child(8n+6),
+ #myHome .daily-school-card:nth-child(4)>.daily-school-btn,
+ #myHome .daily-school-card:nth-child(2)>.daily-school-btn
+ ){
+ color:var(--prek-vivid-cream)!important;
+ -webkit-text-fill-color:var(--prek-vivid-cream)!important;
+ text-shadow:none!important;
+}
+html body :is(
+ [data-prek-surface="purple"],[data-prek-surface="red"],
+ [data-prek-surface="orange"],[data-prek-surface="coral"],
+ .prek-cream-on-vivid,
+ #pinnedApps .feature-accordion[data-feature="pinned"]>summary,
+ .feature-accordion[data-feature="profile"]>summary,
+ .feature-accordion[data-feature="support"]>summary,
+ #weeklyGarden .weekly-adventure:nth-child(8n+5),
+ #weeklyGarden .weekly-adventure:nth-child(8n+6)
+ ) :is(h1,h2,h3,h4,p,small,strong,span,a,button,summary){
+ color:var(--prek-vivid-cream)!important;
+ -webkit-text-fill-color:var(--prek-vivid-cream)!important;
+ text-shadow:none!important;
+}
