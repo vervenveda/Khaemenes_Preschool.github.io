@@ -2084,3 +2084,36 @@ html body #contribute .feature-accordion[data-feature="support"]>summary :is(str
   }
   html body #contribute .creche-support-card{min-height:0!important;padding:18px!important;}
 }
+
+
+/* Preschool contrast correction: blue profile tab and vivid action lettering. */
+/* Distinguish accordion tab from the separately styled watermelon title card. */
+html body #profiles .feature-accordion[data-feature="profile"]>summary {
+  background:#245a96!important;
+  color:var(--prek-cream)!important;
+}
+html body #profiles .feature-accordion[data-feature="profile"]>summary :is(strong,span) {
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+/* Upper navigation: only the colored green Rooms, pink, orange and purple buttons. */
+html body .hero-orbit-labels>:nth-child(8n+3),
+html body .hero-orbit-labels>:nth-child(8n+4),
+html body .hero-orbit-labels>:nth-child(8n+5),
+html body .hero-orbit-labels>:nth-child(8n+6) {
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+/* Preserve button fills: set cream lettering on existing purple actions only. */
+html body #profiles .actions[aria-label="Pre-K student profile entrances"]>.btn.primary,
+html body #profiles .family-card:nth-child(2) .family-actions>:nth-child(1),
+html body #profiles .family-card:nth-child(3) .family-actions>:nth-child(4) {
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+/* Watermelon support tab retains its pink background. */
+html body #contribute .feature-accordion[data-feature="support"]>summary,
+html body #contribute .feature-accordion[data-feature="support"]>summary :is(strong,span) {
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
