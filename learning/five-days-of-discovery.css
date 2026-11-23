@@ -1,0 +1,94 @@
+/* Khaemenes Preschool · Five Days of Discovery
+   Standalone learning-engine stylesheet; visual tokens copied from approved
+   Preschool homepage. No homepage CSS or markup is modified. */
+:root{
+ --prek-cream:#fffbea;--prek-paper:#fffef8;--prek-charcoal:#243038;
+ --prek-sun:#ffe45e;--prek-sky:#67cfff;--prek-aqua:#62e4f5;
+ --prek-mint:#77e6b6;--prek-green:#a6e85c;--prek-pink:#ff88c8;
+ --prek-watermelon:#ff7a8a;--prek-orange:#ffb347;--prek-lavender:#b89cff;
+ --prek-coral:#ffadad;--prek-radius:7px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{margin:0;background:var(--prek-charcoal);color:var(--prek-cream);font:400 24px/1.45 "Comic Sans MS","Chalkboard SE",cursive}
+button,a,select,summary{font:inherit}
+button,summary{cursor:pointer}
+a{color:inherit}
+a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible{outline:4px solid #000;outline-offset:4px}
+.discover-breadcrumbs{margin:0 auto;max-width:1060px;padding:16px 18px;text-align:center;font-size:24px}
+.discover-breadcrumbs a{color:var(--prek-cream);text-decoration:none;border-bottom:2px solid var(--prek-sun)}
+.discover-shell{width:min(1040px,calc(100% - 28px));margin:0 auto;padding:10px 0 45px}
+.discover-shell>*{margin-bottom:16px}
+.discover-hero{border:5px solid #fff;border-radius:7px;padding:24px 24px 30px;text-align:center;background:var(--prek-sun);color:#000}
+.discover-eyebrow{margin:0;font-size:33px;font-weight:333;-webkit-text-stroke:.6px var(--prek-sky)}
+.discover-hero h1{font-size:clamp(42px,7vw,66px);font-weight:333;line-height:1.12;margin:4px 0 8px;-webkit-text-stroke:1px var(--prek-lavender);text-shadow:none}
+.discover-hero .discover-grade{margin:0;font-size:33px;font-weight:333;-webkit-text-stroke:.6px var(--prek-mint)}
+.discover-summary{background:var(--prek-lavender);color:#000;border:5px solid #fff;border-radius:7px;padding:20px 24px;text-align:center}
+.discover-summary p{margin:0 auto;max-width:850px;font-size:24px}
+.discover-week{background:var(--prek-aqua);color:#000;border:5px solid #fff;border-radius:7px;padding:20px;text-align:center}
+.discover-week .discover-week-label{font-size:24px;margin:0}
+.discover-week h2{font:333 clamp(30px,4vw,44px)/1.25 "Comic Sans MS","Chalkboard SE",cursive;margin:6px 0 16px;-webkit-text-stroke:.7px var(--prek-lavender)}
+.discover-week-controls{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+.discover-week-controls button,.discover-week-controls select{
+ padding:12px 16px;min-height:64px;border:4px solid #fff;border-radius:7px;background:var(--prek-sun);color:#000;font-size:24px;text-align:center
+}
+.discover-week-controls select{background:var(--prek-cream);min-width:125px}
+.discover-week-hint{font-size:24px;margin:14px auto 0;max-width:780px}
+.discover-day-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.discover-day-nav a{display:grid;place-items:center;min-height:78px;padding:10px 6px;border:4px solid #fff;border-radius:7px;color:#000;text-align:center;text-decoration:none;font-size:24px}
+.discover-day-nav a:nth-child(1){background:var(--prek-sun)}
+.discover-day-nav a:nth-child(2){background:var(--prek-sky)}
+.discover-day-nav a:nth-child(3){background:var(--prek-pink)}
+.discover-day-nav a:nth-child(4){background:var(--prek-mint)}
+.discover-day-nav a:nth-child(5){background:var(--prek-orange)}
+.discover-days{display:grid;gap:14px}
+.discover-lesson{border:5px solid #fff;border-radius:7px;background:var(--prek-sun);color:#000;overflow:hidden;scroll-margin-top:135px}
+.discover-lesson:nth-child(5n+2){background:var(--prek-sky)}
+.discover-lesson:nth-child(5n+3){background:var(--prek-pink)}
+.discover-lesson:nth-child(5n+4){background:var(--prek-mint)}
+.discover-lesson:nth-child(5n){background:var(--prek-orange)}
+.discover-lesson>summary{display:flex;align-items:center;gap:16px;min-height:96px;padding:16px 24px;list-style:none}
+.discover-lesson>summary::-webkit-details-marker{display:none}
+.discover-lesson>summary .day-icon{font-size:66px;line-height:1;flex:0 0 auto}
+.discover-lesson>summary .day-copy{display:grid;gap:2px;flex:1;min-width:0;text-align:left}
+.discover-lesson>summary .day-name{font-size:24px}
+.discover-lesson>summary .day-topic{font-size:33px;font-weight:333;line-height:1.2;-webkit-text-stroke:.55px var(--prek-lavender)}
+.discover-lesson>summary .day-toggle{font-size:33px;padding:0 5px}
+.discover-lesson[open]>summary .day-toggle::after{content:"−"}
+.discover-lesson:not([open])>summary .day-toggle::after{content:"+"}
+.discover-lesson-body{display:grid;gap:16px;padding:20px 24px 25px;border-top:5px solid #fff}
+.discover-lesson-body h3{font-size:30px;font-weight:333;line-height:1.2;margin:0;-webkit-text-stroke:.5px var(--prek-lavender)}
+.discover-lesson-body p{font-size:24px;margin:6px 0 0}
+.discover-activity{background:rgba(255,255,255,.52);padding:16px;border:3px solid #fff;border-radius:7px}
+.discover-activity .activity-icon{font-size:66px;line-height:1.1;display:block;margin-bottom:8px}
+.discover-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.discover-play{display:flex;align-items:center;justify-content:center;min-height:85px;padding:12px 14px;border:5px solid #fff;border-radius:7px;background:var(--prek-lavender);color:#000!important;text-decoration:none!important;font-size:30px;line-height:1.2;text-align:center}
+.discover-play:nth-child(2){background:var(--prek-aqua)}
+.discover-play[hidden]{display:none!important}
+.discover-play:hover{filter:brightness(.98)}
+.discover-reflect{border:3px solid #fff;border-radius:7px;padding:14px 18px;background:rgba(255,255,255,.42)}
+.discover-reflect summary{font-size:24px;font-weight:333;list-style:none}
+.discover-reflect summary::-webkit-details-marker{display:none}
+.discover-reflect p{margin-top:10px}
+.discover-parent{background:var(--prek-coral);color:#000;border:5px solid #fff;border-radius:7px;padding:0 18px}
+.discover-parent summary{font-size:30px;font-weight:333;padding:22px 10px;list-style:none;text-align:center}
+.discover-parent summary::-webkit-details-marker{display:none}
+.discover-parent p{padding:0 10px 18px;margin:0}
+.discover-foot{padding:24px 16px;text-align:center;background:var(--prek-mint);color:#000;border:5px solid #fff;border-radius:7px}
+.discover-foot p{margin:0 0 14px}
+.discover-foot a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:var(--prek-lavender);border:4px solid #fff;border-radius:7px;padding:12px 18px;min-height:64px;color:#000}
+.discover-footer{margin-top:32px;text-align:center;color:var(--prek-cream);padding-bottom:18px;font-size:24px}
+@media(max-width:760px){
+ .discover-day-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .discover-lesson>summary{padding:14px;gap:12px}
+ .discover-lesson>summary .day-icon{font-size:52px}
+ .discover-lesson>summary .day-topic{font-size:28px}
+ .discover-actions{grid-template-columns:1fr}
+ .discover-week-controls button,.discover-week-controls select{font-size:24px}
+}
+@media print{
+ body{background:#fff!important;color:#000!important}
+ .discover-lesson{break-inside:avoid}
+ .discover-lesson-body{display:grid!important}
+ .discover-parent,.discover-day-nav,.discover-week-controls{display:none!important}
+}
