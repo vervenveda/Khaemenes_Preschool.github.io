@@ -1037,6 +1037,99 @@ body[data-profile-stage="preschool"] main.shell :is(
   -webkit-text-stroke:0!important;
   text-shadow:none!important;
 }
+/* Blue/aqua and green/mint surfaces use BLACK readable lettering.
+   No palette changes and no site-wide effects. */
+body[data-profile-stage="preschool"] main.shell :is(.profile-hero,.prek-welcome,.prek-daily),
+body[data-profile-stage="preschool"] main.shell :is(.profile-hero,.prek-welcome,.prek-daily) :is(p,span,small,label,a,button,li),
+body[data-profile-stage="preschool"] main.shell :is(
+  .prek-menu .prek-tile:nth-child(2),.prek-menu .prek-tile:nth-child(6),
+  .prek-classes>a:nth-child(2),.prek-classes>a:nth-child(5),
+  .hero-actions .button.secondary
+),
+body[data-profile-stage="preschool"] main.shell :is(
+  .prek-menu .prek-tile:nth-child(2),.prek-menu .prek-tile:nth-child(6),
+  .prek-classes>a:nth-child(2),.prek-classes>a:nth-child(5),
+  .hero-actions .button.secondary
+) :is(span,p,a,button,small){
+  color:#000!important;
+  -webkit-text-fill-color:#000!important;
+  -webkit-text-stroke:0!important;
+  text-shadow:none!important;
+}
+/* Section headers retain their previously approved black-and-color outlines. */
+body[data-profile-stage="preschool"] main.shell .profile-hero .eyebrow{
+  -webkit-text-stroke:2px var(--prek-sky)!important;
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero #childTitle{
+  -webkit-text-stroke:2.5px var(--prek-lavender)!important;
+}
+/* The Academy-injected Picture & Colors entry becomes one bright, collapsed
+   accordion. Its input/check and original editor button remain functional. */
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry{
+  box-sizing:border-box!important;
+  width:100%!important;max-width:100%!important;
+  margin:14px auto 20px!important;
+  padding:0!important;
+  background:var(--prek-sun)!important;
+  color:#000!important;
+  border:5px solid #fff!important;border-radius:7px!important;
+  overflow:hidden!important;
+  box-shadow:none!important;
+  text-align:center!important;
+}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .prek-picture-accordion{
+  display:block!important;width:100%!important;
+  background:var(--prek-sun)!important;border:0!important;
+}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .prek-picture-summary{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  cursor:pointer!important;min-height:94px!important;gap:12px!important;
+  list-style:none!important;
+  padding:20px!important;margin:0!important;
+  font:400 33px/1.25 "Comic Sans MS","Chalkboard SE",cursive!important;
+  color:#000!important;-webkit-text-fill-color:#000!important;
+  -webkit-text-stroke:2px var(--prek-lavender)!important;
+  paint-order:stroke fill!important;text-shadow:none!important;
+}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .prek-picture-summary::-webkit-details-marker{display:none!important}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .prek-picture-summary::after{
+  content:"＋";font-size:33px!important;color:#000!important;
+  -webkit-text-fill-color:#000!important;
+}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry details[open]>.prek-picture-summary::after{content:"−"}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .prek-picture-contents{
+  border-top:5px solid #fff!important;
+  padding:22px 20px 26px!important;
+}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry :is(p,label,.kpu-status){
+  color:#000!important;-webkit-text-fill-color:#000!important;
+  font:400 24px/1.5 "Comic Sans MS","Chalkboard SE",cursive!important;
+  text-shadow:none!important;
+}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .kpu-consent{
+  background:#fff!important;color:#000!important;
+  border:5px solid var(--prek-lavender)!important;
+  border-radius:7px!important;
+}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .kpu-open{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  background:var(--prek-lavender)!important;
+  color:#000!important;-webkit-text-fill-color:#000!important;
+  font:400 24px/1.35 "Comic Sans MS","Chalkboard SE",cursive!important;
+  text-shadow:none!important;border:5px solid #fff!important;
+  border-radius:7px!important;min-height:90px!important;
+  padding:14px 24px!important;cursor:pointer!important;
+  opacity:1!important;
+}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .kpu-status a{
+  color:#000!important;-webkit-text-fill-color:#000!important;
+  text-decoration:underline!important;font-size:24px!important;
+}
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .prek-picture-summary:focus-visible,
+body[data-profile-stage="preschool"] main.shell #khaePrekUniversalLookEntry .kpu-open:focus-visible{
+  outline:4px solid #000!important;outline-offset:-5px!important;
+}
+
 /* Preserve editable white form inputs with dark text. */
 body[data-profile-stage="preschool"] main.shell :is(input,select,textarea,option){
   background:#fff!important;color:var(--prek-charcoal)!important;
