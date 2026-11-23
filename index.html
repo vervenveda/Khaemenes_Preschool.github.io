@@ -2200,7 +2200,7 @@ document.addEventListener("DOMContentLoaded",function(){
     return {label:(app.icon?app.icon+" ":"")+app.title,
       href:"https://vervenveda.com/Khaemenes_Preschool.github.io/apps/"+app.file.split("/").map(encodeURIComponent).join("/")};
   });
-  window.VNV_TICKER?.autoPopulate({label:"🌈 Preschool Adventures",ariaLabel:"Rotating child-friendly Preschool activities",max:count,cleanLegacy:true,links});
+  window.VNV_TICKER?.autoPopulate({label:"🌈 Preschool Adventures",ariaLabel:"Rotating child-friendly Preschool activities",max:count,cleanLegacy:true,before:"body > .breadcrumbs",links});
 })();
 </script>
 <script src="https://vervenveda.com/assets/vnv-header-autopopulate.js"></script>
