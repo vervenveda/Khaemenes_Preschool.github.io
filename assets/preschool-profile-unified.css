@@ -778,3 +778,55 @@ body[data-profile-stage="preschool"] main.shell #learnerSwitch{
  body[data-profile-stage="preschool"] main.shell .prek-profile-title h1{font-size:clamp(44px,9vw,77px)!important}
  body[data-profile-stage="preschool"] main.shell .prek-profile-info p{font-size:26px!important}
 }
+
+/* USER-APPROVED TYPE CONTRACT — main, 2026-11-23
+   Exact cheerful home colors STAY unchanged. Cream WHITE typography is
+   intentional, even on bright yellow/pink/aqua panels. Provide a strong
+   charcoal edge for readability rather than silently recoloring surfaces. */
+:root{--prek-requested-white:#fffbea}
+body[data-profile-stage="preschool"] .prek-profile-breadcrumbs,
+body[data-profile-stage="preschool"] .prek-profile-breadcrumbs :is(a,span),
+body[data-profile-stage="preschool"] main.shell :is(.prek-profile-title,.prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,.prek-menu .prek-tile,.prek-classes a,footer),
+body[data-profile-stage="preschool"] main.shell :is(.prek-profile-title,.prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,.prek-menu .prek-tile,.prek-classes a,footer) :is(h1,h2,h3,h4,h5,h6,p,span,small,em,strong,b,label,a,button,li){
+ color:#fffbea!important;
+ -webkit-text-fill-color:#fffbea!important;
+ font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
+ font-weight:400!important;
+ text-shadow:0 1px 2px rgba(36,48,56,.95),1px 0 1px rgba(36,48,56,.85),-1px 0 1px rgba(36,48,56,.85)!important
+}
+body[data-profile-stage="preschool"] .prek-profile-breadcrumbs,
+body[data-profile-stage="preschool"] .prek-profile-breadcrumbs :is(a,span),
+body[data-profile-stage="preschool"] main.shell :is(.prek-profile-title,.prek-profile-info,.profile-hero,.prek-welcome,.prek-daily,.prek-menu .prek-tile,.prek-classes a,footer) :is(p,span,small,label,a,button,li){
+ font-size:max(24px,1.5rem)!important;
+ line-height:1.45!important
+}
+body[data-profile-stage="preschool"] main.shell .prek-profile-title .eyebrow{font-size:33px!important}
+body[data-profile-stage="preschool"] main.shell .prek-profile-title h1{font-size:77px!important}
+body[data-profile-stage="preschool"] main.shell .prek-profile-info p{font-size:30px!important}
+body[data-profile-stage="preschool"] main.shell .profile-hero #childTitle{font-size:clamp(36px,5vw,55px)!important}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile>span:first-child,
+body[data-profile-stage="preschool"] main.shell .prek-classes .prek-class-icon,
+body[data-profile-stage="preschool"] main.shell .prek-studio-sticker{font-size:66px!important}
+/* Profile editor and account forms remain readable against their WHITE input
+   surfaces. Text on brightly colored buttons and cards stays cream. */
+body[data-profile-stage="preschool"] main.shell :is(input,select,textarea,option){
+ color:#243038!important;-webkit-text-fill-color:#243038!important;
+ background-color:#ffffff!important;font-size:24px!important
+}
+body[data-profile-stage="preschool"] main.shell :is(.notice,#accountNote,#learnerSwitch){
+ background:#ffffff!important;color:#243038!important
+}
+body[data-profile-stage="preschool"] main.shell :is(.notice,#accountNote,#learnerSwitch) :is(p,label,span,a){
+ color:#243038!important;-webkit-text-fill-color:#243038!important;
+ text-shadow:none!important;font-size:24px!important
+}
+/* Preserve cream on the two primary personalization buttons. */
+body[data-profile-stage="preschool"] main.shell .profile-hero #prekEditProfileLaunch,
+body[data-profile-stage="preschool"] main.shell .profile-hero #prekEditBackgroundLaunch,
+body[data-profile-stage="preschool"] main.shell .profile-hero .hero-actions :is(a,button){
+ color:#fffbea!important;-webkit-text-fill-color:#fffbea!important;
+ font-size:24px!important
+}
+@media(max-width:760px){
+ body[data-profile-stage="preschool"] main.shell .prek-profile-title h1{font-size:clamp(44px,9vw,77px)!important}
+}
