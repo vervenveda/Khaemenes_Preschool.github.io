@@ -188,6 +188,8 @@ function configurePictureAccordion(){
  const statusNode=section.querySelector(".kpu-status");
  if(!heading||!button||!statusNode)return false;
  section.dataset.prekPictureAccordion="ready";
+ section.removeAttribute("aria-labelledby");
+ section.setAttribute("aria-label","My Picture and Colors");
  const details=node("details",{class:"prek-picture-accordion"});
  const summary=node("summary",{class:"prek-picture-summary"},"🎨 My Picture & Colors");
  summary.setAttribute("aria-label","Expand My Picture and Colors");
