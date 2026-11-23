@@ -165,7 +165,7 @@ button,a,.btn,summary{touch-action:manipulation}
     0 0 0 10px #fff,
     0 0 0 20px var(--prek-sun),
     0 0 0 30px var(--prek-pink),
-    0 0 0 40px var(--prek-sky),
+    0 0 0 40px var(--prek-lavender),
     0 22px 45px rgba(36,48,56,.18);
   animation:creche-breathe 7s ease-in-out infinite alternate;
 }
@@ -226,7 +226,7 @@ button,a,.btn,summary{touch-action:manipulation}
 }
 .orbit-button:nth-of-type(1){left:3%;top:7%;background:var(--prek-sun)}
 .orbit-button:nth-of-type(2){right:3%;top:8%;background:var(--prek-pink);animation-delay:-.5s}
-.orbit-button:nth-of-type(3){left:0;top:42%;background:var(--prek-aqua);animation-delay:-1s}
+.orbit-button:nth-of-type(3){left:0;top:42%;background:var(--prek-watermelon);animation-delay:-1s}
 .orbit-button:nth-of-type(4){right:0;top:42%;background:var(--prek-green);animation-delay:-1.5s}
 .orbit-button:nth-of-type(5){left:13%;bottom:1%;background:var(--prek-orange);animation-delay:-2s}
 .orbit-button:nth-of-type(6){right:13%;bottom:1%;background:var(--prek-lavender);animation-delay:-2.4s}
@@ -264,12 +264,12 @@ button,a,.btn,summary{touch-action:manipulation}
   box-shadow:none;
 }
 .hero-orbit-labels>:nth-child(8n+1){background:var(--prek-sun)}
-.hero-orbit-labels>:nth-child(8n+2){background:var(--prek-aqua)}
-.hero-orbit-labels>:nth-child(8n+3){background:var(--prek-green)}
+.hero-orbit-labels>:nth-child(8n+2){background:var(--prek-lavender)}
+.hero-orbit-labels>:nth-child(8n+3){background:var(--prek-green);color:var(--prek-cream);-webkit-text-fill-color:var(--prek-cream)}
 .hero-orbit-labels>:nth-child(8n+4){background:var(--prek-pink)}
 .hero-orbit-labels>:nth-child(8n+5){background:var(--prek-orange)}
 .hero-orbit-labels>:nth-child(8n+6){background:var(--prek-lavender)}
-.hero-orbit-labels>:nth-child(8n+7){background:var(--prek-sky)}
+.hero-orbit-labels>:nth-child(8n+7){background:var(--prek-watermelon)}
 .hero-orbit-labels>:nth-child(8n){background:var(--prek-mint)}
 .hero-orbit-labels>:is(a,button):hover{transform:translateY(-2px);filter:saturate(1.06)}
 .view-choice[aria-pressed="true"]{box-shadow:inset 0 0 0 3px var(--prek-charcoal)}
@@ -569,6 +569,8 @@ main > section.feature-section{
    EXPLORE & PLAY
    ========================================================================== */
 #new .explore-heading{
+  color:var(--prek-cream);
+  -webkit-text-fill-color:var(--prek-cream);
   width:min(var(--prek-narrow),100%);
   padding:22px 24px;
   background:var(--prek-green);
@@ -899,7 +901,7 @@ main > section.feature-section{
   box-shadow:var(--prek-shadow-soft);
 }
 .family-card:nth-child(6n+1){background:var(--prek-sun)}
-.family-card:nth-child(6n+2){background:var(--prek-aqua)}
+.family-card:nth-child(6n+2){background:var(--prek-orange)}
 .family-card:nth-child(6n+3){background:var(--prek-green)}
 .family-card:nth-child(6n+4){background:var(--prek-pink)}
 .family-card:nth-child(6n+5){background:var(--prek-orange)}
@@ -2128,12 +2130,12 @@ section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywher
 #profiles .family-grid>.family-card:nth-child(6){
   background:var(--prek-purple,#7957ff)!important;
 }
-#profiles .family-grid>.family-card:nth-child(-n+3) :is(h3,p){
+#profiles .family-grid>.family-card:nth-child(1) :is(h3,p){
   color:var(--prek-charcoal,#243038)!important;
   -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
   text-shadow:none!important;
 }
-#profiles .family-grid>.family-card:nth-child(n+4) :is(h3,p){
+#profiles .family-grid>.family-card:nth-child(n+2) :is(h3,p,small,strong,span:not(.family-icon)){
   color:var(--prek-cream,#fffbea)!important;
   -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
   text-shadow:none!important;
@@ -2168,7 +2170,7 @@ section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywher
   color:var(--prek-charcoal,#243038)!important;
   border:3px solid #fff!important;border-radius:7px!important;
 }
-#profiles #pinnedGames :is(h3,p,.continuity-note){
+#profiles #pinnedGames :is(h3,p,.continuity-note,.pinned-list,.pinned-list>*,.pinned-list p,.pinned-list span,.pinned-list small){
   color:var(--prek-charcoal,#243038)!important;
   -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
   text-shadow:none!important;
