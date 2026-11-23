@@ -68,11 +68,11 @@
       <a href="#weeklyGarden">This Week</a>
       <a href="#today">Today</a>
       <a href="#graduationFeature">Graduation</a>
-      <button type="button" id="surpriseHero">🎈 Surprise Me</button>
-      <a href="./apps/ABC_Story_Time/index.html">📚 Story Time</a>
+      <a href="#pinnedApps">📌 Pinned Apps</a>
+      <a href="#readingFeature">📚 Reading Time</a>
       <button type="button" id="menuBtn" aria-label="Open complete Preschool directory" aria-controls="menuOverlay" aria-expanded="false">☰ Preschool Directory</button>
-      <button class="view-choice" id="childViewBtn" type="button" data-view-choice="child" aria-pressed="true">🌈 Child View</button>
-      <button class="view-choice" id="grownupViewBtn" type="button" data-view-choice="grownup" aria-pressed="false" aria-controls="prekParentCenter">🧑‍🧒 Grown-Up Center</button>
+      <a href="#new">🎨 Explore &amp; Play</a>
+      <a href="https://vervenveda.com/Khaemenes_Academy.github.io/family/" data-prek-grownup-exit="true">🧑‍🧒 Parent Portal</a>
     </nav>
   </div>
 </section>
@@ -2008,11 +2008,11 @@ chooseOffscreenPrompt();
 $("year").textContent=new Date().getFullYear();
 $("search").addEventListener("input",filterActivities);$("category").addEventListener("change",filterActivities);
 $("favoritesBtn").addEventListener("click",()=>{favoritesOnly=!favoritesOnly;updateFavorites();filterActivities()});
-$("randomBtn").addEventListener("click",()=>chooseRandom($("category").value));$("surpriseHero").addEventListener("click",()=>chooseRandom());$("orbitRandom")?.addEventListener("click",()=>chooseRandom());
+$("randomBtn").addEventListener("click",()=>chooseRandom($("category").value));$("orbitRandom")?.addEventListener("click",()=>chooseRandom());
 $("calmBtn").addEventListener("click",()=>setCalm(!calm));$("menuBtn").addEventListener("click",openMenu);$("closeMenu").addEventListener("click",()=>closeMenu(true));
-$("childViewBtn").addEventListener("click",()=>setView("child",{scroll:true}));
+
 document.getElementById("prekParentClose")?.addEventListener("click",()=>setView("child",{scroll:false}));
-$("grownupViewBtn").addEventListener("click",()=>setView("grownup",{scroll:true}));
+
 $("homeSurprise")?.addEventListener("click",()=>chooseRandom());
 $("homeCalmBtn").addEventListener("click",()=>setCalm(!calm));
 $("motionBtn").addEventListener("click",()=>setReducedMotion(!reduceMotion));
