@@ -583,3 +583,92 @@ dialog.prek-edit-dialog .prek-edit-stickers button{background:#dcfaff;color:#273
 dialog.prek-edit-dialog button[aria-pressed=true]{outline:4px solid #7957ff;outline-offset:2px}
 .prek-edit-status{min-height:1.45em;color:#273847;font-size:24px!important}
 @media(max-width:620px){.prek-edit-colors,.prek-edit-stickers{grid-template-columns:repeat(2,minmax(0,1fr))}dialog.prek-edit-dialog{padding:14px}.prek-edit-head .prek-edit-close{margin:0 auto}}
+
+/* ==================================================================
+  PRE-K PROFILE · canonical homepage parity · 2026-11-23
+  Only page-specific design; shared VNV header, ticker and docks own themselves.
+  Palette is sourced from creche-home-fresh-v1.css.
+================================================================== */
+:root{
+ --prek-sun:#ffe45e;--prek-sky:#67cfff;--prek-aqua:#62e4f5;
+ --prek-mint:#77e6b6;--prek-green:#a6e85c;--prek-pink:#ff88c8;
+ --prek-watermelon:#ff7a8a;--prek-orange:#ffb347;
+ --prek-lavender:#b89cff;--prek-charcoal:#243038;
+ --prek-cream:#fffbea;--prek-coral:#ffadad;
+}
+body[data-prek-background="sky"],body[data-prek-background="sunset"],body:not([data-prek-background]){
+ background:var(--prek-coral)!important;background-image:none!important;color:var(--prek-charcoal)!important
+}
+body main.shell{width:min(1160px,calc(100% - 32px))!important;margin:0 auto!important;text-align:center!important}
+body main.shell .prek-profile-title{
+ background:var(--prek-sun)!important;color:var(--prek-charcoal)!important;
+ border:3px solid #fff;border-radius:7px;
+ padding:30px 24px 34px;margin:0 auto 22px;width:100%;text-align:center;
+}
+body main.shell .prek-profile-title .eyebrow{
+ font:400 33px/1.25 "Comic Sans MS","Chalkboard SE",cursive!important;
+ color:#243038!important;letter-spacing:0!important;text-transform:none!important;margin:0 0 10px
+}
+body main.shell .prek-profile-title h1{
+ font:400 clamp(48px,6vw,77px)/1.12 "Comic Sans MS","Chalkboard SE",cursive!important;
+ color:#243038!important;letter-spacing:0!important;margin:0 auto 14px;max-width:100%;
+ overflow-wrap:anywhere
+}
+body main.shell .prek-profile-title .prek-profile-description{
+ max-width:900px;margin:0 auto!important;color:#243038!important;
+ font:400 24px/1.5 "Comic Sans MS","Chalkboard SE",cursive!important
+}
+body main.shell .prek-profile-title .prek-profile-description span{display:block;font-size:24px!important}
+body main.shell #accountNote{background:#fff!important;color:#243038!important;border:3px solid var(--prek-pink)!important}
+body main.shell .profile-hero{background:var(--prek-aqua)!important;border-color:var(--prek-sun)!important}
+body main.shell .prek-welcome{background:var(--prek-mint)!important;border-color:#fff!important}
+body main.shell .prek-daily{background:var(--prek-green)!important;border-color:#fff!important}
+body main.shell .prek-menu .prek-tile:nth-child(6n+1){background:var(--prek-sun)!important;color:#243038!important}
+body main.shell .prek-menu .prek-tile:nth-child(6n+2){background:var(--prek-aqua)!important;color:#243038!important}
+body main.shell .prek-menu .prek-tile:nth-child(6n+3){background:var(--prek-pink)!important;color:#243038!important}
+body main.shell .prek-menu .prek-tile:nth-child(6n+4){background:var(--prek-mint)!important;color:#243038!important}
+body main.shell .prek-menu .prek-tile:nth-child(6n+5){background:var(--prek-lavender)!important;color:#243038!important}
+body main.shell .prek-menu .prek-tile:nth-child(6n){background:var(--prek-orange)!important;color:#243038!important}
+body main.shell .prek-menu .prek-tile{min-height:190px!important;display:flex;align-items:center;justify-content:center}
+body main.shell .prek-menu .prek-tile>span,body main.shell .prek-classes .prek-class-icon{font-size:66px!important;line-height:1.1!important;display:block}
+body main.shell .prek-classes a{min-height:140px!important;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center}
+body main.shell .prek-classes a:nth-child(6n+1){background:var(--prek-sun)!important}
+body main.shell .prek-classes a:nth-child(6n+2){background:var(--prek-aqua)!important}
+body main.shell .prek-classes a:nth-child(6n+3){background:var(--prek-mint)!important}
+body main.shell .prek-classes a:nth-child(6n+4){background:var(--prek-pink)!important}
+body main.shell .prek-classes a:nth-child(6n+5){background:var(--prek-lavender)!important}
+body main.shell .prek-classes a:nth-child(6n){background:var(--prek-orange)!important}
+body main.shell .prek-classes{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+body main.shell .prek-classes a,.prek-menu .prek-tile,body main.shell :is(button,a.button){font-weight:400!important}
+body main.shell .prek-menu .prek-tile,body main.shell .prek-classes a{border-radius:7px!important}
+body main.shell #learnerSwitch{background:#fff!important}
+body main.shell #accountNote a{color:#243038!important;text-decoration:underline!important}
+body main.shell footer{
+ text-align:center!important;background:var(--prek-sky)!important;color:var(--prek-charcoal)!important;
+ border:3px solid #fff;border-radius:7px;margin:26px auto 16px;padding:24px;
+ font:400 24px/1.4 "Comic Sans MS","Chalkboard SE",cursive!important
+}
+.prek-profile-breadcrumbs{
+ width:100%;padding:12px 16px;text-align:center;
+ background:#fff!important;color:#243038!important;border-bottom:3px solid var(--prek-sun);
+ font:400 24px/1.4 "Comic Sans MS","Chalkboard SE",cursive!important
+}
+.prek-profile-breadcrumbs a{color:inherit!important;text-decoration:underline}
+html body #vnvEcosystemUtilityDock{display:grid!important}
+html body #vnvClassToolsToolbar{display:block!important}
+html body #prekLocalToolbar,html body #prekExitNotice,html body #preschoolLocalMenuOverlay{display:none!important}
+body main.shell .profile-hero #childTitle{font-size:clamp(36px,5vw,55px)!important}
+body main.shell .hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:14px}
+body main.shell .hero-actions>a,body main.shell .hero-actions>button{width:100%;min-height:82px!important;border-radius:7px!important}
+body main.shell #prekEditProfileLaunch{background:#7957ff!important;color:#fffbea!important}
+body main.shell #prekEditBackgroundLaunch{background:#b62c78!important;color:#fffbea!important}
+body main.shell .profile-hero .photo{border-radius:7px}
+@media(max-width:720px){
+ body main.shell .prek-profile-title{padding:20px 12px}
+ body main.shell .hero-actions{grid-template-columns:1fr}
+ body main.shell .prek-menu,body main.shell .prek-classes{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:460px){
+ body main.shell .prek-classes{grid-template-columns:1fr!important}
+ body main.shell .prek-profile-title h1{font-size:clamp(45px,10vw,66px)!important}
+}
