@@ -14,7 +14,7 @@ function load(src){return new Promise(resolve=>{
 function sharedChrome(){
  if(document.querySelector('link[data-preschool-shared-chrome]'))return;
  const link=document.createElement("link");
- link.rel="stylesheet";link.href="/Khaemenes_Preschool.github.io/assets/preschool-shared-chrome.css?v=20261123-3";
+ link.rel="stylesheet";link.href="/Khaemenes_Preschool.github.io/assets/preschool-shared-chrome.css?v=20261123-4";
  link.dataset.preschoolSharedChrome="true";document.head.append(link);
 }
 async function start(){
