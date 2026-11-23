@@ -13,7 +13,7 @@ function guardExternal(event){
  const anchor=event.target.closest?.("a[href]");
  if(!anchor||anchor.hasAttribute("download")||anchor.dataset.prekGrownupExit==="true")return;
  if(samePreschool(anchor.href))return;
- if(anchor.closest("#vnvEnrichedMenuOverlay")||anchor.closest("#vnvHeaderAutoPopulate"))return;
+ if(anchor.closest("#vnvEnrichedMenuOverlay")||anchor.closest("#vnvHeaderAutoPopulate")||anchor.closest("#vnvClassToolsToolbar"))return;
  if(anchor.closest("#prekParentCenter")||document.body.dataset.view==="grownup")return;
  event.preventDefault();
  const notice=document.getElementById("prekExitNotice");
