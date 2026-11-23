@@ -98,7 +98,11 @@ function renderBackground(){
   delete document.body.dataset.prekStudioColor;
  }
  const sticker=$("prekStudioSticker");
- if(sticker)sticker.textContent=stickers.includes(saved?.sticker)?saved.sticker:"🌈";
+ if(sticker){
+  const chosen=stickers.includes(saved?.sticker)&&saved.sticker!=="🌈"?saved.sticker:"";
+  sticker.textContent=chosen;
+  sticker.hidden=!chosen;
+ }
 }
 let profileDialog=null,backgroundDialog=null;
 function openProfile(){
@@ -171,7 +175,7 @@ function mount(){
  addLaunches();
  const hero=document.querySelector("main.shell .profile-hero>div:last-child");
  if(hero&&!$("prekPersonalIntroduction"))hero.append(node("div",{id:"prekPersonalIntroduction",class:"prek-personal-introduction","aria-live":"polite"}));
- const frame=$("photoPreview");if(frame&&!$("prekStudioSticker"))frame.after(node("span",{id:"prekStudioSticker",class:"prek-studio-sticker","aria-hidden":"true"},"🌈"));
+ const frame=$("photoPreview");if(frame&&!$("prekStudioSticker")){const sticker=node("span",{id:"prekStudioSticker",class:"prek-studio-sticker","aria-hidden":"true"});sticker.hidden=true;frame.after(sticker)}
  renderPublic();renderBackground();
 }
 window.KhaemenesPrekPersonalization=Object.freeze({mount,refresh:()=>{renderPublic();renderBackground()}});
