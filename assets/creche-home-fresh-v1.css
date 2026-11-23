@@ -2312,12 +2312,10 @@ section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywher
   -webkit-text-fill-color:var(--prek-cream)!important;
   text-shadow:none!important;
 }
-:is(.feature-accordion-panel,.weekly-garden-card,.activity-grid,.category-grid,.new-grid,.family-grid)
-:is(a,button)[class*="btn"],
-:is(.feature-accordion-panel,.weekly-garden-card,.activity-grid,.category-grid,.new-grid,.family-grid)
-:is(a,button)[class*="action"],
 #profiles .family-card .family-actions>.family-action,
-#contribute #crecheSupportLaunch{
+#contribute #crecheSupportLaunch,
+#today .activity-grid .card-actions :is(.open,.read-card,.favorite),
+#weeklyGarden .weekly-continue #continueLink{
   color:var(--prek-cream)!important;
   -webkit-text-fill-color:var(--prek-cream)!important;
 }
