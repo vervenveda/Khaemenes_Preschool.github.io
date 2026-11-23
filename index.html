@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-standard.css">
 <link rel="stylesheet" href="https://vervenveda.com/Khaemenes_Academy.github.io/assets/khaemenes-landing-toolbar.css">
 <link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#67cfff"><link rel="stylesheet" href="./assets/creche-home-fresh-v1.css" data-creche-visual-standard="creche-home-fresh-v1">
-  <link rel="stylesheet" href="/Khaemenes_Preschool.github.io/assets/preschool-playful-theme.css" data-preschool-playful-theme>\n</head>
+  <link rel="stylesheet" href="/Khaemenes_Preschool.github.io/assets/preschool-playful-theme.css" data-preschool-playful-theme>
+</head>
 <body id="top" data-view="child">
 <a class="skip" href="#activities">Skip to learning adventures</a>
 <div class="sky-decor" aria-hidden="true"><span class="float-shape">⭐</span><span class="float-shape">♥</span><span class="float-shape">●</span><span class="float-shape">▲</span></div>
@@ -2181,18 +2182,30 @@ document.addEventListener("DOMContentLoaded",function(){
 <script id="creche-weekly-school-sync">document.addEventListener("DOMContentLoaded",()=>{syncDailySchoolToWeek();renderWeeklyGardenState();});</script>
 <script id="preschool-offline-shell">if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script>
 
-<!-- Preschool contained canonical shell -->
-<script src="/Khaemenes_Preschool.github.io/assets/preschool-local-menu-adapter.js"></script>\n<script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
-<script>VNV_TICKER.autoPopulate({label:"Preschool Quick Links",max:7,cleanLegacy:true,links:[
- {label:"Home",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/"},
- {label:"Today",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#today"},
- {label:"Learning Garden",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#activities"},
- {label:"Reading",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/#readingFeature"},
- {label:"My Profile",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/student-profile/"},
- {label:"Graduation",href:"https://vervenveda.com/Khaemenes_Preschool.github.io/graduation/"}
-]});</script>
+<!-- Canonical auto-populating child-adventure ticker + official branched ecosystem header. -->
+<script src="https://vervenveda.com/assets/vnv-ticker-autopopulate.js" data-vnv-ticker-autopopulate></script>
+<script>
+(function(){
+  "use strict";
+  const catalog=window.KhaemenesPreschoolCatalog;
+  const activities=Array.isArray(catalog?.activities)?catalog.activities.filter(app=>app.category!=="grownup"&&app.file&&app.title):[];
+  if(!activities.length)return;
+  /* Daily rotation of catalog-backed Preschool activities; no parent or external network items. */
+  const today=new Date();
+  const day=Math.floor((Date.UTC(today.getFullYear(),today.getMonth(),today.getDate())-Date.UTC(today.getFullYear(),0,1))/86400000);
+  const count=Math.min(12,activities.length);
+  const links=Array.from({length:count},(_,i)=>{
+    const app=activities[(day*7+i*5)%activities.length];
+    return {label:(app.icon?app.icon+" ":"")+app.title,
+      href:"https://vervenveda.com/Khaemenes_Preschool.github.io/apps/"+app.file.split("/").map(encodeURIComponent).join("/")};
+  });
+  window.VNV_TICKER?.autoPopulate({label:"🌈 Preschool Adventures",ariaLabel:"Rotating child-friendly Preschool activities",max:count,cleanLegacy:true,links});
+})();
+</script>
 <script src="https://vervenveda.com/assets/vnv-header-autopopulate.js"></script>
-<script>VNV_HEADER.mount({title:"Khaemenes Preschool",subtitle:"Crechè · Bright Beginnings",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});</script>
+<script>
+window.VNV_HEADER?.mount({title:"Khaemenes Preschool",subtitle:"Crèche · Bright Beginnings",icon:"PK",home:"https://vervenveda.com/Khaemenes_Preschool.github.io/",actions:[],replaceLegacy:true});
+</script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-language-loader.js" defer></script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-local-toolbar.js" defer></script>
 </body>
