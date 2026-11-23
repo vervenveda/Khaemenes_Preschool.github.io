@@ -6,6 +6,53 @@ const spine=window.KhaemenesPreschoolSpine;
 const catalog=window.KhaemenesPreschoolCatalog;
 const $=id=>document.getElementById(id);
 const KEY="khaemenes.preschool.week";
+
+/* The canonical translator intentionally skips SELECT/OPTION.
+   Localize native options and engine-generated status explicitly. */
+const WEEK_UI=Object.freeze({
+ en:{week:"Week",of:"of",ready:"Week {n} is ready. Choose a day to explore."},
+ es:{week:"Semana",of:"de",ready:"La semana {n} está lista. Elige un día para explorar."},
+ fr:{week:"Semaine",of:"sur",ready:"La semaine {n} est prête. Choisis un jour à explorer."},
+ ar:{week:"الأسبوع",of:"من",ready:"الأسبوع {n} جاهز. اختر يومًا للاستكشاف."},
+ zh:{week:"第",suffix:"周",of:"共",count:n=>"第 "+n+" 周，共 42 周",ready:"第 {n} 周已准备好。请选择一天开始探索。"},
+ de:{week:"Woche",of:"von",ready:"Woche {n} ist bereit. Wähle einen Tag zum Entdecken."},
+ ru:{week:"Неделя",of:"из",ready:"Неделя {n} готова. Выбери день для открытий."},
+ pt:{week:"Semana",of:"de",ready:"A semana {n} está pronta. Escolha um dia para explorar."},
+ hi:{week:"सप्ताह",of:"में से",ready:"सप्ताह {n} तैयार है। खोजने के लिए एक दिन चुनें।"},
+ ja:{week:"第",suffix:"週",of:"全",count:n=>"第 "+n+" 週（全42週）",ready:"第 {n} 週の準備ができました。探検する日を選びましょう。"},
+ ko:{week:"주",of:"전체",count:n=>"전체 42주 중 "+n+"주",ready:"{n}주차가 준비됐어요. 탐험할 요일을 선택하세요."},
+ it:{week:"Settimana",of:"di",ready:"La settimana {n} è pronta. Scegli un giorno da esplorare."},
+ bn:{week:"সপ্তাহ",of:"এর মধ্যে",count:n=>"৪২ সপ্তাহের মধ্যে "+n+"তম সপ্তাহ",ready:"{n}তম সপ্তাহ প্রস্তুত। ঘুরে দেখার জন্য একটি দিন বেছে নাও।"}
+});
+function currentLanguage(){
+ const canon=window.VNVLanguage?.getLanguage?.()||document.documentElement.lang||"en";
+ const lang=String(canon).toLowerCase().split("-")[0];
+ return Object.prototype.hasOwnProperty.call(WEEK_UI,lang)?lang:"en";
+}
+function localWeek(n){
+ const ui=WEEK_UI[currentLanguage()];
+ return ui.suffix?ui.week+" "+n+" "+ui.suffix:ui.week+" "+n;
+}
+function localWeekCount(n){
+ const ui=WEEK_UI[currentLanguage()];
+ return ui.count?ui.count(n):localWeek(n)+" "+ui.of+" 42";
+}
+function refreshWeekLanguage(){
+ const ui=WEEK_UI[currentLanguage()];
+ const label=$("discoveryWeekLabel");
+ if(label)label.textContent=ui.week;
+ const select=$("discoveryWeekSelect");
+ if(select){
+  for(const option of select.options)option.textContent=localWeek(Number(option.value));
+  select.setAttribute("aria-label",ui.week);
+ }
+ const count=$("discoveryWeekCount");if(count)count.textContent=localWeekCount(selected);
+ const status=$("discoveryStatus");
+ if(status)status.textContent=ui.ready.replace("{n}",String(selected));
+ // Curriculum theme titles remain with the canonical VNV translator.
+ window.VNVLanguage?.refresh?.();
+}
+
 const DAYS=[
  {name:"Monday",icon:"📚",topic:"Story & Sounds",domains:["literacy"],
  invitation:theme=>"Start with a story connected to “"+theme+".” Read aloud or tell a familiar story. Pause to notice a character, a picture, a word, or a sound. Clap the beats in one familiar word.",
@@ -80,18 +127,19 @@ function render(){
  }
  const data=spine.weeks[selected-1];
  $("discoveryWeekTheme").textContent=data.theme;
- $("discoveryWeekText").textContent="Week "+selected+" of 42 · "+data.theme;
+ $("discoveryWeekThemeName").textContent=data.theme;
  $("discoveryWeekSelect").value=String(selected);
- if(status)status.textContent="Week "+selected+" is ready. Choose a day to explore.";
  DAYS.forEach((def,i)=>renderDay(data,def,i));
+ refreshWeekLanguage();
 }
 function init(){
  const selector=$("discoveryWeekSelect");
  if(selector)selector.replaceChildren(); // Remove the no-JS Week 1 fallback before populating all 42.
  if(selector)for(let week=1;week<=42;week++){
-  const opt=document.createElement("option");opt.value=String(week);opt.textContent="Week "+week;selector.append(opt);
+  const opt=document.createElement("option");opt.value=String(week);opt.textContent=localWeek(week);selector.append(opt);
  }
  selector&&selector.addEventListener("change",()=>choose(Number(selector.value)));
+ document.addEventListener("vnv:language-change",refreshWeekLanguage);
  $("discoveryPrev")?.addEventListener("click",()=>choose(selected===1?42:selected-1));
  $("discoveryNext")?.addEventListener("click",()=>choose(selected===42?1:selected+1));
  document.querySelectorAll(".discover-day-nav a[href^='#day']").forEach(link=>{
