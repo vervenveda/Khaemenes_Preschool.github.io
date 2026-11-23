@@ -121,6 +121,14 @@ try{
  for(const key of ["yellow","aqua"])
   assert.equal(cream[key],"rgb(0, 0, 0)",key+" should preserve dark lettering");
  console.log("PASS shared cream text contract on purple/coral/orange, with yellow/aqua dark");
+ const fridayColors=await page.evaluate(()=>{
+  const queries=["#day5","#day5 > summary","#day5 .day-topic","#day5 .discover-invitation","#day5 .discover-activity","#day5 .discover-try","#day5 .discover-app-caption","#day5 .discover-play.primary","#day5 .discover-reflect summary"];
+  return Object.fromEntries(queries.map(selector=>[selector,getComputedStyle(document.querySelector(selector)).color]));
+ });
+ for(const [selector,color] of Object.entries(fridayColors))
+  assert.equal(color,"rgb(0, 0, 0)",selector+" must have readable black text");
+ console.log("PASS Friday lesson and inset activity panel have black text without changing other days");
+
 
 
  await page.locator(".discover-day-nav a[href='#day4']").click();
