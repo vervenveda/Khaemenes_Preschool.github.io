@@ -12,7 +12,7 @@ const profile=origin+"/Khaemenes_Preschool.github.io/student-profile/";
 const browser=await chromium.launch({headless:true});
 const context=await browser.newContext({viewport:{width:1200,height:850},acceptDownloads:true,reducedMotion:"reduce"});
 const page=await context.newPage(),errors=[],issues=[];
-page.on("pageerror",error=>errors.push(error.message));
+page.on("pageerror",error=>errors.push(error.stack||error.message));
 page.on("console",message=>{if(message.type()==="error"&&!/404|Failed to load/i.test(message.text()))issues.push(message.text())});
 await page.route(origin+"/**",async route=>{
  const pathname=new URL(route.request().url()).pathname;
