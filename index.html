@@ -2253,7 +2253,7 @@ document.addEventListener("DOMContentLoaded",function(){
     var count=api.childActivities().filter(function(x){return x.category===key}).length;
     var b=document.createElement("button"); b.type="button"; b.className="subject-tile"; b.dataset.subject=key;
     b.style.background="linear-gradient(135deg,"+meta.a+","+meta.b+")";
-    b.innerHTML="<span class='subject-icon' aria-hidden='true'>"+meta.icon+"</span><strong>"+meta.label+"</strong><small>"+subjectNotes[key]+" · "+count+" adventures</small>";
+    b.innerHTML="<span class='subject-icon' aria-hidden='true'>"+meta.icon+"</span><strong>"+meta.label+"</strong><small><span class='subject-description'>"+subjectNotes[key]+"</span><span class='subject-count'>"+count+" adventures</span></small>";
     b.addEventListener("click",function(){openSubject(key)}); subjectGarden.appendChild(b);
   });
   function shut(){pop.hidden=true;document.body.style.overflow=""}
