@@ -25,6 +25,19 @@ await page.route("https://vervenveda.com/**",async route=>{
   await route.fulfill({status:200,body:data,contentType:mime[path.extname(filename)]||"application/octet-stream"});
  }catch{await route.fulfill({status:404,body:"Not found"})}
 });
+/* Click the real Profile UI panels before testing their protected controls.
+   Previously this regression assumed all child/guardian studios always displayed. */
+async function showPanel(key){
+ const tile=page.locator('[data-prek-panel="'+key+'"]');
+ if(await tile.getAttribute("aria-expanded")!=="true")await tile.click();
+ await page.locator("#prek-panel-"+key).waitFor({state:"visible"});
+}
+async function adultConfirm(){
+ const accordion=page.locator("#khaePrekUniversalLookEntry .prek-picture-accordion");
+ await accordion.waitFor({state:"attached"});
+ if(!(await accordion.evaluate(el=>el.open)))await accordion.locator("summary").click();
+ await adultConfirm();
+}
 const url="https://vervenveda.com/Khaemenes_Preschool.github.io/student-profile/";
 try{
  await page.goto(url,{waitUntil:"domcontentloaded"});
@@ -43,8 +56,10 @@ try{
  });
  assert.equal(await page.locator("#childTitle").innerText(),"QA Sunshine");
  assert.equal(await page.locator("#learnerSelect option").count(),2);
+ await showPanel("learningStudio");
  assert.equal(await page.locator("#profileStudio").isVisible(),true);
- await page.locator("#adultConfirm").check();
+ await adultConfirm();
+ await showPanel("backgroundTitle");
  await page.locator("#backgroundChoices button[data-theme='forest']").click();
  assert.equal(await page.locator("body").getAttribute("data-prek-background"),"forest");
  await page.reload({waitUntil:"domcontentloaded"});
@@ -74,12 +89,17 @@ try{
  },lookKey);
  assert.equal(await page.locator("body").getAttribute("data-prek-background"),"forest");
  console.log("PASS Pre-K visual changes from another tab refresh selected learner");
- assert.equal(await page.locator("#avatarChoices button").count(),8,"Pre-K should have eight supported avatars");
- assert.equal(await page.locator("#avatarChoices button[data-avatar='🐝']").count(),1);
- assert.equal(await page.locator("#avatarChoices button[data-avatar='🐢']").count(),1);
- await page.locator("#adultConfirm").check();
+ assert.equal(await showPanel("pictureTitle");
+ await page.locator("#avatarChoices button").count(),8,"Pre-K should have eight supported avatars");
+ assert.equal(await showPanel("pictureTitle");
+ await page.locator("#avatarChoices button[data-avatar='🐝']").count(),1);
+ assert.equal(await showPanel("pictureTitle");
+ await page.locator("#avatarChoices button[data-avatar='🐢']").count(),1);
+ await adultConfirm();
  const favoriteId=await page.evaluate(()=>window.KhaemenesPreschoolCatalog.childActivities()[0].id);
+ await showPanel("pinsTitle");
  await page.locator("#adventureSelect").selectOption(favoriteId);
+ await showPanel("pinsTitle");
  await page.locator("#pinAdventure").click();
  assert.match(await page.locator("#pinStatus").innerText(),/pinned for this learner/i);
  let favoriteSnapshot=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes_profile_favorites_v1")),first.a);
@@ -87,31 +107,40 @@ try{
  await page.reload({waitUntil:"domcontentloaded"});
  assert.equal(await page.locator("#favoritePill").innerText(),"1 pinned favorites");
  console.log("PASS full Pre-K adventure pin is stored under existing Preschool favorites identity");
- await page.locator("#adultConfirm").check();
+ await adultConfirm();
  await page.evaluate(()=>{window.__printCalls=0;window.print=()=>{window.__printCalls++}});
+ await showPanel("backgroundTitle");
  await page.locator("#printProfile").click();
  assert.equal(await page.evaluate(()=>window.__printCalls),1,"print button should call browser print");
  console.log("PASS guardian-assisted printable profile action");
- await page.locator("#adultConfirm").check();
+ await adultConfirm();
+ await showPanel("pictureTitle");
  await page.locator("#avatarChoices button[data-avatar='🦋']").click();
  assert.equal((await page.locator("#photoPreview").innerText()).trim(),"🦋");
  const tinyPng=Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9pXmKr8AAAAASUVORK5CYII=","base64");
+ await showPanel("pictureTitle");
  await page.locator("#childPhoto").setInputFiles({name:"qa.png",mimeType:"image/png",buffer:tinyPng});
  await page.locator("#photoPreview img").waitFor({state:"attached",timeout:3000});
  assert.match(await page.locator("#photoPreview img").getAttribute("src"),/^data:image\/jpeg;base64,/);
  console.log("PASS photo upload converts to browser-local JPEG preview");
+ await showPanel("kindergartenHandoff");
  await page.locator("#showHandoff").click();
  assert.equal(await page.locator("#showHandoff").getAttribute("aria-expanded"),"true");
  assert.equal(await page.locator("#handoffPicture img").count(),1,"handoff preview should show current child photo");
  assert.match(await page.locator("#handoffDetails").innerText(),/forest background/i);
  assert.match(await page.locator("#handoffFavorites").innerText(),/1 pinned Pre-K adventures/i);
  assert.equal(await page.evaluate(()=>window.KhaemenesFamilyRegistry.getLearner().stage),"preschool","preview must not promote learner");
+ await showPanel("backgroundTitle");
  await page.locator("#backgroundChoices button[data-theme='sunset']").click();
  assert.match(await page.locator("#handoffDetails").innerText(),/sunset background/i);
+ await showPanel("backgroundTitle");
  await page.locator("#backgroundChoices button[data-theme='forest']").click();
  console.log("PASS informative kindergarten preview tracks current Pre-K photo and theme without changing placement");
+ await showPanel("learningStudio");
  await page.locator("#pv2Goal").fill("Sing the ABC song");
+ await showPanel("learningStudio");
  await page.locator("#pv2SaveCompass").click();
+ await showPanel("learningStudio");
  await page.locator("#learnerSelect").selectOption(first.b);
  assert.equal(await page.locator("#adultConfirm").isChecked(),false,"new child must require new adult confirmation");
  assert.equal(await page.locator("#childTitle").innerText(),"QA Moonbeam");
@@ -122,16 +151,20 @@ try{
  let map=await page.evaluate(()=>JSON.parse(localStorage.getItem("khaemenes_profile_favorites_v1")));
  assert.equal(map[first.b],undefined,"switching children must not manufacture another child's favorites");
 
- await page.locator("#adultConfirm").check();
+ await adultConfirm();
+ await showPanel("backgroundTitle");
  await page.locator("#backgroundChoices button[data-theme='ocean']").click();
+ await showPanel("learningStudio");
  await page.locator("#learnerSelect").selectOption(first.a);
  assert.equal(await page.locator("body").getAttribute("data-prek-background"),"forest");
  assert.equal(await page.locator("#photoPreview img").count(),1);
  assert.equal(await page.locator("#pv2Goal").inputValue(),"Sing the ABC song");
  console.log("PASS same-family learner switch isolates photos, themes, and Academy goals");
  assert.equal(await page.locator("#favoritePill").innerText(),"1 pinned favorites");
- await page.locator("#adultConfirm").check();
+ await adultConfirm();
+ await showPanel("pinsTitle");
  await page.locator("#adventureSelect").selectOption(favoriteId);
+ await showPanel("pinsTitle");
  await page.locator("#unpinAdventure").click();
  assert.equal(await page.locator("#favoritePill").innerText(),"0 pinned favorites");
  const clean=await page.evaluate(()=>JSON.parse(localStorage.getItem("khaemenes_profile_favorites_v1")));
@@ -139,25 +172,31 @@ try{
  assert.equal(clean[first.b],undefined);
  console.log("PASS Pre-K unpin removes only the selected learner's existing favorite");
 
+ await showPanel("pinsTitle");
  await page.locator("#pinPreschoolPath").click();
  assert.match(await page.locator("#pinnedActivities").innerText(),/My Preschool Pathway/);
  assert.equal(await page.locator("#favoritePill").innerText(),"1 pinned favorites");
  const pathPins=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes_course_pins_v1")).learners[id],first.a);
  assert.equal(pathPins.filter(x=>x.id==="khaemenes-preschool").length,1);
+ await showPanel("learningStudio");
  await page.locator("#learnerSelect").selectOption(first.b);
  assert.doesNotMatch(await page.locator("#pinnedActivities").innerText(),/My Preschool Pathway/);
+ await showPanel("learningStudio");
  await page.locator("#learnerSelect").selectOption(first.a);
- await page.locator("#adultConfirm").check();
+ await adultConfirm();
+ await showPanel("pinsTitle");
  await page.locator("#unpinPreschoolPath").click();
  assert.doesNotMatch(await page.locator("#pinnedActivities").innerText(),/My Preschool Pathway/);
  assert.equal(await page.evaluate(()=>window.KhaemenesFamilyRegistry.getLearner().stage),"preschool");
  console.log("PASS Pre-K pathway pin and unpin preserve sibling isolation and placement");
  const download=page.waitForEvent("download");
+ await showPanel("backgroundTitle");
  await page.locator("#exportLook").click();
  const exported=await download;
  assert.match(exported.suggestedFilename(),/^khaemenes-prek-visual-.*\.json$/);
  console.log("PASS visual bundle export");
  const wrong={schema:"khaemenes.prek-visual.v1",learnerId:first.b,theme:"night",avatar:"🐝",photo:""};
+ await showPanel("backgroundTitle");
  await page.locator("#importLook").setInputFiles({name:"other-child.json",mimeType:"application/json",buffer:Buffer.from(JSON.stringify(wrong))});
  await page.waitForFunction(()=>/belongs to another learner/i.test(document.getElementById("lookStatus")?.textContent||""),null,{timeout:3000});
  assert.equal(await page.locator("body").getAttribute("data-prek-background"),"forest","wrong-child backup cannot overwrite appearance");
@@ -176,8 +215,10 @@ try{
   const k=R.registerLearner({familyId:f.familyId,nickname:"Older Kindergarten Child",stage:"kindergarten",grade:"k"});
   R.setActive({familyId:f.familyId,learnerId:k.learnerId});
  });
+ await showPanel("learningStudio");
  assert.equal(await page.locator("#learnerSwitch").isVisible(),true,"one Pre-K child must be selectable while Kindergarten sibling is active");
  await page.locator("#learnerSelect option").first().evaluate(x=>{x.selected=true});
+ await showPanel("learningStudio");
  await page.locator("#learnerSelect").selectOption({index:0});
  assert.equal(await page.locator("#childTitle").innerText(),"Only Preschool Child");
  console.log("PASS one Pre-K learner can be reached while another grade is active");
