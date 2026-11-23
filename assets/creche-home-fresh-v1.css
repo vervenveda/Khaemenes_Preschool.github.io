@@ -1506,3 +1506,13 @@ html body #today .garden-bottom-actions>.garden-action.graduate{
  border-radius:7px!important;
  text-decoration:none!important;
 }
+
+/* Purple Preschool Tools heading and accordion bar: light cream text. */
+html body #today .feature-accordion[data-feature="garden"]>summary,
+html body #today .feature-accordion[data-feature="garden"]>summary :is(strong,span),
+html body #today .garden-heading,
+html body #today .garden-heading :is(h2,p,.kicker){
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+ text-shadow:none!important;
+}
