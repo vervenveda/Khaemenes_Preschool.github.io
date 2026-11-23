@@ -476,7 +476,7 @@
         <h3>Archaemenes · Wise Owl</h3>
         <p>After a family links a child learner, Archaemenes becomes that child’s continuous Academy Mentor. In Preschool he appears as Wise Owl and guides a short, age-aware path through Crechè activities.</p>
         <div class="family-meta"><span>Family-linked learner</span><span>One Academy Mentor</span><span>Balanced learning day</span></div>
-        <div class="family-actions"><a class="family-action" href="#familyMentorEntry">Enter the Learning Hub →</a></div>
+        <div class="family-actions"><a class="family-action" href="#familyMentorEntry">Enter</a></div>
       </article>
 
       <article class="family-card">
@@ -488,8 +488,8 @@
           <span><strong id="profileName">No local preferences needed for play</strong><small id="profileStatus">Public adventures and favorites remain open without registration.</small></span>
         </div>
         <div class="family-actions">
-          <button class="family-action" id="openChildProfile" type="button">Local Play Preferences</button>
-          <button class="family-action light" id="showProfileFavorites" type="button">Show Pinned Games</button>
+          <button class="family-action" id="openChildProfile" type="button">Customize</button>
+          <button class="family-action light" id="showProfileFavorites" type="button">Pinned</button>
         </div>
       </article>
 
@@ -499,10 +499,10 @@
         <p>Review browser-local exploration, observations, and comfort preferences here. Use the Academy Family Profile for the child’s Archaemenes Mentor and formal continuity across Khaemenes schools.</p>
         <div class="family-meta"><span id="profileFavoriteCount">0 pinned</span><span id="profileVisitCount">0 visited</span><span>No parent account required</span></div>
         <div class="family-actions">
-          <button class="family-action" id="editProfileFromParent" type="button">Review Profile</button>
+          <button class="family-action" id="editProfileFromParent" type="button">Profile</button>
           <button class="family-action light" id="exportFamilyData" type="button">Export</button>
           <button class="family-action light" id="eraseFamilyData" type="button">Erase</button>
-          <a class="family-action light" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Formal Curriculum Family Profile →</a>
+          <a class="family-action light" href="https://vervenveda.com/Khaemenes_Academy.github.io/family/">Family</a>
         </div>
       </article>
 
@@ -511,7 +511,7 @@
         <h3>Khaemenes Kinder Garden</h3>
         <p>Continue into kindness, curiosity, early literacy, number sense, nature, creativity, and school readiness.</p>
         <div class="family-meta"><span>Next learning stage</span><span>Same custom-domain origin</span></div>
-        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/">Enter Kinder Garden →</a></div>
+        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_KinderGarden.github.io/">Explore</a></div>
       </article>
 
       <article class="family-card">
@@ -519,7 +519,7 @@
         <h3>Khaemenes Elementary School</h3>
         <p>Carry the learner’s continuity record toward Kinder Garden through Grade 5 courses, tools, and family resources.</p>
         <div class="family-meta"><span>Kinder–Grade 5</span><span>Continuity-ready</span></div>
-        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Elementary.github.io/">Enter Elementary School →</a></div>
+        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Elementary.github.io/">Visit</a></div>
       </article>
 
       <article class="family-card">
@@ -527,7 +527,7 @@
         <h3>Khaemenes Academy</h3>
         <p>Open the larger campus directory for every educational level while keeping Crechè as the child’s first joyful doorway.</p>
         <div class="family-meta"><span>Full campus</span><span>All learning levels</span></div>
-        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Academy.github.io/">Visit the Academy →</a></div>
+        <div class="family-actions"><a class="family-action" href="https://vervenveda.com/Khaemenes_Academy.github.io/">Discover</a></div>
       </article>
     </div>
 
@@ -2332,5 +2332,63 @@ window.VNV_HEADER?.mount({title:"Khaemenes Preschool",subtitle:"Crèche · Brigh
 </script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-language-loader.js" defer></script>
 <script src="/Khaemenes_Preschool.github.io/assets/preschool-local-toolbar.js" defer></script>
+
+<!-- Preschool family pathway visual refinement: scoped, reversible, no action or routing changes. -->
+<style id="preschool-family-card-refinement-20261123">
+#profiles>.feature-accordion>summary,
+#profiles .feature-accordion>summary {
+  background:#b52b38!important;color:#fff7e8!important;
+  border-color:#fff7e8!important;
+}
+#profiles .feature-accordion>summary :is(strong,.accordion-icon,.accordion-state){
+  color:#fff7e8!important;-webkit-text-fill-color:#fff7e8!important;
+  text-shadow:none!important;-webkit-text-stroke:0!important;
+}
+#profiles .feature-accordion>summary .accordion-icon,
+#profiles .family-card>.family-icon{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  width:auto!important;height:auto!important;min-width:32px!important;min-height:32px!important;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif!important;
+  font-size:30px!important;line-height:1.25!important;
+  visibility:visible!important;opacity:1!important;overflow:visible!important;
+  -webkit-text-fill-color:initial!important;-webkit-text-stroke:0!important;
+  filter:none!important;text-shadow:none!important;
+}
+#profiles .family-grid{align-items:stretch!important}
+#profiles .family-grid>.family-card{
+  display:flex!important;flex-direction:column!important;
+  min-width:0!important;height:100%!important;
+}
+#profiles .family-card h3,#profiles .family-card p{color:#17232b!important;-webkit-text-fill-color:#17232b!important;text-shadow:none!important}
+#profiles .family-card .family-meta{display:none!important}
+#profiles .family-card .family-actions{
+  margin-top:auto!important;padding-top:18px!important;
+  display:flex!important;flex-direction:column!important;gap:10px!important;
+  align-items:stretch!important;
+}
+#profiles .family-card .family-actions>.family-action{
+  box-sizing:border-box!important;display:flex!important;justify-content:center!important;
+  align-items:center!important;width:100%!important;min-width:0!important;
+  min-height:48px!important;margin:0!important;padding:9px 12px!important;
+  background:#252d38!important;color:#fff7e8!important;
+  -webkit-text-fill-color:#fff7e8!important;
+  border:2px solid #fff7e8!important;border-radius:7px!important;
+  font:400 17px/1.3 "Comic Sans MS","Chalkboard SE",sans-serif!important;
+  text-align:center!important;text-decoration:none!important;box-shadow:none!important;
+  overflow-wrap:anywhere!important;text-shadow:none!important;
+}
+#profiles .family-card .family-actions>.family-action:hover{
+  background:#101820!important;color:#fff7e8!important;-webkit-text-fill-color:#fff7e8!important;
+}
+#profiles .family-card .family-actions>.family-action:focus-visible{
+  outline:3px solid #252d38!important;outline-offset:3px!important;
+}
+@media(max-width:840px){
+  #profiles .family-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:520px){
+  #profiles .family-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+</style>
 </body>
 </html>
