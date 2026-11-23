@@ -149,14 +149,13 @@ try{
  // Pointer drag must save learner-scoped coordinates without changing the coral background.
  const drag=page.locator("#prekStickerCanvas .prek-sticker-drag").first();
  const before=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes.prek.background-studio.v1:"+encodeURIComponent(id))).placements[0],r);
+ await drag.scrollIntoViewIfNeeded();
  const bounds=await drag.boundingBox();assert.ok(bounds,"draggable sticker should be visible");
- console.log("HIT DEBUG",JSON.stringify(await drag.evaluate(el=>{const r=el.getBoundingClientRect(),cx=r.x+r.width/2,cy=r.y+r.height/2;const top=document.elementFromPoint(cx,cy);return {rect:{x:r.x,y:r.y,w:r.width,h:r.height},hit:top?.outerHTML.slice(0,220),pointer:getComputedStyle(el).pointerEvents,parent:getComputedStyle(el.parentElement).pointerEvents,stage:getComputedStyle(el.parentElement.parentElement).pointerEvents,dialog:document.querySelector("#prekEditBackgroundDialog")?.open}})));
  await page.mouse.move(bounds.x+bounds.width/2,bounds.y+bounds.height/2);
  await page.mouse.down();
  await page.mouse.move(bounds.x+bounds.width/2+95,bounds.y+bounds.height/2+35,{steps:8});
  await page.mouse.up();
  const after=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes.prek.background-studio.v1:"+encodeURIComponent(id))).placements[0],r);
- console.log("DRAG DEBUG",JSON.stringify({before,after,checked:await page.locator("#adultConfirm").isChecked(),status:await stickerDialog.locator("[data-prek-studio-status]").innerText(),screen:await page.locator("#prekStickerCanvas .prek-placed-sticker").first().evaluate(e=>({left:e.style.left,top:e.style.top})),errors}));
  assert.ok(after.x!==before.x||after.y!==before.y,"drag should persist the new coordinates");
  await page.locator("#prekStickerCanvas .prek-sticker-remove").first().click();
  const remaining=await page.evaluate(id=>JSON.parse(localStorage.getItem("khaemenes.prek.background-studio.v1:"+encodeURIComponent(id))).placements.length,r);
