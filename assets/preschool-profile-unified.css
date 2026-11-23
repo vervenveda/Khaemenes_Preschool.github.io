@@ -610,7 +610,7 @@ body main.shell .prek-profile-title .eyebrow{
  color:#243038!important;letter-spacing:0!important;text-transform:none!important;margin:0 0 10px
 }
 body main.shell .prek-profile-title h1{
- font:400 clamp(48px,6vw,77px)/1.12 "Comic Sans MS","Chalkboard SE",cursive!important;
+ font:400 77px/1.12 "Comic Sans MS","Chalkboard SE",cursive!important;
  color:#243038!important;letter-spacing:0!important;margin:0 auto 14px;max-width:100%;
  overflow-wrap:anywhere
 }
