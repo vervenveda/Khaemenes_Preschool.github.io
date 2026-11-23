@@ -1,0 +1,42 @@
+/* Shared Pre-K page chrome: one canonical translator rail, no duplicate engine.
+   Loaded by preschool-language-loader.js on both Pre-K Home and Student Profile.
+   Official vnv-language.js owns all translation controls and behavior. */
+:root{--prek-chrome-cream:#fffbea;--prek-chrome-ink:#243038}
+html body #vnv-language-rail{
+ box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+ min-height:66px!important;padding:8px 12px!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ background:#243038!important;color:#fffbea!important;
+ border-bottom:3px solid #ffda48!important;text-align:center!important
+}
+html body #vnv-language-rail #vnv-language-switch{
+ box-sizing:border-box!important;display:flex!important;align-items:center!important;
+ justify-content:center!important;flex-flow:row nowrap!important;
+ gap:12px!important;width:max-content!important;max-width:100%!important;
+ min-height:50px!important;margin:0 auto!important;padding:0!important;
+ border:0!important;background:transparent!important;box-shadow:none!important;
+ color:#fffbea!important;white-space:nowrap!important
+}
+html body #vnv-language-rail #vnv-language-switch label,
+html body #vnv-language-rail #vnv-language-switch [data-vnv-coverage]{
+ color:#fffbea!important;-webkit-text-fill-color:#fffbea!important;
+ font:400 20px/1.3 "Comic Sans MS","Chalkboard SE",cursive!important;
+ white-space:nowrap!important
+}
+html body #vnv-language-rail #vnv-language-switch :is(select,button){
+ box-sizing:border-box!important;flex:0 1 auto!important;
+ min-height:48px!important;height:auto!important;max-width:100%!important;
+ padding:8px 11px!important;margin:0!important;border:2px solid #fffbea!important;
+ border-radius:7px!important;background:#fffbea!important;color:#243038!important;
+ -webkit-text-fill-color:#243038!important;
+ font:400 20px/1.25 "Comic Sans MS","Chalkboard SE",cursive!important;
+ white-space:nowrap!important
+}
+html body #vnv-language-rail #vnv-language-select{min-width:115px!important;max-width:165px!important}
+html body #vnv-language-rail #vnv-language-switch [data-vnv-coverage]{
+ max-width:125px!important;overflow:hidden!important;text-overflow:ellipsis!important
+}
+@media(max-width:760px){
+ html body #vnv-language-rail{overflow-x:auto!important;justify-content:flex-start!important;scrollbar-width:thin}
+ html body #vnv-language-rail #vnv-language-switch{min-width:max-content!important}
+}
