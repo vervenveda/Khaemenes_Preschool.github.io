@@ -1196,3 +1196,75 @@ body[data-profile-stage="preschool"] main.shell footer{
     width:214px!important;height:214px!important;font-size:142px!important;
   }
 }
+
+/* PRE-K STICKER STUDIO · profile only. No palette/geometry changes to homepage.
+   Sticker canvas floats over the existing hero and never blocks the buttons. */
+body[data-profile-stage="preschool"] main.shell .profile-hero{position:relative!important;isolation:isolate}
+body[data-profile-stage="preschool"] main.shell #prekStickerCanvas{
+ position:absolute!important;inset:0!important;z-index:3!important;
+ width:100%!important;height:100%!important;
+ pointer-events:none!important;overflow:hidden!important;
+ border-radius:7px!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-placed-sticker{
+ position:absolute!important;transform:translate(-50%,-50%)!important;
+ display:flex!important;align-items:flex-start!important;gap:2px!important;
+ pointer-events:auto!important;touch-action:none!important;
+ background:transparent!important;border:0!important;
+ width:max-content!important;max-width:125px!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-sticker-drag{
+ display:block!important;width:80px!important;height:80px!important;min-height:80px!important;
+ padding:0!important;margin:0!important;border:0!important;
+ background:transparent!important;box-shadow:none!important;
+ font:400 66px/1.1 "Comic Sans MS","Chalkboard SE",cursive!important;
+ color:#000!important;-webkit-text-fill-color:#000!important;
+ text-shadow:0 1px 1px #fff!important;cursor:grab!important;
+ touch-action:none!important;user-select:none!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-sticker-drag:active{cursor:grabbing!important}
+body[data-profile-stage="preschool"] main.shell .prek-sticker-remove{
+ width:36px!important;height:36px!important;min-height:36px!important;
+ margin:0!important;padding:0!important;
+ display:grid!important;place-items:center!important;
+ background:#ffe45e!important;color:#000!important;-webkit-text-fill-color:#000!important;
+ border:2px solid #000!important;border-radius:50%!important;
+ font:400 28px/1 "Comic Sans MS","Chalkboard SE",cursive!important;
+ text-shadow:none!important;cursor:pointer!important;
+}
+dialog#prekEditBackgroundDialog .prek-edit-stickers{
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:12px!important;
+}
+dialog#prekEditBackgroundDialog .prek-edit-stickers button{
+ background:#62e4f5!important;color:#000!important;
+ -webkit-text-fill-color:#000!important;
+ border:3px solid #b89cff!important;border-radius:7px!important;
+ font-size:66px!important;line-height:1.1!important;
+ min-height:102px!important;padding:8px!important;
+ cursor:pointer!important;
+}
+dialog#prekEditBackgroundDialog .prek-edit-stickers button:nth-child(6n+2){background:#ffe45e!important}
+dialog#prekEditBackgroundDialog .prek-edit-stickers button:nth-child(6n+3){background:#ff88c8!important}
+dialog#prekEditBackgroundDialog .prek-edit-stickers button:nth-child(6n+4){background:#77e6b6!important}
+dialog#prekEditBackgroundDialog .prek-edit-stickers button:nth-child(6n+5){background:#b89cff!important}
+dialog#prekEditBackgroundDialog .prek-edit-stickers button:nth-child(6n){background:#ffb347!important}
+dialog#prekEditBackgroundDialog [data-prek-sticker-count]{
+ font:400 24px/1.35 "Comic Sans MS","Chalkboard SE",cursive!important;
+ text-align:center!important;color:#000!important;
+}
+dialog#prekEditBackgroundDialog .prek-clear-stickers{
+ background:#ffe45e!important;color:#000!important;
+ border:3px solid #fff!important;border-radius:7px!important;
+ font:400 24px/1.3 "Comic Sans MS","Chalkboard SE",cursive!important;
+ min-height:66px!important;padding:12px 20px!important;
+}
+@media(max-width:600px){
+ dialog#prekEditBackgroundDialog .prek-edit-stickers{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ body[data-profile-stage="preschool"] main.shell .prek-sticker-drag{
+  width:64px!important;height:64px!important;min-height:64px!important;font-size:50px!important
+ }
+ body[data-profile-stage="preschool"] main.shell .prek-sticker-remove{
+  width:30px!important;height:30px!important;min-height:30px!important;font-size:24px!important
+ }
+}
