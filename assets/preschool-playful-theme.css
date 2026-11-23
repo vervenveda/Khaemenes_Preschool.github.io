@@ -212,3 +212,35 @@ section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywher
 .prek-local-menu-panel,.prek-tool-panel,.prek-exit-card{background:#fff!important}
 @media(max-width:900px){.hero-orbit-labels{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:560px){.hero-undertray{width:calc(100% - 20px)!important;padding:9px!important}.hero-orbit-labels{gap:8px}.hero-orbit-labels>:is(a,button){min-height:78px!important;font-size:24px!important;padding:8px!important}.feature-accordion>summary{grid-template-columns:auto minmax(0,1fr) auto!important;gap:8px!important;padding:12px!important}.feature-accordion>summary .accordion-icon{font-size:66px!important;min-width:66px}.feature-accordion>summary .accordion-state{font-size:24px!important;min-width:54px}.prek-parent-links{grid-template-columns:1fr}.prek-parent-shell{padding:12px}}
+
+/* 2026-11-23 · Official VNV shell, balanced child buttons, and spaced rainbow orbit. */
+/* The canonical branched hamburger in the official header owns global navigation. */
+.hero-orbit-labels #menuBtn{display:none!important}
+#vnvHeaderAutoPopulate{width:100%!important;background:#ffffff!important;color:#243038!important}
+#vnvHeaderAutoPopulate .vnv-header-inner{width:100%;max-width:none}
+#vnvHeaderAutoPopulate .vnv-header-menu-button{justify-self:end}
+#vnvTickerAutoPopulate{width:100%;max-width:none}
+.hero-playground{width:min(1080px,calc(100vw - 40px))!important}
+.hero-copy{width:min(500px,calc(100% - 280px))!important;min-height:340px}
+.hero-inner{min-height:600px}
+.orbit-button{width:114px;height:114px}
+.orbit-button:nth-of-type(1){left:3%;top:6%}
+.orbit-button:nth-of-type(2){right:3%;top:6%}
+.orbit-button:nth-of-type(3){left:0;top:42%}
+.orbit-button:nth-of-type(4){right:0;top:42%}
+.orbit-button:nth-of-type(5){left:12%;bottom:1%}
+.orbit-button:nth-of-type(6){right:12%;bottom:1%}
+@media(max-width:900px){
+ .hero-copy{width:min(430px,calc(100% - 230px))!important;min-height:300px}
+ .hero-inner{min-height:590px}
+ .hero-playground{width:calc(100vw - 24px)!important}
+ .orbit-button{width:96px;height:96px}
+}
+@media(max-width:600px){
+ .hero-inner{display:flex;flex-direction:column;gap:45px;min-height:0;padding:36px 0 22px}
+ .hero-copy{width:min(330px,calc(100% - 75px))!important;min-height:255px;padding:30px 16px}
+ .hero-playground{position:relative!important;inset:auto!important;transform:none!important;width:min(440px,100%)!important;height:auto!important;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-items:center;gap:18px;pointer-events:auto}
+ .hero-playground .orbit-button{position:relative!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;width:min(96px,100%);height:96px;font-size:66px!important}
+ .hero-copy h1{font-size:clamp(48px,12vw,66px)!important}
+ .hero-preschool{font-size:clamp(24px,7vw,36px)!important}
+}
