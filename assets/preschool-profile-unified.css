@@ -1039,14 +1039,14 @@ body[data-profile-stage="preschool"] main.shell :is(
 }
 /* Approved aqua, sky-blue, mint-green panels and matching buttons: BLACK.
    Explicitly target labels/icons so earlier cream declarations cannot override. */
-body[data-profile-stage="preschool"] main.shell :is(.profile-hero,.prek-welcome,.prek-daily),
-body[data-profile-stage="preschool"] main.shell :is(.profile-hero,.prek-welcome,.prek-daily) :is(h2,h3,p,span,small,label,a,button,li),
-body[data-profile-stage="preschool"] main.shell :is(
+html body[data-profile-stage="preschool"] main#main.shell :is(.profile-hero,.prek-welcome,.prek-daily),
+html body[data-profile-stage="preschool"] main#main.shell :is(.profile-hero,.prek-welcome,.prek-daily) :is(h2,h3,p,span,small,label,a,button,li),
+html body[data-profile-stage="preschool"] main#main.shell :is(
   .prek-menu .prek-tile:nth-child(2),.prek-menu .prek-tile:nth-child(6),
   .prek-classes>a:nth-child(2),.prek-classes>a:nth-child(5),
   .hero-actions .button.secondary
 ),
-body[data-profile-stage="preschool"] main.shell :is(
+html body[data-profile-stage="preschool"] main#main.shell :is(
   .prek-menu .prek-tile:nth-child(2),.prek-menu .prek-tile:nth-child(6),
   .prek-classes>a:nth-child(2),.prek-classes>a:nth-child(5),
   .hero-actions .button.secondary
