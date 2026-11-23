@@ -1506,3 +1506,148 @@ html body #today .garden-bottom-actions>.garden-action.graduate{
  border-radius:7px!important;
  text-decoration:none!important;
 }
+
+/* Purple Preschool Tools heading and accordion bar: light cream text. */
+html body #today .feature-accordion[data-feature="garden"]>summary,
+html body #today .feature-accordion[data-feature="garden"]>summary :is(strong,span),
+html body #today .garden-heading,
+html body #today .garden-heading :is(h2,p,.kicker){
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+ text-shadow:none!important;
+}
+
+/* PRESCHOOL TOOLS · Adventure directory / 2-column card architecture.
+   Only catalog #activityGrid. Child-first, no faux buttons or vertical text. */
+html body #today #activityGrid.activity-grid{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:16px!important;
+ padding:16px!important;
+ align-items:stretch!important;
+}
+html body #today #activityGrid>.activity{
+ box-sizing:border-box!important;
+ min-width:0!important;
+ width:100%!important;
+ min-height:340px!important;
+ padding:18px!important;
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:center!important;
+ gap:8px!important;
+ text-align:center!important;
+ border:5px solid #000!important;
+ border-radius:7px!important;
+ overflow-wrap:break-word!important;
+ word-break:normal!important;
+}
+html body #today #activityGrid>.activity .card-top{
+ display:flex!important;
+ justify-content:center!important;
+ width:100%!important;
+ min-width:0!important;
+}
+html body #today #activityGrid>.activity .app-icon{
+ display:block!important;
+ font-size:66px!important;
+ line-height:1.1!important;
+}
+html body #today #activityGrid>.activity :is(.category-label,h3,p,.stage-badge,.visited-badge){
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+ margin:3px 0!important;
+ text-align:center!important;
+ line-height:1.4!important;
+ overflow-wrap:break-word!important;
+ word-break:normal!important;
+ white-space:normal!important;
+}
+html body #today #activityGrid>.activity h3{
+ font-size:28px!important;
+ font-weight:333!important;
+}
+html body #today #activityGrid>.activity>p{
+ font-size:24px!important;
+ color:#243038!important;
+}
+html body #today #activityGrid>.activity :is(.category-label,.stage-badge,.visited-badge){
+ display:block!important;
+ width:auto!important;
+ max-width:100%!important;
+ padding:4px 0!important;
+ background:transparent!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ font-size:18px!important;
+ color:#243038!important;
+}
+html body #today #activityGrid>.activity .visited-badge{display:none!important}
+html body #today #activityGrid>.activity.visited .visited-badge{display:block!important}
+html body #today #activityGrid>.activity .card-actions{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) minmax(0,1fr) 56px!important;
+ width:100%!important;
+ gap:8px!important;
+ margin-top:auto!important;
+ padding-top:18px!important;
+ align-items:stretch!important;
+ justify-items:stretch!important;
+}
+html body #today #activityGrid>.activity .card-actions :is(.open,.read-card,.favorite){
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ box-sizing:border-box!important;
+ position:static!important;
+ width:100%!important;
+ min-width:0!important;
+ height:auto!important;
+ min-height:64px!important;
+ padding:10px 6px!important;
+ margin:0!important;
+ border:3px solid #fff!important;
+ border-radius:7px!important;
+ font:333 24px/1.15 "Comic Sans MS","Chalkboard SE",cursive!important;
+ text-align:center!important;
+ text-decoration:none!important;
+ white-space:normal!important;
+ overflow-wrap:normal!important;
+ word-break:normal!important;
+ cursor:pointer!important;
+}
+html body #today #activityGrid>.activity .card-actions .open{
+ background:var(--prek-lavender)!important;
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+}
+html body #today #activityGrid>.activity .card-actions .read-card{
+ background:var(--prek-orange)!important;
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+}
+html body #today #activityGrid>.activity .card-actions .favorite{
+ background:var(--prek-watermelon)!important;
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+ font-size:33px!important;
+}
+html body #today #activityGrid>.activity:nth-child(8n+4),
+html body #today #activityGrid>.activity:nth-child(8n+5),
+html body #today #activityGrid>.activity:nth-child(8n+6),
+html body #today #activityGrid>.activity:nth-child(8n+3){
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+}
+html body #today #activityGrid>.activity:nth-child(8n+4)>:is(h3,p,.category-label),
+html body #today #activityGrid>.activity:nth-child(8n+5)>:is(h3,p,.category-label),
+html body #today #activityGrid>.activity:nth-child(8n+6)>:is(h3,p,.category-label),
+html body #today #activityGrid>.activity:nth-child(8n+3)>:is(h3,p,.category-label){
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+}
+@media(max-width:520px){
+ html body #today #activityGrid.activity-grid{grid-template-columns:1fr!important}
+}
