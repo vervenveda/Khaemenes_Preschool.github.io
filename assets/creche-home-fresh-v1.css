@@ -1970,3 +1970,117 @@ html body #profiles #managePinnedGames{background:var(--prek-mint)!important;}
 @media(max-width:640px){
  html body #profiles .family-card .family-actions{grid-template-columns:1fr!important;}
 }
+
+
+/* Preschool profile and support card specific refinements, approved colors retained. */
+html body #profiles .feature-accordion[data-feature="profile"]>summary,
+html body #profiles .feature-accordion[data-feature="profile"]>summary :is(strong,span){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+html body #profiles .heading :is(p,.kicker){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+/* Preserve the separately approved white title with a black outline. */
+html body #profiles .heading h2{
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+  -webkit-text-stroke:1.3px #101010!important;
+}
+html body #profiles #pinnedGames :is(h3,p,span,strong),
+html body #profiles #pinnedGames .pinned-head :is(h3,p),
+html body #profiles #pinnedGames .pinned-list :is(p,span,strong){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+html body #profiles #pinnedGames .continuity-note,
+html body #profiles #pinnedGames .continuity-note :is(strong,span,p){
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+}
+/* Four real family actions, exactly two equal columns by two rows. */
+html body #profiles .family-grid>.family-card:nth-child(3) .family-actions{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-rows:minmax(74px,auto)!important;
+  gap:10px!important;
+  margin-top:auto!important;
+}
+html body #profiles .family-grid>.family-card:nth-child(3) .family-actions>:is(a,button){
+  grid-column:auto!important;
+  width:100%!important;height:100%!important;min-width:0!important;
+  min-height:74px!important;
+  padding:10px 12px!important;
+  font-size:24px!important;
+  line-height:1.25!important;
+  align-self:stretch!important;
+}
+/* Donation card: sky blue fill, full-width centered copy, bottom red call-to-action. */
+html body #contribute .creche-support-card{
+  width:100%!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  gap:18px!important;
+  min-height:460px!important;
+  padding:24px!important;
+  background:var(--prek-sky)!important;
+  border:3px solid #fff!important;
+  border-radius:7px!important;
+  color:var(--prek-charcoal)!important;
+  text-align:center!important;
+}
+html body #contribute .support-heart{align-self:center!important;}
+html body #contribute .support-copy{
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  text-align:center!important;
+}
+html body #contribute .support-copy :is(h2,p,strong,.kicker){
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+  max-width:100%!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+html body #contribute .support-promises{
+  display:flex!important;flex-wrap:wrap!important;
+  justify-content:center!important;gap:10px!important;
+}
+html body #contribute .support-cta{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:12px!important;
+  width:100%!important;
+  margin-top:auto!important;
+}
+html body #contribute #crecheSupportLaunch{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-height:72px!important;
+  margin:0!important;
+  padding:14px 20px!important;
+  background:var(--prek-watermelon)!important;
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  border:3px solid #fff!important;
+  border-radius:7px!important;
+  font-size:24px!important;
+  text-align:center!important;
+}
+html body #contribute .support-cta small{
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+}
+html body #contribute .feature-accordion[data-feature="support"]>summary :is(strong,span){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+}
+@media(max-width:640px){
+  html body #profiles .family-grid>.family-card:nth-child(3) .family-actions{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  html body #contribute .creche-support-card{min-height:0!important;padding:18px!important;}
+}
