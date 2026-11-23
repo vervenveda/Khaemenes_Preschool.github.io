@@ -174,7 +174,7 @@ button,.btn,[class*="button"],[class*="-btn"],a[class*="btn"],a[class*="open"],
 .prek-exit-card strong{display:block;font-size:24px}.prek-exit-card p{font-size:16px}.prek-exit-card button{min-height:55px;padding:10px 18px;background:var(--prek-charcoal);color:var(--prek-cream)}
 html.prek-calm *,html.prek-calm *::before,html.prek-calm *::after{animation:none!important;transition:none!important}
 html.prek-calm body{background-image:none!important;background:#fffaf0!important}
-body[data-view="child"] #menuBtn,body[data-view="child"] #menuOverlay{display:none!important}
+/* Preserve the complete Preschool directory in Child View: the twelfth grid button. */
 .site-footer,body>footer{box-sizing:border-box;width:100%;padding:24px 16px;background:var(--prek-charcoal)!important;color:var(--prek-cream)!important;text-align:center!important;border-radius:0!important}
 .site-footer a,body>footer a{color:var(--prek-cream)!important}
 .prek-hero-academy{font-size:33px!important;line-height:1.1!important}
@@ -211,4 +211,4 @@ section .card,.feature-accordion-panel,.prek-parent-center{overflow-wrap:anywher
 .prek-parent-links a:nth-child(4n+1){background:#ffe36c}.prek-parent-links a:nth-child(4n+2){background:#70dce8}.prek-parent-links a:nth-child(4n+3){background:#66e3c0}.prek-parent-links a:nth-child(4n){background:#ff8fbe}
 .prek-local-menu-panel,.prek-tool-panel,.prek-exit-card{background:#fff!important}
 @media(max-width:900px){.hero-orbit-labels{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media(max-width:560px){.hero-undertray{width:calc(100% - 20px)!important;padding:9px!important}.hero-orbit-labels{gap:8px}.hero-orbit-labels>:is(a,button){min-height:78px!important;font-size:24px!important;padding:8px!important}.feature-accordion>summary{grid-template-columns:auto minmax(0,1fr) auto!important;gap:8px!important;padding:12px!important}.feature-accordion>summary .accordion-icon{font-size:48px!important;min-width:50px}.feature-accordion>summary .accordion-state{font-size:20px!important;min-width:54px}.prek-parent-links{grid-template-columns:1fr}.prek-parent-shell{padding:12px}}
+@media(max-width:560px){.hero-undertray{width:calc(100% - 20px)!important;padding:9px!important}.hero-orbit-labels{gap:8px}.hero-orbit-labels>:is(a,button){min-height:78px!important;font-size:24px!important;padding:8px!important}.feature-accordion>summary{grid-template-columns:auto minmax(0,1fr) auto!important;gap:8px!important;padding:12px!important}.feature-accordion>summary .accordion-icon{font-size:66px!important;min-width:66px}.feature-accordion>summary .accordion-state{font-size:24px!important;min-width:54px}.prek-parent-links{grid-template-columns:1fr}.prek-parent-shell{padding:12px}}
