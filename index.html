@@ -948,7 +948,7 @@ function closeCategoryPopup(returnFocus=false){
 function buildCategories(){
   $("category").innerHTML=Object.entries(CATEGORIES).filter(([key])=>key!=="grownup").map(([key,data])=>`<option value="${key}">${escapeHtml(data.label)}</option>`).join("");
   const counts={};KID_APPS.forEach(app=>counts[app.category]=(counts[app.category]||0)+1);
-  $("categoryGrid").innerHTML=Object.entries(CATEGORIES).filter(([key])=>!["all","grownup"].includes(key)).map(([key,data])=>`<button class="category-card" type="button" data-pick="${key}" aria-haspopup="dialog" style="background:linear-gradient(145deg,${data.a},${data.b})"><span>${data.icon}</span><strong>${escapeHtml(data.label)}</strong><small>${counts[key]||0} adventures · open shelf</small></button>`).join("");
+  $("categoryGrid").innerHTML=Object.entries(CATEGORIES).filter(([key])=>!["all","grownup"].includes(key)).map(([key,data])=>`<button class="category-card" type="button" data-pick="${key}" aria-haspopup="dialog" style="background:linear-gradient(145deg,${data.a},${data.b})"><span>${data.icon}</span><strong>${escapeHtml(data.label)}</strong><small>${counts[key]||0} adventures<br>open shelf</small></button>`).join("");
   $("allAppsCount").textContent=APPS.length;
   document.querySelectorAll("[data-pick]").forEach(button=>button.addEventListener("click",()=>openCategoryPopup(button.dataset.pick)));
 }
