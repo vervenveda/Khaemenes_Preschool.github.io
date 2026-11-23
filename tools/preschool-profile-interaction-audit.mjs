@@ -227,6 +227,8 @@ try{
  const home=origin+"/Khaemenes_Preschool.github.io/";
  const homepage=await page.goto(home+"#pinnedApps",{waitUntil:"load"});
  assert.equal(homepage.status(),200);
+ await page.waitForTimeout(250);
+ console.log("HOME DEBUG",JSON.stringify(await page.evaluate(()=>({hash:location.hash,state:document.readyState,view:document.body.dataset.view,section:!!document.querySelector("#pinnedApps"),opened:document.querySelector("#pinnedApps details")?.open,saved:localStorage.getItem("khaemenes_profile_favorites_v1"),count:document.querySelectorAll("#prekPinnedAppsList .prek-pin-item").length}))),"errors",JSON.stringify(errors));
  const shelf=page.locator("#pinnedApps");
  await shelf.waitFor({state:"visible",timeout:5000});
  await page.waitForFunction(()=>document.querySelector("#pinnedApps details.feature-accordion")?.open===true,null,{timeout:5000});
