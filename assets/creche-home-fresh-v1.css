@@ -1651,3 +1651,91 @@ html body #today #activityGrid>.activity:nth-child(8n+3)>:is(h3,p,.category-labe
 @media(max-width:520px){
  html body #today #activityGrid.activity-grid{grid-template-columns:1fr!important}
 }
+
+/* GRADUATION GARDEN · joyful Preschool palette, with its one real
+   navigation button anchored to the bottom of the full-width card. */
+html body #graduationFeature .graduation-feature-card{
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:stretch!important;
+ justify-content:space-between!important;
+ gap:18px!important;
+ width:100%!important;
+ min-height:365px!important;
+ padding:22px!important;
+ background:var(--prek-sun)!important;
+ border:5px solid #fff!important;
+ border-radius:7px!important;
+ text-align:center!important;
+ box-sizing:border-box!important;
+}
+html body #graduationFeature .graduation-feature-card>div{
+ flex:1 1 auto!important;
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:center!important;
+ justify-content:center!important;
+ min-width:0!important;
+ gap:12px!important;
+}
+html body #graduationFeature .graduation-feature-icon{
+ display:block!important;
+ font-size:66px!important;
+ line-height:1.1!important;
+}
+html body #graduationFeature .graduation-feature-card .kicker{
+ background:var(--prek-coral)!important;
+ color:var(--prek-charcoal)!important;
+ -webkit-text-fill-color:var(--prek-charcoal)!important;
+ padding:10px 16px!important;
+ border:3px solid #fff!important;
+ border-radius:7px!important;
+ font:333 24px/1.3 "Comic Sans MS","Chalkboard SE",cursive!important;
+ text-align:center!important;
+}
+html body #graduationFeature .graduation-feature-card h2{
+ color:#000!important;
+ -webkit-text-fill-color:#000!important;
+ -webkit-text-stroke:.6px var(--prek-lavender)!important;
+ text-shadow:none!important;
+ font:333 44px/1.2 "Comic Sans MS","Chalkboard SE",cursive!important;
+ margin:0!important;
+ text-align:center!important;
+}
+html body #graduationFeature .graduation-feature-card>div>p:last-child{
+ width:100%!important;
+ max-width:760px!important;
+ margin:0!important;
+ padding:16px 18px!important;
+ background:var(--prek-mint)!important;
+ color:#000!important;
+ -webkit-text-fill-color:#000!important;
+ border:3px solid #fff!important;
+ border-radius:7px!important;
+ font:333 24px/1.45 "Comic Sans MS","Chalkboard SE",cursive!important;
+ text-align:center!important;
+}
+html body #graduationFeature .graduation-feature-card>.feature-primary-link{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ align-self:stretch!important;
+ width:100%!important;
+ min-height:75px!important;
+ margin-top:auto!important;
+ padding:14px 18px!important;
+ background:var(--prek-lavender)!important;
+ color:var(--prek-cream)!important;
+ -webkit-text-fill-color:var(--prek-cream)!important;
+ border:5px solid #fff!important;
+ border-radius:7px!important;
+ font:333 24px/1.35 "Comic Sans MS","Chalkboard SE",cursive!important;
+ text-decoration:none!important;
+ text-shadow:none!important;
+ text-align:center!important;
+ box-sizing:border-box!important;
+}
+html body #graduationFeature .graduation-feature-card>.feature-primary-link:focus-visible{
+ outline:4px solid #243038!important;
+ outline-offset:3px!important;
+}
