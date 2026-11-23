@@ -871,3 +871,113 @@ body[data-profile-stage="preschool"] main.shell #learnerSwitch{border-color:var(
   font-size:44px!important
  }
 }
+
+/* 2026-11-23 · PROFILE HEADING AND BUTTON PARITY
+   Approved homepage colors only. Outline colors rotate by section
+   deterministically, so reloading does not flicker or randomly restyle a page.
+   The top page title keeps its previous cream fill / black outline. */
+body[data-profile-stage="preschool"] main.shell{
+ --prek-heading-outline:var(--prek-pink);
+}
+body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+1){--prek-heading-outline:var(--prek-watermelon)}
+body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+2){--prek-heading-outline:var(--prek-sun)}
+body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+3){--prek-heading-outline:var(--prek-lavender)}
+body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+4){--prek-heading-outline:var(--prek-orange)}
+body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n+5){--prek-heading-outline:var(--prek-mint)}
+body[data-profile-stage="preschool"] main.shell > section:nth-of-type(6n){--prek-heading-outline:var(--prek-sky)}
+body[data-profile-stage="preschool"] main.shell > .grid .card:nth-child(odd){--prek-heading-outline:var(--prek-pink)}
+body[data-profile-stage="preschool"] main.shell > .grid .card:nth-child(even){--prek-heading-outline:var(--prek-green)}
+body[data-profile-stage="preschool"] main.shell .prek-pop-panel:nth-child(3n+1){--prek-heading-outline:var(--prek-sun)}
+body[data-profile-stage="preschool"] main.shell .prek-pop-panel:nth-child(3n+2){--prek-heading-outline:var(--prek-sky)}
+body[data-profile-stage="preschool"] main.shell .prek-pop-panel:nth-child(3n){--prek-heading-outline:var(--prek-watermelon)}
+/* Main section headings, including Our Little Learner, are solid BLACK
+   with a clearly visible outline drawn from the existing homepage palette. */
+body[data-profile-stage="preschool"] main.shell :is(.profile-hero,.prek-welcome,.prek-daily,.card,.prek-pop-panel) :is(h2,h3),
+body[data-profile-stage="preschool"] main.shell .profile-hero #childTitle{
+ color:#000!important;
+ -webkit-text-fill-color:#000!important;
+ -webkit-text-stroke:2.5px var(--prek-heading-outline)!important;
+ paint-order:stroke fill!important;
+ text-shadow:none!important;
+ font-family:"Comic Sans MS","Chalkboard SE","Comic Sans",cursive!important;
+ font-weight:400!important;
+ line-height:1.22!important;
+}
+/* The hero's title uses a contrasting pink edge on the aqua frame. */
+body[data-profile-stage="preschool"] main.shell .profile-hero{
+ --prek-heading-outline:var(--prek-pink);
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero #childTitle{
+ font-size:clamp(44px,5vw,55px)!important;
+}
+/* Uniform heights by button family, with consistent padding and 7px corners.
+   Actual colors remain those already approved for each button. */
+body[data-profile-stage="preschool"] main.shell .hero-actions{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-auto-rows:minmax(90px,auto)!important;gap:14px!important;
+}
+body[data-profile-stage="preschool"] main.shell .hero-actions :is(a,button),
+body[data-profile-stage="preschool"] main.shell .actions :is(a,button){
+ box-sizing:border-box!important;min-height:90px!important;
+ height:100%!important;width:100%!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:14px 18px!important;border-radius:7px!important;
+ text-align:center!important;line-height:1.3!important;font-size:24px!important;
+ overflow-wrap:anywhere!important;
+}
+body[data-profile-stage="preschool"] main.shell .actions{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-auto-rows:minmax(90px,auto)!important;gap:14px!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-menu{
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ grid-auto-rows:minmax(200px,auto)!important;gap:14px!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile{
+ box-sizing:border-box!important;min-width:0!important;width:100%!important;
+ height:100%!important;min-height:200px!important;
+ padding:18px 12px!important;
+ display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:center!important;gap:12px!important;
+ text-align:center!important;overflow-wrap:anywhere!important
+}
+body[data-profile-stage="preschool"] main.shell .prek-classes{
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-auto-rows:minmax(158px,auto)!important;gap:14px!important;
+}
+body[data-profile-stage="preschool"] main.shell .prek-classes>a{
+ box-sizing:border-box!important;width:100%!important;
+ min-height:158px!important;height:100%!important;
+ padding:15px 12px!important;display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:center!important;
+ gap:12px!important;overflow-wrap:anywhere!important
+}
+/* Large rainbow/avatar; saved pictures are still displayed without distortion. */
+body[data-profile-stage="preschool"] main.shell .profile-hero #photoPreview{
+ box-sizing:border-box!important;width:268px!important;height:268px!important;
+ display:grid!important;place-items:center!important;
+ font-size:164px!important;line-height:1!important;overflow:hidden!important;
+ margin:8px auto 24px!important;
+}
+body[data-profile-stage="preschool"] main.shell .profile-hero #photoPreview img{
+ max-width:100%!important;max-height:100%!important;width:100%!important;
+ height:100%!important;object-fit:cover!important;
+}
+@media(max-width:900px){
+ body[data-profile-stage="preschool"] main.shell .prek-menu{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important
+ }
+}
+@media(max-width:600px){
+ body[data-profile-stage="preschool"] main.shell .hero-actions,
+ body[data-profile-stage="preschool"] main.shell .actions,
+ body[data-profile-stage="preschool"] main.shell .prek-classes{
+  grid-template-columns:1fr!important
+ }
+ body[data-profile-stage="preschool"] main.shell .profile-hero #photoPreview{
+  width:214px!important;height:214px!important;font-size:142px!important
+ }
+ body[data-profile-stage="preschool"] main.shell .prek-menu .prek-tile{
+  min-height:190px!important
+ }
+}
