@@ -1772,7 +1772,7 @@ html body #profiles .feature-accordion[data-feature="profile"]>summary :is(stron
 html body #profiles .heading{background:var(--prek-watermelon)!important;border:3px solid #fff!important;border-radius:7px!important;padding:18px!important;}
 html body #profiles .heading :is(h2,p){color:var(--prek-charcoal)!important;-webkit-text-fill-color:var(--prek-charcoal)!important;}
 html body #profiles .family-grid>.family-card:nth-child(3){
-  background:#176c50!important;color:var(--prek-cream)!important;
+  background:var(--prek-green)!important;color:var(--prek-cream)!important;
 }
 html body #profiles .family-grid>.family-card:nth-child(3) :is(h3,p,span,strong,small){
   color:var(--prek-cream)!important;-webkit-text-fill-color:var(--prek-cream)!important;
@@ -1784,7 +1784,7 @@ html body #profiles .family-grid>#pinnedGames{
 html body #profiles #pinnedGames .pinned-head{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;}
 html body #profiles #pinnedGames .pinned-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
 html body #graduationFeature .feature-accordion[data-feature="graduation"]>summary{
-  background:#176c50!important;color:var(--prek-cream)!important;
+  background:var(--prek-green)!important;color:var(--prek-cream)!important;
 }
 html body #graduationFeature .feature-accordion[data-feature="graduation"]>summary :is(strong,span){
   color:var(--prek-cream)!important;-webkit-text-fill-color:var(--prek-cream)!important;
