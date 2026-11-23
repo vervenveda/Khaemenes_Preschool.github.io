@@ -2187,3 +2187,57 @@ html body :is(
   color:#fff!important;
   -webkit-text-fill-color:#fff!important;
 }
+
+
+/* Preschool Reading Time and Explore & Play card refinements · 2026-11-23 */
+/* Preserve the accordion’s yellow tab; recolor only its interior content card. */
+html body #readingFeature .reading-feature-card{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  min-height:300px!important;
+  gap:20px!important;
+  padding:24px!important;
+  background:var(--prek-sky)!important;
+  border:3px solid #fff!important;
+  border-radius:7px!important;
+  text-align:center!important;
+}
+html body #readingFeature .reading-feature-card>div{
+  flex:1 1 auto!important;
+  width:100%!important;
+  min-width:0!important;
+}
+html body #readingFeature .reading-feature-card :is(.kicker,h2,p){
+  color:var(--prek-charcoal)!important;
+  -webkit-text-fill-color:var(--prek-charcoal)!important;
+  text-align:center!important;
+}
+html body #readingFeature .reading-feature-card .reading-time-launch{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  align-self:stretch!important;
+  width:100%!important;
+  min-height:66px!important;
+  margin-top:auto!important;
+  padding:12px 18px!important;
+  background:var(--prek-watermelon)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  border:3px solid #fff!important;
+  border-radius:7px!important;
+  font-size:24px!important;
+  text-align:center!important;
+}
+/* Title lettering only: retain green Explore & Play hero background. */
+html body #new #explorePlayTitle{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+/* Explicit two-line shelf metadata; never alter category card links or layout. */
+html body #new #categoryGrid .category-card small{
+  display:block!important;
+  line-height:1.4!important;
+  text-align:center!important;
+}
