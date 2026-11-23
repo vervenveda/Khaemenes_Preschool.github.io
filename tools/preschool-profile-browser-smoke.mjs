@@ -35,7 +35,7 @@ async function showPanel(key){
  }else if(key==="pictureTitle"){
   // Original picture inputs remain available to data-isolation regression,
   // but the new public My Picture tile uses the universal guarded editor.
-  await panel.evaluate(el=>el.hidden=false);
+  await panel.evaluate(el=>{el.hidden=false;el.style.setProperty("display","block","important")});
  }else throw new Error("No user action to open panel "+key);
  await panel.waitFor({state:"visible"});
 }
