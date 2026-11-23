@@ -578,6 +578,11 @@ main > section.feature-section{
   border-radius:var(--prek-radius);
   box-shadow:var(--prek-shadow-soft);
 }
+#new .explore-heading :is(h2,p,.kicker){
+  color:var(--prek-cream)!important;
+  -webkit-text-fill-color:var(--prek-cream)!important;
+  text-shadow:none!important;
+}
 .explore-actions,.garden-bottom-actions{
   display:flex;
   justify-content:center;
