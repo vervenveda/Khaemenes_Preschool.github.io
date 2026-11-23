@@ -2335,17 +2335,43 @@ window.VNV_HEADER?.mount({title:"Khaemenes Preschool",subtitle:"Crèche · Brigh
 
 <!-- Preschool family pathway visual refinement: scoped, reversible, no action or routing changes. -->
 <style id="preschool-family-card-refinement-20261123">
-#profiles>.feature-accordion>summary,
+/* Use the site's existing preschool palette rather than introducing a new red. */
 #profiles .feature-accordion>summary {
-  background:#b52b38!important;color:#fff7e8!important;
-  border-color:#fff7e8!important;
+  background:var(--prek-watermelon,#ff7a8a)!important;
+  color:var(--prek-cream,#fffbea)!important;
+  border-color:var(--prek-cream,#fffbea)!important;
 }
 #profiles .feature-accordion>summary :is(strong,.accordion-icon,.accordion-state){
-  color:#fff7e8!important;-webkit-text-fill-color:#fff7e8!important;
-  text-shadow:none!important;-webkit-text-stroke:0!important;
+  color:var(--prek-cream,#fffbea)!important;
+  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
+  -webkit-text-stroke:0!important;text-shadow:none!important;
 }
-#profiles .feature-accordion>summary .accordion-icon,
-#profiles .family-card>.family-icon{
+/* Purple body of the expanded Learning Profile accordion. */
+#profiles .feature-accordion>.feature-accordion-panel {
+  background:var(--prek-purple,#7957ff)!important;
+  color:var(--prek-cream,#fffbea)!important;
+}
+#profiles .feature-accordion-panel>.shell>.heading {
+  background:transparent!important;color:var(--prek-cream,#fffbea)!important;
+  text-align:center!important;
+}
+#profiles .feature-accordion-panel>.shell>.heading :is(h2,p,.kicker){
+  color:var(--prek-cream,#fffbea)!important;
+  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
+  -webkit-text-stroke:0!important;text-shadow:none!important;
+}
+#profiles .feature-accordion-panel>.shell>.actions .btn{
+  background:var(--prek-charcoal,#243038)!important;
+  color:var(--prek-cream,#fffbea)!important;
+  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
+}
+#profiles .family-grid{align-items:stretch!important}
+#profiles .family-grid>.family-card{
+  display:flex!important;flex-direction:column!important;
+  min-width:0!important;height:100%!important;
+}
+#profiles .family-card>.family-icon,
+#profiles .feature-accordion>summary .accordion-icon{
   display:inline-flex!important;align-items:center!important;justify-content:center!important;
   width:auto!important;height:auto!important;min-width:32px!important;min-height:32px!important;
   font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif!important;
@@ -2354,12 +2380,26 @@ window.VNV_HEADER?.mount({title:"Khaemenes Preschool",subtitle:"Crèche · Brigh
   -webkit-text-fill-color:initial!important;-webkit-text-stroke:0!important;
   filter:none!important;text-shadow:none!important;
 }
-#profiles .family-grid{align-items:stretch!important}
-#profiles .family-grid>.family-card{
-  display:flex!important;flex-direction:column!important;
-  min-width:0!important;height:100%!important;
+/* Brighter warm and violet cards have cream text; light yellow, cyan and green remain dark. */
+#profiles .family-grid>.family-card:nth-child(4){
+  background:var(--prek-pink,#ff4fa3)!important;
 }
-#profiles .family-card h3,#profiles .family-card p{color:#17232b!important;-webkit-text-fill-color:#17232b!important;text-shadow:none!important}
+#profiles .family-grid>.family-card:nth-child(5){
+  background:var(--prek-orange,#ff8f3d)!important;
+}
+#profiles .family-grid>.family-card:nth-child(6){
+  background:var(--prek-purple,#7957ff)!important;
+}
+#profiles .family-grid>.family-card:nth-child(-n+3) :is(h3,p){
+  color:var(--prek-charcoal,#243038)!important;
+  -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
+  text-shadow:none!important;
+}
+#profiles .family-grid>.family-card:nth-child(n+4) :is(h3,p){
+  color:var(--prek-cream,#fffbea)!important;
+  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
+  text-shadow:none!important;
+}
 #profiles .family-card .family-meta{display:none!important}
 #profiles .family-card .family-actions{
   margin-top:auto!important;padding-top:18px!important;
@@ -2370,18 +2410,48 @@ window.VNV_HEADER?.mount({title:"Khaemenes Preschool",subtitle:"Crèche · Brigh
   box-sizing:border-box!important;display:flex!important;justify-content:center!important;
   align-items:center!important;width:100%!important;min-width:0!important;
   min-height:48px!important;margin:0!important;padding:9px 12px!important;
-  background:#252d38!important;color:#fff7e8!important;
-  -webkit-text-fill-color:#fff7e8!important;
-  border:2px solid #fff7e8!important;border-radius:7px!important;
+  background:var(--prek-charcoal,#243038)!important;
+  color:var(--prek-cream,#fffbea)!important;
+  -webkit-text-fill-color:var(--prek-cream,#fffbea)!important;
+  border:2px solid var(--prek-cream,#fffbea)!important;border-radius:7px!important;
   font:400 17px/1.3 "Comic Sans MS","Chalkboard SE",sans-serif!important;
   text-align:center!important;text-decoration:none!important;box-shadow:none!important;
   overflow-wrap:anywhere!important;text-shadow:none!important;
 }
 #profiles .family-card .family-actions>.family-action:hover{
-  background:#101820!important;color:#fff7e8!important;-webkit-text-fill-color:#fff7e8!important;
+  background:#101820!important;
 }
 #profiles .family-card .family-actions>.family-action:focus-visible{
-  outline:3px solid #252d38!important;outline-offset:3px!important;
+  outline:3px solid var(--prek-charcoal,#243038)!important;outline-offset:3px!important;
+}
+/* Yellow favorite-adventures card, with its blue action centered under the wording. */
+#profiles #pinnedGames{
+  background:var(--prek-sun,#ffe45e)!important;
+  color:var(--prek-charcoal,#243038)!important;
+  border:3px solid #fff!important;border-radius:7px!important;
+}
+#profiles #pinnedGames :is(h3,p,.continuity-note){
+  color:var(--prek-charcoal,#243038)!important;
+  -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
+  text-shadow:none!important;
+}
+#profiles #pinnedGames .pinned-head{
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  text-align:center!important;gap:14px!important;
+}
+#profiles #pinnedGames .pinned-head>div{width:100%!important}
+#profiles #managePinnedGames{
+  display:inline-flex!important;align-self:center!important;
+  align-items:center!important;justify-content:center!important;
+  margin:0 auto!important;min-height:48px!important;padding:10px 18px!important;
+  background:var(--prek-sky,#67cfff)!important;
+  color:var(--prek-charcoal,#243038)!important;
+  -webkit-text-fill-color:var(--prek-charcoal,#243038)!important;
+  border:2px solid var(--prek-charcoal,#243038)!important;border-radius:7px!important;
+  text-align:center!important;text-shadow:none!important;
+}
+#profiles #managePinnedGames:focus-visible{
+  outline:3px solid var(--prek-charcoal,#243038)!important;outline-offset:3px!important;
 }
 @media(max-width:840px){
   #profiles .family-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
