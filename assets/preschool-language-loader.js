@@ -5,10 +5,17 @@ const resources=[
  "https://vervenveda.com/assets/khaemenes-campus-phrases.js",
  "https://vervenveda.com/assets/khaemenes-interlingual-core.js",
  "https://vervenveda.com/Khaemenes_Linguistics.github.io/assets/khaemenes-translator-loader.js?v=1.1.1",
- "https://vervenveda.com/assets/vnv-language.js?v=20261108-cream-buttons"
+ "https://vervenveda.com/assets/vnv-language.js?v=20261124-header-slot"
 ];
 function load(src){return new Promise(resolve=>{
- if([...document.scripts].some(s=>s.src===new URL(src,location.href).href)){resolve();return}
+ const requested=new URL(src,location.href);
+ // The canonical interface is not safe to execute twice under different query versions.
+ if([...document.scripts].some(s=>{
+  if(!s.src)return false;
+  const existing=new URL(s.src,location.href);
+  return existing.href===requested.href||
+   (requested.pathname==="/assets/vnv-language.js"&&existing.origin===requested.origin&&existing.pathname===requested.pathname);
+ })){resolve();return}
  const s=document.createElement("script");s.src=src;s.defer=true;s.onload=resolve;s.onerror=resolve;(document.head||document.documentElement).append(s);
 })}
 function sharedChrome(){
