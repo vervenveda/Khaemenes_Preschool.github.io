@@ -1,0 +1,22 @@
+name: Preschool Translator Reference Contract
+on:
+  pull_request:
+    paths:
+      - 'assets/preschool-language-loader.js'
+      - 'tests/preschool-translator-reference.test.mjs'
+      - '.github/workflows/preschool-translator-reference.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  translator-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check assets/preschool-language-loader.js
+      - run: node --test tests/preschool-translator-reference.test.mjs
